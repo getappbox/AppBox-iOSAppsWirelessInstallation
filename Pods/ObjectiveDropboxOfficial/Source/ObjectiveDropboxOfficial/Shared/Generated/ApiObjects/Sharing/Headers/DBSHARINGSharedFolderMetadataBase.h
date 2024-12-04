@@ -51,6 +51,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// is contained within another shared folder.
 @property (nonatomic, readonly, copy, nullable) NSString *parentSharedFolderId;
 
+/// The full path of this shared folder. Absent for unmounted folders.
+@property (nonatomic, readonly, copy, nullable) NSString *pathDisplay;
+
 /// The lower-cased full path of this shared folder. Absent for unmounted
 /// folders.
 @property (nonatomic, readonly, copy, nullable) NSString *pathLower;
@@ -74,6 +77,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// the folder is not owned by a team.
 /// @param parentSharedFolderId The ID of the parent shared folder. This field
 /// is present only if the folder is contained within another shared folder.
+/// @param pathDisplay The full path of this shared folder. Absent for unmounted
+/// folders.
 /// @param pathLower The lower-cased full path of this shared folder. Absent for
 /// unmounted folders.
 /// @param parentFolderName Display name for the parent folder.
@@ -86,6 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
                  ownerDisplayNames:(nullable NSArray<NSString *> *)ownerDisplayNames
                          ownerTeam:(nullable DBUSERSTeam *)ownerTeam
               parentSharedFolderId:(nullable NSString *)parentSharedFolderId
+                       pathDisplay:(nullable NSString *)pathDisplay
                          pathLower:(nullable NSString *)pathLower
                   parentFolderName:(nullable NSString *)parentFolderName;
 

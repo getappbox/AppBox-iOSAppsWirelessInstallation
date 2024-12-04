@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `EchoArg` struct.
 ///
-/// EchoArg contains the arguments to be sent to the Dropbox servers.
+/// Contains the arguments to be sent to the Dropbox servers.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

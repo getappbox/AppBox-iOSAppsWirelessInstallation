@@ -62,7 +62,7 @@
 
   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
   NSMutableDictionary<NSString *, NSString *> *allParams = [params mutableCopy];
-  [allParams addEntriesFromDictionary:@{ @"locale" : locale, @"client_id" : appKey }];
+  [allParams addEntriesFromDictionary:@{@"locale" : locale, @"client_id" : appKey}];
   NSMutableArray<NSString *> *paramsArray = [NSMutableArray new];
   for (NSString *key in allParams.allKeys) {
     [paramsArray addObject:[NSString stringWithFormat:@"%@=%@", key, allParams[key]]];

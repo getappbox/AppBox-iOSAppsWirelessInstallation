@@ -190,7 +190,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBAUTHAccessError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -488,7 +488,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBAUTHAuthError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -675,7 +675,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBAUTHInvalidAccountTypeError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -851,7 +851,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBAUTHPaperAccessError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -969,7 +969,7 @@
   jsonDict[@"reason"] = [DBAUTHRateLimitReasonSerializer serialize:valueObj.reason];
   jsonDict[@"retry_after"] = valueObj.retryAfter;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBAUTHRateLimitError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1138,7 +1138,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBAUTHRateLimitReason *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1253,7 +1253,7 @@
   jsonDict[@"oauth1_token"] = valueObj.oauth1Token;
   jsonDict[@"oauth1_token_secret"] = valueObj.oauth1TokenSecret;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBAUTHTokenFromOAuth1Arg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1422,7 +1422,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBAUTHTokenFromOAuth1Error *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1529,7 +1529,7 @@
 
   jsonDict[@"oauth2_token"] = valueObj.oauth2Token;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBAUTHTokenFromOAuth1Result *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1628,7 +1628,7 @@
 
   jsonDict[@"required_scope"] = valueObj.requiredScope;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBAUTHTokenScopeError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {

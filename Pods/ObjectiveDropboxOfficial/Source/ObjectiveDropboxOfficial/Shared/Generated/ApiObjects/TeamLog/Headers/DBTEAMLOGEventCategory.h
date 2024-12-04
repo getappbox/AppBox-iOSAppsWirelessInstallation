@@ -50,6 +50,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventCategoryTag){
     /// invite enforcement and account capture.
     DBTEAMLOGEventCategoryDomains,
 
+    /// Events that involve encryption.
+    DBTEAMLOGEventCategoryEncryption,
+
     /// Events that have to do with filesystem operations on files and folders:
     /// copy, move, delete, etc.
     DBTEAMLOGEventCategoryFileOperations,
@@ -172,6 +175,15 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventCategoryTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithDomains;
+
+///
+/// Initializes union class with tag state of "encryption".
+///
+/// Description of the "encryption" tag state: Events that involve encryption.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithEncryption;
 
 ///
 /// Initializes union class with tag state of "file_operations".
@@ -384,6 +396,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventCategoryTag){
 /// @return Whether the union's current tag state has value "domains".
 ///
 - (BOOL)isDomains;
+
+///
+/// Retrieves whether the union's current tag state has value "encryption".
+///
+/// @return Whether the union's current tag state has value "encryption".
+///
+- (BOOL)isEncryption;
 
 ///
 /// Retrieves whether the union's current tag state has value "file_operations".

@@ -47,11 +47,7 @@ static NSObject *lockObj = nil;
                                             deprecated:@NO
                                             resultType:[DBUSERSUserFeaturesGetValuesBatchResult class]
                                              errorType:[DBUSERSUserFeaturesGetValuesBatchError class]
-                                                 attrs:@{
-                                                   @"auth" : @"user",
-                                                   @"host" : @"api",
-                                                   @"style" : @"rpc"
-                                                 }
+                                                 attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                  dataStructSerialBlock:nil
                                dataStructDeserialBlock:nil];
     }
@@ -67,11 +63,7 @@ static NSObject *lockObj = nil;
                                      deprecated:@NO
                                      resultType:[DBUSERSBasicAccount class]
                                       errorType:[DBUSERSGetAccountError class]
-                                          attrs:@{
-                                            @"auth" : @"user",
-                                            @"host" : @"api",
-                                            @"style" : @"rpc"
-                                          }
+                                          attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                           dataStructSerialBlock:nil
                         dataStructDeserialBlock:nil];
     }
@@ -83,22 +75,18 @@ static NSObject *lockObj = nil;
   @synchronized(lockObj) {
     if (!DBUSERSGetAccountBatch) {
       DBUSERSGetAccountBatch = [[DBRoute alloc] init:@"get_account_batch"
-          namespace_:@"users"
-          deprecated:@NO
-          resultType:[NSArray<DBUSERSBasicAccount *> class]
-          errorType:[DBUSERSGetAccountBatchError class]
-          attrs:@{
-            @"auth" : @"user",
-            @"host" : @"api",
-            @"style" : @"rpc"
-          }
-          dataStructSerialBlock:nil
-          dataStructDeserialBlock:^id(id dataStruct) {
-            return [DBArraySerializer deserialize:dataStruct
-                                        withBlock:^id(id elem0) {
-                                          return [DBUSERSBasicAccountSerializer deserialize:elem0];
-                                        }];
-          }];
+                                          namespace_:@"users"
+                                          deprecated:@NO
+                                          resultType:[NSArray<DBUSERSBasicAccount *> class]
+                                           errorType:[DBUSERSGetAccountBatchError class]
+                                               attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
+                               dataStructSerialBlock:nil
+                             dataStructDeserialBlock:^id(id dataStruct) {
+                               return [DBArraySerializer deserialize:dataStruct
+                                                           withBlock:^id(id elem0) {
+                                                             return [DBUSERSBasicAccountSerializer deserialize:elem0];
+                                                           }];
+                             }];
     }
     return DBUSERSGetAccountBatch;
   }
@@ -112,11 +100,7 @@ static NSObject *lockObj = nil;
                                             deprecated:@NO
                                             resultType:[DBUSERSFullAccount class]
                                              errorType:nil
-                                                 attrs:@{
-                                                   @"auth" : @"user",
-                                                   @"host" : @"api",
-                                                   @"style" : @"rpc"
-                                                 }
+                                                 attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                  dataStructSerialBlock:nil
                                dataStructDeserialBlock:nil];
     }
@@ -132,11 +116,7 @@ static NSObject *lockObj = nil;
                                         deprecated:@NO
                                         resultType:[DBUSERSSpaceUsage class]
                                          errorType:nil
-                                             attrs:@{
-                                               @"auth" : @"user",
-                                               @"host" : @"api",
-                                               @"style" : @"rpc"
-                                             }
+                                             attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                              dataStructSerialBlock:nil
                            dataStructDeserialBlock:nil];
     }

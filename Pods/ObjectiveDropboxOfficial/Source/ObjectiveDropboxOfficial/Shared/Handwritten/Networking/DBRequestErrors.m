@@ -236,7 +236,7 @@
 }
 
 - (NSString *)description {
-  NSDictionary *values = @{ @"NSError" : _nsError ?: @"nil" };
+  NSDictionary *values = @{@"NSError" : _nsError ?: @"nil"};
   return [NSString stringWithFormat:@"DropboxClientError[%@];", values];
 }
 
@@ -305,7 +305,7 @@
                      errorContent:(NSString *)errorContent
                       userMessage:(DBLocalizedUserMessage *)userMessage
             structuredAccessError:(DBAUTHAccessError *)structuredAccessError {
-  return [self init:DBRequestErrorAuth
+  return [self init:DBRequestErrorAccess
                      requestId:requestId
                     statusCode:statusCode
                   errorContent:errorContent

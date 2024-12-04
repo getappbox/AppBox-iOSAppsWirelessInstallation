@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Path to the item to tag.
 @property (nonatomic, readonly, copy) NSString *path;
 
-/// The tag to remove.
+/// The tag to remove. Will be automatically converted to lowercase letters.
 @property (nonatomic, readonly, copy) NSString *tagText;
 
 #pragma mark - Constructors
@@ -37,7 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param path Path to the item to tag.
-/// @param tagText The tag to remove.
+/// @param tagText The tag to remove. Will be automatically converted to
+/// lowercase letters.
 ///
 /// @return An initialized instance.
 ///

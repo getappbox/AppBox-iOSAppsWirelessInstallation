@@ -6,28 +6,20 @@
 
 /// Arguments, results, and errors for the `Openid` namespace.
 
-#import "DBOPENIDAuthError.h"
+#import "DBOPENIDOpenIdError.h"
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
 
 #pragma mark - API Object
 
-@implementation DBOPENIDAuthError
+@implementation DBOPENIDOpenIdError
 
 #pragma mark - Constructors
 
-- (instancetype)initWithInvalidToken {
+- (instancetype)initWithIncorrectOpenidScopes {
   self = [super init];
   if (self) {
-    _tag = DBOPENIDAuthErrorInvalidToken;
-  }
-  return self;
-}
-
-- (instancetype)initWithNoOpenidAuth {
-  self = [super init];
-  if (self) {
-    _tag = DBOPENIDAuthErrorNoOpenidAuth;
+    _tag = DBOPENIDOpenIdErrorIncorrectOpenidScopes;
   }
   return self;
 }
@@ -35,7 +27,7 @@
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
-    _tag = DBOPENIDAuthErrorOther;
+    _tag = DBOPENIDOpenIdErrorOther;
   }
   return self;
 }
@@ -44,26 +36,20 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isInvalidToken {
-  return _tag == DBOPENIDAuthErrorInvalidToken;
-}
-
-- (BOOL)isNoOpenidAuth {
-  return _tag == DBOPENIDAuthErrorNoOpenidAuth;
+- (BOOL)isIncorrectOpenidScopes {
+  return _tag == DBOPENIDOpenIdErrorIncorrectOpenidScopes;
 }
 
 - (BOOL)isOther {
-  return _tag == DBOPENIDAuthErrorOther;
+  return _tag == DBOPENIDOpenIdErrorOther;
 }
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBOPENIDAuthErrorInvalidToken:
-    return @"DBOPENIDAuthErrorInvalidToken";
-  case DBOPENIDAuthErrorNoOpenidAuth:
-    return @"DBOPENIDAuthErrorNoOpenidAuth";
-  case DBOPENIDAuthErrorOther:
-    return @"DBOPENIDAuthErrorOther";
+  case DBOPENIDOpenIdErrorIncorrectOpenidScopes:
+    return @"DBOPENIDOpenIdErrorIncorrectOpenidScopes";
+  case DBOPENIDOpenIdErrorOther:
+    return @"DBOPENIDOpenIdErrorOther";
   }
 
   @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
@@ -72,17 +58,17 @@
 #pragma mark - Serialization methods
 
 + (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
-  return [DBOPENIDAuthErrorSerializer serialize:instance];
+  return [DBOPENIDOpenIdErrorSerializer serialize:instance];
 }
 
 + (id)deserialize:(NSDictionary<NSString *, id> *)dict {
-  return [DBOPENIDAuthErrorSerializer deserialize:dict];
+  return [DBOPENIDOpenIdErrorSerializer deserialize:dict];
 }
 
 #pragma mark - Debug Description method
 
 - (NSString *)debugDescription {
-  return [[DBOPENIDAuthErrorSerializer serialize:self] description];
+  return [[DBOPENIDOpenIdErrorSerializer serialize:self] description];
 }
 
 #pragma mark - Copyable method
@@ -100,13 +86,10 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBOPENIDAuthErrorInvalidToken:
+  case DBOPENIDOpenIdErrorIncorrectOpenidScopes:
     result = prime * result + [[self tagName] hash];
     break;
-  case DBOPENIDAuthErrorNoOpenidAuth:
-    result = prime * result + [[self tagName] hash];
-    break;
-  case DBOPENIDAuthErrorOther:
+  case DBOPENIDOpenIdErrorOther:
     result = prime * result + [[self tagName] hash];
     break;
   }
@@ -123,23 +106,21 @@
   if (!other || ![other isKindOfClass:[self class]]) {
     return NO;
   }
-  return [self isEqualToAuthError:other];
+  return [self isEqualToOpenIdError:other];
 }
 
-- (BOOL)isEqualToAuthError:(DBOPENIDAuthError *)anAuthError {
-  if (self == anAuthError) {
+- (BOOL)isEqualToOpenIdError:(DBOPENIDOpenIdError *)anOpenIdError {
+  if (self == anOpenIdError) {
     return YES;
   }
-  if (self.tag != anAuthError.tag) {
+  if (self.tag != anOpenIdError.tag) {
     return NO;
   }
   switch (_tag) {
-  case DBOPENIDAuthErrorInvalidToken:
-    return [[self tagName] isEqual:[anAuthError tagName]];
-  case DBOPENIDAuthErrorNoOpenidAuth:
-    return [[self tagName] isEqual:[anAuthError tagName]];
-  case DBOPENIDAuthErrorOther:
-    return [[self tagName] isEqual:[anAuthError tagName]];
+  case DBOPENIDOpenIdErrorIncorrectOpenidScopes:
+    return [[self tagName] isEqual:[anOpenIdError tagName]];
+  case DBOPENIDOpenIdErrorOther:
+    return [[self tagName] isEqual:[anOpenIdError tagName]];
   }
   return YES;
 }
@@ -148,35 +129,31 @@
 
 #pragma mark - Serializer Object
 
-@implementation DBOPENIDAuthErrorSerializer
+@implementation DBOPENIDOpenIdErrorSerializer
 
-+ (NSDictionary<NSString *, id> *)serialize:(DBOPENIDAuthError *)valueObj {
++ (NSDictionary<NSString *, id> *)serialize:(DBOPENIDOpenIdError *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isInvalidToken]) {
-    jsonDict[@".tag"] = @"invalid_token";
-  } else if ([valueObj isNoOpenidAuth]) {
-    jsonDict[@".tag"] = @"no_openid_auth";
+  if ([valueObj isIncorrectOpenidScopes]) {
+    jsonDict[@".tag"] = @"incorrect_openid_scopes";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
-+ (DBOPENIDAuthError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
++ (DBOPENIDOpenIdError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"invalid_token"]) {
-    return [[DBOPENIDAuthError alloc] initWithInvalidToken];
-  } else if ([tag isEqualToString:@"no_openid_auth"]) {
-    return [[DBOPENIDAuthError alloc] initWithNoOpenidAuth];
+  if ([tag isEqualToString:@"incorrect_openid_scopes"]) {
+    return [[DBOPENIDOpenIdError alloc] initWithIncorrectOpenidScopes];
   } else if ([tag isEqualToString:@"other"]) {
-    return [[DBOPENIDAuthError alloc] initWithOther];
+    return [[DBOPENIDOpenIdError alloc] initWithOther];
   } else {
-    return [[DBOPENIDAuthError alloc] initWithOther];
+    return [[DBOPENIDOpenIdError alloc] initWithOther];
   }
 }
 
@@ -262,7 +239,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBOPENIDUserInfoArgs *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -273,7 +250,7 @@
 
 @end
 
-#import "DBOPENIDErrUnion.h"
+#import "DBOPENIDOpenIdError.h"
 #import "DBOPENIDUserInfoError.h"
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
@@ -282,20 +259,56 @@
 
 @implementation DBOPENIDUserInfoError
 
+@synthesize openidError = _openidError;
+
 #pragma mark - Constructors
 
-- (instancetype)initWithErr:(DBOPENIDErrUnion *)err errorMessage:(NSString *)errorMessage {
-
+- (instancetype)initWithOpenidError:(DBOPENIDOpenIdError *)openidError {
   self = [super init];
   if (self) {
-    _err = err;
-    _errorMessage = errorMessage ?: @"";
+    _tag = DBOPENIDUserInfoErrorOpenidError;
+    _openidError = openidError;
   }
   return self;
 }
 
-- (instancetype)initDefault {
-  return [self initWithErr:nil errorMessage:nil];
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBOPENIDUserInfoErrorOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+- (DBOPENIDOpenIdError *)openidError {
+  if (![self isOpenidError]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBOPENIDUserInfoErrorOpenidError, but was %@.", [self tagName]];
+  }
+  return _openidError;
+}
+
+#pragma mark - Tag state methods
+
+- (BOOL)isOpenidError {
+  return _tag == DBOPENIDUserInfoErrorOpenidError;
+}
+
+- (BOOL)isOther {
+  return _tag == DBOPENIDUserInfoErrorOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBOPENIDUserInfoErrorOpenidError:
+    return @"DBOPENIDUserInfoErrorOpenidError";
+  case DBOPENIDUserInfoErrorOther:
+    return @"DBOPENIDUserInfoErrorOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
 }
 
 #pragma mark - Serialization methods
@@ -328,10 +341,14 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.err != nil) {
-    result = prime * result + [self.err hash];
+  switch (_tag) {
+  case DBOPENIDUserInfoErrorOpenidError:
+    result = prime * result + [self.openidError hash];
+    break;
+  case DBOPENIDUserInfoErrorOther:
+    result = prime * result + [[self tagName] hash];
+    break;
   }
-  result = prime * result + [self.errorMessage hash];
 
   return prime * result;
 }
@@ -352,13 +369,14 @@
   if (self == anUserInfoError) {
     return YES;
   }
-  if (self.err) {
-    if (![self.err isEqual:anUserInfoError.err]) {
-      return NO;
-    }
-  }
-  if (![self.errorMessage isEqual:anUserInfoError.errorMessage]) {
+  if (self.tag != anUserInfoError.tag) {
     return NO;
+  }
+  switch (_tag) {
+  case DBOPENIDUserInfoErrorOpenidError:
+    return [self.openidError isEqual:anUserInfoError.openidError];
+  case DBOPENIDUserInfoErrorOther:
+    return [[self tagName] isEqual:[anUserInfoError tagName]];
   }
   return YES;
 }
@@ -372,19 +390,29 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBOPENIDUserInfoError *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if (valueObj.err) {
-    jsonDict[@"err"] = [DBOPENIDErrUnionSerializer serialize:valueObj.err];
+  if ([valueObj isOpenidError]) {
+    jsonDict[@"openid_error"] = [[DBOPENIDOpenIdErrorSerializer serialize:valueObj.openidError] mutableCopy];
+    jsonDict[@".tag"] = @"openid_error";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
   }
-  jsonDict[@"error_message"] = valueObj.errorMessage;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBOPENIDUserInfoError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
-  DBOPENIDErrUnion *err = valueDict[@"err"] ? [DBOPENIDErrUnionSerializer deserialize:valueDict[@"err"]] : nil;
-  NSString *errorMessage = valueDict[@"error_message"] ?: @"";
+  NSString *tag = valueDict[@".tag"];
 
-  return [[DBOPENIDUserInfoError alloc] initWithErr:err errorMessage:errorMessage];
+  if ([tag isEqualToString:@"openid_error"]) {
+    DBOPENIDOpenIdError *openidError = [DBOPENIDOpenIdErrorSerializer deserialize:valueDict[@"openid_error"]];
+    return [[DBOPENIDUserInfoError alloc] initWithOpenidError:openidError];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBOPENIDUserInfoError alloc] initWithOther];
+  } else {
+    return [[DBOPENIDUserInfoError alloc] initWithOther];
+  }
 }
 
 @end
@@ -539,7 +567,7 @@
   jsonDict[@"iss"] = valueObj.iss;
   jsonDict[@"sub"] = valueObj.sub;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBOPENIDUserInfoResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -556,173 +584,6 @@
                                               emailVerified:emailVerified
                                                         iss:iss
                                                         sub:sub];
-}
-
-@end
-
-#import "DBOPENIDAuthError.h"
-#import "DBOPENIDErrUnion.h"
-#import "DBStoneSerializers.h"
-#import "DBStoneValidators.h"
-
-#pragma mark - API Object
-
-@implementation DBOPENIDErrUnion
-
-@synthesize authError = _authError;
-
-#pragma mark - Constructors
-
-- (instancetype)initWithAuthError:(DBOPENIDAuthError *)authError {
-  self = [super init];
-  if (self) {
-    _tag = DBOPENIDErrUnionAuthError;
-    _authError = authError;
-  }
-  return self;
-}
-
-- (instancetype)initWithOther {
-  self = [super init];
-  if (self) {
-    _tag = DBOPENIDErrUnionOther;
-  }
-  return self;
-}
-
-#pragma mark - Instance field accessors
-
-- (DBOPENIDAuthError *)authError {
-  if (![self isAuthError]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBOPENIDErrUnionAuthError, but was %@.", [self tagName]];
-  }
-  return _authError;
-}
-
-#pragma mark - Tag state methods
-
-- (BOOL)isAuthError {
-  return _tag == DBOPENIDErrUnionAuthError;
-}
-
-- (BOOL)isOther {
-  return _tag == DBOPENIDErrUnionOther;
-}
-
-- (NSString *)tagName {
-  switch (_tag) {
-  case DBOPENIDErrUnionAuthError:
-    return @"DBOPENIDErrUnionAuthError";
-  case DBOPENIDErrUnionOther:
-    return @"DBOPENIDErrUnionOther";
-  }
-
-  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
-}
-
-#pragma mark - Serialization methods
-
-+ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
-  return [DBOPENIDErrUnionSerializer serialize:instance];
-}
-
-+ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
-  return [DBOPENIDErrUnionSerializer deserialize:dict];
-}
-
-#pragma mark - Debug Description method
-
-- (NSString *)debugDescription {
-  return [[DBOPENIDErrUnionSerializer serialize:self] description];
-}
-
-#pragma mark - Copyable method
-
-- (instancetype)copyWithZone:(NSZone *)zone {
-#pragma unused(zone)
-  /// object is immutable
-  return self;
-}
-
-#pragma mark - Hash method
-
-- (NSUInteger)hash {
-  NSUInteger prime = 31;
-  NSUInteger result = 1;
-
-  switch (_tag) {
-  case DBOPENIDErrUnionAuthError:
-    result = prime * result + [self.authError hash];
-    break;
-  case DBOPENIDErrUnionOther:
-    result = prime * result + [[self tagName] hash];
-    break;
-  }
-
-  return prime * result;
-}
-
-#pragma mark - Equality method
-
-- (BOOL)isEqual:(id)other {
-  if (other == self) {
-    return YES;
-  }
-  if (!other || ![other isKindOfClass:[self class]]) {
-    return NO;
-  }
-  return [self isEqualToErrUnion:other];
-}
-
-- (BOOL)isEqualToErrUnion:(DBOPENIDErrUnion *)anErrUnion {
-  if (self == anErrUnion) {
-    return YES;
-  }
-  if (self.tag != anErrUnion.tag) {
-    return NO;
-  }
-  switch (_tag) {
-  case DBOPENIDErrUnionAuthError:
-    return [self.authError isEqual:anErrUnion.authError];
-  case DBOPENIDErrUnionOther:
-    return [[self tagName] isEqual:[anErrUnion tagName]];
-  }
-  return YES;
-}
-
-@end
-
-#pragma mark - Serializer Object
-
-@implementation DBOPENIDErrUnionSerializer
-
-+ (NSDictionary<NSString *, id> *)serialize:(DBOPENIDErrUnion *)valueObj {
-  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
-
-  if ([valueObj isAuthError]) {
-    jsonDict[@"auth_error"] = [[DBOPENIDAuthErrorSerializer serialize:valueObj.authError] mutableCopy];
-    jsonDict[@".tag"] = @"auth_error";
-  } else if ([valueObj isOther]) {
-    jsonDict[@".tag"] = @"other";
-  } else {
-    jsonDict[@".tag"] = @"other";
-  }
-
-  return [jsonDict count] > 0 ? jsonDict : nil;
-}
-
-+ (DBOPENIDErrUnion *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
-  NSString *tag = valueDict[@".tag"];
-
-  if ([tag isEqualToString:@"auth_error"]) {
-    DBOPENIDAuthError *authError = [DBOPENIDAuthErrorSerializer deserialize:valueDict[@"auth_error"]];
-    return [[DBOPENIDErrUnion alloc] initWithAuthError:authError];
-  } else if ([tag isEqualToString:@"other"]) {
-    return [[DBOPENIDErrUnion alloc] initWithOther];
-  } else {
-    return [[DBOPENIDErrUnion alloc] initWithOther];
-  }
 }
 
 @end

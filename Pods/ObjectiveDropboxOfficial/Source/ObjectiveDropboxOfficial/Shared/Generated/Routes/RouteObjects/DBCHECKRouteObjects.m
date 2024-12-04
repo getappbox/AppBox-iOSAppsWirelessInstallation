@@ -32,11 +32,7 @@ static NSObject *lockObj = nil;
                               deprecated:@NO
                               resultType:[DBCHECKEchoResult class]
                                errorType:nil
-                                   attrs:@{
-                                     @"auth" : @"app",
-                                     @"host" : @"api",
-                                     @"style" : @"rpc"
-                                   }
+                                   attrs:@{@"auth" : @"app", @"host" : @"api", @"style" : @"rpc"}
                    dataStructSerialBlock:nil
                  dataStructDeserialBlock:nil];
     }
@@ -52,11 +48,7 @@ static NSObject *lockObj = nil;
                                deprecated:@NO
                                resultType:[DBCHECKEchoResult class]
                                 errorType:nil
-                                    attrs:@{
-                                      @"auth" : @"user",
-                                      @"host" : @"api",
-                                      @"style" : @"rpc"
-                                    }
+                                    attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                     dataStructSerialBlock:nil
                   dataStructDeserialBlock:nil];
     }

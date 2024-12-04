@@ -72,11 +72,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// a `DBTEAMLOGGetTeamEventsError` object on failure.
 ///
 - (DBRpcTask<DBTEAMLOGGetTeamEventsResult *, DBTEAMLOGGetTeamEventsError *> *)
-getEvents:(nullable NSNumber *)limit
-accountId:(nullable NSString *)accountId
-     time:(nullable DBTEAMCOMMONTimeRange *)time
- category:(nullable DBTEAMLOGEventCategory *)category
-eventType:(nullable DBTEAMLOGEventTypeArg *)eventType;
+    getEvents:(nullable NSNumber *)limit
+    accountId:(nullable NSString *)accountId
+         time:(nullable DBTEAMCOMMONTimeRange *)time
+     category:(nullable DBTEAMLOGEventCategory *)category
+    eventType:(nullable DBTEAMLOGEventTypeArg *)eventType;
 
 ///
 /// Once a cursor has been retrieved from `getEvents`, use this to paginate through all events. Permission : Team

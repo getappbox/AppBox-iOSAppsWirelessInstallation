@@ -105,7 +105,7 @@
   jsonDict[@"email"] = valueObj.email;
   jsonDict[@"is_verified"] = valueObj.isVerified;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBSECONDARYEMAILSSecondaryEmail *)deserialize:(NSDictionary<NSString *, id> *)valueDict {

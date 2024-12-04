@@ -141,7 +141,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)_setCFClientFlags:(CFOptionFlags)inFlags
                  callback:(CFReadStreamClientCallBack)inCallback
                   context:(CFStreamClientContext *)inContext {
-
   if (inCallback) {
     _requestedEvents = inFlags;
     _copiedCallback = inCallback;

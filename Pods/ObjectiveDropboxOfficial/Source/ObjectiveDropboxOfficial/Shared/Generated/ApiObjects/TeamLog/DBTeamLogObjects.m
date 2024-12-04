@@ -319,7 +319,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAccessMethodLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -509,7 +509,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAccountCaptureAvailability *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -635,7 +635,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGAccountCaptureAvailabilitySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAccountCaptureChangeAvailabilityDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -741,7 +741,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAccountCaptureChangeAvailabilityType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -859,7 +859,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGAccountCapturePolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAccountCaptureChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -963,7 +963,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAccountCaptureChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1063,7 +1063,7 @@
 
   jsonDict[@"domain_name"] = valueObj.domainName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAccountCaptureMigrateAccountDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1163,7 +1163,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAccountCaptureMigrateAccountType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1282,7 +1282,7 @@
         [DBTEAMLOGAccountCaptureNotificationTypeSerializer serialize:valueObj.notificationType];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAccountCaptureNotificationEmailsSentDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1387,7 +1387,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAccountCaptureNotificationEmailsSentType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1556,7 +1556,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAccountCaptureNotificationType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1609,6 +1609,14 @@
   return self;
 }
 
+- (instancetype)initWithPreventPersonalCreation {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAccountCapturePolicyPreventPersonalCreation;
+  }
+  return self;
+}
+
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -1633,6 +1641,10 @@
   return _tag == DBTEAMLOGAccountCapturePolicyInvitedUsers;
 }
 
+- (BOOL)isPreventPersonalCreation {
+  return _tag == DBTEAMLOGAccountCapturePolicyPreventPersonalCreation;
+}
+
 - (BOOL)isOther {
   return _tag == DBTEAMLOGAccountCapturePolicyOther;
 }
@@ -1645,6 +1657,8 @@
     return @"DBTEAMLOGAccountCapturePolicyDisabled";
   case DBTEAMLOGAccountCapturePolicyInvitedUsers:
     return @"DBTEAMLOGAccountCapturePolicyInvitedUsers";
+  case DBTEAMLOGAccountCapturePolicyPreventPersonalCreation:
+    return @"DBTEAMLOGAccountCapturePolicyPreventPersonalCreation";
   case DBTEAMLOGAccountCapturePolicyOther:
     return @"DBTEAMLOGAccountCapturePolicyOther";
   }
@@ -1692,6 +1706,9 @@
   case DBTEAMLOGAccountCapturePolicyInvitedUsers:
     result = prime * result + [[self tagName] hash];
     break;
+  case DBTEAMLOGAccountCapturePolicyPreventPersonalCreation:
+    result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMLOGAccountCapturePolicyOther:
     result = prime * result + [[self tagName] hash];
     break;
@@ -1726,6 +1743,8 @@
     return [[self tagName] isEqual:[anAccountCapturePolicy tagName]];
   case DBTEAMLOGAccountCapturePolicyInvitedUsers:
     return [[self tagName] isEqual:[anAccountCapturePolicy tagName]];
+  case DBTEAMLOGAccountCapturePolicyPreventPersonalCreation:
+    return [[self tagName] isEqual:[anAccountCapturePolicy tagName]];
   case DBTEAMLOGAccountCapturePolicyOther:
     return [[self tagName] isEqual:[anAccountCapturePolicy tagName]];
   }
@@ -1747,13 +1766,15 @@
     jsonDict[@".tag"] = @"disabled";
   } else if ([valueObj isInvitedUsers]) {
     jsonDict[@".tag"] = @"invited_users";
+  } else if ([valueObj isPreventPersonalCreation]) {
+    jsonDict[@".tag"] = @"prevent_personal_creation";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAccountCapturePolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1765,6 +1786,8 @@
     return [[DBTEAMLOGAccountCapturePolicy alloc] initWithDisabled];
   } else if ([tag isEqualToString:@"invited_users"]) {
     return [[DBTEAMLOGAccountCapturePolicy alloc] initWithInvitedUsers];
+  } else if ([tag isEqualToString:@"prevent_personal_creation"]) {
+    return [[DBTEAMLOGAccountCapturePolicy alloc] initWithPreventPersonalCreation];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGAccountCapturePolicy alloc] initWithOther];
   } else {
@@ -1863,7 +1886,7 @@
 
   jsonDict[@"domain_name"] = valueObj.domainName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAccountCaptureRelinquishAccountDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1963,7 +1986,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAccountCaptureRelinquishAccountType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2071,7 +2094,7 @@
   jsonDict[@"previous_value"] = [DBTEAMLOGAccountStateSerializer serialize:valueObj.previousValue];
   jsonDict[@"new_value"] = [DBTEAMLOGAccountStateSerializer serialize:valueObj.dNewValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAccountLockOrUnlockedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2171,7 +2194,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAccountLockOrUnlockedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2339,7 +2362,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAccountState *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2574,7 +2597,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGActionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2888,7 +2911,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGActorLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3181,7 +3204,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAdminAlertCategoryEnum *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3430,7 +3453,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAdminAlertGeneralStateEnum *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3675,7 +3698,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAdminAlertSeverityEnum *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3855,7 +3878,7 @@
     jsonDict[@"excluded_file_extensions"] = valueObj.excludedFileExtensions;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAdminAlertingAlertConfiguration *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4125,7 +4148,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAdminAlertingAlertSensitivity *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4284,7 +4307,7 @@
   jsonDict[@"previous_value"] = [DBTEAMLOGAdminAlertGeneralStateEnumSerializer serialize:valueObj.previousValue];
   jsonDict[@"new_value"] = [DBTEAMLOGAdminAlertGeneralStateEnumSerializer serialize:valueObj.dNewValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAdminAlertingAlertStateChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4398,7 +4421,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAdminAlertingAlertStateChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4567,7 +4590,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAdminAlertingAlertStatePolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4694,7 +4717,7 @@
   jsonDict[@"new_alert_config"] =
       [DBTEAMLOGAdminAlertingAlertConfigurationSerializer serialize:valueObj.dNewAlertConfig];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAdminAlertingChangedAlertConfigDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4800,7 +4823,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAdminAlertingChangedAlertConfigType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4926,7 +4949,7 @@
   jsonDict[@"alert_category"] = [DBTEAMLOGAdminAlertCategoryEnumSerializer serialize:valueObj.alertCategory];
   jsonDict[@"alert_instance_id"] = valueObj.alertInstanceId;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAdminAlertingTriggeredAlertDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -5034,7 +5057,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAdminAlertingTriggeredAlertType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -5202,7 +5225,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAdminConsoleAppPermission *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -5399,7 +5422,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAdminConsoleAppPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -5518,7 +5541,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGAdminEmailRemindersPolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGAdminEmailRemindersPolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAdminEmailRemindersChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -5621,7 +5644,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAdminEmailRemindersChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -5810,7 +5833,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAdminEmailRemindersPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -6156,7 +6179,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAdminRole *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -6390,7 +6413,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAlertRecipientsSettingType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -6493,7 +6516,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAllowDownloadDisabledDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -6592,7 +6615,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAllowDownloadDisabledType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -6683,7 +6706,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAllowDownloadEnabledDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -6782,7 +6805,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAllowDownloadEnabledType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -6881,7 +6904,7 @@
 
   jsonDict[@"request_id"] = valueObj.requestId;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGApiSessionLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -6982,7 +7005,7 @@
 
   jsonDict[@"app_info"] = [DBTEAMLOGAppLogInfoSerializer serialize:valueObj.appInfo];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAppBlockedByPermissionsDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -7081,7 +7104,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAppBlockedByPermissionsType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -7181,7 +7204,7 @@
 
   jsonDict[@"app_info"] = [DBTEAMLOGAppLogInfoSerializer serialize:valueObj.appInfo];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAppLinkTeamDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -7280,7 +7303,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAppLinkTeamType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -7380,7 +7403,7 @@
 
   jsonDict[@"app_info"] = [DBTEAMLOGAppLogInfoSerializer serialize:valueObj.appInfo];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAppLinkUserDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -7479,7 +7502,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAppLinkUserType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -7625,7 +7648,7 @@
     jsonDict[@".tag"] = @"teamLinkedApp";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAppLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -7776,7 +7799,7 @@
     jsonDict[@"permission"] = [DBTEAMLOGAdminConsoleAppPermissionSerializer serialize:valueObj.permission];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAppPermissionsChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -7885,7 +7908,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAppPermissionsChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -7985,7 +8008,7 @@
 
   jsonDict[@"app_info"] = [DBTEAMLOGAppLogInfoSerializer serialize:valueObj.appInfo];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAppUnlinkTeamDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -8084,7 +8107,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAppUnlinkTeamType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -8184,7 +8207,7 @@
 
   jsonDict[@"app_info"] = [DBTEAMLOGAppLogInfoSerializer serialize:valueObj.appInfo];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAppUnlinkUserDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -8283,7 +8306,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAppUnlinkUserType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -8374,7 +8397,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGApplyNamingConventionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -8473,7 +8496,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGApplyNamingConventionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -8766,7 +8789,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGAssetLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -8793,6 +8816,389 @@
   } else {
     return [[DBTEAMLOGAssetLogInfo alloc] initWithOther];
   }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGBackupAdminInvitationSentDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGBackupAdminInvitationSentDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGBackupAdminInvitationSentDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGBackupAdminInvitationSentDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGBackupAdminInvitationSentDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToBackupAdminInvitationSentDetails:other];
+}
+
+- (BOOL)isEqualToBackupAdminInvitationSentDetails:
+    (DBTEAMLOGBackupAdminInvitationSentDetails *)aBackupAdminInvitationSentDetails {
+  if (self == aBackupAdminInvitationSentDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGBackupAdminInvitationSentDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGBackupAdminInvitationSentDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGBackupAdminInvitationSentDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGBackupAdminInvitationSentDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGBackupAdminInvitationSentType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGBackupAdminInvitationSentType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGBackupAdminInvitationSentTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGBackupAdminInvitationSentTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGBackupAdminInvitationSentTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToBackupAdminInvitationSentType:other];
+}
+
+- (BOOL)isEqualToBackupAdminInvitationSentType:
+    (DBTEAMLOGBackupAdminInvitationSentType *)aBackupAdminInvitationSentType {
+  if (self == aBackupAdminInvitationSentType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aBackupAdminInvitationSentType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGBackupAdminInvitationSentTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGBackupAdminInvitationSentType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGBackupAdminInvitationSentType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGBackupAdminInvitationSentType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGBackupInvitationOpenedDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGBackupInvitationOpenedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGBackupInvitationOpenedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGBackupInvitationOpenedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGBackupInvitationOpenedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToBackupInvitationOpenedDetails:other];
+}
+
+- (BOOL)isEqualToBackupInvitationOpenedDetails:
+    (DBTEAMLOGBackupInvitationOpenedDetails *)aBackupInvitationOpenedDetails {
+  if (self == aBackupInvitationOpenedDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGBackupInvitationOpenedDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGBackupInvitationOpenedDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGBackupInvitationOpenedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGBackupInvitationOpenedDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGBackupInvitationOpenedType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGBackupInvitationOpenedType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGBackupInvitationOpenedTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGBackupInvitationOpenedTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGBackupInvitationOpenedTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToBackupInvitationOpenedType:other];
+}
+
+- (BOOL)isEqualToBackupInvitationOpenedType:(DBTEAMLOGBackupInvitationOpenedType *)aBackupInvitationOpenedType {
+  if (self == aBackupInvitationOpenedType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aBackupInvitationOpenedType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGBackupInvitationOpenedTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGBackupInvitationOpenedType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGBackupInvitationOpenedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGBackupInvitationOpenedType alloc] initWithDescription_:description_];
 }
 
 @end
@@ -8954,7 +9360,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGBackupStatus *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -9077,7 +9483,7 @@
   jsonDict[@"doc_title"] = valueObj.docTitle;
   jsonDict[@"binder_item_name"] = valueObj.binderItemName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGBinderAddPageDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -9180,7 +9586,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGBinderAddPageType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -9295,7 +9701,7 @@
   jsonDict[@"doc_title"] = valueObj.docTitle;
   jsonDict[@"binder_item_name"] = valueObj.binderItemName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGBinderAddSectionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -9398,7 +9804,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGBinderAddSectionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -9513,7 +9919,7 @@
   jsonDict[@"doc_title"] = valueObj.docTitle;
   jsonDict[@"binder_item_name"] = valueObj.binderItemName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGBinderRemovePageDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -9616,7 +10022,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGBinderRemovePageType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -9731,7 +10137,7 @@
   jsonDict[@"doc_title"] = valueObj.docTitle;
   jsonDict[@"binder_item_name"] = valueObj.binderItemName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGBinderRemoveSectionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -9834,7 +10240,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGBinderRemoveSectionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -9968,7 +10374,7 @@
     jsonDict[@"previous_binder_item_name"] = valueObj.previousBinderItemName;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGBinderRenamePageDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -10073,7 +10479,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGBinderRenamePageType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -10207,7 +10613,7 @@
     jsonDict[@"previous_binder_item_name"] = valueObj.previousBinderItemName;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGBinderRenameSectionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -10312,7 +10718,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGBinderRenameSectionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -10427,7 +10833,7 @@
   jsonDict[@"doc_title"] = valueObj.docTitle;
   jsonDict[@"binder_item_name"] = valueObj.binderItemName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGBinderReorderPageDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -10530,7 +10936,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGBinderReorderPageType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -10645,7 +11051,7 @@
   jsonDict[@"doc_title"] = valueObj.docTitle;
   jsonDict[@"binder_item_name"] = valueObj.binderItemName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGBinderReorderSectionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -10748,7 +11154,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGBinderReorderSectionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -10916,7 +11322,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGCameraUploadsPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -11033,7 +11439,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGCameraUploadsPolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGCameraUploadsPolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGCameraUploadsPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -11136,7 +11542,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGCameraUploadsPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -11325,7 +11731,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGCaptureTranscriptPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -11444,7 +11850,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGCaptureTranscriptPolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGCaptureTranscriptPolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGCaptureTranscriptPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -11548,7 +11954,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGCaptureTranscriptPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -11715,7 +12121,7 @@
     jsonDict[@"common_name"] = valueObj.commonName;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGCertificate *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -11895,7 +12301,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGChangeLinkExpirationPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -12020,7 +12426,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGFedAdminRoleSerializer serialize:valueObj.dNewValue];
   jsonDict[@"team_name"] = valueObj.teamName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGChangedEnterpriseAdminRoleDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -12124,7 +12530,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGChangedEnterpriseAdminRoleType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -12252,7 +12658,7 @@
   jsonDict[@"previous_value"] = [DBTEAMLOGTrustedTeamsRequestStateSerializer serialize:valueObj.previousValue];
   jsonDict[@"new_value"] = [DBTEAMLOGTrustedTeamsRequestStateSerializer serialize:valueObj.dNewValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGChangedEnterpriseConnectedTeamStatusDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -12361,7 +12767,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGChangedEnterpriseConnectedTeamStatusType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -12479,7 +12885,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGClassificationPolicyEnumWrapperSerializer serialize:valueObj.dNewValue];
   jsonDict[@"classification_type"] = [DBTEAMLOGClassificationTypeSerializer serialize:valueObj.classificationType];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGClassificationChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -12586,7 +12992,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGClassificationChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -12678,7 +13084,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGClassificationCreateReportDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -12779,7 +13185,7 @@
 
   jsonDict[@"failure_reason"] = [DBTEAMTeamReportFailureReasonSerializer serialize:valueObj.failureReason];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGClassificationCreateReportFailDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -12880,7 +13286,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGClassificationCreateReportFailType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -12980,7 +13386,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGClassificationCreateReportType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -13191,7 +13597,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGClassificationPolicyEnumWrapper *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -13371,7 +13777,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGClassificationType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -13478,7 +13884,7 @@
 
   jsonDict[@"album_name"] = valueObj.albumName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGCollectionShareDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -13577,7 +13983,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGCollectionShareType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -13766,7 +14172,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGComputerBackupPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -13885,7 +14291,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGComputerBackupPolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGComputerBackupPolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGComputerBackupPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -13988,7 +14394,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGComputerBackupPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -14087,7 +14493,7 @@
 
   jsonDict[@"team"] = valueObj.team;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGConnectedTeamName *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -14194,7 +14600,7 @@
   jsonDict[@"new_value"] = valueObj.dNewValue;
   jsonDict[@"previous_value"] = valueObj.previousValue;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGContentAdministrationPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -14296,7 +14702,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGContentAdministrationPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -14464,7 +14870,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGContentPermanentDeletePolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -14775,7 +15181,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGContextLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -14887,7 +15293,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGCreateFolderDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -14986,7 +15392,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGCreateFolderType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -15092,7 +15498,7 @@
   jsonDict[@"link_url"] = valueObj.linkUrl;
   jsonDict[@"expiry_date"] = valueObj.expiryDate;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGCreateTeamInviteLinkDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -15192,7 +15598,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGCreateTeamInviteLinkType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -15301,7 +15707,7 @@
   jsonDict[@"previous_value"] = [DBTEAMLOGPlacementRestrictionSerializer serialize:valueObj.previousValue];
   jsonDict[@"new_value"] = [DBTEAMLOGPlacementRestrictionSerializer serialize:valueObj.dNewValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDataPlacementRestrictionChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -15405,7 +15811,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDataPlacementRestrictionChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -15507,7 +15913,7 @@
   jsonDict[@"placement_restriction"] =
       [DBTEAMLOGPlacementRestrictionSerializer serialize:valueObj.placementRestriction];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDataPlacementRestrictionSatisfyPolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -15609,7 +16015,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDataPlacementRestrictionSatisfyPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -15701,7 +16107,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDataResidencyMigrationRequestSuccessfulDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -15801,7 +16207,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDataResidencyMigrationRequestSuccessfulType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -15893,7 +16299,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -15993,7 +16399,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -16288,7 +16694,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDefaultLinkExpirationDaysPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -16407,7 +16813,7 @@
 
   jsonDict[@"link_url"] = valueObj.linkUrl;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeleteTeamInviteLinkDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -16506,7 +16912,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeleteTeamInviteLinkType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -16672,7 +17078,7 @@
     jsonDict[@".tag"] = @"legacyDeviceSession";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceSessionLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -16894,7 +17300,7 @@
     jsonDict[@"client_version"] = valueObj.clientVersion;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDesktopDeviceSessionLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -17050,7 +17456,7 @@
     jsonDict[@".tag"] = @"mobile";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSessionLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -17168,7 +17574,7 @@
     jsonDict[@"session_id"] = valueObj.sessionId;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDesktopSessionLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -17260,7 +17666,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceApprovalsAddExceptionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -17360,7 +17766,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceApprovalsAddExceptionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -17483,7 +17889,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGDeviceApprovalsPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceApprovalsChangeDesktopPolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -17588,7 +17994,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceApprovalsChangeDesktopPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -17711,7 +18117,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGDeviceApprovalsPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceApprovalsChangeMobilePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -17816,7 +18222,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceApprovalsChangeMobilePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -17939,7 +18345,7 @@
     jsonDict[@"previous_value"] = [DBTEAMPOLICIESRolloutMethodSerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceApprovalsChangeOverageActionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -18044,7 +18450,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceApprovalsChangeOverageActionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -18167,7 +18573,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGDeviceUnlinkPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceApprovalsChangeUnlinkActionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -18272,7 +18678,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceApprovalsChangeUnlinkActionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -18440,7 +18846,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceApprovalsPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -18540,7 +18946,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceApprovalsRemoveExceptionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -18640,7 +19046,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceApprovalsRemoveExceptionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -18740,7 +19146,7 @@
 
   jsonDict[@"device_session_info"] = [DBTEAMLOGDeviceSessionLogInfoSerializer serialize:valueObj.deviceSessionInfo];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceChangeIpDesktopDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -18840,7 +19246,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceChangeIpDesktopType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -18949,7 +19355,7 @@
     jsonDict[@"device_session_info"] = [DBTEAMLOGDeviceSessionLogInfoSerializer serialize:valueObj.deviceSessionInfo];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceChangeIpMobileDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -19051,7 +19457,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceChangeIpMobileType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -19150,7 +19556,7 @@
 
   jsonDict[@"user_agent"] = valueObj.userAgent;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceChangeIpWebDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -19249,7 +19655,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceChangeIpWebType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -19380,7 +19786,7 @@
     jsonDict[@"display_name"] = valueObj.displayName;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceDeleteOnUnlinkFailDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -19484,7 +19890,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceDeleteOnUnlinkFailType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -19606,7 +20012,7 @@
     jsonDict[@"display_name"] = valueObj.displayName;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceDeleteOnUnlinkSuccessDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -19708,7 +20114,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceDeleteOnUnlinkSuccessType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -19824,7 +20230,7 @@
     jsonDict[@"ip_address"] = valueObj.ipAddress;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceLinkFailDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -19924,7 +20330,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceLinkFailType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -20033,7 +20439,7 @@
     jsonDict[@"device_session_info"] = [DBTEAMLOGDeviceSessionLogInfoSerializer serialize:valueObj.deviceSessionInfo];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceLinkSuccessDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -20135,7 +20541,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceLinkSuccessType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -20227,7 +20633,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceManagementDisabledDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -20326,7 +20732,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceManagementDisabledType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -20418,7 +20824,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceManagementEnabledDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -20517,7 +20923,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceManagementEnabledType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -20636,7 +21042,7 @@
   jsonDict[@"previous_value"] = [DBTEAMLOGBackupStatusSerializer serialize:valueObj.previousValue];
   jsonDict[@"new_value"] = [DBTEAMLOGBackupStatusSerializer serialize:valueObj.dNewValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceSyncBackupStatusChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -20742,7 +21148,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceSyncBackupStatusChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -20910,7 +21316,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -21048,7 +21454,7 @@
     jsonDict[@"display_name"] = valueObj.displayName;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceUnlinkDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -21221,7 +21627,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceUnlinkPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -21328,7 +21734,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDeviceUnlinkType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -21420,7 +21826,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDirectoryRestrictionsAddMembersDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -21520,7 +21926,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDirectoryRestrictionsAddMembersType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -21612,7 +22018,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDirectoryRestrictionsRemoveMembersDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -21712,7 +22118,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDirectoryRestrictionsRemoveMembersType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -21803,7 +22209,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDisabledDomainInvitesDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -21902,7 +22308,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDisabledDomainInvitesType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -22070,7 +22476,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDispositionActionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -22170,7 +22576,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDomainInvitesApproveRequestToJoinTeamDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -22270,7 +22676,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDomainInvitesApproveRequestToJoinTeamType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -22362,7 +22768,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDomainInvitesDeclineRequestToJoinTeamDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -22462,7 +22868,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDomainInvitesDeclineRequestToJoinTeamType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -22569,7 +22975,7 @@
   jsonDict[@"domain_name"] = valueObj.domainName;
   jsonDict[@"num_recipients"] = valueObj.numRecipients;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDomainInvitesEmailExistingUsersDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -22671,7 +23077,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDomainInvitesEmailExistingUsersType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -22763,7 +23169,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDomainInvitesRequestToJoinTeamDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -22863,7 +23269,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDomainInvitesRequestToJoinTeamType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -22955,7 +23361,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDomainInvitesSetInviteNewUserPrefToNoDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -23055,7 +23461,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDomainInvitesSetInviteNewUserPrefToNoType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -23147,7 +23553,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDomainInvitesSetInviteNewUserPrefToYesDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -23247,7 +23653,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDomainInvitesSetInviteNewUserPrefToYesType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -23363,7 +23769,7 @@
     jsonDict[@"verification_method"] = valueObj.verificationMethod;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDomainVerificationAddDomainFailDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -23465,7 +23871,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDomainVerificationAddDomainFailType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -23588,7 +23994,7 @@
     jsonDict[@"verification_method"] = valueObj.verificationMethod;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDomainVerificationAddDomainSuccessDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -23693,7 +24099,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDomainVerificationAddDomainSuccessType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -23799,7 +24205,7 @@
                                                    return elem0;
                                                  }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDomainVerificationRemoveDomainDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -23902,7 +24308,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDomainVerificationRemoveDomainType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -24070,7 +24476,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDownloadPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -24178,7 +24584,7 @@
 
   jsonDict[@"platform"] = valueObj.platform;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDropboxPasswordsExportedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -24277,7 +24683,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDropboxPasswordsExportedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -24384,7 +24790,7 @@
   jsonDict[@"is_first_device"] = valueObj.isFirstDevice;
   jsonDict[@"platform"] = valueObj.platform;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -24486,7 +24892,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDropboxPasswordsNewDeviceEnrolledType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -24675,7 +25081,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDropboxPasswordsPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -24794,7 +25200,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGDropboxPasswordsPolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGDropboxPasswordsPolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDropboxPasswordsPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -24898,7 +25304,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDropboxPasswordsPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -25005,7 +25411,7 @@
   jsonDict[@"unit"] = [DBTEAMLOGTimeUnitSerializer serialize:valueObj.unit];
   jsonDict[@"amount"] = valueObj.amount;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGDurationLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -25174,7 +25580,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEmailIngestPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -25291,7 +25697,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGEmailIngestPolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGEmailIngestPolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEmailIngestPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -25392,7 +25798,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEmailIngestPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -25550,7 +25956,7 @@
     jsonDict[@"from_email"] = valueObj.fromEmail;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEmailIngestReceiveFileDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -25660,7 +26066,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEmailIngestReceiveFileType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -25751,7 +26157,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEmmAddExceptionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -25850,7 +26256,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEmmAddExceptionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -25967,7 +26373,7 @@
     jsonDict[@"previous_value"] = [DBTEAMPOLICIESEmmStateSerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEmmChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -26068,7 +26474,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEmmChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -26160,7 +26566,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEmmCreateExceptionsReportDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -26260,7 +26666,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEmmCreateExceptionsReportType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -26351,7 +26757,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEmmCreateUsageReportDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -26450,7 +26856,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEmmCreateUsageReportType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -26550,7 +26956,7 @@
 
   jsonDict[@"error_details"] = [DBTEAMLOGFailureDetailsLogInfoSerializer serialize:valueObj.errorDetails];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEmmErrorDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -26650,7 +27056,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEmmErrorType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -26741,7 +27147,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEmmRefreshAuthTokenDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -26840,7 +27246,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEmmRefreshAuthTokenType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -26931,7 +27337,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEmmRemoveExceptionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -27030,7 +27436,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEmmRemoveExceptionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -27121,7 +27527,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEnabledDomainInvitesDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -27220,7 +27626,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEnabledDomainInvitesType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -27322,7 +27728,7 @@
   jsonDict[@"federation_extra_details"] =
       [DBTEAMLOGFedExtraDetailsSerializer serialize:valueObj.federationExtraDetails];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEndedEnterpriseAdminSessionDeprecatedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -27424,7 +27830,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEndedEnterpriseAdminSessionDeprecatedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -27516,7 +27922,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEndedEnterpriseAdminSessionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -27616,7 +28022,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEndedEnterpriseAdminSessionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -27784,7 +28190,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEnforceLinkPasswordPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -27917,7 +28323,7 @@
   jsonDict[@"previous_settings_page_locking_state"] = valueObj.previousSettingsPageLockingState;
   jsonDict[@"new_settings_page_locking_state"] = valueObj.dNewSettingsPageLockingState;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEnterpriseSettingsLockingDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -28023,7 +28429,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEnterpriseSettingsLockingType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -28088,6 +28494,14 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventCategoryDomains;
+  }
+  return self;
+}
+
+- (instancetype)initWithEncryption {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventCategoryEncryption;
   }
   return self;
 }
@@ -28256,6 +28670,10 @@
   return _tag == DBTEAMLOGEventCategoryDomains;
 }
 
+- (BOOL)isEncryption {
+  return _tag == DBTEAMLOGEventCategoryEncryption;
+}
+
 - (BOOL)isFileOperations {
   return _tag == DBTEAMLOGEventCategoryFileOperations;
 }
@@ -28338,6 +28756,8 @@
     return @"DBTEAMLOGEventCategoryDevices";
   case DBTEAMLOGEventCategoryDomains:
     return @"DBTEAMLOGEventCategoryDomains";
+  case DBTEAMLOGEventCategoryEncryption:
+    return @"DBTEAMLOGEventCategoryEncryption";
   case DBTEAMLOGEventCategoryFileOperations:
     return @"DBTEAMLOGEventCategoryFileOperations";
   case DBTEAMLOGEventCategoryFileRequests:
@@ -28424,6 +28844,9 @@
     result = prime * result + [[self tagName] hash];
     break;
   case DBTEAMLOGEventCategoryDomains:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventCategoryEncryption:
     result = prime * result + [[self tagName] hash];
     break;
   case DBTEAMLOGEventCategoryFileOperations:
@@ -28514,6 +28937,8 @@
     return [[self tagName] isEqual:[anEventCategory tagName]];
   case DBTEAMLOGEventCategoryDomains:
     return [[self tagName] isEqual:[anEventCategory tagName]];
+  case DBTEAMLOGEventCategoryEncryption:
+    return [[self tagName] isEqual:[anEventCategory tagName]];
   case DBTEAMLOGEventCategoryFileOperations:
     return [[self tagName] isEqual:[anEventCategory tagName]];
   case DBTEAMLOGEventCategoryFileRequests:
@@ -28573,6 +28998,8 @@
     jsonDict[@".tag"] = @"devices";
   } else if ([valueObj isDomains]) {
     jsonDict[@".tag"] = @"domains";
+  } else if ([valueObj isEncryption]) {
+    jsonDict[@".tag"] = @"encryption";
   } else if ([valueObj isFileOperations]) {
     jsonDict[@".tag"] = @"file_operations";
   } else if ([valueObj isFileRequests]) {
@@ -28611,7 +29038,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEventCategory *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -28629,6 +29056,8 @@
     return [[DBTEAMLOGEventCategory alloc] initWithDevices];
   } else if ([tag isEqualToString:@"domains"]) {
     return [[DBTEAMLOGEventCategory alloc] initWithDomains];
+  } else if ([tag isEqualToString:@"encryption"]) {
+    return [[DBTEAMLOGEventCategory alloc] initWithEncryption];
   } else if ([tag isEqualToString:@"file_operations"]) {
     return [[DBTEAMLOGEventCategory alloc] initWithFileOperations];
   } else if ([tag isEqualToString:@"file_requests"]) {
@@ -28691,6 +29120,8 @@
 #import "DBTEAMLOGAppUnlinkTeamDetails.h"
 #import "DBTEAMLOGAppUnlinkUserDetails.h"
 #import "DBTEAMLOGApplyNamingConventionDetails.h"
+#import "DBTEAMLOGBackupAdminInvitationSentDetails.h"
+#import "DBTEAMLOGBackupInvitationOpenedDetails.h"
 #import "DBTEAMLOGBinderAddPageDetails.h"
 #import "DBTEAMLOGBinderAddSectionDetails.h"
 #import "DBTEAMLOGBinderRemovePageDetails.h"
@@ -28772,6 +29203,7 @@
 #import "DBTEAMLOGExternalSharingReportFailedDetails.h"
 #import "DBTEAMLOGFileAddCommentDetails.h"
 #import "DBTEAMLOGFileAddDetails.h"
+#import "DBTEAMLOGFileAddFromAutomationDetails.h"
 #import "DBTEAMLOGFileChangeCommentSubscriptionDetails.h"
 #import "DBTEAMLOGFileCommentsChangePolicyDetails.h"
 #import "DBTEAMLOGFileCopyDetails.h"
@@ -28787,6 +29219,7 @@
 #import "DBTEAMLOGFileMoveDetails.h"
 #import "DBTEAMLOGFilePermanentlyDeleteDetails.h"
 #import "DBTEAMLOGFilePreviewDetails.h"
+#import "DBTEAMLOGFileProviderMigrationPolicyChangedDetails.h"
 #import "DBTEAMLOGFileRenameDetails.h"
 #import "DBTEAMLOGFileRequestChangeDetails.h"
 #import "DBTEAMLOGFileRequestCloseDetails.h"
@@ -28809,6 +29242,7 @@
 #import "DBTEAMLOGFileTransfersTransferViewDetails.h"
 #import "DBTEAMLOGFileUnlikeCommentDetails.h"
 #import "DBTEAMLOGFileUnresolveCommentDetails.h"
+#import "DBTEAMLOGFolderLinkRestrictionPolicyChangedDetails.h"
 #import "DBTEAMLOGFolderOverviewDescriptionChangedDetails.h"
 #import "DBTEAMLOGFolderOverviewItemPinnedDetails.h"
 #import "DBTEAMLOGFolderOverviewItemUnpinnedDetails.h"
@@ -28964,6 +29398,15 @@
 #import "DBTEAMLOGPasswordStrengthRequirementsChangePolicyDetails.h"
 #import "DBTEAMLOGPendingSecondaryEmailAddedDetails.h"
 #import "DBTEAMLOGPermanentDeleteChangePolicyDetails.h"
+#import "DBTEAMLOGRansomwareAlertCreateReportDetails.h"
+#import "DBTEAMLOGRansomwareAlertCreateReportFailedDetails.h"
+#import "DBTEAMLOGRansomwareRestoreProcessCompletedDetails.h"
+#import "DBTEAMLOGRansomwareRestoreProcessStartedDetails.h"
+#import "DBTEAMLOGReplayFileDeleteDetails.h"
+#import "DBTEAMLOGReplayFileSharedLinkCreatedDetails.h"
+#import "DBTEAMLOGReplayFileSharedLinkModifiedDetails.h"
+#import "DBTEAMLOGReplayProjectTeamAddDetails.h"
+#import "DBTEAMLOGReplayProjectTeamDeleteDetails.h"
 #import "DBTEAMLOGResellerSupportChangePolicyDetails.h"
 #import "DBTEAMLOGResellerSupportSessionEndDetails.h"
 #import "DBTEAMLOGResellerSupportSessionStartDetails.h"
@@ -29099,6 +29542,13 @@
 #import "DBTEAMLOGTeamActivityCreateReportDetails.h"
 #import "DBTEAMLOGTeamActivityCreateReportFailDetails.h"
 #import "DBTEAMLOGTeamBrandingPolicyChangedDetails.h"
+#import "DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionDetails.h"
+#import "DBTEAMLOGTeamEncryptionKeyCreateKeyDetails.h"
+#import "DBTEAMLOGTeamEncryptionKeyDeleteKeyDetails.h"
+#import "DBTEAMLOGTeamEncryptionKeyDisableKeyDetails.h"
+#import "DBTEAMLOGTeamEncryptionKeyEnableKeyDetails.h"
+#import "DBTEAMLOGTeamEncryptionKeyRotateKeyDetails.h"
+#import "DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionDetails.h"
 #import "DBTEAMLOGTeamExtensionsPolicyChangedDetails.h"
 #import "DBTEAMLOGTeamFolderChangeStatusDetails.h"
 #import "DBTEAMLOGTeamFolderCreateDetails.h"
@@ -29164,6 +29614,8 @@
 @synthesize adminAlertingAlertStateChangedDetails = _adminAlertingAlertStateChangedDetails;
 @synthesize adminAlertingChangedAlertConfigDetails = _adminAlertingChangedAlertConfigDetails;
 @synthesize adminAlertingTriggeredAlertDetails = _adminAlertingTriggeredAlertDetails;
+@synthesize ransomwareRestoreProcessCompletedDetails = _ransomwareRestoreProcessCompletedDetails;
+@synthesize ransomwareRestoreProcessStartedDetails = _ransomwareRestoreProcessStartedDetails;
 @synthesize appBlockedByPermissionsDetails = _appBlockedByPermissionsDetails;
 @synthesize appLinkTeamDetails = _appLinkTeamDetails;
 @synthesize appLinkUserDetails = _appLinkUserDetails;
@@ -29233,9 +29685,17 @@
 @synthesize domainVerificationAddDomainSuccessDetails = _domainVerificationAddDomainSuccessDetails;
 @synthesize domainVerificationRemoveDomainDetails = _domainVerificationRemoveDomainDetails;
 @synthesize enabledDomainInvitesDetails = _enabledDomainInvitesDetails;
+@synthesize teamEncryptionKeyCancelKeyDeletionDetails = _teamEncryptionKeyCancelKeyDeletionDetails;
+@synthesize teamEncryptionKeyCreateKeyDetails = _teamEncryptionKeyCreateKeyDetails;
+@synthesize teamEncryptionKeyDeleteKeyDetails = _teamEncryptionKeyDeleteKeyDetails;
+@synthesize teamEncryptionKeyDisableKeyDetails = _teamEncryptionKeyDisableKeyDetails;
+@synthesize teamEncryptionKeyEnableKeyDetails = _teamEncryptionKeyEnableKeyDetails;
+@synthesize teamEncryptionKeyRotateKeyDetails = _teamEncryptionKeyRotateKeyDetails;
+@synthesize teamEncryptionKeyScheduleKeyDeletionDetails = _teamEncryptionKeyScheduleKeyDeletionDetails;
 @synthesize applyNamingConventionDetails = _applyNamingConventionDetails;
 @synthesize createFolderDetails = _createFolderDetails;
 @synthesize fileAddDetails = _fileAddDetails;
+@synthesize fileAddFromAutomationDetails = _fileAddFromAutomationDetails;
 @synthesize fileCopyDetails = _fileCopyDetails;
 @synthesize fileDeleteDetails = _fileDeleteDetails;
 @synthesize fileDownloadDetails = _fileDownloadDetails;
@@ -29257,6 +29717,7 @@
 @synthesize objectLabelRemovedDetails = _objectLabelRemovedDetails;
 @synthesize objectLabelUpdatedValueDetails = _objectLabelUpdatedValueDetails;
 @synthesize organizeFolderWithTidyDetails = _organizeFolderWithTidyDetails;
+@synthesize replayFileDeleteDetails = _replayFileDeleteDetails;
 @synthesize rewindFolderDetails = _rewindFolderDetails;
 @synthesize undoNamingConventionDetails = _undoNamingConventionDetails;
 @synthesize undoOrganizeFolderWithTidyDetails = _undoOrganizeFolderWithTidyDetails;
@@ -29293,6 +29754,8 @@
 @synthesize signInAsSessionEndDetails = _signInAsSessionEndDetails;
 @synthesize signInAsSessionStartDetails = _signInAsSessionStartDetails;
 @synthesize ssoErrorDetails = _ssoErrorDetails;
+@synthesize backupAdminInvitationSentDetails = _backupAdminInvitationSentDetails;
+@synthesize backupInvitationOpenedDetails = _backupInvitationOpenedDetails;
 @synthesize createTeamInviteLinkDetails = _createTeamInviteLinkDetails;
 @synthesize deleteTeamInviteLinkDetails = _deleteTeamInviteLinkDetails;
 @synthesize memberAddExternalIdDetails = _memberAddExternalIdDetails;
@@ -29388,6 +29851,8 @@
 @synthesize outdatedLinkViewCreateReportDetails = _outdatedLinkViewCreateReportDetails;
 @synthesize outdatedLinkViewReportFailedDetails = _outdatedLinkViewReportFailedDetails;
 @synthesize paperAdminExportStartDetails = _paperAdminExportStartDetails;
+@synthesize ransomwareAlertCreateReportDetails = _ransomwareAlertCreateReportDetails;
+@synthesize ransomwareAlertCreateReportFailedDetails = _ransomwareAlertCreateReportFailedDetails;
 @synthesize smartSyncCreateAdminPrivilegeReportDetails = _smartSyncCreateAdminPrivilegeReportDetails;
 @synthesize teamActivityCreateReportDetails = _teamActivityCreateReportDetails;
 @synthesize teamActivityCreateReportFailDetails = _teamActivityCreateReportFailDetails;
@@ -29403,6 +29868,10 @@
 @synthesize noteSharedDetails = _noteSharedDetails;
 @synthesize noteShareReceiveDetails = _noteShareReceiveDetails;
 @synthesize openNoteSharedDetails = _openNoteSharedDetails;
+@synthesize replayFileSharedLinkCreatedDetails = _replayFileSharedLinkCreatedDetails;
+@synthesize replayFileSharedLinkModifiedDetails = _replayFileSharedLinkModifiedDetails;
+@synthesize replayProjectTeamAddDetails = _replayProjectTeamAddDetails;
+@synthesize replayProjectTeamDeleteDetails = _replayProjectTeamDeleteDetails;
 @synthesize sfAddGroupDetails = _sfAddGroupDetails;
 @synthesize sfAllowNonMembersToViewSharedLinksDetails = _sfAllowNonMembersToViewSharedLinksDetails;
 @synthesize sfExternalInviteWarnDetails = _sfExternalInviteWarnDetails;
@@ -29542,10 +30011,12 @@
 @synthesize externalDriveBackupPolicyChangedDetails = _externalDriveBackupPolicyChangedDetails;
 @synthesize fileCommentsChangePolicyDetails = _fileCommentsChangePolicyDetails;
 @synthesize fileLockingPolicyChangedDetails = _fileLockingPolicyChangedDetails;
+@synthesize fileProviderMigrationPolicyChangedDetails = _fileProviderMigrationPolicyChangedDetails;
 @synthesize fileRequestsChangePolicyDetails = _fileRequestsChangePolicyDetails;
 @synthesize fileRequestsEmailsEnabledDetails = _fileRequestsEmailsEnabledDetails;
 @synthesize fileRequestsEmailsRestrictedToTeamOnlyDetails = _fileRequestsEmailsRestrictedToTeamOnlyDetails;
 @synthesize fileTransfersPolicyChangedDetails = _fileTransfersPolicyChangedDetails;
+@synthesize folderLinkRestrictionPolicyChangedDetails = _folderLinkRestrictionPolicyChangedDetails;
 @synthesize googleSsoChangePolicyDetails = _googleSsoChangePolicyDetails;
 @synthesize groupUserManagementChangePolicyDetails = _groupUserManagementChangePolicyDetails;
 @synthesize integrationPolicyChangedDetails = _integrationPolicyChangedDetails;
@@ -29673,6 +30144,26 @@
   if (self) {
     _tag = DBTEAMLOGEventDetailsAdminAlertingTriggeredAlertDetails;
     _adminAlertingTriggeredAlertDetails = adminAlertingTriggeredAlertDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithRansomwareRestoreProcessCompletedDetails:
+    (DBTEAMLOGRansomwareRestoreProcessCompletedDetails *)ransomwareRestoreProcessCompletedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsRansomwareRestoreProcessCompletedDetails;
+    _ransomwareRestoreProcessCompletedDetails = ransomwareRestoreProcessCompletedDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithRansomwareRestoreProcessStartedDetails:
+    (DBTEAMLOGRansomwareRestoreProcessStartedDetails *)ransomwareRestoreProcessStartedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsRansomwareRestoreProcessStartedDetails;
+    _ransomwareRestoreProcessStartedDetails = ransomwareRestoreProcessStartedDetails;
   }
   return self;
 }
@@ -30352,6 +30843,76 @@
   return self;
 }
 
+- (instancetype)initWithTeamEncryptionKeyCancelKeyDeletionDetails:
+    (DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionDetails *)teamEncryptionKeyCancelKeyDeletionDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsTeamEncryptionKeyCancelKeyDeletionDetails;
+    _teamEncryptionKeyCancelKeyDeletionDetails = teamEncryptionKeyCancelKeyDeletionDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamEncryptionKeyCreateKeyDetails:
+    (DBTEAMLOGTeamEncryptionKeyCreateKeyDetails *)teamEncryptionKeyCreateKeyDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsTeamEncryptionKeyCreateKeyDetails;
+    _teamEncryptionKeyCreateKeyDetails = teamEncryptionKeyCreateKeyDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamEncryptionKeyDeleteKeyDetails:
+    (DBTEAMLOGTeamEncryptionKeyDeleteKeyDetails *)teamEncryptionKeyDeleteKeyDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsTeamEncryptionKeyDeleteKeyDetails;
+    _teamEncryptionKeyDeleteKeyDetails = teamEncryptionKeyDeleteKeyDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamEncryptionKeyDisableKeyDetails:
+    (DBTEAMLOGTeamEncryptionKeyDisableKeyDetails *)teamEncryptionKeyDisableKeyDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsTeamEncryptionKeyDisableKeyDetails;
+    _teamEncryptionKeyDisableKeyDetails = teamEncryptionKeyDisableKeyDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamEncryptionKeyEnableKeyDetails:
+    (DBTEAMLOGTeamEncryptionKeyEnableKeyDetails *)teamEncryptionKeyEnableKeyDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsTeamEncryptionKeyEnableKeyDetails;
+    _teamEncryptionKeyEnableKeyDetails = teamEncryptionKeyEnableKeyDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamEncryptionKeyRotateKeyDetails:
+    (DBTEAMLOGTeamEncryptionKeyRotateKeyDetails *)teamEncryptionKeyRotateKeyDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsTeamEncryptionKeyRotateKeyDetails;
+    _teamEncryptionKeyRotateKeyDetails = teamEncryptionKeyRotateKeyDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamEncryptionKeyScheduleKeyDeletionDetails:
+    (DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionDetails *)teamEncryptionKeyScheduleKeyDeletionDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsTeamEncryptionKeyScheduleKeyDeletionDetails;
+    _teamEncryptionKeyScheduleKeyDeletionDetails = teamEncryptionKeyScheduleKeyDeletionDetails;
+  }
+  return self;
+}
+
 - (instancetype)initWithApplyNamingConventionDetails:
     (DBTEAMLOGApplyNamingConventionDetails *)applyNamingConventionDetails {
   self = [super init];
@@ -30376,6 +30937,16 @@
   if (self) {
     _tag = DBTEAMLOGEventDetailsFileAddDetails;
     _fileAddDetails = fileAddDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithFileAddFromAutomationDetails:
+    (DBTEAMLOGFileAddFromAutomationDetails *)fileAddFromAutomationDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsFileAddFromAutomationDetails;
+    _fileAddFromAutomationDetails = fileAddFromAutomationDetails;
   }
   return self;
 }
@@ -30574,6 +31145,15 @@
   if (self) {
     _tag = DBTEAMLOGEventDetailsOrganizeFolderWithTidyDetails;
     _organizeFolderWithTidyDetails = organizeFolderWithTidyDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithReplayFileDeleteDetails:(DBTEAMLOGReplayFileDeleteDetails *)replayFileDeleteDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsReplayFileDeleteDetails;
+    _replayFileDeleteDetails = replayFileDeleteDetails;
   }
   return self;
 }
@@ -30914,6 +31494,26 @@
   if (self) {
     _tag = DBTEAMLOGEventDetailsSsoErrorDetails;
     _ssoErrorDetails = ssoErrorDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithBackupAdminInvitationSentDetails:
+    (DBTEAMLOGBackupAdminInvitationSentDetails *)backupAdminInvitationSentDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsBackupAdminInvitationSentDetails;
+    _backupAdminInvitationSentDetails = backupAdminInvitationSentDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithBackupInvitationOpenedDetails:
+    (DBTEAMLOGBackupInvitationOpenedDetails *)backupInvitationOpenedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsBackupInvitationOpenedDetails;
+    _backupInvitationOpenedDetails = backupInvitationOpenedDetails;
   }
   return self;
 }
@@ -31832,6 +32432,26 @@
   return self;
 }
 
+- (instancetype)initWithRansomwareAlertCreateReportDetails:
+    (DBTEAMLOGRansomwareAlertCreateReportDetails *)ransomwareAlertCreateReportDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsRansomwareAlertCreateReportDetails;
+    _ransomwareAlertCreateReportDetails = ransomwareAlertCreateReportDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithRansomwareAlertCreateReportFailedDetails:
+    (DBTEAMLOGRansomwareAlertCreateReportFailedDetails *)ransomwareAlertCreateReportFailedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsRansomwareAlertCreateReportFailedDetails;
+    _ransomwareAlertCreateReportFailedDetails = ransomwareAlertCreateReportFailedDetails;
+  }
+  return self;
+}
+
 - (instancetype)initWithSmartSyncCreateAdminPrivilegeReportDetails:
     (DBTEAMLOGSmartSyncCreateAdminPrivilegeReportDetails *)smartSyncCreateAdminPrivilegeReportDetails {
   self = [super init];
@@ -31971,6 +32591,46 @@
   if (self) {
     _tag = DBTEAMLOGEventDetailsOpenNoteSharedDetails;
     _openNoteSharedDetails = openNoteSharedDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithReplayFileSharedLinkCreatedDetails:
+    (DBTEAMLOGReplayFileSharedLinkCreatedDetails *)replayFileSharedLinkCreatedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsReplayFileSharedLinkCreatedDetails;
+    _replayFileSharedLinkCreatedDetails = replayFileSharedLinkCreatedDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithReplayFileSharedLinkModifiedDetails:
+    (DBTEAMLOGReplayFileSharedLinkModifiedDetails *)replayFileSharedLinkModifiedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsReplayFileSharedLinkModifiedDetails;
+    _replayFileSharedLinkModifiedDetails = replayFileSharedLinkModifiedDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithReplayProjectTeamAddDetails:
+    (DBTEAMLOGReplayProjectTeamAddDetails *)replayProjectTeamAddDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsReplayProjectTeamAddDetails;
+    _replayProjectTeamAddDetails = replayProjectTeamAddDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithReplayProjectTeamDeleteDetails:
+    (DBTEAMLOGReplayProjectTeamDeleteDetails *)replayProjectTeamDeleteDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsReplayProjectTeamDeleteDetails;
+    _replayProjectTeamDeleteDetails = replayProjectTeamDeleteDetails;
   }
   return self;
 }
@@ -33313,6 +33973,16 @@
   return self;
 }
 
+- (instancetype)initWithFileProviderMigrationPolicyChangedDetails:
+    (DBTEAMLOGFileProviderMigrationPolicyChangedDetails *)fileProviderMigrationPolicyChangedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsFileProviderMigrationPolicyChangedDetails;
+    _fileProviderMigrationPolicyChangedDetails = fileProviderMigrationPolicyChangedDetails;
+  }
+  return self;
+}
+
 - (instancetype)initWithFileRequestsChangePolicyDetails:
     (DBTEAMLOGFileRequestsChangePolicyDetails *)fileRequestsChangePolicyDetails {
   self = [super init];
@@ -33349,6 +34019,16 @@
   if (self) {
     _tag = DBTEAMLOGEventDetailsFileTransfersPolicyChangedDetails;
     _fileTransfersPolicyChangedDetails = fileTransfersPolicyChangedDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithFolderLinkRestrictionPolicyChangedDetails:
+    (DBTEAMLOGFolderLinkRestrictionPolicyChangedDetails *)folderLinkRestrictionPolicyChangedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsFolderLinkRestrictionPolicyChangedDetails;
+    _folderLinkRestrictionPolicyChangedDetails = folderLinkRestrictionPolicyChangedDetails;
   }
   return self;
 }
@@ -34360,6 +35040,26 @@
   return _adminAlertingTriggeredAlertDetails;
 }
 
+- (DBTEAMLOGRansomwareRestoreProcessCompletedDetails *)ransomwareRestoreProcessCompletedDetails {
+  if (![self isRansomwareRestoreProcessCompletedDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsRansomwareRestoreProcessCompletedDetails, but was %@.",
+               [self tagName]];
+  }
+  return _ransomwareRestoreProcessCompletedDetails;
+}
+
+- (DBTEAMLOGRansomwareRestoreProcessStartedDetails *)ransomwareRestoreProcessStartedDetails {
+  if (![self isRansomwareRestoreProcessStartedDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsRansomwareRestoreProcessStartedDetails, but was %@.",
+               [self tagName]];
+  }
+  return _ransomwareRestoreProcessStartedDetails;
+}
+
 - (DBTEAMLOGAppBlockedByPermissionsDetails *)appBlockedByPermissionsDetails {
   if (![self isAppBlockedByPermissionsDetails]) {
     [NSException raise:@"IllegalStateException"
@@ -34992,6 +35692,71 @@
   return _enabledDomainInvitesDetails;
 }
 
+- (DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionDetails *)teamEncryptionKeyCancelKeyDeletionDetails {
+  if (![self isTeamEncryptionKeyCancelKeyDeletionDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsTeamEncryptionKeyCancelKeyDeletionDetails, but was %@.",
+               [self tagName]];
+  }
+  return _teamEncryptionKeyCancelKeyDeletionDetails;
+}
+
+- (DBTEAMLOGTeamEncryptionKeyCreateKeyDetails *)teamEncryptionKeyCreateKeyDetails {
+  if (![self isTeamEncryptionKeyCreateKeyDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsTeamEncryptionKeyCreateKeyDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _teamEncryptionKeyCreateKeyDetails;
+}
+
+- (DBTEAMLOGTeamEncryptionKeyDeleteKeyDetails *)teamEncryptionKeyDeleteKeyDetails {
+  if (![self isTeamEncryptionKeyDeleteKeyDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsTeamEncryptionKeyDeleteKeyDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _teamEncryptionKeyDeleteKeyDetails;
+}
+
+- (DBTEAMLOGTeamEncryptionKeyDisableKeyDetails *)teamEncryptionKeyDisableKeyDetails {
+  if (![self isTeamEncryptionKeyDisableKeyDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsTeamEncryptionKeyDisableKeyDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _teamEncryptionKeyDisableKeyDetails;
+}
+
+- (DBTEAMLOGTeamEncryptionKeyEnableKeyDetails *)teamEncryptionKeyEnableKeyDetails {
+  if (![self isTeamEncryptionKeyEnableKeyDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsTeamEncryptionKeyEnableKeyDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _teamEncryptionKeyEnableKeyDetails;
+}
+
+- (DBTEAMLOGTeamEncryptionKeyRotateKeyDetails *)teamEncryptionKeyRotateKeyDetails {
+  if (![self isTeamEncryptionKeyRotateKeyDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsTeamEncryptionKeyRotateKeyDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _teamEncryptionKeyRotateKeyDetails;
+}
+
+- (DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionDetails *)teamEncryptionKeyScheduleKeyDeletionDetails {
+  if (![self isTeamEncryptionKeyScheduleKeyDeletionDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsTeamEncryptionKeyScheduleKeyDeletionDetails, but was %@.",
+               [self tagName]];
+  }
+  return _teamEncryptionKeyScheduleKeyDeletionDetails;
+}
+
 - (DBTEAMLOGApplyNamingConventionDetails *)applyNamingConventionDetails {
   if (![self isApplyNamingConventionDetails]) {
     [NSException
@@ -35015,6 +35780,15 @@
                 format:@"Invalid tag: required DBTEAMLOGEventDetailsFileAddDetails, but was %@.", [self tagName]];
   }
   return _fileAddDetails;
+}
+
+- (DBTEAMLOGFileAddFromAutomationDetails *)fileAddFromAutomationDetails {
+  if (![self isFileAddFromAutomationDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsFileAddFromAutomationDetails, but was %@.", [self tagName]];
+  }
+  return _fileAddFromAutomationDetails;
 }
 
 - (DBTEAMLOGFileCopyDetails *)fileCopyDetails {
@@ -35196,6 +35970,15 @@
                        [self tagName]];
   }
   return _organizeFolderWithTidyDetails;
+}
+
+- (DBTEAMLOGReplayFileDeleteDetails *)replayFileDeleteDetails {
+  if (![self isReplayFileDeleteDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsReplayFileDeleteDetails, but was %@.", [self tagName]];
+  }
+  return _replayFileDeleteDetails;
 }
 
 - (DBTEAMLOGRewindFolderDetails *)rewindFolderDetails {
@@ -35511,6 +36294,24 @@
                 format:@"Invalid tag: required DBTEAMLOGEventDetailsSsoErrorDetails, but was %@.", [self tagName]];
   }
   return _ssoErrorDetails;
+}
+
+- (DBTEAMLOGBackupAdminInvitationSentDetails *)backupAdminInvitationSentDetails {
+  if (![self isBackupAdminInvitationSentDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsBackupAdminInvitationSentDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _backupAdminInvitationSentDetails;
+}
+
+- (DBTEAMLOGBackupInvitationOpenedDetails *)backupInvitationOpenedDetails {
+  if (![self isBackupInvitationOpenedDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsBackupInvitationOpenedDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _backupInvitationOpenedDetails;
 }
 
 - (DBTEAMLOGCreateTeamInviteLinkDetails *)createTeamInviteLinkDetails {
@@ -36369,6 +37170,25 @@
   return _paperAdminExportStartDetails;
 }
 
+- (DBTEAMLOGRansomwareAlertCreateReportDetails *)ransomwareAlertCreateReportDetails {
+  if (![self isRansomwareAlertCreateReportDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsRansomwareAlertCreateReportDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _ransomwareAlertCreateReportDetails;
+}
+
+- (DBTEAMLOGRansomwareAlertCreateReportFailedDetails *)ransomwareAlertCreateReportFailedDetails {
+  if (![self isRansomwareAlertCreateReportFailedDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsRansomwareAlertCreateReportFailedDetails, but was %@.",
+               [self tagName]];
+  }
+  return _ransomwareAlertCreateReportFailedDetails;
+}
+
 - (DBTEAMLOGSmartSyncCreateAdminPrivilegeReportDetails *)smartSyncCreateAdminPrivilegeReportDetails {
   if (![self isSmartSyncCreateAdminPrivilegeReportDetails]) {
     [NSException
@@ -36501,6 +37321,42 @@
         format:@"Invalid tag: required DBTEAMLOGEventDetailsOpenNoteSharedDetails, but was %@.", [self tagName]];
   }
   return _openNoteSharedDetails;
+}
+
+- (DBTEAMLOGReplayFileSharedLinkCreatedDetails *)replayFileSharedLinkCreatedDetails {
+  if (![self isReplayFileSharedLinkCreatedDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsReplayFileSharedLinkCreatedDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _replayFileSharedLinkCreatedDetails;
+}
+
+- (DBTEAMLOGReplayFileSharedLinkModifiedDetails *)replayFileSharedLinkModifiedDetails {
+  if (![self isReplayFileSharedLinkModifiedDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsReplayFileSharedLinkModifiedDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _replayFileSharedLinkModifiedDetails;
+}
+
+- (DBTEAMLOGReplayProjectTeamAddDetails *)replayProjectTeamAddDetails {
+  if (![self isReplayProjectTeamAddDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsReplayProjectTeamAddDetails, but was %@.", [self tagName]];
+  }
+  return _replayProjectTeamAddDetails;
+}
+
+- (DBTEAMLOGReplayProjectTeamDeleteDetails *)replayProjectTeamDeleteDetails {
+  if (![self isReplayProjectTeamDeleteDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsReplayProjectTeamDeleteDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _replayProjectTeamDeleteDetails;
 }
 
 - (DBTEAMLOGSfAddGroupDetails *)sfAddGroupDetails {
@@ -37774,6 +38630,16 @@
   return _fileLockingPolicyChangedDetails;
 }
 
+- (DBTEAMLOGFileProviderMigrationPolicyChangedDetails *)fileProviderMigrationPolicyChangedDetails {
+  if (![self isFileProviderMigrationPolicyChangedDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsFileProviderMigrationPolicyChangedDetails, but was %@.",
+               [self tagName]];
+  }
+  return _fileProviderMigrationPolicyChangedDetails;
+}
+
 - (DBTEAMLOGFileRequestsChangePolicyDetails *)fileRequestsChangePolicyDetails {
   if (![self isFileRequestsChangePolicyDetails]) {
     [NSException raise:@"IllegalStateException"
@@ -37809,6 +38675,16 @@
                        [self tagName]];
   }
   return _fileTransfersPolicyChangedDetails;
+}
+
+- (DBTEAMLOGFolderLinkRestrictionPolicyChangedDetails *)folderLinkRestrictionPolicyChangedDetails {
+  if (![self isFolderLinkRestrictionPolicyChangedDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsFolderLinkRestrictionPolicyChangedDetails, but was %@.",
+               [self tagName]];
+  }
+  return _folderLinkRestrictionPolicyChangedDetails;
 }
 
 - (DBTEAMLOGGoogleSsoChangePolicyDetails *)googleSsoChangePolicyDetails {
@@ -38735,6 +39611,14 @@
   return _tag == DBTEAMLOGEventDetailsAdminAlertingTriggeredAlertDetails;
 }
 
+- (BOOL)isRansomwareRestoreProcessCompletedDetails {
+  return _tag == DBTEAMLOGEventDetailsRansomwareRestoreProcessCompletedDetails;
+}
+
+- (BOOL)isRansomwareRestoreProcessStartedDetails {
+  return _tag == DBTEAMLOGEventDetailsRansomwareRestoreProcessStartedDetails;
+}
+
 - (BOOL)isAppBlockedByPermissionsDetails {
   return _tag == DBTEAMLOGEventDetailsAppBlockedByPermissionsDetails;
 }
@@ -39011,6 +39895,34 @@
   return _tag == DBTEAMLOGEventDetailsEnabledDomainInvitesDetails;
 }
 
+- (BOOL)isTeamEncryptionKeyCancelKeyDeletionDetails {
+  return _tag == DBTEAMLOGEventDetailsTeamEncryptionKeyCancelKeyDeletionDetails;
+}
+
+- (BOOL)isTeamEncryptionKeyCreateKeyDetails {
+  return _tag == DBTEAMLOGEventDetailsTeamEncryptionKeyCreateKeyDetails;
+}
+
+- (BOOL)isTeamEncryptionKeyDeleteKeyDetails {
+  return _tag == DBTEAMLOGEventDetailsTeamEncryptionKeyDeleteKeyDetails;
+}
+
+- (BOOL)isTeamEncryptionKeyDisableKeyDetails {
+  return _tag == DBTEAMLOGEventDetailsTeamEncryptionKeyDisableKeyDetails;
+}
+
+- (BOOL)isTeamEncryptionKeyEnableKeyDetails {
+  return _tag == DBTEAMLOGEventDetailsTeamEncryptionKeyEnableKeyDetails;
+}
+
+- (BOOL)isTeamEncryptionKeyRotateKeyDetails {
+  return _tag == DBTEAMLOGEventDetailsTeamEncryptionKeyRotateKeyDetails;
+}
+
+- (BOOL)isTeamEncryptionKeyScheduleKeyDeletionDetails {
+  return _tag == DBTEAMLOGEventDetailsTeamEncryptionKeyScheduleKeyDeletionDetails;
+}
+
 - (BOOL)isApplyNamingConventionDetails {
   return _tag == DBTEAMLOGEventDetailsApplyNamingConventionDetails;
 }
@@ -39021,6 +39933,10 @@
 
 - (BOOL)isFileAddDetails {
   return _tag == DBTEAMLOGEventDetailsFileAddDetails;
+}
+
+- (BOOL)isFileAddFromAutomationDetails {
+  return _tag == DBTEAMLOGEventDetailsFileAddFromAutomationDetails;
 }
 
 - (BOOL)isFileCopyDetails {
@@ -39105,6 +40021,10 @@
 
 - (BOOL)isOrganizeFolderWithTidyDetails {
   return _tag == DBTEAMLOGEventDetailsOrganizeFolderWithTidyDetails;
+}
+
+- (BOOL)isReplayFileDeleteDetails {
+  return _tag == DBTEAMLOGEventDetailsReplayFileDeleteDetails;
 }
 
 - (BOOL)isRewindFolderDetails {
@@ -39249,6 +40169,14 @@
 
 - (BOOL)isSsoErrorDetails {
   return _tag == DBTEAMLOGEventDetailsSsoErrorDetails;
+}
+
+- (BOOL)isBackupAdminInvitationSentDetails {
+  return _tag == DBTEAMLOGEventDetailsBackupAdminInvitationSentDetails;
+}
+
+- (BOOL)isBackupInvitationOpenedDetails {
+  return _tag == DBTEAMLOGEventDetailsBackupInvitationOpenedDetails;
 }
 
 - (BOOL)isCreateTeamInviteLinkDetails {
@@ -39631,6 +40559,14 @@
   return _tag == DBTEAMLOGEventDetailsPaperAdminExportStartDetails;
 }
 
+- (BOOL)isRansomwareAlertCreateReportDetails {
+  return _tag == DBTEAMLOGEventDetailsRansomwareAlertCreateReportDetails;
+}
+
+- (BOOL)isRansomwareAlertCreateReportFailedDetails {
+  return _tag == DBTEAMLOGEventDetailsRansomwareAlertCreateReportFailedDetails;
+}
+
 - (BOOL)isSmartSyncCreateAdminPrivilegeReportDetails {
   return _tag == DBTEAMLOGEventDetailsSmartSyncCreateAdminPrivilegeReportDetails;
 }
@@ -39689,6 +40625,22 @@
 
 - (BOOL)isOpenNoteSharedDetails {
   return _tag == DBTEAMLOGEventDetailsOpenNoteSharedDetails;
+}
+
+- (BOOL)isReplayFileSharedLinkCreatedDetails {
+  return _tag == DBTEAMLOGEventDetailsReplayFileSharedLinkCreatedDetails;
+}
+
+- (BOOL)isReplayFileSharedLinkModifiedDetails {
+  return _tag == DBTEAMLOGEventDetailsReplayFileSharedLinkModifiedDetails;
+}
+
+- (BOOL)isReplayProjectTeamAddDetails {
+  return _tag == DBTEAMLOGEventDetailsReplayProjectTeamAddDetails;
+}
+
+- (BOOL)isReplayProjectTeamDeleteDetails {
+  return _tag == DBTEAMLOGEventDetailsReplayProjectTeamDeleteDetails;
 }
 
 - (BOOL)isSfAddGroupDetails {
@@ -40247,6 +41199,10 @@
   return _tag == DBTEAMLOGEventDetailsFileLockingPolicyChangedDetails;
 }
 
+- (BOOL)isFileProviderMigrationPolicyChangedDetails {
+  return _tag == DBTEAMLOGEventDetailsFileProviderMigrationPolicyChangedDetails;
+}
+
 - (BOOL)isFileRequestsChangePolicyDetails {
   return _tag == DBTEAMLOGEventDetailsFileRequestsChangePolicyDetails;
 }
@@ -40261,6 +41217,10 @@
 
 - (BOOL)isFileTransfersPolicyChangedDetails {
   return _tag == DBTEAMLOGEventDetailsFileTransfersPolicyChangedDetails;
+}
+
+- (BOOL)isFolderLinkRestrictionPolicyChangedDetails {
+  return _tag == DBTEAMLOGEventDetailsFolderLinkRestrictionPolicyChangedDetails;
 }
 
 - (BOOL)isGoogleSsoChangePolicyDetails {
@@ -40667,6 +41627,10 @@
     return @"DBTEAMLOGEventDetailsAdminAlertingChangedAlertConfigDetails";
   case DBTEAMLOGEventDetailsAdminAlertingTriggeredAlertDetails:
     return @"DBTEAMLOGEventDetailsAdminAlertingTriggeredAlertDetails";
+  case DBTEAMLOGEventDetailsRansomwareRestoreProcessCompletedDetails:
+    return @"DBTEAMLOGEventDetailsRansomwareRestoreProcessCompletedDetails";
+  case DBTEAMLOGEventDetailsRansomwareRestoreProcessStartedDetails:
+    return @"DBTEAMLOGEventDetailsRansomwareRestoreProcessStartedDetails";
   case DBTEAMLOGEventDetailsAppBlockedByPermissionsDetails:
     return @"DBTEAMLOGEventDetailsAppBlockedByPermissionsDetails";
   case DBTEAMLOGEventDetailsAppLinkTeamDetails:
@@ -40805,12 +41769,28 @@
     return @"DBTEAMLOGEventDetailsDomainVerificationRemoveDomainDetails";
   case DBTEAMLOGEventDetailsEnabledDomainInvitesDetails:
     return @"DBTEAMLOGEventDetailsEnabledDomainInvitesDetails";
+  case DBTEAMLOGEventDetailsTeamEncryptionKeyCancelKeyDeletionDetails:
+    return @"DBTEAMLOGEventDetailsTeamEncryptionKeyCancelKeyDeletionDetails";
+  case DBTEAMLOGEventDetailsTeamEncryptionKeyCreateKeyDetails:
+    return @"DBTEAMLOGEventDetailsTeamEncryptionKeyCreateKeyDetails";
+  case DBTEAMLOGEventDetailsTeamEncryptionKeyDeleteKeyDetails:
+    return @"DBTEAMLOGEventDetailsTeamEncryptionKeyDeleteKeyDetails";
+  case DBTEAMLOGEventDetailsTeamEncryptionKeyDisableKeyDetails:
+    return @"DBTEAMLOGEventDetailsTeamEncryptionKeyDisableKeyDetails";
+  case DBTEAMLOGEventDetailsTeamEncryptionKeyEnableKeyDetails:
+    return @"DBTEAMLOGEventDetailsTeamEncryptionKeyEnableKeyDetails";
+  case DBTEAMLOGEventDetailsTeamEncryptionKeyRotateKeyDetails:
+    return @"DBTEAMLOGEventDetailsTeamEncryptionKeyRotateKeyDetails";
+  case DBTEAMLOGEventDetailsTeamEncryptionKeyScheduleKeyDeletionDetails:
+    return @"DBTEAMLOGEventDetailsTeamEncryptionKeyScheduleKeyDeletionDetails";
   case DBTEAMLOGEventDetailsApplyNamingConventionDetails:
     return @"DBTEAMLOGEventDetailsApplyNamingConventionDetails";
   case DBTEAMLOGEventDetailsCreateFolderDetails:
     return @"DBTEAMLOGEventDetailsCreateFolderDetails";
   case DBTEAMLOGEventDetailsFileAddDetails:
     return @"DBTEAMLOGEventDetailsFileAddDetails";
+  case DBTEAMLOGEventDetailsFileAddFromAutomationDetails:
+    return @"DBTEAMLOGEventDetailsFileAddFromAutomationDetails";
   case DBTEAMLOGEventDetailsFileCopyDetails:
     return @"DBTEAMLOGEventDetailsFileCopyDetails";
   case DBTEAMLOGEventDetailsFileDeleteDetails:
@@ -40853,6 +41833,8 @@
     return @"DBTEAMLOGEventDetailsObjectLabelUpdatedValueDetails";
   case DBTEAMLOGEventDetailsOrganizeFolderWithTidyDetails:
     return @"DBTEAMLOGEventDetailsOrganizeFolderWithTidyDetails";
+  case DBTEAMLOGEventDetailsReplayFileDeleteDetails:
+    return @"DBTEAMLOGEventDetailsReplayFileDeleteDetails";
   case DBTEAMLOGEventDetailsRewindFolderDetails:
     return @"DBTEAMLOGEventDetailsRewindFolderDetails";
   case DBTEAMLOGEventDetailsUndoNamingConventionDetails:
@@ -40925,6 +41907,10 @@
     return @"DBTEAMLOGEventDetailsSignInAsSessionStartDetails";
   case DBTEAMLOGEventDetailsSsoErrorDetails:
     return @"DBTEAMLOGEventDetailsSsoErrorDetails";
+  case DBTEAMLOGEventDetailsBackupAdminInvitationSentDetails:
+    return @"DBTEAMLOGEventDetailsBackupAdminInvitationSentDetails";
+  case DBTEAMLOGEventDetailsBackupInvitationOpenedDetails:
+    return @"DBTEAMLOGEventDetailsBackupInvitationOpenedDetails";
   case DBTEAMLOGEventDetailsCreateTeamInviteLinkDetails:
     return @"DBTEAMLOGEventDetailsCreateTeamInviteLinkDetails";
   case DBTEAMLOGEventDetailsDeleteTeamInviteLinkDetails:
@@ -41115,6 +42101,10 @@
     return @"DBTEAMLOGEventDetailsOutdatedLinkViewReportFailedDetails";
   case DBTEAMLOGEventDetailsPaperAdminExportStartDetails:
     return @"DBTEAMLOGEventDetailsPaperAdminExportStartDetails";
+  case DBTEAMLOGEventDetailsRansomwareAlertCreateReportDetails:
+    return @"DBTEAMLOGEventDetailsRansomwareAlertCreateReportDetails";
+  case DBTEAMLOGEventDetailsRansomwareAlertCreateReportFailedDetails:
+    return @"DBTEAMLOGEventDetailsRansomwareAlertCreateReportFailedDetails";
   case DBTEAMLOGEventDetailsSmartSyncCreateAdminPrivilegeReportDetails:
     return @"DBTEAMLOGEventDetailsSmartSyncCreateAdminPrivilegeReportDetails";
   case DBTEAMLOGEventDetailsTeamActivityCreateReportDetails:
@@ -41145,6 +42135,14 @@
     return @"DBTEAMLOGEventDetailsNoteShareReceiveDetails";
   case DBTEAMLOGEventDetailsOpenNoteSharedDetails:
     return @"DBTEAMLOGEventDetailsOpenNoteSharedDetails";
+  case DBTEAMLOGEventDetailsReplayFileSharedLinkCreatedDetails:
+    return @"DBTEAMLOGEventDetailsReplayFileSharedLinkCreatedDetails";
+  case DBTEAMLOGEventDetailsReplayFileSharedLinkModifiedDetails:
+    return @"DBTEAMLOGEventDetailsReplayFileSharedLinkModifiedDetails";
+  case DBTEAMLOGEventDetailsReplayProjectTeamAddDetails:
+    return @"DBTEAMLOGEventDetailsReplayProjectTeamAddDetails";
+  case DBTEAMLOGEventDetailsReplayProjectTeamDeleteDetails:
+    return @"DBTEAMLOGEventDetailsReplayProjectTeamDeleteDetails";
   case DBTEAMLOGEventDetailsSfAddGroupDetails:
     return @"DBTEAMLOGEventDetailsSfAddGroupDetails";
   case DBTEAMLOGEventDetailsSfAllowNonMembersToViewSharedLinksDetails:
@@ -41423,6 +42421,8 @@
     return @"DBTEAMLOGEventDetailsFileCommentsChangePolicyDetails";
   case DBTEAMLOGEventDetailsFileLockingPolicyChangedDetails:
     return @"DBTEAMLOGEventDetailsFileLockingPolicyChangedDetails";
+  case DBTEAMLOGEventDetailsFileProviderMigrationPolicyChangedDetails:
+    return @"DBTEAMLOGEventDetailsFileProviderMigrationPolicyChangedDetails";
   case DBTEAMLOGEventDetailsFileRequestsChangePolicyDetails:
     return @"DBTEAMLOGEventDetailsFileRequestsChangePolicyDetails";
   case DBTEAMLOGEventDetailsFileRequestsEmailsEnabledDetails:
@@ -41431,6 +42431,8 @@
     return @"DBTEAMLOGEventDetailsFileRequestsEmailsRestrictedToTeamOnlyDetails";
   case DBTEAMLOGEventDetailsFileTransfersPolicyChangedDetails:
     return @"DBTEAMLOGEventDetailsFileTransfersPolicyChangedDetails";
+  case DBTEAMLOGEventDetailsFolderLinkRestrictionPolicyChangedDetails:
+    return @"DBTEAMLOGEventDetailsFolderLinkRestrictionPolicyChangedDetails";
   case DBTEAMLOGEventDetailsGoogleSsoChangePolicyDetails:
     return @"DBTEAMLOGEventDetailsGoogleSsoChangePolicyDetails";
   case DBTEAMLOGEventDetailsGroupUserManagementChangePolicyDetails:
@@ -41674,6 +42676,12 @@
   case DBTEAMLOGEventDetailsAdminAlertingTriggeredAlertDetails:
     result = prime * result + [self.adminAlertingTriggeredAlertDetails hash];
     break;
+  case DBTEAMLOGEventDetailsRansomwareRestoreProcessCompletedDetails:
+    result = prime * result + [self.ransomwareRestoreProcessCompletedDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsRansomwareRestoreProcessStartedDetails:
+    result = prime * result + [self.ransomwareRestoreProcessStartedDetails hash];
+    break;
   case DBTEAMLOGEventDetailsAppBlockedByPermissionsDetails:
     result = prime * result + [self.appBlockedByPermissionsDetails hash];
     break;
@@ -41881,6 +42889,27 @@
   case DBTEAMLOGEventDetailsEnabledDomainInvitesDetails:
     result = prime * result + [self.enabledDomainInvitesDetails hash];
     break;
+  case DBTEAMLOGEventDetailsTeamEncryptionKeyCancelKeyDeletionDetails:
+    result = prime * result + [self.teamEncryptionKeyCancelKeyDeletionDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsTeamEncryptionKeyCreateKeyDetails:
+    result = prime * result + [self.teamEncryptionKeyCreateKeyDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsTeamEncryptionKeyDeleteKeyDetails:
+    result = prime * result + [self.teamEncryptionKeyDeleteKeyDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsTeamEncryptionKeyDisableKeyDetails:
+    result = prime * result + [self.teamEncryptionKeyDisableKeyDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsTeamEncryptionKeyEnableKeyDetails:
+    result = prime * result + [self.teamEncryptionKeyEnableKeyDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsTeamEncryptionKeyRotateKeyDetails:
+    result = prime * result + [self.teamEncryptionKeyRotateKeyDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsTeamEncryptionKeyScheduleKeyDeletionDetails:
+    result = prime * result + [self.teamEncryptionKeyScheduleKeyDeletionDetails hash];
+    break;
   case DBTEAMLOGEventDetailsApplyNamingConventionDetails:
     result = prime * result + [self.applyNamingConventionDetails hash];
     break;
@@ -41889,6 +42918,9 @@
     break;
   case DBTEAMLOGEventDetailsFileAddDetails:
     result = prime * result + [self.fileAddDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsFileAddFromAutomationDetails:
+    result = prime * result + [self.fileAddFromAutomationDetails hash];
     break;
   case DBTEAMLOGEventDetailsFileCopyDetails:
     result = prime * result + [self.fileCopyDetails hash];
@@ -41952,6 +42984,9 @@
     break;
   case DBTEAMLOGEventDetailsOrganizeFolderWithTidyDetails:
     result = prime * result + [self.organizeFolderWithTidyDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsReplayFileDeleteDetails:
+    result = prime * result + [self.replayFileDeleteDetails hash];
     break;
   case DBTEAMLOGEventDetailsRewindFolderDetails:
     result = prime * result + [self.rewindFolderDetails hash];
@@ -42060,6 +43095,12 @@
     break;
   case DBTEAMLOGEventDetailsSsoErrorDetails:
     result = prime * result + [self.ssoErrorDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsBackupAdminInvitationSentDetails:
+    result = prime * result + [self.backupAdminInvitationSentDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsBackupInvitationOpenedDetails:
+    result = prime * result + [self.backupInvitationOpenedDetails hash];
     break;
   case DBTEAMLOGEventDetailsCreateTeamInviteLinkDetails:
     result = prime * result + [self.createTeamInviteLinkDetails hash];
@@ -42346,6 +43387,12 @@
   case DBTEAMLOGEventDetailsPaperAdminExportStartDetails:
     result = prime * result + [self.paperAdminExportStartDetails hash];
     break;
+  case DBTEAMLOGEventDetailsRansomwareAlertCreateReportDetails:
+    result = prime * result + [self.ransomwareAlertCreateReportDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsRansomwareAlertCreateReportFailedDetails:
+    result = prime * result + [self.ransomwareAlertCreateReportFailedDetails hash];
+    break;
   case DBTEAMLOGEventDetailsSmartSyncCreateAdminPrivilegeReportDetails:
     result = prime * result + [self.smartSyncCreateAdminPrivilegeReportDetails hash];
     break;
@@ -42390,6 +43437,18 @@
     break;
   case DBTEAMLOGEventDetailsOpenNoteSharedDetails:
     result = prime * result + [self.openNoteSharedDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsReplayFileSharedLinkCreatedDetails:
+    result = prime * result + [self.replayFileSharedLinkCreatedDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsReplayFileSharedLinkModifiedDetails:
+    result = prime * result + [self.replayFileSharedLinkModifiedDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsReplayProjectTeamAddDetails:
+    result = prime * result + [self.replayProjectTeamAddDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsReplayProjectTeamDeleteDetails:
+    result = prime * result + [self.replayProjectTeamDeleteDetails hash];
     break;
   case DBTEAMLOGEventDetailsSfAddGroupDetails:
     result = prime * result + [self.sfAddGroupDetails hash];
@@ -42808,6 +43867,9 @@
   case DBTEAMLOGEventDetailsFileLockingPolicyChangedDetails:
     result = prime * result + [self.fileLockingPolicyChangedDetails hash];
     break;
+  case DBTEAMLOGEventDetailsFileProviderMigrationPolicyChangedDetails:
+    result = prime * result + [self.fileProviderMigrationPolicyChangedDetails hash];
+    break;
   case DBTEAMLOGEventDetailsFileRequestsChangePolicyDetails:
     result = prime * result + [self.fileRequestsChangePolicyDetails hash];
     break;
@@ -42819,6 +43881,9 @@
     break;
   case DBTEAMLOGEventDetailsFileTransfersPolicyChangedDetails:
     result = prime * result + [self.fileTransfersPolicyChangedDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsFolderLinkRestrictionPolicyChangedDetails:
+    result = prime * result + [self.folderLinkRestrictionPolicyChangedDetails hash];
     break;
   case DBTEAMLOGEventDetailsGoogleSsoChangePolicyDetails:
     result = prime * result + [self.googleSsoChangePolicyDetails hash];
@@ -43148,6 +44213,11 @@
     return [self.adminAlertingChangedAlertConfigDetails isEqual:anEventDetails.adminAlertingChangedAlertConfigDetails];
   case DBTEAMLOGEventDetailsAdminAlertingTriggeredAlertDetails:
     return [self.adminAlertingTriggeredAlertDetails isEqual:anEventDetails.adminAlertingTriggeredAlertDetails];
+  case DBTEAMLOGEventDetailsRansomwareRestoreProcessCompletedDetails:
+    return
+        [self.ransomwareRestoreProcessCompletedDetails isEqual:anEventDetails.ransomwareRestoreProcessCompletedDetails];
+  case DBTEAMLOGEventDetailsRansomwareRestoreProcessStartedDetails:
+    return [self.ransomwareRestoreProcessStartedDetails isEqual:anEventDetails.ransomwareRestoreProcessStartedDetails];
   case DBTEAMLOGEventDetailsAppBlockedByPermissionsDetails:
     return [self.appBlockedByPermissionsDetails isEqual:anEventDetails.appBlockedByPermissionsDetails];
   case DBTEAMLOGEventDetailsAppLinkTeamDetails:
@@ -43297,12 +44367,30 @@
     return [self.domainVerificationRemoveDomainDetails isEqual:anEventDetails.domainVerificationRemoveDomainDetails];
   case DBTEAMLOGEventDetailsEnabledDomainInvitesDetails:
     return [self.enabledDomainInvitesDetails isEqual:anEventDetails.enabledDomainInvitesDetails];
+  case DBTEAMLOGEventDetailsTeamEncryptionKeyCancelKeyDeletionDetails:
+    return [self.teamEncryptionKeyCancelKeyDeletionDetails
+        isEqual:anEventDetails.teamEncryptionKeyCancelKeyDeletionDetails];
+  case DBTEAMLOGEventDetailsTeamEncryptionKeyCreateKeyDetails:
+    return [self.teamEncryptionKeyCreateKeyDetails isEqual:anEventDetails.teamEncryptionKeyCreateKeyDetails];
+  case DBTEAMLOGEventDetailsTeamEncryptionKeyDeleteKeyDetails:
+    return [self.teamEncryptionKeyDeleteKeyDetails isEqual:anEventDetails.teamEncryptionKeyDeleteKeyDetails];
+  case DBTEAMLOGEventDetailsTeamEncryptionKeyDisableKeyDetails:
+    return [self.teamEncryptionKeyDisableKeyDetails isEqual:anEventDetails.teamEncryptionKeyDisableKeyDetails];
+  case DBTEAMLOGEventDetailsTeamEncryptionKeyEnableKeyDetails:
+    return [self.teamEncryptionKeyEnableKeyDetails isEqual:anEventDetails.teamEncryptionKeyEnableKeyDetails];
+  case DBTEAMLOGEventDetailsTeamEncryptionKeyRotateKeyDetails:
+    return [self.teamEncryptionKeyRotateKeyDetails isEqual:anEventDetails.teamEncryptionKeyRotateKeyDetails];
+  case DBTEAMLOGEventDetailsTeamEncryptionKeyScheduleKeyDeletionDetails:
+    return [self.teamEncryptionKeyScheduleKeyDeletionDetails
+        isEqual:anEventDetails.teamEncryptionKeyScheduleKeyDeletionDetails];
   case DBTEAMLOGEventDetailsApplyNamingConventionDetails:
     return [self.applyNamingConventionDetails isEqual:anEventDetails.applyNamingConventionDetails];
   case DBTEAMLOGEventDetailsCreateFolderDetails:
     return [self.createFolderDetails isEqual:anEventDetails.createFolderDetails];
   case DBTEAMLOGEventDetailsFileAddDetails:
     return [self.fileAddDetails isEqual:anEventDetails.fileAddDetails];
+  case DBTEAMLOGEventDetailsFileAddFromAutomationDetails:
+    return [self.fileAddFromAutomationDetails isEqual:anEventDetails.fileAddFromAutomationDetails];
   case DBTEAMLOGEventDetailsFileCopyDetails:
     return [self.fileCopyDetails isEqual:anEventDetails.fileCopyDetails];
   case DBTEAMLOGEventDetailsFileDeleteDetails:
@@ -43346,6 +44434,8 @@
     return [self.objectLabelUpdatedValueDetails isEqual:anEventDetails.objectLabelUpdatedValueDetails];
   case DBTEAMLOGEventDetailsOrganizeFolderWithTidyDetails:
     return [self.organizeFolderWithTidyDetails isEqual:anEventDetails.organizeFolderWithTidyDetails];
+  case DBTEAMLOGEventDetailsReplayFileDeleteDetails:
+    return [self.replayFileDeleteDetails isEqual:anEventDetails.replayFileDeleteDetails];
   case DBTEAMLOGEventDetailsRewindFolderDetails:
     return [self.rewindFolderDetails isEqual:anEventDetails.rewindFolderDetails];
   case DBTEAMLOGEventDetailsUndoNamingConventionDetails:
@@ -43420,6 +44510,10 @@
     return [self.signInAsSessionStartDetails isEqual:anEventDetails.signInAsSessionStartDetails];
   case DBTEAMLOGEventDetailsSsoErrorDetails:
     return [self.ssoErrorDetails isEqual:anEventDetails.ssoErrorDetails];
+  case DBTEAMLOGEventDetailsBackupAdminInvitationSentDetails:
+    return [self.backupAdminInvitationSentDetails isEqual:anEventDetails.backupAdminInvitationSentDetails];
+  case DBTEAMLOGEventDetailsBackupInvitationOpenedDetails:
+    return [self.backupInvitationOpenedDetails isEqual:anEventDetails.backupInvitationOpenedDetails];
   case DBTEAMLOGEventDetailsCreateTeamInviteLinkDetails:
     return [self.createTeamInviteLinkDetails isEqual:anEventDetails.createTeamInviteLinkDetails];
   case DBTEAMLOGEventDetailsDeleteTeamInviteLinkDetails:
@@ -43614,6 +44708,11 @@
     return [self.outdatedLinkViewReportFailedDetails isEqual:anEventDetails.outdatedLinkViewReportFailedDetails];
   case DBTEAMLOGEventDetailsPaperAdminExportStartDetails:
     return [self.paperAdminExportStartDetails isEqual:anEventDetails.paperAdminExportStartDetails];
+  case DBTEAMLOGEventDetailsRansomwareAlertCreateReportDetails:
+    return [self.ransomwareAlertCreateReportDetails isEqual:anEventDetails.ransomwareAlertCreateReportDetails];
+  case DBTEAMLOGEventDetailsRansomwareAlertCreateReportFailedDetails:
+    return
+        [self.ransomwareAlertCreateReportFailedDetails isEqual:anEventDetails.ransomwareAlertCreateReportFailedDetails];
   case DBTEAMLOGEventDetailsSmartSyncCreateAdminPrivilegeReportDetails:
     return [self.smartSyncCreateAdminPrivilegeReportDetails
         isEqual:anEventDetails.smartSyncCreateAdminPrivilegeReportDetails];
@@ -43645,6 +44744,14 @@
     return [self.noteShareReceiveDetails isEqual:anEventDetails.noteShareReceiveDetails];
   case DBTEAMLOGEventDetailsOpenNoteSharedDetails:
     return [self.openNoteSharedDetails isEqual:anEventDetails.openNoteSharedDetails];
+  case DBTEAMLOGEventDetailsReplayFileSharedLinkCreatedDetails:
+    return [self.replayFileSharedLinkCreatedDetails isEqual:anEventDetails.replayFileSharedLinkCreatedDetails];
+  case DBTEAMLOGEventDetailsReplayFileSharedLinkModifiedDetails:
+    return [self.replayFileSharedLinkModifiedDetails isEqual:anEventDetails.replayFileSharedLinkModifiedDetails];
+  case DBTEAMLOGEventDetailsReplayProjectTeamAddDetails:
+    return [self.replayProjectTeamAddDetails isEqual:anEventDetails.replayProjectTeamAddDetails];
+  case DBTEAMLOGEventDetailsReplayProjectTeamDeleteDetails:
+    return [self.replayProjectTeamDeleteDetails isEqual:anEventDetails.replayProjectTeamDeleteDetails];
   case DBTEAMLOGEventDetailsSfAddGroupDetails:
     return [self.sfAddGroupDetails isEqual:anEventDetails.sfAddGroupDetails];
   case DBTEAMLOGEventDetailsSfAllowNonMembersToViewSharedLinksDetails:
@@ -43947,6 +45054,9 @@
     return [self.fileCommentsChangePolicyDetails isEqual:anEventDetails.fileCommentsChangePolicyDetails];
   case DBTEAMLOGEventDetailsFileLockingPolicyChangedDetails:
     return [self.fileLockingPolicyChangedDetails isEqual:anEventDetails.fileLockingPolicyChangedDetails];
+  case DBTEAMLOGEventDetailsFileProviderMigrationPolicyChangedDetails:
+    return [self.fileProviderMigrationPolicyChangedDetails
+        isEqual:anEventDetails.fileProviderMigrationPolicyChangedDetails];
   case DBTEAMLOGEventDetailsFileRequestsChangePolicyDetails:
     return [self.fileRequestsChangePolicyDetails isEqual:anEventDetails.fileRequestsChangePolicyDetails];
   case DBTEAMLOGEventDetailsFileRequestsEmailsEnabledDetails:
@@ -43956,6 +45066,9 @@
         isEqual:anEventDetails.fileRequestsEmailsRestrictedToTeamOnlyDetails];
   case DBTEAMLOGEventDetailsFileTransfersPolicyChangedDetails:
     return [self.fileTransfersPolicyChangedDetails isEqual:anEventDetails.fileTransfersPolicyChangedDetails];
+  case DBTEAMLOGEventDetailsFolderLinkRestrictionPolicyChangedDetails:
+    return [self.folderLinkRestrictionPolicyChangedDetails
+        isEqual:anEventDetails.folderLinkRestrictionPolicyChangedDetails];
   case DBTEAMLOGEventDetailsGoogleSsoChangePolicyDetails:
     return [self.googleSsoChangePolicyDetails isEqual:anEventDetails.googleSsoChangePolicyDetails];
   case DBTEAMLOGEventDetailsGroupUserManagementChangePolicyDetails:
@@ -44209,6 +45322,14 @@
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGAdminAlertingTriggeredAlertDetailsSerializer
                                            serialize:valueObj.adminAlertingTriggeredAlertDetails]];
     jsonDict[@".tag"] = @"admin_alerting_triggered_alert_details";
+  } else if ([valueObj isRansomwareRestoreProcessCompletedDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGRansomwareRestoreProcessCompletedDetailsSerializer
+                                           serialize:valueObj.ransomwareRestoreProcessCompletedDetails]];
+    jsonDict[@".tag"] = @"ransomware_restore_process_completed_details";
+  } else if ([valueObj isRansomwareRestoreProcessStartedDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGRansomwareRestoreProcessStartedDetailsSerializer
+                                           serialize:valueObj.ransomwareRestoreProcessStartedDetails]];
+    jsonDict[@".tag"] = @"ransomware_restore_process_started_details";
   } else if ([valueObj isAppBlockedByPermissionsDetails]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGAppBlockedByPermissionsDetailsSerializer
                                            serialize:valueObj.appBlockedByPermissionsDetails]];
@@ -44482,6 +45603,34 @@
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGEnabledDomainInvitesDetailsSerializer
                                            serialize:valueObj.enabledDomainInvitesDetails]];
     jsonDict[@".tag"] = @"enabled_domain_invites_details";
+  } else if ([valueObj isTeamEncryptionKeyCancelKeyDeletionDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionDetailsSerializer
+                                           serialize:valueObj.teamEncryptionKeyCancelKeyDeletionDetails]];
+    jsonDict[@".tag"] = @"team_encryption_key_cancel_key_deletion_details";
+  } else if ([valueObj isTeamEncryptionKeyCreateKeyDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamEncryptionKeyCreateKeyDetailsSerializer
+                                           serialize:valueObj.teamEncryptionKeyCreateKeyDetails]];
+    jsonDict[@".tag"] = @"team_encryption_key_create_key_details";
+  } else if ([valueObj isTeamEncryptionKeyDeleteKeyDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamEncryptionKeyDeleteKeyDetailsSerializer
+                                           serialize:valueObj.teamEncryptionKeyDeleteKeyDetails]];
+    jsonDict[@".tag"] = @"team_encryption_key_delete_key_details";
+  } else if ([valueObj isTeamEncryptionKeyDisableKeyDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamEncryptionKeyDisableKeyDetailsSerializer
+                                           serialize:valueObj.teamEncryptionKeyDisableKeyDetails]];
+    jsonDict[@".tag"] = @"team_encryption_key_disable_key_details";
+  } else if ([valueObj isTeamEncryptionKeyEnableKeyDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamEncryptionKeyEnableKeyDetailsSerializer
+                                           serialize:valueObj.teamEncryptionKeyEnableKeyDetails]];
+    jsonDict[@".tag"] = @"team_encryption_key_enable_key_details";
+  } else if ([valueObj isTeamEncryptionKeyRotateKeyDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamEncryptionKeyRotateKeyDetailsSerializer
+                                           serialize:valueObj.teamEncryptionKeyRotateKeyDetails]];
+    jsonDict[@".tag"] = @"team_encryption_key_rotate_key_details";
+  } else if ([valueObj isTeamEncryptionKeyScheduleKeyDeletionDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionDetailsSerializer
+                                           serialize:valueObj.teamEncryptionKeyScheduleKeyDeletionDetails]];
+    jsonDict[@".tag"] = @"team_encryption_key_schedule_key_deletion_details";
   } else if ([valueObj isApplyNamingConventionDetails]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGApplyNamingConventionDetailsSerializer
                                            serialize:valueObj.applyNamingConventionDetails]];
@@ -44492,6 +45641,10 @@
   } else if ([valueObj isFileAddDetails]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileAddDetailsSerializer serialize:valueObj.fileAddDetails]];
     jsonDict[@".tag"] = @"file_add_details";
+  } else if ([valueObj isFileAddFromAutomationDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileAddFromAutomationDetailsSerializer
+                                           serialize:valueObj.fileAddFromAutomationDetails]];
+    jsonDict[@".tag"] = @"file_add_from_automation_details";
   } else if ([valueObj isFileCopyDetails]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileCopyDetailsSerializer serialize:valueObj.fileCopyDetails]];
     jsonDict[@".tag"] = @"file_copy_details";
@@ -44567,6 +45720,10 @@
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGOrganizeFolderWithTidyDetailsSerializer
                                            serialize:valueObj.organizeFolderWithTidyDetails]];
     jsonDict[@".tag"] = @"organize_folder_with_tidy_details";
+  } else if ([valueObj isReplayFileDeleteDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGReplayFileDeleteDetailsSerializer
+                                           serialize:valueObj.replayFileDeleteDetails]];
+    jsonDict[@".tag"] = @"replay_file_delete_details";
   } else if ([valueObj isRewindFolderDetails]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGRewindFolderDetailsSerializer serialize:valueObj.rewindFolderDetails]];
     jsonDict[@".tag"] = @"rewind_folder_details";
@@ -44701,6 +45858,14 @@
   } else if ([valueObj isSsoErrorDetails]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGSsoErrorDetailsSerializer serialize:valueObj.ssoErrorDetails]];
     jsonDict[@".tag"] = @"sso_error_details";
+  } else if ([valueObj isBackupAdminInvitationSentDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGBackupAdminInvitationSentDetailsSerializer
+                                           serialize:valueObj.backupAdminInvitationSentDetails]];
+    jsonDict[@".tag"] = @"backup_admin_invitation_sent_details";
+  } else if ([valueObj isBackupInvitationOpenedDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGBackupInvitationOpenedDetailsSerializer
+                                           serialize:valueObj.backupInvitationOpenedDetails]];
+    jsonDict[@".tag"] = @"backup_invitation_opened_details";
   } else if ([valueObj isCreateTeamInviteLinkDetails]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGCreateTeamInviteLinkDetailsSerializer
                                            serialize:valueObj.createTeamInviteLinkDetails]];
@@ -45079,6 +46244,14 @@
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperAdminExportStartDetailsSerializer
                                            serialize:valueObj.paperAdminExportStartDetails]];
     jsonDict[@".tag"] = @"paper_admin_export_start_details";
+  } else if ([valueObj isRansomwareAlertCreateReportDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGRansomwareAlertCreateReportDetailsSerializer
+                                           serialize:valueObj.ransomwareAlertCreateReportDetails]];
+    jsonDict[@".tag"] = @"ransomware_alert_create_report_details";
+  } else if ([valueObj isRansomwareAlertCreateReportFailedDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGRansomwareAlertCreateReportFailedDetailsSerializer
+                                           serialize:valueObj.ransomwareAlertCreateReportFailedDetails]];
+    jsonDict[@".tag"] = @"ransomware_alert_create_report_failed_details";
   } else if ([valueObj isSmartSyncCreateAdminPrivilegeReportDetails]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGSmartSyncCreateAdminPrivilegeReportDetailsSerializer
                                            serialize:valueObj.smartSyncCreateAdminPrivilegeReportDetails]];
@@ -45137,6 +46310,22 @@
     [jsonDict
         addEntriesFromDictionary:[DBTEAMLOGOpenNoteSharedDetailsSerializer serialize:valueObj.openNoteSharedDetails]];
     jsonDict[@".tag"] = @"open_note_shared_details";
+  } else if ([valueObj isReplayFileSharedLinkCreatedDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGReplayFileSharedLinkCreatedDetailsSerializer
+                                           serialize:valueObj.replayFileSharedLinkCreatedDetails]];
+    jsonDict[@".tag"] = @"replay_file_shared_link_created_details";
+  } else if ([valueObj isReplayFileSharedLinkModifiedDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGReplayFileSharedLinkModifiedDetailsSerializer
+                                           serialize:valueObj.replayFileSharedLinkModifiedDetails]];
+    jsonDict[@".tag"] = @"replay_file_shared_link_modified_details";
+  } else if ([valueObj isReplayProjectTeamAddDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGReplayProjectTeamAddDetailsSerializer
+                                           serialize:valueObj.replayProjectTeamAddDetails]];
+    jsonDict[@".tag"] = @"replay_project_team_add_details";
+  } else if ([valueObj isReplayProjectTeamDeleteDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGReplayProjectTeamDeleteDetailsSerializer
+                                           serialize:valueObj.replayProjectTeamDeleteDetails]];
+    jsonDict[@".tag"] = @"replay_project_team_delete_details";
   } else if ([valueObj isSfAddGroupDetails]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfAddGroupDetailsSerializer serialize:valueObj.sfAddGroupDetails]];
     jsonDict[@".tag"] = @"sf_add_group_details";
@@ -45686,6 +46875,10 @@
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileLockingPolicyChangedDetailsSerializer
                                            serialize:valueObj.fileLockingPolicyChangedDetails]];
     jsonDict[@".tag"] = @"file_locking_policy_changed_details";
+  } else if ([valueObj isFileProviderMigrationPolicyChangedDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileProviderMigrationPolicyChangedDetailsSerializer
+                                           serialize:valueObj.fileProviderMigrationPolicyChangedDetails]];
+    jsonDict[@".tag"] = @"file_provider_migration_policy_changed_details";
   } else if ([valueObj isFileRequestsChangePolicyDetails]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRequestsChangePolicyDetailsSerializer
                                            serialize:valueObj.fileRequestsChangePolicyDetails]];
@@ -45702,6 +46895,10 @@
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileTransfersPolicyChangedDetailsSerializer
                                            serialize:valueObj.fileTransfersPolicyChangedDetails]];
     jsonDict[@".tag"] = @"file_transfers_policy_changed_details";
+  } else if ([valueObj isFolderLinkRestrictionPolicyChangedDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFolderLinkRestrictionPolicyChangedDetailsSerializer
+                                           serialize:valueObj.folderLinkRestrictionPolicyChangedDetails]];
+    jsonDict[@".tag"] = @"folder_link_restriction_policy_changed_details";
   } else if ([valueObj isGoogleSsoChangePolicyDetails]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGGoogleSsoChangePolicyDetailsSerializer
                                            serialize:valueObj.googleSsoChangePolicyDetails]];
@@ -46097,7 +47294,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEventDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -46118,6 +47315,16 @@
         [DBTEAMLOGAdminAlertingTriggeredAlertDetailsSerializer deserialize:valueDict];
     return
         [[DBTEAMLOGEventDetails alloc] initWithAdminAlertingTriggeredAlertDetails:adminAlertingTriggeredAlertDetails];
+  } else if ([tag isEqualToString:@"ransomware_restore_process_completed_details"]) {
+    DBTEAMLOGRansomwareRestoreProcessCompletedDetails *ransomwareRestoreProcessCompletedDetails =
+        [DBTEAMLOGRansomwareRestoreProcessCompletedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithRansomwareRestoreProcessCompletedDetails:ransomwareRestoreProcessCompletedDetails];
+  } else if ([tag isEqualToString:@"ransomware_restore_process_started_details"]) {
+    DBTEAMLOGRansomwareRestoreProcessStartedDetails *ransomwareRestoreProcessStartedDetails =
+        [DBTEAMLOGRansomwareRestoreProcessStartedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithRansomwareRestoreProcessStartedDetails:ransomwareRestoreProcessStartedDetails];
   } else if ([tag isEqualToString:@"app_blocked_by_permissions_details"]) {
     DBTEAMLOGAppBlockedByPermissionsDetails *appBlockedByPermissionsDetails =
         [DBTEAMLOGAppBlockedByPermissionsDetailsSerializer deserialize:valueDict];
@@ -46420,6 +47627,37 @@
     DBTEAMLOGEnabledDomainInvitesDetails *enabledDomainInvitesDetails =
         [DBTEAMLOGEnabledDomainInvitesDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithEnabledDomainInvitesDetails:enabledDomainInvitesDetails];
+  } else if ([tag isEqualToString:@"team_encryption_key_cancel_key_deletion_details"]) {
+    DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionDetails *teamEncryptionKeyCancelKeyDeletionDetails =
+        [DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithTeamEncryptionKeyCancelKeyDeletionDetails:teamEncryptionKeyCancelKeyDeletionDetails];
+  } else if ([tag isEqualToString:@"team_encryption_key_create_key_details"]) {
+    DBTEAMLOGTeamEncryptionKeyCreateKeyDetails *teamEncryptionKeyCreateKeyDetails =
+        [DBTEAMLOGTeamEncryptionKeyCreateKeyDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithTeamEncryptionKeyCreateKeyDetails:teamEncryptionKeyCreateKeyDetails];
+  } else if ([tag isEqualToString:@"team_encryption_key_delete_key_details"]) {
+    DBTEAMLOGTeamEncryptionKeyDeleteKeyDetails *teamEncryptionKeyDeleteKeyDetails =
+        [DBTEAMLOGTeamEncryptionKeyDeleteKeyDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithTeamEncryptionKeyDeleteKeyDetails:teamEncryptionKeyDeleteKeyDetails];
+  } else if ([tag isEqualToString:@"team_encryption_key_disable_key_details"]) {
+    DBTEAMLOGTeamEncryptionKeyDisableKeyDetails *teamEncryptionKeyDisableKeyDetails =
+        [DBTEAMLOGTeamEncryptionKeyDisableKeyDetailsSerializer deserialize:valueDict];
+    return
+        [[DBTEAMLOGEventDetails alloc] initWithTeamEncryptionKeyDisableKeyDetails:teamEncryptionKeyDisableKeyDetails];
+  } else if ([tag isEqualToString:@"team_encryption_key_enable_key_details"]) {
+    DBTEAMLOGTeamEncryptionKeyEnableKeyDetails *teamEncryptionKeyEnableKeyDetails =
+        [DBTEAMLOGTeamEncryptionKeyEnableKeyDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithTeamEncryptionKeyEnableKeyDetails:teamEncryptionKeyEnableKeyDetails];
+  } else if ([tag isEqualToString:@"team_encryption_key_rotate_key_details"]) {
+    DBTEAMLOGTeamEncryptionKeyRotateKeyDetails *teamEncryptionKeyRotateKeyDetails =
+        [DBTEAMLOGTeamEncryptionKeyRotateKeyDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithTeamEncryptionKeyRotateKeyDetails:teamEncryptionKeyRotateKeyDetails];
+  } else if ([tag isEqualToString:@"team_encryption_key_schedule_key_deletion_details"]) {
+    DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionDetails *teamEncryptionKeyScheduleKeyDeletionDetails =
+        [DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithTeamEncryptionKeyScheduleKeyDeletionDetails:teamEncryptionKeyScheduleKeyDeletionDetails];
   } else if ([tag isEqualToString:@"apply_naming_convention_details"]) {
     DBTEAMLOGApplyNamingConventionDetails *applyNamingConventionDetails =
         [DBTEAMLOGApplyNamingConventionDetailsSerializer deserialize:valueDict];
@@ -46430,6 +47668,10 @@
   } else if ([tag isEqualToString:@"file_add_details"]) {
     DBTEAMLOGFileAddDetails *fileAddDetails = [DBTEAMLOGFileAddDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithFileAddDetails:fileAddDetails];
+  } else if ([tag isEqualToString:@"file_add_from_automation_details"]) {
+    DBTEAMLOGFileAddFromAutomationDetails *fileAddFromAutomationDetails =
+        [DBTEAMLOGFileAddFromAutomationDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithFileAddFromAutomationDetails:fileAddFromAutomationDetails];
   } else if ([tag isEqualToString:@"file_copy_details"]) {
     DBTEAMLOGFileCopyDetails *fileCopyDetails = [DBTEAMLOGFileCopyDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithFileCopyDetails:fileCopyDetails];
@@ -46507,6 +47749,10 @@
     DBTEAMLOGOrganizeFolderWithTidyDetails *organizeFolderWithTidyDetails =
         [DBTEAMLOGOrganizeFolderWithTidyDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithOrganizeFolderWithTidyDetails:organizeFolderWithTidyDetails];
+  } else if ([tag isEqualToString:@"replay_file_delete_details"]) {
+    DBTEAMLOGReplayFileDeleteDetails *replayFileDeleteDetails =
+        [DBTEAMLOGReplayFileDeleteDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithReplayFileDeleteDetails:replayFileDeleteDetails];
   } else if ([tag isEqualToString:@"rewind_folder_details"]) {
     DBTEAMLOGRewindFolderDetails *rewindFolderDetails = [DBTEAMLOGRewindFolderDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithRewindFolderDetails:rewindFolderDetails];
@@ -46644,6 +47890,14 @@
   } else if ([tag isEqualToString:@"sso_error_details"]) {
     DBTEAMLOGSsoErrorDetails *ssoErrorDetails = [DBTEAMLOGSsoErrorDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithSsoErrorDetails:ssoErrorDetails];
+  } else if ([tag isEqualToString:@"backup_admin_invitation_sent_details"]) {
+    DBTEAMLOGBackupAdminInvitationSentDetails *backupAdminInvitationSentDetails =
+        [DBTEAMLOGBackupAdminInvitationSentDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithBackupAdminInvitationSentDetails:backupAdminInvitationSentDetails];
+  } else if ([tag isEqualToString:@"backup_invitation_opened_details"]) {
+    DBTEAMLOGBackupInvitationOpenedDetails *backupInvitationOpenedDetails =
+        [DBTEAMLOGBackupInvitationOpenedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithBackupInvitationOpenedDetails:backupInvitationOpenedDetails];
   } else if ([tag isEqualToString:@"create_team_invite_link_details"]) {
     DBTEAMLOGCreateTeamInviteLinkDetails *createTeamInviteLinkDetails =
         [DBTEAMLOGCreateTeamInviteLinkDetailsSerializer deserialize:valueDict];
@@ -47046,6 +48300,16 @@
     DBTEAMLOGPaperAdminExportStartDetails *paperAdminExportStartDetails =
         [DBTEAMLOGPaperAdminExportStartDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithPaperAdminExportStartDetails:paperAdminExportStartDetails];
+  } else if ([tag isEqualToString:@"ransomware_alert_create_report_details"]) {
+    DBTEAMLOGRansomwareAlertCreateReportDetails *ransomwareAlertCreateReportDetails =
+        [DBTEAMLOGRansomwareAlertCreateReportDetailsSerializer deserialize:valueDict];
+    return
+        [[DBTEAMLOGEventDetails alloc] initWithRansomwareAlertCreateReportDetails:ransomwareAlertCreateReportDetails];
+  } else if ([tag isEqualToString:@"ransomware_alert_create_report_failed_details"]) {
+    DBTEAMLOGRansomwareAlertCreateReportFailedDetails *ransomwareAlertCreateReportFailedDetails =
+        [DBTEAMLOGRansomwareAlertCreateReportFailedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithRansomwareAlertCreateReportFailedDetails:ransomwareAlertCreateReportFailedDetails];
   } else if ([tag isEqualToString:@"smart_sync_create_admin_privilege_report_details"]) {
     DBTEAMLOGSmartSyncCreateAdminPrivilegeReportDetails *smartSyncCreateAdminPrivilegeReportDetails =
         [DBTEAMLOGSmartSyncCreateAdminPrivilegeReportDetailsSerializer deserialize:valueDict];
@@ -47108,6 +48372,24 @@
     DBTEAMLOGOpenNoteSharedDetails *openNoteSharedDetails =
         [DBTEAMLOGOpenNoteSharedDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithOpenNoteSharedDetails:openNoteSharedDetails];
+  } else if ([tag isEqualToString:@"replay_file_shared_link_created_details"]) {
+    DBTEAMLOGReplayFileSharedLinkCreatedDetails *replayFileSharedLinkCreatedDetails =
+        [DBTEAMLOGReplayFileSharedLinkCreatedDetailsSerializer deserialize:valueDict];
+    return
+        [[DBTEAMLOGEventDetails alloc] initWithReplayFileSharedLinkCreatedDetails:replayFileSharedLinkCreatedDetails];
+  } else if ([tag isEqualToString:@"replay_file_shared_link_modified_details"]) {
+    DBTEAMLOGReplayFileSharedLinkModifiedDetails *replayFileSharedLinkModifiedDetails =
+        [DBTEAMLOGReplayFileSharedLinkModifiedDetailsSerializer deserialize:valueDict];
+    return
+        [[DBTEAMLOGEventDetails alloc] initWithReplayFileSharedLinkModifiedDetails:replayFileSharedLinkModifiedDetails];
+  } else if ([tag isEqualToString:@"replay_project_team_add_details"]) {
+    DBTEAMLOGReplayProjectTeamAddDetails *replayProjectTeamAddDetails =
+        [DBTEAMLOGReplayProjectTeamAddDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithReplayProjectTeamAddDetails:replayProjectTeamAddDetails];
+  } else if ([tag isEqualToString:@"replay_project_team_delete_details"]) {
+    DBTEAMLOGReplayProjectTeamDeleteDetails *replayProjectTeamDeleteDetails =
+        [DBTEAMLOGReplayProjectTeamDeleteDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithReplayProjectTeamDeleteDetails:replayProjectTeamDeleteDetails];
   } else if ([tag isEqualToString:@"sf_add_group_details"]) {
     DBTEAMLOGSfAddGroupDetails *sfAddGroupDetails = [DBTEAMLOGSfAddGroupDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithSfAddGroupDetails:sfAddGroupDetails];
@@ -47706,6 +48988,11 @@
     DBTEAMLOGFileLockingPolicyChangedDetails *fileLockingPolicyChangedDetails =
         [DBTEAMLOGFileLockingPolicyChangedDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithFileLockingPolicyChangedDetails:fileLockingPolicyChangedDetails];
+  } else if ([tag isEqualToString:@"file_provider_migration_policy_changed_details"]) {
+    DBTEAMLOGFileProviderMigrationPolicyChangedDetails *fileProviderMigrationPolicyChangedDetails =
+        [DBTEAMLOGFileProviderMigrationPolicyChangedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithFileProviderMigrationPolicyChangedDetails:fileProviderMigrationPolicyChangedDetails];
   } else if ([tag isEqualToString:@"file_requests_change_policy_details"]) {
     DBTEAMLOGFileRequestsChangePolicyDetails *fileRequestsChangePolicyDetails =
         [DBTEAMLOGFileRequestsChangePolicyDetailsSerializer deserialize:valueDict];
@@ -47723,6 +49010,11 @@
     DBTEAMLOGFileTransfersPolicyChangedDetails *fileTransfersPolicyChangedDetails =
         [DBTEAMLOGFileTransfersPolicyChangedDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithFileTransfersPolicyChangedDetails:fileTransfersPolicyChangedDetails];
+  } else if ([tag isEqualToString:@"folder_link_restriction_policy_changed_details"]) {
+    DBTEAMLOGFolderLinkRestrictionPolicyChangedDetails *folderLinkRestrictionPolicyChangedDetails =
+        [DBTEAMLOGFolderLinkRestrictionPolicyChangedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithFolderLinkRestrictionPolicyChangedDetails:folderLinkRestrictionPolicyChangedDetails];
   } else if ([tag isEqualToString:@"google_sso_change_policy_details"]) {
     DBTEAMLOGGoogleSsoChangePolicyDetails *googleSsoChangePolicyDetails =
         [DBTEAMLOGGoogleSsoChangePolicyDetailsSerializer deserialize:valueDict];
@@ -48196,6 +49488,8 @@
 #import "DBTEAMLOGAppUnlinkTeamType.h"
 #import "DBTEAMLOGAppUnlinkUserType.h"
 #import "DBTEAMLOGApplyNamingConventionType.h"
+#import "DBTEAMLOGBackupAdminInvitationSentType.h"
+#import "DBTEAMLOGBackupInvitationOpenedType.h"
 #import "DBTEAMLOGBinderAddPageType.h"
 #import "DBTEAMLOGBinderAddSectionType.h"
 #import "DBTEAMLOGBinderRemovePageType.h"
@@ -48276,6 +49570,7 @@
 #import "DBTEAMLOGExternalSharingCreateReportType.h"
 #import "DBTEAMLOGExternalSharingReportFailedType.h"
 #import "DBTEAMLOGFileAddCommentType.h"
+#import "DBTEAMLOGFileAddFromAutomationType.h"
 #import "DBTEAMLOGFileAddType.h"
 #import "DBTEAMLOGFileChangeCommentSubscriptionType.h"
 #import "DBTEAMLOGFileCommentsChangePolicyType.h"
@@ -48292,6 +49587,7 @@
 #import "DBTEAMLOGFileMoveType.h"
 #import "DBTEAMLOGFilePermanentlyDeleteType.h"
 #import "DBTEAMLOGFilePreviewType.h"
+#import "DBTEAMLOGFileProviderMigrationPolicyChangedType.h"
 #import "DBTEAMLOGFileRenameType.h"
 #import "DBTEAMLOGFileRequestChangeType.h"
 #import "DBTEAMLOGFileRequestCloseType.h"
@@ -48314,6 +49610,7 @@
 #import "DBTEAMLOGFileTransfersTransferViewType.h"
 #import "DBTEAMLOGFileUnlikeCommentType.h"
 #import "DBTEAMLOGFileUnresolveCommentType.h"
+#import "DBTEAMLOGFolderLinkRestrictionPolicyChangedType.h"
 #import "DBTEAMLOGFolderOverviewDescriptionChangedType.h"
 #import "DBTEAMLOGFolderOverviewItemPinnedType.h"
 #import "DBTEAMLOGFolderOverviewItemUnpinnedType.h"
@@ -48468,6 +49765,15 @@
 #import "DBTEAMLOGPasswordStrengthRequirementsChangePolicyType.h"
 #import "DBTEAMLOGPendingSecondaryEmailAddedType.h"
 #import "DBTEAMLOGPermanentDeleteChangePolicyType.h"
+#import "DBTEAMLOGRansomwareAlertCreateReportFailedType.h"
+#import "DBTEAMLOGRansomwareAlertCreateReportType.h"
+#import "DBTEAMLOGRansomwareRestoreProcessCompletedType.h"
+#import "DBTEAMLOGRansomwareRestoreProcessStartedType.h"
+#import "DBTEAMLOGReplayFileDeleteType.h"
+#import "DBTEAMLOGReplayFileSharedLinkCreatedType.h"
+#import "DBTEAMLOGReplayFileSharedLinkModifiedType.h"
+#import "DBTEAMLOGReplayProjectTeamAddType.h"
+#import "DBTEAMLOGReplayProjectTeamDeleteType.h"
 #import "DBTEAMLOGResellerSupportChangePolicyType.h"
 #import "DBTEAMLOGResellerSupportSessionEndType.h"
 #import "DBTEAMLOGResellerSupportSessionStartType.h"
@@ -48603,6 +49909,13 @@
 #import "DBTEAMLOGTeamActivityCreateReportFailType.h"
 #import "DBTEAMLOGTeamActivityCreateReportType.h"
 #import "DBTEAMLOGTeamBrandingPolicyChangedType.h"
+#import "DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionType.h"
+#import "DBTEAMLOGTeamEncryptionKeyCreateKeyType.h"
+#import "DBTEAMLOGTeamEncryptionKeyDeleteKeyType.h"
+#import "DBTEAMLOGTeamEncryptionKeyDisableKeyType.h"
+#import "DBTEAMLOGTeamEncryptionKeyEnableKeyType.h"
+#import "DBTEAMLOGTeamEncryptionKeyRotateKeyType.h"
+#import "DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionType.h"
 #import "DBTEAMLOGTeamExtensionsPolicyChangedType.h"
 #import "DBTEAMLOGTeamFolderChangeStatusType.h"
 #import "DBTEAMLOGTeamFolderCreateType.h"
@@ -48668,6 +49981,8 @@
 @synthesize adminAlertingAlertStateChanged = _adminAlertingAlertStateChanged;
 @synthesize adminAlertingChangedAlertConfig = _adminAlertingChangedAlertConfig;
 @synthesize adminAlertingTriggeredAlert = _adminAlertingTriggeredAlert;
+@synthesize ransomwareRestoreProcessCompleted = _ransomwareRestoreProcessCompleted;
+@synthesize ransomwareRestoreProcessStarted = _ransomwareRestoreProcessStarted;
 @synthesize appBlockedByPermissions = _appBlockedByPermissions;
 @synthesize appLinkTeam = _appLinkTeam;
 @synthesize appLinkUser = _appLinkUser;
@@ -48737,9 +50052,17 @@
 @synthesize domainVerificationAddDomainSuccess = _domainVerificationAddDomainSuccess;
 @synthesize domainVerificationRemoveDomain = _domainVerificationRemoveDomain;
 @synthesize enabledDomainInvites = _enabledDomainInvites;
+@synthesize teamEncryptionKeyCancelKeyDeletion = _teamEncryptionKeyCancelKeyDeletion;
+@synthesize teamEncryptionKeyCreateKey = _teamEncryptionKeyCreateKey;
+@synthesize teamEncryptionKeyDeleteKey = _teamEncryptionKeyDeleteKey;
+@synthesize teamEncryptionKeyDisableKey = _teamEncryptionKeyDisableKey;
+@synthesize teamEncryptionKeyEnableKey = _teamEncryptionKeyEnableKey;
+@synthesize teamEncryptionKeyRotateKey = _teamEncryptionKeyRotateKey;
+@synthesize teamEncryptionKeyScheduleKeyDeletion = _teamEncryptionKeyScheduleKeyDeletion;
 @synthesize applyNamingConvention = _applyNamingConvention;
 @synthesize createFolder = _createFolder;
 @synthesize fileAdd = _fileAdd;
+@synthesize fileAddFromAutomation = _fileAddFromAutomation;
 @synthesize fileCopy = _fileCopy;
 @synthesize fileDelete = _fileDelete;
 @synthesize fileDownload = _fileDownload;
@@ -48761,6 +50084,7 @@
 @synthesize objectLabelRemoved = _objectLabelRemoved;
 @synthesize objectLabelUpdatedValue = _objectLabelUpdatedValue;
 @synthesize organizeFolderWithTidy = _organizeFolderWithTidy;
+@synthesize replayFileDelete = _replayFileDelete;
 @synthesize rewindFolder = _rewindFolder;
 @synthesize undoNamingConvention = _undoNamingConvention;
 @synthesize undoOrganizeFolderWithTidy = _undoOrganizeFolderWithTidy;
@@ -48797,6 +50121,8 @@
 @synthesize signInAsSessionEnd = _signInAsSessionEnd;
 @synthesize signInAsSessionStart = _signInAsSessionStart;
 @synthesize ssoError = _ssoError;
+@synthesize backupAdminInvitationSent = _backupAdminInvitationSent;
+@synthesize backupInvitationOpened = _backupInvitationOpened;
 @synthesize createTeamInviteLink = _createTeamInviteLink;
 @synthesize deleteTeamInviteLink = _deleteTeamInviteLink;
 @synthesize memberAddExternalId = _memberAddExternalId;
@@ -48892,6 +50218,8 @@
 @synthesize outdatedLinkViewCreateReport = _outdatedLinkViewCreateReport;
 @synthesize outdatedLinkViewReportFailed = _outdatedLinkViewReportFailed;
 @synthesize paperAdminExportStart = _paperAdminExportStart;
+@synthesize ransomwareAlertCreateReport = _ransomwareAlertCreateReport;
+@synthesize ransomwareAlertCreateReportFailed = _ransomwareAlertCreateReportFailed;
 @synthesize smartSyncCreateAdminPrivilegeReport = _smartSyncCreateAdminPrivilegeReport;
 @synthesize teamActivityCreateReport = _teamActivityCreateReport;
 @synthesize teamActivityCreateReportFail = _teamActivityCreateReportFail;
@@ -48907,6 +50235,10 @@
 @synthesize noteShared = _noteShared;
 @synthesize noteShareReceive = _noteShareReceive;
 @synthesize openNoteShared = _openNoteShared;
+@synthesize replayFileSharedLinkCreated = _replayFileSharedLinkCreated;
+@synthesize replayFileSharedLinkModified = _replayFileSharedLinkModified;
+@synthesize replayProjectTeamAdd = _replayProjectTeamAdd;
+@synthesize replayProjectTeamDelete = _replayProjectTeamDelete;
 @synthesize sfAddGroup = _sfAddGroup;
 @synthesize sfAllowNonMembersToViewSharedLinks = _sfAllowNonMembersToViewSharedLinks;
 @synthesize sfExternalInviteWarn = _sfExternalInviteWarn;
@@ -49046,10 +50378,12 @@
 @synthesize externalDriveBackupPolicyChanged = _externalDriveBackupPolicyChanged;
 @synthesize fileCommentsChangePolicy = _fileCommentsChangePolicy;
 @synthesize fileLockingPolicyChanged = _fileLockingPolicyChanged;
+@synthesize fileProviderMigrationPolicyChanged = _fileProviderMigrationPolicyChanged;
 @synthesize fileRequestsChangePolicy = _fileRequestsChangePolicy;
 @synthesize fileRequestsEmailsEnabled = _fileRequestsEmailsEnabled;
 @synthesize fileRequestsEmailsRestrictedToTeamOnly = _fileRequestsEmailsRestrictedToTeamOnly;
 @synthesize fileTransfersPolicyChanged = _fileTransfersPolicyChanged;
+@synthesize folderLinkRestrictionPolicyChanged = _folderLinkRestrictionPolicyChanged;
 @synthesize googleSsoChangePolicy = _googleSsoChangePolicy;
 @synthesize groupUserManagementChangePolicy = _groupUserManagementChangePolicy;
 @synthesize integrationPolicyChanged = _integrationPolicyChanged;
@@ -49176,6 +50510,26 @@
   if (self) {
     _tag = DBTEAMLOGEventTypeAdminAlertingTriggeredAlert;
     _adminAlertingTriggeredAlert = adminAlertingTriggeredAlert;
+  }
+  return self;
+}
+
+- (instancetype)initWithRansomwareRestoreProcessCompleted:
+    (DBTEAMLOGRansomwareRestoreProcessCompletedType *)ransomwareRestoreProcessCompleted {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeRansomwareRestoreProcessCompleted;
+    _ransomwareRestoreProcessCompleted = ransomwareRestoreProcessCompleted;
+  }
+  return self;
+}
+
+- (instancetype)initWithRansomwareRestoreProcessStarted:
+    (DBTEAMLOGRansomwareRestoreProcessStartedType *)ransomwareRestoreProcessStarted {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeRansomwareRestoreProcessStarted;
+    _ransomwareRestoreProcessStarted = ransomwareRestoreProcessStarted;
   }
   return self;
 }
@@ -49832,6 +51186,76 @@
   return self;
 }
 
+- (instancetype)initWithTeamEncryptionKeyCancelKeyDeletion:
+    (DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionType *)teamEncryptionKeyCancelKeyDeletion {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeTeamEncryptionKeyCancelKeyDeletion;
+    _teamEncryptionKeyCancelKeyDeletion = teamEncryptionKeyCancelKeyDeletion;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamEncryptionKeyCreateKey:
+    (DBTEAMLOGTeamEncryptionKeyCreateKeyType *)teamEncryptionKeyCreateKey {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeTeamEncryptionKeyCreateKey;
+    _teamEncryptionKeyCreateKey = teamEncryptionKeyCreateKey;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamEncryptionKeyDeleteKey:
+    (DBTEAMLOGTeamEncryptionKeyDeleteKeyType *)teamEncryptionKeyDeleteKey {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeTeamEncryptionKeyDeleteKey;
+    _teamEncryptionKeyDeleteKey = teamEncryptionKeyDeleteKey;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamEncryptionKeyDisableKey:
+    (DBTEAMLOGTeamEncryptionKeyDisableKeyType *)teamEncryptionKeyDisableKey {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeTeamEncryptionKeyDisableKey;
+    _teamEncryptionKeyDisableKey = teamEncryptionKeyDisableKey;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamEncryptionKeyEnableKey:
+    (DBTEAMLOGTeamEncryptionKeyEnableKeyType *)teamEncryptionKeyEnableKey {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeTeamEncryptionKeyEnableKey;
+    _teamEncryptionKeyEnableKey = teamEncryptionKeyEnableKey;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamEncryptionKeyRotateKey:
+    (DBTEAMLOGTeamEncryptionKeyRotateKeyType *)teamEncryptionKeyRotateKey {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeTeamEncryptionKeyRotateKey;
+    _teamEncryptionKeyRotateKey = teamEncryptionKeyRotateKey;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamEncryptionKeyScheduleKeyDeletion:
+    (DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionType *)teamEncryptionKeyScheduleKeyDeletion {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeTeamEncryptionKeyScheduleKeyDeletion;
+    _teamEncryptionKeyScheduleKeyDeletion = teamEncryptionKeyScheduleKeyDeletion;
+  }
+  return self;
+}
+
 - (instancetype)initWithApplyNamingConvention:(DBTEAMLOGApplyNamingConventionType *)applyNamingConvention {
   self = [super init];
   if (self) {
@@ -49855,6 +51279,15 @@
   if (self) {
     _tag = DBTEAMLOGEventTypeFileAdd;
     _fileAdd = fileAdd;
+  }
+  return self;
+}
+
+- (instancetype)initWithFileAddFromAutomation:(DBTEAMLOGFileAddFromAutomationType *)fileAddFromAutomation {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeFileAddFromAutomation;
+    _fileAddFromAutomation = fileAddFromAutomation;
   }
   return self;
 }
@@ -50047,6 +51480,15 @@
   if (self) {
     _tag = DBTEAMLOGEventTypeOrganizeFolderWithTidy;
     _organizeFolderWithTidy = organizeFolderWithTidy;
+  }
+  return self;
+}
+
+- (instancetype)initWithReplayFileDelete:(DBTEAMLOGReplayFileDeleteType *)replayFileDelete {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeReplayFileDelete;
+    _replayFileDelete = replayFileDelete;
   }
   return self;
 }
@@ -50375,6 +51817,24 @@
   if (self) {
     _tag = DBTEAMLOGEventTypeSsoError;
     _ssoError = ssoError;
+  }
+  return self;
+}
+
+- (instancetype)initWithBackupAdminInvitationSent:(DBTEAMLOGBackupAdminInvitationSentType *)backupAdminInvitationSent {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeBackupAdminInvitationSent;
+    _backupAdminInvitationSent = backupAdminInvitationSent;
+  }
+  return self;
+}
+
+- (instancetype)initWithBackupInvitationOpened:(DBTEAMLOGBackupInvitationOpenedType *)backupInvitationOpened {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeBackupInvitationOpened;
+    _backupInvitationOpened = backupInvitationOpened;
   }
   return self;
 }
@@ -51264,6 +52724,26 @@
   return self;
 }
 
+- (instancetype)initWithRansomwareAlertCreateReport:
+    (DBTEAMLOGRansomwareAlertCreateReportType *)ransomwareAlertCreateReport {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeRansomwareAlertCreateReport;
+    _ransomwareAlertCreateReport = ransomwareAlertCreateReport;
+  }
+  return self;
+}
+
+- (instancetype)initWithRansomwareAlertCreateReportFailed:
+    (DBTEAMLOGRansomwareAlertCreateReportFailedType *)ransomwareAlertCreateReportFailed {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeRansomwareAlertCreateReportFailed;
+    _ransomwareAlertCreateReportFailed = ransomwareAlertCreateReportFailed;
+  }
+  return self;
+}
+
 - (instancetype)initWithSmartSyncCreateAdminPrivilegeReport:
     (DBTEAMLOGSmartSyncCreateAdminPrivilegeReportType *)smartSyncCreateAdminPrivilegeReport {
   self = [super init];
@@ -51399,6 +52879,44 @@
   if (self) {
     _tag = DBTEAMLOGEventTypeOpenNoteShared;
     _openNoteShared = openNoteShared;
+  }
+  return self;
+}
+
+- (instancetype)initWithReplayFileSharedLinkCreated:
+    (DBTEAMLOGReplayFileSharedLinkCreatedType *)replayFileSharedLinkCreated {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeReplayFileSharedLinkCreated;
+    _replayFileSharedLinkCreated = replayFileSharedLinkCreated;
+  }
+  return self;
+}
+
+- (instancetype)initWithReplayFileSharedLinkModified:
+    (DBTEAMLOGReplayFileSharedLinkModifiedType *)replayFileSharedLinkModified {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeReplayFileSharedLinkModified;
+    _replayFileSharedLinkModified = replayFileSharedLinkModified;
+  }
+  return self;
+}
+
+- (instancetype)initWithReplayProjectTeamAdd:(DBTEAMLOGReplayProjectTeamAddType *)replayProjectTeamAdd {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeReplayProjectTeamAdd;
+    _replayProjectTeamAdd = replayProjectTeamAdd;
+  }
+  return self;
+}
+
+- (instancetype)initWithReplayProjectTeamDelete:(DBTEAMLOGReplayProjectTeamDeleteType *)replayProjectTeamDelete {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeReplayProjectTeamDelete;
+    _replayProjectTeamDelete = replayProjectTeamDelete;
   }
   return self;
 }
@@ -52712,6 +54230,16 @@
   return self;
 }
 
+- (instancetype)initWithFileProviderMigrationPolicyChanged:
+    (DBTEAMLOGFileProviderMigrationPolicyChangedType *)fileProviderMigrationPolicyChanged {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeFileProviderMigrationPolicyChanged;
+    _fileProviderMigrationPolicyChanged = fileProviderMigrationPolicyChanged;
+  }
+  return self;
+}
+
 - (instancetype)initWithFileRequestsChangePolicy:(DBTEAMLOGFileRequestsChangePolicyType *)fileRequestsChangePolicy {
   self = [super init];
   if (self) {
@@ -52746,6 +54274,16 @@
   if (self) {
     _tag = DBTEAMLOGEventTypeFileTransfersPolicyChanged;
     _fileTransfersPolicyChanged = fileTransfersPolicyChanged;
+  }
+  return self;
+}
+
+- (instancetype)initWithFolderLinkRestrictionPolicyChanged:
+    (DBTEAMLOGFolderLinkRestrictionPolicyChangedType *)folderLinkRestrictionPolicyChanged {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeFolderLinkRestrictionPolicyChanged;
+    _folderLinkRestrictionPolicyChanged = folderLinkRestrictionPolicyChanged;
   }
   return self;
 }
@@ -53717,6 +55255,24 @@
   return _adminAlertingTriggeredAlert;
 }
 
+- (DBTEAMLOGRansomwareRestoreProcessCompletedType *)ransomwareRestoreProcessCompleted {
+  if (![self isRansomwareRestoreProcessCompleted]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeRansomwareRestoreProcessCompleted, but was %@.",
+                       [self tagName]];
+  }
+  return _ransomwareRestoreProcessCompleted;
+}
+
+- (DBTEAMLOGRansomwareRestoreProcessStartedType *)ransomwareRestoreProcessStarted {
+  if (![self isRansomwareRestoreProcessStarted]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeRansomwareRestoreProcessStarted, but was %@.", [self tagName]];
+  }
+  return _ransomwareRestoreProcessStarted;
+}
+
 - (DBTEAMLOGAppBlockedByPermissionsType *)appBlockedByPermissions {
   if (![self isAppBlockedByPermissions]) {
     [NSException raise:@"IllegalStateException"
@@ -54306,6 +55862,69 @@
   return _enabledDomainInvites;
 }
 
+- (DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionType *)teamEncryptionKeyCancelKeyDeletion {
+  if (![self isTeamEncryptionKeyCancelKeyDeletion]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeTeamEncryptionKeyCancelKeyDeletion, but was %@.",
+                       [self tagName]];
+  }
+  return _teamEncryptionKeyCancelKeyDeletion;
+}
+
+- (DBTEAMLOGTeamEncryptionKeyCreateKeyType *)teamEncryptionKeyCreateKey {
+  if (![self isTeamEncryptionKeyCreateKey]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeTeamEncryptionKeyCreateKey, but was %@.", [self tagName]];
+  }
+  return _teamEncryptionKeyCreateKey;
+}
+
+- (DBTEAMLOGTeamEncryptionKeyDeleteKeyType *)teamEncryptionKeyDeleteKey {
+  if (![self isTeamEncryptionKeyDeleteKey]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeTeamEncryptionKeyDeleteKey, but was %@.", [self tagName]];
+  }
+  return _teamEncryptionKeyDeleteKey;
+}
+
+- (DBTEAMLOGTeamEncryptionKeyDisableKeyType *)teamEncryptionKeyDisableKey {
+  if (![self isTeamEncryptionKeyDisableKey]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeTeamEncryptionKeyDisableKey, but was %@.", [self tagName]];
+  }
+  return _teamEncryptionKeyDisableKey;
+}
+
+- (DBTEAMLOGTeamEncryptionKeyEnableKeyType *)teamEncryptionKeyEnableKey {
+  if (![self isTeamEncryptionKeyEnableKey]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeTeamEncryptionKeyEnableKey, but was %@.", [self tagName]];
+  }
+  return _teamEncryptionKeyEnableKey;
+}
+
+- (DBTEAMLOGTeamEncryptionKeyRotateKeyType *)teamEncryptionKeyRotateKey {
+  if (![self isTeamEncryptionKeyRotateKey]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeTeamEncryptionKeyRotateKey, but was %@.", [self tagName]];
+  }
+  return _teamEncryptionKeyRotateKey;
+}
+
+- (DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionType *)teamEncryptionKeyScheduleKeyDeletion {
+  if (![self isTeamEncryptionKeyScheduleKeyDeletion]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeTeamEncryptionKeyScheduleKeyDeletion, but was %@.",
+                       [self tagName]];
+  }
+  return _teamEncryptionKeyScheduleKeyDeletion;
+}
+
 - (DBTEAMLOGApplyNamingConventionType *)applyNamingConvention {
   if (![self isApplyNamingConvention]) {
     [NSException raise:@"IllegalStateException"
@@ -54328,6 +55947,14 @@
                 format:@"Invalid tag: required DBTEAMLOGEventTypeFileAdd, but was %@.", [self tagName]];
   }
   return _fileAdd;
+}
+
+- (DBTEAMLOGFileAddFromAutomationType *)fileAddFromAutomation {
+  if (![self isFileAddFromAutomation]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeFileAddFromAutomation, but was %@.", [self tagName]];
+  }
+  return _fileAddFromAutomation;
 }
 
 - (DBTEAMLOGFileCopyType *)fileCopy {
@@ -54500,6 +56127,14 @@
                 format:@"Invalid tag: required DBTEAMLOGEventTypeOrganizeFolderWithTidy, but was %@.", [self tagName]];
   }
   return _organizeFolderWithTidy;
+}
+
+- (DBTEAMLOGReplayFileDeleteType *)replayFileDelete {
+  if (![self isReplayFileDelete]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeReplayFileDelete, but was %@.", [self tagName]];
+  }
+  return _replayFileDelete;
 }
 
 - (DBTEAMLOGRewindFolderType *)rewindFolder {
@@ -54794,6 +56429,23 @@
                 format:@"Invalid tag: required DBTEAMLOGEventTypeSsoError, but was %@.", [self tagName]];
   }
   return _ssoError;
+}
+
+- (DBTEAMLOGBackupAdminInvitationSentType *)backupAdminInvitationSent {
+  if (![self isBackupAdminInvitationSent]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeBackupAdminInvitationSent, but was %@.", [self tagName]];
+  }
+  return _backupAdminInvitationSent;
+}
+
+- (DBTEAMLOGBackupInvitationOpenedType *)backupInvitationOpened {
+  if (![self isBackupInvitationOpened]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeBackupInvitationOpened, but was %@.", [self tagName]];
+  }
+  return _backupInvitationOpened;
 }
 
 - (DBTEAMLOGCreateTeamInviteLinkType *)createTeamInviteLink {
@@ -55594,6 +57246,24 @@
   return _paperAdminExportStart;
 }
 
+- (DBTEAMLOGRansomwareAlertCreateReportType *)ransomwareAlertCreateReport {
+  if (![self isRansomwareAlertCreateReport]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeRansomwareAlertCreateReport, but was %@.", [self tagName]];
+  }
+  return _ransomwareAlertCreateReport;
+}
+
+- (DBTEAMLOGRansomwareAlertCreateReportFailedType *)ransomwareAlertCreateReportFailed {
+  if (![self isRansomwareAlertCreateReportFailed]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeRansomwareAlertCreateReportFailed, but was %@.",
+                       [self tagName]];
+  }
+  return _ransomwareAlertCreateReportFailed;
+}
+
 - (DBTEAMLOGSmartSyncCreateAdminPrivilegeReportType *)smartSyncCreateAdminPrivilegeReport {
   if (![self isSmartSyncCreateAdminPrivilegeReport]) {
     [NSException raise:@"IllegalStateException"
@@ -55719,6 +57389,40 @@
                 format:@"Invalid tag: required DBTEAMLOGEventTypeOpenNoteShared, but was %@.", [self tagName]];
   }
   return _openNoteShared;
+}
+
+- (DBTEAMLOGReplayFileSharedLinkCreatedType *)replayFileSharedLinkCreated {
+  if (![self isReplayFileSharedLinkCreated]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeReplayFileSharedLinkCreated, but was %@.", [self tagName]];
+  }
+  return _replayFileSharedLinkCreated;
+}
+
+- (DBTEAMLOGReplayFileSharedLinkModifiedType *)replayFileSharedLinkModified {
+  if (![self isReplayFileSharedLinkModified]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeReplayFileSharedLinkModified, but was %@.", [self tagName]];
+  }
+  return _replayFileSharedLinkModified;
+}
+
+- (DBTEAMLOGReplayProjectTeamAddType *)replayProjectTeamAdd {
+  if (![self isReplayProjectTeamAdd]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeReplayProjectTeamAdd, but was %@.", [self tagName]];
+  }
+  return _replayProjectTeamAdd;
+}
+
+- (DBTEAMLOGReplayProjectTeamDeleteType *)replayProjectTeamDelete {
+  if (![self isReplayProjectTeamDelete]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeReplayProjectTeamDelete, but was %@.", [self tagName]];
+  }
+  return _replayProjectTeamDelete;
 }
 
 - (DBTEAMLOGSfAddGroupType *)sfAddGroup {
@@ -56901,6 +58605,15 @@
   return _fileLockingPolicyChanged;
 }
 
+- (DBTEAMLOGFileProviderMigrationPolicyChangedType *)fileProviderMigrationPolicyChanged {
+  if (![self isFileProviderMigrationPolicyChanged]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeFileProviderMigrationPolicyChanged, but was %@.",
+                       [self tagName]];
+  }
+  return _fileProviderMigrationPolicyChanged;
+}
+
 - (DBTEAMLOGFileRequestsChangePolicyType *)fileRequestsChangePolicy {
   if (![self isFileRequestsChangePolicy]) {
     [NSException
@@ -56935,6 +58648,15 @@
         format:@"Invalid tag: required DBTEAMLOGEventTypeFileTransfersPolicyChanged, but was %@.", [self tagName]];
   }
   return _fileTransfersPolicyChanged;
+}
+
+- (DBTEAMLOGFolderLinkRestrictionPolicyChangedType *)folderLinkRestrictionPolicyChanged {
+  if (![self isFolderLinkRestrictionPolicyChanged]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeFolderLinkRestrictionPolicyChanged, but was %@.",
+                       [self tagName]];
+  }
+  return _folderLinkRestrictionPolicyChanged;
 }
 
 - (DBTEAMLOGGoogleSsoChangePolicyType *)googleSsoChangePolicy {
@@ -57806,6 +59528,14 @@
   return _tag == DBTEAMLOGEventTypeAdminAlertingTriggeredAlert;
 }
 
+- (BOOL)isRansomwareRestoreProcessCompleted {
+  return _tag == DBTEAMLOGEventTypeRansomwareRestoreProcessCompleted;
+}
+
+- (BOOL)isRansomwareRestoreProcessStarted {
+  return _tag == DBTEAMLOGEventTypeRansomwareRestoreProcessStarted;
+}
+
 - (BOOL)isAppBlockedByPermissions {
   return _tag == DBTEAMLOGEventTypeAppBlockedByPermissions;
 }
@@ -58082,6 +59812,34 @@
   return _tag == DBTEAMLOGEventTypeEnabledDomainInvites;
 }
 
+- (BOOL)isTeamEncryptionKeyCancelKeyDeletion {
+  return _tag == DBTEAMLOGEventTypeTeamEncryptionKeyCancelKeyDeletion;
+}
+
+- (BOOL)isTeamEncryptionKeyCreateKey {
+  return _tag == DBTEAMLOGEventTypeTeamEncryptionKeyCreateKey;
+}
+
+- (BOOL)isTeamEncryptionKeyDeleteKey {
+  return _tag == DBTEAMLOGEventTypeTeamEncryptionKeyDeleteKey;
+}
+
+- (BOOL)isTeamEncryptionKeyDisableKey {
+  return _tag == DBTEAMLOGEventTypeTeamEncryptionKeyDisableKey;
+}
+
+- (BOOL)isTeamEncryptionKeyEnableKey {
+  return _tag == DBTEAMLOGEventTypeTeamEncryptionKeyEnableKey;
+}
+
+- (BOOL)isTeamEncryptionKeyRotateKey {
+  return _tag == DBTEAMLOGEventTypeTeamEncryptionKeyRotateKey;
+}
+
+- (BOOL)isTeamEncryptionKeyScheduleKeyDeletion {
+  return _tag == DBTEAMLOGEventTypeTeamEncryptionKeyScheduleKeyDeletion;
+}
+
 - (BOOL)isApplyNamingConvention {
   return _tag == DBTEAMLOGEventTypeApplyNamingConvention;
 }
@@ -58092,6 +59850,10 @@
 
 - (BOOL)isFileAdd {
   return _tag == DBTEAMLOGEventTypeFileAdd;
+}
+
+- (BOOL)isFileAddFromAutomation {
+  return _tag == DBTEAMLOGEventTypeFileAddFromAutomation;
 }
 
 - (BOOL)isFileCopy {
@@ -58176,6 +59938,10 @@
 
 - (BOOL)isOrganizeFolderWithTidy {
   return _tag == DBTEAMLOGEventTypeOrganizeFolderWithTidy;
+}
+
+- (BOOL)isReplayFileDelete {
+  return _tag == DBTEAMLOGEventTypeReplayFileDelete;
 }
 
 - (BOOL)isRewindFolder {
@@ -58320,6 +60086,14 @@
 
 - (BOOL)isSsoError {
   return _tag == DBTEAMLOGEventTypeSsoError;
+}
+
+- (BOOL)isBackupAdminInvitationSent {
+  return _tag == DBTEAMLOGEventTypeBackupAdminInvitationSent;
+}
+
+- (BOOL)isBackupInvitationOpened {
+  return _tag == DBTEAMLOGEventTypeBackupInvitationOpened;
 }
 
 - (BOOL)isCreateTeamInviteLink {
@@ -58702,6 +60476,14 @@
   return _tag == DBTEAMLOGEventTypePaperAdminExportStart;
 }
 
+- (BOOL)isRansomwareAlertCreateReport {
+  return _tag == DBTEAMLOGEventTypeRansomwareAlertCreateReport;
+}
+
+- (BOOL)isRansomwareAlertCreateReportFailed {
+  return _tag == DBTEAMLOGEventTypeRansomwareAlertCreateReportFailed;
+}
+
 - (BOOL)isSmartSyncCreateAdminPrivilegeReport {
   return _tag == DBTEAMLOGEventTypeSmartSyncCreateAdminPrivilegeReport;
 }
@@ -58760,6 +60542,22 @@
 
 - (BOOL)isOpenNoteShared {
   return _tag == DBTEAMLOGEventTypeOpenNoteShared;
+}
+
+- (BOOL)isReplayFileSharedLinkCreated {
+  return _tag == DBTEAMLOGEventTypeReplayFileSharedLinkCreated;
+}
+
+- (BOOL)isReplayFileSharedLinkModified {
+  return _tag == DBTEAMLOGEventTypeReplayFileSharedLinkModified;
+}
+
+- (BOOL)isReplayProjectTeamAdd {
+  return _tag == DBTEAMLOGEventTypeReplayProjectTeamAdd;
+}
+
+- (BOOL)isReplayProjectTeamDelete {
+  return _tag == DBTEAMLOGEventTypeReplayProjectTeamDelete;
 }
 
 - (BOOL)isSfAddGroup {
@@ -59318,6 +61116,10 @@
   return _tag == DBTEAMLOGEventTypeFileLockingPolicyChanged;
 }
 
+- (BOOL)isFileProviderMigrationPolicyChanged {
+  return _tag == DBTEAMLOGEventTypeFileProviderMigrationPolicyChanged;
+}
+
 - (BOOL)isFileRequestsChangePolicy {
   return _tag == DBTEAMLOGEventTypeFileRequestsChangePolicy;
 }
@@ -59332,6 +61134,10 @@
 
 - (BOOL)isFileTransfersPolicyChanged {
   return _tag == DBTEAMLOGEventTypeFileTransfersPolicyChanged;
+}
+
+- (BOOL)isFolderLinkRestrictionPolicyChanged {
+  return _tag == DBTEAMLOGEventTypeFolderLinkRestrictionPolicyChanged;
 }
 
 - (BOOL)isGoogleSsoChangePolicy {
@@ -59734,6 +61540,10 @@
     return @"DBTEAMLOGEventTypeAdminAlertingChangedAlertConfig";
   case DBTEAMLOGEventTypeAdminAlertingTriggeredAlert:
     return @"DBTEAMLOGEventTypeAdminAlertingTriggeredAlert";
+  case DBTEAMLOGEventTypeRansomwareRestoreProcessCompleted:
+    return @"DBTEAMLOGEventTypeRansomwareRestoreProcessCompleted";
+  case DBTEAMLOGEventTypeRansomwareRestoreProcessStarted:
+    return @"DBTEAMLOGEventTypeRansomwareRestoreProcessStarted";
   case DBTEAMLOGEventTypeAppBlockedByPermissions:
     return @"DBTEAMLOGEventTypeAppBlockedByPermissions";
   case DBTEAMLOGEventTypeAppLinkTeam:
@@ -59872,12 +61682,28 @@
     return @"DBTEAMLOGEventTypeDomainVerificationRemoveDomain";
   case DBTEAMLOGEventTypeEnabledDomainInvites:
     return @"DBTEAMLOGEventTypeEnabledDomainInvites";
+  case DBTEAMLOGEventTypeTeamEncryptionKeyCancelKeyDeletion:
+    return @"DBTEAMLOGEventTypeTeamEncryptionKeyCancelKeyDeletion";
+  case DBTEAMLOGEventTypeTeamEncryptionKeyCreateKey:
+    return @"DBTEAMLOGEventTypeTeamEncryptionKeyCreateKey";
+  case DBTEAMLOGEventTypeTeamEncryptionKeyDeleteKey:
+    return @"DBTEAMLOGEventTypeTeamEncryptionKeyDeleteKey";
+  case DBTEAMLOGEventTypeTeamEncryptionKeyDisableKey:
+    return @"DBTEAMLOGEventTypeTeamEncryptionKeyDisableKey";
+  case DBTEAMLOGEventTypeTeamEncryptionKeyEnableKey:
+    return @"DBTEAMLOGEventTypeTeamEncryptionKeyEnableKey";
+  case DBTEAMLOGEventTypeTeamEncryptionKeyRotateKey:
+    return @"DBTEAMLOGEventTypeTeamEncryptionKeyRotateKey";
+  case DBTEAMLOGEventTypeTeamEncryptionKeyScheduleKeyDeletion:
+    return @"DBTEAMLOGEventTypeTeamEncryptionKeyScheduleKeyDeletion";
   case DBTEAMLOGEventTypeApplyNamingConvention:
     return @"DBTEAMLOGEventTypeApplyNamingConvention";
   case DBTEAMLOGEventTypeCreateFolder:
     return @"DBTEAMLOGEventTypeCreateFolder";
   case DBTEAMLOGEventTypeFileAdd:
     return @"DBTEAMLOGEventTypeFileAdd";
+  case DBTEAMLOGEventTypeFileAddFromAutomation:
+    return @"DBTEAMLOGEventTypeFileAddFromAutomation";
   case DBTEAMLOGEventTypeFileCopy:
     return @"DBTEAMLOGEventTypeFileCopy";
   case DBTEAMLOGEventTypeFileDelete:
@@ -59920,6 +61746,8 @@
     return @"DBTEAMLOGEventTypeObjectLabelUpdatedValue";
   case DBTEAMLOGEventTypeOrganizeFolderWithTidy:
     return @"DBTEAMLOGEventTypeOrganizeFolderWithTidy";
+  case DBTEAMLOGEventTypeReplayFileDelete:
+    return @"DBTEAMLOGEventTypeReplayFileDelete";
   case DBTEAMLOGEventTypeRewindFolder:
     return @"DBTEAMLOGEventTypeRewindFolder";
   case DBTEAMLOGEventTypeUndoNamingConvention:
@@ -59992,6 +61820,10 @@
     return @"DBTEAMLOGEventTypeSignInAsSessionStart";
   case DBTEAMLOGEventTypeSsoError:
     return @"DBTEAMLOGEventTypeSsoError";
+  case DBTEAMLOGEventTypeBackupAdminInvitationSent:
+    return @"DBTEAMLOGEventTypeBackupAdminInvitationSent";
+  case DBTEAMLOGEventTypeBackupInvitationOpened:
+    return @"DBTEAMLOGEventTypeBackupInvitationOpened";
   case DBTEAMLOGEventTypeCreateTeamInviteLink:
     return @"DBTEAMLOGEventTypeCreateTeamInviteLink";
   case DBTEAMLOGEventTypeDeleteTeamInviteLink:
@@ -60182,6 +62014,10 @@
     return @"DBTEAMLOGEventTypeOutdatedLinkViewReportFailed";
   case DBTEAMLOGEventTypePaperAdminExportStart:
     return @"DBTEAMLOGEventTypePaperAdminExportStart";
+  case DBTEAMLOGEventTypeRansomwareAlertCreateReport:
+    return @"DBTEAMLOGEventTypeRansomwareAlertCreateReport";
+  case DBTEAMLOGEventTypeRansomwareAlertCreateReportFailed:
+    return @"DBTEAMLOGEventTypeRansomwareAlertCreateReportFailed";
   case DBTEAMLOGEventTypeSmartSyncCreateAdminPrivilegeReport:
     return @"DBTEAMLOGEventTypeSmartSyncCreateAdminPrivilegeReport";
   case DBTEAMLOGEventTypeTeamActivityCreateReport:
@@ -60212,6 +62048,14 @@
     return @"DBTEAMLOGEventTypeNoteShareReceive";
   case DBTEAMLOGEventTypeOpenNoteShared:
     return @"DBTEAMLOGEventTypeOpenNoteShared";
+  case DBTEAMLOGEventTypeReplayFileSharedLinkCreated:
+    return @"DBTEAMLOGEventTypeReplayFileSharedLinkCreated";
+  case DBTEAMLOGEventTypeReplayFileSharedLinkModified:
+    return @"DBTEAMLOGEventTypeReplayFileSharedLinkModified";
+  case DBTEAMLOGEventTypeReplayProjectTeamAdd:
+    return @"DBTEAMLOGEventTypeReplayProjectTeamAdd";
+  case DBTEAMLOGEventTypeReplayProjectTeamDelete:
+    return @"DBTEAMLOGEventTypeReplayProjectTeamDelete";
   case DBTEAMLOGEventTypeSfAddGroup:
     return @"DBTEAMLOGEventTypeSfAddGroup";
   case DBTEAMLOGEventTypeSfAllowNonMembersToViewSharedLinks:
@@ -60490,6 +62334,8 @@
     return @"DBTEAMLOGEventTypeFileCommentsChangePolicy";
   case DBTEAMLOGEventTypeFileLockingPolicyChanged:
     return @"DBTEAMLOGEventTypeFileLockingPolicyChanged";
+  case DBTEAMLOGEventTypeFileProviderMigrationPolicyChanged:
+    return @"DBTEAMLOGEventTypeFileProviderMigrationPolicyChanged";
   case DBTEAMLOGEventTypeFileRequestsChangePolicy:
     return @"DBTEAMLOGEventTypeFileRequestsChangePolicy";
   case DBTEAMLOGEventTypeFileRequestsEmailsEnabled:
@@ -60498,6 +62344,8 @@
     return @"DBTEAMLOGEventTypeFileRequestsEmailsRestrictedToTeamOnly";
   case DBTEAMLOGEventTypeFileTransfersPolicyChanged:
     return @"DBTEAMLOGEventTypeFileTransfersPolicyChanged";
+  case DBTEAMLOGEventTypeFolderLinkRestrictionPolicyChanged:
+    return @"DBTEAMLOGEventTypeFolderLinkRestrictionPolicyChanged";
   case DBTEAMLOGEventTypeGoogleSsoChangePolicy:
     return @"DBTEAMLOGEventTypeGoogleSsoChangePolicy";
   case DBTEAMLOGEventTypeGroupUserManagementChangePolicy:
@@ -60739,6 +62587,12 @@
   case DBTEAMLOGEventTypeAdminAlertingTriggeredAlert:
     result = prime * result + [self.adminAlertingTriggeredAlert hash];
     break;
+  case DBTEAMLOGEventTypeRansomwareRestoreProcessCompleted:
+    result = prime * result + [self.ransomwareRestoreProcessCompleted hash];
+    break;
+  case DBTEAMLOGEventTypeRansomwareRestoreProcessStarted:
+    result = prime * result + [self.ransomwareRestoreProcessStarted hash];
+    break;
   case DBTEAMLOGEventTypeAppBlockedByPermissions:
     result = prime * result + [self.appBlockedByPermissions hash];
     break;
@@ -60946,6 +62800,27 @@
   case DBTEAMLOGEventTypeEnabledDomainInvites:
     result = prime * result + [self.enabledDomainInvites hash];
     break;
+  case DBTEAMLOGEventTypeTeamEncryptionKeyCancelKeyDeletion:
+    result = prime * result + [self.teamEncryptionKeyCancelKeyDeletion hash];
+    break;
+  case DBTEAMLOGEventTypeTeamEncryptionKeyCreateKey:
+    result = prime * result + [self.teamEncryptionKeyCreateKey hash];
+    break;
+  case DBTEAMLOGEventTypeTeamEncryptionKeyDeleteKey:
+    result = prime * result + [self.teamEncryptionKeyDeleteKey hash];
+    break;
+  case DBTEAMLOGEventTypeTeamEncryptionKeyDisableKey:
+    result = prime * result + [self.teamEncryptionKeyDisableKey hash];
+    break;
+  case DBTEAMLOGEventTypeTeamEncryptionKeyEnableKey:
+    result = prime * result + [self.teamEncryptionKeyEnableKey hash];
+    break;
+  case DBTEAMLOGEventTypeTeamEncryptionKeyRotateKey:
+    result = prime * result + [self.teamEncryptionKeyRotateKey hash];
+    break;
+  case DBTEAMLOGEventTypeTeamEncryptionKeyScheduleKeyDeletion:
+    result = prime * result + [self.teamEncryptionKeyScheduleKeyDeletion hash];
+    break;
   case DBTEAMLOGEventTypeApplyNamingConvention:
     result = prime * result + [self.applyNamingConvention hash];
     break;
@@ -60954,6 +62829,9 @@
     break;
   case DBTEAMLOGEventTypeFileAdd:
     result = prime * result + [self.fileAdd hash];
+    break;
+  case DBTEAMLOGEventTypeFileAddFromAutomation:
+    result = prime * result + [self.fileAddFromAutomation hash];
     break;
   case DBTEAMLOGEventTypeFileCopy:
     result = prime * result + [self.fileCopy hash];
@@ -61017,6 +62895,9 @@
     break;
   case DBTEAMLOGEventTypeOrganizeFolderWithTidy:
     result = prime * result + [self.organizeFolderWithTidy hash];
+    break;
+  case DBTEAMLOGEventTypeReplayFileDelete:
+    result = prime * result + [self.replayFileDelete hash];
     break;
   case DBTEAMLOGEventTypeRewindFolder:
     result = prime * result + [self.rewindFolder hash];
@@ -61125,6 +63006,12 @@
     break;
   case DBTEAMLOGEventTypeSsoError:
     result = prime * result + [self.ssoError hash];
+    break;
+  case DBTEAMLOGEventTypeBackupAdminInvitationSent:
+    result = prime * result + [self.backupAdminInvitationSent hash];
+    break;
+  case DBTEAMLOGEventTypeBackupInvitationOpened:
+    result = prime * result + [self.backupInvitationOpened hash];
     break;
   case DBTEAMLOGEventTypeCreateTeamInviteLink:
     result = prime * result + [self.createTeamInviteLink hash];
@@ -61411,6 +63298,12 @@
   case DBTEAMLOGEventTypePaperAdminExportStart:
     result = prime * result + [self.paperAdminExportStart hash];
     break;
+  case DBTEAMLOGEventTypeRansomwareAlertCreateReport:
+    result = prime * result + [self.ransomwareAlertCreateReport hash];
+    break;
+  case DBTEAMLOGEventTypeRansomwareAlertCreateReportFailed:
+    result = prime * result + [self.ransomwareAlertCreateReportFailed hash];
+    break;
   case DBTEAMLOGEventTypeSmartSyncCreateAdminPrivilegeReport:
     result = prime * result + [self.smartSyncCreateAdminPrivilegeReport hash];
     break;
@@ -61455,6 +63348,18 @@
     break;
   case DBTEAMLOGEventTypeOpenNoteShared:
     result = prime * result + [self.openNoteShared hash];
+    break;
+  case DBTEAMLOGEventTypeReplayFileSharedLinkCreated:
+    result = prime * result + [self.replayFileSharedLinkCreated hash];
+    break;
+  case DBTEAMLOGEventTypeReplayFileSharedLinkModified:
+    result = prime * result + [self.replayFileSharedLinkModified hash];
+    break;
+  case DBTEAMLOGEventTypeReplayProjectTeamAdd:
+    result = prime * result + [self.replayProjectTeamAdd hash];
+    break;
+  case DBTEAMLOGEventTypeReplayProjectTeamDelete:
+    result = prime * result + [self.replayProjectTeamDelete hash];
     break;
   case DBTEAMLOGEventTypeSfAddGroup:
     result = prime * result + [self.sfAddGroup hash];
@@ -61873,6 +63778,9 @@
   case DBTEAMLOGEventTypeFileLockingPolicyChanged:
     result = prime * result + [self.fileLockingPolicyChanged hash];
     break;
+  case DBTEAMLOGEventTypeFileProviderMigrationPolicyChanged:
+    result = prime * result + [self.fileProviderMigrationPolicyChanged hash];
+    break;
   case DBTEAMLOGEventTypeFileRequestsChangePolicy:
     result = prime * result + [self.fileRequestsChangePolicy hash];
     break;
@@ -61884,6 +63792,9 @@
     break;
   case DBTEAMLOGEventTypeFileTransfersPolicyChanged:
     result = prime * result + [self.fileTransfersPolicyChanged hash];
+    break;
+  case DBTEAMLOGEventTypeFolderLinkRestrictionPolicyChanged:
+    result = prime * result + [self.folderLinkRestrictionPolicyChanged hash];
     break;
   case DBTEAMLOGEventTypeGoogleSsoChangePolicy:
     result = prime * result + [self.googleSsoChangePolicy hash];
@@ -62210,6 +64121,10 @@
     return [self.adminAlertingChangedAlertConfig isEqual:anEventType.adminAlertingChangedAlertConfig];
   case DBTEAMLOGEventTypeAdminAlertingTriggeredAlert:
     return [self.adminAlertingTriggeredAlert isEqual:anEventType.adminAlertingTriggeredAlert];
+  case DBTEAMLOGEventTypeRansomwareRestoreProcessCompleted:
+    return [self.ransomwareRestoreProcessCompleted isEqual:anEventType.ransomwareRestoreProcessCompleted];
+  case DBTEAMLOGEventTypeRansomwareRestoreProcessStarted:
+    return [self.ransomwareRestoreProcessStarted isEqual:anEventType.ransomwareRestoreProcessStarted];
   case DBTEAMLOGEventTypeAppBlockedByPermissions:
     return [self.appBlockedByPermissions isEqual:anEventType.appBlockedByPermissions];
   case DBTEAMLOGEventTypeAppLinkTeam:
@@ -62349,12 +64264,28 @@
     return [self.domainVerificationRemoveDomain isEqual:anEventType.domainVerificationRemoveDomain];
   case DBTEAMLOGEventTypeEnabledDomainInvites:
     return [self.enabledDomainInvites isEqual:anEventType.enabledDomainInvites];
+  case DBTEAMLOGEventTypeTeamEncryptionKeyCancelKeyDeletion:
+    return [self.teamEncryptionKeyCancelKeyDeletion isEqual:anEventType.teamEncryptionKeyCancelKeyDeletion];
+  case DBTEAMLOGEventTypeTeamEncryptionKeyCreateKey:
+    return [self.teamEncryptionKeyCreateKey isEqual:anEventType.teamEncryptionKeyCreateKey];
+  case DBTEAMLOGEventTypeTeamEncryptionKeyDeleteKey:
+    return [self.teamEncryptionKeyDeleteKey isEqual:anEventType.teamEncryptionKeyDeleteKey];
+  case DBTEAMLOGEventTypeTeamEncryptionKeyDisableKey:
+    return [self.teamEncryptionKeyDisableKey isEqual:anEventType.teamEncryptionKeyDisableKey];
+  case DBTEAMLOGEventTypeTeamEncryptionKeyEnableKey:
+    return [self.teamEncryptionKeyEnableKey isEqual:anEventType.teamEncryptionKeyEnableKey];
+  case DBTEAMLOGEventTypeTeamEncryptionKeyRotateKey:
+    return [self.teamEncryptionKeyRotateKey isEqual:anEventType.teamEncryptionKeyRotateKey];
+  case DBTEAMLOGEventTypeTeamEncryptionKeyScheduleKeyDeletion:
+    return [self.teamEncryptionKeyScheduleKeyDeletion isEqual:anEventType.teamEncryptionKeyScheduleKeyDeletion];
   case DBTEAMLOGEventTypeApplyNamingConvention:
     return [self.applyNamingConvention isEqual:anEventType.applyNamingConvention];
   case DBTEAMLOGEventTypeCreateFolder:
     return [self.createFolder isEqual:anEventType.createFolder];
   case DBTEAMLOGEventTypeFileAdd:
     return [self.fileAdd isEqual:anEventType.fileAdd];
+  case DBTEAMLOGEventTypeFileAddFromAutomation:
+    return [self.fileAddFromAutomation isEqual:anEventType.fileAddFromAutomation];
   case DBTEAMLOGEventTypeFileCopy:
     return [self.fileCopy isEqual:anEventType.fileCopy];
   case DBTEAMLOGEventTypeFileDelete:
@@ -62397,6 +64328,8 @@
     return [self.objectLabelUpdatedValue isEqual:anEventType.objectLabelUpdatedValue];
   case DBTEAMLOGEventTypeOrganizeFolderWithTidy:
     return [self.organizeFolderWithTidy isEqual:anEventType.organizeFolderWithTidy];
+  case DBTEAMLOGEventTypeReplayFileDelete:
+    return [self.replayFileDelete isEqual:anEventType.replayFileDelete];
   case DBTEAMLOGEventTypeRewindFolder:
     return [self.rewindFolder isEqual:anEventType.rewindFolder];
   case DBTEAMLOGEventTypeUndoNamingConvention:
@@ -62469,6 +64402,10 @@
     return [self.signInAsSessionStart isEqual:anEventType.signInAsSessionStart];
   case DBTEAMLOGEventTypeSsoError:
     return [self.ssoError isEqual:anEventType.ssoError];
+  case DBTEAMLOGEventTypeBackupAdminInvitationSent:
+    return [self.backupAdminInvitationSent isEqual:anEventType.backupAdminInvitationSent];
+  case DBTEAMLOGEventTypeBackupInvitationOpened:
+    return [self.backupInvitationOpened isEqual:anEventType.backupInvitationOpened];
   case DBTEAMLOGEventTypeCreateTeamInviteLink:
     return [self.createTeamInviteLink isEqual:anEventType.createTeamInviteLink];
   case DBTEAMLOGEventTypeDeleteTeamInviteLink:
@@ -62659,6 +64596,10 @@
     return [self.outdatedLinkViewReportFailed isEqual:anEventType.outdatedLinkViewReportFailed];
   case DBTEAMLOGEventTypePaperAdminExportStart:
     return [self.paperAdminExportStart isEqual:anEventType.paperAdminExportStart];
+  case DBTEAMLOGEventTypeRansomwareAlertCreateReport:
+    return [self.ransomwareAlertCreateReport isEqual:anEventType.ransomwareAlertCreateReport];
+  case DBTEAMLOGEventTypeRansomwareAlertCreateReportFailed:
+    return [self.ransomwareAlertCreateReportFailed isEqual:anEventType.ransomwareAlertCreateReportFailed];
   case DBTEAMLOGEventTypeSmartSyncCreateAdminPrivilegeReport:
     return [self.smartSyncCreateAdminPrivilegeReport isEqual:anEventType.smartSyncCreateAdminPrivilegeReport];
   case DBTEAMLOGEventTypeTeamActivityCreateReport:
@@ -62689,6 +64630,14 @@
     return [self.noteShareReceive isEqual:anEventType.noteShareReceive];
   case DBTEAMLOGEventTypeOpenNoteShared:
     return [self.openNoteShared isEqual:anEventType.openNoteShared];
+  case DBTEAMLOGEventTypeReplayFileSharedLinkCreated:
+    return [self.replayFileSharedLinkCreated isEqual:anEventType.replayFileSharedLinkCreated];
+  case DBTEAMLOGEventTypeReplayFileSharedLinkModified:
+    return [self.replayFileSharedLinkModified isEqual:anEventType.replayFileSharedLinkModified];
+  case DBTEAMLOGEventTypeReplayProjectTeamAdd:
+    return [self.replayProjectTeamAdd isEqual:anEventType.replayProjectTeamAdd];
+  case DBTEAMLOGEventTypeReplayProjectTeamDelete:
+    return [self.replayProjectTeamDelete isEqual:anEventType.replayProjectTeamDelete];
   case DBTEAMLOGEventTypeSfAddGroup:
     return [self.sfAddGroup isEqual:anEventType.sfAddGroup];
   case DBTEAMLOGEventTypeSfAllowNonMembersToViewSharedLinks:
@@ -62969,6 +64918,8 @@
     return [self.fileCommentsChangePolicy isEqual:anEventType.fileCommentsChangePolicy];
   case DBTEAMLOGEventTypeFileLockingPolicyChanged:
     return [self.fileLockingPolicyChanged isEqual:anEventType.fileLockingPolicyChanged];
+  case DBTEAMLOGEventTypeFileProviderMigrationPolicyChanged:
+    return [self.fileProviderMigrationPolicyChanged isEqual:anEventType.fileProviderMigrationPolicyChanged];
   case DBTEAMLOGEventTypeFileRequestsChangePolicy:
     return [self.fileRequestsChangePolicy isEqual:anEventType.fileRequestsChangePolicy];
   case DBTEAMLOGEventTypeFileRequestsEmailsEnabled:
@@ -62977,6 +64928,8 @@
     return [self.fileRequestsEmailsRestrictedToTeamOnly isEqual:anEventType.fileRequestsEmailsRestrictedToTeamOnly];
   case DBTEAMLOGEventTypeFileTransfersPolicyChanged:
     return [self.fileTransfersPolicyChanged isEqual:anEventType.fileTransfersPolicyChanged];
+  case DBTEAMLOGEventTypeFolderLinkRestrictionPolicyChanged:
+    return [self.folderLinkRestrictionPolicyChanged isEqual:anEventType.folderLinkRestrictionPolicyChanged];
   case DBTEAMLOGEventTypeGoogleSsoChangePolicy:
     return [self.googleSsoChangePolicy isEqual:anEventType.googleSsoChangePolicy];
   case DBTEAMLOGEventTypeGroupUserManagementChangePolicy:
@@ -63210,6 +65163,14 @@
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGAdminAlertingTriggeredAlertTypeSerializer
                                            serialize:valueObj.adminAlertingTriggeredAlert]];
     jsonDict[@".tag"] = @"admin_alerting_triggered_alert";
+  } else if ([valueObj isRansomwareRestoreProcessCompleted]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGRansomwareRestoreProcessCompletedTypeSerializer
+                                           serialize:valueObj.ransomwareRestoreProcessCompleted]];
+    jsonDict[@".tag"] = @"ransomware_restore_process_completed";
+  } else if ([valueObj isRansomwareRestoreProcessStarted]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGRansomwareRestoreProcessStartedTypeSerializer
+                                           serialize:valueObj.ransomwareRestoreProcessStarted]];
+    jsonDict[@".tag"] = @"ransomware_restore_process_started";
   } else if ([valueObj isAppBlockedByPermissions]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGAppBlockedByPermissionsTypeSerializer
                                            serialize:valueObj.appBlockedByPermissions]];
@@ -63473,6 +65434,34 @@
     [jsonDict
         addEntriesFromDictionary:[DBTEAMLOGEnabledDomainInvitesTypeSerializer serialize:valueObj.enabledDomainInvites]];
     jsonDict[@".tag"] = @"enabled_domain_invites";
+  } else if ([valueObj isTeamEncryptionKeyCancelKeyDeletion]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionTypeSerializer
+                                           serialize:valueObj.teamEncryptionKeyCancelKeyDeletion]];
+    jsonDict[@".tag"] = @"team_encryption_key_cancel_key_deletion";
+  } else if ([valueObj isTeamEncryptionKeyCreateKey]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamEncryptionKeyCreateKeyTypeSerializer
+                                           serialize:valueObj.teamEncryptionKeyCreateKey]];
+    jsonDict[@".tag"] = @"team_encryption_key_create_key";
+  } else if ([valueObj isTeamEncryptionKeyDeleteKey]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamEncryptionKeyDeleteKeyTypeSerializer
+                                           serialize:valueObj.teamEncryptionKeyDeleteKey]];
+    jsonDict[@".tag"] = @"team_encryption_key_delete_key";
+  } else if ([valueObj isTeamEncryptionKeyDisableKey]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamEncryptionKeyDisableKeyTypeSerializer
+                                           serialize:valueObj.teamEncryptionKeyDisableKey]];
+    jsonDict[@".tag"] = @"team_encryption_key_disable_key";
+  } else if ([valueObj isTeamEncryptionKeyEnableKey]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamEncryptionKeyEnableKeyTypeSerializer
+                                           serialize:valueObj.teamEncryptionKeyEnableKey]];
+    jsonDict[@".tag"] = @"team_encryption_key_enable_key";
+  } else if ([valueObj isTeamEncryptionKeyRotateKey]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamEncryptionKeyRotateKeyTypeSerializer
+                                           serialize:valueObj.teamEncryptionKeyRotateKey]];
+    jsonDict[@".tag"] = @"team_encryption_key_rotate_key";
+  } else if ([valueObj isTeamEncryptionKeyScheduleKeyDeletion]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionTypeSerializer
+                                           serialize:valueObj.teamEncryptionKeyScheduleKeyDeletion]];
+    jsonDict[@".tag"] = @"team_encryption_key_schedule_key_deletion";
   } else if ([valueObj isApplyNamingConvention]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGApplyNamingConventionTypeSerializer
                                            serialize:valueObj.applyNamingConvention]];
@@ -63483,6 +65472,10 @@
   } else if ([valueObj isFileAdd]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileAddTypeSerializer serialize:valueObj.fileAdd]];
     jsonDict[@".tag"] = @"file_add";
+  } else if ([valueObj isFileAddFromAutomation]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileAddFromAutomationTypeSerializer
+                                           serialize:valueObj.fileAddFromAutomation]];
+    jsonDict[@".tag"] = @"file_add_from_automation";
   } else if ([valueObj isFileCopy]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileCopyTypeSerializer serialize:valueObj.fileCopy]];
     jsonDict[@".tag"] = @"file_copy";
@@ -63557,6 +65550,9 @@
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGOrganizeFolderWithTidyTypeSerializer
                                            serialize:valueObj.organizeFolderWithTidy]];
     jsonDict[@".tag"] = @"organize_folder_with_tidy";
+  } else if ([valueObj isReplayFileDelete]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGReplayFileDeleteTypeSerializer serialize:valueObj.replayFileDelete]];
+    jsonDict[@".tag"] = @"replay_file_delete";
   } else if ([valueObj isRewindFolder]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGRewindFolderTypeSerializer serialize:valueObj.rewindFolder]];
     jsonDict[@".tag"] = @"rewind_folder";
@@ -63683,6 +65679,14 @@
   } else if ([valueObj isSsoError]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGSsoErrorTypeSerializer serialize:valueObj.ssoError]];
     jsonDict[@".tag"] = @"sso_error";
+  } else if ([valueObj isBackupAdminInvitationSent]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGBackupAdminInvitationSentTypeSerializer
+                                           serialize:valueObj.backupAdminInvitationSent]];
+    jsonDict[@".tag"] = @"backup_admin_invitation_sent";
+  } else if ([valueObj isBackupInvitationOpened]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGBackupInvitationOpenedTypeSerializer
+                                           serialize:valueObj.backupInvitationOpened]];
+    jsonDict[@".tag"] = @"backup_invitation_opened";
   } else if ([valueObj isCreateTeamInviteLink]) {
     [jsonDict
         addEntriesFromDictionary:[DBTEAMLOGCreateTeamInviteLinkTypeSerializer serialize:valueObj.createTeamInviteLink]];
@@ -64042,6 +66046,14 @@
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperAdminExportStartTypeSerializer
                                            serialize:valueObj.paperAdminExportStart]];
     jsonDict[@".tag"] = @"paper_admin_export_start";
+  } else if ([valueObj isRansomwareAlertCreateReport]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGRansomwareAlertCreateReportTypeSerializer
+                                           serialize:valueObj.ransomwareAlertCreateReport]];
+    jsonDict[@".tag"] = @"ransomware_alert_create_report";
+  } else if ([valueObj isRansomwareAlertCreateReportFailed]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGRansomwareAlertCreateReportFailedTypeSerializer
+                                           serialize:valueObj.ransomwareAlertCreateReportFailed]];
+    jsonDict[@".tag"] = @"ransomware_alert_create_report_failed";
   } else if ([valueObj isSmartSyncCreateAdminPrivilegeReport]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGSmartSyncCreateAdminPrivilegeReportTypeSerializer
                                            serialize:valueObj.smartSyncCreateAdminPrivilegeReport]];
@@ -64095,6 +66107,22 @@
   } else if ([valueObj isOpenNoteShared]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGOpenNoteSharedTypeSerializer serialize:valueObj.openNoteShared]];
     jsonDict[@".tag"] = @"open_note_shared";
+  } else if ([valueObj isReplayFileSharedLinkCreated]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGReplayFileSharedLinkCreatedTypeSerializer
+                                           serialize:valueObj.replayFileSharedLinkCreated]];
+    jsonDict[@".tag"] = @"replay_file_shared_link_created";
+  } else if ([valueObj isReplayFileSharedLinkModified]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGReplayFileSharedLinkModifiedTypeSerializer
+                                           serialize:valueObj.replayFileSharedLinkModified]];
+    jsonDict[@".tag"] = @"replay_file_shared_link_modified";
+  } else if ([valueObj isReplayProjectTeamAdd]) {
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGReplayProjectTeamAddTypeSerializer serialize:valueObj.replayProjectTeamAdd]];
+    jsonDict[@".tag"] = @"replay_project_team_add";
+  } else if ([valueObj isReplayProjectTeamDelete]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGReplayProjectTeamDeleteTypeSerializer
+                                           serialize:valueObj.replayProjectTeamDelete]];
+    jsonDict[@".tag"] = @"replay_project_team_delete";
   } else if ([valueObj isSfAddGroup]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfAddGroupTypeSerializer serialize:valueObj.sfAddGroup]];
     jsonDict[@".tag"] = @"sf_add_group";
@@ -64610,6 +66638,10 @@
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileLockingPolicyChangedTypeSerializer
                                            serialize:valueObj.fileLockingPolicyChanged]];
     jsonDict[@".tag"] = @"file_locking_policy_changed";
+  } else if ([valueObj isFileProviderMigrationPolicyChanged]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileProviderMigrationPolicyChangedTypeSerializer
+                                           serialize:valueObj.fileProviderMigrationPolicyChanged]];
+    jsonDict[@".tag"] = @"file_provider_migration_policy_changed";
   } else if ([valueObj isFileRequestsChangePolicy]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRequestsChangePolicyTypeSerializer
                                            serialize:valueObj.fileRequestsChangePolicy]];
@@ -64626,6 +66658,10 @@
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileTransfersPolicyChangedTypeSerializer
                                            serialize:valueObj.fileTransfersPolicyChanged]];
     jsonDict[@".tag"] = @"file_transfers_policy_changed";
+  } else if ([valueObj isFolderLinkRestrictionPolicyChanged]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFolderLinkRestrictionPolicyChangedTypeSerializer
+                                           serialize:valueObj.folderLinkRestrictionPolicyChanged]];
+    jsonDict[@".tag"] = @"folder_link_restriction_policy_changed";
   } else if ([valueObj isGoogleSsoChangePolicy]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGGoogleSsoChangePolicyTypeSerializer
                                            serialize:valueObj.googleSsoChangePolicy]];
@@ -65009,7 +67045,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEventType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -65027,6 +67063,14 @@
     DBTEAMLOGAdminAlertingTriggeredAlertType *adminAlertingTriggeredAlert =
         [DBTEAMLOGAdminAlertingTriggeredAlertTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithAdminAlertingTriggeredAlert:adminAlertingTriggeredAlert];
+  } else if ([tag isEqualToString:@"ransomware_restore_process_completed"]) {
+    DBTEAMLOGRansomwareRestoreProcessCompletedType *ransomwareRestoreProcessCompleted =
+        [DBTEAMLOGRansomwareRestoreProcessCompletedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithRansomwareRestoreProcessCompleted:ransomwareRestoreProcessCompleted];
+  } else if ([tag isEqualToString:@"ransomware_restore_process_started"]) {
+    DBTEAMLOGRansomwareRestoreProcessStartedType *ransomwareRestoreProcessStarted =
+        [DBTEAMLOGRansomwareRestoreProcessStartedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithRansomwareRestoreProcessStarted:ransomwareRestoreProcessStarted];
   } else if ([tag isEqualToString:@"app_blocked_by_permissions"]) {
     DBTEAMLOGAppBlockedByPermissionsType *appBlockedByPermissions =
         [DBTEAMLOGAppBlockedByPermissionsTypeSerializer deserialize:valueDict];
@@ -65300,6 +67344,35 @@
     DBTEAMLOGEnabledDomainInvitesType *enabledDomainInvites =
         [DBTEAMLOGEnabledDomainInvitesTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithEnabledDomainInvites:enabledDomainInvites];
+  } else if ([tag isEqualToString:@"team_encryption_key_cancel_key_deletion"]) {
+    DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionType *teamEncryptionKeyCancelKeyDeletion =
+        [DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithTeamEncryptionKeyCancelKeyDeletion:teamEncryptionKeyCancelKeyDeletion];
+  } else if ([tag isEqualToString:@"team_encryption_key_create_key"]) {
+    DBTEAMLOGTeamEncryptionKeyCreateKeyType *teamEncryptionKeyCreateKey =
+        [DBTEAMLOGTeamEncryptionKeyCreateKeyTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithTeamEncryptionKeyCreateKey:teamEncryptionKeyCreateKey];
+  } else if ([tag isEqualToString:@"team_encryption_key_delete_key"]) {
+    DBTEAMLOGTeamEncryptionKeyDeleteKeyType *teamEncryptionKeyDeleteKey =
+        [DBTEAMLOGTeamEncryptionKeyDeleteKeyTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithTeamEncryptionKeyDeleteKey:teamEncryptionKeyDeleteKey];
+  } else if ([tag isEqualToString:@"team_encryption_key_disable_key"]) {
+    DBTEAMLOGTeamEncryptionKeyDisableKeyType *teamEncryptionKeyDisableKey =
+        [DBTEAMLOGTeamEncryptionKeyDisableKeyTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithTeamEncryptionKeyDisableKey:teamEncryptionKeyDisableKey];
+  } else if ([tag isEqualToString:@"team_encryption_key_enable_key"]) {
+    DBTEAMLOGTeamEncryptionKeyEnableKeyType *teamEncryptionKeyEnableKey =
+        [DBTEAMLOGTeamEncryptionKeyEnableKeyTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithTeamEncryptionKeyEnableKey:teamEncryptionKeyEnableKey];
+  } else if ([tag isEqualToString:@"team_encryption_key_rotate_key"]) {
+    DBTEAMLOGTeamEncryptionKeyRotateKeyType *teamEncryptionKeyRotateKey =
+        [DBTEAMLOGTeamEncryptionKeyRotateKeyTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithTeamEncryptionKeyRotateKey:teamEncryptionKeyRotateKey];
+  } else if ([tag isEqualToString:@"team_encryption_key_schedule_key_deletion"]) {
+    DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionType *teamEncryptionKeyScheduleKeyDeletion =
+        [DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionTypeSerializer deserialize:valueDict];
+    return
+        [[DBTEAMLOGEventType alloc] initWithTeamEncryptionKeyScheduleKeyDeletion:teamEncryptionKeyScheduleKeyDeletion];
   } else if ([tag isEqualToString:@"apply_naming_convention"]) {
     DBTEAMLOGApplyNamingConventionType *applyNamingConvention =
         [DBTEAMLOGApplyNamingConventionTypeSerializer deserialize:valueDict];
@@ -65310,6 +67383,10 @@
   } else if ([tag isEqualToString:@"file_add"]) {
     DBTEAMLOGFileAddType *fileAdd = [DBTEAMLOGFileAddTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithFileAdd:fileAdd];
+  } else if ([tag isEqualToString:@"file_add_from_automation"]) {
+    DBTEAMLOGFileAddFromAutomationType *fileAddFromAutomation =
+        [DBTEAMLOGFileAddFromAutomationTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithFileAddFromAutomation:fileAddFromAutomation];
   } else if ([tag isEqualToString:@"file_copy"]) {
     DBTEAMLOGFileCopyType *fileCopy = [DBTEAMLOGFileCopyTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithFileCopy:fileCopy];
@@ -65384,6 +67461,9 @@
     DBTEAMLOGOrganizeFolderWithTidyType *organizeFolderWithTidy =
         [DBTEAMLOGOrganizeFolderWithTidyTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithOrganizeFolderWithTidy:organizeFolderWithTidy];
+  } else if ([tag isEqualToString:@"replay_file_delete"]) {
+    DBTEAMLOGReplayFileDeleteType *replayFileDelete = [DBTEAMLOGReplayFileDeleteTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithReplayFileDelete:replayFileDelete];
   } else if ([tag isEqualToString:@"rewind_folder"]) {
     DBTEAMLOGRewindFolderType *rewindFolder = [DBTEAMLOGRewindFolderTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithRewindFolder:rewindFolder];
@@ -65514,6 +67594,14 @@
   } else if ([tag isEqualToString:@"sso_error"]) {
     DBTEAMLOGSsoErrorType *ssoError = [DBTEAMLOGSsoErrorTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithSsoError:ssoError];
+  } else if ([tag isEqualToString:@"backup_admin_invitation_sent"]) {
+    DBTEAMLOGBackupAdminInvitationSentType *backupAdminInvitationSent =
+        [DBTEAMLOGBackupAdminInvitationSentTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithBackupAdminInvitationSent:backupAdminInvitationSent];
+  } else if ([tag isEqualToString:@"backup_invitation_opened"]) {
+    DBTEAMLOGBackupInvitationOpenedType *backupInvitationOpened =
+        [DBTEAMLOGBackupInvitationOpenedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithBackupInvitationOpened:backupInvitationOpened];
   } else if ([tag isEqualToString:@"create_team_invite_link"]) {
     DBTEAMLOGCreateTeamInviteLinkType *createTeamInviteLink =
         [DBTEAMLOGCreateTeamInviteLinkTypeSerializer deserialize:valueDict];
@@ -65877,6 +67965,14 @@
     DBTEAMLOGPaperAdminExportStartType *paperAdminExportStart =
         [DBTEAMLOGPaperAdminExportStartTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithPaperAdminExportStart:paperAdminExportStart];
+  } else if ([tag isEqualToString:@"ransomware_alert_create_report"]) {
+    DBTEAMLOGRansomwareAlertCreateReportType *ransomwareAlertCreateReport =
+        [DBTEAMLOGRansomwareAlertCreateReportTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithRansomwareAlertCreateReport:ransomwareAlertCreateReport];
+  } else if ([tag isEqualToString:@"ransomware_alert_create_report_failed"]) {
+    DBTEAMLOGRansomwareAlertCreateReportFailedType *ransomwareAlertCreateReportFailed =
+        [DBTEAMLOGRansomwareAlertCreateReportFailedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithRansomwareAlertCreateReportFailed:ransomwareAlertCreateReportFailed];
   } else if ([tag isEqualToString:@"smart_sync_create_admin_privilege_report"]) {
     DBTEAMLOGSmartSyncCreateAdminPrivilegeReportType *smartSyncCreateAdminPrivilegeReport =
         [DBTEAMLOGSmartSyncCreateAdminPrivilegeReportTypeSerializer deserialize:valueDict];
@@ -65931,6 +68027,22 @@
   } else if ([tag isEqualToString:@"open_note_shared"]) {
     DBTEAMLOGOpenNoteSharedType *openNoteShared = [DBTEAMLOGOpenNoteSharedTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithOpenNoteShared:openNoteShared];
+  } else if ([tag isEqualToString:@"replay_file_shared_link_created"]) {
+    DBTEAMLOGReplayFileSharedLinkCreatedType *replayFileSharedLinkCreated =
+        [DBTEAMLOGReplayFileSharedLinkCreatedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithReplayFileSharedLinkCreated:replayFileSharedLinkCreated];
+  } else if ([tag isEqualToString:@"replay_file_shared_link_modified"]) {
+    DBTEAMLOGReplayFileSharedLinkModifiedType *replayFileSharedLinkModified =
+        [DBTEAMLOGReplayFileSharedLinkModifiedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithReplayFileSharedLinkModified:replayFileSharedLinkModified];
+  } else if ([tag isEqualToString:@"replay_project_team_add"]) {
+    DBTEAMLOGReplayProjectTeamAddType *replayProjectTeamAdd =
+        [DBTEAMLOGReplayProjectTeamAddTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithReplayProjectTeamAdd:replayProjectTeamAdd];
+  } else if ([tag isEqualToString:@"replay_project_team_delete"]) {
+    DBTEAMLOGReplayProjectTeamDeleteType *replayProjectTeamDelete =
+        [DBTEAMLOGReplayProjectTeamDeleteTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithReplayProjectTeamDelete:replayProjectTeamDelete];
   } else if ([tag isEqualToString:@"sf_add_group"]) {
     DBTEAMLOGSfAddGroupType *sfAddGroup = [DBTEAMLOGSfAddGroupTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithSfAddGroup:sfAddGroup];
@@ -66463,6 +68575,10 @@
     DBTEAMLOGFileLockingPolicyChangedType *fileLockingPolicyChanged =
         [DBTEAMLOGFileLockingPolicyChangedTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithFileLockingPolicyChanged:fileLockingPolicyChanged];
+  } else if ([tag isEqualToString:@"file_provider_migration_policy_changed"]) {
+    DBTEAMLOGFileProviderMigrationPolicyChangedType *fileProviderMigrationPolicyChanged =
+        [DBTEAMLOGFileProviderMigrationPolicyChangedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithFileProviderMigrationPolicyChanged:fileProviderMigrationPolicyChanged];
   } else if ([tag isEqualToString:@"file_requests_change_policy"]) {
     DBTEAMLOGFileRequestsChangePolicyType *fileRequestsChangePolicy =
         [DBTEAMLOGFileRequestsChangePolicyTypeSerializer deserialize:valueDict];
@@ -66480,6 +68596,10 @@
     DBTEAMLOGFileTransfersPolicyChangedType *fileTransfersPolicyChanged =
         [DBTEAMLOGFileTransfersPolicyChangedTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithFileTransfersPolicyChanged:fileTransfersPolicyChanged];
+  } else if ([tag isEqualToString:@"folder_link_restriction_policy_changed"]) {
+    DBTEAMLOGFolderLinkRestrictionPolicyChangedType *folderLinkRestrictionPolicyChanged =
+        [DBTEAMLOGFolderLinkRestrictionPolicyChangedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithFolderLinkRestrictionPolicyChanged:folderLinkRestrictionPolicyChanged];
   } else if ([tag isEqualToString:@"google_sso_change_policy"]) {
     DBTEAMLOGGoogleSsoChangePolicyType *googleSsoChangePolicy =
         [DBTEAMLOGGoogleSsoChangePolicyTypeSerializer deserialize:valueDict];
@@ -66920,6 +69040,22 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypeArgAdminAlertingTriggeredAlert;
+  }
+  return self;
+}
+
+- (instancetype)initWithRansomwareRestoreProcessCompleted {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgRansomwareRestoreProcessCompleted;
+  }
+  return self;
+}
+
+- (instancetype)initWithRansomwareRestoreProcessStarted {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgRansomwareRestoreProcessStarted;
   }
   return self;
 }
@@ -67476,6 +69612,62 @@
   return self;
 }
 
+- (instancetype)initWithTeamEncryptionKeyCancelKeyDeletion {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgTeamEncryptionKeyCancelKeyDeletion;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamEncryptionKeyCreateKey {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgTeamEncryptionKeyCreateKey;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamEncryptionKeyDeleteKey {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgTeamEncryptionKeyDeleteKey;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamEncryptionKeyDisableKey {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgTeamEncryptionKeyDisableKey;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamEncryptionKeyEnableKey {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgTeamEncryptionKeyEnableKey;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamEncryptionKeyRotateKey {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgTeamEncryptionKeyRotateKey;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamEncryptionKeyScheduleKeyDeletion {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgTeamEncryptionKeyScheduleKeyDeletion;
+  }
+  return self;
+}
+
 - (instancetype)initWithApplyNamingConvention {
   self = [super init];
   if (self) {
@@ -67496,6 +69688,14 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypeArgFileAdd;
+  }
+  return self;
+}
+
+- (instancetype)initWithFileAddFromAutomation {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgFileAddFromAutomation;
   }
   return self;
 }
@@ -67664,6 +69864,14 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypeArgOrganizeFolderWithTidy;
+  }
+  return self;
+}
+
+- (instancetype)initWithReplayFileDelete {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgReplayFileDelete;
   }
   return self;
 }
@@ -67952,6 +70160,22 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypeArgSsoError;
+  }
+  return self;
+}
+
+- (instancetype)initWithBackupAdminInvitationSent {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgBackupAdminInvitationSent;
+  }
+  return self;
+}
+
+- (instancetype)initWithBackupInvitationOpened {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgBackupInvitationOpened;
   }
   return self;
 }
@@ -68716,6 +70940,22 @@
   return self;
 }
 
+- (instancetype)initWithRansomwareAlertCreateReport {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgRansomwareAlertCreateReport;
+  }
+  return self;
+}
+
+- (instancetype)initWithRansomwareAlertCreateReportFailed {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgRansomwareAlertCreateReportFailed;
+  }
+  return self;
+}
+
 - (instancetype)initWithSmartSyncCreateAdminPrivilegeReport {
   self = [super init];
   if (self) {
@@ -68832,6 +71072,38 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypeArgOpenNoteShared;
+  }
+  return self;
+}
+
+- (instancetype)initWithReplayFileSharedLinkCreated {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgReplayFileSharedLinkCreated;
+  }
+  return self;
+}
+
+- (instancetype)initWithReplayFileSharedLinkModified {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgReplayFileSharedLinkModified;
+  }
+  return self;
+}
+
+- (instancetype)initWithReplayProjectTeamAdd {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgReplayProjectTeamAdd;
+  }
+  return self;
+}
+
+- (instancetype)initWithReplayProjectTeamDelete {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgReplayProjectTeamDelete;
   }
   return self;
 }
@@ -69948,6 +72220,14 @@
   return self;
 }
 
+- (instancetype)initWithFileProviderMigrationPolicyChanged {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgFileProviderMigrationPolicyChanged;
+  }
+  return self;
+}
+
 - (instancetype)initWithFileRequestsChangePolicy {
   self = [super init];
   if (self) {
@@ -69976,6 +72256,14 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypeArgFileTransfersPolicyChanged;
+  }
+  return self;
+}
+
+- (instancetype)initWithFolderLinkRestrictionPolicyChanged {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgFolderLinkRestrictionPolicyChanged;
   }
   return self;
 }
@@ -70780,6 +73068,14 @@
   return _tag == DBTEAMLOGEventTypeArgAdminAlertingTriggeredAlert;
 }
 
+- (BOOL)isRansomwareRestoreProcessCompleted {
+  return _tag == DBTEAMLOGEventTypeArgRansomwareRestoreProcessCompleted;
+}
+
+- (BOOL)isRansomwareRestoreProcessStarted {
+  return _tag == DBTEAMLOGEventTypeArgRansomwareRestoreProcessStarted;
+}
+
 - (BOOL)isAppBlockedByPermissions {
   return _tag == DBTEAMLOGEventTypeArgAppBlockedByPermissions;
 }
@@ -71056,6 +73352,34 @@
   return _tag == DBTEAMLOGEventTypeArgEnabledDomainInvites;
 }
 
+- (BOOL)isTeamEncryptionKeyCancelKeyDeletion {
+  return _tag == DBTEAMLOGEventTypeArgTeamEncryptionKeyCancelKeyDeletion;
+}
+
+- (BOOL)isTeamEncryptionKeyCreateKey {
+  return _tag == DBTEAMLOGEventTypeArgTeamEncryptionKeyCreateKey;
+}
+
+- (BOOL)isTeamEncryptionKeyDeleteKey {
+  return _tag == DBTEAMLOGEventTypeArgTeamEncryptionKeyDeleteKey;
+}
+
+- (BOOL)isTeamEncryptionKeyDisableKey {
+  return _tag == DBTEAMLOGEventTypeArgTeamEncryptionKeyDisableKey;
+}
+
+- (BOOL)isTeamEncryptionKeyEnableKey {
+  return _tag == DBTEAMLOGEventTypeArgTeamEncryptionKeyEnableKey;
+}
+
+- (BOOL)isTeamEncryptionKeyRotateKey {
+  return _tag == DBTEAMLOGEventTypeArgTeamEncryptionKeyRotateKey;
+}
+
+- (BOOL)isTeamEncryptionKeyScheduleKeyDeletion {
+  return _tag == DBTEAMLOGEventTypeArgTeamEncryptionKeyScheduleKeyDeletion;
+}
+
 - (BOOL)isApplyNamingConvention {
   return _tag == DBTEAMLOGEventTypeArgApplyNamingConvention;
 }
@@ -71066,6 +73390,10 @@
 
 - (BOOL)isFileAdd {
   return _tag == DBTEAMLOGEventTypeArgFileAdd;
+}
+
+- (BOOL)isFileAddFromAutomation {
+  return _tag == DBTEAMLOGEventTypeArgFileAddFromAutomation;
 }
 
 - (BOOL)isFileCopy {
@@ -71150,6 +73478,10 @@
 
 - (BOOL)isOrganizeFolderWithTidy {
   return _tag == DBTEAMLOGEventTypeArgOrganizeFolderWithTidy;
+}
+
+- (BOOL)isReplayFileDelete {
+  return _tag == DBTEAMLOGEventTypeArgReplayFileDelete;
 }
 
 - (BOOL)isRewindFolder {
@@ -71294,6 +73626,14 @@
 
 - (BOOL)isSsoError {
   return _tag == DBTEAMLOGEventTypeArgSsoError;
+}
+
+- (BOOL)isBackupAdminInvitationSent {
+  return _tag == DBTEAMLOGEventTypeArgBackupAdminInvitationSent;
+}
+
+- (BOOL)isBackupInvitationOpened {
+  return _tag == DBTEAMLOGEventTypeArgBackupInvitationOpened;
 }
 
 - (BOOL)isCreateTeamInviteLink {
@@ -71676,6 +74016,14 @@
   return _tag == DBTEAMLOGEventTypeArgPaperAdminExportStart;
 }
 
+- (BOOL)isRansomwareAlertCreateReport {
+  return _tag == DBTEAMLOGEventTypeArgRansomwareAlertCreateReport;
+}
+
+- (BOOL)isRansomwareAlertCreateReportFailed {
+  return _tag == DBTEAMLOGEventTypeArgRansomwareAlertCreateReportFailed;
+}
+
 - (BOOL)isSmartSyncCreateAdminPrivilegeReport {
   return _tag == DBTEAMLOGEventTypeArgSmartSyncCreateAdminPrivilegeReport;
 }
@@ -71734,6 +74082,22 @@
 
 - (BOOL)isOpenNoteShared {
   return _tag == DBTEAMLOGEventTypeArgOpenNoteShared;
+}
+
+- (BOOL)isReplayFileSharedLinkCreated {
+  return _tag == DBTEAMLOGEventTypeArgReplayFileSharedLinkCreated;
+}
+
+- (BOOL)isReplayFileSharedLinkModified {
+  return _tag == DBTEAMLOGEventTypeArgReplayFileSharedLinkModified;
+}
+
+- (BOOL)isReplayProjectTeamAdd {
+  return _tag == DBTEAMLOGEventTypeArgReplayProjectTeamAdd;
+}
+
+- (BOOL)isReplayProjectTeamDelete {
+  return _tag == DBTEAMLOGEventTypeArgReplayProjectTeamDelete;
 }
 
 - (BOOL)isSfAddGroup {
@@ -72292,6 +74656,10 @@
   return _tag == DBTEAMLOGEventTypeArgFileLockingPolicyChanged;
 }
 
+- (BOOL)isFileProviderMigrationPolicyChanged {
+  return _tag == DBTEAMLOGEventTypeArgFileProviderMigrationPolicyChanged;
+}
+
 - (BOOL)isFileRequestsChangePolicy {
   return _tag == DBTEAMLOGEventTypeArgFileRequestsChangePolicy;
 }
@@ -72306,6 +74674,10 @@
 
 - (BOOL)isFileTransfersPolicyChanged {
   return _tag == DBTEAMLOGEventTypeArgFileTransfersPolicyChanged;
+}
+
+- (BOOL)isFolderLinkRestrictionPolicyChanged {
+  return _tag == DBTEAMLOGEventTypeArgFolderLinkRestrictionPolicyChanged;
 }
 
 - (BOOL)isGoogleSsoChangePolicy {
@@ -72708,6 +75080,10 @@
     return @"DBTEAMLOGEventTypeArgAdminAlertingChangedAlertConfig";
   case DBTEAMLOGEventTypeArgAdminAlertingTriggeredAlert:
     return @"DBTEAMLOGEventTypeArgAdminAlertingTriggeredAlert";
+  case DBTEAMLOGEventTypeArgRansomwareRestoreProcessCompleted:
+    return @"DBTEAMLOGEventTypeArgRansomwareRestoreProcessCompleted";
+  case DBTEAMLOGEventTypeArgRansomwareRestoreProcessStarted:
+    return @"DBTEAMLOGEventTypeArgRansomwareRestoreProcessStarted";
   case DBTEAMLOGEventTypeArgAppBlockedByPermissions:
     return @"DBTEAMLOGEventTypeArgAppBlockedByPermissions";
   case DBTEAMLOGEventTypeArgAppLinkTeam:
@@ -72846,12 +75222,28 @@
     return @"DBTEAMLOGEventTypeArgDomainVerificationRemoveDomain";
   case DBTEAMLOGEventTypeArgEnabledDomainInvites:
     return @"DBTEAMLOGEventTypeArgEnabledDomainInvites";
+  case DBTEAMLOGEventTypeArgTeamEncryptionKeyCancelKeyDeletion:
+    return @"DBTEAMLOGEventTypeArgTeamEncryptionKeyCancelKeyDeletion";
+  case DBTEAMLOGEventTypeArgTeamEncryptionKeyCreateKey:
+    return @"DBTEAMLOGEventTypeArgTeamEncryptionKeyCreateKey";
+  case DBTEAMLOGEventTypeArgTeamEncryptionKeyDeleteKey:
+    return @"DBTEAMLOGEventTypeArgTeamEncryptionKeyDeleteKey";
+  case DBTEAMLOGEventTypeArgTeamEncryptionKeyDisableKey:
+    return @"DBTEAMLOGEventTypeArgTeamEncryptionKeyDisableKey";
+  case DBTEAMLOGEventTypeArgTeamEncryptionKeyEnableKey:
+    return @"DBTEAMLOGEventTypeArgTeamEncryptionKeyEnableKey";
+  case DBTEAMLOGEventTypeArgTeamEncryptionKeyRotateKey:
+    return @"DBTEAMLOGEventTypeArgTeamEncryptionKeyRotateKey";
+  case DBTEAMLOGEventTypeArgTeamEncryptionKeyScheduleKeyDeletion:
+    return @"DBTEAMLOGEventTypeArgTeamEncryptionKeyScheduleKeyDeletion";
   case DBTEAMLOGEventTypeArgApplyNamingConvention:
     return @"DBTEAMLOGEventTypeArgApplyNamingConvention";
   case DBTEAMLOGEventTypeArgCreateFolder:
     return @"DBTEAMLOGEventTypeArgCreateFolder";
   case DBTEAMLOGEventTypeArgFileAdd:
     return @"DBTEAMLOGEventTypeArgFileAdd";
+  case DBTEAMLOGEventTypeArgFileAddFromAutomation:
+    return @"DBTEAMLOGEventTypeArgFileAddFromAutomation";
   case DBTEAMLOGEventTypeArgFileCopy:
     return @"DBTEAMLOGEventTypeArgFileCopy";
   case DBTEAMLOGEventTypeArgFileDelete:
@@ -72894,6 +75286,8 @@
     return @"DBTEAMLOGEventTypeArgObjectLabelUpdatedValue";
   case DBTEAMLOGEventTypeArgOrganizeFolderWithTidy:
     return @"DBTEAMLOGEventTypeArgOrganizeFolderWithTidy";
+  case DBTEAMLOGEventTypeArgReplayFileDelete:
+    return @"DBTEAMLOGEventTypeArgReplayFileDelete";
   case DBTEAMLOGEventTypeArgRewindFolder:
     return @"DBTEAMLOGEventTypeArgRewindFolder";
   case DBTEAMLOGEventTypeArgUndoNamingConvention:
@@ -72966,6 +75360,10 @@
     return @"DBTEAMLOGEventTypeArgSignInAsSessionStart";
   case DBTEAMLOGEventTypeArgSsoError:
     return @"DBTEAMLOGEventTypeArgSsoError";
+  case DBTEAMLOGEventTypeArgBackupAdminInvitationSent:
+    return @"DBTEAMLOGEventTypeArgBackupAdminInvitationSent";
+  case DBTEAMLOGEventTypeArgBackupInvitationOpened:
+    return @"DBTEAMLOGEventTypeArgBackupInvitationOpened";
   case DBTEAMLOGEventTypeArgCreateTeamInviteLink:
     return @"DBTEAMLOGEventTypeArgCreateTeamInviteLink";
   case DBTEAMLOGEventTypeArgDeleteTeamInviteLink:
@@ -73156,6 +75554,10 @@
     return @"DBTEAMLOGEventTypeArgOutdatedLinkViewReportFailed";
   case DBTEAMLOGEventTypeArgPaperAdminExportStart:
     return @"DBTEAMLOGEventTypeArgPaperAdminExportStart";
+  case DBTEAMLOGEventTypeArgRansomwareAlertCreateReport:
+    return @"DBTEAMLOGEventTypeArgRansomwareAlertCreateReport";
+  case DBTEAMLOGEventTypeArgRansomwareAlertCreateReportFailed:
+    return @"DBTEAMLOGEventTypeArgRansomwareAlertCreateReportFailed";
   case DBTEAMLOGEventTypeArgSmartSyncCreateAdminPrivilegeReport:
     return @"DBTEAMLOGEventTypeArgSmartSyncCreateAdminPrivilegeReport";
   case DBTEAMLOGEventTypeArgTeamActivityCreateReport:
@@ -73186,6 +75588,14 @@
     return @"DBTEAMLOGEventTypeArgNoteShareReceive";
   case DBTEAMLOGEventTypeArgOpenNoteShared:
     return @"DBTEAMLOGEventTypeArgOpenNoteShared";
+  case DBTEAMLOGEventTypeArgReplayFileSharedLinkCreated:
+    return @"DBTEAMLOGEventTypeArgReplayFileSharedLinkCreated";
+  case DBTEAMLOGEventTypeArgReplayFileSharedLinkModified:
+    return @"DBTEAMLOGEventTypeArgReplayFileSharedLinkModified";
+  case DBTEAMLOGEventTypeArgReplayProjectTeamAdd:
+    return @"DBTEAMLOGEventTypeArgReplayProjectTeamAdd";
+  case DBTEAMLOGEventTypeArgReplayProjectTeamDelete:
+    return @"DBTEAMLOGEventTypeArgReplayProjectTeamDelete";
   case DBTEAMLOGEventTypeArgSfAddGroup:
     return @"DBTEAMLOGEventTypeArgSfAddGroup";
   case DBTEAMLOGEventTypeArgSfAllowNonMembersToViewSharedLinks:
@@ -73464,6 +75874,8 @@
     return @"DBTEAMLOGEventTypeArgFileCommentsChangePolicy";
   case DBTEAMLOGEventTypeArgFileLockingPolicyChanged:
     return @"DBTEAMLOGEventTypeArgFileLockingPolicyChanged";
+  case DBTEAMLOGEventTypeArgFileProviderMigrationPolicyChanged:
+    return @"DBTEAMLOGEventTypeArgFileProviderMigrationPolicyChanged";
   case DBTEAMLOGEventTypeArgFileRequestsChangePolicy:
     return @"DBTEAMLOGEventTypeArgFileRequestsChangePolicy";
   case DBTEAMLOGEventTypeArgFileRequestsEmailsEnabled:
@@ -73472,6 +75884,8 @@
     return @"DBTEAMLOGEventTypeArgFileRequestsEmailsRestrictedToTeamOnly";
   case DBTEAMLOGEventTypeArgFileTransfersPolicyChanged:
     return @"DBTEAMLOGEventTypeArgFileTransfersPolicyChanged";
+  case DBTEAMLOGEventTypeArgFolderLinkRestrictionPolicyChanged:
+    return @"DBTEAMLOGEventTypeArgFolderLinkRestrictionPolicyChanged";
   case DBTEAMLOGEventTypeArgGoogleSsoChangePolicy:
     return @"DBTEAMLOGEventTypeArgGoogleSsoChangePolicy";
   case DBTEAMLOGEventTypeArgGroupUserManagementChangePolicy:
@@ -73713,6 +76127,12 @@
   case DBTEAMLOGEventTypeArgAdminAlertingTriggeredAlert:
     result = prime * result + [[self tagName] hash];
     break;
+  case DBTEAMLOGEventTypeArgRansomwareRestoreProcessCompleted:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgRansomwareRestoreProcessStarted:
+    result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMLOGEventTypeArgAppBlockedByPermissions:
     result = prime * result + [[self tagName] hash];
     break;
@@ -73920,6 +76340,27 @@
   case DBTEAMLOGEventTypeArgEnabledDomainInvites:
     result = prime * result + [[self tagName] hash];
     break;
+  case DBTEAMLOGEventTypeArgTeamEncryptionKeyCancelKeyDeletion:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgTeamEncryptionKeyCreateKey:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgTeamEncryptionKeyDeleteKey:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgTeamEncryptionKeyDisableKey:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgTeamEncryptionKeyEnableKey:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgTeamEncryptionKeyRotateKey:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgTeamEncryptionKeyScheduleKeyDeletion:
+    result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMLOGEventTypeArgApplyNamingConvention:
     result = prime * result + [[self tagName] hash];
     break;
@@ -73927,6 +76368,9 @@
     result = prime * result + [[self tagName] hash];
     break;
   case DBTEAMLOGEventTypeArgFileAdd:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgFileAddFromAutomation:
     result = prime * result + [[self tagName] hash];
     break;
   case DBTEAMLOGEventTypeArgFileCopy:
@@ -73990,6 +76434,9 @@
     result = prime * result + [[self tagName] hash];
     break;
   case DBTEAMLOGEventTypeArgOrganizeFolderWithTidy:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgReplayFileDelete:
     result = prime * result + [[self tagName] hash];
     break;
   case DBTEAMLOGEventTypeArgRewindFolder:
@@ -74098,6 +76545,12 @@
     result = prime * result + [[self tagName] hash];
     break;
   case DBTEAMLOGEventTypeArgSsoError:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgBackupAdminInvitationSent:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgBackupInvitationOpened:
     result = prime * result + [[self tagName] hash];
     break;
   case DBTEAMLOGEventTypeArgCreateTeamInviteLink:
@@ -74385,6 +76838,12 @@
   case DBTEAMLOGEventTypeArgPaperAdminExportStart:
     result = prime * result + [[self tagName] hash];
     break;
+  case DBTEAMLOGEventTypeArgRansomwareAlertCreateReport:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgRansomwareAlertCreateReportFailed:
+    result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMLOGEventTypeArgSmartSyncCreateAdminPrivilegeReport:
     result = prime * result + [[self tagName] hash];
     break;
@@ -74428,6 +76887,18 @@
     result = prime * result + [[self tagName] hash];
     break;
   case DBTEAMLOGEventTypeArgOpenNoteShared:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgReplayFileSharedLinkCreated:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgReplayFileSharedLinkModified:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgReplayProjectTeamAdd:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgReplayProjectTeamDelete:
     result = prime * result + [[self tagName] hash];
     break;
   case DBTEAMLOGEventTypeArgSfAddGroup:
@@ -74847,6 +77318,9 @@
   case DBTEAMLOGEventTypeArgFileLockingPolicyChanged:
     result = prime * result + [[self tagName] hash];
     break;
+  case DBTEAMLOGEventTypeArgFileProviderMigrationPolicyChanged:
+    result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMLOGEventTypeArgFileRequestsChangePolicy:
     result = prime * result + [[self tagName] hash];
     break;
@@ -74857,6 +77331,9 @@
     result = prime * result + [[self tagName] hash];
     break;
   case DBTEAMLOGEventTypeArgFileTransfersPolicyChanged:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgFolderLinkRestrictionPolicyChanged:
     result = prime * result + [[self tagName] hash];
     break;
   case DBTEAMLOGEventTypeArgGoogleSsoChangePolicy:
@@ -75184,6 +77661,10 @@
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgAdminAlertingTriggeredAlert:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgRansomwareRestoreProcessCompleted:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgRansomwareRestoreProcessStarted:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgAppBlockedByPermissions:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgAppLinkTeam:
@@ -75322,11 +77803,27 @@
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgEnabledDomainInvites:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgTeamEncryptionKeyCancelKeyDeletion:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgTeamEncryptionKeyCreateKey:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgTeamEncryptionKeyDeleteKey:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgTeamEncryptionKeyDisableKey:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgTeamEncryptionKeyEnableKey:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgTeamEncryptionKeyRotateKey:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgTeamEncryptionKeyScheduleKeyDeletion:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgApplyNamingConvention:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgCreateFolder:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgFileAdd:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgFileAddFromAutomation:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgFileCopy:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
@@ -75369,6 +77866,8 @@
   case DBTEAMLOGEventTypeArgObjectLabelUpdatedValue:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgOrganizeFolderWithTidy:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgReplayFileDelete:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgRewindFolder:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
@@ -75441,6 +77940,10 @@
   case DBTEAMLOGEventTypeArgSignInAsSessionStart:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgSsoError:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgBackupAdminInvitationSent:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgBackupInvitationOpened:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgCreateTeamInviteLink:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
@@ -75632,6 +78135,10 @@
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgPaperAdminExportStart:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgRansomwareAlertCreateReport:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgRansomwareAlertCreateReportFailed:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgSmartSyncCreateAdminPrivilegeReport:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgTeamActivityCreateReport:
@@ -75661,6 +78168,14 @@
   case DBTEAMLOGEventTypeArgNoteShareReceive:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgOpenNoteShared:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgReplayFileSharedLinkCreated:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgReplayFileSharedLinkModified:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgReplayProjectTeamAdd:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgReplayProjectTeamDelete:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgSfAddGroup:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
@@ -75940,6 +78455,8 @@
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgFileLockingPolicyChanged:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgFileProviderMigrationPolicyChanged:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgFileRequestsChangePolicy:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgFileRequestsEmailsEnabled:
@@ -75947,6 +78464,8 @@
   case DBTEAMLOGEventTypeArgFileRequestsEmailsRestrictedToTeamOnly:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgFileTransfersPolicyChanged:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgFolderLinkRestrictionPolicyChanged:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgGoogleSsoChangePolicy:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
@@ -76163,6 +78682,10 @@
     jsonDict[@".tag"] = @"admin_alerting_changed_alert_config";
   } else if ([valueObj isAdminAlertingTriggeredAlert]) {
     jsonDict[@".tag"] = @"admin_alerting_triggered_alert";
+  } else if ([valueObj isRansomwareRestoreProcessCompleted]) {
+    jsonDict[@".tag"] = @"ransomware_restore_process_completed";
+  } else if ([valueObj isRansomwareRestoreProcessStarted]) {
+    jsonDict[@".tag"] = @"ransomware_restore_process_started";
   } else if ([valueObj isAppBlockedByPermissions]) {
     jsonDict[@".tag"] = @"app_blocked_by_permissions";
   } else if ([valueObj isAppLinkTeam]) {
@@ -76301,12 +78824,28 @@
     jsonDict[@".tag"] = @"domain_verification_remove_domain";
   } else if ([valueObj isEnabledDomainInvites]) {
     jsonDict[@".tag"] = @"enabled_domain_invites";
+  } else if ([valueObj isTeamEncryptionKeyCancelKeyDeletion]) {
+    jsonDict[@".tag"] = @"team_encryption_key_cancel_key_deletion";
+  } else if ([valueObj isTeamEncryptionKeyCreateKey]) {
+    jsonDict[@".tag"] = @"team_encryption_key_create_key";
+  } else if ([valueObj isTeamEncryptionKeyDeleteKey]) {
+    jsonDict[@".tag"] = @"team_encryption_key_delete_key";
+  } else if ([valueObj isTeamEncryptionKeyDisableKey]) {
+    jsonDict[@".tag"] = @"team_encryption_key_disable_key";
+  } else if ([valueObj isTeamEncryptionKeyEnableKey]) {
+    jsonDict[@".tag"] = @"team_encryption_key_enable_key";
+  } else if ([valueObj isTeamEncryptionKeyRotateKey]) {
+    jsonDict[@".tag"] = @"team_encryption_key_rotate_key";
+  } else if ([valueObj isTeamEncryptionKeyScheduleKeyDeletion]) {
+    jsonDict[@".tag"] = @"team_encryption_key_schedule_key_deletion";
   } else if ([valueObj isApplyNamingConvention]) {
     jsonDict[@".tag"] = @"apply_naming_convention";
   } else if ([valueObj isCreateFolder]) {
     jsonDict[@".tag"] = @"create_folder";
   } else if ([valueObj isFileAdd]) {
     jsonDict[@".tag"] = @"file_add";
+  } else if ([valueObj isFileAddFromAutomation]) {
+    jsonDict[@".tag"] = @"file_add_from_automation";
   } else if ([valueObj isFileCopy]) {
     jsonDict[@".tag"] = @"file_copy";
   } else if ([valueObj isFileDelete]) {
@@ -76349,6 +78888,8 @@
     jsonDict[@".tag"] = @"object_label_updated_value";
   } else if ([valueObj isOrganizeFolderWithTidy]) {
     jsonDict[@".tag"] = @"organize_folder_with_tidy";
+  } else if ([valueObj isReplayFileDelete]) {
+    jsonDict[@".tag"] = @"replay_file_delete";
   } else if ([valueObj isRewindFolder]) {
     jsonDict[@".tag"] = @"rewind_folder";
   } else if ([valueObj isUndoNamingConvention]) {
@@ -76421,6 +78962,10 @@
     jsonDict[@".tag"] = @"sign_in_as_session_start";
   } else if ([valueObj isSsoError]) {
     jsonDict[@".tag"] = @"sso_error";
+  } else if ([valueObj isBackupAdminInvitationSent]) {
+    jsonDict[@".tag"] = @"backup_admin_invitation_sent";
+  } else if ([valueObj isBackupInvitationOpened]) {
+    jsonDict[@".tag"] = @"backup_invitation_opened";
   } else if ([valueObj isCreateTeamInviteLink]) {
     jsonDict[@".tag"] = @"create_team_invite_link";
   } else if ([valueObj isDeleteTeamInviteLink]) {
@@ -76611,6 +79156,10 @@
     jsonDict[@".tag"] = @"outdated_link_view_report_failed";
   } else if ([valueObj isPaperAdminExportStart]) {
     jsonDict[@".tag"] = @"paper_admin_export_start";
+  } else if ([valueObj isRansomwareAlertCreateReport]) {
+    jsonDict[@".tag"] = @"ransomware_alert_create_report";
+  } else if ([valueObj isRansomwareAlertCreateReportFailed]) {
+    jsonDict[@".tag"] = @"ransomware_alert_create_report_failed";
   } else if ([valueObj isSmartSyncCreateAdminPrivilegeReport]) {
     jsonDict[@".tag"] = @"smart_sync_create_admin_privilege_report";
   } else if ([valueObj isTeamActivityCreateReport]) {
@@ -76641,6 +79190,14 @@
     jsonDict[@".tag"] = @"note_share_receive";
   } else if ([valueObj isOpenNoteShared]) {
     jsonDict[@".tag"] = @"open_note_shared";
+  } else if ([valueObj isReplayFileSharedLinkCreated]) {
+    jsonDict[@".tag"] = @"replay_file_shared_link_created";
+  } else if ([valueObj isReplayFileSharedLinkModified]) {
+    jsonDict[@".tag"] = @"replay_file_shared_link_modified";
+  } else if ([valueObj isReplayProjectTeamAdd]) {
+    jsonDict[@".tag"] = @"replay_project_team_add";
+  } else if ([valueObj isReplayProjectTeamDelete]) {
+    jsonDict[@".tag"] = @"replay_project_team_delete";
   } else if ([valueObj isSfAddGroup]) {
     jsonDict[@".tag"] = @"sf_add_group";
   } else if ([valueObj isSfAllowNonMembersToViewSharedLinks]) {
@@ -76919,6 +79476,8 @@
     jsonDict[@".tag"] = @"file_comments_change_policy";
   } else if ([valueObj isFileLockingPolicyChanged]) {
     jsonDict[@".tag"] = @"file_locking_policy_changed";
+  } else if ([valueObj isFileProviderMigrationPolicyChanged]) {
+    jsonDict[@".tag"] = @"file_provider_migration_policy_changed";
   } else if ([valueObj isFileRequestsChangePolicy]) {
     jsonDict[@".tag"] = @"file_requests_change_policy";
   } else if ([valueObj isFileRequestsEmailsEnabled]) {
@@ -76927,6 +79486,8 @@
     jsonDict[@".tag"] = @"file_requests_emails_restricted_to_team_only";
   } else if ([valueObj isFileTransfersPolicyChanged]) {
     jsonDict[@".tag"] = @"file_transfers_policy_changed";
+  } else if ([valueObj isFolderLinkRestrictionPolicyChanged]) {
+    jsonDict[@".tag"] = @"folder_link_restriction_policy_changed";
   } else if ([valueObj isGoogleSsoChangePolicy]) {
     jsonDict[@".tag"] = @"google_sso_change_policy";
   } else if ([valueObj isGroupUserManagementChangePolicy]) {
@@ -77127,7 +79688,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGEventTypeArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -77139,6 +79700,10 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithAdminAlertingChangedAlertConfig];
   } else if ([tag isEqualToString:@"admin_alerting_triggered_alert"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithAdminAlertingTriggeredAlert];
+  } else if ([tag isEqualToString:@"ransomware_restore_process_completed"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithRansomwareRestoreProcessCompleted];
+  } else if ([tag isEqualToString:@"ransomware_restore_process_started"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithRansomwareRestoreProcessStarted];
   } else if ([tag isEqualToString:@"app_blocked_by_permissions"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithAppBlockedByPermissions];
   } else if ([tag isEqualToString:@"app_link_team"]) {
@@ -77277,12 +79842,28 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithDomainVerificationRemoveDomain];
   } else if ([tag isEqualToString:@"enabled_domain_invites"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithEnabledDomainInvites];
+  } else if ([tag isEqualToString:@"team_encryption_key_cancel_key_deletion"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithTeamEncryptionKeyCancelKeyDeletion];
+  } else if ([tag isEqualToString:@"team_encryption_key_create_key"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithTeamEncryptionKeyCreateKey];
+  } else if ([tag isEqualToString:@"team_encryption_key_delete_key"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithTeamEncryptionKeyDeleteKey];
+  } else if ([tag isEqualToString:@"team_encryption_key_disable_key"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithTeamEncryptionKeyDisableKey];
+  } else if ([tag isEqualToString:@"team_encryption_key_enable_key"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithTeamEncryptionKeyEnableKey];
+  } else if ([tag isEqualToString:@"team_encryption_key_rotate_key"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithTeamEncryptionKeyRotateKey];
+  } else if ([tag isEqualToString:@"team_encryption_key_schedule_key_deletion"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithTeamEncryptionKeyScheduleKeyDeletion];
   } else if ([tag isEqualToString:@"apply_naming_convention"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithApplyNamingConvention];
   } else if ([tag isEqualToString:@"create_folder"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithCreateFolder];
   } else if ([tag isEqualToString:@"file_add"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithFileAdd];
+  } else if ([tag isEqualToString:@"file_add_from_automation"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithFileAddFromAutomation];
   } else if ([tag isEqualToString:@"file_copy"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithFileCopy];
   } else if ([tag isEqualToString:@"file_delete"]) {
@@ -77325,6 +79906,8 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithObjectLabelUpdatedValue];
   } else if ([tag isEqualToString:@"organize_folder_with_tidy"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithOrganizeFolderWithTidy];
+  } else if ([tag isEqualToString:@"replay_file_delete"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithReplayFileDelete];
   } else if ([tag isEqualToString:@"rewind_folder"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithRewindFolder];
   } else if ([tag isEqualToString:@"undo_naming_convention"]) {
@@ -77397,6 +79980,10 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithSignInAsSessionStart];
   } else if ([tag isEqualToString:@"sso_error"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithSsoError];
+  } else if ([tag isEqualToString:@"backup_admin_invitation_sent"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithBackupAdminInvitationSent];
+  } else if ([tag isEqualToString:@"backup_invitation_opened"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithBackupInvitationOpened];
   } else if ([tag isEqualToString:@"create_team_invite_link"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithCreateTeamInviteLink];
   } else if ([tag isEqualToString:@"delete_team_invite_link"]) {
@@ -77587,6 +80174,10 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithOutdatedLinkViewReportFailed];
   } else if ([tag isEqualToString:@"paper_admin_export_start"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithPaperAdminExportStart];
+  } else if ([tag isEqualToString:@"ransomware_alert_create_report"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithRansomwareAlertCreateReport];
+  } else if ([tag isEqualToString:@"ransomware_alert_create_report_failed"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithRansomwareAlertCreateReportFailed];
   } else if ([tag isEqualToString:@"smart_sync_create_admin_privilege_report"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithSmartSyncCreateAdminPrivilegeReport];
   } else if ([tag isEqualToString:@"team_activity_create_report"]) {
@@ -77617,6 +80208,14 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithNoteShareReceive];
   } else if ([tag isEqualToString:@"open_note_shared"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithOpenNoteShared];
+  } else if ([tag isEqualToString:@"replay_file_shared_link_created"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithReplayFileSharedLinkCreated];
+  } else if ([tag isEqualToString:@"replay_file_shared_link_modified"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithReplayFileSharedLinkModified];
+  } else if ([tag isEqualToString:@"replay_project_team_add"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithReplayProjectTeamAdd];
+  } else if ([tag isEqualToString:@"replay_project_team_delete"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithReplayProjectTeamDelete];
   } else if ([tag isEqualToString:@"sf_add_group"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithSfAddGroup];
   } else if ([tag isEqualToString:@"sf_allow_non_members_to_view_shared_links"]) {
@@ -77895,6 +80494,8 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithFileCommentsChangePolicy];
   } else if ([tag isEqualToString:@"file_locking_policy_changed"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithFileLockingPolicyChanged];
+  } else if ([tag isEqualToString:@"file_provider_migration_policy_changed"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithFileProviderMigrationPolicyChanged];
   } else if ([tag isEqualToString:@"file_requests_change_policy"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithFileRequestsChangePolicy];
   } else if ([tag isEqualToString:@"file_requests_emails_enabled"]) {
@@ -77903,6 +80504,8 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithFileRequestsEmailsRestrictedToTeamOnly];
   } else if ([tag isEqualToString:@"file_transfers_policy_changed"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithFileTransfersPolicyChanged];
+  } else if ([tag isEqualToString:@"folder_link_restriction_policy_changed"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithFolderLinkRestrictionPolicyChanged];
   } else if ([tag isEqualToString:@"google_sso_change_policy"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithGoogleSsoChangePolicy];
   } else if ([tag isEqualToString:@"group_user_management_change_policy"]) {
@@ -78186,7 +80789,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGExportMembersReportDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -78287,7 +80890,7 @@
 
   jsonDict[@"failure_reason"] = [DBTEAMTeamReportFailureReasonSerializer serialize:valueObj.failureReason];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGExportMembersReportFailDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -78387,7 +80990,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGExportMembersReportFailType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -78486,7 +81089,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGExportMembersReportType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -78604,7 +81207,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGExtendedVersionHistoryPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGExtendedVersionHistoryChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -78710,7 +81313,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGExtendedVersionHistoryChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -78920,7 +81523,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGExtendedVersionHistoryPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -79101,7 +81704,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGExternalDriveBackupEligibilityStatus *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -79231,7 +81834,7 @@
   jsonDict[@"status"] = [DBTEAMLOGExternalDriveBackupEligibilityStatusSerializer serialize:valueObj.status];
   jsonDict[@"number_of_external_drive_backup"] = valueObj.numberOfExternalDriveBackup;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -79338,7 +81941,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -79527,7 +82130,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGExternalDriveBackupPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -79646,7 +82249,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGExternalDriveBackupPolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGExternalDriveBackupPolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGExternalDriveBackupPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -79750,7 +82353,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGExternalDriveBackupPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -80002,7 +82605,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGExternalDriveBackupStatus *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -80137,7 +82740,7 @@
   jsonDict[@"previous_value"] = [DBTEAMLOGExternalDriveBackupStatusSerializer serialize:valueObj.previousValue];
   jsonDict[@"new_value"] = [DBTEAMLOGExternalDriveBackupStatusSerializer serialize:valueObj.dNewValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGExternalDriveBackupStatusChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -80245,7 +82848,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGExternalDriveBackupStatusChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -80337,7 +82940,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGExternalSharingCreateReportDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -80437,7 +83040,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGExternalSharingCreateReportType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -80538,7 +83141,7 @@
 
   jsonDict[@"failure_reason"] = [DBTEAMTeamReportFailureReasonSerializer serialize:valueObj.failureReason];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGExternalSharingReportFailedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -80639,7 +83242,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGExternalSharingReportFailedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -80747,7 +83350,7 @@
   jsonDict[@"user_identifier"] = valueObj.userIdentifier;
   jsonDict[@"identifier_type"] = [DBTEAMLOGIdentifierTypeSerializer serialize:valueObj.identifierType];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGExternalUserLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -80870,7 +83473,7 @@
     jsonDict[@"technical_error_message"] = valueObj.technicalErrorMessage;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFailureDetailsLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -81040,7 +83643,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFedAdminRole *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -81241,7 +83844,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFedExtraDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -81503,7 +84106,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFedHandshakeAction *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -81753,7 +84356,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFederationStatusChangeAdditionalInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -81875,7 +84478,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileAddCommentDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -81974,7 +84577,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileAddCommentType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -82065,13 +84668,203 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileAddDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
 #pragma unused(valueDict)
 
   return [[DBTEAMLOGFileAddDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGFileAddFromAutomationDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGFileAddFromAutomationDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGFileAddFromAutomationDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGFileAddFromAutomationDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGFileAddFromAutomationDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFileAddFromAutomationDetails:other];
+}
+
+- (BOOL)isEqualToFileAddFromAutomationDetails:(DBTEAMLOGFileAddFromAutomationDetails *)aFileAddFromAutomationDetails {
+  if (self == aFileAddFromAutomationDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGFileAddFromAutomationDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFileAddFromAutomationDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGFileAddFromAutomationDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGFileAddFromAutomationDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGFileAddFromAutomationType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGFileAddFromAutomationType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGFileAddFromAutomationTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGFileAddFromAutomationTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGFileAddFromAutomationTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFileAddFromAutomationType:other];
+}
+
+- (BOOL)isEqualToFileAddFromAutomationType:(DBTEAMLOGFileAddFromAutomationType *)aFileAddFromAutomationType {
+  if (self == aFileAddFromAutomationType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aFileAddFromAutomationType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGFileAddFromAutomationTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFileAddFromAutomationType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGFileAddFromAutomationType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGFileAddFromAutomationType alloc] initWithDescription_:description_];
 }
 
 @end
@@ -82164,7 +84957,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileAddType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -82282,7 +85075,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGFileCommentNotificationPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileChangeCommentSubscriptionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -82388,7 +85181,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileChangeCommentSubscriptionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -82557,7 +85350,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileCommentNotificationPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -82683,7 +85476,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGFileCommentsPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileCommentsChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -82785,7 +85578,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileCommentsChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -82953,7 +85746,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileCommentsPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -83069,7 +85862,7 @@
                            return [DBTEAMLOGRelocateAssetReferencesLogInfoSerializer serialize:elem0];
                          }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileCopyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -83172,7 +85965,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileCopyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -83280,7 +86073,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileDeleteCommentDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -83379,7 +86172,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileDeleteCommentType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -83470,7 +86263,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileDeleteDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -83569,7 +86362,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileDeleteType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -83660,7 +86453,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileDownloadDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -83759,7 +86552,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileDownloadType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -83874,7 +86667,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileEditCommentDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -83975,7 +86768,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileEditCommentType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -84066,7 +86859,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileEditDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -84165,7 +86958,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileEditType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -84256,7 +87049,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileGetCopyReferenceDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -84355,7 +87148,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileGetCopyReferenceType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -84463,7 +87256,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileLikeCommentDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -84562,7 +87355,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileLikeCommentType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -84670,7 +87463,7 @@
   jsonDict[@"previous_value"] = [DBTEAMLOGLockStatusSerializer serialize:valueObj.previousValue];
   jsonDict[@"new_value"] = [DBTEAMLOGLockStatusSerializer serialize:valueObj.dNewValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileLockingLockStatusChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -84771,7 +87564,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileLockingLockStatusChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -84880,7 +87673,7 @@
   jsonDict[@"new_value"] = [DBTEAMPOLICIESFileLockingPolicyStateSerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMPOLICIESFileLockingPolicyStateSerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileLockingPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -84982,7 +87775,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileLockingPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -85125,7 +87918,7 @@
     jsonDict[@"file_size"] = valueObj.fileSize;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileOrFolderLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -85269,7 +88062,7 @@
     jsonDict[@"file_size"] = valueObj.fileSize;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -85380,7 +88173,7 @@
                            return [DBTEAMLOGRelocateAssetReferencesLogInfoSerializer serialize:elem0];
                          }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileMoveDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -85483,7 +88276,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileMoveType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -85574,7 +88367,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFilePermanentlyDeleteDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -85673,7 +88466,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFilePermanentlyDeleteType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -85764,7 +88557,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFilePreviewDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -85863,13 +88656,227 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFilePreviewType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *description_ = valueDict[@"description"];
 
   return [[DBTEAMLOGFilePreviewType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGFileProviderMigrationPolicyChangedDetails.h"
+#import "DBTEAMPOLICIESFileProviderMigrationPolicyState.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGFileProviderMigrationPolicyChangedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDNewValue:(DBTEAMPOLICIESFileProviderMigrationPolicyState *)dNewValue
+                    previousValue:(DBTEAMPOLICIESFileProviderMigrationPolicyState *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+
+  self = [super init];
+  if (self) {
+    _dNewValue = dNewValue;
+    _previousValue = previousValue;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGFileProviderMigrationPolicyChangedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGFileProviderMigrationPolicyChangedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGFileProviderMigrationPolicyChangedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.dNewValue hash];
+  result = prime * result + [self.previousValue hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFileProviderMigrationPolicyChangedDetails:other];
+}
+
+- (BOOL)isEqualToFileProviderMigrationPolicyChangedDetails:
+    (DBTEAMLOGFileProviderMigrationPolicyChangedDetails *)aFileProviderMigrationPolicyChangedDetails {
+  if (self == aFileProviderMigrationPolicyChangedDetails) {
+    return YES;
+  }
+  if (![self.dNewValue isEqual:aFileProviderMigrationPolicyChangedDetails.dNewValue]) {
+    return NO;
+  }
+  if (![self.previousValue isEqual:aFileProviderMigrationPolicyChangedDetails.previousValue]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGFileProviderMigrationPolicyChangedDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFileProviderMigrationPolicyChangedDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"new_value"] = [DBTEAMPOLICIESFileProviderMigrationPolicyStateSerializer serialize:valueObj.dNewValue];
+  jsonDict[@"previous_value"] =
+      [DBTEAMPOLICIESFileProviderMigrationPolicyStateSerializer serialize:valueObj.previousValue];
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGFileProviderMigrationPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  DBTEAMPOLICIESFileProviderMigrationPolicyState *dNewValue =
+      [DBTEAMPOLICIESFileProviderMigrationPolicyStateSerializer deserialize:valueDict[@"new_value"]];
+  DBTEAMPOLICIESFileProviderMigrationPolicyState *previousValue =
+      [DBTEAMPOLICIESFileProviderMigrationPolicyStateSerializer deserialize:valueDict[@"previous_value"]];
+
+  return [[DBTEAMLOGFileProviderMigrationPolicyChangedDetails alloc] initWithDNewValue:dNewValue
+                                                                         previousValue:previousValue];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGFileProviderMigrationPolicyChangedType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGFileProviderMigrationPolicyChangedType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGFileProviderMigrationPolicyChangedTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGFileProviderMigrationPolicyChangedTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGFileProviderMigrationPolicyChangedTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFileProviderMigrationPolicyChangedType:other];
+}
+
+- (BOOL)isEqualToFileProviderMigrationPolicyChangedType:
+    (DBTEAMLOGFileProviderMigrationPolicyChangedType *)aFileProviderMigrationPolicyChangedType {
+  if (self == aFileProviderMigrationPolicyChangedType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aFileProviderMigrationPolicyChangedType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGFileProviderMigrationPolicyChangedTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFileProviderMigrationPolicyChangedType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGFileProviderMigrationPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGFileProviderMigrationPolicyChangedType alloc] initWithDescription_:description_];
 }
 
 @end
@@ -85971,7 +88978,7 @@
                            return [DBTEAMLOGRelocateAssetReferencesLogInfoSerializer serialize:elem0];
                          }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRenameDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -86074,7 +89081,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRenameType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -86206,7 +89213,7 @@
     jsonDict[@"previous_details"] = [DBTEAMLOGFileRequestDetailsSerializer serialize:valueObj.previousDetails];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRequestChangeDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -86313,7 +89320,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRequestChangeType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -86437,7 +89444,7 @@
     jsonDict[@"previous_details"] = [DBTEAMLOGFileRequestDetailsSerializer serialize:valueObj.previousDetails];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRequestCloseDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -86540,7 +89547,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRequestCloseType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -86664,7 +89671,7 @@
     jsonDict[@"request_details"] = [DBTEAMLOGFileRequestDetailsSerializer serialize:valueObj.requestDetails];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRequestCreateDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -86766,7 +89773,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRequestCreateType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -86886,7 +89893,7 @@
     jsonDict[@"allow_late_uploads"] = valueObj.allowLateUploads;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRequestDeadline *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -87013,7 +90020,7 @@
     jsonDict[@"previous_details"] = [DBTEAMLOGFileRequestDetailsSerializer serialize:valueObj.previousDetails];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRequestDeleteDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -87117,7 +90124,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRequestDeleteType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -87233,7 +90240,7 @@
     jsonDict[@"deadline"] = [DBTEAMLOGFileRequestDeadlineSerializer serialize:valueObj.deadline];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRequestDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -87406,7 +90413,7 @@
     jsonDict[@"submitter_email"] = valueObj.submitterEmail;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRequestReceiveFileDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -87519,7 +90526,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRequestReceiveFileType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -87637,7 +90644,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGFileRequestsPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRequestsChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -87739,7 +90746,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRequestsChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -87831,7 +90838,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRequestsEmailsEnabledDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -87931,7 +90938,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRequestsEmailsEnabledType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -88023,7 +91030,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRequestsEmailsRestrictedToTeamOnlyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -88123,7 +91130,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRequestsEmailsRestrictedToTeamOnlyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -88291,7 +91298,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRequestsPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -88407,7 +91414,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileResolveCommentDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -88506,7 +91513,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileResolveCommentType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -88597,7 +91604,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRestoreDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -88696,7 +91703,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRestoreType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -88787,7 +91794,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRevertDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -88886,7 +91893,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRevertType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -88977,7 +91984,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRollbackChangesDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -89076,7 +92083,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileRollbackChangesType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -89184,7 +92191,7 @@
                            return [DBTEAMLOGRelocateAssetReferencesLogInfoSerializer serialize:elem0];
                          }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileSaveCopyReferenceDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -89287,7 +92294,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileSaveCopyReferenceType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -89386,7 +92393,7 @@
 
   jsonDict[@"file_transfer_id"] = valueObj.fileTransferId;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileTransfersFileAddDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -89485,7 +92492,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileTransfersFileAddType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -89653,7 +92660,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileTransfersPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -89770,7 +92777,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGFileTransfersPolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGFileTransfersPolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileTransfersPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -89873,7 +92880,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileTransfersPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -89973,7 +92980,7 @@
 
   jsonDict[@"file_transfer_id"] = valueObj.fileTransferId;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileTransfersTransferDeleteDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -90073,7 +93080,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileTransfersTransferDeleteType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -90173,7 +93180,7 @@
 
   jsonDict[@"file_transfer_id"] = valueObj.fileTransferId;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileTransfersTransferDownloadDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -90273,7 +93280,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileTransfersTransferDownloadType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -90373,7 +93380,7 @@
 
   jsonDict[@"file_transfer_id"] = valueObj.fileTransferId;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileTransfersTransferSendDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -90473,7 +93480,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileTransfersTransferSendType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -90573,7 +93580,7 @@
 
   jsonDict[@"file_transfer_id"] = valueObj.fileTransferId;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileTransfersTransferViewDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -90673,7 +93680,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileTransfersTransferViewType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -90781,7 +93788,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileUnlikeCommentDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -90880,7 +93887,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileUnlikeCommentType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -90988,7 +93995,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileUnresolveCommentDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -91087,13 +94094,402 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFileUnresolveCommentType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *description_ = valueDict[@"description"];
 
   return [[DBTEAMLOGFileUnresolveCommentType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGFolderLinkRestrictionPolicy.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGFolderLinkRestrictionPolicy
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDisabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGFolderLinkRestrictionPolicyDisabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithEnabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGFolderLinkRestrictionPolicyEnabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGFolderLinkRestrictionPolicyOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isDisabled {
+  return _tag == DBTEAMLOGFolderLinkRestrictionPolicyDisabled;
+}
+
+- (BOOL)isEnabled {
+  return _tag == DBTEAMLOGFolderLinkRestrictionPolicyEnabled;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMLOGFolderLinkRestrictionPolicyOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMLOGFolderLinkRestrictionPolicyDisabled:
+    return @"DBTEAMLOGFolderLinkRestrictionPolicyDisabled";
+  case DBTEAMLOGFolderLinkRestrictionPolicyEnabled:
+    return @"DBTEAMLOGFolderLinkRestrictionPolicyEnabled";
+  case DBTEAMLOGFolderLinkRestrictionPolicyOther:
+    return @"DBTEAMLOGFolderLinkRestrictionPolicyOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGFolderLinkRestrictionPolicySerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGFolderLinkRestrictionPolicySerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGFolderLinkRestrictionPolicySerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMLOGFolderLinkRestrictionPolicyDisabled:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGFolderLinkRestrictionPolicyEnabled:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGFolderLinkRestrictionPolicyOther:
+    result = prime * result + [[self tagName] hash];
+    break;
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFolderLinkRestrictionPolicy:other];
+}
+
+- (BOOL)isEqualToFolderLinkRestrictionPolicy:(DBTEAMLOGFolderLinkRestrictionPolicy *)aFolderLinkRestrictionPolicy {
+  if (self == aFolderLinkRestrictionPolicy) {
+    return YES;
+  }
+  if (self.tag != aFolderLinkRestrictionPolicy.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMLOGFolderLinkRestrictionPolicyDisabled:
+    return [[self tagName] isEqual:[aFolderLinkRestrictionPolicy tagName]];
+  case DBTEAMLOGFolderLinkRestrictionPolicyEnabled:
+    return [[self tagName] isEqual:[aFolderLinkRestrictionPolicy tagName]];
+  case DBTEAMLOGFolderLinkRestrictionPolicyOther:
+    return [[self tagName] isEqual:[aFolderLinkRestrictionPolicy tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGFolderLinkRestrictionPolicySerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFolderLinkRestrictionPolicy *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isDisabled]) {
+    jsonDict[@".tag"] = @"disabled";
+  } else if ([valueObj isEnabled]) {
+    jsonDict[@".tag"] = @"enabled";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGFolderLinkRestrictionPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"disabled"]) {
+    return [[DBTEAMLOGFolderLinkRestrictionPolicy alloc] initWithDisabled];
+  } else if ([tag isEqualToString:@"enabled"]) {
+    return [[DBTEAMLOGFolderLinkRestrictionPolicy alloc] initWithEnabled];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMLOGFolderLinkRestrictionPolicy alloc] initWithOther];
+  } else {
+    return [[DBTEAMLOGFolderLinkRestrictionPolicy alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGFolderLinkRestrictionPolicy.h"
+#import "DBTEAMLOGFolderLinkRestrictionPolicyChangedDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGFolderLinkRestrictionPolicyChangedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDNewValue:(DBTEAMLOGFolderLinkRestrictionPolicy *)dNewValue
+                    previousValue:(DBTEAMLOGFolderLinkRestrictionPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+
+  self = [super init];
+  if (self) {
+    _dNewValue = dNewValue;
+    _previousValue = previousValue;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGFolderLinkRestrictionPolicyChangedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGFolderLinkRestrictionPolicyChangedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGFolderLinkRestrictionPolicyChangedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.dNewValue hash];
+  result = prime * result + [self.previousValue hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFolderLinkRestrictionPolicyChangedDetails:other];
+}
+
+- (BOOL)isEqualToFolderLinkRestrictionPolicyChangedDetails:
+    (DBTEAMLOGFolderLinkRestrictionPolicyChangedDetails *)aFolderLinkRestrictionPolicyChangedDetails {
+  if (self == aFolderLinkRestrictionPolicyChangedDetails) {
+    return YES;
+  }
+  if (![self.dNewValue isEqual:aFolderLinkRestrictionPolicyChangedDetails.dNewValue]) {
+    return NO;
+  }
+  if (![self.previousValue isEqual:aFolderLinkRestrictionPolicyChangedDetails.previousValue]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGFolderLinkRestrictionPolicyChangedDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFolderLinkRestrictionPolicyChangedDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"new_value"] = [DBTEAMLOGFolderLinkRestrictionPolicySerializer serialize:valueObj.dNewValue];
+  jsonDict[@"previous_value"] = [DBTEAMLOGFolderLinkRestrictionPolicySerializer serialize:valueObj.previousValue];
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGFolderLinkRestrictionPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  DBTEAMLOGFolderLinkRestrictionPolicy *dNewValue =
+      [DBTEAMLOGFolderLinkRestrictionPolicySerializer deserialize:valueDict[@"new_value"]];
+  DBTEAMLOGFolderLinkRestrictionPolicy *previousValue =
+      [DBTEAMLOGFolderLinkRestrictionPolicySerializer deserialize:valueDict[@"previous_value"]];
+
+  return [[DBTEAMLOGFolderLinkRestrictionPolicyChangedDetails alloc] initWithDNewValue:dNewValue
+                                                                         previousValue:previousValue];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGFolderLinkRestrictionPolicyChangedType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGFolderLinkRestrictionPolicyChangedType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGFolderLinkRestrictionPolicyChangedTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGFolderLinkRestrictionPolicyChangedTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGFolderLinkRestrictionPolicyChangedTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFolderLinkRestrictionPolicyChangedType:other];
+}
+
+- (BOOL)isEqualToFolderLinkRestrictionPolicyChangedType:
+    (DBTEAMLOGFolderLinkRestrictionPolicyChangedType *)aFolderLinkRestrictionPolicyChangedType {
+  if (self == aFolderLinkRestrictionPolicyChangedType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aFolderLinkRestrictionPolicyChangedType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGFolderLinkRestrictionPolicyChangedTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFolderLinkRestrictionPolicyChangedType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGFolderLinkRestrictionPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGFolderLinkRestrictionPolicyChangedType alloc] initWithDescription_:description_];
 }
 
 @end
@@ -91240,7 +94636,7 @@
     jsonDict[@"file_count"] = valueObj.fileCount;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFolderLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -91331,8 +94727,8 @@
   if (self == aFolderOverviewDescriptionChangedDetails) {
     return YES;
   }
-  if (![self.folderOverviewLocationAsset
-          isEqual:aFolderOverviewDescriptionChangedDetails.folderOverviewLocationAsset]) {
+  if (!
+      [self.folderOverviewLocationAsset isEqual:aFolderOverviewDescriptionChangedDetails.folderOverviewLocationAsset]) {
     return NO;
   }
   return YES;
@@ -91349,7 +94745,7 @@
 
   jsonDict[@"folder_overview_location_asset"] = valueObj.folderOverviewLocationAsset;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFolderOverviewDescriptionChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -91450,7 +94846,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFolderOverviewDescriptionChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -91564,7 +94960,7 @@
                                                                  return elem0;
                                                                }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFolderOverviewItemPinnedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -91669,7 +95065,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFolderOverviewItemPinnedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -91783,7 +95179,7 @@
                                                                  return elem0;
                                                                }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFolderOverviewItemUnpinnedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -91889,7 +95285,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGFolderOverviewItemUnpinnedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -92031,7 +95427,7 @@
     jsonDict[@"country"] = valueObj.country;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGeoLocationLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -92193,7 +95589,7 @@
     jsonDict[@"event_type"] = [DBTEAMLOGEventTypeArgSerializer serialize:valueObj.eventType];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGetTeamEventsArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -92303,7 +95699,7 @@
 
   jsonDict[@"cursor"] = valueObj.cursor;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGetTeamEventsContinueArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -92483,7 +95879,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGetTeamEventsContinueError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -92681,7 +96077,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGetTeamEventsError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -92813,7 +96209,7 @@
   jsonDict[@"cursor"] = valueObj.cursor;
   jsonDict[@"has_more"] = valueObj.hasMore;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGetTeamEventsResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -92936,7 +96332,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGGoogleSsoPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGoogleSsoChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -93038,7 +96434,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGoogleSsoChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -93206,7 +96602,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGoogleSsoPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -93363,7 +96759,7 @@
     jsonDict[@"reason"] = valueObj.reason;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyAddFolderFailedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -93472,7 +96868,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyAddFolderFailedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -93618,7 +97014,7 @@
                                               }];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyAddFoldersDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -93729,7 +97125,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyAddFoldersType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -93866,7 +97262,7 @@
     jsonDict[@"policy_type"] = [DBTEAMLOGPolicyTypeSerializer serialize:valueObj.policyType];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyContentDisposedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -93974,7 +97370,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyContentDisposedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -94131,7 +97527,7 @@
                                               }];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyCreateDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -94243,7 +97639,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyCreateType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -94369,7 +97765,7 @@
     jsonDict[@"policy_type"] = [DBTEAMLOGPolicyTypeSerializer serialize:valueObj.policyType];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyDeleteDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -94473,7 +97869,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyDeleteType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -94632,7 +98028,7 @@
     jsonDict[@"policy_type"] = [DBTEAMLOGPolicyTypeSerializer serialize:valueObj.policyType];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyEditDetailsDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -94743,7 +98139,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyEditDetailsType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -94893,7 +98289,7 @@
     jsonDict[@"policy_type"] = [DBTEAMLOGPolicyTypeSerializer serialize:valueObj.policyType];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyEditDurationDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -95003,7 +98399,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyEditDurationType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -95139,7 +98535,7 @@
     jsonDict[@"policy_type"] = [DBTEAMLOGPolicyTypeSerializer serialize:valueObj.policyType];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyExportCreatedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -95246,7 +98642,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyExportCreatedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -95382,7 +98778,7 @@
     jsonDict[@"policy_type"] = [DBTEAMLOGPolicyTypeSerializer serialize:valueObj.policyType];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyExportRemovedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -95489,7 +98885,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyExportRemovedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -95648,7 +99044,7 @@
     jsonDict[@"reason"] = valueObj.reason;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyRemoveFoldersDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -95761,7 +99157,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyRemoveFoldersType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -95887,7 +99283,7 @@
     jsonDict[@"policy_type"] = [DBTEAMLOGPolicyTypeSerializer serialize:valueObj.policyType];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyReportCreatedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -95992,7 +99388,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyReportCreatedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -96141,7 +99537,7 @@
     jsonDict[@"part"] = valueObj.part;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyZipPartDownloadedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -96250,7 +99646,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGovernancePolicyZipPartDownloadedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -96349,7 +99745,7 @@
 
   jsonDict[@"new_value"] = valueObj.dNewValue;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupAddExternalIdDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -96448,7 +99844,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupAddExternalIdType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -96547,7 +99943,7 @@
 
   jsonDict[@"is_group_owner"] = valueObj.isGroupOwner;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupAddMemberDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -96646,7 +100042,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupAddMemberType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -96752,7 +100148,7 @@
   jsonDict[@"new_value"] = valueObj.dNewValue;
   jsonDict[@"previous_value"] = valueObj.previousValue;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupChangeExternalIdDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -96852,7 +100248,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupChangeExternalIdType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -96970,7 +100366,7 @@
     jsonDict[@"previous_value"] = [DBTEAMCOMMONGroupManagementTypeSerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupChangeManagementTypeDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -97075,7 +100471,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupChangeManagementTypeType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -97174,7 +100570,7 @@
 
   jsonDict[@"is_group_owner"] = valueObj.isGroupOwner;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupChangeMemberRoleDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -97273,7 +100669,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupChangeMemberRoleType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -97395,7 +100791,7 @@
     jsonDict[@"join_policy"] = [DBTEAMLOGGroupJoinPolicySerializer serialize:valueObj.joinPolicy];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupCreateDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -97496,7 +100892,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupCreateType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -97604,7 +101000,7 @@
     jsonDict[@"is_company_managed"] = valueObj.isCompanyManaged;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupDeleteDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -97703,7 +101099,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupDeleteType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -97795,7 +101191,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupDescriptionUpdatedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -97894,7 +101290,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupDescriptionUpdatedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -98062,7 +101458,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupJoinPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -98193,7 +101589,7 @@
     jsonDict[@"join_policy"] = [DBTEAMLOGGroupJoinPolicySerializer serialize:valueObj.joinPolicy];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupJoinPolicyUpdatedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -98295,7 +101691,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupJoinPolicyUpdatedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -98424,7 +101820,7 @@
     jsonDict[@"external_id"] = valueObj.externalId;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -98517,7 +101913,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupMovedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -98616,7 +102012,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupMovedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -98715,7 +102111,7 @@
 
   jsonDict[@"previous_value"] = valueObj.previousValue;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupRemoveExternalIdDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -98814,7 +102210,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupRemoveExternalIdType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -98905,7 +102301,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupRemoveMemberDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -99004,7 +102400,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupRemoveMemberType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -99110,7 +102506,7 @@
   jsonDict[@"previous_value"] = valueObj.previousValue;
   jsonDict[@"new_value"] = valueObj.dNewValue;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupRenameDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -99210,7 +102606,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupRenameType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -99328,7 +102724,7 @@
     jsonDict[@"previous_value"] = [DBTEAMPOLICIESGroupCreationSerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupUserManagementChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -99432,7 +102828,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGroupUserManagementChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -99596,7 +102992,7 @@
     jsonDict[@"host_team_name"] = valueObj.hostTeamName;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGuestAdminChangeStatusDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -99708,7 +103104,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGuestAdminChangeStatusType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -99829,7 +103225,7 @@
     jsonDict[@"trusted_team_name"] = valueObj.trustedTeamName;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGuestAdminSignedInViaTrustedTeamsDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -99931,7 +103327,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGuestAdminSignedInViaTrustedTeamsType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -100052,7 +103448,7 @@
     jsonDict[@"trusted_team_name"] = valueObj.trustedTeamName;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGuestAdminSignedOutViaTrustedTeamsDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -100154,7 +103550,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGGuestAdminSignedOutViaTrustedTeamsType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -100322,7 +103718,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGIdentifierType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -100429,7 +103825,7 @@
 
   jsonDict[@"integration_name"] = valueObj.integrationName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGIntegrationConnectedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -100528,7 +103924,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGIntegrationConnectedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -100628,7 +104024,7 @@
 
   jsonDict[@"integration_name"] = valueObj.integrationName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGIntegrationDisconnectedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -100727,7 +104123,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGIntegrationDisconnectedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -100895,7 +104291,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGIntegrationPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -101020,7 +104416,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGIntegrationPolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGIntegrationPolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGIntegrationPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -101124,7 +104520,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGIntegrationPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -101292,7 +104688,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGInviteAcceptanceEmailPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -101409,7 +104805,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGInviteAcceptanceEmailPolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGInviteAcceptanceEmailPolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGInviteAcceptanceEmailPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -101513,7 +104909,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGInviteAcceptanceEmailPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -101723,7 +105119,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGInviteMethod *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -101963,7 +105359,7 @@
     jsonDict[@"has_linked_shared_folders"] = valueObj.hasLinkedSharedFolders;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGJoinTeamDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -102180,7 +105576,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLabelType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -102451,7 +105847,7 @@
     jsonDict[@"legacy_uniq_id"] = valueObj.legacyUniqId;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegacyDeviceSessionLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -102611,7 +106007,7 @@
     jsonDict[@"end_date"] = [DBNSDateSerializer serialize:valueObj.endDate dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsActivateAHoldDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -102718,7 +106114,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsActivateAHoldType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -102824,7 +106220,7 @@
   jsonDict[@"legal_hold_id"] = valueObj.legalHoldId;
   jsonDict[@"name"] = valueObj.name;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsAddMembersDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -102924,7 +106320,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsAddMembersType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -103048,7 +106444,7 @@
   jsonDict[@"previous_value"] = valueObj.previousValue;
   jsonDict[@"new_value"] = valueObj.dNewValue;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsChangeHoldDetailsDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -103154,7 +106550,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsChangeHoldDetailsType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -103270,7 +106666,7 @@
   jsonDict[@"previous_value"] = valueObj.previousValue;
   jsonDict[@"new_value"] = valueObj.dNewValue;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsChangeHoldNameDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -103373,7 +106769,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsChangeHoldNameType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -103495,7 +106891,7 @@
     jsonDict[@"export_name"] = valueObj.exportName;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsExportAHoldDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -103597,7 +106993,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsExportAHoldType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -103711,7 +107107,7 @@
   jsonDict[@"name"] = valueObj.name;
   jsonDict[@"export_name"] = valueObj.exportName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsExportCancelledDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -103815,7 +107211,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsExportCancelledType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -103961,7 +107357,7 @@
     jsonDict[@"file_name"] = valueObj.fileName;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsExportDownloadedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -104069,7 +107465,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsExportDownloadedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -104183,7 +107579,7 @@
   jsonDict[@"name"] = valueObj.name;
   jsonDict[@"export_name"] = valueObj.exportName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsExportRemovedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -104285,7 +107681,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsExportRemovedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -104392,7 +107788,7 @@
   jsonDict[@"legal_hold_id"] = valueObj.legalHoldId;
   jsonDict[@"name"] = valueObj.name;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsReleaseAHoldDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -104492,7 +107888,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsReleaseAHoldType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -104599,7 +107995,7 @@
   jsonDict[@"legal_hold_id"] = valueObj.legalHoldId;
   jsonDict[@"name"] = valueObj.name;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsRemoveMembersDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -104699,7 +108095,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsRemoveMembersType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -104805,7 +108201,7 @@
   jsonDict[@"legal_hold_id"] = valueObj.legalHoldId;
   jsonDict[@"name"] = valueObj.name;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsReportAHoldDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -104905,7 +108301,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLegalHoldsReportAHoldType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -105172,7 +108568,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLinkedDeviceLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -105360,7 +108756,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLockStatus *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -105495,7 +108891,7 @@
     jsonDict[@"is_emm_managed"] = valueObj.isEmmManaged;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLoginFailDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -105599,7 +108995,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLoginFailType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -105640,6 +109036,14 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGLoginMethodGoogleOauth;
+  }
+  return self;
+}
+
+- (instancetype)initWithLenovoOauth {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGLoginMethodLenovoOauth;
   }
   return self;
 }
@@ -105708,6 +109112,10 @@
   return _tag == DBTEAMLOGLoginMethodGoogleOauth;
 }
 
+- (BOOL)isLenovoOauth {
+  return _tag == DBTEAMLOGLoginMethodLenovoOauth;
+}
+
 - (BOOL)isPassword {
   return _tag == DBTEAMLOGLoginMethodPassword;
 }
@@ -105740,6 +109148,8 @@
     return @"DBTEAMLOGLoginMethodFirstPartyTokenExchange";
   case DBTEAMLOGLoginMethodGoogleOauth:
     return @"DBTEAMLOGLoginMethodGoogleOauth";
+  case DBTEAMLOGLoginMethodLenovoOauth:
+    return @"DBTEAMLOGLoginMethodLenovoOauth";
   case DBTEAMLOGLoginMethodPassword:
     return @"DBTEAMLOGLoginMethodPassword";
   case DBTEAMLOGLoginMethodQrCode:
@@ -105797,6 +109207,9 @@
   case DBTEAMLOGLoginMethodGoogleOauth:
     result = prime * result + [[self tagName] hash];
     break;
+  case DBTEAMLOGLoginMethodLenovoOauth:
+    result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMLOGLoginMethodPassword:
     result = prime * result + [[self tagName] hash];
     break;
@@ -105846,6 +109259,8 @@
     return [[self tagName] isEqual:[aLoginMethod tagName]];
   case DBTEAMLOGLoginMethodGoogleOauth:
     return [[self tagName] isEqual:[aLoginMethod tagName]];
+  case DBTEAMLOGLoginMethodLenovoOauth:
+    return [[self tagName] isEqual:[aLoginMethod tagName]];
   case DBTEAMLOGLoginMethodPassword:
     return [[self tagName] isEqual:[aLoginMethod tagName]];
   case DBTEAMLOGLoginMethodQrCode:
@@ -105877,6 +109292,8 @@
     jsonDict[@".tag"] = @"first_party_token_exchange";
   } else if ([valueObj isGoogleOauth]) {
     jsonDict[@".tag"] = @"google_oauth";
+  } else if ([valueObj isLenovoOauth]) {
+    jsonDict[@".tag"] = @"lenovo_oauth";
   } else if ([valueObj isPassword]) {
     jsonDict[@".tag"] = @"password";
   } else if ([valueObj isQrCode]) {
@@ -105893,7 +109310,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLoginMethod *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -105905,6 +109322,8 @@
     return [[DBTEAMLOGLoginMethod alloc] initWithFirstPartyTokenExchange];
   } else if ([tag isEqualToString:@"google_oauth"]) {
     return [[DBTEAMLOGLoginMethod alloc] initWithGoogleOauth];
+  } else if ([tag isEqualToString:@"lenovo_oauth"]) {
+    return [[DBTEAMLOGLoginMethod alloc] initWithLenovoOauth];
   } else if ([tag isEqualToString:@"password"]) {
     return [[DBTEAMLOGLoginMethod alloc] initWithPassword];
   } else if ([tag isEqualToString:@"qr_code"]) {
@@ -106029,7 +109448,7 @@
     jsonDict[@"is_emm_managed"] = valueObj.isEmmManaged;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLoginSuccessDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -106129,7 +109548,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLoginSuccessType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -106237,7 +109656,7 @@
     jsonDict[@"login_id"] = valueObj.loginId;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLogoutDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -106336,7 +109755,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGLogoutType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -106435,7 +109854,7 @@
 
   jsonDict[@"new_value"] = valueObj.dNewValue;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberAddExternalIdDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -106534,7 +109953,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberAddExternalIdType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -106634,7 +110053,7 @@
 
   jsonDict[@"new_value"] = [DBTEAMLOGUserNameLogInfoSerializer serialize:valueObj.dNewValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberAddNameDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -106733,7 +110152,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberAddNameType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -106854,7 +110273,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGAdminRoleSerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberChangeAdminRoleDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -106956,7 +110375,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberChangeAdminRoleType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -107073,7 +110492,7 @@
     jsonDict[@"previous_value"] = valueObj.previousValue;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberChangeEmailDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -107173,7 +110592,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberChangeEmailType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -107281,7 +110700,7 @@
   jsonDict[@"new_value"] = valueObj.dNewValue;
   jsonDict[@"previous_value"] = valueObj.previousValue;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberChangeExternalIdDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -107381,7 +110800,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberChangeExternalIdType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -107490,7 +110909,7 @@
   jsonDict[@"prev_value"] = [DBTEAMLOGTeamMembershipTypeSerializer serialize:valueObj.prevValue];
   jsonDict[@"new_value"] = [DBTEAMLOGTeamMembershipTypeSerializer serialize:valueObj.dNewValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberChangeMembershipTypeDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -107591,7 +111010,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberChangeMembershipTypeType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -107708,7 +111127,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGUserNameLogInfoSerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberChangeNameDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -107810,7 +111229,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberChangeNameType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -107919,7 +111338,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGResellerRoleSerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGResellerRoleSerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberChangeResellerRoleDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -108019,7 +111438,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberChangeResellerRoleType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -108176,7 +111595,7 @@
     jsonDict[@"previous_team"] = valueObj.previousTeam;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberChangeStatusDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -108285,7 +111704,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberChangeStatusType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -108377,7 +111796,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberDeleteManualContactsDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -108477,7 +111896,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberDeleteManualContactsType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -108569,7 +111988,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberDeleteProfilePhotoDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -108668,7 +112087,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberDeleteProfilePhotoType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -108760,7 +112179,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberPermanentlyDeleteAccountContentsDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -108860,7 +112279,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberPermanentlyDeleteAccountContentsType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -109070,7 +112489,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberRemoveActionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -109183,7 +112602,7 @@
 
   jsonDict[@"previous_value"] = valueObj.previousValue;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberRemoveExternalIdDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -109282,7 +112701,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberRemoveExternalIdType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -109400,7 +112819,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGMemberRequestsPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberRequestsChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -109504,7 +112923,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberRequestsChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -109693,7 +113112,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberRequestsPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -109892,7 +113311,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSendInvitePolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -110011,7 +113430,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGMemberSendInvitePolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGMemberSendInvitePolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSendInvitePolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -110115,7 +113534,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSendInvitePolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -110206,7 +113625,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSetProfilePhotoDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -110305,7 +113724,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSetProfilePhotoType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -110405,7 +113824,7 @@
 
   jsonDict[@"new_value"] = valueObj.dNewValue;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSpaceLimitsAddCustomQuotaDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -110505,7 +113924,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSpaceLimitsAddCustomQuotaType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -110597,7 +114016,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSpaceLimitsAddExceptionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -110697,7 +114116,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSpaceLimitsAddExceptionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -110806,7 +114225,7 @@
   jsonDict[@"previous_value"] = [DBTEAMLOGSpaceCapsTypeSerializer serialize:valueObj.previousValue];
   jsonDict[@"new_value"] = [DBTEAMLOGSpaceCapsTypeSerializer serialize:valueObj.dNewValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSpaceLimitsChangeCapsTypePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -110908,7 +114327,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSpaceLimitsChangeCapsTypePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -111015,7 +114434,7 @@
   jsonDict[@"previous_value"] = valueObj.previousValue;
   jsonDict[@"new_value"] = valueObj.dNewValue;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSpaceLimitsChangeCustomQuotaDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -111117,7 +114536,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSpaceLimitsChangeCustomQuotaType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -111238,7 +114657,7 @@
     jsonDict[@"new_value"] = valueObj.dNewValue;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSpaceLimitsChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -111340,7 +114759,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSpaceLimitsChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -111449,7 +114868,7 @@
   jsonDict[@"previous_value"] = [DBTEAMLOGSpaceLimitsStatusSerializer serialize:valueObj.previousValue];
   jsonDict[@"new_value"] = [DBTEAMLOGSpaceLimitsStatusSerializer serialize:valueObj.dNewValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSpaceLimitsChangeStatusDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -111552,7 +114971,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSpaceLimitsChangeStatusType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -111644,7 +115063,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSpaceLimitsRemoveCustomQuotaDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -111744,7 +115163,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSpaceLimitsRemoveCustomQuotaType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -111836,7 +115255,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSpaceLimitsRemoveExceptionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -111936,7 +115355,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSpaceLimitsRemoveExceptionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -112188,7 +115607,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberStatus *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -112313,7 +115732,7 @@
                                                         return elem0;
                                                       }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSuggestDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -112415,7 +115834,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSuggestType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -112533,7 +115952,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGMemberSuggestionsPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSuggestionsChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -112639,7 +116058,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSuggestionsChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -112807,7 +116226,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberSuggestionsPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -112907,7 +116326,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberTransferAccountContentsDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -113007,7 +116426,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberTransferAccountContentsType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -113114,7 +116533,7 @@
   jsonDict[@"source_team_id"] = valueObj.sourceTeamId;
   jsonDict[@"target_team_id"] = valueObj.targetTeamId;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMemberTransferredInternalFields *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -113233,7 +116652,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGMicrosoftOfficeAddinPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMicrosoftOfficeAddinChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -113339,7 +116758,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMicrosoftOfficeAddinChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -113507,7 +116926,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMicrosoftOfficeAddinPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -113623,7 +117042,7 @@
     jsonDict[@"source_event_fields"] = valueObj.sourceEventFields;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMissingDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -113833,7 +117252,7 @@
     jsonDict[@"last_carrier"] = valueObj.lastCarrier;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMobileDeviceSessionLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -113963,7 +117382,7 @@
     jsonDict[@"session_id"] = valueObj.sessionId;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGMobileSessionLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -114097,7 +117516,7 @@
     jsonDict[@"is_shared_namespace"] = valueObj.isSharedNamespace;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNamespaceRelativePathLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -114219,7 +117638,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGNetworkControlPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNetworkControlChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -114323,7 +117742,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNetworkControlChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -114491,7 +117910,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNetworkControlPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -114606,7 +118025,7 @@
   jsonDict[@"start_date"] = [DBNSDateSerializer serialize:valueObj.startDate dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
   jsonDict[@"end_date"] = [DBNSDateSerializer serialize:valueObj.endDate dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoExpirationLinkGenCreateReportDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -114707,7 +118126,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoExpirationLinkGenCreateReportType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -114808,7 +118227,7 @@
 
   jsonDict[@"failure_reason"] = [DBTEAMTeamReportFailureReasonSerializer serialize:valueObj.failureReason];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoExpirationLinkGenReportFailedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -114909,7 +118328,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoExpirationLinkGenReportFailedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -115016,7 +118435,7 @@
   jsonDict[@"start_date"] = [DBNSDateSerializer serialize:valueObj.startDate dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
   jsonDict[@"end_date"] = [DBNSDateSerializer serialize:valueObj.endDate dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoPasswordLinkGenCreateReportDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -115117,7 +118536,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoPasswordLinkGenCreateReportType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -115218,7 +118637,7 @@
 
   jsonDict[@"failure_reason"] = [DBTEAMTeamReportFailureReasonSerializer serialize:valueObj.failureReason];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoPasswordLinkGenReportFailedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -115319,7 +118738,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoPasswordLinkGenReportFailedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -115426,7 +118845,7 @@
   jsonDict[@"start_date"] = [DBNSDateSerializer serialize:valueObj.startDate dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
   jsonDict[@"end_date"] = [DBNSDateSerializer serialize:valueObj.endDate dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoPasswordLinkViewCreateReportDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -115527,7 +118946,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoPasswordLinkViewCreateReportType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -115628,7 +119047,7 @@
 
   jsonDict[@"failure_reason"] = [DBTEAMTeamReportFailureReasonSerializer serialize:valueObj.failureReason];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoPasswordLinkViewReportFailedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -115729,7 +119148,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoPasswordLinkViewReportFailedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -115890,7 +119309,7 @@
     jsonDict[@".tag"] = @"nonTeamMember";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGUserLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -116035,7 +119454,7 @@
     jsonDict[@"email"] = valueObj.email;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNonTeamMemberLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -116136,7 +119555,7 @@
 
   jsonDict[@"team"] = valueObj.team;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNonTrustedTeamDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -116227,7 +119646,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoteAclInviteOnlyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -116326,7 +119745,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoteAclInviteOnlyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -116417,7 +119836,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoteAclLinkDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -116516,7 +119935,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoteAclLinkType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -116607,7 +120026,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoteAclTeamLinkDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -116706,7 +120125,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoteAclTeamLinkType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -116797,7 +120216,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoteShareReceiveDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -116896,7 +120315,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoteShareReceiveType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -116987,7 +120406,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoteSharedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -117086,7 +120505,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGNoteSharedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -117186,7 +120605,7 @@
 
   jsonDict[@"label_type"] = [DBTEAMLOGLabelTypeSerializer serialize:valueObj.labelType];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGObjectLabelAddedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -117285,7 +120704,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGObjectLabelAddedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -117385,7 +120804,7 @@
 
   jsonDict[@"label_type"] = [DBTEAMLOGLabelTypeSerializer serialize:valueObj.labelType];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGObjectLabelRemovedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -117484,7 +120903,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGObjectLabelRemovedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -117585,7 +121004,7 @@
 
   jsonDict[@"label_type"] = [DBTEAMLOGLabelTypeSerializer serialize:valueObj.labelType];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGObjectLabelUpdatedValueDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -117684,7 +121103,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGObjectLabelUpdatedValueType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -117775,7 +121194,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGOpenNoteSharedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -117874,7 +121293,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGOpenNoteSharedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -117973,7 +121392,7 @@
 
   jsonDict[@"organization"] = valueObj.organization;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGOrganizationDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -118072,7 +121491,7 @@
 
   jsonDict[@"organization"] = valueObj.organization;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGOrganizationName *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -118164,7 +121583,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGOrganizeFolderWithTidyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -118263,7 +121682,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGOrganizeFolderWithTidyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -118381,7 +121800,7 @@
     jsonDict[@"geo_location"] = [DBTEAMLOGGeoLocationLogInfoSerializer serialize:valueObj.geoLocation];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGOriginLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -118491,7 +121910,7 @@
   jsonDict[@"start_date"] = [DBNSDateSerializer serialize:valueObj.startDate dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
   jsonDict[@"end_date"] = [DBNSDateSerializer serialize:valueObj.endDate dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGOutdatedLinkViewCreateReportDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -118592,7 +122011,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGOutdatedLinkViewCreateReportType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -118693,7 +122112,7 @@
 
   jsonDict[@"failure_reason"] = [DBTEAMTeamReportFailureReasonSerializer serialize:valueObj.failureReason];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGOutdatedLinkViewReportFailedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -118794,7 +122213,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGOutdatedLinkViewReportFailedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -118983,7 +122402,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperAccessType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -119084,7 +122503,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperAdminExportStartDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -119183,7 +122602,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperAdminExportStartType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -119301,7 +122720,7 @@
     jsonDict[@"previous_value"] = [DBTEAMPOLICIESPaperDeploymentPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperChangeDeploymentPolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -119406,7 +122825,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperChangeDeploymentPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -119507,7 +122926,7 @@
 
   jsonDict[@"new_value"] = [DBTEAMLOGPaperMemberPolicySerializer serialize:valueObj.dNewValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperChangeMemberLinkPolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -119607,7 +123026,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperChangeMemberLinkPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -119725,7 +123144,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGPaperMemberPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperChangeMemberPolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -119827,7 +123246,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperChangeMemberPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -119944,7 +123363,7 @@
     jsonDict[@"previous_value"] = [DBTEAMPOLICIESPaperEnabledPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -120048,7 +123467,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -120147,7 +123566,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperContentAddMemberDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -120246,7 +123665,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperContentAddMemberType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -120362,7 +123781,7 @@
   jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"parent_asset_index"] = valueObj.parentAssetIndex;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperContentAddToFolderDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -120465,7 +123884,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperContentAddToFolderType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -120564,7 +123983,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperContentArchiveDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -120663,7 +124082,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperContentArchiveType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -120762,7 +124181,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperContentCreateDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -120861,7 +124280,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperContentCreateType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -120961,7 +124380,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperContentPermanentlyDeleteDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -121061,7 +124480,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperContentPermanentlyDeleteType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -121191,7 +124610,7 @@
     jsonDict[@"parent_asset_index"] = valueObj.parentAssetIndex;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperContentRemoveFromFolderDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -121295,7 +124714,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperContentRemoveFromFolderType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -121395,7 +124814,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperContentRemoveMemberDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -121494,7 +124913,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperContentRemoveMemberType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -121593,7 +125012,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperContentRenameDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -121692,7 +125111,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperContentRenameType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -121791,7 +125210,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperContentRestoreDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -121890,7 +125309,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperContentRestoreType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -122058,7 +125477,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDefaultFolderPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -122175,7 +125594,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGPaperDefaultFolderPolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGPaperDefaultFolderPolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDefaultFolderPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -122279,7 +125698,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDefaultFolderPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -122447,7 +125866,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDesktopPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -122564,7 +125983,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGPaperDesktopPolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGPaperDesktopPolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDesktopPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -122666,7 +126085,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDesktopPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -122781,7 +126200,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocAddCommentDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -122881,7 +126300,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocAddCommentType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -122989,7 +126408,7 @@
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
   jsonDict[@"access_type"] = [DBTEAMLOGPaperAccessTypeSerializer serialize:valueObj.accessType];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocChangeMemberRoleDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -123089,7 +126508,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocChangeMemberRoleType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -123219,7 +126638,7 @@
     jsonDict[@"team_sharing_policy"] = valueObj.teamSharingPolicy;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocChangeSharingPolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -123323,7 +126742,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocChangeSharingPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -123448,7 +126867,7 @@
     jsonDict[@"previous_subscription_level"] = valueObj.previousSubscriptionLevel;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocChangeSubscriptionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -123552,7 +126971,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocChangeSubscriptionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -123667,7 +127086,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocDeleteCommentDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -123767,7 +127186,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocDeleteCommentType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -123866,7 +127285,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocDeletedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -123965,7 +127384,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocDeletedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -124073,7 +127492,7 @@
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
   jsonDict[@"export_file_format"] = [DBTEAMLOGPaperDownloadFormatSerializer serialize:valueObj.exportFileFormat];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocDownloadDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -124174,7 +127593,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocDownloadType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -124289,7 +127708,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocEditCommentDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -124389,7 +127808,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocEditCommentType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -124488,7 +127907,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocEditDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -124587,7 +128006,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocEditType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -124686,7 +128105,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocFollowedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -124785,7 +128204,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocFollowedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -124884,7 +128303,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocMentionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -124983,7 +128402,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocMentionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -125111,7 +128530,7 @@
     jsonDict[@"old_owner_user_id"] = valueObj.oldOwnerUserId;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocOwnershipChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -125214,7 +128633,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocOwnershipChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -125313,7 +128732,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocRequestAccessDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -125412,7 +128831,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocRequestAccessType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -125528,7 +128947,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocResolveCommentDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -125628,7 +129047,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocResolveCommentType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -125727,7 +129146,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocRevertDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -125826,7 +129245,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocRevertType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -125925,7 +129344,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocSlackShareDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -126024,7 +129443,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocSlackShareType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -126123,7 +129542,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocTeamInviteDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -126222,7 +129641,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocTeamInviteType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -126321,7 +129740,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocTrashedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -126420,7 +129839,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocTrashedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -126536,7 +129955,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocUnresolveCommentDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -126636,7 +130055,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocUnresolveCommentType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -126735,7 +130154,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocUntrashedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -126834,7 +130253,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocUntrashedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -126933,7 +130352,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocViewDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -127032,7 +130451,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocViewType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -127138,7 +130557,7 @@
   jsonDict[@"doc_id"] = valueObj.docId;
   jsonDict[@"doc_title"] = valueObj.docTitle;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDocumentLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -127349,7 +130768,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperDownloadFormat *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -127453,7 +130872,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperEnabledUsersGroupAdditionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -127553,7 +130972,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperEnabledUsersGroupAdditionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -127645,7 +131064,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperEnabledUsersGroupRemovalDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -127745,7 +131164,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperEnabledUsersGroupRemovalType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -127845,7 +131264,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperExternalViewAllowDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -127944,7 +131363,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperExternalViewAllowType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -128044,7 +131463,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperExternalViewDefaultTeamDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -128144,7 +131563,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperExternalViewDefaultTeamType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -128244,7 +131663,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperExternalViewForbidDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -128343,7 +131762,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperExternalViewForbidType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -128468,7 +131887,7 @@
     jsonDict[@"previous_subscription_level"] = valueObj.previousSubscriptionLevel;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperFolderChangeSubscriptionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -128572,7 +131991,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperFolderChangeSubscriptionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -128671,7 +132090,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperFolderDeletedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -128770,7 +132189,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperFolderDeletedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -128869,7 +132288,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperFolderFollowedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -128968,7 +132387,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperFolderFollowedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -129074,7 +132493,7 @@
   jsonDict[@"folder_id"] = valueObj.folderId;
   jsonDict[@"folder_name"] = valueObj.folderName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperFolderLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -129174,7 +132593,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperFolderTeamInviteDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -129273,7 +132692,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperFolderTeamInviteType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -129462,7 +132881,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperMemberPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -129588,7 +133007,7 @@
   jsonDict[@"new_permission_level"] = valueObj.dNewPermissionLevel;
   jsonDict[@"previous_permission_level"] = valueObj.previousPermissionLevel;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperPublishedLinkChangePermissionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -129692,7 +133111,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperPublishedLinkChangePermissionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -129792,7 +133211,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperPublishedLinkCreateDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -129891,7 +133310,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperPublishedLinkCreateType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -129991,7 +133410,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperPublishedLinkDisabledDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -130091,7 +133510,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperPublishedLinkDisabledType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -130191,7 +133610,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperPublishedLinkViewDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -130290,7 +133709,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPaperPublishedLinkViewType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -130483,7 +133902,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGParticipantLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -130682,7 +134101,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPassPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -130783,7 +134202,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPasswordChangeDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -130882,7 +134301,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPasswordChangeType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -130973,7 +134392,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPasswordResetAllDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -131072,7 +134491,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPasswordResetAllType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -131163,7 +134582,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPasswordResetDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -131262,7 +134681,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPasswordResetType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -131371,7 +134790,7 @@
   jsonDict[@"previous_value"] = [DBTEAMPOLICIESPasswordStrengthPolicySerializer serialize:valueObj.previousValue];
   jsonDict[@"new_value"] = [DBTEAMPOLICIESPasswordStrengthPolicySerializer serialize:valueObj.dNewValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPasswordStrengthRequirementsChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -131475,7 +134894,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPasswordStrengthRequirementsChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -131593,7 +135012,7 @@
     jsonDict[@"contextual"] = valueObj.contextual;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPathLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -131696,7 +135115,7 @@
 
   jsonDict[@"secondary_email"] = valueObj.secondaryEmail;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPendingSecondaryEmailAddedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -131796,7 +135215,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPendingSecondaryEmailAddedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -131914,7 +135333,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGContentPermanentDeletePolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPermanentDeleteChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -132019,7 +135438,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPermanentDeleteChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -132271,7 +135690,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPlacementRestriction *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -132455,7 +135874,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -132570,7 +135989,7 @@
   jsonDict[@"secondary_team"] = valueObj.secondaryTeam;
   jsonDict[@"sent_by"] = valueObj.sentBy;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPrimaryTeamRequestAcceptedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -132678,7 +136097,7 @@
   jsonDict[@"secondary_team"] = valueObj.secondaryTeam;
   jsonDict[@"sent_by"] = valueObj.sentBy;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPrimaryTeamRequestCanceledDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -132786,7 +136205,7 @@
   jsonDict[@"secondary_team"] = valueObj.secondaryTeam;
   jsonDict[@"sent_by"] = valueObj.sentBy;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPrimaryTeamRequestExpiredDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -132894,7 +136313,7 @@
   jsonDict[@"secondary_team"] = valueObj.secondaryTeam;
   jsonDict[@"sent_to"] = valueObj.sentTo;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGPrimaryTeamRequestReminderDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -133147,7 +136566,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGQuickActionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -133170,6 +136589,820 @@
   } else {
     return [[DBTEAMLOGQuickActionType alloc] initWithOther];
   }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGRansomwareAlertCreateReportDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGRansomwareAlertCreateReportDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGRansomwareAlertCreateReportDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGRansomwareAlertCreateReportDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGRansomwareAlertCreateReportDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRansomwareAlertCreateReportDetails:other];
+}
+
+- (BOOL)isEqualToRansomwareAlertCreateReportDetails:
+    (DBTEAMLOGRansomwareAlertCreateReportDetails *)aRansomwareAlertCreateReportDetails {
+  if (self == aRansomwareAlertCreateReportDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGRansomwareAlertCreateReportDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGRansomwareAlertCreateReportDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGRansomwareAlertCreateReportDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGRansomwareAlertCreateReportDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGRansomwareAlertCreateReportFailedDetails.h"
+#import "DBTEAMTeamReportFailureReason.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGRansomwareAlertCreateReportFailedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithFailureReason:(DBTEAMTeamReportFailureReason *)failureReason {
+  [DBStoneValidators nonnullValidator:nil](failureReason);
+
+  self = [super init];
+  if (self) {
+    _failureReason = failureReason;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGRansomwareAlertCreateReportFailedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGRansomwareAlertCreateReportFailedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGRansomwareAlertCreateReportFailedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.failureReason hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRansomwareAlertCreateReportFailedDetails:other];
+}
+
+- (BOOL)isEqualToRansomwareAlertCreateReportFailedDetails:
+    (DBTEAMLOGRansomwareAlertCreateReportFailedDetails *)aRansomwareAlertCreateReportFailedDetails {
+  if (self == aRansomwareAlertCreateReportFailedDetails) {
+    return YES;
+  }
+  if (![self.failureReason isEqual:aRansomwareAlertCreateReportFailedDetails.failureReason]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGRansomwareAlertCreateReportFailedDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGRansomwareAlertCreateReportFailedDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"failure_reason"] = [DBTEAMTeamReportFailureReasonSerializer serialize:valueObj.failureReason];
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGRansomwareAlertCreateReportFailedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  DBTEAMTeamReportFailureReason *failureReason =
+      [DBTEAMTeamReportFailureReasonSerializer deserialize:valueDict[@"failure_reason"]];
+
+  return [[DBTEAMLOGRansomwareAlertCreateReportFailedDetails alloc] initWithFailureReason:failureReason];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGRansomwareAlertCreateReportFailedType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGRansomwareAlertCreateReportFailedType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGRansomwareAlertCreateReportFailedTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGRansomwareAlertCreateReportFailedTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGRansomwareAlertCreateReportFailedTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRansomwareAlertCreateReportFailedType:other];
+}
+
+- (BOOL)isEqualToRansomwareAlertCreateReportFailedType:
+    (DBTEAMLOGRansomwareAlertCreateReportFailedType *)aRansomwareAlertCreateReportFailedType {
+  if (self == aRansomwareAlertCreateReportFailedType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aRansomwareAlertCreateReportFailedType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGRansomwareAlertCreateReportFailedTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGRansomwareAlertCreateReportFailedType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGRansomwareAlertCreateReportFailedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGRansomwareAlertCreateReportFailedType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGRansomwareAlertCreateReportType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGRansomwareAlertCreateReportType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGRansomwareAlertCreateReportTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGRansomwareAlertCreateReportTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGRansomwareAlertCreateReportTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRansomwareAlertCreateReportType:other];
+}
+
+- (BOOL)isEqualToRansomwareAlertCreateReportType:
+    (DBTEAMLOGRansomwareAlertCreateReportType *)aRansomwareAlertCreateReportType {
+  if (self == aRansomwareAlertCreateReportType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aRansomwareAlertCreateReportType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGRansomwareAlertCreateReportTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGRansomwareAlertCreateReportType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGRansomwareAlertCreateReportType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGRansomwareAlertCreateReportType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGRansomwareRestoreProcessCompletedDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGRansomwareRestoreProcessCompletedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithStatus:(NSString *)status
+            restoredFilesCount:(NSNumber *)restoredFilesCount
+      restoredFilesFailedCount:(NSNumber *)restoredFilesFailedCount {
+  [DBStoneValidators nonnullValidator:nil](status);
+  [DBStoneValidators nonnullValidator:nil](restoredFilesCount);
+  [DBStoneValidators nonnullValidator:nil](restoredFilesFailedCount);
+
+  self = [super init];
+  if (self) {
+    _status = status;
+    _restoredFilesCount = restoredFilesCount;
+    _restoredFilesFailedCount = restoredFilesFailedCount;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGRansomwareRestoreProcessCompletedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGRansomwareRestoreProcessCompletedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGRansomwareRestoreProcessCompletedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.status hash];
+  result = prime * result + [self.restoredFilesCount hash];
+  result = prime * result + [self.restoredFilesFailedCount hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRansomwareRestoreProcessCompletedDetails:other];
+}
+
+- (BOOL)isEqualToRansomwareRestoreProcessCompletedDetails:
+    (DBTEAMLOGRansomwareRestoreProcessCompletedDetails *)aRansomwareRestoreProcessCompletedDetails {
+  if (self == aRansomwareRestoreProcessCompletedDetails) {
+    return YES;
+  }
+  if (![self.status isEqual:aRansomwareRestoreProcessCompletedDetails.status]) {
+    return NO;
+  }
+  if (![self.restoredFilesCount isEqual:aRansomwareRestoreProcessCompletedDetails.restoredFilesCount]) {
+    return NO;
+  }
+  if (![self.restoredFilesFailedCount isEqual:aRansomwareRestoreProcessCompletedDetails.restoredFilesFailedCount]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGRansomwareRestoreProcessCompletedDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGRansomwareRestoreProcessCompletedDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"status"] = valueObj.status;
+  jsonDict[@"restored_files_count"] = valueObj.restoredFilesCount;
+  jsonDict[@"restored_files_failed_count"] = valueObj.restoredFilesFailedCount;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGRansomwareRestoreProcessCompletedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *status = valueDict[@"status"];
+  NSNumber *restoredFilesCount = valueDict[@"restored_files_count"];
+  NSNumber *restoredFilesFailedCount = valueDict[@"restored_files_failed_count"];
+
+  return [[DBTEAMLOGRansomwareRestoreProcessCompletedDetails alloc] initWithStatus:status
+                                                                restoredFilesCount:restoredFilesCount
+                                                          restoredFilesFailedCount:restoredFilesFailedCount];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGRansomwareRestoreProcessCompletedType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGRansomwareRestoreProcessCompletedType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGRansomwareRestoreProcessCompletedTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGRansomwareRestoreProcessCompletedTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGRansomwareRestoreProcessCompletedTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRansomwareRestoreProcessCompletedType:other];
+}
+
+- (BOOL)isEqualToRansomwareRestoreProcessCompletedType:
+    (DBTEAMLOGRansomwareRestoreProcessCompletedType *)aRansomwareRestoreProcessCompletedType {
+  if (self == aRansomwareRestoreProcessCompletedType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aRansomwareRestoreProcessCompletedType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGRansomwareRestoreProcessCompletedTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGRansomwareRestoreProcessCompletedType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGRansomwareRestoreProcessCompletedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGRansomwareRestoreProcessCompletedType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGRansomwareRestoreProcessStartedDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGRansomwareRestoreProcessStartedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithExtension:(NSString *)extension {
+  [DBStoneValidators nonnullValidator:nil](extension);
+
+  self = [super init];
+  if (self) {
+    _extension = extension;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGRansomwareRestoreProcessStartedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGRansomwareRestoreProcessStartedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGRansomwareRestoreProcessStartedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.extension hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRansomwareRestoreProcessStartedDetails:other];
+}
+
+- (BOOL)isEqualToRansomwareRestoreProcessStartedDetails:
+    (DBTEAMLOGRansomwareRestoreProcessStartedDetails *)aRansomwareRestoreProcessStartedDetails {
+  if (self == aRansomwareRestoreProcessStartedDetails) {
+    return YES;
+  }
+  if (![self.extension isEqual:aRansomwareRestoreProcessStartedDetails.extension]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGRansomwareRestoreProcessStartedDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGRansomwareRestoreProcessStartedDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"extension"] = valueObj.extension;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGRansomwareRestoreProcessStartedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *extension = valueDict[@"extension"];
+
+  return [[DBTEAMLOGRansomwareRestoreProcessStartedDetails alloc] initWithExtension:extension];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGRansomwareRestoreProcessStartedType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGRansomwareRestoreProcessStartedType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGRansomwareRestoreProcessStartedTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGRansomwareRestoreProcessStartedTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGRansomwareRestoreProcessStartedTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRansomwareRestoreProcessStartedType:other];
+}
+
+- (BOOL)isEqualToRansomwareRestoreProcessStartedType:
+    (DBTEAMLOGRansomwareRestoreProcessStartedType *)aRansomwareRestoreProcessStartedType {
+  if (self == aRansomwareRestoreProcessStartedType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aRansomwareRestoreProcessStartedType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGRansomwareRestoreProcessStartedTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGRansomwareRestoreProcessStartedType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGRansomwareRestoreProcessStartedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGRansomwareRestoreProcessStartedType alloc] initWithDescription_:description_];
 }
 
 @end
@@ -133317,7 +137550,7 @@
                                              }];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGRecipientsConfiguration *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -133439,7 +137672,7 @@
   jsonDict[@"src_asset_index"] = valueObj.srcAssetIndex;
   jsonDict[@"dest_asset_index"] = valueObj.destAssetIndex;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGRelocateAssetReferencesLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -133448,6 +137681,961 @@
 
   return [[DBTEAMLOGRelocateAssetReferencesLogInfo alloc] initWithSrcAssetIndex:srcAssetIndex
                                                                  destAssetIndex:destAssetIndex];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGReplayFileDeleteDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGReplayFileDeleteDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGReplayFileDeleteDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGReplayFileDeleteDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGReplayFileDeleteDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToReplayFileDeleteDetails:other];
+}
+
+- (BOOL)isEqualToReplayFileDeleteDetails:(DBTEAMLOGReplayFileDeleteDetails *)aReplayFileDeleteDetails {
+  if (self == aReplayFileDeleteDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGReplayFileDeleteDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGReplayFileDeleteDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGReplayFileDeleteDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGReplayFileDeleteDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGReplayFileDeleteType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGReplayFileDeleteType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGReplayFileDeleteTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGReplayFileDeleteTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGReplayFileDeleteTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToReplayFileDeleteType:other];
+}
+
+- (BOOL)isEqualToReplayFileDeleteType:(DBTEAMLOGReplayFileDeleteType *)aReplayFileDeleteType {
+  if (self == aReplayFileDeleteType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aReplayFileDeleteType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGReplayFileDeleteTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGReplayFileDeleteType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGReplayFileDeleteType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGReplayFileDeleteType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGReplayFileSharedLinkCreatedDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGReplayFileSharedLinkCreatedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGReplayFileSharedLinkCreatedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGReplayFileSharedLinkCreatedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGReplayFileSharedLinkCreatedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToReplayFileSharedLinkCreatedDetails:other];
+}
+
+- (BOOL)isEqualToReplayFileSharedLinkCreatedDetails:
+    (DBTEAMLOGReplayFileSharedLinkCreatedDetails *)aReplayFileSharedLinkCreatedDetails {
+  if (self == aReplayFileSharedLinkCreatedDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGReplayFileSharedLinkCreatedDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGReplayFileSharedLinkCreatedDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGReplayFileSharedLinkCreatedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGReplayFileSharedLinkCreatedDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGReplayFileSharedLinkCreatedType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGReplayFileSharedLinkCreatedType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGReplayFileSharedLinkCreatedTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGReplayFileSharedLinkCreatedTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGReplayFileSharedLinkCreatedTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToReplayFileSharedLinkCreatedType:other];
+}
+
+- (BOOL)isEqualToReplayFileSharedLinkCreatedType:
+    (DBTEAMLOGReplayFileSharedLinkCreatedType *)aReplayFileSharedLinkCreatedType {
+  if (self == aReplayFileSharedLinkCreatedType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aReplayFileSharedLinkCreatedType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGReplayFileSharedLinkCreatedTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGReplayFileSharedLinkCreatedType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGReplayFileSharedLinkCreatedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGReplayFileSharedLinkCreatedType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGReplayFileSharedLinkModifiedDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGReplayFileSharedLinkModifiedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGReplayFileSharedLinkModifiedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGReplayFileSharedLinkModifiedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGReplayFileSharedLinkModifiedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToReplayFileSharedLinkModifiedDetails:other];
+}
+
+- (BOOL)isEqualToReplayFileSharedLinkModifiedDetails:
+    (DBTEAMLOGReplayFileSharedLinkModifiedDetails *)aReplayFileSharedLinkModifiedDetails {
+  if (self == aReplayFileSharedLinkModifiedDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGReplayFileSharedLinkModifiedDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGReplayFileSharedLinkModifiedDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGReplayFileSharedLinkModifiedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGReplayFileSharedLinkModifiedDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGReplayFileSharedLinkModifiedType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGReplayFileSharedLinkModifiedType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGReplayFileSharedLinkModifiedTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGReplayFileSharedLinkModifiedTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGReplayFileSharedLinkModifiedTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToReplayFileSharedLinkModifiedType:other];
+}
+
+- (BOOL)isEqualToReplayFileSharedLinkModifiedType:
+    (DBTEAMLOGReplayFileSharedLinkModifiedType *)aReplayFileSharedLinkModifiedType {
+  if (self == aReplayFileSharedLinkModifiedType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aReplayFileSharedLinkModifiedType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGReplayFileSharedLinkModifiedTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGReplayFileSharedLinkModifiedType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGReplayFileSharedLinkModifiedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGReplayFileSharedLinkModifiedType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGReplayProjectTeamAddDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGReplayProjectTeamAddDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGReplayProjectTeamAddDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGReplayProjectTeamAddDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGReplayProjectTeamAddDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToReplayProjectTeamAddDetails:other];
+}
+
+- (BOOL)isEqualToReplayProjectTeamAddDetails:(DBTEAMLOGReplayProjectTeamAddDetails *)aReplayProjectTeamAddDetails {
+  if (self == aReplayProjectTeamAddDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGReplayProjectTeamAddDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGReplayProjectTeamAddDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGReplayProjectTeamAddDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGReplayProjectTeamAddDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGReplayProjectTeamAddType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGReplayProjectTeamAddType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGReplayProjectTeamAddTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGReplayProjectTeamAddTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGReplayProjectTeamAddTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToReplayProjectTeamAddType:other];
+}
+
+- (BOOL)isEqualToReplayProjectTeamAddType:(DBTEAMLOGReplayProjectTeamAddType *)aReplayProjectTeamAddType {
+  if (self == aReplayProjectTeamAddType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aReplayProjectTeamAddType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGReplayProjectTeamAddTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGReplayProjectTeamAddType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGReplayProjectTeamAddType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGReplayProjectTeamAddType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGReplayProjectTeamDeleteDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGReplayProjectTeamDeleteDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGReplayProjectTeamDeleteDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGReplayProjectTeamDeleteDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGReplayProjectTeamDeleteDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToReplayProjectTeamDeleteDetails:other];
+}
+
+- (BOOL)isEqualToReplayProjectTeamDeleteDetails:
+    (DBTEAMLOGReplayProjectTeamDeleteDetails *)aReplayProjectTeamDeleteDetails {
+  if (self == aReplayProjectTeamDeleteDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGReplayProjectTeamDeleteDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGReplayProjectTeamDeleteDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGReplayProjectTeamDeleteDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGReplayProjectTeamDeleteDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGReplayProjectTeamDeleteType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGReplayProjectTeamDeleteType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGReplayProjectTeamDeleteTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGReplayProjectTeamDeleteTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGReplayProjectTeamDeleteTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToReplayProjectTeamDeleteType:other];
+}
+
+- (BOOL)isEqualToReplayProjectTeamDeleteType:(DBTEAMLOGReplayProjectTeamDeleteType *)aReplayProjectTeamDeleteType {
+  if (self == aReplayProjectTeamDeleteType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aReplayProjectTeamDeleteType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGReplayProjectTeamDeleteTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGReplayProjectTeamDeleteType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGReplayProjectTeamDeleteType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGReplayProjectTeamDeleteType alloc] initWithDescription_:description_];
 }
 
 @end
@@ -133548,7 +138736,7 @@
   jsonDict[@"reseller_name"] = valueObj.resellerName;
   jsonDict[@"reseller_email"] = valueObj.resellerEmail;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGResellerLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -133717,7 +138905,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGResellerRole *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -133834,7 +139022,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGResellerSupportPolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGResellerSupportPolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGResellerSupportChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -133937,7 +139125,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGResellerSupportChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -134105,7 +139293,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGResellerSupportPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -134205,7 +139393,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGResellerSupportSessionEndDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -134305,7 +139493,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGResellerSupportSessionEndType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -134397,7 +139585,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGResellerSupportSessionStartDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -134497,7 +139685,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGResellerSupportSessionStartType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -134597,7 +139785,7 @@
   jsonDict[@"rewind_folder_target_ts_ms"] =
       [DBNSDateSerializer serialize:valueObj.rewindFolderTargetTsMs dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGRewindFolderDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -134697,7 +139885,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGRewindFolderType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -134865,7 +140053,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGRewindPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -134981,7 +140169,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGRewindPolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGRewindPolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGRewindPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -135081,7 +140269,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGRewindPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -135181,7 +140369,7 @@
 
   jsonDict[@"secondary_email"] = valueObj.secondaryEmail;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSecondaryEmailDeletedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -135280,7 +140468,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSecondaryEmailDeletedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -135381,7 +140569,7 @@
 
   jsonDict[@"secondary_email"] = valueObj.secondaryEmail;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSecondaryEmailVerifiedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -135480,7 +140668,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSecondaryEmailVerifiedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -135648,7 +140836,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSecondaryMailsPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -135765,7 +140953,7 @@
   jsonDict[@"previous_value"] = [DBTEAMLOGSecondaryMailsPolicySerializer serialize:valueObj.previousValue];
   jsonDict[@"new_value"] = [DBTEAMLOGSecondaryMailsPolicySerializer serialize:valueObj.dNewValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSecondaryMailsPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -135868,7 +141056,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSecondaryMailsPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -135975,7 +141163,7 @@
   jsonDict[@"primary_team"] = valueObj.primaryTeam;
   jsonDict[@"sent_by"] = valueObj.sentBy;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSecondaryTeamRequestAcceptedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -136083,7 +141271,7 @@
   jsonDict[@"sent_to"] = valueObj.sentTo;
   jsonDict[@"sent_by"] = valueObj.sentBy;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSecondaryTeamRequestCanceledDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -136184,7 +141372,7 @@
 
   jsonDict[@"sent_to"] = valueObj.sentTo;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSecondaryTeamRequestExpiredDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -136284,7 +141472,7 @@
 
   jsonDict[@"sent_to"] = valueObj.sentTo;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSecondaryTeamRequestReminderDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -136452,7 +141640,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSendForSignaturePolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -136569,7 +141757,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGSendForSignaturePolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGSendForSignaturePolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSendForSignaturePolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -136673,7 +141861,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSendForSignaturePolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -136810,7 +141998,7 @@
     jsonDict[@"sharing_permission"] = valueObj.sharingPermission;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfAddGroupDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -136915,7 +142103,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfAddGroupType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -137041,7 +142229,7 @@
     jsonDict[@"shared_folder_type"] = valueObj.sharedFolderType;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfAllowNonMembersToViewSharedLinksDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -137145,7 +142333,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfAllowNonMembersToViewSharedLinksType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -137286,7 +142474,7 @@
     jsonDict[@"previous_sharing_permission"] = valueObj.previousSharingPermission;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfExternalInviteWarnDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -137391,7 +142579,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfExternalInviteWarnType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -137532,7 +142720,7 @@
     jsonDict[@"new_sharing_permission"] = valueObj.dNewSharingPermission;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfFbInviteChangeRoleDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -137637,7 +142825,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfFbInviteChangeRoleType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -137762,7 +142950,7 @@
     jsonDict[@"sharing_permission"] = valueObj.sharingPermission;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfFbInviteDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -137865,7 +143053,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfFbInviteType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -137972,7 +143160,7 @@
   jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfFbUninviteDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -138073,7 +143261,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfFbUninviteType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -138172,7 +143360,7 @@
 
   jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfInviteGroupDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -138271,7 +143459,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfInviteGroupType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -138378,7 +143566,7 @@
   jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfTeamGrantAccessDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -138479,7 +143667,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfTeamGrantAccessType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -138621,7 +143809,7 @@
     jsonDict[@"previous_sharing_permission"] = valueObj.previousSharingPermission;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfTeamInviteChangeRoleDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -138726,7 +143914,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfTeamInviteChangeRoleType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -138851,7 +144039,7 @@
     jsonDict[@"sharing_permission"] = valueObj.sharingPermission;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfTeamInviteDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -138954,7 +144142,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfTeamInviteType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -139061,7 +144249,7 @@
   jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfTeamJoinDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -139204,7 +144392,7 @@
     jsonDict[@"sharing_permission"] = valueObj.sharingPermission;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfTeamJoinFromOobLinkDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -139309,7 +144497,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfTeamJoinFromOobLinkType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -139408,7 +144596,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfTeamJoinType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -139515,7 +144703,7 @@
   jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfTeamUninviteDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -139616,7 +144804,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSfTeamUninviteType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -139736,7 +144924,7 @@
                                                return elem0;
                                              }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentAddInviteesDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -139841,7 +145029,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentAddInviteesType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -139950,7 +145138,7 @@
     jsonDict[@"new_value"] = [DBNSDateSerializer serialize:valueObj.dNewValue dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentAddLinkExpiryDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -140052,7 +145240,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentAddLinkExpiryType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -140144,7 +145332,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentAddLinkPasswordDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -140244,7 +145432,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentAddLinkPasswordType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -140346,7 +145534,7 @@
   jsonDict[@"shared_content_access_level"] =
       [DBSHARINGAccessLevelSerializer serialize:valueObj.sharedContentAccessLevel];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentAddMemberDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -140446,7 +145634,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentAddMemberType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -140564,7 +145752,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGDownloadPolicyTypeSerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentChangeDownloadsPolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -140668,7 +145856,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentChangeDownloadsPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -140794,7 +145982,7 @@
     jsonDict[@"previous_access_level"] = [DBSHARINGAccessLevelSerializer serialize:valueObj.previousAccessLevel];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentChangeInviteeRoleDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -140901,7 +146089,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentChangeInviteeRoleType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -141019,7 +146207,7 @@
     jsonDict[@"previous_value"] = [DBSHARINGLinkAudienceSerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentChangeLinkAudienceDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -141122,7 +146310,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentChangeLinkAudienceType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -141244,7 +146432,7 @@
         [DBNSDateSerializer serialize:valueObj.previousValue dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentChangeLinkExpiryDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -141350,7 +146538,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentChangeLinkExpiryType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -141442,7 +146630,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentChangeLinkPasswordDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -141542,7 +146730,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentChangeLinkPasswordType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -141660,7 +146848,7 @@
     jsonDict[@"previous_access_level"] = [DBSHARINGAccessLevelSerializer serialize:valueObj.previousAccessLevel];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentChangeMemberRoleDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -141765,7 +146953,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentChangeMemberRoleType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -141883,7 +147071,7 @@
     jsonDict[@"previous_value"] = [DBSHARINGViewerInfoPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentChangeViewerInfoPolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -141987,7 +147175,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentChangeViewerInfoPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -142096,7 +147284,7 @@
     jsonDict[@"shared_content_link"] = valueObj.sharedContentLink;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentClaimInvitationDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -142196,7 +147384,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentClaimInvitationType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -142336,7 +147524,7 @@
     jsonDict[@"shared_content_owner"] = [DBTEAMLOGUserLogInfoSerializer serialize:valueObj.sharedContentOwner];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentCopyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -142445,7 +147633,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentCopyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -142575,7 +147763,7 @@
     jsonDict[@"shared_content_owner"] = [DBTEAMLOGUserLogInfoSerializer serialize:valueObj.sharedContentOwner];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentDownloadDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -142682,7 +147870,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentDownloadType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -142774,7 +147962,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentRelinquishMembershipDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -142874,7 +148062,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentRelinquishMembershipType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -142984,7 +148172,7 @@
                                                return elem0;
                                              }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentRemoveInviteesDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -143087,7 +148275,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentRemoveInviteesType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -143197,7 +148385,7 @@
         [DBNSDateSerializer serialize:valueObj.previousValue dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentRemoveLinkExpiryDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -143299,7 +148487,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentRemoveLinkExpiryType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -143391,7 +148579,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentRemoveLinkPasswordDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -143491,7 +148679,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentRemoveLinkPasswordType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -143602,7 +148790,7 @@
         [DBSHARINGAccessLevelSerializer serialize:valueObj.sharedContentAccessLevel];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentRemoveMemberDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -143705,7 +148893,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentRemoveMemberType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -143814,7 +149002,7 @@
     jsonDict[@"shared_content_link"] = valueObj.sharedContentLink;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentRequestAccessDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -143914,7 +149102,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentRequestAccessType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -144034,7 +149222,7 @@
                                                return elem0;
                                              }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentRestoreInviteesDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -144140,7 +149328,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentRestoreInviteesType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -144242,7 +149430,7 @@
   jsonDict[@"shared_content_access_level"] =
       [DBSHARINGAccessLevelSerializer serialize:valueObj.sharedContentAccessLevel];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentRestoreMemberDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -144343,7 +149531,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentRestoreMemberType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -144434,7 +149622,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentUnshareDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -144533,7 +149721,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentUnshareType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -144663,7 +149851,7 @@
     jsonDict[@"shared_content_owner"] = [DBTEAMLOGUserLogInfoSerializer serialize:valueObj.sharedContentOwner];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentViewDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -144770,7 +149958,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedContentViewType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -144888,7 +150076,7 @@
     jsonDict[@"previous_value"] = [DBSHARINGSharedLinkPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedFolderChangeLinkPolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -144991,7 +150179,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedFolderChangeLinkPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -145110,7 +150298,7 @@
         [DBTEAMLOGSharedFolderMembersInheritancePolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedFolderChangeMembersInheritancePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -145216,7 +150404,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedFolderChangeMembersInheritancePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -145334,7 +150522,7 @@
     jsonDict[@"previous_value"] = [DBSHARINGAclUpdatePolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedFolderChangeMembersManagementPolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -145438,7 +150626,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedFolderChangeMembersManagementPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -145556,7 +150744,7 @@
     jsonDict[@"previous_value"] = [DBSHARINGMemberPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedFolderChangeMembersPolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -145659,7 +150847,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedFolderChangeMembersPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -145767,7 +150955,7 @@
     jsonDict[@"target_ns_id"] = valueObj.targetNsId;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedFolderCreateDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -145866,7 +151054,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedFolderCreateType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -145958,7 +151146,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedFolderDeclineInvitationDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -146058,7 +151246,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedFolderDeclineInvitationType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -146227,7 +151415,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedFolderMembersInheritancePolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -146326,7 +151514,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedFolderMountDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -146425,7 +151613,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedFolderMountType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -146572,7 +151760,7 @@
     jsonDict[@"new_ns_path"] = valueObj.dNewNsPath;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedFolderNestDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -146677,7 +151865,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedFolderNestType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -146796,7 +151984,7 @@
     jsonDict[@"previous_owner_email"] = valueObj.previousOwnerEmail;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedFolderTransferOwnershipDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -146898,7 +152086,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedFolderTransferOwnershipType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -146989,7 +152177,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedFolderUnmountDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -147088,7 +152276,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedFolderUnmountType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -147277,7 +152465,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkAccessLevel *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -147386,7 +152574,7 @@
 
   jsonDict[@"new_value"] = [DBNSDateSerializer serialize:valueObj.dNewValue dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkAddExpiryDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -147485,7 +152673,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkAddExpiryType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -147607,7 +152795,7 @@
         [DBNSDateSerializer serialize:valueObj.previousValue dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkChangeExpiryDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -147711,7 +152899,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkChangeExpiryType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -147829,7 +153017,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGSharedLinkVisibilitySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkChangeVisibilityDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -147933,7 +153121,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkChangeVisibilityType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -148042,7 +153230,7 @@
     jsonDict[@"shared_link_owner"] = [DBTEAMLOGUserLogInfoSerializer serialize:valueObj.sharedLinkOwner];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkCopyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -148143,7 +153331,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkCopyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -148253,7 +153441,7 @@
         [DBTEAMLOGSharedLinkAccessLevelSerializer serialize:valueObj.sharedLinkAccessLevel];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkCreateDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -148355,7 +153543,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkCreateType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -148464,7 +153652,7 @@
     jsonDict[@"shared_link_owner"] = [DBTEAMLOGUserLogInfoSerializer serialize:valueObj.sharedLinkOwner];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkDisableDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -148565,7 +153753,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkDisableType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -148674,7 +153862,7 @@
     jsonDict[@"shared_link_owner"] = [DBTEAMLOGUserLogInfoSerializer serialize:valueObj.sharedLinkOwner];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkDownloadDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -148775,7 +153963,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkDownloadType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -148885,7 +154073,7 @@
         [DBNSDateSerializer serialize:valueObj.previousValue dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkRemoveExpiryDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -148986,7 +154174,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkRemoveExpiryType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -149118,7 +154306,7 @@
     jsonDict[@"new_value"] = [DBNSDateSerializer serialize:valueObj.dNewValue dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkSettingsAddExpirationDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -149226,7 +154414,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkSettingsAddExpirationType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -149345,7 +154533,7 @@
     jsonDict[@"shared_content_link"] = valueObj.sharedContentLink;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkSettingsAddPasswordDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -149449,7 +154637,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkSettingsAddPasswordType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -149569,7 +154757,7 @@
     jsonDict[@"shared_content_link"] = valueObj.sharedContentLink;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkSettingsAllowDownloadDisabledDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -149673,7 +154861,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkSettingsAllowDownloadDisabledType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -149766,8 +154954,8 @@
   if (self == aSharedLinkSettingsAllowDownloadEnabledDetails) {
     return YES;
   }
-  if (![self.sharedContentAccessLevel
-          isEqual:aSharedLinkSettingsAllowDownloadEnabledDetails.sharedContentAccessLevel]) {
+  if (!
+      [self.sharedContentAccessLevel isEqual:aSharedLinkSettingsAllowDownloadEnabledDetails.sharedContentAccessLevel]) {
     return NO;
   }
   if (self.sharedContentLink) {
@@ -149793,7 +154981,7 @@
     jsonDict[@"shared_content_link"] = valueObj.sharedContentLink;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkSettingsAllowDownloadEnabledDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -149897,7 +155085,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkSettingsAllowDownloadEnabledType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -150042,7 +155230,7 @@
     jsonDict[@"previous_value"] = [DBSHARINGLinkAudienceSerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkSettingsChangeAudienceDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -150151,7 +155339,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkSettingsChangeAudienceType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -150300,7 +155488,7 @@
         [DBNSDateSerializer serialize:valueObj.previousValue dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkSettingsChangeExpirationDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -150412,7 +155600,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkSettingsChangeExpirationType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -150531,7 +155719,7 @@
     jsonDict[@"shared_content_link"] = valueObj.sharedContentLink;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkSettingsChangePasswordDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -150635,7 +155823,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkSettingsChangePasswordType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -150768,7 +155956,7 @@
         [DBNSDateSerializer serialize:valueObj.previousValue dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkSettingsRemoveExpirationDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -150876,7 +156064,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkSettingsRemoveExpirationType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -150995,7 +156183,7 @@
     jsonDict[@"shared_content_link"] = valueObj.sharedContentLink;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkSettingsRemovePasswordDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -151099,7 +156287,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkSettingsRemovePasswordType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -151229,7 +156417,7 @@
                                                      }];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkShareDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -151337,7 +156525,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkShareType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -151446,7 +156634,7 @@
     jsonDict[@"shared_link_owner"] = [DBTEAMLOGUserLogInfoSerializer serialize:valueObj.sharedLinkOwner];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkViewDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -151547,7 +156735,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkViewType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -151757,7 +156945,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedLinkVisibility *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -151860,7 +157048,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedNoteOpenedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -151959,7 +157147,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharedNoteOpenedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -152077,7 +157265,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGSharingFolderJoinPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharingChangeFolderJoinPolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -152183,7 +157371,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharingChangeFolderJoinPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -152302,7 +157490,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGEnforceLinkPasswordPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharingChangeLinkAllowChangeExpirationPolicyDetails *)deserialize:
@@ -152409,7 +157597,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharingChangeLinkAllowChangeExpirationPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -152527,7 +157715,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGDefaultLinkExpirationDaysPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharingChangeLinkDefaultExpirationPolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -152633,7 +157821,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharingChangeLinkDefaultExpirationPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -152751,7 +157939,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGChangeLinkExpirationPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharingChangeLinkEnforcePasswordPolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -152857,7 +158045,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharingChangeLinkEnforcePasswordPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -152975,7 +158163,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGSharingLinkPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharingChangeLinkPolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -153077,7 +158265,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharingChangeLinkPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -153195,7 +158383,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGSharingMemberPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharingChangeMemberPolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -153299,7 +158487,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharingChangeMemberPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -153467,7 +158655,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharingFolderJoinPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -153685,7 +158873,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharingLinkPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -153886,7 +159074,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSharingMemberPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -154006,7 +159194,7 @@
     jsonDict[@"shared_link_owner"] = [DBTEAMLOGUserLogInfoSerializer serialize:valueObj.sharedLinkOwner];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShmodelDisableDownloadsDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -154107,7 +159295,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShmodelDisableDownloadsType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -154217,7 +159405,7 @@
     jsonDict[@"shared_link_owner"] = [DBTEAMLOGUserLogInfoSerializer serialize:valueObj.sharedLinkOwner];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShmodelEnableDownloadsDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -154318,7 +159506,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShmodelEnableDownloadsType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -154409,7 +159597,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShmodelGroupShareDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -154508,7 +159696,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShmodelGroupShareType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -154607,7 +159795,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseAccessGrantedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -154706,7 +159894,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseAccessGrantedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -154805,7 +159993,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseAddMemberDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -154904,7 +160092,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseAddMemberType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -155003,7 +160191,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseArchivedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -155102,7 +160290,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseArchivedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -155211,7 +160399,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGShowcaseDownloadPolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGShowcaseDownloadPolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseChangeDownloadPolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -155314,7 +160502,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseChangeDownloadPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -155423,7 +160611,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGShowcaseEnabledPolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGShowcaseEnabledPolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseChangeEnabledPolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -155526,7 +160714,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseChangeEnabledPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -155635,7 +160823,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGShowcaseExternalSharingPolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGShowcaseExternalSharingPolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseChangeExternalSharingPolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -155739,7 +160927,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseChangeExternalSharingPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -155838,7 +161026,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseCreatedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -155937,7 +161125,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseCreatedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -156052,7 +161240,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseDeleteCommentDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -156152,7 +161340,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseDeleteCommentType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -156258,7 +161446,7 @@
   jsonDict[@"showcase_id"] = valueObj.showcaseId;
   jsonDict[@"showcase_title"] = valueObj.showcaseTitle;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseDocumentLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -156427,7 +161615,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseDownloadPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -156550,7 +161738,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseEditCommentDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -156650,7 +161838,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseEditCommentType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -156749,7 +161937,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseEditedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -156848,7 +162036,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseEditedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -157016,7 +162204,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseEnabledPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -157193,7 +162381,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseExternalSharingPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -157300,7 +162488,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseFileAddedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -157399,7 +162587,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseFileAddedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -157505,7 +162693,7 @@
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
   jsonDict[@"download_type"] = valueObj.downloadType;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseFileDownloadDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -157605,7 +162793,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseFileDownloadType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -157704,7 +162892,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseFileRemovedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -157803,7 +162991,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseFileRemovedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -157902,7 +163090,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseFileViewDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -158001,7 +163189,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseFileViewType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -158101,7 +163289,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcasePermanentlyDeletedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -158201,7 +163389,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcasePermanentlyDeletedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -158316,7 +163504,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcasePostCommentDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -158416,7 +163604,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcasePostCommentType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -158515,7 +163703,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseRemoveMemberDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -158614,7 +163802,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseRemoveMemberType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -158713,7 +163901,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseRenamedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -158812,7 +164000,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseRenamedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -158911,7 +164099,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseRequestAccessDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -159010,7 +164198,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseRequestAccessType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -159126,7 +164314,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseResolveCommentDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -159226,7 +164414,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseResolveCommentType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -159325,7 +164513,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseRestoredDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -159424,7 +164612,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseRestoredType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -159524,7 +164712,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseTrashedDeprecatedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -159624,7 +164812,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseTrashedDeprecatedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -159723,7 +164911,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseTrashedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -159822,7 +165010,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseTrashedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -159938,7 +165126,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseUnresolveCommentDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -160038,7 +165226,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseUnresolveCommentType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -160138,7 +165326,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseUntrashedDeprecatedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -160238,7 +165426,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseUntrashedDeprecatedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -160337,7 +165525,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseUntrashedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -160436,7 +165624,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseUntrashedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -160535,7 +165723,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseViewDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -160634,7 +165822,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGShowcaseViewType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -160725,7 +165913,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSignInAsSessionEndDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -160824,7 +166012,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSignInAsSessionEndType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -160915,7 +166103,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSignInAsSessionStartDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -161014,7 +166202,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSignInAsSessionStartType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -161136,7 +166324,7 @@
     jsonDict[@"previous_value"] = [DBTEAMPOLICIESSmartSyncPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSmartSyncChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -161239,7 +166427,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSmartSyncChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -161331,7 +166519,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSmartSyncCreateAdminPrivilegeReportDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -161431,7 +166619,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSmartSyncCreateAdminPrivilegeReportType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -161539,7 +166727,7 @@
   jsonDict[@"previous_value"] = [DBTEAMLOGSmartSyncOptOutPolicySerializer serialize:valueObj.previousValue];
   jsonDict[@"new_value"] = [DBTEAMLOGSmartSyncOptOutPolicySerializer serialize:valueObj.dNewValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSmartSyncNotOptOutDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -161641,7 +166829,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSmartSyncNotOptOutType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -161749,7 +166937,7 @@
   jsonDict[@"previous_value"] = [DBTEAMLOGSmartSyncOptOutPolicySerializer serialize:valueObj.previousValue];
   jsonDict[@"new_value"] = [DBTEAMLOGSmartSyncOptOutPolicySerializer serialize:valueObj.dNewValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSmartSyncOptOutDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -161920,7 +167108,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSmartSyncOptOutPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -162027,7 +167215,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSmartSyncOptOutType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -162136,7 +167324,7 @@
   jsonDict[@"previous_value"] = [DBTEAMPOLICIESSmarterSmartSyncPolicyStateSerializer serialize:valueObj.previousValue];
   jsonDict[@"new_value"] = [DBTEAMPOLICIESSmarterSmartSyncPolicyStateSerializer serialize:valueObj.dNewValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSmarterSmartSyncPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -162240,7 +167428,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSmarterSmartSyncPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -162429,7 +167617,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSpaceCapsType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -162628,7 +167816,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSpaceLimitsStatus *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -162738,7 +167926,7 @@
 
   jsonDict[@"certificate_details"] = [DBTEAMLOGCertificateSerializer serialize:valueObj.certificateDetails];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoAddCertDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -162838,7 +168026,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoAddCertType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -162937,7 +168125,7 @@
 
   jsonDict[@"new_value"] = valueObj.dNewValue;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoAddLoginUrlDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -163036,7 +168224,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoAddLoginUrlType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -163144,7 +168332,7 @@
     jsonDict[@"new_value"] = valueObj.dNewValue;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoAddLogoutUrlDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -163243,7 +168431,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoAddLogoutUrlType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -163361,7 +168549,7 @@
         [DBTEAMLOGCertificateSerializer serialize:valueObj.previousCertificateDetails];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoChangeCertDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -163466,7 +168654,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoChangeCertType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -163572,7 +168760,7 @@
   jsonDict[@"previous_value"] = valueObj.previousValue;
   jsonDict[@"new_value"] = valueObj.dNewValue;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoChangeLoginUrlDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -163672,7 +168860,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoChangeLoginUrlType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -163792,7 +168980,7 @@
     jsonDict[@"new_value"] = valueObj.dNewValue;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoChangeLogoutUrlDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -163892,7 +169080,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoChangeLogoutUrlType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -164009,7 +169197,7 @@
     jsonDict[@"previous_value"] = [DBTEAMPOLICIESSsoPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -164110,7 +169298,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -164217,7 +169405,7 @@
   jsonDict[@"previous_value"] = valueObj.previousValue;
   jsonDict[@"new_value"] = valueObj.dNewValue;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoChangeSamlIdentityModeDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -164318,7 +169506,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoChangeSamlIdentityModeType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -164418,7 +169606,7 @@
 
   jsonDict[@"error_details"] = [DBTEAMLOGFailureDetailsLogInfoSerializer serialize:valueObj.errorDetails];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoErrorDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -164518,7 +169706,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoErrorType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -164609,7 +169797,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoRemoveCertDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -164708,7 +169896,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoRemoveCertType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -164807,7 +169995,7 @@
 
   jsonDict[@"previous_value"] = valueObj.previousValue;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoRemoveLoginUrlDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -164906,7 +170094,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoRemoveLoginUrlType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -165005,7 +170193,7 @@
 
   jsonDict[@"previous_value"] = valueObj.previousValue;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoRemoveLogoutUrlDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -165104,7 +170292,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGSsoRemoveLogoutUrlType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -165206,7 +170394,7 @@
   jsonDict[@"federation_extra_details"] =
       [DBTEAMLOGFedExtraDetailsSerializer serialize:valueObj.federationExtraDetails];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGStartedEnterpriseAdminSessionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -165307,7 +170495,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGStartedEnterpriseAdminSessionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -165414,7 +170602,7 @@
   jsonDict[@"start_date"] = [DBNSDateSerializer serialize:valueObj.startDate dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
   jsonDict[@"end_date"] = [DBNSDateSerializer serialize:valueObj.endDate dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamActivityCreateReportDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -165516,7 +170704,7 @@
 
   jsonDict[@"failure_reason"] = [DBTEAMTeamReportFailureReasonSerializer serialize:valueObj.failureReason];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamActivityCreateReportFailDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -165617,7 +170805,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamActivityCreateReportFailType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -165716,7 +170904,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamActivityCreateReportType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -165884,7 +171072,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamBrandingPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -166001,7 +171189,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGTeamBrandingPolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGTeamBrandingPolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamBrandingPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -166103,7 +171291,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamBrandingPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -166202,13 +171390,1357 @@
 
   jsonDict[@"team"] = valueObj.team;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *team = valueDict[@"team"];
 
   return [[DBTEAMLOGTeamDetails alloc] initWithTeam:team];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamEncryptionKeyCancelKeyDeletionDetails:other];
+}
+
+- (BOOL)isEqualToTeamEncryptionKeyCancelKeyDeletionDetails:
+    (DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionDetails *)aTeamEncryptionKeyCancelKeyDeletionDetails {
+  if (self == aTeamEncryptionKeyCancelKeyDeletionDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamEncryptionKeyCancelKeyDeletionType:other];
+}
+
+- (BOOL)isEqualToTeamEncryptionKeyCancelKeyDeletionType:
+    (DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionType *)aTeamEncryptionKeyCancelKeyDeletionType {
+  if (self == aTeamEncryptionKeyCancelKeyDeletionType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aTeamEncryptionKeyCancelKeyDeletionType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamEncryptionKeyCreateKeyDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyCreateKeyDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamEncryptionKeyCreateKeyDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamEncryptionKeyCreateKeyDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamEncryptionKeyCreateKeyDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamEncryptionKeyCreateKeyDetails:other];
+}
+
+- (BOOL)isEqualToTeamEncryptionKeyCreateKeyDetails:
+    (DBTEAMLOGTeamEncryptionKeyCreateKeyDetails *)aTeamEncryptionKeyCreateKeyDetails {
+  if (self == aTeamEncryptionKeyCreateKeyDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyCreateKeyDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamEncryptionKeyCreateKeyDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGTeamEncryptionKeyCreateKeyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGTeamEncryptionKeyCreateKeyDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamEncryptionKeyCreateKeyType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyCreateKeyType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamEncryptionKeyCreateKeyTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamEncryptionKeyCreateKeyTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamEncryptionKeyCreateKeyTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamEncryptionKeyCreateKeyType:other];
+}
+
+- (BOOL)isEqualToTeamEncryptionKeyCreateKeyType:
+    (DBTEAMLOGTeamEncryptionKeyCreateKeyType *)aTeamEncryptionKeyCreateKeyType {
+  if (self == aTeamEncryptionKeyCreateKeyType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aTeamEncryptionKeyCreateKeyType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyCreateKeyTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamEncryptionKeyCreateKeyType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGTeamEncryptionKeyCreateKeyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGTeamEncryptionKeyCreateKeyType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamEncryptionKeyDeleteKeyDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyDeleteKeyDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamEncryptionKeyDeleteKeyDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamEncryptionKeyDeleteKeyDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamEncryptionKeyDeleteKeyDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamEncryptionKeyDeleteKeyDetails:other];
+}
+
+- (BOOL)isEqualToTeamEncryptionKeyDeleteKeyDetails:
+    (DBTEAMLOGTeamEncryptionKeyDeleteKeyDetails *)aTeamEncryptionKeyDeleteKeyDetails {
+  if (self == aTeamEncryptionKeyDeleteKeyDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyDeleteKeyDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamEncryptionKeyDeleteKeyDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGTeamEncryptionKeyDeleteKeyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGTeamEncryptionKeyDeleteKeyDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamEncryptionKeyDeleteKeyType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyDeleteKeyType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamEncryptionKeyDeleteKeyTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamEncryptionKeyDeleteKeyTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamEncryptionKeyDeleteKeyTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamEncryptionKeyDeleteKeyType:other];
+}
+
+- (BOOL)isEqualToTeamEncryptionKeyDeleteKeyType:
+    (DBTEAMLOGTeamEncryptionKeyDeleteKeyType *)aTeamEncryptionKeyDeleteKeyType {
+  if (self == aTeamEncryptionKeyDeleteKeyType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aTeamEncryptionKeyDeleteKeyType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyDeleteKeyTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamEncryptionKeyDeleteKeyType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGTeamEncryptionKeyDeleteKeyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGTeamEncryptionKeyDeleteKeyType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamEncryptionKeyDisableKeyDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyDisableKeyDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamEncryptionKeyDisableKeyDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamEncryptionKeyDisableKeyDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamEncryptionKeyDisableKeyDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamEncryptionKeyDisableKeyDetails:other];
+}
+
+- (BOOL)isEqualToTeamEncryptionKeyDisableKeyDetails:
+    (DBTEAMLOGTeamEncryptionKeyDisableKeyDetails *)aTeamEncryptionKeyDisableKeyDetails {
+  if (self == aTeamEncryptionKeyDisableKeyDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyDisableKeyDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamEncryptionKeyDisableKeyDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGTeamEncryptionKeyDisableKeyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGTeamEncryptionKeyDisableKeyDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamEncryptionKeyDisableKeyType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyDisableKeyType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamEncryptionKeyDisableKeyTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamEncryptionKeyDisableKeyTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamEncryptionKeyDisableKeyTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamEncryptionKeyDisableKeyType:other];
+}
+
+- (BOOL)isEqualToTeamEncryptionKeyDisableKeyType:
+    (DBTEAMLOGTeamEncryptionKeyDisableKeyType *)aTeamEncryptionKeyDisableKeyType {
+  if (self == aTeamEncryptionKeyDisableKeyType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aTeamEncryptionKeyDisableKeyType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyDisableKeyTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamEncryptionKeyDisableKeyType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGTeamEncryptionKeyDisableKeyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGTeamEncryptionKeyDisableKeyType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamEncryptionKeyEnableKeyDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyEnableKeyDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamEncryptionKeyEnableKeyDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamEncryptionKeyEnableKeyDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamEncryptionKeyEnableKeyDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamEncryptionKeyEnableKeyDetails:other];
+}
+
+- (BOOL)isEqualToTeamEncryptionKeyEnableKeyDetails:
+    (DBTEAMLOGTeamEncryptionKeyEnableKeyDetails *)aTeamEncryptionKeyEnableKeyDetails {
+  if (self == aTeamEncryptionKeyEnableKeyDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyEnableKeyDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamEncryptionKeyEnableKeyDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGTeamEncryptionKeyEnableKeyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGTeamEncryptionKeyEnableKeyDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamEncryptionKeyEnableKeyType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyEnableKeyType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamEncryptionKeyEnableKeyTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamEncryptionKeyEnableKeyTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamEncryptionKeyEnableKeyTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamEncryptionKeyEnableKeyType:other];
+}
+
+- (BOOL)isEqualToTeamEncryptionKeyEnableKeyType:
+    (DBTEAMLOGTeamEncryptionKeyEnableKeyType *)aTeamEncryptionKeyEnableKeyType {
+  if (self == aTeamEncryptionKeyEnableKeyType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aTeamEncryptionKeyEnableKeyType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyEnableKeyTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamEncryptionKeyEnableKeyType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGTeamEncryptionKeyEnableKeyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGTeamEncryptionKeyEnableKeyType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamEncryptionKeyRotateKeyDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyRotateKeyDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamEncryptionKeyRotateKeyDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamEncryptionKeyRotateKeyDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamEncryptionKeyRotateKeyDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamEncryptionKeyRotateKeyDetails:other];
+}
+
+- (BOOL)isEqualToTeamEncryptionKeyRotateKeyDetails:
+    (DBTEAMLOGTeamEncryptionKeyRotateKeyDetails *)aTeamEncryptionKeyRotateKeyDetails {
+  if (self == aTeamEncryptionKeyRotateKeyDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyRotateKeyDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamEncryptionKeyRotateKeyDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGTeamEncryptionKeyRotateKeyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGTeamEncryptionKeyRotateKeyDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamEncryptionKeyRotateKeyType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyRotateKeyType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamEncryptionKeyRotateKeyTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamEncryptionKeyRotateKeyTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamEncryptionKeyRotateKeyTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamEncryptionKeyRotateKeyType:other];
+}
+
+- (BOOL)isEqualToTeamEncryptionKeyRotateKeyType:
+    (DBTEAMLOGTeamEncryptionKeyRotateKeyType *)aTeamEncryptionKeyRotateKeyType {
+  if (self == aTeamEncryptionKeyRotateKeyType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aTeamEncryptionKeyRotateKeyType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyRotateKeyTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamEncryptionKeyRotateKeyType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGTeamEncryptionKeyRotateKeyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGTeamEncryptionKeyRotateKeyType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamEncryptionKeyScheduleKeyDeletionDetails:other];
+}
+
+- (BOOL)isEqualToTeamEncryptionKeyScheduleKeyDeletionDetails:
+    (DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionDetails *)aTeamEncryptionKeyScheduleKeyDeletionDetails {
+  if (self == aTeamEncryptionKeyScheduleKeyDeletionDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamEncryptionKeyScheduleKeyDeletionType:other];
+}
+
+- (BOOL)isEqualToTeamEncryptionKeyScheduleKeyDeletionType:
+    (DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionType *)aTeamEncryptionKeyScheduleKeyDeletionType {
+  if (self == aTeamEncryptionKeyScheduleKeyDeletionType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aTeamEncryptionKeyScheduleKeyDeletionType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return jsonDict;
+}
+
++ (DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionType alloc] initWithDescription_:description_];
 }
 
 @end
@@ -166441,7 +172973,7 @@
                                              }];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamEvent *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -166641,7 +173173,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamExtensionsPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -166758,7 +173290,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGTeamExtensionsPolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGTeamExtensionsPolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamExtensionsPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -166861,7 +173393,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamExtensionsPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -166979,7 +173511,7 @@
     jsonDict[@"previous_value"] = [DBTEAMTeamFolderStatusSerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamFolderChangeStatusDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -167080,7 +173612,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamFolderChangeStatusType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -167171,7 +173703,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamFolderCreateDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -167270,7 +173802,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamFolderCreateType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -167369,7 +173901,7 @@
 
   jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamFolderDowngradeDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -167468,7 +174000,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamFolderDowngradeType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -167560,7 +174092,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamFolderPermanentlyDeleteDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -167660,7 +174192,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamFolderPermanentlyDeleteType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -167766,7 +174298,7 @@
   jsonDict[@"previous_folder_name"] = valueObj.previousFolderName;
   jsonDict[@"new_folder_name"] = valueObj.dNewFolderName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamFolderRenameDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -167867,7 +174399,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamFolderRenameType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -167984,7 +174516,7 @@
     jsonDict[@"additional_license_purchase"] = valueObj.additionalLicensePurchase;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamInviteDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -168105,7 +174637,7 @@
     jsonDict[@"display_name"] = valueObj.displayName;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamLinkedAppLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -168205,7 +174737,7 @@
 
   jsonDict[@"display_name"] = valueObj.displayName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -168382,7 +174914,7 @@
     jsonDict[@"team"] = [DBTEAMLOGTeamLogInfoSerializer serialize:valueObj.team];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMemberLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -168430,6 +174962,14 @@
   return self;
 }
 
+- (instancetype)initWithGuest {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGTeamMembershipTypeGuest;
+  }
+  return self;
+}
+
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -168450,6 +174990,10 @@
   return _tag == DBTEAMLOGTeamMembershipTypeFull;
 }
 
+- (BOOL)isGuest {
+  return _tag == DBTEAMLOGTeamMembershipTypeGuest;
+}
+
 - (BOOL)isOther {
   return _tag == DBTEAMLOGTeamMembershipTypeOther;
 }
@@ -168460,6 +175004,8 @@
     return @"DBTEAMLOGTeamMembershipTypeFree";
   case DBTEAMLOGTeamMembershipTypeFull:
     return @"DBTEAMLOGTeamMembershipTypeFull";
+  case DBTEAMLOGTeamMembershipTypeGuest:
+    return @"DBTEAMLOGTeamMembershipTypeGuest";
   case DBTEAMLOGTeamMembershipTypeOther:
     return @"DBTEAMLOGTeamMembershipTypeOther";
   }
@@ -168504,6 +175050,9 @@
   case DBTEAMLOGTeamMembershipTypeFull:
     result = prime * result + [[self tagName] hash];
     break;
+  case DBTEAMLOGTeamMembershipTypeGuest:
+    result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMLOGTeamMembershipTypeOther:
     result = prime * result + [[self tagName] hash];
     break;
@@ -168536,6 +175085,8 @@
     return [[self tagName] isEqual:[aTeamMembershipType tagName]];
   case DBTEAMLOGTeamMembershipTypeFull:
     return [[self tagName] isEqual:[aTeamMembershipType tagName]];
+  case DBTEAMLOGTeamMembershipTypeGuest:
+    return [[self tagName] isEqual:[aTeamMembershipType tagName]];
   case DBTEAMLOGTeamMembershipTypeOther:
     return [[self tagName] isEqual:[aTeamMembershipType tagName]];
   }
@@ -168555,13 +175106,15 @@
     jsonDict[@".tag"] = @"free";
   } else if ([valueObj isFull]) {
     jsonDict[@".tag"] = @"full";
+  } else if ([valueObj isGuest]) {
+    jsonDict[@".tag"] = @"guest";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMembershipType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -168571,6 +175124,8 @@
     return [[DBTEAMLOGTeamMembershipType alloc] initWithFree];
   } else if ([tag isEqualToString:@"full"]) {
     return [[DBTEAMLOGTeamMembershipType alloc] initWithFull];
+  } else if ([tag isEqualToString:@"guest"]) {
+    return [[DBTEAMLOGTeamMembershipType alloc] initWithGuest];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGTeamMembershipType alloc] initWithOther];
   } else {
@@ -168668,7 +175223,7 @@
 
   jsonDict[@"team_name"] = valueObj.teamName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeFromDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -168767,7 +175322,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeFromType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -168869,7 +175424,7 @@
   jsonDict[@"request_accepted_details"] =
       [DBTEAMLOGTeamMergeRequestAcceptedExtraDetailsSerializer serialize:valueObj.requestAcceptedDetails];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestAcceptedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -169068,7 +175623,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestAcceptedExtraDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -169187,7 +175742,7 @@
   jsonDict[@"secondary_team"] = valueObj.secondaryTeam;
   jsonDict[@"sent_by"] = valueObj.sentBy;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestAcceptedShownToPrimaryTeamDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -169289,7 +175844,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestAcceptedShownToPrimaryTeamType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -169397,7 +175952,7 @@
   jsonDict[@"primary_team"] = valueObj.primaryTeam;
   jsonDict[@"sent_by"] = valueObj.sentBy;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestAcceptedShownToSecondaryTeamDetails *)deserialize:
@@ -169500,7 +176055,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestAcceptedShownToSecondaryTeamType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -169599,7 +176154,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestAcceptedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -169708,7 +176263,7 @@
     jsonDict[@"details"] = valueObj.details;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestAutoCanceledDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -169808,7 +176363,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestAutoCanceledType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -169910,7 +176465,7 @@
   jsonDict[@"request_canceled_details"] =
       [DBTEAMLOGTeamMergeRequestCanceledExtraDetailsSerializer serialize:valueObj.requestCanceledDetails];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestCanceledDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -170109,7 +176664,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestCanceledExtraDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -170228,7 +176783,7 @@
   jsonDict[@"secondary_team"] = valueObj.secondaryTeam;
   jsonDict[@"sent_by"] = valueObj.sentBy;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestCanceledShownToPrimaryTeamDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -170330,7 +176885,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestCanceledShownToPrimaryTeamType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -170438,7 +176993,7 @@
   jsonDict[@"sent_to"] = valueObj.sentTo;
   jsonDict[@"sent_by"] = valueObj.sentBy;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestCanceledShownToSecondaryTeamDetails *)deserialize:
@@ -170540,7 +177095,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestCanceledShownToSecondaryTeamType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -170639,7 +177194,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestCanceledType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -170741,7 +177296,7 @@
   jsonDict[@"request_expired_details"] =
       [DBTEAMLOGTeamMergeRequestExpiredExtraDetailsSerializer serialize:valueObj.requestExpiredDetails];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestExpiredDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -170940,7 +177495,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestExpiredExtraDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -171059,7 +177614,7 @@
   jsonDict[@"secondary_team"] = valueObj.secondaryTeam;
   jsonDict[@"sent_by"] = valueObj.sentBy;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestExpiredShownToPrimaryTeamDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -171161,7 +177716,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestExpiredShownToPrimaryTeamType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -171261,7 +177816,7 @@
 
   jsonDict[@"sent_to"] = valueObj.sentTo;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestExpiredShownToSecondaryTeamDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -171361,7 +177916,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestExpiredShownToSecondaryTeamType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -171460,7 +178015,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestExpiredType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -171567,7 +178122,7 @@
   jsonDict[@"secondary_team"] = valueObj.secondaryTeam;
   jsonDict[@"sent_by"] = valueObj.sentBy;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestRejectedShownToPrimaryTeamDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -171669,7 +178224,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestRejectedShownToPrimaryTeamType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -171770,7 +178325,7 @@
 
   jsonDict[@"sent_by"] = valueObj.sentBy;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestRejectedShownToSecondaryTeamDetails *)deserialize:
@@ -171871,7 +178426,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestRejectedShownToSecondaryTeamType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -171973,7 +178528,7 @@
   jsonDict[@"request_reminder_details"] =
       [DBTEAMLOGTeamMergeRequestReminderExtraDetailsSerializer serialize:valueObj.requestReminderDetails];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestReminderDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -172172,7 +178727,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestReminderExtraDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -172291,7 +178846,7 @@
   jsonDict[@"secondary_team"] = valueObj.secondaryTeam;
   jsonDict[@"sent_to"] = valueObj.sentTo;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestReminderShownToPrimaryTeamDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -172393,7 +178948,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestReminderShownToPrimaryTeamType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -172494,7 +179049,7 @@
 
   jsonDict[@"sent_to"] = valueObj.sentTo;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestReminderShownToSecondaryTeamDetails *)deserialize:
@@ -172595,7 +179150,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestReminderShownToSecondaryTeamType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -172694,7 +179249,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestReminderType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -172794,7 +179349,7 @@
 
   jsonDict[@"team"] = valueObj.team;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestRevokedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -172893,7 +179448,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestRevokedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -173000,7 +179555,7 @@
   jsonDict[@"secondary_team"] = valueObj.secondaryTeam;
   jsonDict[@"sent_to"] = valueObj.sentTo;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestSentShownToPrimaryTeamDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -173102,7 +179657,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestSentShownToPrimaryTeamType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -173202,7 +179757,7 @@
 
   jsonDict[@"sent_to"] = valueObj.sentTo;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestSentShownToSecondaryTeamDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -173302,7 +179857,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeRequestSentShownToSecondaryTeamType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -173401,7 +179956,7 @@
 
   jsonDict[@"team_name"] = valueObj.teamName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeToDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -173500,7 +180055,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamMergeToType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -173606,7 +180161,7 @@
   jsonDict[@"team_display_name"] = valueObj.teamDisplayName;
   jsonDict[@"team_legal_name"] = valueObj.teamLegalName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamName *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -173699,7 +180254,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamProfileAddBackgroundDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -173798,7 +180353,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamProfileAddBackgroundType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -173889,7 +180444,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamProfileAddLogoDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -173988,7 +180543,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamProfileAddLogoType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -174080,7 +180635,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamProfileChangeBackgroundDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -174180,7 +180735,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamProfileChangeBackgroundType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -174288,7 +180843,7 @@
   jsonDict[@"new_value"] = valueObj.dNewValue;
   jsonDict[@"previous_value"] = valueObj.previousValue;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamProfileChangeDefaultLanguageDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -174390,7 +180945,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamProfileChangeDefaultLanguageType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -174481,7 +181036,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamProfileChangeLogoDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -174580,7 +181135,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamProfileChangeLogoType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -174696,7 +181251,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGTeamNameSerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamProfileChangeNameDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -174797,7 +181352,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamProfileChangeNameType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -174889,7 +181444,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamProfileRemoveBackgroundDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -174989,7 +181544,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamProfileRemoveBackgroundType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -175080,7 +181635,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamProfileRemoveLogoDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -175179,7 +181734,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamProfileRemoveLogoType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -175347,7 +181902,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamSelectiveSyncPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -175464,7 +182019,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGTeamSelectiveSyncPolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGTeamSelectiveSyncPolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamSelectiveSyncPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -175568,7 +182123,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamSelectiveSyncPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -175676,7 +182231,7 @@
   jsonDict[@"previous_value"] = [DBFILESSyncSettingSerializer serialize:valueObj.previousValue];
   jsonDict[@"new_value"] = [DBFILESSyncSettingSerializer serialize:valueObj.dNewValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamSelectiveSyncSettingsChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -175778,7 +182333,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamSelectiveSyncSettingsChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -175898,7 +182453,7 @@
                                                                  return elem0;
                                                                }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamSharingWhitelistSubjectsChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -176008,7 +182563,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTeamSharingWhitelistSubjectsChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -176099,7 +182654,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTfaAddBackupPhoneDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -176198,7 +182753,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTfaAddBackupPhoneType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -176289,7 +182844,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTfaAddExceptionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -176388,7 +182943,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTfaAddExceptionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -176479,7 +183034,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTfaAddSecurityKeyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -176578,7 +183133,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTfaAddSecurityKeyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -176669,7 +183224,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTfaChangeBackupPhoneDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -176768,7 +183323,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTfaChangeBackupPhoneType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -176885,7 +183440,7 @@
     jsonDict[@"previous_value"] = [DBTEAMPOLICIESTwoStepVerificationPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTfaChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -176989,7 +183544,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTfaChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -177119,7 +183674,7 @@
     jsonDict[@"used_rescue_code"] = valueObj.usedRescueCode;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTfaChangeStatusDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -177224,7 +183779,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTfaChangeStatusType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -177434,7 +183989,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTfaConfiguration *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -177537,7 +184092,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTfaRemoveBackupPhoneDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -177636,7 +184191,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTfaRemoveBackupPhoneType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -177727,7 +184282,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTfaRemoveExceptionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -177826,7 +184381,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTfaRemoveExceptionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -177917,7 +184472,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTfaRemoveSecurityKeyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -178016,7 +184571,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTfaRemoveSecurityKeyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -178107,7 +184662,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTfaResetDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -178206,7 +184761,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTfaResetType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -178500,7 +185055,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTimeUnit *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -178680,7 +185235,7 @@
     jsonDict[@"team"] = [DBTEAMLOGTeamLogInfoSerializer serialize:valueObj.team];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTrustedNonTeamMemberLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -178858,7 +185413,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTrustedNonTeamMemberType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -179097,7 +185652,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTrustedTeamsRequestAction *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -179300,7 +185855,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTrustedTeamsRequestState *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -179428,7 +185983,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGTwoAccountPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTwoAccountChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -179530,7 +186085,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTwoAccountChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -179698,7 +186253,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGTwoAccountPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -179797,7 +186352,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGUndoNamingConventionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -179896,7 +186451,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGUndoNamingConventionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -179988,7 +186543,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGUndoOrganizeFolderWithTidyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -180088,7 +186643,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGUndoOrganizeFolderWithTidyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -180207,7 +186762,7 @@
     jsonDict[@"display_name"] = valueObj.displayName;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGUserLinkedAppLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -180330,7 +186885,7 @@
     jsonDict[@"locale"] = valueObj.locale;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGUserNameLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -180451,7 +187006,7 @@
     jsonDict[@"display_name"] = valueObj.displayName;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGUserOrTeamLinkedAppLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -180557,7 +187112,7 @@
                                              return elem0;
                                            }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGUserTagsAddedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -180659,7 +187214,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGUserTagsAddedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -180764,7 +187319,7 @@
                                              return elem0;
                                            }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGUserTagsRemovedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -180866,7 +187421,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGUserTagsRemovedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -180974,7 +187529,7 @@
   jsonDict[@"previous_value"] = [DBTEAMLOGPassPolicySerializer serialize:valueObj.previousValue];
   jsonDict[@"new_value"] = [DBTEAMLOGPassPolicySerializer serialize:valueObj.dNewValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGViewerInfoPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -181074,7 +187629,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGViewerInfoPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -181242,7 +187797,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGWatermarkingPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -181359,7 +187914,7 @@
   jsonDict[@"new_value"] = [DBTEAMLOGWatermarkingPolicySerializer serialize:valueObj.dNewValue];
   jsonDict[@"previous_value"] = [DBTEAMLOGWatermarkingPolicySerializer serialize:valueObj.previousValue];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGWatermarkingPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -181461,7 +188016,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGWatermarkingPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -181631,7 +188186,7 @@
     jsonDict[@"session_info"] = [DBTEAMLOGWebSessionLogInfoSerializer serialize:valueObj.sessionInfo];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGWebDeviceSessionLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -181756,7 +188311,7 @@
     jsonDict[@"session_id"] = valueObj.sessionId;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGWebSessionLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -181863,7 +188418,7 @@
   jsonDict[@"previous_value"] = valueObj.previousValue;
   jsonDict[@"new_value"] = valueObj.dNewValue;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGWebSessionsChangeActiveSessionLimitDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -181965,7 +188520,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGWebSessionsChangeActiveSessionLimitType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -182088,7 +188643,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGWebSessionsFixedLengthPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGWebSessionsChangeFixedLengthPolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -182195,7 +188750,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGWebSessionsChangeFixedLengthPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -182318,7 +188873,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGWebSessionsIdleLengthPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGWebSessionsChangeIdleLengthPolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -182425,7 +188980,7 @@
 
   jsonDict[@"description"] = valueObj.description_;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGWebSessionsChangeIdleLengthPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -182607,7 +189162,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGWebSessionsFixedLengthPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -182798,7 +189353,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMLOGWebSessionsIdleLengthPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {

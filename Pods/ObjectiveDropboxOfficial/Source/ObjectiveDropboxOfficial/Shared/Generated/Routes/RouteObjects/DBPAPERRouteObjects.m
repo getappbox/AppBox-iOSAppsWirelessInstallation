@@ -73,11 +73,7 @@ static NSObject *lockObj = nil;
                                       deprecated:@YES
                                       resultType:nil
                                        errorType:[DBPAPERDocLookupError class]
-                                           attrs:@{
-                                             @"auth" : @"user",
-                                             @"host" : @"api",
-                                             @"style" : @"rpc"
-                                           }
+                                           attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                            dataStructSerialBlock:nil
                          dataStructDeserialBlock:nil];
     }
@@ -93,11 +89,7 @@ static NSObject *lockObj = nil;
                                      deprecated:@YES
                                      resultType:[DBPAPERPaperDocCreateUpdateResult class]
                                       errorType:[DBPAPERPaperDocCreateError class]
-                                          attrs:@{
-                                            @"auth" : @"user",
-                                            @"host" : @"api",
-                                            @"style" : @"upload"
-                                          }
+                                          attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"upload"}
                           dataStructSerialBlock:nil
                         dataStructDeserialBlock:nil];
     }
@@ -113,11 +105,7 @@ static NSObject *lockObj = nil;
                                        deprecated:@YES
                                        resultType:[DBPAPERPaperDocExportResult class]
                                         errorType:[DBPAPERDocLookupError class]
-                                            attrs:@{
-                                              @"auth" : @"user",
-                                              @"host" : @"api",
-                                              @"style" : @"download"
-                                            }
+                                            attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"download"}
                             dataStructSerialBlock:nil
                           dataStructDeserialBlock:nil];
     }
@@ -133,11 +121,7 @@ static NSObject *lockObj = nil;
                                               deprecated:@YES
                                               resultType:[DBPAPERListUsersOnFolderResponse class]
                                                errorType:[DBPAPERDocLookupError class]
-                                                   attrs:@{
-                                                     @"auth" : @"user",
-                                                     @"host" : @"api",
-                                                     @"style" : @"rpc"
-                                                   }
+                                                   attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                    dataStructSerialBlock:nil
                                  dataStructDeserialBlock:nil];
     }
@@ -148,18 +132,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBPAPERDocsFolderUsersListContinue {
   @synchronized(lockObj) {
     if (!DBPAPERDocsFolderUsersListContinue) {
-      DBPAPERDocsFolderUsersListContinue = [[DBRoute alloc] init:@"docs/folder_users/list/continue"
-                                                      namespace_:@"paper"
-                                                      deprecated:@YES
-                                                      resultType:[DBPAPERListUsersOnFolderResponse class]
-                                                       errorType:[DBPAPERListUsersCursorError class]
-                                                           attrs:@{
-                                                             @"auth" : @"user",
-                                                             @"host" : @"api",
-                                                             @"style" : @"rpc"
-                                                           }
-                                           dataStructSerialBlock:nil
-                                         dataStructDeserialBlock:nil];
+      DBPAPERDocsFolderUsersListContinue =
+          [[DBRoute alloc] init:@"docs/folder_users/list/continue"
+                           namespace_:@"paper"
+                           deprecated:@YES
+                           resultType:[DBPAPERListUsersOnFolderResponse class]
+                            errorType:[DBPAPERListUsersCursorError class]
+                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBPAPERDocsFolderUsersListContinue;
   }
@@ -173,11 +154,7 @@ static NSObject *lockObj = nil;
                                             deprecated:@YES
                                             resultType:[DBPAPERFoldersContainingPaperDoc class]
                                              errorType:[DBPAPERDocLookupError class]
-                                                 attrs:@{
-                                                   @"auth" : @"user",
-                                                   @"host" : @"api",
-                                                   @"style" : @"rpc"
-                                                 }
+                                                 attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                  dataStructSerialBlock:nil
                                dataStructDeserialBlock:nil];
     }
@@ -193,11 +170,7 @@ static NSObject *lockObj = nil;
                                    deprecated:@YES
                                    resultType:[DBPAPERListPaperDocsResponse class]
                                     errorType:nil
-                                        attrs:@{
-                                          @"auth" : @"user",
-                                          @"host" : @"api",
-                                          @"style" : @"rpc"
-                                        }
+                                        attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                         dataStructSerialBlock:nil
                       dataStructDeserialBlock:nil];
     }
@@ -213,11 +186,7 @@ static NSObject *lockObj = nil;
                                            deprecated:@YES
                                            resultType:[DBPAPERListPaperDocsResponse class]
                                             errorType:[DBPAPERListDocsCursorError class]
-                                                attrs:@{
-                                                  @"auth" : @"user",
-                                                  @"host" : @"api",
-                                                  @"style" : @"rpc"
-                                                }
+                                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                 dataStructSerialBlock:nil
                               dataStructDeserialBlock:nil];
     }
@@ -233,11 +202,7 @@ static NSObject *lockObj = nil;
                                                 deprecated:@YES
                                                 resultType:nil
                                                  errorType:[DBPAPERDocLookupError class]
-                                                     attrs:@{
-                                                       @"auth" : @"user",
-                                                       @"host" : @"api",
-                                                       @"style" : @"rpc"
-                                                     }
+                                                     attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                      dataStructSerialBlock:nil
                                    dataStructDeserialBlock:nil];
     }
@@ -253,11 +218,7 @@ static NSObject *lockObj = nil;
                                                deprecated:@YES
                                                resultType:[DBPAPERSharingPolicy class]
                                                 errorType:[DBPAPERDocLookupError class]
-                                                    attrs:@{
-                                                      @"auth" : @"user",
-                                                      @"host" : @"api",
-                                                      @"style" : @"rpc"
-                                                    }
+                                                    attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                     dataStructSerialBlock:nil
                                   dataStructDeserialBlock:nil];
     }
@@ -273,11 +234,7 @@ static NSObject *lockObj = nil;
                                                deprecated:@YES
                                                resultType:nil
                                                 errorType:[DBPAPERDocLookupError class]
-                                                    attrs:@{
-                                                      @"auth" : @"user",
-                                                      @"host" : @"api",
-                                                      @"style" : @"rpc"
-                                                    }
+                                                    attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                     dataStructSerialBlock:nil
                                   dataStructDeserialBlock:nil];
     }
@@ -293,11 +250,7 @@ static NSObject *lockObj = nil;
                                      deprecated:@YES
                                      resultType:[DBPAPERPaperDocCreateUpdateResult class]
                                       errorType:[DBPAPERPaperDocUpdateError class]
-                                          attrs:@{
-                                            @"auth" : @"user",
-                                            @"host" : @"api",
-                                            @"style" : @"upload"
-                                          }
+                                          attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"upload"}
                           dataStructSerialBlock:nil
                         dataStructDeserialBlock:nil];
     }
@@ -308,23 +261,20 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBPAPERDocsUsersAdd {
   @synchronized(lockObj) {
     if (!DBPAPERDocsUsersAdd) {
-      DBPAPERDocsUsersAdd = [[DBRoute alloc] init:@"docs/users/add"
-          namespace_:@"paper"
-          deprecated:@YES
-          resultType:[NSArray<DBPAPERAddPaperDocUserMemberResult *> class]
-          errorType:[DBPAPERDocLookupError class]
-          attrs:@{
-            @"auth" : @"user",
-            @"host" : @"api",
-            @"style" : @"rpc"
-          }
-          dataStructSerialBlock:nil
-          dataStructDeserialBlock:^id(id dataStruct) {
-            return [DBArraySerializer deserialize:dataStruct
-                                        withBlock:^id(id elem0) {
-                                          return [DBPAPERAddPaperDocUserMemberResultSerializer deserialize:elem0];
-                                        }];
-          }];
+      DBPAPERDocsUsersAdd =
+          [[DBRoute alloc] init:@"docs/users/add"
+                           namespace_:@"paper"
+                           deprecated:@YES
+                           resultType:[NSArray<DBPAPERAddPaperDocUserMemberResult *> class]
+                            errorType:[DBPAPERDocLookupError class]
+                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:^id(id dataStruct) {
+                return [DBArraySerializer deserialize:dataStruct
+                                            withBlock:^id(id elem0) {
+                                              return [DBPAPERAddPaperDocUserMemberResultSerializer deserialize:elem0];
+                                            }];
+              }];
     }
     return DBPAPERDocsUsersAdd;
   }
@@ -338,11 +288,7 @@ static NSObject *lockObj = nil;
                                         deprecated:@YES
                                         resultType:[DBPAPERListUsersOnPaperDocResponse class]
                                          errorType:[DBPAPERDocLookupError class]
-                                             attrs:@{
-                                               @"auth" : @"user",
-                                               @"host" : @"api",
-                                               @"style" : @"rpc"
-                                             }
+                                             attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                              dataStructSerialBlock:nil
                            dataStructDeserialBlock:nil];
     }
@@ -358,11 +304,7 @@ static NSObject *lockObj = nil;
                                                 deprecated:@YES
                                                 resultType:[DBPAPERListUsersOnPaperDocResponse class]
                                                  errorType:[DBPAPERListUsersCursorError class]
-                                                     attrs:@{
-                                                       @"auth" : @"user",
-                                                       @"host" : @"api",
-                                                       @"style" : @"rpc"
-                                                     }
+                                                     attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                      dataStructSerialBlock:nil
                                    dataStructDeserialBlock:nil];
     }
@@ -378,11 +320,7 @@ static NSObject *lockObj = nil;
                                           deprecated:@YES
                                           resultType:nil
                                            errorType:[DBPAPERDocLookupError class]
-                                               attrs:@{
-                                                 @"auth" : @"user",
-                                                 @"host" : @"api",
-                                                 @"style" : @"rpc"
-                                               }
+                                               attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                dataStructSerialBlock:nil
                              dataStructDeserialBlock:nil];
     }
@@ -398,11 +336,7 @@ static NSObject *lockObj = nil;
                                         deprecated:@YES
                                         resultType:[DBPAPERPaperFolderCreateResult class]
                                          errorType:[DBPAPERPaperFolderCreateError class]
-                                             attrs:@{
-                                               @"auth" : @"user",
-                                               @"host" : @"api",
-                                               @"style" : @"rpc"
-                                             }
+                                             attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                              dataStructSerialBlock:nil
                            dataStructDeserialBlock:nil];
     }

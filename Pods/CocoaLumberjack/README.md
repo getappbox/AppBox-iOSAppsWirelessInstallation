@@ -204,7 +204,7 @@ The current version of Lumberjack requires:
 - watchOS 4 or later
 
 ### Backwards compatibility
-- for Xcode 12 and Swift up to 5.4, use the 3.7.4 version
+- for iOS/tvOS up to 10, watchOS up to 3, macOS up to 10.12, Xcode up to 13 and Swift up to 5.4, use the 3.7.4 version
 - for Xcode 11 and Swift up to 5.2, use the 3.6.2 version
 - for Xcode 10 and Swift 4.2, use the 3.5.2 version
 - for iOS 8, use the 3.6.1 version
@@ -289,6 +289,7 @@ _Example_: `DDLogInfo("User: \(myUser)")` will add the `myUser` info to the logs
 - CocoaLumberjack is available under the BSD 3 license. See the [LICENSE file](LICENSE).
 
 ## Extensions
+- [Birch-Lumberjack](https://github.com/gruffins/birch-lumberjack) A remote logger for CocoaLumberjack
 - [BugfenderSDK-CocoaLumberjack](https://github.com/bugfender/BugfenderSDK-CocoaLumberjack) A Bugfender logger for CocoaLumberjack
 - [LogIO-CocoaLumberjack](https://github.com/s4nchez/LogIO-CocoaLumberjack) A log.io logger for CocoaLumberjack
 - [XCDLumberjackNSLogger](https://github.com/0xced/XCDLumberjackNSLogger) CocoaLumberjack logger which sends logs to NSLogger

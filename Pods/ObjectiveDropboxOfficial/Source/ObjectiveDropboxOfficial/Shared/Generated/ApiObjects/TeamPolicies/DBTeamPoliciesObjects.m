@@ -163,7 +163,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESCameraUploadsPolicyState *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -360,7 +360,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESComputerBackupPolicyState *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -559,7 +559,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESEmmState *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -759,7 +759,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESExternalDriveBackupPolicyState *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -937,7 +937,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESFileLockingPolicyState *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1135,7 +1135,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESFileProviderMigrationPolicyState *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1294,7 +1294,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESGroupCreation *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1471,7 +1471,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESOfficeAddInPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1647,7 +1647,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESPaperDefaultFolderPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1823,7 +1823,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESPaperDeploymentPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1999,7 +1999,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESPaperDesktopPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2196,7 +2196,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESPaperEnabledPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2374,7 +2374,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESPasswordControlMode *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2571,7 +2571,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESPasswordStrengthPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2751,7 +2751,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESRolloutMethod *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2768,6 +2768,183 @@
         exceptionWithName:@"InvalidTag"
                    reason:[NSString stringWithFormat:@"Tag has an invalid value: \"%@\".", valueDict[@".tag"]]
                  userInfo:nil]);
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicy.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicy
+
+#pragma mark - Constructors
+
+- (instancetype)initWithMembers {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicyMembers;
+  }
+  return self;
+}
+
+- (instancetype)initWithAnyone {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicyAnyone;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicyOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isMembers {
+  return _tag == DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicyMembers;
+}
+
+- (BOOL)isAnyone {
+  return _tag == DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicyAnyone;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicyOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicyMembers:
+    return @"DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicyMembers";
+  case DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicyAnyone:
+    return @"DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicyAnyone";
+  case DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicyOther:
+    return @"DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicyOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicySerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicySerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicySerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicyMembers:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicyAnyone:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicyOther:
+    result = prime * result + [[self tagName] hash];
+    break;
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSharedFolderBlanketLinkRestrictionPolicy:other];
+}
+
+- (BOOL)isEqualToSharedFolderBlanketLinkRestrictionPolicy:
+    (DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicy *)aSharedFolderBlanketLinkRestrictionPolicy {
+  if (self == aSharedFolderBlanketLinkRestrictionPolicy) {
+    return YES;
+  }
+  if (self.tag != aSharedFolderBlanketLinkRestrictionPolicy.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicyMembers:
+    return [[self tagName] isEqual:[aSharedFolderBlanketLinkRestrictionPolicy tagName]];
+  case DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicyAnyone:
+    return [[self tagName] isEqual:[aSharedFolderBlanketLinkRestrictionPolicy tagName]];
+  case DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicyOther:
+    return [[self tagName] isEqual:[aSharedFolderBlanketLinkRestrictionPolicy tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicySerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicy *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isMembers]) {
+    jsonDict[@".tag"] = @"members";
+  } else if ([valueObj isAnyone]) {
+    jsonDict[@".tag"] = @"anyone";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return jsonDict;
+}
+
++ (DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"members"]) {
+    return [[DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicy alloc] initWithMembers];
+  } else if ([tag isEqualToString:@"anyone"]) {
+    return [[DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicy alloc] initWithAnyone];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicy alloc] initWithOther];
+  } else {
+    return [[DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicy alloc] initWithOther];
   }
 }
 
@@ -2930,7 +3107,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESSharedFolderJoinPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3106,7 +3283,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESSharedFolderMemberPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3324,7 +3501,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESSharedLinkCreatePolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3504,7 +3681,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESShowcaseDownloadPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3680,7 +3857,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESShowcaseEnabledPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3857,7 +4034,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESShowcaseExternalSharingPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4033,7 +4210,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESSmartSyncPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4209,7 +4386,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESSmarterSmartSyncPolicyState *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4406,7 +4583,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESSsoPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4584,7 +4761,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESSuggestMembersPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4720,7 +4897,7 @@
   jsonDict[@"suggest_members_policy"] =
       [DBTEAMPOLICIESSuggestMembersPolicySerializer serialize:valueObj.suggestMembersPolicy];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESTeamMemberPolicies *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4742,6 +4919,8 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
+#import "DBTEAMPOLICIESGroupCreation.h"
+#import "DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicy.h"
 #import "DBTEAMPOLICIESSharedFolderJoinPolicy.h"
 #import "DBTEAMPOLICIESSharedFolderMemberPolicy.h"
 #import "DBTEAMPOLICIESSharedLinkCreatePolicy.h"
@@ -4755,16 +4934,23 @@
 
 - (instancetype)initWithSharedFolderMemberPolicy:(DBTEAMPOLICIESSharedFolderMemberPolicy *)sharedFolderMemberPolicy
                           sharedFolderJoinPolicy:(DBTEAMPOLICIESSharedFolderJoinPolicy *)sharedFolderJoinPolicy
-                          sharedLinkCreatePolicy:(DBTEAMPOLICIESSharedLinkCreatePolicy *)sharedLinkCreatePolicy {
+                          sharedLinkCreatePolicy:(DBTEAMPOLICIESSharedLinkCreatePolicy *)sharedLinkCreatePolicy
+                             groupCreationPolicy:(DBTEAMPOLICIESGroupCreation *)groupCreationPolicy
+               sharedFolderLinkRestrictionPolicy:
+                   (DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicy *)sharedFolderLinkRestrictionPolicy {
   [DBStoneValidators nonnullValidator:nil](sharedFolderMemberPolicy);
   [DBStoneValidators nonnullValidator:nil](sharedFolderJoinPolicy);
   [DBStoneValidators nonnullValidator:nil](sharedLinkCreatePolicy);
+  [DBStoneValidators nonnullValidator:nil](groupCreationPolicy);
+  [DBStoneValidators nonnullValidator:nil](sharedFolderLinkRestrictionPolicy);
 
   self = [super init];
   if (self) {
     _sharedFolderMemberPolicy = sharedFolderMemberPolicy;
     _sharedFolderJoinPolicy = sharedFolderJoinPolicy;
     _sharedLinkCreatePolicy = sharedLinkCreatePolicy;
+    _groupCreationPolicy = groupCreationPolicy;
+    _sharedFolderLinkRestrictionPolicy = sharedFolderLinkRestrictionPolicy;
   }
   return self;
 }
@@ -4802,6 +4988,8 @@
   result = prime * result + [self.sharedFolderMemberPolicy hash];
   result = prime * result + [self.sharedFolderJoinPolicy hash];
   result = prime * result + [self.sharedLinkCreatePolicy hash];
+  result = prime * result + [self.groupCreationPolicy hash];
+  result = prime * result + [self.sharedFolderLinkRestrictionPolicy hash];
 
   return prime * result;
 }
@@ -4831,6 +5019,12 @@
   if (![self.sharedLinkCreatePolicy isEqual:aTeamSharingPolicies.sharedLinkCreatePolicy]) {
     return NO;
   }
+  if (![self.groupCreationPolicy isEqual:aTeamSharingPolicies.groupCreationPolicy]) {
+    return NO;
+  }
+  if (![self.sharedFolderLinkRestrictionPolicy isEqual:aTeamSharingPolicies.sharedFolderLinkRestrictionPolicy]) {
+    return NO;
+  }
   return YES;
 }
 
@@ -4849,8 +5043,11 @@
       [DBTEAMPOLICIESSharedFolderJoinPolicySerializer serialize:valueObj.sharedFolderJoinPolicy];
   jsonDict[@"shared_link_create_policy"] =
       [DBTEAMPOLICIESSharedLinkCreatePolicySerializer serialize:valueObj.sharedLinkCreatePolicy];
+  jsonDict[@"group_creation_policy"] = [DBTEAMPOLICIESGroupCreationSerializer serialize:valueObj.groupCreationPolicy];
+  jsonDict[@"shared_folder_link_restriction_policy"] = [DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicySerializer
+      serialize:valueObj.sharedFolderLinkRestrictionPolicy];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESTeamSharingPolicies *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4860,10 +5057,17 @@
       [DBTEAMPOLICIESSharedFolderJoinPolicySerializer deserialize:valueDict[@"shared_folder_join_policy"]];
   DBTEAMPOLICIESSharedLinkCreatePolicy *sharedLinkCreatePolicy =
       [DBTEAMPOLICIESSharedLinkCreatePolicySerializer deserialize:valueDict[@"shared_link_create_policy"]];
+  DBTEAMPOLICIESGroupCreation *groupCreationPolicy =
+      [DBTEAMPOLICIESGroupCreationSerializer deserialize:valueDict[@"group_creation_policy"]];
+  DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicy *sharedFolderLinkRestrictionPolicy =
+      [DBTEAMPOLICIESSharedFolderBlanketLinkRestrictionPolicySerializer
+          deserialize:valueDict[@"shared_folder_link_restriction_policy"]];
 
   return [[DBTEAMPOLICIESTeamSharingPolicies alloc] initWithSharedFolderMemberPolicy:sharedFolderMemberPolicy
                                                               sharedFolderJoinPolicy:sharedFolderJoinPolicy
-                                                              sharedLinkCreatePolicy:sharedLinkCreatePolicy];
+                                                              sharedLinkCreatePolicy:sharedLinkCreatePolicy
+                                                                 groupCreationPolicy:groupCreationPolicy
+                                                   sharedFolderLinkRestrictionPolicy:sharedFolderLinkRestrictionPolicy];
 }
 
 @end
@@ -5025,7 +5229,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESTwoStepVerificationPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -5222,7 +5426,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMPOLICIESTwoStepVerificationState *)deserialize:(NSDictionary<NSString *, id> *)valueDict {

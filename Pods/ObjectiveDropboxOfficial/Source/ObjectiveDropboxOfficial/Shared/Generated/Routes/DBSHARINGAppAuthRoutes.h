@@ -150,9 +150,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// a `DBSHARINGSharedLinkError` object on failure.
 ///
 - (DBRpcTask<DBSHARINGSharedLinkMetadata *, DBSHARINGSharedLinkError *> *)
-getSharedLinkMetadata:(NSString *)url
-                 path:(nullable NSString *)path
-         linkPassword:(nullable NSString *)linkPassword;
+    getSharedLinkMetadata:(NSString *)url
+                     path:(nullable NSString *)path
+             linkPassword:(nullable NSString *)linkPassword;
 
 @end
 

@@ -28,7 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Path to the item to be tagged.
 @property (nonatomic, readonly, copy) NSString *path;
 
-/// The value of the tag to add.
+/// The value of the tag to add. Will be automatically converted to lowercase
+/// letters.
 @property (nonatomic, readonly, copy) NSString *tagText;
 
 #pragma mark - Constructors
@@ -37,7 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param path Path to the item to be tagged.
-/// @param tagText The value of the tag to add.
+/// @param tagText The value of the tag to add. Will be automatically converted
+/// to lowercase letters.
 ///
 /// @return An initialized instance.
 ///

@@ -94,8 +94,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// success or a `DBPAPERPaperDocCreateError` object on failure.
 ///
 - (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocCreateError *> *)
-docsCreateUrl:(DBPAPERImportFormat *)importFormat
-     inputUrl:(NSString *)inputUrl __deprecated_msg("docsCreate is deprecated.");
+    docsCreateUrl:(DBPAPERImportFormat *)importFormat
+         inputUrl:(NSString *)inputUrl __deprecated_msg("docsCreate is deprecated.");
 
 ///
 /// DEPRECATED: Creates a new Paper doc with the provided content. Note that this endpoint will continue to work for
@@ -113,9 +113,9 @@ docsCreateUrl:(DBPAPERImportFormat *)importFormat
 /// success or a `DBPAPERPaperDocCreateError` object on failure.
 ///
 - (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocCreateError *> *)
- docsCreateUrl:(DBPAPERImportFormat *)importFormat
-parentFolderId:(nullable NSString *)parentFolderId
-      inputUrl:(NSString *)inputUrl __deprecated_msg("docsCreate is deprecated.");
+     docsCreateUrl:(DBPAPERImportFormat *)importFormat
+    parentFolderId:(nullable NSString *)parentFolderId
+          inputUrl:(NSString *)inputUrl __deprecated_msg("docsCreate is deprecated.");
 
 ///
 /// DEPRECATED: Creates a new Paper doc with the provided content. Note that this endpoint will continue to work for
@@ -131,8 +131,8 @@ parentFolderId:(nullable NSString *)parentFolderId
 /// success or a `DBPAPERPaperDocCreateError` object on failure.
 ///
 - (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocCreateError *> *)
-docsCreateData:(DBPAPERImportFormat *)importFormat
-     inputData:(NSData *)inputData __deprecated_msg("docsCreate is deprecated.");
+    docsCreateData:(DBPAPERImportFormat *)importFormat
+         inputData:(NSData *)inputData __deprecated_msg("docsCreate is deprecated.");
 
 ///
 /// DEPRECATED: Creates a new Paper doc with the provided content. Note that this endpoint will continue to work for
@@ -150,9 +150,9 @@ docsCreateData:(DBPAPERImportFormat *)importFormat
 /// success or a `DBPAPERPaperDocCreateError` object on failure.
 ///
 - (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocCreateError *> *)
-docsCreateData:(DBPAPERImportFormat *)importFormat
-parentFolderId:(nullable NSString *)parentFolderId
-     inputData:(NSData *)inputData __deprecated_msg("docsCreate is deprecated.");
+    docsCreateData:(DBPAPERImportFormat *)importFormat
+    parentFolderId:(nullable NSString *)parentFolderId
+         inputData:(NSData *)inputData __deprecated_msg("docsCreate is deprecated.");
 
 ///
 /// DEPRECATED: Creates a new Paper doc with the provided content. Note that this endpoint will continue to work for
@@ -168,8 +168,8 @@ parentFolderId:(nullable NSString *)parentFolderId
 /// success or a `DBPAPERPaperDocCreateError` object on failure.
 ///
 - (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocCreateError *> *)
-docsCreateStream:(DBPAPERImportFormat *)importFormat
-     inputStream:(NSInputStream *)inputStream __deprecated_msg("docsCreate is deprecated.");
+    docsCreateStream:(DBPAPERImportFormat *)importFormat
+         inputStream:(NSInputStream *)inputStream __deprecated_msg("docsCreate is deprecated.");
 
 ///
 /// DEPRECATED: Creates a new Paper doc with the provided content. Note that this endpoint will continue to work for
@@ -187,9 +187,9 @@ docsCreateStream:(DBPAPERImportFormat *)importFormat
 /// success or a `DBPAPERPaperDocCreateError` object on failure.
 ///
 - (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocCreateError *> *)
-docsCreateStream:(DBPAPERImportFormat *)importFormat
-  parentFolderId:(nullable NSString *)parentFolderId
-     inputStream:(NSInputStream *)inputStream __deprecated_msg("docsCreate is deprecated.");
+    docsCreateStream:(DBPAPERImportFormat *)importFormat
+      parentFolderId:(nullable NSString *)parentFolderId
+         inputStream:(NSInputStream *)inputStream __deprecated_msg("docsCreate is deprecated.");
 
 ///
 /// DEPRECATED: Exports and downloads Paper doc either as HTML or markdown. Note that this endpoint will continue to
@@ -207,10 +207,10 @@ docsCreateStream:(DBPAPERImportFormat *)importFormat
 /// a `DBPAPERDocLookupError` object on failure.
 ///
 - (DBDownloadUrlTask<DBPAPERPaperDocExportResult *, DBPAPERDocLookupError *> *)
-docsDownloadUrl:(NSString *)docId
-   exportFormat:(DBPAPERExportFormat *)exportFormat
-      overwrite:(BOOL)overwrite
-    destination:(NSURL *)destination __deprecated_msg("docsDownload is deprecated.");
+    docsDownloadUrl:(NSString *)docId
+       exportFormat:(DBPAPERExportFormat *)exportFormat
+          overwrite:(BOOL)overwrite
+        destination:(NSURL *)destination __deprecated_msg("docsDownload is deprecated.");
 
 ///
 /// DEPRECATED: Exports and downloads Paper doc either as HTML or markdown. Note that this endpoint will continue to
@@ -232,12 +232,12 @@ docsDownloadUrl:(NSString *)docId
 /// a `DBPAPERDocLookupError` object on failure.
 ///
 - (DBDownloadUrlTask<DBPAPERPaperDocExportResult *, DBPAPERDocLookupError *> *)
-docsDownloadUrl:(NSString *)docId
-   exportFormat:(DBPAPERExportFormat *)exportFormat
-      overwrite:(BOOL)overwrite
-    destination:(NSURL *)destination
-byteOffsetStart:(NSNumber *)byteOffsetStart
-  byteOffsetEnd:(NSNumber *)byteOffsetEnd __deprecated_msg("docsDownload is deprecated.");
+    docsDownloadUrl:(NSString *)docId
+       exportFormat:(DBPAPERExportFormat *)exportFormat
+          overwrite:(BOOL)overwrite
+        destination:(NSURL *)destination
+    byteOffsetStart:(NSNumber *)byteOffsetStart
+      byteOffsetEnd:(NSNumber *)byteOffsetEnd __deprecated_msg("docsDownload is deprecated.");
 
 ///
 /// DEPRECATED: Exports and downloads Paper doc either as HTML or markdown. Note that this endpoint will continue to
@@ -251,8 +251,8 @@ byteOffsetStart:(NSNumber *)byteOffsetStart
 /// a `DBPAPERDocLookupError` object on failure.
 ///
 - (DBDownloadDataTask<DBPAPERPaperDocExportResult *, DBPAPERDocLookupError *> *)
-docsDownloadData:(NSString *)docId
-    exportFormat:(DBPAPERExportFormat *)exportFormat __deprecated_msg("docsDownload is deprecated.");
+    docsDownloadData:(NSString *)docId
+        exportFormat:(DBPAPERExportFormat *)exportFormat __deprecated_msg("docsDownload is deprecated.");
 
 ///
 /// DEPRECATED: Exports and downloads Paper doc either as HTML or markdown. Note that this endpoint will continue to
@@ -270,10 +270,10 @@ docsDownloadData:(NSString *)docId
 /// a `DBPAPERDocLookupError` object on failure.
 ///
 - (DBDownloadDataTask<DBPAPERPaperDocExportResult *, DBPAPERDocLookupError *> *)
-docsDownloadData:(NSString *)docId
-    exportFormat:(DBPAPERExportFormat *)exportFormat
- byteOffsetStart:(NSNumber *)byteOffsetStart
-   byteOffsetEnd:(NSNumber *)byteOffsetEnd __deprecated_msg("docsDownload is deprecated.");
+    docsDownloadData:(NSString *)docId
+        exportFormat:(DBPAPERExportFormat *)exportFormat
+     byteOffsetStart:(NSNumber *)byteOffsetStart
+       byteOffsetEnd:(NSNumber *)byteOffsetEnd __deprecated_msg("docsDownload is deprecated.");
 
 ///
 /// DEPRECATED: Lists the users who are explicitly invited to the Paper folder in which the Paper doc is contained. For
@@ -323,8 +323,8 @@ docsDownloadData:(NSString *)docId
 /// success or a `DBPAPERListUsersCursorError` object on failure.
 ///
 - (DBRpcTask<DBPAPERListUsersOnFolderResponse *, DBPAPERListUsersCursorError *> *)
-docsFolderUsersListContinue:(NSString *)docId
-                     cursor:(NSString *)cursor __deprecated_msg("docsFolderUsersListContinue is deprecated.");
+    docsFolderUsersListContinue:(NSString *)docId
+                         cursor:(NSString *)cursor __deprecated_msg("docsFolderUsersListContinue is deprecated.");
 
 ///
 /// DEPRECATED: Retrieves folder information for the given Paper doc. This includes:   - folder sharing policy;
@@ -462,11 +462,11 @@ docsFolderUsersListContinue:(NSString *)docId
 /// success or a `DBPAPERPaperDocUpdateError` object on failure.
 ///
 - (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocUpdateError *> *)
-  docsUpdateUrl:(NSString *)docId
-docUpdatePolicy:(DBPAPERPaperDocUpdatePolicy *)docUpdatePolicy
-       revision:(NSNumber *)revision
-   importFormat:(DBPAPERImportFormat *)importFormat
-       inputUrl:(NSString *)inputUrl __deprecated_msg("docsUpdate is deprecated.");
+      docsUpdateUrl:(NSString *)docId
+    docUpdatePolicy:(DBPAPERPaperDocUpdatePolicy *)docUpdatePolicy
+           revision:(NSNumber *)revision
+       importFormat:(DBPAPERImportFormat *)importFormat
+           inputUrl:(NSString *)inputUrl __deprecated_msg("docsUpdate is deprecated.");
 
 ///
 /// DEPRECATED: Updates an existing Paper doc with the provided content. Note that this endpoint will continue to work
@@ -485,11 +485,11 @@ docUpdatePolicy:(DBPAPERPaperDocUpdatePolicy *)docUpdatePolicy
 /// success or a `DBPAPERPaperDocUpdateError` object on failure.
 ///
 - (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocUpdateError *> *)
- docsUpdateData:(NSString *)docId
-docUpdatePolicy:(DBPAPERPaperDocUpdatePolicy *)docUpdatePolicy
-       revision:(NSNumber *)revision
-   importFormat:(DBPAPERImportFormat *)importFormat
-      inputData:(NSData *)inputData __deprecated_msg("docsUpdate is deprecated.");
+     docsUpdateData:(NSString *)docId
+    docUpdatePolicy:(DBPAPERPaperDocUpdatePolicy *)docUpdatePolicy
+           revision:(NSNumber *)revision
+       importFormat:(DBPAPERImportFormat *)importFormat
+          inputData:(NSData *)inputData __deprecated_msg("docsUpdate is deprecated.");
 
 ///
 /// DEPRECATED: Updates an existing Paper doc with the provided content. Note that this endpoint will continue to work
@@ -508,11 +508,11 @@ docUpdatePolicy:(DBPAPERPaperDocUpdatePolicy *)docUpdatePolicy
 /// success or a `DBPAPERPaperDocUpdateError` object on failure.
 ///
 - (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocUpdateError *> *)
-docsUpdateStream:(NSString *)docId
- docUpdatePolicy:(DBPAPERPaperDocUpdatePolicy *)docUpdatePolicy
-        revision:(NSNumber *)revision
-    importFormat:(DBPAPERImportFormat *)importFormat
-     inputStream:(NSInputStream *)inputStream __deprecated_msg("docsUpdate is deprecated.");
+    docsUpdateStream:(NSString *)docId
+     docUpdatePolicy:(DBPAPERPaperDocUpdatePolicy *)docUpdatePolicy
+            revision:(NSNumber *)revision
+        importFormat:(DBPAPERImportFormat *)importFormat
+         inputStream:(NSInputStream *)inputStream __deprecated_msg("docsUpdate is deprecated.");
 
 ///
 /// DEPRECATED: Allows an owner or editor to add users to a Paper doc or change their permissions using their email
@@ -528,8 +528,8 @@ docsUpdateStream:(NSString *)docId
 /// object on success or a `DBPAPERDocLookupError` object on failure.
 ///
 - (DBRpcTask<NSArray<DBPAPERAddPaperDocUserMemberResult *> *, DBPAPERDocLookupError *> *)
-docsUsersAdd:(NSString *)docId
-     members:(NSArray<DBPAPERAddMember *> *)members __deprecated_msg("docsUsersAdd is deprecated.");
+    docsUsersAdd:(NSString *)docId
+         members:(NSArray<DBPAPERAddMember *> *)members __deprecated_msg("docsUsersAdd is deprecated.");
 
 ///
 /// DEPRECATED: Allows an owner or editor to add users to a Paper doc or change their permissions using their email
@@ -547,10 +547,10 @@ docsUsersAdd:(NSString *)docId
 /// object on success or a `DBPAPERDocLookupError` object on failure.
 ///
 - (DBRpcTask<NSArray<DBPAPERAddPaperDocUserMemberResult *> *, DBPAPERDocLookupError *> *)
- docsUsersAdd:(NSString *)docId
-      members:(NSArray<DBPAPERAddMember *> *)members
-customMessage:(nullable NSString *)customMessage
-        quiet:(nullable NSNumber *)quiet __deprecated_msg("docsUsersAdd is deprecated.");
+     docsUsersAdd:(NSString *)docId
+          members:(NSArray<DBPAPERAddMember *> *)members
+    customMessage:(nullable NSString *)customMessage
+            quiet:(nullable NSNumber *)quiet __deprecated_msg("docsUsersAdd is deprecated.");
 
 ///
 /// DEPRECATED: Lists all users who visited the Paper doc or users with explicit access. This call excludes users who
@@ -585,9 +585,9 @@ customMessage:(nullable NSString *)customMessage
 /// success or a `DBPAPERDocLookupError` object on failure.
 ///
 - (DBRpcTask<DBPAPERListUsersOnPaperDocResponse *, DBPAPERDocLookupError *> *)
-docsUsersList:(NSString *)docId
-        limit:(nullable NSNumber *)limit
-     filterBy:(nullable DBPAPERUserOnPaperDocFilter *)filterBy __deprecated_msg("docsUsersList is deprecated.");
+    docsUsersList:(NSString *)docId
+            limit:(nullable NSNumber *)limit
+         filterBy:(nullable DBPAPERUserOnPaperDocFilter *)filterBy __deprecated_msg("docsUsersList is deprecated.");
 
 ///
 /// DEPRECATED: Once a cursor has been retrieved from `docsUsersList`, use this to paginate through all users on the
@@ -602,8 +602,8 @@ docsUsersList:(NSString *)docId
 /// success or a `DBPAPERListUsersCursorError` object on failure.
 ///
 - (DBRpcTask<DBPAPERListUsersOnPaperDocResponse *, DBPAPERListUsersCursorError *> *)
-docsUsersListContinue:(NSString *)docId
-               cursor:(NSString *)cursor __deprecated_msg("docsUsersListContinue is deprecated.");
+    docsUsersListContinue:(NSString *)docId
+                   cursor:(NSString *)cursor __deprecated_msg("docsUsersListContinue is deprecated.");
 
 ///
 /// DEPRECATED: Allows an owner or editor to remove users from a Paper doc using their email address or Dropbox account
@@ -655,9 +655,9 @@ docsUsersListContinue:(NSString *)docId
 /// or a `DBPAPERPaperFolderCreateError` object on failure.
 ///
 - (DBRpcTask<DBPAPERPaperFolderCreateResult *, DBPAPERPaperFolderCreateError *> *)
- foldersCreate:(NSString *)name
-parentFolderId:(nullable NSString *)parentFolderId
-  isTeamFolder:(nullable NSNumber *)isTeamFolder __deprecated_msg("foldersCreate is deprecated.");
+     foldersCreate:(NSString *)name
+    parentFolderId:(nullable NSString *)parentFolderId
+      isTeamFolder:(nullable NSNumber *)isTeamFolder __deprecated_msg("foldersCreate is deprecated.");
 
 @end
 

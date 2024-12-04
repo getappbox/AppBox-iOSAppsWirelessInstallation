@@ -146,6 +146,13 @@
 #import "DBTEAMRevokeLinkedAppError.h"
 #import "DBTEAMRevokeLinkedAppStatus.h"
 #import "DBTEAMSetCustomQuotaError.h"
+#import "DBTEAMSharingAllowlistAddError.h"
+#import "DBTEAMSharingAllowlistAddResponse.h"
+#import "DBTEAMSharingAllowlistListContinueError.h"
+#import "DBTEAMSharingAllowlistListError.h"
+#import "DBTEAMSharingAllowlistListResponse.h"
+#import "DBTEAMSharingAllowlistRemoveError.h"
+#import "DBTEAMSharingAllowlistRemoveResponse.h"
 #import "DBTEAMStorageBucket.h"
 #import "DBTEAMTeamAuthRoutes.h"
 #import "DBTEAMTeamFolderAccessError.h"
@@ -263,6 +270,10 @@ static DBRoute *DBTEAMReportsGetActivity;
 static DBRoute *DBTEAMReportsGetDevices;
 static DBRoute *DBTEAMReportsGetMembership;
 static DBRoute *DBTEAMReportsGetStorage;
+static DBRoute *DBTEAMSharingAllowlistAdd;
+static DBRoute *DBTEAMSharingAllowlistList;
+static DBRoute *DBTEAMSharingAllowlistListContinue;
+static DBRoute *DBTEAMSharingAllowlistRemove;
 static DBRoute *DBTEAMTeamFolderActivate;
 static DBRoute *DBTEAMTeamFolderArchive;
 static DBRoute *DBTEAMTeamFolderArchiveCheck;
@@ -291,11 +302,7 @@ static NSObject *lockObj = nil;
                                                   deprecated:@NO
                                                   resultType:[DBTEAMListMemberDevicesResult class]
                                                    errorType:[DBTEAMListMemberDevicesError class]
-                                                       attrs:@{
-                                                         @"auth" : @"team",
-                                                         @"host" : @"api",
-                                                         @"style" : @"rpc"
-                                                       }
+                                                       attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                        dataStructSerialBlock:nil
                                      dataStructDeserialBlock:nil];
     }
@@ -311,11 +318,7 @@ static NSObject *lockObj = nil;
                                                    deprecated:@NO
                                                    resultType:[DBTEAMListMembersDevicesResult class]
                                                     errorType:[DBTEAMListMembersDevicesError class]
-                                                        attrs:@{
-                                                          @"auth" : @"team",
-                                                          @"host" : @"api",
-                                                          @"style" : @"rpc"
-                                                        }
+                                                        attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                         dataStructSerialBlock:nil
                                       dataStructDeserialBlock:nil];
     }
@@ -331,11 +334,7 @@ static NSObject *lockObj = nil;
                                                 deprecated:@YES
                                                 resultType:[DBTEAMListTeamDevicesResult class]
                                                  errorType:[DBTEAMListTeamDevicesError class]
-                                                     attrs:@{
-                                                       @"auth" : @"team",
-                                                       @"host" : @"api",
-                                                       @"style" : @"rpc"
-                                                     }
+                                                     attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                      dataStructSerialBlock:nil
                                    dataStructDeserialBlock:nil];
     }
@@ -351,11 +350,7 @@ static NSObject *lockObj = nil;
                                                     deprecated:@NO
                                                     resultType:nil
                                                      errorType:[DBTEAMRevokeDeviceSessionError class]
-                                                         attrs:@{
-                                                           @"auth" : @"team",
-                                                           @"host" : @"api",
-                                                           @"style" : @"rpc"
-                                                         }
+                                                         attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                          dataStructSerialBlock:nil
                                        dataStructDeserialBlock:nil];
     }
@@ -366,18 +361,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMDevicesRevokeDeviceSessionBatch {
   @synchronized(lockObj) {
     if (!DBTEAMDevicesRevokeDeviceSessionBatch) {
-      DBTEAMDevicesRevokeDeviceSessionBatch = [[DBRoute alloc] init:@"devices/revoke_device_session_batch"
-                                                         namespace_:@"team"
-                                                         deprecated:@NO
-                                                         resultType:[DBTEAMRevokeDeviceSessionBatchResult class]
-                                                          errorType:[DBTEAMRevokeDeviceSessionBatchError class]
-                                                              attrs:@{
-                                                                @"auth" : @"team",
-                                                                @"host" : @"api",
-                                                                @"style" : @"rpc"
-                                                              }
-                                              dataStructSerialBlock:nil
-                                            dataStructDeserialBlock:nil];
+      DBTEAMDevicesRevokeDeviceSessionBatch =
+          [[DBRoute alloc] init:@"devices/revoke_device_session_batch"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[DBTEAMRevokeDeviceSessionBatchResult class]
+                            errorType:[DBTEAMRevokeDeviceSessionBatchError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBTEAMDevicesRevokeDeviceSessionBatch;
   }
@@ -391,11 +383,7 @@ static NSObject *lockObj = nil;
                                            deprecated:@NO
                                            resultType:[DBTEAMFeaturesGetValuesBatchResult class]
                                             errorType:[DBTEAMFeaturesGetValuesBatchError class]
-                                                attrs:@{
-                                                  @"auth" : @"team",
-                                                  @"host" : @"api",
-                                                  @"style" : @"rpc"
-                                                }
+                                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                 dataStructSerialBlock:nil
                               dataStructDeserialBlock:nil];
     }
@@ -411,11 +399,7 @@ static NSObject *lockObj = nil;
                                  deprecated:@NO
                                  resultType:[DBTEAMTeamGetInfoResult class]
                                   errorType:nil
-                                      attrs:@{
-                                        @"auth" : @"team",
-                                        @"host" : @"api",
-                                        @"style" : @"rpc"
-                                      }
+                                      attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                       dataStructSerialBlock:nil
                     dataStructDeserialBlock:nil];
     }
@@ -431,11 +415,7 @@ static NSObject *lockObj = nil;
                                       deprecated:@NO
                                       resultType:[DBTEAMGroupFullInfo class]
                                        errorType:[DBTEAMGroupCreateError class]
-                                           attrs:@{
-                                             @"auth" : @"team",
-                                             @"host" : @"api",
-                                             @"style" : @"rpc"
-                                           }
+                                           attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                            dataStructSerialBlock:nil
                          dataStructDeserialBlock:nil];
     }
@@ -451,11 +431,7 @@ static NSObject *lockObj = nil;
                                       deprecated:@NO
                                       resultType:[DBASYNCLaunchEmptyResult class]
                                        errorType:[DBTEAMGroupDeleteError class]
-                                           attrs:@{
-                                             @"auth" : @"team",
-                                             @"host" : @"api",
-                                             @"style" : @"rpc"
-                                           }
+                                           attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                            dataStructSerialBlock:nil
                          dataStructDeserialBlock:nil];
     }
@@ -467,22 +443,18 @@ static NSObject *lockObj = nil;
   @synchronized(lockObj) {
     if (!DBTEAMGroupsGetInfo) {
       DBTEAMGroupsGetInfo = [[DBRoute alloc] init:@"groups/get_info"
-          namespace_:@"team"
-          deprecated:@NO
-          resultType:[NSArray<DBTEAMGroupsGetInfoItem *> class]
-          errorType:[DBTEAMGroupsGetInfoError class]
-          attrs:@{
-            @"auth" : @"team",
-            @"host" : @"api",
-            @"style" : @"rpc"
-          }
-          dataStructSerialBlock:nil
-          dataStructDeserialBlock:^id(id dataStruct) {
-            return [DBArraySerializer deserialize:dataStruct
-                                        withBlock:^id(id elem0) {
-                                          return [DBTEAMGroupsGetInfoItemSerializer deserialize:elem0];
-                                        }];
-          }];
+                                       namespace_:@"team"
+                                       deprecated:@NO
+                                       resultType:[NSArray<DBTEAMGroupsGetInfoItem *> class]
+                                        errorType:[DBTEAMGroupsGetInfoError class]
+                                            attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                            dataStructSerialBlock:nil
+                          dataStructDeserialBlock:^id(id dataStruct) {
+                            return [DBArraySerializer deserialize:dataStruct
+                                                        withBlock:^id(id elem0) {
+                                                          return [DBTEAMGroupsGetInfoItemSerializer deserialize:elem0];
+                                                        }];
+                          }];
     }
     return DBTEAMGroupsGetInfo;
   }
@@ -496,11 +468,7 @@ static NSObject *lockObj = nil;
                                             deprecated:@NO
                                             resultType:[DBASYNCPollEmptyResult class]
                                              errorType:[DBTEAMGroupsPollError class]
-                                                 attrs:@{
-                                                   @"auth" : @"team",
-                                                   @"host" : @"api",
-                                                   @"style" : @"rpc"
-                                                 }
+                                                 attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                  dataStructSerialBlock:nil
                                dataStructDeserialBlock:nil];
     }
@@ -516,11 +484,7 @@ static NSObject *lockObj = nil;
                                     deprecated:@NO
                                     resultType:[DBTEAMGroupsListResult class]
                                      errorType:nil
-                                         attrs:@{
-                                           @"auth" : @"team",
-                                           @"host" : @"api",
-                                           @"style" : @"rpc"
-                                         }
+                                         attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                          dataStructSerialBlock:nil
                        dataStructDeserialBlock:nil];
     }
@@ -536,11 +500,7 @@ static NSObject *lockObj = nil;
                                             deprecated:@NO
                                             resultType:[DBTEAMGroupsListResult class]
                                              errorType:[DBTEAMGroupsListContinueError class]
-                                                 attrs:@{
-                                                   @"auth" : @"team",
-                                                   @"host" : @"api",
-                                                   @"style" : @"rpc"
-                                                 }
+                                                 attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                  dataStructSerialBlock:nil
                                dataStructDeserialBlock:nil];
     }
@@ -556,11 +516,7 @@ static NSObject *lockObj = nil;
                                           deprecated:@NO
                                           resultType:[DBTEAMGroupMembersChangeResult class]
                                            errorType:[DBTEAMGroupMembersAddError class]
-                                               attrs:@{
-                                                 @"auth" : @"team",
-                                                 @"host" : @"api",
-                                                 @"style" : @"rpc"
-                                               }
+                                               attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                dataStructSerialBlock:nil
                              dataStructDeserialBlock:nil];
     }
@@ -576,11 +532,7 @@ static NSObject *lockObj = nil;
                                            deprecated:@NO
                                            resultType:[DBTEAMGroupsMembersListResult class]
                                             errorType:[DBTEAMGroupSelectorError class]
-                                                attrs:@{
-                                                  @"auth" : @"team",
-                                                  @"host" : @"api",
-                                                  @"style" : @"rpc"
-                                                }
+                                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                 dataStructSerialBlock:nil
                               dataStructDeserialBlock:nil];
     }
@@ -596,11 +548,7 @@ static NSObject *lockObj = nil;
                                                    deprecated:@NO
                                                    resultType:[DBTEAMGroupsMembersListResult class]
                                                     errorType:[DBTEAMGroupsMembersListContinueError class]
-                                                        attrs:@{
-                                                          @"auth" : @"team",
-                                                          @"host" : @"api",
-                                                          @"style" : @"rpc"
-                                                        }
+                                                        attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                         dataStructSerialBlock:nil
                                       dataStructDeserialBlock:nil];
     }
@@ -616,11 +564,7 @@ static NSObject *lockObj = nil;
                                              deprecated:@NO
                                              resultType:[DBTEAMGroupMembersChangeResult class]
                                               errorType:[DBTEAMGroupMembersRemoveError class]
-                                                  attrs:@{
-                                                    @"auth" : @"team",
-                                                    @"host" : @"api",
-                                                    @"style" : @"rpc"
-                                                  }
+                                                  attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                   dataStructSerialBlock:nil
                                 dataStructDeserialBlock:nil];
     }
@@ -631,23 +575,20 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMGroupsMembersSetAccessType {
   @synchronized(lockObj) {
     if (!DBTEAMGroupsMembersSetAccessType) {
-      DBTEAMGroupsMembersSetAccessType = [[DBRoute alloc] init:@"groups/members/set_access_type"
-          namespace_:@"team"
-          deprecated:@NO
-          resultType:[NSArray<DBTEAMGroupsGetInfoItem *> class]
-          errorType:[DBTEAMGroupMemberSetAccessTypeError class]
-          attrs:@{
-            @"auth" : @"team",
-            @"host" : @"api",
-            @"style" : @"rpc"
-          }
-          dataStructSerialBlock:nil
-          dataStructDeserialBlock:^id(id dataStruct) {
-            return [DBArraySerializer deserialize:dataStruct
-                                        withBlock:^id(id elem0) {
-                                          return [DBTEAMGroupsGetInfoItemSerializer deserialize:elem0];
-                                        }];
-          }];
+      DBTEAMGroupsMembersSetAccessType =
+          [[DBRoute alloc] init:@"groups/members/set_access_type"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[NSArray<DBTEAMGroupsGetInfoItem *> class]
+                            errorType:[DBTEAMGroupMemberSetAccessTypeError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:^id(id dataStruct) {
+                return [DBArraySerializer deserialize:dataStruct
+                                            withBlock:^id(id elem0) {
+                                              return [DBTEAMGroupsGetInfoItemSerializer deserialize:elem0];
+                                            }];
+              }];
     }
     return DBTEAMGroupsMembersSetAccessType;
   }
@@ -661,11 +602,7 @@ static NSObject *lockObj = nil;
                                       deprecated:@NO
                                       resultType:[DBTEAMGroupFullInfo class]
                                        errorType:[DBTEAMGroupUpdateError class]
-                                           attrs:@{
-                                             @"auth" : @"team",
-                                             @"host" : @"api",
-                                             @"style" : @"rpc"
-                                           }
+                                           attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                            dataStructSerialBlock:nil
                          dataStructDeserialBlock:nil];
     }
@@ -681,11 +618,7 @@ static NSObject *lockObj = nil;
                                                 deprecated:@NO
                                                 resultType:[DBTEAMLegalHoldPolicy class]
                                                  errorType:[DBTEAMLegalHoldsPolicyCreateError class]
-                                                     attrs:@{
-                                                       @"auth" : @"team",
-                                                       @"host" : @"api",
-                                                       @"style" : @"rpc"
-                                                     }
+                                                     attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                      dataStructSerialBlock:nil
                                    dataStructDeserialBlock:nil];
     }
@@ -701,11 +634,7 @@ static NSObject *lockObj = nil;
                                              deprecated:@NO
                                              resultType:[DBTEAMLegalHoldPolicy class]
                                               errorType:[DBTEAMLegalHoldsGetPolicyError class]
-                                                  attrs:@{
-                                                    @"auth" : @"team",
-                                                    @"host" : @"api",
-                                                    @"style" : @"rpc"
-                                                  }
+                                                  attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                   dataStructSerialBlock:nil
                                 dataStructDeserialBlock:nil];
     }
@@ -716,18 +645,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMLegalHoldsListHeldRevisions {
   @synchronized(lockObj) {
     if (!DBTEAMLegalHoldsListHeldRevisions) {
-      DBTEAMLegalHoldsListHeldRevisions = [[DBRoute alloc] init:@"legal_holds/list_held_revisions"
-                                                     namespace_:@"team"
-                                                     deprecated:@NO
-                                                     resultType:[DBTEAMLegalHoldsListHeldRevisionResult class]
-                                                      errorType:[DBTEAMLegalHoldsListHeldRevisionsError class]
-                                                          attrs:@{
-                                                            @"auth" : @"team",
-                                                            @"host" : @"api",
-                                                            @"style" : @"rpc"
-                                                          }
-                                          dataStructSerialBlock:nil
-                                        dataStructDeserialBlock:nil];
+      DBTEAMLegalHoldsListHeldRevisions =
+          [[DBRoute alloc] init:@"legal_holds/list_held_revisions"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[DBTEAMLegalHoldsListHeldRevisionResult class]
+                            errorType:[DBTEAMLegalHoldsListHeldRevisionsError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBTEAMLegalHoldsListHeldRevisions;
   }
@@ -736,18 +662,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMLegalHoldsListHeldRevisionsContinue {
   @synchronized(lockObj) {
     if (!DBTEAMLegalHoldsListHeldRevisionsContinue) {
-      DBTEAMLegalHoldsListHeldRevisionsContinue = [[DBRoute alloc] init:@"legal_holds/list_held_revisions_continue"
-                                                             namespace_:@"team"
-                                                             deprecated:@NO
-                                                             resultType:[DBTEAMLegalHoldsListHeldRevisionResult class]
-                                                              errorType:[DBTEAMLegalHoldsListHeldRevisionsError class]
-                                                                  attrs:@{
-                                                                    @"auth" : @"team",
-                                                                    @"host" : @"api",
-                                                                    @"style" : @"rpc"
-                                                                  }
-                                                  dataStructSerialBlock:nil
-                                                dataStructDeserialBlock:nil];
+      DBTEAMLegalHoldsListHeldRevisionsContinue =
+          [[DBRoute alloc] init:@"legal_holds/list_held_revisions_continue"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[DBTEAMLegalHoldsListHeldRevisionResult class]
+                            errorType:[DBTEAMLegalHoldsListHeldRevisionsError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBTEAMLegalHoldsListHeldRevisionsContinue;
   }
@@ -761,11 +684,7 @@ static NSObject *lockObj = nil;
                                                 deprecated:@NO
                                                 resultType:[DBTEAMLegalHoldsListPoliciesResult class]
                                                  errorType:[DBTEAMLegalHoldsListPoliciesError class]
-                                                     attrs:@{
-                                                       @"auth" : @"team",
-                                                       @"host" : @"api",
-                                                       @"style" : @"rpc"
-                                                     }
+                                                     attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                      dataStructSerialBlock:nil
                                    dataStructDeserialBlock:nil];
     }
@@ -781,11 +700,7 @@ static NSObject *lockObj = nil;
                                                  deprecated:@NO
                                                  resultType:nil
                                                   errorType:[DBTEAMLegalHoldsPolicyReleaseError class]
-                                                      attrs:@{
-                                                        @"auth" : @"team",
-                                                        @"host" : @"api",
-                                                        @"style" : @"rpc"
-                                                      }
+                                                      attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                       dataStructSerialBlock:nil
                                     dataStructDeserialBlock:nil];
     }
@@ -801,11 +716,7 @@ static NSObject *lockObj = nil;
                                                 deprecated:@NO
                                                 resultType:[DBTEAMLegalHoldPolicy class]
                                                  errorType:[DBTEAMLegalHoldsPolicyUpdateError class]
-                                                     attrs:@{
-                                                       @"auth" : @"team",
-                                                       @"host" : @"api",
-                                                       @"style" : @"rpc"
-                                                     }
+                                                     attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                      dataStructSerialBlock:nil
                                    dataStructDeserialBlock:nil];
     }
@@ -816,18 +727,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMLinkedAppsListMemberLinkedApps {
   @synchronized(lockObj) {
     if (!DBTEAMLinkedAppsListMemberLinkedApps) {
-      DBTEAMLinkedAppsListMemberLinkedApps = [[DBRoute alloc] init:@"linked_apps/list_member_linked_apps"
-                                                        namespace_:@"team"
-                                                        deprecated:@NO
-                                                        resultType:[DBTEAMListMemberAppsResult class]
-                                                         errorType:[DBTEAMListMemberAppsError class]
-                                                             attrs:@{
-                                                               @"auth" : @"team",
-                                                               @"host" : @"api",
-                                                               @"style" : @"rpc"
-                                                             }
-                                             dataStructSerialBlock:nil
-                                           dataStructDeserialBlock:nil];
+      DBTEAMLinkedAppsListMemberLinkedApps =
+          [[DBRoute alloc] init:@"linked_apps/list_member_linked_apps"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[DBTEAMListMemberAppsResult class]
+                            errorType:[DBTEAMListMemberAppsError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBTEAMLinkedAppsListMemberLinkedApps;
   }
@@ -836,18 +744,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMLinkedAppsListMembersLinkedApps {
   @synchronized(lockObj) {
     if (!DBTEAMLinkedAppsListMembersLinkedApps) {
-      DBTEAMLinkedAppsListMembersLinkedApps = [[DBRoute alloc] init:@"linked_apps/list_members_linked_apps"
-                                                         namespace_:@"team"
-                                                         deprecated:@NO
-                                                         resultType:[DBTEAMListMembersAppsResult class]
-                                                          errorType:[DBTEAMListMembersAppsError class]
-                                                              attrs:@{
-                                                                @"auth" : @"team",
-                                                                @"host" : @"api",
-                                                                @"style" : @"rpc"
-                                                              }
-                                              dataStructSerialBlock:nil
-                                            dataStructDeserialBlock:nil];
+      DBTEAMLinkedAppsListMembersLinkedApps =
+          [[DBRoute alloc] init:@"linked_apps/list_members_linked_apps"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[DBTEAMListMembersAppsResult class]
+                            errorType:[DBTEAMListMembersAppsError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBTEAMLinkedAppsListMembersLinkedApps;
   }
@@ -856,18 +761,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMLinkedAppsListTeamLinkedApps {
   @synchronized(lockObj) {
     if (!DBTEAMLinkedAppsListTeamLinkedApps) {
-      DBTEAMLinkedAppsListTeamLinkedApps = [[DBRoute alloc] init:@"linked_apps/list_team_linked_apps"
-                                                      namespace_:@"team"
-                                                      deprecated:@YES
-                                                      resultType:[DBTEAMListTeamAppsResult class]
-                                                       errorType:[DBTEAMListTeamAppsError class]
-                                                           attrs:@{
-                                                             @"auth" : @"team",
-                                                             @"host" : @"api",
-                                                             @"style" : @"rpc"
-                                                           }
-                                           dataStructSerialBlock:nil
-                                         dataStructDeserialBlock:nil];
+      DBTEAMLinkedAppsListTeamLinkedApps =
+          [[DBRoute alloc] init:@"linked_apps/list_team_linked_apps"
+                           namespace_:@"team"
+                           deprecated:@YES
+                           resultType:[DBTEAMListTeamAppsResult class]
+                            errorType:[DBTEAMListTeamAppsError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBTEAMLinkedAppsListTeamLinkedApps;
   }
@@ -881,11 +783,7 @@ static NSObject *lockObj = nil;
                                                    deprecated:@NO
                                                    resultType:nil
                                                     errorType:[DBTEAMRevokeLinkedAppError class]
-                                                        attrs:@{
-                                                          @"auth" : @"team",
-                                                          @"host" : @"api",
-                                                          @"style" : @"rpc"
-                                                        }
+                                                        attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                         dataStructSerialBlock:nil
                                       dataStructDeserialBlock:nil];
     }
@@ -896,18 +794,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMLinkedAppsRevokeLinkedAppBatch {
   @synchronized(lockObj) {
     if (!DBTEAMLinkedAppsRevokeLinkedAppBatch) {
-      DBTEAMLinkedAppsRevokeLinkedAppBatch = [[DBRoute alloc] init:@"linked_apps/revoke_linked_app_batch"
-                                                        namespace_:@"team"
-                                                        deprecated:@NO
-                                                        resultType:[DBTEAMRevokeLinkedAppBatchResult class]
-                                                         errorType:[DBTEAMRevokeLinkedAppBatchError class]
-                                                             attrs:@{
-                                                               @"auth" : @"team",
-                                                               @"host" : @"api",
-                                                               @"style" : @"rpc"
-                                                             }
-                                             dataStructSerialBlock:nil
-                                           dataStructDeserialBlock:nil];
+      DBTEAMLinkedAppsRevokeLinkedAppBatch =
+          [[DBRoute alloc] init:@"linked_apps/revoke_linked_app_batch"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[DBTEAMRevokeLinkedAppBatchResult class]
+                            errorType:[DBTEAMRevokeLinkedAppBatchError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBTEAMLinkedAppsRevokeLinkedAppBatch;
   }
@@ -916,18 +811,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMMemberSpaceLimitsExcludedUsersAdd {
   @synchronized(lockObj) {
     if (!DBTEAMMemberSpaceLimitsExcludedUsersAdd) {
-      DBTEAMMemberSpaceLimitsExcludedUsersAdd = [[DBRoute alloc] init:@"member_space_limits/excluded_users/add"
-                                                           namespace_:@"team"
-                                                           deprecated:@NO
-                                                           resultType:[DBTEAMExcludedUsersUpdateResult class]
-                                                            errorType:[DBTEAMExcludedUsersUpdateError class]
-                                                                attrs:@{
-                                                                  @"auth" : @"team",
-                                                                  @"host" : @"api",
-                                                                  @"style" : @"rpc"
-                                                                }
-                                                dataStructSerialBlock:nil
-                                              dataStructDeserialBlock:nil];
+      DBTEAMMemberSpaceLimitsExcludedUsersAdd =
+          [[DBRoute alloc] init:@"member_space_limits/excluded_users/add"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[DBTEAMExcludedUsersUpdateResult class]
+                            errorType:[DBTEAMExcludedUsersUpdateError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBTEAMMemberSpaceLimitsExcludedUsersAdd;
   }
@@ -936,18 +828,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMMemberSpaceLimitsExcludedUsersList {
   @synchronized(lockObj) {
     if (!DBTEAMMemberSpaceLimitsExcludedUsersList) {
-      DBTEAMMemberSpaceLimitsExcludedUsersList = [[DBRoute alloc] init:@"member_space_limits/excluded_users/list"
-                                                            namespace_:@"team"
-                                                            deprecated:@NO
-                                                            resultType:[DBTEAMExcludedUsersListResult class]
-                                                             errorType:[DBTEAMExcludedUsersListError class]
-                                                                 attrs:@{
-                                                                   @"auth" : @"team",
-                                                                   @"host" : @"api",
-                                                                   @"style" : @"rpc"
-                                                                 }
-                                                 dataStructSerialBlock:nil
-                                               dataStructDeserialBlock:nil];
+      DBTEAMMemberSpaceLimitsExcludedUsersList =
+          [[DBRoute alloc] init:@"member_space_limits/excluded_users/list"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[DBTEAMExcludedUsersListResult class]
+                            errorType:[DBTEAMExcludedUsersListError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBTEAMMemberSpaceLimitsExcludedUsersList;
   }
@@ -962,11 +851,7 @@ static NSObject *lockObj = nil;
                            deprecated:@NO
                            resultType:[DBTEAMExcludedUsersListResult class]
                             errorType:[DBTEAMExcludedUsersListContinueError class]
-                                attrs:@{
-                                  @"auth" : @"team",
-                                  @"host" : @"api",
-                                  @"style" : @"rpc"
-                                }
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                 dataStructSerialBlock:nil
               dataStructDeserialBlock:nil];
     }
@@ -977,18 +862,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMMemberSpaceLimitsExcludedUsersRemove {
   @synchronized(lockObj) {
     if (!DBTEAMMemberSpaceLimitsExcludedUsersRemove) {
-      DBTEAMMemberSpaceLimitsExcludedUsersRemove = [[DBRoute alloc] init:@"member_space_limits/excluded_users/remove"
-                                                              namespace_:@"team"
-                                                              deprecated:@NO
-                                                              resultType:[DBTEAMExcludedUsersUpdateResult class]
-                                                               errorType:[DBTEAMExcludedUsersUpdateError class]
-                                                                   attrs:@{
-                                                                     @"auth" : @"team",
-                                                                     @"host" : @"api",
-                                                                     @"style" : @"rpc"
-                                                                   }
-                                                   dataStructSerialBlock:nil
-                                                 dataStructDeserialBlock:nil];
+      DBTEAMMemberSpaceLimitsExcludedUsersRemove =
+          [[DBRoute alloc] init:@"member_space_limits/excluded_users/remove"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[DBTEAMExcludedUsersUpdateResult class]
+                            errorType:[DBTEAMExcludedUsersUpdateError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBTEAMMemberSpaceLimitsExcludedUsersRemove;
   }
@@ -997,23 +879,20 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMMemberSpaceLimitsGetCustomQuota {
   @synchronized(lockObj) {
     if (!DBTEAMMemberSpaceLimitsGetCustomQuota) {
-      DBTEAMMemberSpaceLimitsGetCustomQuota = [[DBRoute alloc] init:@"member_space_limits/get_custom_quota"
-          namespace_:@"team"
-          deprecated:@NO
-          resultType:[NSArray<DBTEAMCustomQuotaResult *> class]
-          errorType:[DBTEAMCustomQuotaError class]
-          attrs:@{
-            @"auth" : @"team",
-            @"host" : @"api",
-            @"style" : @"rpc"
-          }
-          dataStructSerialBlock:nil
-          dataStructDeserialBlock:^id(id dataStruct) {
-            return [DBArraySerializer deserialize:dataStruct
-                                        withBlock:^id(id elem0) {
-                                          return [DBTEAMCustomQuotaResultSerializer deserialize:elem0];
-                                        }];
-          }];
+      DBTEAMMemberSpaceLimitsGetCustomQuota =
+          [[DBRoute alloc] init:@"member_space_limits/get_custom_quota"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[NSArray<DBTEAMCustomQuotaResult *> class]
+                            errorType:[DBTEAMCustomQuotaError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:^id(id dataStruct) {
+                return [DBArraySerializer deserialize:dataStruct
+                                            withBlock:^id(id elem0) {
+                                              return [DBTEAMCustomQuotaResultSerializer deserialize:elem0];
+                                            }];
+              }];
     }
     return DBTEAMMemberSpaceLimitsGetCustomQuota;
   }
@@ -1022,23 +901,20 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMMemberSpaceLimitsRemoveCustomQuota {
   @synchronized(lockObj) {
     if (!DBTEAMMemberSpaceLimitsRemoveCustomQuota) {
-      DBTEAMMemberSpaceLimitsRemoveCustomQuota = [[DBRoute alloc] init:@"member_space_limits/remove_custom_quota"
-          namespace_:@"team"
-          deprecated:@NO
-          resultType:[NSArray<DBTEAMRemoveCustomQuotaResult *> class]
-          errorType:[DBTEAMCustomQuotaError class]
-          attrs:@{
-            @"auth" : @"team",
-            @"host" : @"api",
-            @"style" : @"rpc"
-          }
-          dataStructSerialBlock:nil
-          dataStructDeserialBlock:^id(id dataStruct) {
-            return [DBArraySerializer deserialize:dataStruct
-                                        withBlock:^id(id elem0) {
-                                          return [DBTEAMRemoveCustomQuotaResultSerializer deserialize:elem0];
-                                        }];
-          }];
+      DBTEAMMemberSpaceLimitsRemoveCustomQuota =
+          [[DBRoute alloc] init:@"member_space_limits/remove_custom_quota"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[NSArray<DBTEAMRemoveCustomQuotaResult *> class]
+                            errorType:[DBTEAMCustomQuotaError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:^id(id dataStruct) {
+                return [DBArraySerializer deserialize:dataStruct
+                                            withBlock:^id(id elem0) {
+                                              return [DBTEAMRemoveCustomQuotaResultSerializer deserialize:elem0];
+                                            }];
+              }];
     }
     return DBTEAMMemberSpaceLimitsRemoveCustomQuota;
   }
@@ -1047,23 +923,20 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMMemberSpaceLimitsSetCustomQuota {
   @synchronized(lockObj) {
     if (!DBTEAMMemberSpaceLimitsSetCustomQuota) {
-      DBTEAMMemberSpaceLimitsSetCustomQuota = [[DBRoute alloc] init:@"member_space_limits/set_custom_quota"
-          namespace_:@"team"
-          deprecated:@NO
-          resultType:[NSArray<DBTEAMCustomQuotaResult *> class]
-          errorType:[DBTEAMSetCustomQuotaError class]
-          attrs:@{
-            @"auth" : @"team",
-            @"host" : @"api",
-            @"style" : @"rpc"
-          }
-          dataStructSerialBlock:nil
-          dataStructDeserialBlock:^id(id dataStruct) {
-            return [DBArraySerializer deserialize:dataStruct
-                                        withBlock:^id(id elem0) {
-                                          return [DBTEAMCustomQuotaResultSerializer deserialize:elem0];
-                                        }];
-          }];
+      DBTEAMMemberSpaceLimitsSetCustomQuota =
+          [[DBRoute alloc] init:@"member_space_limits/set_custom_quota"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[NSArray<DBTEAMCustomQuotaResult *> class]
+                            errorType:[DBTEAMSetCustomQuotaError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:^id(id dataStruct) {
+                return [DBArraySerializer deserialize:dataStruct
+                                            withBlock:^id(id elem0) {
+                                              return [DBTEAMCustomQuotaResultSerializer deserialize:elem0];
+                                            }];
+              }];
     }
     return DBTEAMMemberSpaceLimitsSetCustomQuota;
   }
@@ -1077,11 +950,7 @@ static NSObject *lockObj = nil;
                                       deprecated:@NO
                                       resultType:[DBTEAMMembersAddLaunchV2Result class]
                                        errorType:nil
-                                           attrs:@{
-                                             @"auth" : @"team",
-                                             @"host" : @"api",
-                                             @"style" : @"rpc"
-                                           }
+                                           attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                            dataStructSerialBlock:nil
                          dataStructDeserialBlock:nil];
     }
@@ -1097,11 +966,7 @@ static NSObject *lockObj = nil;
                                     deprecated:@NO
                                     resultType:[DBTEAMMembersAddLaunch class]
                                      errorType:nil
-                                         attrs:@{
-                                           @"auth" : @"team",
-                                           @"host" : @"api",
-                                           @"style" : @"rpc"
-                                         }
+                                         attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                          dataStructSerialBlock:nil
                        dataStructDeserialBlock:nil];
     }
@@ -1117,11 +982,7 @@ static NSObject *lockObj = nil;
                                                   deprecated:@NO
                                                   resultType:[DBTEAMMembersAddJobStatusV2Result class]
                                                    errorType:[DBASYNCPollError class]
-                                                       attrs:@{
-                                                         @"auth" : @"team",
-                                                         @"host" : @"api",
-                                                         @"style" : @"rpc"
-                                                       }
+                                                       attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                        dataStructSerialBlock:nil
                                      dataStructDeserialBlock:nil];
     }
@@ -1137,11 +998,7 @@ static NSObject *lockObj = nil;
                                                 deprecated:@NO
                                                 resultType:[DBTEAMMembersAddJobStatus class]
                                                  errorType:[DBASYNCPollError class]
-                                                     attrs:@{
-                                                       @"auth" : @"team",
-                                                       @"host" : @"api",
-                                                       @"style" : @"rpc"
-                                                     }
+                                                     attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                      dataStructSerialBlock:nil
                                    dataStructDeserialBlock:nil];
     }
@@ -1152,18 +1009,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMMembersDeleteProfilePhotoV2 {
   @synchronized(lockObj) {
     if (!DBTEAMMembersDeleteProfilePhotoV2) {
-      DBTEAMMembersDeleteProfilePhotoV2 = [[DBRoute alloc] init:@"members/delete_profile_photo_v2"
-                                                     namespace_:@"team"
-                                                     deprecated:@NO
-                                                     resultType:[DBTEAMTeamMemberInfoV2Result class]
-                                                      errorType:[DBTEAMMembersDeleteProfilePhotoError class]
-                                                          attrs:@{
-                                                            @"auth" : @"team",
-                                                            @"host" : @"api",
-                                                            @"style" : @"rpc"
-                                                          }
-                                          dataStructSerialBlock:nil
-                                        dataStructDeserialBlock:nil];
+      DBTEAMMembersDeleteProfilePhotoV2 =
+          [[DBRoute alloc] init:@"members/delete_profile_photo_v2"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[DBTEAMTeamMemberInfoV2Result class]
+                            errorType:[DBTEAMMembersDeleteProfilePhotoError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBTEAMMembersDeleteProfilePhotoV2;
   }
@@ -1177,11 +1031,7 @@ static NSObject *lockObj = nil;
                                                    deprecated:@NO
                                                    resultType:[DBTEAMTeamMemberInfo class]
                                                     errorType:[DBTEAMMembersDeleteProfilePhotoError class]
-                                                        attrs:@{
-                                                          @"auth" : @"team",
-                                                          @"host" : @"api",
-                                                          @"style" : @"rpc"
-                                                        }
+                                                        attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                         dataStructSerialBlock:nil
                                       dataStructDeserialBlock:nil];
     }
@@ -1198,11 +1048,7 @@ static NSObject *lockObj = nil;
                            deprecated:@NO
                            resultType:[DBTEAMMembersGetAvailableTeamMemberRolesResult class]
                             errorType:nil
-                                attrs:@{
-                                  @"auth" : @"team",
-                                  @"host" : @"api",
-                                  @"style" : @"rpc"
-                                }
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                 dataStructSerialBlock:nil
               dataStructDeserialBlock:nil];
     }
@@ -1218,11 +1064,7 @@ static NSObject *lockObj = nil;
                                           deprecated:@NO
                                           resultType:[DBTEAMMembersGetInfoV2Result class]
                                            errorType:[DBTEAMMembersGetInfoError class]
-                                               attrs:@{
-                                                 @"auth" : @"team",
-                                                 @"host" : @"api",
-                                                 @"style" : @"rpc"
-                                               }
+                                               attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                dataStructSerialBlock:nil
                              dataStructDeserialBlock:nil];
     }
@@ -1233,23 +1075,20 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMMembersGetInfo {
   @synchronized(lockObj) {
     if (!DBTEAMMembersGetInfo) {
-      DBTEAMMembersGetInfo = [[DBRoute alloc] init:@"members/get_info"
-          namespace_:@"team"
-          deprecated:@NO
-          resultType:[NSArray<DBTEAMMembersGetInfoItem *> class]
-          errorType:[DBTEAMMembersGetInfoError class]
-          attrs:@{
-            @"auth" : @"team",
-            @"host" : @"api",
-            @"style" : @"rpc"
-          }
-          dataStructSerialBlock:nil
-          dataStructDeserialBlock:^id(id dataStruct) {
-            return [DBArraySerializer deserialize:dataStruct
-                                        withBlock:^id(id elem0) {
-                                          return [DBTEAMMembersGetInfoItemSerializer deserialize:elem0];
-                                        }];
-          }];
+      DBTEAMMembersGetInfo =
+          [[DBRoute alloc] init:@"members/get_info"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[NSArray<DBTEAMMembersGetInfoItem *> class]
+                            errorType:[DBTEAMMembersGetInfoError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:^id(id dataStruct) {
+                return [DBArraySerializer deserialize:dataStruct
+                                            withBlock:^id(id elem0) {
+                                              return [DBTEAMMembersGetInfoItemSerializer deserialize:elem0];
+                                            }];
+              }];
     }
     return DBTEAMMembersGetInfo;
   }
@@ -1263,11 +1102,7 @@ static NSObject *lockObj = nil;
                                        deprecated:@NO
                                        resultType:[DBTEAMMembersListV2Result class]
                                         errorType:[DBTEAMMembersListError class]
-                                            attrs:@{
-                                              @"auth" : @"team",
-                                              @"host" : @"api",
-                                              @"style" : @"rpc"
-                                            }
+                                            attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                             dataStructSerialBlock:nil
                           dataStructDeserialBlock:nil];
     }
@@ -1283,11 +1118,7 @@ static NSObject *lockObj = nil;
                                      deprecated:@NO
                                      resultType:[DBTEAMMembersListResult class]
                                       errorType:[DBTEAMMembersListError class]
-                                          attrs:@{
-                                            @"auth" : @"team",
-                                            @"host" : @"api",
-                                            @"style" : @"rpc"
-                                          }
+                                          attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                           dataStructSerialBlock:nil
                         dataStructDeserialBlock:nil];
     }
@@ -1303,11 +1134,7 @@ static NSObject *lockObj = nil;
                                                deprecated:@NO
                                                resultType:[DBTEAMMembersListV2Result class]
                                                 errorType:[DBTEAMMembersListContinueError class]
-                                                    attrs:@{
-                                                      @"auth" : @"team",
-                                                      @"host" : @"api",
-                                                      @"style" : @"rpc"
-                                                    }
+                                                    attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                     dataStructSerialBlock:nil
                                   dataStructDeserialBlock:nil];
     }
@@ -1323,11 +1150,7 @@ static NSObject *lockObj = nil;
                                              deprecated:@NO
                                              resultType:[DBTEAMMembersListResult class]
                                               errorType:[DBTEAMMembersListContinueError class]
-                                                  attrs:@{
-                                                    @"auth" : @"team",
-                                                    @"host" : @"api",
-                                                    @"style" : @"rpc"
-                                                  }
+                                                  attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                   dataStructSerialBlock:nil
                                 dataStructDeserialBlock:nil];
     }
@@ -1338,18 +1161,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMMembersMoveFormerMemberFiles {
   @synchronized(lockObj) {
     if (!DBTEAMMembersMoveFormerMemberFiles) {
-      DBTEAMMembersMoveFormerMemberFiles = [[DBRoute alloc] init:@"members/move_former_member_files"
-                                                      namespace_:@"team"
-                                                      deprecated:@NO
-                                                      resultType:[DBASYNCLaunchEmptyResult class]
-                                                       errorType:[DBTEAMMembersTransferFormerMembersFilesError class]
-                                                           attrs:@{
-                                                             @"auth" : @"team",
-                                                             @"host" : @"api",
-                                                             @"style" : @"rpc"
-                                                           }
-                                           dataStructSerialBlock:nil
-                                         dataStructDeserialBlock:nil];
+      DBTEAMMembersMoveFormerMemberFiles =
+          [[DBRoute alloc] init:@"members/move_former_member_files"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[DBASYNCLaunchEmptyResult class]
+                            errorType:[DBTEAMMembersTransferFormerMembersFilesError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBTEAMMembersMoveFormerMemberFiles;
   }
@@ -1364,11 +1184,7 @@ static NSObject *lockObj = nil;
                            deprecated:@NO
                            resultType:[DBASYNCPollEmptyResult class]
                             errorType:[DBASYNCPollError class]
-                                attrs:@{
-                                  @"auth" : @"team",
-                                  @"host" : @"api",
-                                  @"style" : @"rpc"
-                                }
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                 dataStructSerialBlock:nil
               dataStructDeserialBlock:nil];
     }
@@ -1384,11 +1200,7 @@ static NSObject *lockObj = nil;
                                         deprecated:@NO
                                         resultType:nil
                                          errorType:[DBTEAMMembersRecoverError class]
-                                             attrs:@{
-                                               @"auth" : @"team",
-                                               @"host" : @"api",
-                                               @"style" : @"rpc"
-                                             }
+                                             attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                              dataStructSerialBlock:nil
                            dataStructDeserialBlock:nil];
     }
@@ -1404,11 +1216,7 @@ static NSObject *lockObj = nil;
                                        deprecated:@NO
                                        resultType:[DBASYNCLaunchEmptyResult class]
                                         errorType:[DBTEAMMembersRemoveError class]
-                                            attrs:@{
-                                              @"auth" : @"team",
-                                              @"host" : @"api",
-                                              @"style" : @"rpc"
-                                            }
+                                            attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                             dataStructSerialBlock:nil
                           dataStructDeserialBlock:nil];
     }
@@ -1424,11 +1232,7 @@ static NSObject *lockObj = nil;
                                                    deprecated:@NO
                                                    resultType:[DBASYNCPollEmptyResult class]
                                                     errorType:[DBASYNCPollError class]
-                                                        attrs:@{
-                                                          @"auth" : @"team",
-                                                          @"host" : @"api",
-                                                          @"style" : @"rpc"
-                                                        }
+                                                        attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                         dataStructSerialBlock:nil
                                       dataStructDeserialBlock:nil];
     }
@@ -1444,11 +1248,7 @@ static NSObject *lockObj = nil;
                                                    deprecated:@NO
                                                    resultType:[DBTEAMAddSecondaryEmailsResult class]
                                                     errorType:[DBTEAMAddSecondaryEmailsError class]
-                                                        attrs:@{
-                                                          @"auth" : @"team",
-                                                          @"host" : @"api",
-                                                          @"style" : @"rpc"
-                                                        }
+                                                        attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                         dataStructSerialBlock:nil
                                       dataStructDeserialBlock:nil];
     }
@@ -1459,18 +1259,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMMembersSecondaryEmailsDelete {
   @synchronized(lockObj) {
     if (!DBTEAMMembersSecondaryEmailsDelete) {
-      DBTEAMMembersSecondaryEmailsDelete = [[DBRoute alloc] init:@"members/secondary_emails/delete"
-                                                      namespace_:@"team"
-                                                      deprecated:@NO
-                                                      resultType:[DBTEAMDeleteSecondaryEmailsResult class]
-                                                       errorType:nil
-                                                           attrs:@{
-                                                             @"auth" : @"team",
-                                                             @"host" : @"api",
-                                                             @"style" : @"rpc"
-                                                           }
-                                           dataStructSerialBlock:nil
-                                         dataStructDeserialBlock:nil];
+      DBTEAMMembersSecondaryEmailsDelete =
+          [[DBRoute alloc] init:@"members/secondary_emails/delete"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[DBTEAMDeleteSecondaryEmailsResult class]
+                            errorType:nil
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBTEAMMembersSecondaryEmailsDelete;
   }
@@ -1485,11 +1282,7 @@ static NSObject *lockObj = nil;
                            deprecated:@NO
                            resultType:[DBTEAMResendVerificationEmailResult class]
                             errorType:nil
-                                attrs:@{
-                                  @"auth" : @"team",
-                                  @"host" : @"api",
-                                  @"style" : @"rpc"
-                                }
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                 dataStructSerialBlock:nil
               dataStructDeserialBlock:nil];
     }
@@ -1505,11 +1298,7 @@ static NSObject *lockObj = nil;
                                                  deprecated:@NO
                                                  resultType:nil
                                                   errorType:[DBTEAMMembersSendWelcomeError class]
-                                                      attrs:@{
-                                                        @"auth" : @"team",
-                                                        @"host" : @"api",
-                                                        @"style" : @"rpc"
-                                                      }
+                                                      attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                       dataStructSerialBlock:nil
                                     dataStructDeserialBlock:nil];
     }
@@ -1520,18 +1309,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMMembersSetAdminPermissionsV2 {
   @synchronized(lockObj) {
     if (!DBTEAMMembersSetAdminPermissionsV2) {
-      DBTEAMMembersSetAdminPermissionsV2 = [[DBRoute alloc] init:@"members/set_admin_permissions_v2"
-                                                      namespace_:@"team"
-                                                      deprecated:@NO
-                                                      resultType:[DBTEAMMembersSetPermissions2Result class]
-                                                       errorType:[DBTEAMMembersSetPermissions2Error class]
-                                                           attrs:@{
-                                                             @"auth" : @"team",
-                                                             @"host" : @"api",
-                                                             @"style" : @"rpc"
-                                                           }
-                                           dataStructSerialBlock:nil
-                                         dataStructDeserialBlock:nil];
+      DBTEAMMembersSetAdminPermissionsV2 =
+          [[DBRoute alloc] init:@"members/set_admin_permissions_v2"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[DBTEAMMembersSetPermissions2Result class]
+                            errorType:[DBTEAMMembersSetPermissions2Error class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBTEAMMembersSetAdminPermissionsV2;
   }
@@ -1545,11 +1331,7 @@ static NSObject *lockObj = nil;
                                                     deprecated:@NO
                                                     resultType:[DBTEAMMembersSetPermissionsResult class]
                                                      errorType:[DBTEAMMembersSetPermissionsError class]
-                                                         attrs:@{
-                                                           @"auth" : @"team",
-                                                           @"host" : @"api",
-                                                           @"style" : @"rpc"
-                                                         }
+                                                         attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                          dataStructSerialBlock:nil
                                        dataStructDeserialBlock:nil];
     }
@@ -1565,11 +1347,7 @@ static NSObject *lockObj = nil;
                                              deprecated:@NO
                                              resultType:[DBTEAMTeamMemberInfoV2Result class]
                                               errorType:[DBTEAMMembersSetProfileError class]
-                                                  attrs:@{
-                                                    @"auth" : @"team",
-                                                    @"host" : @"api",
-                                                    @"style" : @"rpc"
-                                                  }
+                                                  attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                   dataStructSerialBlock:nil
                                 dataStructDeserialBlock:nil];
     }
@@ -1585,11 +1363,7 @@ static NSObject *lockObj = nil;
                                            deprecated:@NO
                                            resultType:[DBTEAMTeamMemberInfo class]
                                             errorType:[DBTEAMMembersSetProfileError class]
-                                                attrs:@{
-                                                  @"auth" : @"team",
-                                                  @"host" : @"api",
-                                                  @"style" : @"rpc"
-                                                }
+                                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                 dataStructSerialBlock:nil
                               dataStructDeserialBlock:nil];
     }
@@ -1605,11 +1379,7 @@ static NSObject *lockObj = nil;
                                                   deprecated:@NO
                                                   resultType:[DBTEAMTeamMemberInfoV2Result class]
                                                    errorType:[DBTEAMMembersSetProfilePhotoError class]
-                                                       attrs:@{
-                                                         @"auth" : @"team",
-                                                         @"host" : @"api",
-                                                         @"style" : @"rpc"
-                                                       }
+                                                       attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                        dataStructSerialBlock:nil
                                      dataStructDeserialBlock:nil];
     }
@@ -1625,11 +1395,7 @@ static NSObject *lockObj = nil;
                                                 deprecated:@NO
                                                 resultType:[DBTEAMTeamMemberInfo class]
                                                  errorType:[DBTEAMMembersSetProfilePhotoError class]
-                                                     attrs:@{
-                                                       @"auth" : @"team",
-                                                       @"host" : @"api",
-                                                       @"style" : @"rpc"
-                                                     }
+                                                     attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                      dataStructSerialBlock:nil
                                    dataStructDeserialBlock:nil];
     }
@@ -1645,11 +1411,7 @@ static NSObject *lockObj = nil;
                                         deprecated:@NO
                                         resultType:nil
                                          errorType:[DBTEAMMembersSuspendError class]
-                                             attrs:@{
-                                               @"auth" : @"team",
-                                               @"host" : @"api",
-                                               @"style" : @"rpc"
-                                             }
+                                             attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                              dataStructSerialBlock:nil
                            dataStructDeserialBlock:nil];
     }
@@ -1665,11 +1427,7 @@ static NSObject *lockObj = nil;
                                           deprecated:@NO
                                           resultType:nil
                                            errorType:[DBTEAMMembersUnsuspendError class]
-                                               attrs:@{
-                                                 @"auth" : @"team",
-                                                 @"host" : @"api",
-                                                 @"style" : @"rpc"
-                                               }
+                                               attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                dataStructSerialBlock:nil
                              dataStructDeserialBlock:nil];
     }
@@ -1685,11 +1443,7 @@ static NSObject *lockObj = nil;
                                         deprecated:@NO
                                         resultType:[DBTEAMTeamNamespacesListResult class]
                                          errorType:[DBTEAMTeamNamespacesListError class]
-                                             attrs:@{
-                                               @"auth" : @"team",
-                                               @"host" : @"api",
-                                               @"style" : @"rpc"
-                                             }
+                                             attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                              dataStructSerialBlock:nil
                            dataStructDeserialBlock:nil];
     }
@@ -1705,11 +1459,7 @@ static NSObject *lockObj = nil;
                                                 deprecated:@NO
                                                 resultType:[DBTEAMTeamNamespacesListResult class]
                                                  errorType:[DBTEAMTeamNamespacesListContinueError class]
-                                                     attrs:@{
-                                                       @"auth" : @"team",
-                                                       @"host" : @"api",
-                                                       @"style" : @"rpc"
-                                                     }
+                                                     attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                      dataStructSerialBlock:nil
                                    dataStructDeserialBlock:nil];
     }
@@ -1725,11 +1475,7 @@ static NSObject *lockObj = nil;
                                                deprecated:@YES
                                                resultType:[DBFILEPROPERTIESAddTemplateResult class]
                                                 errorType:[DBFILEPROPERTIESModifyTemplateError class]
-                                                    attrs:@{
-                                                      @"auth" : @"team",
-                                                      @"host" : @"api",
-                                                      @"style" : @"rpc"
-                                                    }
+                                                    attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                     dataStructSerialBlock:nil
                                   dataStructDeserialBlock:nil];
     }
@@ -1745,11 +1491,7 @@ static NSObject *lockObj = nil;
                                                deprecated:@YES
                                                resultType:[DBFILEPROPERTIESGetTemplateResult class]
                                                 errorType:[DBFILEPROPERTIESTemplateError class]
-                                                    attrs:@{
-                                                      @"auth" : @"team",
-                                                      @"host" : @"api",
-                                                      @"style" : @"rpc"
-                                                    }
+                                                    attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                     dataStructSerialBlock:nil
                                   dataStructDeserialBlock:nil];
     }
@@ -1765,11 +1507,7 @@ static NSObject *lockObj = nil;
                                                 deprecated:@YES
                                                 resultType:[DBFILEPROPERTIESListTemplateResult class]
                                                  errorType:[DBFILEPROPERTIESTemplateError class]
-                                                     attrs:@{
-                                                       @"auth" : @"team",
-                                                       @"host" : @"api",
-                                                       @"style" : @"rpc"
-                                                     }
+                                                     attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                      dataStructSerialBlock:nil
                                    dataStructDeserialBlock:nil];
     }
@@ -1785,11 +1523,7 @@ static NSObject *lockObj = nil;
                                                   deprecated:@YES
                                                   resultType:[DBFILEPROPERTIESUpdateTemplateResult class]
                                                    errorType:[DBFILEPROPERTIESModifyTemplateError class]
-                                                       attrs:@{
-                                                         @"auth" : @"team",
-                                                         @"host" : @"api",
-                                                         @"style" : @"rpc"
-                                                       }
+                                                       attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                        dataStructSerialBlock:nil
                                      dataStructDeserialBlock:nil];
     }
@@ -1805,11 +1539,7 @@ static NSObject *lockObj = nil;
                                             deprecated:@YES
                                             resultType:[DBTEAMGetActivityReport class]
                                              errorType:[DBTEAMDateRangeError class]
-                                                 attrs:@{
-                                                   @"auth" : @"team",
-                                                   @"host" : @"api",
-                                                   @"style" : @"rpc"
-                                                 }
+                                                 attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                  dataStructSerialBlock:nil
                                dataStructDeserialBlock:nil];
     }
@@ -1825,11 +1555,7 @@ static NSObject *lockObj = nil;
                                            deprecated:@YES
                                            resultType:[DBTEAMGetDevicesReport class]
                                             errorType:[DBTEAMDateRangeError class]
-                                                attrs:@{
-                                                  @"auth" : @"team",
-                                                  @"host" : @"api",
-                                                  @"style" : @"rpc"
-                                                }
+                                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                 dataStructSerialBlock:nil
                               dataStructDeserialBlock:nil];
     }
@@ -1845,11 +1571,7 @@ static NSObject *lockObj = nil;
                                               deprecated:@YES
                                               resultType:[DBTEAMGetMembershipReport class]
                                                errorType:[DBTEAMDateRangeError class]
-                                                   attrs:@{
-                                                     @"auth" : @"team",
-                                                     @"host" : @"api",
-                                                     @"style" : @"rpc"
-                                                   }
+                                                   attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                    dataStructSerialBlock:nil
                                  dataStructDeserialBlock:nil];
     }
@@ -1865,15 +1587,76 @@ static NSObject *lockObj = nil;
                                            deprecated:@YES
                                            resultType:[DBTEAMGetStorageReport class]
                                             errorType:[DBTEAMDateRangeError class]
-                                                attrs:@{
-                                                  @"auth" : @"team",
-                                                  @"host" : @"api",
-                                                  @"style" : @"rpc"
-                                                }
+                                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                 dataStructSerialBlock:nil
                               dataStructDeserialBlock:nil];
     }
     return DBTEAMReportsGetStorage;
+  }
+}
+
++ (DBRoute *)DBTEAMSharingAllowlistAdd {
+  @synchronized(lockObj) {
+    if (!DBTEAMSharingAllowlistAdd) {
+      DBTEAMSharingAllowlistAdd = [[DBRoute alloc] init:@"sharing_allowlist/add"
+                                             namespace_:@"team"
+                                             deprecated:@NO
+                                             resultType:[DBTEAMSharingAllowlistAddResponse class]
+                                              errorType:[DBTEAMSharingAllowlistAddError class]
+                                                  attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                                  dataStructSerialBlock:nil
+                                dataStructDeserialBlock:nil];
+    }
+    return DBTEAMSharingAllowlistAdd;
+  }
+}
+
++ (DBRoute *)DBTEAMSharingAllowlistList {
+  @synchronized(lockObj) {
+    if (!DBTEAMSharingAllowlistList) {
+      DBTEAMSharingAllowlistList = [[DBRoute alloc] init:@"sharing_allowlist/list"
+                                              namespace_:@"team"
+                                              deprecated:@NO
+                                              resultType:[DBTEAMSharingAllowlistListResponse class]
+                                               errorType:[DBTEAMSharingAllowlistListError class]
+                                                   attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                                   dataStructSerialBlock:nil
+                                 dataStructDeserialBlock:nil];
+    }
+    return DBTEAMSharingAllowlistList;
+  }
+}
+
++ (DBRoute *)DBTEAMSharingAllowlistListContinue {
+  @synchronized(lockObj) {
+    if (!DBTEAMSharingAllowlistListContinue) {
+      DBTEAMSharingAllowlistListContinue =
+          [[DBRoute alloc] init:@"sharing_allowlist/list/continue"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[DBTEAMSharingAllowlistListResponse class]
+                            errorType:[DBTEAMSharingAllowlistListContinueError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
+    }
+    return DBTEAMSharingAllowlistListContinue;
+  }
+}
+
++ (DBRoute *)DBTEAMSharingAllowlistRemove {
+  @synchronized(lockObj) {
+    if (!DBTEAMSharingAllowlistRemove) {
+      DBTEAMSharingAllowlistRemove = [[DBRoute alloc] init:@"sharing_allowlist/remove"
+                                                namespace_:@"team"
+                                                deprecated:@NO
+                                                resultType:[DBTEAMSharingAllowlistRemoveResponse class]
+                                                 errorType:[DBTEAMSharingAllowlistRemoveError class]
+                                                     attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                                     dataStructSerialBlock:nil
+                                   dataStructDeserialBlock:nil];
+    }
+    return DBTEAMSharingAllowlistRemove;
   }
 }
 
@@ -1885,11 +1668,7 @@ static NSObject *lockObj = nil;
                                             deprecated:@NO
                                             resultType:[DBTEAMTeamFolderMetadata class]
                                              errorType:[DBTEAMTeamFolderActivateError class]
-                                                 attrs:@{
-                                                   @"auth" : @"team",
-                                                   @"host" : @"api",
-                                                   @"style" : @"rpc"
-                                                 }
+                                                 attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                  dataStructSerialBlock:nil
                                dataStructDeserialBlock:nil];
     }
@@ -1905,11 +1684,7 @@ static NSObject *lockObj = nil;
                                            deprecated:@NO
                                            resultType:[DBTEAMTeamFolderArchiveLaunch class]
                                             errorType:[DBTEAMTeamFolderArchiveError class]
-                                                attrs:@{
-                                                  @"auth" : @"team",
-                                                  @"host" : @"api",
-                                                  @"style" : @"rpc"
-                                                }
+                                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                 dataStructSerialBlock:nil
                               dataStructDeserialBlock:nil];
     }
@@ -1925,11 +1700,7 @@ static NSObject *lockObj = nil;
                                                 deprecated:@NO
                                                 resultType:[DBTEAMTeamFolderArchiveJobStatus class]
                                                  errorType:[DBASYNCPollError class]
-                                                     attrs:@{
-                                                       @"auth" : @"team",
-                                                       @"host" : @"api",
-                                                       @"style" : @"rpc"
-                                                     }
+                                                     attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                      dataStructSerialBlock:nil
                                    dataStructDeserialBlock:nil];
     }
@@ -1945,11 +1716,7 @@ static NSObject *lockObj = nil;
                                           deprecated:@NO
                                           resultType:[DBTEAMTeamFolderMetadata class]
                                            errorType:[DBTEAMTeamFolderCreateError class]
-                                               attrs:@{
-                                                 @"auth" : @"team",
-                                                 @"host" : @"api",
-                                                 @"style" : @"rpc"
-                                               }
+                                               attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                dataStructSerialBlock:nil
                              dataStructDeserialBlock:nil];
     }
@@ -1960,23 +1727,20 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMTeamFolderGetInfo {
   @synchronized(lockObj) {
     if (!DBTEAMTeamFolderGetInfo) {
-      DBTEAMTeamFolderGetInfo = [[DBRoute alloc] init:@"team_folder/get_info"
-          namespace_:@"team"
-          deprecated:@NO
-          resultType:[NSArray<DBTEAMTeamFolderGetInfoItem *> class]
-          errorType:nil
-          attrs:@{
-            @"auth" : @"team",
-            @"host" : @"api",
-            @"style" : @"rpc"
-          }
-          dataStructSerialBlock:nil
-          dataStructDeserialBlock:^id(id dataStruct) {
-            return [DBArraySerializer deserialize:dataStruct
-                                        withBlock:^id(id elem0) {
-                                          return [DBTEAMTeamFolderGetInfoItemSerializer deserialize:elem0];
-                                        }];
-          }];
+      DBTEAMTeamFolderGetInfo =
+          [[DBRoute alloc] init:@"team_folder/get_info"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[NSArray<DBTEAMTeamFolderGetInfoItem *> class]
+                            errorType:nil
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:^id(id dataStruct) {
+                return [DBArraySerializer deserialize:dataStruct
+                                            withBlock:^id(id elem0) {
+                                              return [DBTEAMTeamFolderGetInfoItemSerializer deserialize:elem0];
+                                            }];
+              }];
     }
     return DBTEAMTeamFolderGetInfo;
   }
@@ -1990,11 +1754,7 @@ static NSObject *lockObj = nil;
                                         deprecated:@NO
                                         resultType:[DBTEAMTeamFolderListResult class]
                                          errorType:[DBTEAMTeamFolderListError class]
-                                             attrs:@{
-                                               @"auth" : @"team",
-                                               @"host" : @"api",
-                                               @"style" : @"rpc"
-                                             }
+                                             attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                              dataStructSerialBlock:nil
                            dataStructDeserialBlock:nil];
     }
@@ -2010,11 +1770,7 @@ static NSObject *lockObj = nil;
                                                 deprecated:@NO
                                                 resultType:[DBTEAMTeamFolderListResult class]
                                                  errorType:[DBTEAMTeamFolderListContinueError class]
-                                                     attrs:@{
-                                                       @"auth" : @"team",
-                                                       @"host" : @"api",
-                                                       @"style" : @"rpc"
-                                                     }
+                                                     attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                      dataStructSerialBlock:nil
                                    dataStructDeserialBlock:nil];
     }
@@ -2025,18 +1781,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMTeamFolderPermanentlyDelete {
   @synchronized(lockObj) {
     if (!DBTEAMTeamFolderPermanentlyDelete) {
-      DBTEAMTeamFolderPermanentlyDelete = [[DBRoute alloc] init:@"team_folder/permanently_delete"
-                                                     namespace_:@"team"
-                                                     deprecated:@NO
-                                                     resultType:nil
-                                                      errorType:[DBTEAMTeamFolderPermanentlyDeleteError class]
-                                                          attrs:@{
-                                                            @"auth" : @"team",
-                                                            @"host" : @"api",
-                                                            @"style" : @"rpc"
-                                                          }
-                                          dataStructSerialBlock:nil
-                                        dataStructDeserialBlock:nil];
+      DBTEAMTeamFolderPermanentlyDelete =
+          [[DBRoute alloc] init:@"team_folder/permanently_delete"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:nil
+                            errorType:[DBTEAMTeamFolderPermanentlyDeleteError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBTEAMTeamFolderPermanentlyDelete;
   }
@@ -2050,11 +1803,7 @@ static NSObject *lockObj = nil;
                                           deprecated:@NO
                                           resultType:[DBTEAMTeamFolderMetadata class]
                                            errorType:[DBTEAMTeamFolderRenameError class]
-                                               attrs:@{
-                                                 @"auth" : @"team",
-                                                 @"host" : @"api",
-                                                 @"style" : @"rpc"
-                                               }
+                                               attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                dataStructSerialBlock:nil
                              dataStructDeserialBlock:nil];
     }
@@ -2065,18 +1814,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBTEAMTeamFolderUpdateSyncSettings {
   @synchronized(lockObj) {
     if (!DBTEAMTeamFolderUpdateSyncSettings) {
-      DBTEAMTeamFolderUpdateSyncSettings = [[DBRoute alloc] init:@"team_folder/update_sync_settings"
-                                                      namespace_:@"team"
-                                                      deprecated:@NO
-                                                      resultType:[DBTEAMTeamFolderMetadata class]
-                                                       errorType:[DBTEAMTeamFolderUpdateSyncSettingsError class]
-                                                           attrs:@{
-                                                             @"auth" : @"team",
-                                                             @"host" : @"api",
-                                                             @"style" : @"rpc"
-                                                           }
-                                           dataStructSerialBlock:nil
-                                         dataStructDeserialBlock:nil];
+      DBTEAMTeamFolderUpdateSyncSettings =
+          [[DBRoute alloc] init:@"team_folder/update_sync_settings"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[DBTEAMTeamFolderMetadata class]
+                            errorType:[DBTEAMTeamFolderUpdateSyncSettingsError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBTEAMTeamFolderUpdateSyncSettings;
   }
@@ -2090,11 +1836,7 @@ static NSObject *lockObj = nil;
                                                     deprecated:@NO
                                                     resultType:[DBTEAMTokenGetAuthenticatedAdminResult class]
                                                      errorType:[DBTEAMTokenGetAuthenticatedAdminError class]
-                                                         attrs:@{
-                                                           @"auth" : @"team",
-                                                           @"host" : @"api",
-                                                           @"style" : @"rpc"
-                                                         }
+                                                         attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                          dataStructSerialBlock:nil
                                        dataStructDeserialBlock:nil];
     }
