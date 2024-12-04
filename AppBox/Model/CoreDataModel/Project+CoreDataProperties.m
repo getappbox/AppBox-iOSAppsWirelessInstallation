@@ -11,7 +11,7 @@
 @implementation ABProject (CoreDataProperties)
 
 + (NSFetchRequest<ABProject *> *)fetchRequest {
-	return [NSFetchRequest fetchRequestWithEntityName:@"ABProject"];
+	return [NSFetchRequest fetchRequestWithEntityName:@"Project"];
 }
 
 @dynamic bundleIdentifier;
