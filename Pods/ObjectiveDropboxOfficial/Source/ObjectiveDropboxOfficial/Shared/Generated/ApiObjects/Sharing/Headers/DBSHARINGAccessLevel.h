@@ -49,6 +49,12 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGAccessLevelTag){
     /// to.
     DBSHARINGAccessLevelTraverse,
 
+    /// If there is a Righteous Link on the folder which grants access and the
+    /// user has visited such link, they are allowed to perform certain action
+    /// (i.e. add themselves to the folder) via the link access even though the
+    /// user themselves are not a member on the shared folder yet.
+    DBSHARINGAccessLevelNoAccess,
+
     /// (no description).
     DBSHARINGAccessLevelOther,
 
@@ -111,6 +117,19 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGAccessLevelTag){
 - (instancetype)initWithTraverse;
 
 ///
+/// Initializes union class with tag state of "no_access".
+///
+/// Description of the "no_access" tag state: If there is a Righteous Link on
+/// the folder which grants access and the user has visited such link, they are
+/// allowed to perform certain action (i.e. add themselves to the folder) via
+/// the link access even though the user themselves are not a member on the
+/// shared folder yet.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithNoAccess;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -156,6 +175,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGAccessLevelTag){
 /// @return Whether the union's current tag state has value "traverse".
 ///
 - (BOOL)isTraverse;
+
+///
+/// Retrieves whether the union's current tag state has value "no_access".
+///
+/// @return Whether the union's current tag state has value "no_access".
+///
+- (BOOL)isNoAccess;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

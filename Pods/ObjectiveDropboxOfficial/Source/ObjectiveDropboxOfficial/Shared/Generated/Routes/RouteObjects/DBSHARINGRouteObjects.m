@@ -155,23 +155,20 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBSHARINGAddFileMember {
   @synchronized(lockObj) {
     if (!DBSHARINGAddFileMember) {
-      DBSHARINGAddFileMember = [[DBRoute alloc] init:@"add_file_member"
-          namespace_:@"sharing"
-          deprecated:@NO
-          resultType:[NSArray<DBSHARINGFileMemberActionResult *> class]
-          errorType:[DBSHARINGAddFileMemberError class]
-          attrs:@{
-            @"auth" : @"user",
-            @"host" : @"api",
-            @"style" : @"rpc"
-          }
-          dataStructSerialBlock:nil
-          dataStructDeserialBlock:^id(id dataStruct) {
-            return [DBArraySerializer deserialize:dataStruct
-                                        withBlock:^id(id elem0) {
-                                          return [DBSHARINGFileMemberActionResultSerializer deserialize:elem0];
-                                        }];
-          }];
+      DBSHARINGAddFileMember =
+          [[DBRoute alloc] init:@"add_file_member"
+                           namespace_:@"sharing"
+                           deprecated:@NO
+                           resultType:[NSArray<DBSHARINGFileMemberActionResult *> class]
+                            errorType:[DBSHARINGAddFileMemberError class]
+                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:^id(id dataStruct) {
+                return [DBArraySerializer deserialize:dataStruct
+                                            withBlock:^id(id elem0) {
+                                              return [DBSHARINGFileMemberActionResultSerializer deserialize:elem0];
+                                            }];
+              }];
     }
     return DBSHARINGAddFileMember;
   }
@@ -185,11 +182,7 @@ static NSObject *lockObj = nil;
                                             deprecated:@NO
                                             resultType:nil
                                              errorType:[DBSHARINGAddFolderMemberError class]
-                                                 attrs:@{
-                                                   @"auth" : @"user",
-                                                   @"host" : @"api",
-                                                   @"style" : @"rpc"
-                                                 }
+                                                 attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                  dataStructSerialBlock:nil
                                dataStructDeserialBlock:nil];
     }
@@ -205,11 +198,7 @@ static NSObject *lockObj = nil;
                                            deprecated:@NO
                                            resultType:[DBSHARINGJobStatus class]
                                             errorType:[DBASYNCPollError class]
-                                                attrs:@{
-                                                  @"auth" : @"user",
-                                                  @"host" : @"api",
-                                                  @"style" : @"rpc"
-                                                }
+                                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                 dataStructSerialBlock:nil
                               dataStructDeserialBlock:nil];
     }
@@ -220,18 +209,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBSHARINGCheckRemoveMemberJobStatus {
   @synchronized(lockObj) {
     if (!DBSHARINGCheckRemoveMemberJobStatus) {
-      DBSHARINGCheckRemoveMemberJobStatus = [[DBRoute alloc] init:@"check_remove_member_job_status"
-                                                       namespace_:@"sharing"
-                                                       deprecated:@NO
-                                                       resultType:[DBSHARINGRemoveMemberJobStatus class]
-                                                        errorType:[DBASYNCPollError class]
-                                                            attrs:@{
-                                                              @"auth" : @"user",
-                                                              @"host" : @"api",
-                                                              @"style" : @"rpc"
-                                                            }
-                                            dataStructSerialBlock:nil
-                                          dataStructDeserialBlock:nil];
+      DBSHARINGCheckRemoveMemberJobStatus =
+          [[DBRoute alloc] init:@"check_remove_member_job_status"
+                           namespace_:@"sharing"
+                           deprecated:@NO
+                           resultType:[DBSHARINGRemoveMemberJobStatus class]
+                            errorType:[DBASYNCPollError class]
+                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBSHARINGCheckRemoveMemberJobStatus;
   }
@@ -245,11 +231,7 @@ static NSObject *lockObj = nil;
                                                 deprecated:@NO
                                                 resultType:[DBSHARINGShareFolderJobStatus class]
                                                  errorType:[DBASYNCPollError class]
-                                                     attrs:@{
-                                                       @"auth" : @"user",
-                                                       @"host" : @"api",
-                                                       @"style" : @"rpc"
-                                                     }
+                                                     attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                      dataStructSerialBlock:nil
                                    dataStructDeserialBlock:nil];
     }
@@ -265,11 +247,7 @@ static NSObject *lockObj = nil;
                                              deprecated:@YES
                                              resultType:[DBSHARINGPathLinkMetadata class]
                                               errorType:[DBSHARINGCreateSharedLinkError class]
-                                                  attrs:@{
-                                                    @"auth" : @"user",
-                                                    @"host" : @"api",
-                                                    @"style" : @"rpc"
-                                                  }
+                                                  attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                   dataStructSerialBlock:nil
                                 dataStructDeserialBlock:nil];
     }
@@ -280,18 +258,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBSHARINGCreateSharedLinkWithSettings {
   @synchronized(lockObj) {
     if (!DBSHARINGCreateSharedLinkWithSettings) {
-      DBSHARINGCreateSharedLinkWithSettings = [[DBRoute alloc] init:@"create_shared_link_with_settings"
-                                                         namespace_:@"sharing"
-                                                         deprecated:@NO
-                                                         resultType:[DBSHARINGSharedLinkMetadata class]
-                                                          errorType:[DBSHARINGCreateSharedLinkWithSettingsError class]
-                                                              attrs:@{
-                                                                @"auth" : @"user",
-                                                                @"host" : @"api",
-                                                                @"style" : @"rpc"
-                                                              }
-                                              dataStructSerialBlock:nil
-                                            dataStructDeserialBlock:nil];
+      DBSHARINGCreateSharedLinkWithSettings =
+          [[DBRoute alloc] init:@"create_shared_link_with_settings"
+                           namespace_:@"sharing"
+                           deprecated:@NO
+                           resultType:[DBSHARINGSharedLinkMetadata class]
+                            errorType:[DBSHARINGCreateSharedLinkWithSettingsError class]
+                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBSHARINGCreateSharedLinkWithSettings;
   }
@@ -305,11 +280,7 @@ static NSObject *lockObj = nil;
                                             deprecated:@NO
                                             resultType:[DBSHARINGSharedFileMetadata class]
                                              errorType:[DBSHARINGGetFileMetadataError class]
-                                                 attrs:@{
-                                                   @"auth" : @"user",
-                                                   @"host" : @"api",
-                                                   @"style" : @"rpc"
-                                                 }
+                                                 attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                  dataStructSerialBlock:nil
                                dataStructDeserialBlock:nil];
     }
@@ -320,23 +291,20 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBSHARINGGetFileMetadataBatch {
   @synchronized(lockObj) {
     if (!DBSHARINGGetFileMetadataBatch) {
-      DBSHARINGGetFileMetadataBatch = [[DBRoute alloc] init:@"get_file_metadata/batch"
-          namespace_:@"sharing"
-          deprecated:@NO
-          resultType:[NSArray<DBSHARINGGetFileMetadataBatchResult *> class]
-          errorType:[DBSHARINGSharingUserError class]
-          attrs:@{
-            @"auth" : @"user",
-            @"host" : @"api",
-            @"style" : @"rpc"
-          }
-          dataStructSerialBlock:nil
-          dataStructDeserialBlock:^id(id dataStruct) {
-            return [DBArraySerializer deserialize:dataStruct
-                                        withBlock:^id(id elem0) {
-                                          return [DBSHARINGGetFileMetadataBatchResultSerializer deserialize:elem0];
-                                        }];
-          }];
+      DBSHARINGGetFileMetadataBatch =
+          [[DBRoute alloc] init:@"get_file_metadata/batch"
+                           namespace_:@"sharing"
+                           deprecated:@NO
+                           resultType:[NSArray<DBSHARINGGetFileMetadataBatchResult *> class]
+                            errorType:[DBSHARINGSharingUserError class]
+                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:^id(id dataStruct) {
+                return [DBArraySerializer deserialize:dataStruct
+                                            withBlock:^id(id elem0) {
+                                              return [DBSHARINGGetFileMetadataBatchResultSerializer deserialize:elem0];
+                                            }];
+              }];
     }
     return DBSHARINGGetFileMetadataBatch;
   }
@@ -350,11 +318,7 @@ static NSObject *lockObj = nil;
                                               deprecated:@NO
                                               resultType:[DBSHARINGSharedFolderMetadata class]
                                                errorType:[DBSHARINGSharedFolderAccessError class]
-                                                   attrs:@{
-                                                     @"auth" : @"user",
-                                                     @"host" : @"api",
-                                                     @"style" : @"rpc"
-                                                   }
+                                                   attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                    dataStructSerialBlock:nil
                                  dataStructDeserialBlock:nil];
     }
@@ -365,18 +329,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBSHARINGGetSharedLinkFile {
   @synchronized(lockObj) {
     if (!DBSHARINGGetSharedLinkFile) {
-      DBSHARINGGetSharedLinkFile = [[DBRoute alloc] init:@"get_shared_link_file"
-                                              namespace_:@"sharing"
-                                              deprecated:@NO
-                                              resultType:[DBSHARINGSharedLinkMetadata class]
-                                               errorType:[DBSHARINGGetSharedLinkFileError class]
-                                                   attrs:@{
-                                                     @"auth" : @"user",
-                                                     @"host" : @"content",
-                                                     @"style" : @"download"
-                                                   }
-                                   dataStructSerialBlock:nil
-                                 dataStructDeserialBlock:nil];
+      DBSHARINGGetSharedLinkFile =
+          [[DBRoute alloc] init:@"get_shared_link_file"
+                           namespace_:@"sharing"
+                           deprecated:@NO
+                           resultType:[DBSHARINGSharedLinkMetadata class]
+                            errorType:[DBSHARINGGetSharedLinkFileError class]
+                                attrs:@{@"auth" : @"user", @"host" : @"content", @"style" : @"download"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBSHARINGGetSharedLinkFile;
   }
@@ -385,18 +346,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBSHARINGGetSharedLinkMetadata {
   @synchronized(lockObj) {
     if (!DBSHARINGGetSharedLinkMetadata) {
-      DBSHARINGGetSharedLinkMetadata = [[DBRoute alloc] init:@"get_shared_link_metadata"
-                                                  namespace_:@"sharing"
-                                                  deprecated:@NO
-                                                  resultType:[DBSHARINGSharedLinkMetadata class]
-                                                   errorType:[DBSHARINGSharedLinkError class]
-                                                       attrs:@{
-                                                         @"auth" : @"app, user",
-                                                         @"host" : @"api",
-                                                         @"style" : @"rpc"
-                                                       }
-                                       dataStructSerialBlock:nil
-                                     dataStructDeserialBlock:nil];
+      DBSHARINGGetSharedLinkMetadata =
+          [[DBRoute alloc] init:@"get_shared_link_metadata"
+                           namespace_:@"sharing"
+                           deprecated:@NO
+                           resultType:[DBSHARINGSharedLinkMetadata class]
+                            errorType:[DBSHARINGSharedLinkError class]
+                                attrs:@{@"auth" : @"app, user", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBSHARINGGetSharedLinkMetadata;
   }
@@ -410,11 +368,7 @@ static NSObject *lockObj = nil;
                                            deprecated:@YES
                                            resultType:[DBSHARINGGetSharedLinksResult class]
                                             errorType:[DBSHARINGGetSharedLinksError class]
-                                                attrs:@{
-                                                  @"auth" : @"user",
-                                                  @"host" : @"api",
-                                                  @"style" : @"rpc"
-                                                }
+                                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                 dataStructSerialBlock:nil
                               dataStructDeserialBlock:nil];
     }
@@ -430,11 +384,7 @@ static NSObject *lockObj = nil;
                                             deprecated:@NO
                                             resultType:[DBSHARINGSharedFileMembers class]
                                              errorType:[DBSHARINGListFileMembersError class]
-                                                 attrs:@{
-                                                   @"auth" : @"user",
-                                                   @"host" : @"api",
-                                                   @"style" : @"rpc"
-                                                 }
+                                                 attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                  dataStructSerialBlock:nil
                                dataStructDeserialBlock:nil];
     }
@@ -445,23 +395,20 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBSHARINGListFileMembersBatch {
   @synchronized(lockObj) {
     if (!DBSHARINGListFileMembersBatch) {
-      DBSHARINGListFileMembersBatch = [[DBRoute alloc] init:@"list_file_members/batch"
-          namespace_:@"sharing"
-          deprecated:@NO
-          resultType:[NSArray<DBSHARINGListFileMembersBatchResult *> class]
-          errorType:[DBSHARINGSharingUserError class]
-          attrs:@{
-            @"auth" : @"user",
-            @"host" : @"api",
-            @"style" : @"rpc"
-          }
-          dataStructSerialBlock:nil
-          dataStructDeserialBlock:^id(id dataStruct) {
-            return [DBArraySerializer deserialize:dataStruct
-                                        withBlock:^id(id elem0) {
-                                          return [DBSHARINGListFileMembersBatchResultSerializer deserialize:elem0];
-                                        }];
-          }];
+      DBSHARINGListFileMembersBatch =
+          [[DBRoute alloc] init:@"list_file_members/batch"
+                           namespace_:@"sharing"
+                           deprecated:@NO
+                           resultType:[NSArray<DBSHARINGListFileMembersBatchResult *> class]
+                            errorType:[DBSHARINGSharingUserError class]
+                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:^id(id dataStruct) {
+                return [DBArraySerializer deserialize:dataStruct
+                                            withBlock:^id(id elem0) {
+                                              return [DBSHARINGListFileMembersBatchResultSerializer deserialize:elem0];
+                                            }];
+              }];
     }
     return DBSHARINGListFileMembersBatch;
   }
@@ -475,11 +422,7 @@ static NSObject *lockObj = nil;
                                                     deprecated:@NO
                                                     resultType:[DBSHARINGSharedFileMembers class]
                                                      errorType:[DBSHARINGListFileMembersContinueError class]
-                                                         attrs:@{
-                                                           @"auth" : @"user",
-                                                           @"host" : @"api",
-                                                           @"style" : @"rpc"
-                                                         }
+                                                         attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                          dataStructSerialBlock:nil
                                        dataStructDeserialBlock:nil];
     }
@@ -495,11 +438,7 @@ static NSObject *lockObj = nil;
                                               deprecated:@NO
                                               resultType:[DBSHARINGSharedFolderMembers class]
                                                errorType:[DBSHARINGSharedFolderAccessError class]
-                                                   attrs:@{
-                                                     @"auth" : @"user",
-                                                     @"host" : @"api",
-                                                     @"style" : @"rpc"
-                                                   }
+                                                   attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                    dataStructSerialBlock:nil
                                  dataStructDeserialBlock:nil];
     }
@@ -510,18 +449,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBSHARINGListFolderMembersContinue {
   @synchronized(lockObj) {
     if (!DBSHARINGListFolderMembersContinue) {
-      DBSHARINGListFolderMembersContinue = [[DBRoute alloc] init:@"list_folder_members/continue"
-                                                      namespace_:@"sharing"
-                                                      deprecated:@NO
-                                                      resultType:[DBSHARINGSharedFolderMembers class]
-                                                       errorType:[DBSHARINGListFolderMembersContinueError class]
-                                                           attrs:@{
-                                                             @"auth" : @"user",
-                                                             @"host" : @"api",
-                                                             @"style" : @"rpc"
-                                                           }
-                                           dataStructSerialBlock:nil
-                                         dataStructDeserialBlock:nil];
+      DBSHARINGListFolderMembersContinue =
+          [[DBRoute alloc] init:@"list_folder_members/continue"
+                           namespace_:@"sharing"
+                           deprecated:@NO
+                           resultType:[DBSHARINGSharedFolderMembers class]
+                            errorType:[DBSHARINGListFolderMembersContinueError class]
+                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBSHARINGListFolderMembersContinue;
   }
@@ -535,11 +471,7 @@ static NSObject *lockObj = nil;
                                         deprecated:@NO
                                         resultType:[DBSHARINGListFoldersResult class]
                                          errorType:nil
-                                             attrs:@{
-                                               @"auth" : @"user",
-                                               @"host" : @"api",
-                                               @"style" : @"rpc"
-                                             }
+                                             attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                              dataStructSerialBlock:nil
                            dataStructDeserialBlock:nil];
     }
@@ -555,11 +487,7 @@ static NSObject *lockObj = nil;
                                                 deprecated:@NO
                                                 resultType:[DBSHARINGListFoldersResult class]
                                                  errorType:[DBSHARINGListFoldersContinueError class]
-                                                     attrs:@{
-                                                       @"auth" : @"user",
-                                                       @"host" : @"api",
-                                                       @"style" : @"rpc"
-                                                     }
+                                                     attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                      dataStructSerialBlock:nil
                                    dataStructDeserialBlock:nil];
     }
@@ -575,11 +503,7 @@ static NSObject *lockObj = nil;
                                                  deprecated:@NO
                                                  resultType:[DBSHARINGListFoldersResult class]
                                                   errorType:nil
-                                                      attrs:@{
-                                                        @"auth" : @"user",
-                                                        @"host" : @"api",
-                                                        @"style" : @"rpc"
-                                                      }
+                                                      attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                       dataStructSerialBlock:nil
                                     dataStructDeserialBlock:nil];
     }
@@ -590,18 +514,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBSHARINGListMountableFoldersContinue {
   @synchronized(lockObj) {
     if (!DBSHARINGListMountableFoldersContinue) {
-      DBSHARINGListMountableFoldersContinue = [[DBRoute alloc] init:@"list_mountable_folders/continue"
-                                                         namespace_:@"sharing"
-                                                         deprecated:@NO
-                                                         resultType:[DBSHARINGListFoldersResult class]
-                                                          errorType:[DBSHARINGListFoldersContinueError class]
-                                                              attrs:@{
-                                                                @"auth" : @"user",
-                                                                @"host" : @"api",
-                                                                @"style" : @"rpc"
-                                                              }
-                                              dataStructSerialBlock:nil
-                                            dataStructDeserialBlock:nil];
+      DBSHARINGListMountableFoldersContinue =
+          [[DBRoute alloc] init:@"list_mountable_folders/continue"
+                           namespace_:@"sharing"
+                           deprecated:@NO
+                           resultType:[DBSHARINGListFoldersResult class]
+                            errorType:[DBSHARINGListFoldersContinueError class]
+                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBSHARINGListMountableFoldersContinue;
   }
@@ -615,11 +536,7 @@ static NSObject *lockObj = nil;
                                               deprecated:@NO
                                               resultType:[DBSHARINGListFilesResult class]
                                                errorType:[DBSHARINGSharingUserError class]
-                                                   attrs:@{
-                                                     @"auth" : @"user",
-                                                     @"host" : @"api",
-                                                     @"style" : @"rpc"
-                                                   }
+                                                   attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                    dataStructSerialBlock:nil
                                  dataStructDeserialBlock:nil];
     }
@@ -630,18 +547,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBSHARINGListReceivedFilesContinue {
   @synchronized(lockObj) {
     if (!DBSHARINGListReceivedFilesContinue) {
-      DBSHARINGListReceivedFilesContinue = [[DBRoute alloc] init:@"list_received_files/continue"
-                                                      namespace_:@"sharing"
-                                                      deprecated:@NO
-                                                      resultType:[DBSHARINGListFilesResult class]
-                                                       errorType:[DBSHARINGListFilesContinueError class]
-                                                           attrs:@{
-                                                             @"auth" : @"user",
-                                                             @"host" : @"api",
-                                                             @"style" : @"rpc"
-                                                           }
-                                           dataStructSerialBlock:nil
-                                         dataStructDeserialBlock:nil];
+      DBSHARINGListReceivedFilesContinue =
+          [[DBRoute alloc] init:@"list_received_files/continue"
+                           namespace_:@"sharing"
+                           deprecated:@NO
+                           resultType:[DBSHARINGListFilesResult class]
+                            errorType:[DBSHARINGListFilesContinueError class]
+                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBSHARINGListReceivedFilesContinue;
   }
@@ -655,11 +569,7 @@ static NSObject *lockObj = nil;
                                             deprecated:@NO
                                             resultType:[DBSHARINGListSharedLinksResult class]
                                              errorType:[DBSHARINGListSharedLinksError class]
-                                                 attrs:@{
-                                                   @"auth" : @"user",
-                                                   @"host" : @"api",
-                                                   @"style" : @"rpc"
-                                                 }
+                                                 attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                  dataStructSerialBlock:nil
                                dataStructDeserialBlock:nil];
     }
@@ -670,18 +580,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBSHARINGModifySharedLinkSettings {
   @synchronized(lockObj) {
     if (!DBSHARINGModifySharedLinkSettings) {
-      DBSHARINGModifySharedLinkSettings = [[DBRoute alloc] init:@"modify_shared_link_settings"
-                                                     namespace_:@"sharing"
-                                                     deprecated:@NO
-                                                     resultType:[DBSHARINGSharedLinkMetadata class]
-                                                      errorType:[DBSHARINGModifySharedLinkSettingsError class]
-                                                          attrs:@{
-                                                            @"auth" : @"user",
-                                                            @"host" : @"api",
-                                                            @"style" : @"rpc"
-                                                          }
-                                          dataStructSerialBlock:nil
-                                        dataStructDeserialBlock:nil];
+      DBSHARINGModifySharedLinkSettings =
+          [[DBRoute alloc] init:@"modify_shared_link_settings"
+                           namespace_:@"sharing"
+                           deprecated:@NO
+                           resultType:[DBSHARINGSharedLinkMetadata class]
+                            errorType:[DBSHARINGModifySharedLinkSettingsError class]
+                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBSHARINGModifySharedLinkSettings;
   }
@@ -695,11 +602,7 @@ static NSObject *lockObj = nil;
                                         deprecated:@NO
                                         resultType:[DBSHARINGSharedFolderMetadata class]
                                          errorType:[DBSHARINGMountFolderError class]
-                                             attrs:@{
-                                               @"auth" : @"user",
-                                               @"host" : @"api",
-                                               @"style" : @"rpc"
-                                             }
+                                             attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                              dataStructSerialBlock:nil
                            dataStructDeserialBlock:nil];
     }
@@ -710,18 +613,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBSHARINGRelinquishFileMembership {
   @synchronized(lockObj) {
     if (!DBSHARINGRelinquishFileMembership) {
-      DBSHARINGRelinquishFileMembership = [[DBRoute alloc] init:@"relinquish_file_membership"
-                                                     namespace_:@"sharing"
-                                                     deprecated:@NO
-                                                     resultType:nil
-                                                      errorType:[DBSHARINGRelinquishFileMembershipError class]
-                                                          attrs:@{
-                                                            @"auth" : @"user",
-                                                            @"host" : @"api",
-                                                            @"style" : @"rpc"
-                                                          }
-                                          dataStructSerialBlock:nil
-                                        dataStructDeserialBlock:nil];
+      DBSHARINGRelinquishFileMembership =
+          [[DBRoute alloc] init:@"relinquish_file_membership"
+                           namespace_:@"sharing"
+                           deprecated:@NO
+                           resultType:nil
+                            errorType:[DBSHARINGRelinquishFileMembershipError class]
+                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBSHARINGRelinquishFileMembership;
   }
@@ -730,18 +630,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBSHARINGRelinquishFolderMembership {
   @synchronized(lockObj) {
     if (!DBSHARINGRelinquishFolderMembership) {
-      DBSHARINGRelinquishFolderMembership = [[DBRoute alloc] init:@"relinquish_folder_membership"
-                                                       namespace_:@"sharing"
-                                                       deprecated:@NO
-                                                       resultType:[DBASYNCLaunchEmptyResult class]
-                                                        errorType:[DBSHARINGRelinquishFolderMembershipError class]
-                                                            attrs:@{
-                                                              @"auth" : @"user",
-                                                              @"host" : @"api",
-                                                              @"style" : @"rpc"
-                                                            }
-                                            dataStructSerialBlock:nil
-                                          dataStructDeserialBlock:nil];
+      DBSHARINGRelinquishFolderMembership =
+          [[DBRoute alloc] init:@"relinquish_folder_membership"
+                           namespace_:@"sharing"
+                           deprecated:@NO
+                           resultType:[DBASYNCLaunchEmptyResult class]
+                            errorType:[DBSHARINGRelinquishFolderMembershipError class]
+                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBSHARINGRelinquishFolderMembership;
   }
@@ -755,11 +652,7 @@ static NSObject *lockObj = nil;
                                              deprecated:@YES
                                              resultType:[DBSHARINGFileMemberActionIndividualResult class]
                                               errorType:[DBSHARINGRemoveFileMemberError class]
-                                                  attrs:@{
-                                                    @"auth" : @"user",
-                                                    @"host" : @"api",
-                                                    @"style" : @"rpc"
-                                                  }
+                                                  attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                   dataStructSerialBlock:nil
                                 dataStructDeserialBlock:nil];
     }
@@ -775,11 +668,7 @@ static NSObject *lockObj = nil;
                                               deprecated:@NO
                                               resultType:[DBSHARINGFileMemberRemoveActionResult class]
                                                errorType:[DBSHARINGRemoveFileMemberError class]
-                                                   attrs:@{
-                                                     @"auth" : @"user",
-                                                     @"host" : @"api",
-                                                     @"style" : @"rpc"
-                                                   }
+                                                   attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                    dataStructSerialBlock:nil
                                  dataStructDeserialBlock:nil];
     }
@@ -795,11 +684,7 @@ static NSObject *lockObj = nil;
                                                deprecated:@NO
                                                resultType:[DBASYNCLaunchResultBase class]
                                                 errorType:[DBSHARINGRemoveFolderMemberError class]
-                                                    attrs:@{
-                                                      @"auth" : @"user",
-                                                      @"host" : @"api",
-                                                      @"style" : @"rpc"
-                                                    }
+                                                    attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                     dataStructSerialBlock:nil
                                   dataStructDeserialBlock:nil];
     }
@@ -815,11 +700,7 @@ static NSObject *lockObj = nil;
                                              deprecated:@NO
                                              resultType:nil
                                               errorType:[DBSHARINGRevokeSharedLinkError class]
-                                                  attrs:@{
-                                                    @"auth" : @"user",
-                                                    @"host" : @"api",
-                                                    @"style" : @"rpc"
-                                                  }
+                                                  attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                   dataStructSerialBlock:nil
                                 dataStructDeserialBlock:nil];
     }
@@ -835,11 +716,7 @@ static NSObject *lockObj = nil;
                                                  deprecated:@NO
                                                  resultType:[DBSHARINGShareFolderLaunch class]
                                                   errorType:[DBSHARINGSetAccessInheritanceError class]
-                                                      attrs:@{
-                                                        @"auth" : @"user",
-                                                        @"host" : @"api",
-                                                        @"style" : @"rpc"
-                                                      }
+                                                      attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                       dataStructSerialBlock:nil
                                     dataStructDeserialBlock:nil];
     }
@@ -855,11 +732,7 @@ static NSObject *lockObj = nil;
                                         deprecated:@NO
                                         resultType:[DBSHARINGShareFolderLaunch class]
                                          errorType:[DBSHARINGShareFolderError class]
-                                             attrs:@{
-                                               @"auth" : @"user",
-                                               @"host" : @"api",
-                                               @"style" : @"rpc"
-                                             }
+                                             attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                              dataStructSerialBlock:nil
                            dataStructDeserialBlock:nil];
     }
@@ -875,11 +748,7 @@ static NSObject *lockObj = nil;
                                            deprecated:@NO
                                            resultType:nil
                                             errorType:[DBSHARINGTransferFolderError class]
-                                                attrs:@{
-                                                  @"auth" : @"user",
-                                                  @"host" : @"api",
-                                                  @"style" : @"rpc"
-                                                }
+                                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                 dataStructSerialBlock:nil
                               dataStructDeserialBlock:nil];
     }
@@ -895,11 +764,7 @@ static NSObject *lockObj = nil;
                                           deprecated:@NO
                                           resultType:nil
                                            errorType:[DBSHARINGUnmountFolderError class]
-                                               attrs:@{
-                                                 @"auth" : @"user",
-                                                 @"host" : @"api",
-                                                 @"style" : @"rpc"
-                                               }
+                                               attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                dataStructSerialBlock:nil
                              dataStructDeserialBlock:nil];
     }
@@ -915,11 +780,7 @@ static NSObject *lockObj = nil;
                                         deprecated:@NO
                                         resultType:nil
                                          errorType:[DBSHARINGUnshareFileError class]
-                                             attrs:@{
-                                               @"auth" : @"user",
-                                               @"host" : @"api",
-                                               @"style" : @"rpc"
-                                             }
+                                             attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                              dataStructSerialBlock:nil
                            dataStructDeserialBlock:nil];
     }
@@ -935,11 +796,7 @@ static NSObject *lockObj = nil;
                                           deprecated:@NO
                                           resultType:[DBASYNCLaunchEmptyResult class]
                                            errorType:[DBSHARINGUnshareFolderError class]
-                                               attrs:@{
-                                                 @"auth" : @"user",
-                                                 @"host" : @"api",
-                                                 @"style" : @"rpc"
-                                               }
+                                               attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                dataStructSerialBlock:nil
                              dataStructDeserialBlock:nil];
     }
@@ -955,11 +812,7 @@ static NSObject *lockObj = nil;
                                              deprecated:@NO
                                              resultType:[DBSHARINGMemberAccessLevelResult class]
                                               errorType:[DBSHARINGFileMemberActionError class]
-                                                  attrs:@{
-                                                    @"auth" : @"user",
-                                                    @"host" : @"api",
-                                                    @"style" : @"rpc"
-                                                  }
+                                                  attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                   dataStructSerialBlock:nil
                                 dataStructDeserialBlock:nil];
     }
@@ -975,11 +828,7 @@ static NSObject *lockObj = nil;
                                                deprecated:@NO
                                                resultType:[DBSHARINGMemberAccessLevelResult class]
                                                 errorType:[DBSHARINGUpdateFolderMemberError class]
-                                                    attrs:@{
-                                                      @"auth" : @"user",
-                                                      @"host" : @"api",
-                                                      @"style" : @"rpc"
-                                                    }
+                                                    attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                     dataStructSerialBlock:nil
                                   dataStructDeserialBlock:nil];
     }
@@ -995,11 +844,7 @@ static NSObject *lockObj = nil;
                                                deprecated:@NO
                                                resultType:[DBSHARINGSharedFolderMetadata class]
                                                 errorType:[DBSHARINGUpdateFolderPolicyError class]
-                                                    attrs:@{
-                                                      @"auth" : @"user",
-                                                      @"host" : @"api",
-                                                      @"style" : @"rpc"
-                                                    }
+                                                    attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                     dataStructSerialBlock:nil
                                   dataStructDeserialBlock:nil];
     }

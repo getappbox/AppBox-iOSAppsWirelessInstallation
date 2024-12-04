@@ -40,6 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Additional HTTP headers to be injected into each client request.
 @property (nonatomic, readonly, copy, nullable) NSDictionary<NSString *, NSString *> *additionalHeaders;
 
+/// Set YES to use a faster, experimental ASCII encoding implementation. Default = NO.
+@property (atomic, class) BOOL useFastAsciiEncoding;
+
 ///
 /// Convenience initializer.
 ///

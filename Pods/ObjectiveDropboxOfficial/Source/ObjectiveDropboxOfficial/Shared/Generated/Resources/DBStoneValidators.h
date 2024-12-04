@@ -9,12 +9,12 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Validator functions used by SDK to impose value constraints.
 ///
-@interface DBStoneValidators <T> : NSObject
+@interface DBStoneValidators<T> : NSObject
 
 /// Validator for `NSString` objects. Enforces minimum length and/or maximum length and/or regex pattern.
 + (void (^_Nonnull)(NSString *))stringValidator:(nullable NSNumber *)minLength
-                                               maxLength:(nullable NSNumber *)maxLength
-                                                 pattern:(nullable NSString *)pattern;
+                                      maxLength:(nullable NSNumber *)maxLength
+                                        pattern:(nullable NSString *)pattern;
 
 /// Validator for `NSNumber` objects. Enforces minimum value and/or maximum value.
 + (void (^_Nonnull)(NSNumber *))numericValidator:(nullable NSNumber *)minValue maxValue:(nullable NSNumber *)maxValue;

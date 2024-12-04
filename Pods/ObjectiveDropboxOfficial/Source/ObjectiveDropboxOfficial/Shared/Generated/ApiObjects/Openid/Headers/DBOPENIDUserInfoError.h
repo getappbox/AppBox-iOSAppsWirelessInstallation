@@ -8,7 +8,7 @@
 
 #import "DBSerializableProtocol.h"
 
-@class DBOPENIDErrUnion;
+@class DBOPENIDOpenIdError;
 @class DBOPENIDUserInfoError;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - API Object
 
 ///
-/// The `UserInfoError` struct.
+/// The `UserInfoError` union.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -26,41 +26,76 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// (no description).
-@property (nonatomic, readonly, nullable) DBOPENIDErrUnion *err;
+/// The `DBOPENIDUserInfoErrorTag` enum type represents the possible tag states
+/// with which the `DBOPENIDUserInfoError` union can exist.
+typedef NS_CLOSED_ENUM(NSInteger, DBOPENIDUserInfoErrorTag){
+    /// (no description).
+    DBOPENIDUserInfoErrorOpenidError,
 
-/// (no description).
-@property (nonatomic, readonly, copy) NSString *errorMessage;
+    /// (no description).
+    DBOPENIDUserInfoErrorOther,
+
+};
+
+/// Represents the union's current tag state.
+@property (nonatomic, readonly) DBOPENIDUserInfoErrorTag tag;
+
+/// (no description). @note Ensure the `isOpenidError` method returns true
+/// before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBOPENIDOpenIdError *openidError;
 
 #pragma mark - Constructors
 
 ///
-/// Full constructor for the struct (exposes all instance variables).
+/// Initializes union class with tag state of "openid_error".
 ///
-/// @param err (no description).
-/// @param errorMessage (no description).
+/// @param openidError (no description).
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithErr:(nullable DBOPENIDErrUnion *)err errorMessage:(nullable NSString *)errorMessage;
+- (instancetype)initWithOpenidError:(DBOPENIDOpenIdError *)openidError;
 
 ///
-/// Convenience constructor (exposes only non-nullable instance variables with
-/// no default value).
-///
+/// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initDefault;
+- (instancetype)initWithOther;
 
 - (instancetype)init NS_UNAVAILABLE;
+
+#pragma mark - Tag state methods
+
+///
+/// Retrieves whether the union's current tag state has value "openid_error".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `openidError` property, otherwise a runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value "openid_error".
+///
+- (BOOL)isOpenidError;
+
+///
+/// Retrieves whether the union's current tag state has value "other".
+///
+/// @return Whether the union's current tag state has value "other".
+///
+- (BOOL)isOther;
+
+///
+/// Retrieves string value of union's current tag state.
+///
+/// @return A human-readable string representing the union's current tag state.
+///
+- (NSString *)tagName;
 
 @end
 
 #pragma mark - Serializer Object
 
 ///
-/// The serialization class for the `UserInfoError` struct.
+/// The serialization class for the `DBOPENIDUserInfoError` union.
 ///
 @interface DBOPENIDUserInfoErrorSerializer : NSObject
 

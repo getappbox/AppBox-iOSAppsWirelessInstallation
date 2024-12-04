@@ -135,7 +135,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBASYNCLaunchResultBase *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -305,7 +305,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBASYNCLaunchEmptyResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -414,7 +414,7 @@
 
   jsonDict[@"async_job_id"] = valueObj.asyncJobId;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBASYNCPollArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -542,7 +542,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBASYNCPollResultBase *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -699,7 +699,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBASYNCPollEmptyResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -876,7 +876,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBASYNCPollError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {

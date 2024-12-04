@@ -1,6 +1,6 @@
 // Software License Agreement (BSD License)
 //
-// Copyright (c) 2010-2022, Deusty, LLC
+// Copyright (c) 2010-2024, Deusty, LLC
 // All rights reserved.
 //
 // Redistribution and use of this software in source and binary forms,
@@ -48,6 +48,41 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+/// The serializer is responsible for turning a log message into binary for writing into a file.
+/// It allows storing log messages in a non-text format.
+/// The serialier should not be used for filtering or formatting messages!
+/// Also, it must be fast!
+@protocol DDFileLogMessageSerializer <NSObject>
+@required
+
+/// Returns the binary representation of the message.
+/// - Parameter message: The formatted log message to serialize.
+//
+
+/// Returns the binary representation of the message.
+/// - Parameters:
+///   - string: The string to serialize. Usually, this is the formatted message, but it can also be e.g. a log file header.
+///   - message: The message which represents the `string`. This is null, if `string` is e.g. a log file header.
+/// - Note: The `message` parameter should not be used for formatting! It should simply be used to extract the necessary metadata for serializing.
+- (NSData *)dataForString:(NSString *)string
+   originatingFromMessage:(nullable DDLogMessage *)message NS_SWIFT_NAME(dataForString(_:originatingFrom:));
+
+@end
+
+/// The (default) plain text message serializer.
+@interface DDFileLogPlainTextMessageSerializer : NSObject <DDFileLogMessageSerializer>
+
+- (instancetype)init;
+
+@end
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+@class DDFileLogger;
 /**
  *  The LogFileManager protocol is designed to allow you to control all aspects of your log files.
  *
@@ -152,30 +187,37 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
 
 @optional
 
-// Private methods (only to be used by DDFileLogger)
-/**
- * Creates a new log file ignoring any errors. Deprecated in favor of `-createNewLogFileWithError:`.
- * Will only be called if `-createNewLogFileWithError:` is not implemented.
- **/
-- (nullable NSString *)createNewLogFile __attribute__((deprecated("Use -createNewLogFileWithError:"))) NS_SWIFT_UNAVAILABLE("Use -createNewLogFileWithError:");
+/// The log message serializer.
+@property (nonatomic, readonly, strong) id<DDFileLogMessageSerializer> logMessageSerializer;
 
-// Notifications from DDFileLogger
+/// Manually perform a cleanup of the log files managed by this manager.
+/// This can be called from any queue!
+- (BOOL)cleanupLogFilesWithError:(NSError **)error;
+
+// MARK: Private methods (only to be used by DDFileLogger)
+
+// MARK: Notifications from DDFileLogger
+/// Called when the log file manager was added to a file logger.
+/// This should be used to make the manager "active" - like starting internal timers etc.
+/// Executed on global queue with default priority.
+/// - Parameter fileLogger: The file logger this manager was added to.
+/// - Important: The manager **must not** keep a strong reference to `fileLogger` or a retain cycle will be created!
+- (void)didAddToFileLogger:(DDFileLogger *)fileLogger;
 
 /// Called when a log file was archived. Executed on global queue with default priority.
 /// @param logFilePath The path to the log file that was archived.
 /// @param wasRolled Whether or not the archiving happend after rolling the log file.
 - (void)didArchiveLogFile:(NSString *)logFilePath wasRolled:(BOOL)wasRolled NS_SWIFT_NAME(didArchiveLogFile(atPath:wasRolled:));
 
-// Deprecated APIs
-/**
- *  Called when a log file was archived. Executed on global queue with default priority.
- */
+// MARK: Deprecated APIs
+/// Creates a new log file ignoring any errors. Deprecated in favor of `-createNewLogFileWithError:`.
+/// Will only be called if `-createNewLogFileWithError:` is not implemented.
+- (nullable NSString *)createNewLogFile __attribute__((deprecated("Use -createNewLogFileWithError:"))) NS_SWIFT_UNAVAILABLE("Use -createNewLogFileWithError:");
+
+/// Called when a log file was archived. Executed on global queue with default priority.
 - (void)didArchiveLogFile:(NSString *)logFilePath NS_SWIFT_NAME(didArchiveLogFile(atPath:)) __attribute__((deprecated("Use -didArchiveLogFile:wasRolled:")));
 
-/**
- *  Called when the roll action was executed and the log was archived.
- *  Executed on global queue with default priority.
- */
+/// Called when the roll action was executed and the log was archived. Executed on global queue with default priority.
 - (void)didRollAndArchiveLogFile:(NSString *)logFilePath NS_SWIFT_NAME(didRollAndArchiveLogFile(atPath:)) __attribute__((deprecated("Use -didArchiveLogFile:wasRolled:")));
 
 @end
@@ -200,11 +242,6 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
 @interface DDLogFileManagerDefault : NSObject <DDLogFileManager>
 
 /**
- *  Default initializer
- */
-- (instancetype)init;
-
-/**
  *  If logDirectory is not specified, then a folder called "Logs" is created in the app's cache directory.
  *  While running on the simulator, the "Logs" folder is located in the library temporary directory.
  */
@@ -225,6 +262,9 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
 - (instancetype)initWithLogsDirectory:(nullable NSString *)logsDirectory
            defaultFileProtectionLevel:(NSFileProtectionType)fileProtectionLevel;
 #endif
+
+/// Convenience  initializer.
+- (instancetype)init;
 
 /*
  * Methods to override.
@@ -276,6 +316,9 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
  **/
 @property (readonly, copy, nullable) NSString *logFileHeader;
 
+/// The log message serializer.
+@property (nonatomic, strong) id<DDFileLogMessageSerializer> logMessageSerializer;
+
 /* Inherited from DDLogFileManager protocol:
 
    @property (readwrite, assign, atomic) NSUInteger maximumNumberOfLogFiles;
@@ -310,15 +353,11 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
  **/
 @interface DDLogFileFormatterDefault : NSObject <DDLogFormatter>
 
-/**
- *  Default initializer
- */
-- (instancetype)init;
-
-/**
- *  Designated initializer, requires a date formatter
- */
+/// Designated initializer, requires a date formatter
 - (instancetype)initWithDateFormatter:(nullable NSDateFormatter *)dateFormatter NS_DESIGNATED_INITIALIZER;
+
+/// Convenience initializer
+- (instancetype)init;
 
 @end
 

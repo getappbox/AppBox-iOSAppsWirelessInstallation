@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `AdminEmailRemindersChangedDetails` struct.
 ///
-/// Changed admin email reminder policy for team requests to join.
+/// Changed admin reminder settings for requests to join the team.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

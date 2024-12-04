@@ -37,10 +37,19 @@
                          api:(NSString *)api
                      content:(NSString *)content
                       notify:(NSString *)notify {
+  return [self initWithMeta:meta api:api content:content downloadContent:content notify:notify];
+}
+
+- (instancetype)initWithMeta:(NSString *)meta
+                         api:(NSString *)api
+                     content:(NSString *)content
+             downloadContent:(NSString *)downloadContent
+                      notify:(NSString *)notify {
   if (self = [super init]) {
     _meta = meta;
     _api = api;
     _content = content;
+    _downloadContent = downloadContent;
     _notify = notify;
   }
   return self;
@@ -51,7 +60,11 @@
   case DBRouteHostApi:
     return [NSString stringWithFormat:@"https://%@/2", _api];
   case DBRouteHostContent:
-    return [NSString stringWithFormat:@"https://%@/2", _content];
+    if ([route.attrs[@"style"] isEqualToString:@"download"]) {
+      return [NSString stringWithFormat:@"https://%@/2", _downloadContent];
+    } else {
+      return [NSString stringWithFormat:@"https://%@/2", _content];
+    }
   case DBRouteHostNotify:
     return [NSString stringWithFormat:@"https://%@/2", _notify];
   case DBRouteHostUnknown:

@@ -2,7 +2,7 @@
 
 The Official Dropbox Objective-C SDK for integrating with Dropbox [API v2](https://www.dropbox.com/developers/documentation/http/documentation) on iOS or macOS.
 
-Full documentation [here](http://dropbox.github.io/dropbox-sdk-obj-c/api-docs/latest/).
+Full documentation [here](https://dropbox.github.io/dropbox-sdk-obj-c/api-docs/7.1.0/).
 
 NOTE: Please do not rely on `master` in production. Please instead use one of our tagged [release commits](https://github.com/dropbox/dropbox-sdk-obj-c/releases) (preferrably fetched via CocoaPods or Carthage), as these commits have been more thoroughly tested.
 
@@ -168,7 +168,7 @@ brew install carthage
 
 ```
 # ObjectiveDropboxOfficial
-github "https://github.com/dropbox/dropbox-sdk-obj-c" ~> 7.0.0
+github "https://github.com/dropbox/dropbox-sdk-obj-c" ~> 7.4.1
 ```
 
 To integrate the Dropbox Objective-C SDK into your project, take the following steps:
@@ -298,7 +298,7 @@ To facilitate the above authorization flows, you should take the following steps
 
 #### Begin the authorization flow
 
-You can commence the auth flow by calling `authorizeFromController:controller:openURL` method in your application's
+You can commence the auth flow by calling `authorizeFromControllerV2:controller:openURL` method in your application's
 view controller.
 
 Please ensure that the supplied view controller is the top-most controller, so that the authorization view displays correctly.
@@ -317,17 +317,8 @@ Please ensure that the supplied view controller is the top-most controller, so t
   [DBClientsManager authorizeFromControllerV2:[UIApplication sharedApplication]
                                    controller:[[self class] topMostController]
                         loadingStatusDelegate:nil
-                                      openURL:^(NSURL *url) { [[UIApplication sharedApplication] openURL:url]; }
+                                      openURL:^(NSURL *url) { [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil]; }
                                  scopeRequest:scopeRequest];
-
-  // Note: this is the DEPRECATED authorization flow that grants a long-lived token.
-  // If you are still using this, please update your app to use the `authorizeFromControllerV2` call instead.
-  // See https://dropbox.tech/developers/migrating-app-permissions-and-access-tokens
-  // [DBClientsManager authorizeFromController:[UIApplication sharedApplication]
-  //                                controller:[[self class] topMostController]
-  //                                   openURL:^(NSURL *url) {
-  //                                     [[UIApplication sharedApplication] openURL:url];
-  //                                   }];
 }
 
 + (UIViewController*)topMostController
@@ -358,14 +349,6 @@ Please ensure that the supplied view controller is the top-most controller, so t
                                loadingStatusDelegate:nil
                                              openURL:^(NSURL *url) { [[NSWorkspace sharedWorkspace] openURL:url]; }
                                         scopeRequest:scopeRequest];
-
-  // Note: this is the DEPRECATED authorization flow that grants a long-lived token.
-  // If you are still using this, please update your app to use the `authorizeFromControllerDesktopV2` call instead.
-  // See https://dropbox.tech/developers/migrating-app-permissions-and-access-tokens
-  // [DBClientsManager authorizeFromControllerDesktop:[NSWorkspace sharedWorkspace]
-  //                                       controller:self
-  //                                          openURL:^(NSURL *url){ [[NSWorkspace sharedWorkspace] openURL:url]; }];
-
 }
 ```
 
@@ -992,7 +975,7 @@ For most apps, it is reasonable to assume that only one Dropbox account (and acc
 
 * call `setupWithAppKey`/`setupWithAppKeyDesktop` (or `setupWithTeamAppKey`/`setupWithTeamAppKeyDesktop`) in integrating app's app delegate
 * `DBClientsManager` class determines whether any access tokens are stored -- if any exist, one token is arbitrarily chosen to use for the `authorizedClient` / `authorizedTeamClient` shared instance
-* if no token is found, client of the SDK should call `authorizeFromController`/`authorizeFromControllerDesktop` to initiate the OAuth flow
+* if no token is found, client of the SDK should call `authorizeFromControllerV2`/`authorizeFromControllerDesktopV2` to initiate the OAuth flow
 * if auth flow is initiated, client of the SDK should call `handleRedirectURL` (or `handleRedirectURLTeam`) in integrating app's app delegate to handle auth redirect back into the app and store the retrieved access token
 * `DBClientsManager` class sets up a `DBUserClient` (or `DBTeamClient`) with the particular network configuration as defined by the `DBTransportDefaultConfig` instance passed in (or a standard configuration, if no config instance was passed when the `setupWith...` method was called)
 
@@ -1008,7 +991,7 @@ For some apps, it is necessary to manage more than one Dropbox account (and acce
 * call `setupWithAppKey`/`setupWithAppKeyDesktop` (or `setupWithTeamAppKey`/`setupWithTeamAppKeyDesktop`) in integrating app's app delegate
 * `DBClientsManager` class determines whether any access tokens are stored -- if any exist, one token is arbitrarily chosen to use for the `authorizedClient` / `authorizedTeamClient` shared instance
 * `DBClientsManager` class also populates `authorizedClients` / `authorizedTeamClients` shared dictionary from all tokens stored in keychain, if any exist
-* if no token is found, client of the SDK should call `authorizeFromController`/`authorizeFromControllerDesktop` to initiate the OAuth flow
+* if no token is found, client of the SDK should call `authorizeFromControllerV2`/`authorizeFromControllerDesktopV2` to initiate the OAuth flow
 * if auth flow is initiated, call `handleRedirectURL` (or `handleRedirectURLTeam`) in integrating app's app delegate to handle auth redirect back into the app and store the retrieved access token
 * at this point, the app that is integrating with the SDK should persistently save the `tokenUid` from the `DBAccessToken` field of the `DBOAuthResult` object returned from the `handleRedirectURL` (or `handleRedirectURLTeam`) method
 * `DBClientsManager` class sets up a `DBUserClient` (or `DBTeamClient`) with the particular network configuration as defined by the `DBTransportDefaultConfig` instance passed in (or a standard configuration, if no config instance was passed when the `setupWith...` method was called) and saves it to the list of authorized clients

@@ -3,7 +3,6 @@ inhibit_all_warnings!
 
 target :AppBox do
 	pod 'AFNetworking'
-	pod 'AppCenter'
 	pod 'CMDQueryStringSerialization'
 	pod 'ObjectiveDropboxOfficial'
 	pod 'SAMKeychain'

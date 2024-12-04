@@ -207,7 +207,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBCOMMONPathRoot *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -400,7 +400,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBCOMMONPathRootError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -533,7 +533,7 @@
     jsonDict[@".tag"] = @"user";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBCOMMONRootInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -657,7 +657,7 @@
   jsonDict[@"home_namespace_id"] = valueObj.homeNamespaceId;
   jsonDict[@"home_path"] = valueObj.homePath;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBCOMMONTeamRootInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -768,7 +768,7 @@
   jsonDict[@"root_namespace_id"] = valueObj.rootNamespaceId;
   jsonDict[@"home_namespace_id"] = valueObj.homeNamespaceId;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBCOMMONUserRootInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {

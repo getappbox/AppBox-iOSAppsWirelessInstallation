@@ -27,6 +27,8 @@
 @class DBTEAMLOGAppUnlinkTeamType;
 @class DBTEAMLOGAppUnlinkUserType;
 @class DBTEAMLOGApplyNamingConventionType;
+@class DBTEAMLOGBackupAdminInvitationSentType;
+@class DBTEAMLOGBackupInvitationOpenedType;
 @class DBTEAMLOGBinderAddPageType;
 @class DBTEAMLOGBinderAddSectionType;
 @class DBTEAMLOGBinderRemovePageType;
@@ -107,6 +109,7 @@
 @class DBTEAMLOGExternalSharingCreateReportType;
 @class DBTEAMLOGExternalSharingReportFailedType;
 @class DBTEAMLOGFileAddCommentType;
+@class DBTEAMLOGFileAddFromAutomationType;
 @class DBTEAMLOGFileAddType;
 @class DBTEAMLOGFileChangeCommentSubscriptionType;
 @class DBTEAMLOGFileCommentsChangePolicyType;
@@ -123,6 +126,7 @@
 @class DBTEAMLOGFileMoveType;
 @class DBTEAMLOGFilePermanentlyDeleteType;
 @class DBTEAMLOGFilePreviewType;
+@class DBTEAMLOGFileProviderMigrationPolicyChangedType;
 @class DBTEAMLOGFileRenameType;
 @class DBTEAMLOGFileRequestChangeType;
 @class DBTEAMLOGFileRequestCloseType;
@@ -145,6 +149,7 @@
 @class DBTEAMLOGFileTransfersTransferViewType;
 @class DBTEAMLOGFileUnlikeCommentType;
 @class DBTEAMLOGFileUnresolveCommentType;
+@class DBTEAMLOGFolderLinkRestrictionPolicyChangedType;
 @class DBTEAMLOGFolderOverviewDescriptionChangedType;
 @class DBTEAMLOGFolderOverviewItemPinnedType;
 @class DBTEAMLOGFolderOverviewItemUnpinnedType;
@@ -299,6 +304,15 @@
 @class DBTEAMLOGPasswordStrengthRequirementsChangePolicyType;
 @class DBTEAMLOGPendingSecondaryEmailAddedType;
 @class DBTEAMLOGPermanentDeleteChangePolicyType;
+@class DBTEAMLOGRansomwareAlertCreateReportFailedType;
+@class DBTEAMLOGRansomwareAlertCreateReportType;
+@class DBTEAMLOGRansomwareRestoreProcessCompletedType;
+@class DBTEAMLOGRansomwareRestoreProcessStartedType;
+@class DBTEAMLOGReplayFileDeleteType;
+@class DBTEAMLOGReplayFileSharedLinkCreatedType;
+@class DBTEAMLOGReplayFileSharedLinkModifiedType;
+@class DBTEAMLOGReplayProjectTeamAddType;
+@class DBTEAMLOGReplayProjectTeamDeleteType;
 @class DBTEAMLOGResellerSupportChangePolicyType;
 @class DBTEAMLOGResellerSupportSessionEndType;
 @class DBTEAMLOGResellerSupportSessionStartType;
@@ -434,6 +448,13 @@
 @class DBTEAMLOGTeamActivityCreateReportFailType;
 @class DBTEAMLOGTeamActivityCreateReportType;
 @class DBTEAMLOGTeamBrandingPolicyChangedType;
+@class DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionType;
+@class DBTEAMLOGTeamEncryptionKeyCreateKeyType;
+@class DBTEAMLOGTeamEncryptionKeyDeleteKeyType;
+@class DBTEAMLOGTeamEncryptionKeyDisableKeyType;
+@class DBTEAMLOGTeamEncryptionKeyEnableKeyType;
+@class DBTEAMLOGTeamEncryptionKeyRotateKeyType;
+@class DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionType;
 @class DBTEAMLOGTeamExtensionsPolicyChangedType;
 @class DBTEAMLOGTeamFolderChangeStatusType;
 @class DBTEAMLOGTeamFolderCreateType;
@@ -520,6 +541,12 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 
     /// (admin_alerting) Triggered security alert
     DBTEAMLOGEventTypeAdminAlertingTriggeredAlert,
+
+    /// (admin_alerting) Completed ransomware restore process
+    DBTEAMLOGEventTypeRansomwareRestoreProcessCompleted,
+
+    /// (admin_alerting) Started ransomware restore process
+    DBTEAMLOGEventTypeRansomwareRestoreProcessStarted,
 
     /// (apps) Failed to connect app for member
     DBTEAMLOGEventTypeAppBlockedByPermissions,
@@ -733,6 +760,27 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
     /// (domains) Enabled domain invites (deprecated, no longer logged)
     DBTEAMLOGEventTypeEnabledDomainInvites,
 
+    /// (encryption) Canceled team encryption key deletion
+    DBTEAMLOGEventTypeTeamEncryptionKeyCancelKeyDeletion,
+
+    /// (encryption) Created team encryption key
+    DBTEAMLOGEventTypeTeamEncryptionKeyCreateKey,
+
+    /// (encryption) Deleted team encryption key
+    DBTEAMLOGEventTypeTeamEncryptionKeyDeleteKey,
+
+    /// (encryption) Disabled team encryption key
+    DBTEAMLOGEventTypeTeamEncryptionKeyDisableKey,
+
+    /// (encryption) Enabled team encryption key
+    DBTEAMLOGEventTypeTeamEncryptionKeyEnableKey,
+
+    /// (encryption) Rotated team encryption key (deprecated, no longer logged)
+    DBTEAMLOGEventTypeTeamEncryptionKeyRotateKey,
+
+    /// (encryption) Scheduled encryption key deletion
+    DBTEAMLOGEventTypeTeamEncryptionKeyScheduleKeyDeletion,
+
     /// (file_operations) Applied naming convention
     DBTEAMLOGEventTypeApplyNamingConvention,
 
@@ -741,6 +789,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 
     /// (file_operations) Added files and/or folders
     DBTEAMLOGEventTypeFileAdd,
+
+    /// (file_operations) Added files and/or folders from automation
+    DBTEAMLOGEventTypeFileAddFromAutomation,
 
     /// (file_operations) Copied files and/or folders
     DBTEAMLOGEventTypeFileCopy,
@@ -804,6 +855,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 
     /// (file_operations) Organized a folder with multi-file organize
     DBTEAMLOGEventTypeOrganizeFolderWithTidy,
+
+    /// (file_operations) Deleted files in Replay
+    DBTEAMLOGEventTypeReplayFileDelete,
 
     /// (file_operations) Rewound a folder
     DBTEAMLOGEventTypeRewindFolder,
@@ -914,6 +968,12 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
     /// (logins) Failed to sign in via SSO (deprecated, replaced by 'Failed to
     /// sign in')
     DBTEAMLOGEventTypeSsoError,
+
+    /// (members) Invited members to activate Backup
+    DBTEAMLOGEventTypeBackupAdminInvitationSent,
+
+    /// (members) Opened Backup invite
+    DBTEAMLOGEventTypeBackupInvitationOpened,
 
     /// (members) Created team invite link
     DBTEAMLOGEventTypeCreateTeamInviteLink,
@@ -1210,6 +1270,12 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
     /// (reports) Exported all team Paper docs
     DBTEAMLOGEventTypePaperAdminExportStart,
 
+    /// (reports) Created ransomware report
+    DBTEAMLOGEventTypeRansomwareAlertCreateReport,
+
+    /// (reports) Couldn't generate ransomware report
+    DBTEAMLOGEventTypeRansomwareAlertCreateReportFailed,
+
     /// (reports) Created Smart Sync non-admin devices report
     DBTEAMLOGEventTypeSmartSyncCreateAdminPrivilegeReport,
 
@@ -1257,6 +1323,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 
     /// (sharing) Opened shared Paper doc (deprecated, no longer logged)
     DBTEAMLOGEventTypeOpenNoteShared,
+
+    /// (sharing) Created shared link in Replay
+    DBTEAMLOGEventTypeReplayFileSharedLinkCreated,
+
+    /// (sharing) Modified shared link in Replay
+    DBTEAMLOGEventTypeReplayFileSharedLinkModified,
+
+    /// (sharing) Added member to Replay Project
+    DBTEAMLOGEventTypeReplayProjectTeamAdd,
+
+    /// (sharing) Removed member from Replay Project
+    DBTEAMLOGEventTypeReplayProjectTeamDelete,
 
     /// (sharing) Added team to shared folder (deprecated, no longer logged)
     DBTEAMLOGEventTypeSfAddGroup,
@@ -1615,8 +1693,8 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
     /// (team_policies) Changed account capture setting on team domain
     DBTEAMLOGEventTypeAccountCaptureChangePolicy,
 
-    /// (team_policies) Changed admin email reminder policy for team requests to
-    /// join
+    /// (team_policies) Changed admin reminder settings for requests to join the
+    /// team
     DBTEAMLOGEventTypeAdminEmailRemindersChanged,
 
     /// (team_policies) Disabled downloads (deprecated, no longer logged)
@@ -1707,6 +1785,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
     /// (team_policies) Changed file locking policy for team
     DBTEAMLOGEventTypeFileLockingPolicyChanged,
 
+    /// (team_policies) Changed File Provider Migration policy for team
+    DBTEAMLOGEventTypeFileProviderMigrationPolicyChanged,
+
     /// (team_policies) Enabled/disabled file requests
     DBTEAMLOGEventTypeFileRequestsChangePolicy,
 
@@ -1720,6 +1801,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 
     /// (team_policies) Changed file transfers policy for team
     DBTEAMLOGEventTypeFileTransfersPolicyChanged,
+
+    /// (team_policies) Changed folder link restrictions policy for team
+    DBTEAMLOGEventTypeFolderLinkRestrictionPolicyChanged,
 
     /// (team_policies) Enabled/disabled Google single sign-on for team
     DBTEAMLOGEventTypeGoogleSsoChangePolicy,
@@ -2066,6 +2150,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGAdminAlertingTriggeredAlertType *adminAlertingTriggeredAlert;
 
+/// (admin_alerting) Completed ransomware restore process @note Ensure the
+/// `isRansomwareRestoreProcessCompleted` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGRansomwareRestoreProcessCompletedType *ransomwareRestoreProcessCompleted;
+
+/// (admin_alerting) Started ransomware restore process @note Ensure the
+/// `isRansomwareRestoreProcessStarted` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGRansomwareRestoreProcessStartedType *ransomwareRestoreProcessStarted;
+
 /// (apps) Failed to connect app for member @note Ensure the
 /// `isAppBlockedByPermissions` method returns true before accessing, otherwise
 /// a runtime exception will be raised.
@@ -2407,6 +2501,41 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGEnabledDomainInvitesType *enabledDomainInvites;
 
+/// (encryption) Canceled team encryption key deletion @note Ensure the
+/// `isTeamEncryptionKeyCancelKeyDeletion` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionType *teamEncryptionKeyCancelKeyDeletion;
+
+/// (encryption) Created team encryption key @note Ensure the
+/// `isTeamEncryptionKeyCreateKey` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGTeamEncryptionKeyCreateKeyType *teamEncryptionKeyCreateKey;
+
+/// (encryption) Deleted team encryption key @note Ensure the
+/// `isTeamEncryptionKeyDeleteKey` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGTeamEncryptionKeyDeleteKeyType *teamEncryptionKeyDeleteKey;
+
+/// (encryption) Disabled team encryption key @note Ensure the
+/// `isTeamEncryptionKeyDisableKey` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGTeamEncryptionKeyDisableKeyType *teamEncryptionKeyDisableKey;
+
+/// (encryption) Enabled team encryption key @note Ensure the
+/// `isTeamEncryptionKeyEnableKey` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGTeamEncryptionKeyEnableKeyType *teamEncryptionKeyEnableKey;
+
+/// (encryption) Rotated team encryption key (deprecated, no longer logged)
+/// @note Ensure the `isTeamEncryptionKeyRotateKey` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGTeamEncryptionKeyRotateKeyType *teamEncryptionKeyRotateKey;
+
+/// (encryption) Scheduled encryption key deletion @note Ensure the
+/// `isTeamEncryptionKeyScheduleKeyDeletion` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionType *teamEncryptionKeyScheduleKeyDeletion;
+
 /// (file_operations) Applied naming convention @note Ensure the
 /// `isApplyNamingConvention` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
@@ -2421,6 +2550,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGFileAddType *fileAdd;
+
+/// (file_operations) Added files and/or folders from automation @note Ensure
+/// the `isFileAddFromAutomation` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGFileAddFromAutomationType *fileAddFromAutomation;
 
 /// (file_operations) Copied files and/or folders @note Ensure the `isFileCopy`
 /// method returns true before accessing, otherwise a runtime exception will be
@@ -2524,6 +2658,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// the `isOrganizeFolderWithTidy` method returns true before accessing,
 /// otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGOrganizeFolderWithTidyType *organizeFolderWithTidy;
+
+/// (file_operations) Deleted files in Replay @note Ensure the
+/// `isReplayFileDelete` method returns true before accessing, otherwise a
+/// runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGReplayFileDeleteType *replayFileDelete;
 
 /// (file_operations) Rewound a folder @note Ensure the `isRewindFolder` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
@@ -2695,6 +2834,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// in') @note Ensure the `isSsoError` method returns true before accessing,
 /// otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGSsoErrorType *ssoError;
+
+/// (members) Invited members to activate Backup @note Ensure the
+/// `isBackupAdminInvitationSent` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGBackupAdminInvitationSentType *backupAdminInvitationSent;
+
+/// (members) Opened Backup invite @note Ensure the `isBackupInvitationOpened`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGBackupInvitationOpenedType *backupInvitationOpened;
 
 /// (members) Created team invite link @note Ensure the `isCreateTeamInviteLink`
 /// method returns true before accessing, otherwise a runtime exception will be
@@ -3164,6 +3313,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGPaperAdminExportStartType *paperAdminExportStart;
 
+/// (reports) Created ransomware report @note Ensure the
+/// `isRansomwareAlertCreateReport` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGRansomwareAlertCreateReportType *ransomwareAlertCreateReport;
+
+/// (reports) Couldn't generate ransomware report @note Ensure the
+/// `isRansomwareAlertCreateReportFailed` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGRansomwareAlertCreateReportFailedType *ransomwareAlertCreateReportFailed;
+
 /// (reports) Created Smart Sync non-admin devices report @note Ensure the
 /// `isSmartSyncCreateAdminPrivilegeReport` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
@@ -3237,6 +3396,26 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// Ensure the `isOpenNoteShared` method returns true before accessing,
 /// otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGOpenNoteSharedType *openNoteShared;
+
+/// (sharing) Created shared link in Replay @note Ensure the
+/// `isReplayFileSharedLinkCreated` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGReplayFileSharedLinkCreatedType *replayFileSharedLinkCreated;
+
+/// (sharing) Modified shared link in Replay @note Ensure the
+/// `isReplayFileSharedLinkModified` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGReplayFileSharedLinkModifiedType *replayFileSharedLinkModified;
+
+/// (sharing) Added member to Replay Project @note Ensure the
+/// `isReplayProjectTeamAdd` method returns true before accessing, otherwise a
+/// runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGReplayProjectTeamAddType *replayProjectTeamAdd;
+
+/// (sharing) Removed member from Replay Project @note Ensure the
+/// `isReplayProjectTeamDelete` method returns true before accessing, otherwise
+/// a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGReplayProjectTeamDeleteType *replayProjectTeamDelete;
 
 /// (sharing) Added team to shared folder (deprecated, no longer logged) @note
 /// Ensure the `isSfAddGroup` method returns true before accessing, otherwise a
@@ -3788,8 +3967,8 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGAccountCaptureChangePolicyType *accountCaptureChangePolicy;
 
-/// (team_policies) Changed admin email reminder policy for team requests to
-/// join @note Ensure the `isAdminEmailRemindersChanged` method returns true
+/// (team_policies) Changed admin reminder settings for requests to join the
+/// team @note Ensure the `isAdminEmailRemindersChanged` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGAdminEmailRemindersChangedType *adminEmailRemindersChanged;
 
@@ -3933,6 +4112,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGFileLockingPolicyChangedType *fileLockingPolicyChanged;
 
+/// (team_policies) Changed File Provider Migration policy for team @note Ensure
+/// the `isFileProviderMigrationPolicyChanged` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGFileProviderMigrationPolicyChangedType *fileProviderMigrationPolicyChanged;
+
 /// (team_policies) Enabled/disabled file requests @note Ensure the
 /// `isFileRequestsChangePolicy` method returns true before accessing, otherwise
 /// a runtime exception will be raised.
@@ -3953,6 +4137,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// `isFileTransfersPolicyChanged` method returns true before accessing,
 /// otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGFileTransfersPolicyChangedType *fileTransfersPolicyChanged;
+
+/// (team_policies) Changed folder link restrictions policy for team @note
+/// Ensure the `isFolderLinkRestrictionPolicyChanged` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGFolderLinkRestrictionPolicyChangedType *folderLinkRestrictionPolicyChanged;
 
 /// (team_policies) Enabled/disabled Google single sign-on for team @note Ensure
 /// the `isGoogleSsoChangePolicy` method returns true before accessing,
@@ -4520,6 +4709,36 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 ///
 - (instancetype)initWithAdminAlertingTriggeredAlert:
     (DBTEAMLOGAdminAlertingTriggeredAlertType *)adminAlertingTriggeredAlert;
+
+///
+/// Initializes union class with tag state of
+/// "ransomware_restore_process_completed".
+///
+/// Description of the "ransomware_restore_process_completed" tag state:
+/// (admin_alerting) Completed ransomware restore process
+///
+/// @param ransomwareRestoreProcessCompleted (admin_alerting) Completed
+/// ransomware restore process
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithRansomwareRestoreProcessCompleted:
+    (DBTEAMLOGRansomwareRestoreProcessCompletedType *)ransomwareRestoreProcessCompleted;
+
+///
+/// Initializes union class with tag state of
+/// "ransomware_restore_process_started".
+///
+/// Description of the "ransomware_restore_process_started" tag state:
+/// (admin_alerting) Started ransomware restore process
+///
+/// @param ransomwareRestoreProcessStarted (admin_alerting) Started ransomware
+/// restore process
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithRansomwareRestoreProcessStarted:
+    (DBTEAMLOGRansomwareRestoreProcessStartedType *)ransomwareRestoreProcessStarted;
 
 ///
 /// Initializes union class with tag state of "app_blocked_by_permissions".
@@ -5442,6 +5661,102 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 - (instancetype)initWithEnabledDomainInvites:(DBTEAMLOGEnabledDomainInvitesType *)enabledDomainInvites;
 
 ///
+/// Initializes union class with tag state of
+/// "team_encryption_key_cancel_key_deletion".
+///
+/// Description of the "team_encryption_key_cancel_key_deletion" tag state:
+/// (encryption) Canceled team encryption key deletion
+///
+/// @param teamEncryptionKeyCancelKeyDeletion (encryption) Canceled team
+/// encryption key deletion
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeamEncryptionKeyCancelKeyDeletion:
+    (DBTEAMLOGTeamEncryptionKeyCancelKeyDeletionType *)teamEncryptionKeyCancelKeyDeletion;
+
+///
+/// Initializes union class with tag state of "team_encryption_key_create_key".
+///
+/// Description of the "team_encryption_key_create_key" tag state: (encryption)
+/// Created team encryption key
+///
+/// @param teamEncryptionKeyCreateKey (encryption) Created team encryption key
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeamEncryptionKeyCreateKey:
+    (DBTEAMLOGTeamEncryptionKeyCreateKeyType *)teamEncryptionKeyCreateKey;
+
+///
+/// Initializes union class with tag state of "team_encryption_key_delete_key".
+///
+/// Description of the "team_encryption_key_delete_key" tag state: (encryption)
+/// Deleted team encryption key
+///
+/// @param teamEncryptionKeyDeleteKey (encryption) Deleted team encryption key
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeamEncryptionKeyDeleteKey:
+    (DBTEAMLOGTeamEncryptionKeyDeleteKeyType *)teamEncryptionKeyDeleteKey;
+
+///
+/// Initializes union class with tag state of "team_encryption_key_disable_key".
+///
+/// Description of the "team_encryption_key_disable_key" tag state: (encryption)
+/// Disabled team encryption key
+///
+/// @param teamEncryptionKeyDisableKey (encryption) Disabled team encryption key
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeamEncryptionKeyDisableKey:
+    (DBTEAMLOGTeamEncryptionKeyDisableKeyType *)teamEncryptionKeyDisableKey;
+
+///
+/// Initializes union class with tag state of "team_encryption_key_enable_key".
+///
+/// Description of the "team_encryption_key_enable_key" tag state: (encryption)
+/// Enabled team encryption key
+///
+/// @param teamEncryptionKeyEnableKey (encryption) Enabled team encryption key
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeamEncryptionKeyEnableKey:
+    (DBTEAMLOGTeamEncryptionKeyEnableKeyType *)teamEncryptionKeyEnableKey;
+
+///
+/// Initializes union class with tag state of "team_encryption_key_rotate_key".
+///
+/// Description of the "team_encryption_key_rotate_key" tag state: (encryption)
+/// Rotated team encryption key (deprecated, no longer logged)
+///
+/// @param teamEncryptionKeyRotateKey (encryption) Rotated team encryption key
+/// (deprecated, no longer logged)
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeamEncryptionKeyRotateKey:
+    (DBTEAMLOGTeamEncryptionKeyRotateKeyType *)teamEncryptionKeyRotateKey;
+
+///
+/// Initializes union class with tag state of
+/// "team_encryption_key_schedule_key_deletion".
+///
+/// Description of the "team_encryption_key_schedule_key_deletion" tag state:
+/// (encryption) Scheduled encryption key deletion
+///
+/// @param teamEncryptionKeyScheduleKeyDeletion (encryption) Scheduled
+/// encryption key deletion
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeamEncryptionKeyScheduleKeyDeletion:
+    (DBTEAMLOGTeamEncryptionKeyScheduleKeyDeletionType *)teamEncryptionKeyScheduleKeyDeletion;
+
+///
 /// Initializes union class with tag state of "apply_naming_convention".
 ///
 /// Description of the "apply_naming_convention" tag state: (file_operations)
@@ -5477,6 +5792,19 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithFileAdd:(DBTEAMLOGFileAddType *)fileAdd;
+
+///
+/// Initializes union class with tag state of "file_add_from_automation".
+///
+/// Description of the "file_add_from_automation" tag state: (file_operations)
+/// Added files and/or folders from automation
+///
+/// @param fileAddFromAutomation (file_operations) Added files and/or folders
+/// from automation
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFileAddFromAutomation:(DBTEAMLOGFileAddFromAutomationType *)fileAddFromAutomation;
 
 ///
 /// Initializes union class with tag state of "file_copy".
@@ -5741,6 +6069,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithOrganizeFolderWithTidy:(DBTEAMLOGOrganizeFolderWithTidyType *)organizeFolderWithTidy;
+
+///
+/// Initializes union class with tag state of "replay_file_delete".
+///
+/// Description of the "replay_file_delete" tag state: (file_operations) Deleted
+/// files in Replay
+///
+/// @param replayFileDelete (file_operations) Deleted files in Replay
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithReplayFileDelete:(DBTEAMLOGReplayFileDeleteType *)replayFileDelete;
 
 ///
 /// Initializes union class with tag state of "rewind_folder".
@@ -6184,6 +6524,31 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithSsoError:(DBTEAMLOGSsoErrorType *)ssoError;
+
+///
+/// Initializes union class with tag state of "backup_admin_invitation_sent".
+///
+/// Description of the "backup_admin_invitation_sent" tag state: (members)
+/// Invited members to activate Backup
+///
+/// @param backupAdminInvitationSent (members) Invited members to activate
+/// Backup
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithBackupAdminInvitationSent:(DBTEAMLOGBackupAdminInvitationSentType *)backupAdminInvitationSent;
+
+///
+/// Initializes union class with tag state of "backup_invitation_opened".
+///
+/// Description of the "backup_invitation_opened" tag state: (members) Opened
+/// Backup invite
+///
+/// @param backupInvitationOpened (members) Opened Backup invite
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithBackupInvitationOpened:(DBTEAMLOGBackupInvitationOpenedType *)backupInvitationOpened;
 
 ///
 /// Initializes union class with tag state of "create_team_invite_link".
@@ -7418,6 +7783,34 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 - (instancetype)initWithPaperAdminExportStart:(DBTEAMLOGPaperAdminExportStartType *)paperAdminExportStart;
 
 ///
+/// Initializes union class with tag state of "ransomware_alert_create_report".
+///
+/// Description of the "ransomware_alert_create_report" tag state: (reports)
+/// Created ransomware report
+///
+/// @param ransomwareAlertCreateReport (reports) Created ransomware report
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithRansomwareAlertCreateReport:
+    (DBTEAMLOGRansomwareAlertCreateReportType *)ransomwareAlertCreateReport;
+
+///
+/// Initializes union class with tag state of
+/// "ransomware_alert_create_report_failed".
+///
+/// Description of the "ransomware_alert_create_report_failed" tag state:
+/// (reports) Couldn't generate ransomware report
+///
+/// @param ransomwareAlertCreateReportFailed (reports) Couldn't generate
+/// ransomware report
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithRansomwareAlertCreateReportFailed:
+    (DBTEAMLOGRansomwareAlertCreateReportFailedType *)ransomwareAlertCreateReportFailed;
+
+///
 /// Initializes union class with tag state of
 /// "smart_sync_create_admin_privilege_report".
 ///
@@ -7609,6 +8002,57 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithOpenNoteShared:(DBTEAMLOGOpenNoteSharedType *)openNoteShared;
+
+///
+/// Initializes union class with tag state of "replay_file_shared_link_created".
+///
+/// Description of the "replay_file_shared_link_created" tag state: (sharing)
+/// Created shared link in Replay
+///
+/// @param replayFileSharedLinkCreated (sharing) Created shared link in Replay
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithReplayFileSharedLinkCreated:
+    (DBTEAMLOGReplayFileSharedLinkCreatedType *)replayFileSharedLinkCreated;
+
+///
+/// Initializes union class with tag state of
+/// "replay_file_shared_link_modified".
+///
+/// Description of the "replay_file_shared_link_modified" tag state: (sharing)
+/// Modified shared link in Replay
+///
+/// @param replayFileSharedLinkModified (sharing) Modified shared link in Replay
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithReplayFileSharedLinkModified:
+    (DBTEAMLOGReplayFileSharedLinkModifiedType *)replayFileSharedLinkModified;
+
+///
+/// Initializes union class with tag state of "replay_project_team_add".
+///
+/// Description of the "replay_project_team_add" tag state: (sharing) Added
+/// member to Replay Project
+///
+/// @param replayProjectTeamAdd (sharing) Added member to Replay Project
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithReplayProjectTeamAdd:(DBTEAMLOGReplayProjectTeamAddType *)replayProjectTeamAdd;
+
+///
+/// Initializes union class with tag state of "replay_project_team_delete".
+///
+/// Description of the "replay_project_team_delete" tag state: (sharing) Removed
+/// member from Replay Project
+///
+/// @param replayProjectTeamDelete (sharing) Removed member from Replay Project
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithReplayProjectTeamDelete:(DBTEAMLOGReplayProjectTeamDeleteType *)replayProjectTeamDelete;
 
 ///
 /// Initializes union class with tag state of "sf_add_group".
@@ -9082,11 +9526,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// Initializes union class with tag state of "admin_email_reminders_changed".
 ///
 /// Description of the "admin_email_reminders_changed" tag state:
-/// (team_policies) Changed admin email reminder policy for team requests to
-/// join
+/// (team_policies) Changed admin reminder settings for requests to join the
+/// team
 ///
-/// @param adminEmailRemindersChanged (team_policies) Changed admin email
-/// reminder policy for team requests to join
+/// @param adminEmailRemindersChanged (team_policies) Changed admin reminder
+/// settings for requests to join the team
 ///
 /// @return An initialized instance.
 ///
@@ -9480,6 +9924,21 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 - (instancetype)initWithFileLockingPolicyChanged:(DBTEAMLOGFileLockingPolicyChangedType *)fileLockingPolicyChanged;
 
 ///
+/// Initializes union class with tag state of
+/// "file_provider_migration_policy_changed".
+///
+/// Description of the "file_provider_migration_policy_changed" tag state:
+/// (team_policies) Changed File Provider Migration policy for team
+///
+/// @param fileProviderMigrationPolicyChanged (team_policies) Changed File
+/// Provider Migration policy for team
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFileProviderMigrationPolicyChanged:
+    (DBTEAMLOGFileProviderMigrationPolicyChangedType *)fileProviderMigrationPolicyChanged;
+
+///
 /// Initializes union class with tag state of "file_requests_change_policy".
 ///
 /// Description of the "file_requests_change_policy" tag state: (team_policies)
@@ -9534,6 +9993,21 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 ///
 - (instancetype)initWithFileTransfersPolicyChanged:
     (DBTEAMLOGFileTransfersPolicyChangedType *)fileTransfersPolicyChanged;
+
+///
+/// Initializes union class with tag state of
+/// "folder_link_restriction_policy_changed".
+///
+/// Description of the "folder_link_restriction_policy_changed" tag state:
+/// (team_policies) Changed folder link restrictions policy for team
+///
+/// @param folderLinkRestrictionPolicyChanged (team_policies) Changed folder
+/// link restrictions policy for team
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFolderLinkRestrictionPolicyChanged:
+    (DBTEAMLOGFolderLinkRestrictionPolicyChangedType *)folderLinkRestrictionPolicyChanged;
 
 ///
 /// Initializes union class with tag state of "google_sso_change_policy".
@@ -10973,6 +11447,32 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "ransomware_restore_process_completed".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `ransomwareRestoreProcessCompleted` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "ransomware_restore_process_completed".
+///
+- (BOOL)isRansomwareRestoreProcessCompleted;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "ransomware_restore_process_started".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `ransomwareRestoreProcessStarted` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "ransomware_restore_process_started".
+///
+- (BOOL)isRansomwareRestoreProcessStarted;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "app_blocked_by_permissions".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -11842,6 +12342,97 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "team_encryption_key_cancel_key_deletion".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `teamEncryptionKeyCancelKeyDeletion` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "team_encryption_key_cancel_key_deletion".
+///
+- (BOOL)isTeamEncryptionKeyCancelKeyDeletion;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "team_encryption_key_create_key".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `teamEncryptionKeyCreateKey` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "team_encryption_key_create_key".
+///
+- (BOOL)isTeamEncryptionKeyCreateKey;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "team_encryption_key_delete_key".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `teamEncryptionKeyDeleteKey` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "team_encryption_key_delete_key".
+///
+- (BOOL)isTeamEncryptionKeyDeleteKey;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "team_encryption_key_disable_key".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `teamEncryptionKeyDisableKey` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "team_encryption_key_disable_key".
+///
+- (BOOL)isTeamEncryptionKeyDisableKey;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "team_encryption_key_enable_key".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `teamEncryptionKeyEnableKey` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "team_encryption_key_enable_key".
+///
+- (BOOL)isTeamEncryptionKeyEnableKey;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "team_encryption_key_rotate_key".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `teamEncryptionKeyRotateKey` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "team_encryption_key_rotate_key".
+///
+- (BOOL)isTeamEncryptionKeyRotateKey;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "team_encryption_key_schedule_key_deletion".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `teamEncryptionKeyScheduleKeyDeletion` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "team_encryption_key_schedule_key_deletion".
+///
+- (BOOL)isTeamEncryptionKeyScheduleKeyDeletion;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "apply_naming_convention".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -11872,6 +12463,19 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// @return Whether the union's current tag state has value "file_add".
 ///
 - (BOOL)isFileAdd;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "file_add_from_automation".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `fileAddFromAutomation` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "file_add_from_automation".
+///
+- (BOOL)isFileAddFromAutomation;
 
 ///
 /// Retrieves whether the union's current tag state has value "file_copy".
@@ -12116,6 +12720,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// "organize_folder_with_tidy".
 ///
 - (BOOL)isOrganizeFolderWithTidy;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "replay_file_delete".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `replayFileDelete` property, otherwise a runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "replay_file_delete".
+///
+- (BOOL)isReplayFileDelete;
 
 ///
 /// Retrieves whether the union's current tag state has value "rewind_folder".
@@ -12540,6 +13156,32 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// @return Whether the union's current tag state has value "sso_error".
 ///
 - (BOOL)isSsoError;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "backup_admin_invitation_sent".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `backupAdminInvitationSent` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "backup_admin_invitation_sent".
+///
+- (BOOL)isBackupAdminInvitationSent;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "backup_invitation_opened".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `backupInvitationOpened` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "backup_invitation_opened".
+///
+- (BOOL)isBackupInvitationOpened;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -13732,6 +14374,32 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "ransomware_alert_create_report".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `ransomwareAlertCreateReport` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "ransomware_alert_create_report".
+///
+- (BOOL)isRansomwareAlertCreateReport;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "ransomware_alert_create_report_failed".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `ransomwareAlertCreateReportFailed` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "ransomware_alert_create_report_failed".
+///
+- (BOOL)isRansomwareAlertCreateReportFailed;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "smart_sync_create_admin_privilege_report".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -13911,6 +14579,58 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// @return Whether the union's current tag state has value "open_note_shared".
 ///
 - (BOOL)isOpenNoteShared;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "replay_file_shared_link_created".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `replayFileSharedLinkCreated` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "replay_file_shared_link_created".
+///
+- (BOOL)isReplayFileSharedLinkCreated;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "replay_file_shared_link_modified".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `replayFileSharedLinkModified` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "replay_file_shared_link_modified".
+///
+- (BOOL)isReplayFileSharedLinkModified;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "replay_project_team_add".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `replayProjectTeamAdd` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "replay_project_team_add".
+///
+- (BOOL)isReplayProjectTeamAdd;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "replay_project_team_delete".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `replayProjectTeamDelete` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "replay_project_team_delete".
+///
+- (BOOL)isReplayProjectTeamDelete;
 
 ///
 /// Retrieves whether the union's current tag state has value "sf_add_group".
@@ -15641,6 +16361,19 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "file_provider_migration_policy_changed".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `fileProviderMigrationPolicyChanged` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "file_provider_migration_policy_changed".
+///
+- (BOOL)isFileProviderMigrationPolicyChanged;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "file_requests_change_policy".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -15690,6 +16423,19 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// "file_transfers_policy_changed".
 ///
 - (BOOL)isFileTransfersPolicyChanged;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "folder_link_restriction_policy_changed".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `folderLinkRestrictionPolicyChanged` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "folder_link_restriction_policy_changed".
+///
+- (BOOL)isFolderLinkRestrictionPolicyChanged;
 
 ///
 /// Retrieves whether the union's current tag state has value

@@ -62,9 +62,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// success or a `DBFILEPROPERTIESModifyTemplateError` object on failure.
 ///
 - (DBRpcTask<DBFILEPROPERTIESAddTemplateResult *, DBFILEPROPERTIESModifyTemplateError *> *)
-templatesAddForTeam:(NSString *)name
-       description_:(NSString *)description_
-             fields:(NSArray<DBFILEPROPERTIESPropertyFieldTemplate *> *)fields;
+    templatesAddForTeam:(NSString *)name
+           description_:(NSString *)description_
+                 fields:(NSArray<DBFILEPROPERTIESPropertyFieldTemplate *> *)fields;
 
 ///
 /// Get the schema for a specified template.
@@ -123,10 +123,10 @@ templatesAddForTeam:(NSString *)name
 /// success or a `DBFILEPROPERTIESModifyTemplateError` object on failure.
 ///
 - (DBRpcTask<DBFILEPROPERTIESUpdateTemplateResult *, DBFILEPROPERTIESModifyTemplateError *> *)
-templatesUpdateForTeam:(NSString *)templateId
-                  name:(nullable NSString *)name
-          description_:(nullable NSString *)description_
-             addFields:(nullable NSArray<DBFILEPROPERTIESPropertyFieldTemplate *> *)addFields;
+    templatesUpdateForTeam:(NSString *)templateId
+                      name:(nullable NSString *)name
+              description_:(nullable NSString *)description_
+                 addFields:(nullable NSArray<DBFILEPROPERTIESPropertyFieldTemplate *> *)addFields;
 
 @end
 

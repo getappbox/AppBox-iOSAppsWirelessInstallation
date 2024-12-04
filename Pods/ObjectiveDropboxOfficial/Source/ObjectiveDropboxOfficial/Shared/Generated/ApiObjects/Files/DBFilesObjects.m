@@ -20,7 +20,7 @@
   [DBStoneValidators
    nonnullValidator:[DBStoneValidators stringValidator:nil maxLength:nil pattern:@"/(.|[\\r\\n])*"]](path);
   [DBStoneValidators
-   nonnullValidator:[DBStoneValidators stringValidator:@(1) maxLength:@(32) pattern:@"[A-Za-z0-9_]+"]](tagText);
+   nonnullValidator:[DBStoneValidators stringValidator:@(1) maxLength:@(32) pattern:@"[\\w]+"]](tagText);
 
   self = [super init];
   if (self) {
@@ -103,7 +103,7 @@
   jsonDict[@"path"] = valueObj.path;
   jsonDict[@"tag_text"] = valueObj.tagText;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESAddTagArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -264,7 +264,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESBaseTagError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -453,7 +453,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESAddTagError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -609,7 +609,7 @@
         [DBFILEPROPERTIESTemplateFilterBaseSerializer serialize:valueObj.includePropertyGroups];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESGetMetadataArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -793,7 +793,7 @@
                                                                  }];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESAlphaGetMetadataArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -952,7 +952,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESGetMetadataError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1137,7 +1137,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESAlphaGetMetadataError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1326,7 +1326,7 @@
   }
   jsonDict[@"strict_conflict"] = valueObj.strictConflict;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESCommitInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1454,7 +1454,7 @@
   jsonDict[@"id"] = valueObj.id_;
   jsonDict[@"sync_setting"] = [DBFILESSyncSettingSerializer serialize:valueObj.syncSetting];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESContentSyncSetting *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1562,7 +1562,7 @@
   jsonDict[@"id"] = valueObj.id_;
   jsonDict[@"sync_setting"] = [DBFILESSyncSettingArgSerializer serialize:valueObj.syncSetting];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESContentSyncSettingArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1674,7 +1674,7 @@
   jsonDict[@"path"] = valueObj.path;
   jsonDict[@"autorename"] = valueObj.autorename;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESCreateFolderArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1704,11 +1704,11 @@
                         arrayValidator:nil
                               maxItems:@(10000)
                          itemValidator:[DBStoneValidators
-                                           nonnullValidator:[DBStoneValidators stringValidator:nil
-                                                                                     maxLength:nil
-                                                                                       pattern:@"(/(.|[\\r\\n])*)|(ns:["
-                                                                                               @"0-9]+(/.*)?)"]]]](
-      paths);
+                                           nonnullValidator:[DBStoneValidators
+                                                                stringValidator:nil
+                                                                      maxLength:nil
+                                                                        pattern:@"(/(.|[\\r\\n])*)|(ns:[0-9]+(/"
+                                                                                @".*)?)"]]]](paths);
 
   self = [super init];
   if (self) {
@@ -1804,7 +1804,7 @@
   jsonDict[@"autorename"] = valueObj.autorename;
   jsonDict[@"force_async"] = valueObj.forceAsync;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESCreateFolderBatchArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1956,7 +1956,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESCreateFolderBatchError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2177,7 +2177,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESCreateFolderBatchJobStatus *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2382,7 +2382,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESCreateFolderBatchLaunch *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2483,7 +2483,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESFileOpsResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2590,7 +2590,7 @@
                                               return [DBFILESCreateFolderBatchResultEntrySerializer serialize:elem0];
                                             }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESCreateFolderBatchResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2770,7 +2770,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESCreateFolderBatchResultEntry *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2942,7 +2942,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESCreateFolderEntryError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3049,7 +3049,7 @@
 
   jsonDict[@"metadata"] = [DBFILESFolderMetadataSerializer serialize:valueObj.metadata];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESCreateFolderEntryResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3190,7 +3190,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESCreateFolderError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3299,7 +3299,7 @@
 
   jsonDict[@"metadata"] = [DBFILESFolderMetadataSerializer serialize:valueObj.metadata];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESCreateFolderResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3419,7 +3419,7 @@
     jsonDict[@"parent_rev"] = valueObj.parentRev;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESDeleteArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3445,7 +3445,7 @@
 - (instancetype)initWithEntries:(NSArray<DBFILESDeleteArg *> *)entries {
   [DBStoneValidators
    nonnullValidator:[DBStoneValidators arrayValidator:nil
-                                             maxItems:nil
+                                             maxItems:@(1000)
                                         itemValidator:[DBStoneValidators nonnullValidator:nil]]](entries);
 
   self = [super init];
@@ -3526,7 +3526,7 @@
                                               return [DBFILESDeleteArgSerializer serialize:elem0];
                                             }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESDeleteBatchArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3676,7 +3676,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESDeleteBatchError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3897,7 +3897,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESDeleteBatchJobStatus *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4102,7 +4102,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESDeleteBatchLaunch *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4219,7 +4219,7 @@
                                               return [DBFILESDeleteBatchResultEntrySerializer serialize:elem0];
                                             }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESDeleteBatchResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4323,7 +4323,7 @@
 
   jsonDict[@"metadata"] = [DBFILESMetadataSerializer serialize:valueObj.metadata];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESDeleteBatchResultData *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4497,7 +4497,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESDeleteBatchResultEntry *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4743,7 +4743,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESDeleteError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4858,7 +4858,7 @@
 
   jsonDict[@"metadata"] = [DBFILESMetadataSerializer serialize:valueObj.metadata];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESDeleteResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -5039,7 +5039,7 @@
     jsonDict[@".tag"] = @"deleted";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESMetadata *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -5208,7 +5208,7 @@
     jsonDict[@"preview_url"] = valueObj.previewUrl;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESDeletedMetadata *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -5322,7 +5322,7 @@
   jsonDict[@"height"] = valueObj.height;
   jsonDict[@"width"] = valueObj.width;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESDimensions *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -5444,7 +5444,7 @@
     jsonDict[@"rev"] = valueObj.rev;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESDownloadArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -5626,7 +5626,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESDownloadError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -5738,7 +5738,7 @@
 
   jsonDict[@"path"] = valueObj.path;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESDownloadZipArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -5940,7 +5940,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESDownloadZipError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -6051,7 +6051,7 @@
 
   jsonDict[@"metadata"] = [DBFILESFolderMetadataSerializer serialize:valueObj.metadata];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESDownloadZipResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -6170,7 +6170,7 @@
     jsonDict[@"export_format"] = valueObj.exportFormat;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESExportArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -6394,7 +6394,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESExportError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -6534,7 +6534,7 @@
                                                      }];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESExportInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -6679,7 +6679,7 @@
     jsonDict[@"paper_revision"] = valueObj.paperRevision;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESExportMetadata *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -6791,7 +6791,7 @@
   jsonDict[@"export_metadata"] = [DBFILESExportMetadataSerializer serialize:valueObj.exportMetadata];
   jsonDict[@"file_metadata"] = [DBFILESFileMetadataSerializer serialize:valueObj.fileMetadata];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESExportResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -7128,7 +7128,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESFileCategory *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -7252,7 +7252,7 @@
 
   jsonDict[@"content"] = [DBFILESFileLockContentSerializer serialize:valueObj.content];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESFileLock *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -7433,7 +7433,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESFileLockContent *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -7591,7 +7591,7 @@
     jsonDict[@"created"] = [DBNSDateSerializer serialize:valueObj.created dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESFileLockMetadata *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -7949,7 +7949,7 @@
     jsonDict[@"file_lock_info"] = [DBFILESFileLockMetadataSerializer serialize:valueObj.fileLockInfo];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESFileMetadata *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -8097,7 +8097,7 @@
 
   jsonDict[@"read_only"] = valueObj.readOnly;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSharingInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -8224,7 +8224,7 @@
     jsonDict[@"modified_by"] = valueObj.modifiedBy;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESFileSharingInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -8396,7 +8396,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESFileStatus *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -8629,7 +8629,7 @@
                            }];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESFolderMetadata *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -8800,7 +8800,7 @@
   jsonDict[@"traverse_only"] = valueObj.traverseOnly;
   jsonDict[@"no_access"] = valueObj.noAccess;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESFolderSharingInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -8911,7 +8911,7 @@
 
   jsonDict[@"path"] = valueObj.path;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESGetCopyReferenceArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -9071,7 +9071,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESGetCopyReferenceError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -9194,7 +9194,7 @@
   jsonDict[@"copy_reference"] = valueObj.dCopyReference;
   jsonDict[@"expires"] = [DBNSDateSerializer serialize:valueObj.expires dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESGetCopyReferenceResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -9307,7 +9307,7 @@
                                             return elem0;
                                           }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESGetTagsArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -9416,7 +9416,7 @@
                                                     return [DBFILESPathToTagsSerializer serialize:elem0];
                                                   }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESGetTagsResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -9523,7 +9523,7 @@
 
   jsonDict[@"path"] = valueObj.path;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESGetTemporaryLinkArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -9746,7 +9746,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESGetTemporaryLinkError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -9866,7 +9866,7 @@
   jsonDict[@"metadata"] = [DBFILESFileMetadataSerializer serialize:valueObj.metadata];
   jsonDict[@"link"] = valueObj.link;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESGetTemporaryLinkResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -9977,7 +9977,7 @@
   jsonDict[@"commit_info"] = [DBFILESCommitInfoSerializer serialize:valueObj.commitInfo];
   jsonDict[@"duration"] = valueObj.duration;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESGetTemporaryUploadLinkArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -10077,7 +10077,7 @@
 
   jsonDict[@"link"] = valueObj.link;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESGetTemporaryUploadLinkResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -10183,7 +10183,7 @@
                                               return [DBFILESThumbnailArgSerializer serialize:elem0];
                                             }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESGetThumbnailBatchArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -10334,7 +10334,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESGetThumbnailBatchError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -10446,7 +10446,7 @@
                                               return [DBFILESGetThumbnailBatchResultEntrySerializer serialize:elem0];
                                             }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESGetThumbnailBatchResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -10557,7 +10557,7 @@
   jsonDict[@"metadata"] = [DBFILESFileMetadataSerializer serialize:valueObj.metadata];
   jsonDict[@"thumbnail"] = valueObj.thumbnail;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESGetThumbnailBatchResultData *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -10753,7 +10753,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESGetThumbnailBatchResultEntry *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -10869,7 +10869,7 @@
   jsonDict[@"latitude"] = valueObj.latitude;
   jsonDict[@"longitude"] = valueObj.longitude;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESGpsCoordinates *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -10976,7 +10976,7 @@
   jsonDict[@"highlight_str"] = valueObj.highlightStr;
   jsonDict[@"is_highlighted"] = valueObj.isHighlighted;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESHighlightSpan *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -11166,7 +11166,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESImportFormat *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -11376,7 +11376,7 @@
   }
   jsonDict[@"include_non_downloadable_files"] = valueObj.includeNonDownloadableFiles;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESListFolderArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -11497,7 +11497,7 @@
 
   jsonDict[@"cursor"] = valueObj.cursor;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESListFolderContinueArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -11678,7 +11678,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESListFolderContinueError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -11881,7 +11881,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESListFolderError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -11992,7 +11992,7 @@
 
   jsonDict[@"cursor"] = valueObj.cursor;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESListFolderGetLatestCursorResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -12101,7 +12101,7 @@
   jsonDict[@"cursor"] = valueObj.cursor;
   jsonDict[@"timeout"] = valueObj.timeout;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESListFolderLongpollArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -12249,7 +12249,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESListFolderLongpollError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -12370,7 +12370,7 @@
     jsonDict[@"backoff"] = valueObj.backoff;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESListFolderLongpollResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -12493,7 +12493,7 @@
   jsonDict[@"cursor"] = valueObj.cursor;
   jsonDict[@"has_more"] = valueObj.hasMore;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESListFolderResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -12617,7 +12617,7 @@
   jsonDict[@"mode"] = [DBFILESListRevisionsModeSerializer serialize:valueObj.mode];
   jsonDict[@"limit"] = valueObj.limit;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESListRevisionsArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -12781,7 +12781,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESListRevisionsError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -12956,7 +12956,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESListRevisionsMode *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -13096,7 +13096,7 @@
         [DBNSDateSerializer serialize:valueObj.serverDeleted dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESListRevisionsResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -13204,7 +13204,7 @@
 
   jsonDict[@"lock"] = [DBFILESFileLockSerializer serialize:valueObj.lock];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESLockConflictError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -13306,7 +13306,7 @@
 
   jsonDict[@"path"] = valueObj.path;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESLockFileArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -13412,7 +13412,7 @@
                                               return [DBFILESLockFileArgSerializer serialize:elem0];
                                             }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESLockFileBatchArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -13523,7 +13523,7 @@
                                               return [DBFILESLockFileResultEntrySerializer serialize:elem0];
                                             }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESLockFileBatchResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -13846,7 +13846,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESLockFileError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -13976,7 +13976,7 @@
   jsonDict[@"metadata"] = [DBFILESMetadataSerializer serialize:valueObj.metadata];
   jsonDict[@"lock"] = [DBFILESFileLockSerializer serialize:valueObj.lock];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESLockFileResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -14151,7 +14151,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESLockFileResultEntry *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -14453,7 +14453,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESLookupError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -14634,7 +14634,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESMediaInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -14796,7 +14796,7 @@
     jsonDict[@".tag"] = @"video";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESMediaMetadata *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -14964,7 +14964,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESMetadataV2 *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -15106,7 +15106,7 @@
     jsonDict[@"path"] = valueObj.path;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESMinimalFileLinkMetadata *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -15134,7 +15134,7 @@
 - (instancetype)initWithEntries:(NSArray<DBFILESRelocationPath *> *)entries autorename:(NSNumber *)autorename {
   [DBStoneValidators
    nonnullValidator:[DBStoneValidators arrayValidator:@(1)
-                                             maxItems:nil
+                                             maxItems:@(1000)
                                         itemValidator:[DBStoneValidators nonnullValidator:nil]]](entries);
 
   self = [super init];
@@ -15225,7 +15225,7 @@
                                             }];
   jsonDict[@"autorename"] = valueObj.autorename;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESRelocationBatchArgBase *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -15258,7 +15258,7 @@
          allowOwnershipTransfer:(NSNumber *)allowOwnershipTransfer {
   [DBStoneValidators
    nonnullValidator:[DBStoneValidators arrayValidator:@(1)
-                                             maxItems:nil
+                                             maxItems:@(1000)
                                         itemValidator:[DBStoneValidators nonnullValidator:nil]]](entries);
 
   self = [super initWithEntries:entries autorename:autorename];
@@ -15353,7 +15353,7 @@
   jsonDict[@"autorename"] = valueObj.autorename;
   jsonDict[@"allow_ownership_transfer"] = valueObj.allowOwnershipTransfer;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESMoveBatchArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -15508,7 +15508,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESMoveIntoFamilyError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -15661,7 +15661,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESMoveIntoVaultError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -15877,7 +15877,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESPaperContentError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -15997,7 +15997,7 @@
   jsonDict[@"path"] = valueObj.path;
   jsonDict[@"import_format"] = [DBFILESImportFormatSerializer serialize:valueObj.importFormat];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESPaperCreateArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -16293,7 +16293,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESPaperCreateError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -16436,7 +16436,7 @@
   jsonDict[@"file_id"] = valueObj.fileId;
   jsonDict[@"paper_revision"] = valueObj.paperRevision;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESPaperCreateResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -16652,7 +16652,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESPaperDocUpdatePolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -16803,7 +16803,7 @@
     jsonDict[@"paper_revision"] = valueObj.paperRevision;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESPaperUpdateArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -17118,7 +17118,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESPaperUpdateError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -17238,7 +17238,7 @@
 
   jsonDict[@"paper_revision"] = valueObj.paperRevision;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESPaperUpdateResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -17430,7 +17430,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESPathOrLink *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -17554,7 +17554,7 @@
                                            return [DBFILESTagSerializer serialize:elem0];
                                          }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESPathToTags *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -17692,7 +17692,7 @@
     jsonDict[@"time_taken"] = [DBNSDateSerializer serialize:valueObj.timeTaken dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESPhotoMetadata *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -17819,7 +17819,7 @@
     jsonDict[@"rev"] = valueObj.rev;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESPreviewArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -18024,7 +18024,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESPreviewError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -18161,7 +18161,7 @@
     jsonDict[@"link_metadata"] = [DBFILESMinimalFileLinkMetadataSerializer serialize:valueObj.linkMetadata];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESPreviewResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -18277,7 +18277,7 @@
   jsonDict[@"from_path"] = valueObj.fromPath;
   jsonDict[@"to_path"] = valueObj.toPath;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESRelocationPath *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -18415,7 +18415,7 @@
   jsonDict[@"autorename"] = valueObj.autorename;
   jsonDict[@"allow_ownership_transfer"] = valueObj.allowOwnershipTransfer;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESRelocationArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -18452,7 +18452,7 @@
          allowOwnershipTransfer:(NSNumber *)allowOwnershipTransfer {
   [DBStoneValidators
    nonnullValidator:[DBStoneValidators arrayValidator:@(1)
-                                             maxItems:nil
+                                             maxItems:@(1000)
                                         itemValidator:[DBStoneValidators nonnullValidator:nil]]](entries);
 
   self = [super initWithEntries:entries autorename:autorename];
@@ -18553,7 +18553,7 @@
   jsonDict[@"allow_shared_folder"] = valueObj.allowSharedFolder;
   jsonDict[@"allow_ownership_transfer"] = valueObj.allowOwnershipTransfer;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESRelocationBatchArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -19045,7 +19045,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESRelocationError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -19590,7 +19590,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESRelocationBatchError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -19834,7 +19834,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESRelocationBatchErrorEntry *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -20042,7 +20042,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESRelocationBatchJobStatus *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -20248,7 +20248,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESRelocationBatchLaunch *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -20365,7 +20365,7 @@
                                               return [DBFILESRelocationBatchResultDataSerializer serialize:elem0];
                                             }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESRelocationBatchResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -20469,7 +20469,7 @@
 
   jsonDict[@"metadata"] = [DBFILESMetadataSerializer serialize:valueObj.metadata];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESRelocationBatchResultData *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -20662,7 +20662,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESRelocationBatchResultEntry *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -20836,7 +20836,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESRelocationBatchV2JobStatus *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -21020,7 +21020,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESRelocationBatchV2Launch *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -21138,7 +21138,7 @@
                                               return [DBFILESRelocationBatchResultEntrySerializer serialize:elem0];
                                             }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESRelocationBatchV2Result *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -21243,7 +21243,7 @@
 
   jsonDict[@"metadata"] = [DBFILESMetadataSerializer serialize:valueObj.metadata];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESRelocationResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -21268,7 +21268,7 @@
   [DBStoneValidators
    nonnullValidator:[DBStoneValidators stringValidator:nil maxLength:nil pattern:@"/(.|[\\r\\n])*"]](path);
   [DBStoneValidators
-   nonnullValidator:[DBStoneValidators stringValidator:@(1) maxLength:@(32) pattern:@"[A-Za-z0-9_]+"]](tagText);
+   nonnullValidator:[DBStoneValidators stringValidator:@(1) maxLength:@(32) pattern:@"[\\w]+"]](tagText);
 
   self = [super init];
   if (self) {
@@ -21351,7 +21351,7 @@
   jsonDict[@"path"] = valueObj.path;
   jsonDict[@"tag_text"] = valueObj.tagText;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESRemoveTagArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -21534,7 +21534,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESRemoveTagError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -21651,7 +21651,7 @@
   jsonDict[@"path"] = valueObj.path;
   jsonDict[@"rev"] = valueObj.rev;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESRestoreArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -21887,7 +21887,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESRestoreError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -22008,7 +22008,7 @@
   jsonDict[@"copy_reference"] = valueObj.dCopyReference;
   jsonDict[@"path"] = valueObj.path;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSaveCopyReferenceArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -22253,7 +22253,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSaveCopyReferenceError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -22368,7 +22368,7 @@
 
   jsonDict[@"metadata"] = [DBFILESMetadataSerializer serialize:valueObj.metadata];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSaveCopyReferenceResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -22475,7 +22475,7 @@
   jsonDict[@"path"] = valueObj.path;
   jsonDict[@"url"] = valueObj.url;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSaveUrlArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -22699,7 +22699,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSaveUrlError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -22908,7 +22908,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSaveUrlJobStatus *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -23095,7 +23095,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSaveUrlResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -23242,7 +23242,7 @@
   jsonDict[@"max_results"] = valueObj.maxResults;
   jsonDict[@"mode"] = [DBFILESSearchModeSerializer serialize:valueObj.mode];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSearchArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -23466,7 +23466,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSearchError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -23586,7 +23586,7 @@
   jsonDict[@"match_type"] = [DBFILESSearchMatchTypeSerializer serialize:valueObj.matchType];
   jsonDict[@"metadata"] = [DBFILESMetadataSerializer serialize:valueObj.metadata];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSearchMatch *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -23689,7 +23689,7 @@
 
   jsonDict[@"include_highlights"] = valueObj.includeHighlights;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSearchMatchFieldOptions *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -23859,7 +23859,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSearchMatchType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -24080,7 +24080,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSearchMatchTypeV2 *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -24231,7 +24231,7 @@
                                                       }];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSearchMatchV2 *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -24409,7 +24409,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSearchMode *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -24631,7 +24631,7 @@
     jsonDict[@"account_id"] = valueObj.accountId;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSearchOptions *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -24826,7 +24826,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSearchOrderBy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -24954,7 +24954,7 @@
   jsonDict[@"more"] = valueObj.more;
   jsonDict[@"start"] = valueObj.start;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSearchResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -25104,7 +25104,7 @@
     jsonDict[@"include_highlights"] = valueObj.includeHighlights;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSearchV2Arg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -25213,7 +25213,7 @@
 
   jsonDict[@"cursor"] = valueObj.cursor;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSearchV2ContinueArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -25345,7 +25345,7 @@
     jsonDict[@"cursor"] = valueObj.cursor;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSearchV2Result *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -25466,7 +25466,7 @@
     jsonDict[@"password"] = valueObj.password;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSharedLink *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -25594,7 +25594,7 @@
     jsonDict[@"password"] = valueObj.password;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSharedLinkFileInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -25721,7 +25721,7 @@
     jsonDict[@"lock_holder_team_id"] = valueObj.lockHolderTeamId;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSingleUserLock *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -25824,7 +25824,7 @@
 
   jsonDict[@"target"] = valueObj.target;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSymlinkInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -26013,7 +26013,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSyncSetting *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -26191,7 +26191,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSyncSettingArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -26401,7 +26401,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESSyncSettingsError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -26572,7 +26572,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESTag *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -26710,7 +26710,7 @@
   jsonDict[@"size"] = [DBFILESThumbnailSizeSerializer serialize:valueObj.size];
   jsonDict[@"mode"] = [DBFILESThumbnailModeSerializer serialize:valueObj.mode];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESThumbnailArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -26921,7 +26921,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESThumbnailError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -27084,7 +27084,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESThumbnailFormat *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -27263,7 +27263,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESThumbnailMode *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -27570,7 +27570,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESThumbnailSize *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -27721,7 +27721,7 @@
   jsonDict[@"size"] = [DBFILESThumbnailSizeSerializer serialize:valueObj.size];
   jsonDict[@"mode"] = [DBFILESThumbnailModeSerializer serialize:valueObj.mode];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESThumbnailV2Arg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -27993,7 +27993,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESThumbnailV2Error *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -28112,7 +28112,7 @@
 
   jsonDict[@"path"] = valueObj.path;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUnlockFileArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -28218,7 +28218,7 @@
                                               return [DBFILESUnlockFileArgSerializer serialize:elem0];
                                             }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUnlockFileBatchArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -28415,7 +28415,7 @@
     jsonDict[@"content_hash"] = valueObj.contentHash;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUploadArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -28674,7 +28674,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUploadError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -28815,7 +28815,7 @@
     jsonDict[@"content_hash"] = valueObj.contentHash;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUploadSessionAppendArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -29125,7 +29125,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUploadSessionLookupError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -29477,7 +29477,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUploadSessionAppendError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -29607,7 +29607,7 @@
   jsonDict[@"session_id"] = valueObj.sessionId;
   jsonDict[@"offset"] = valueObj.offset;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUploadSessionCursor *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -29736,7 +29736,7 @@
     jsonDict[@"content_hash"] = valueObj.contentHash;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUploadSessionFinishArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -29844,7 +29844,7 @@
                                               return [DBFILESUploadSessionFinishArgSerializer serialize:elem0];
                                             }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUploadSessionFinishBatchArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -30013,7 +30013,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUploadSessionFinishBatchJobStatus *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -30220,7 +30220,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUploadSessionFinishBatchLaunch *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -30339,7 +30339,7 @@
                            return [DBFILESUploadSessionFinishBatchResultEntrySerializer serialize:elem0];
                          }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUploadSessionFinishBatchResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -30520,7 +30520,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUploadSessionFinishBatchResultEntry *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -30909,7 +30909,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUploadSessionFinishError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -31037,7 +31037,7 @@
 
   jsonDict[@"correct_offset"] = valueObj.correctOffset;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUploadSessionOffsetError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -31168,7 +31168,7 @@
     jsonDict[@"content_hash"] = valueObj.contentHash;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUploadSessionStartArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -31287,7 +31287,7 @@
     jsonDict[@"session_type"] = [DBFILESUploadSessionTypeSerializer serialize:valueObj.sessionType];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUploadSessionStartBatchArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -31394,7 +31394,7 @@
                                                   return elem0;
                                                 }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUploadSessionStartBatchResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -31607,7 +31607,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUploadSessionStartError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -31718,7 +31718,7 @@
 
   jsonDict[@"session_id"] = valueObj.sessionId;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUploadSessionStartResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -31886,7 +31886,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUploadSessionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -32001,7 +32001,7 @@
   jsonDict[@"reason"] = [DBFILESWriteErrorSerializer serialize:valueObj.reason];
   jsonDict[@"upload_session_id"] = valueObj.uploadSessionId;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUploadWriteFailed *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -32025,7 +32025,7 @@
 
 - (instancetype)initWithTagText:(NSString *)tagText {
   [DBStoneValidators
-   nonnullValidator:[DBStoneValidators stringValidator:@(1) maxLength:@(32) pattern:@"[A-Za-z0-9_]+"]](tagText);
+   nonnullValidator:[DBStoneValidators stringValidator:@(1) maxLength:@(32) pattern:@"[\\w]+"]](tagText);
 
   self = [super init];
   if (self) {
@@ -32102,7 +32102,7 @@
 
   jsonDict[@"tag_text"] = valueObj.tagText;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESUserGeneratedTag *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -32249,7 +32249,7 @@
     jsonDict[@"duration"] = valueObj.duration;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESVideoMetadata *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -32448,7 +32448,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESWriteConflictError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -32782,7 +32782,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESWriteError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -32986,7 +32986,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBFILESWriteMode *)deserialize:(NSDictionary<NSString *, id> *)valueDict {

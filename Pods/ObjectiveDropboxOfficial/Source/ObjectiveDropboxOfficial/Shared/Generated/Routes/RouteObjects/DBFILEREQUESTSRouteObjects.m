@@ -54,11 +54,7 @@ static NSObject *lockObj = nil;
                                        deprecated:@NO
                                        resultType:[DBFILEREQUESTSCountFileRequestsResult class]
                                         errorType:[DBFILEREQUESTSCountFileRequestsError class]
-                                            attrs:@{
-                                              @"auth" : @"user",
-                                              @"host" : @"api",
-                                              @"style" : @"rpc"
-                                            }
+                                            attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                             dataStructSerialBlock:nil
                           dataStructDeserialBlock:nil];
     }
@@ -74,11 +70,7 @@ static NSObject *lockObj = nil;
                                         deprecated:@NO
                                         resultType:[DBFILEREQUESTSFileRequest class]
                                          errorType:[DBFILEREQUESTSCreateFileRequestError class]
-                                             attrs:@{
-                                               @"auth" : @"user",
-                                               @"host" : @"api",
-                                               @"style" : @"rpc"
-                                             }
+                                             attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                              dataStructSerialBlock:nil
                            dataStructDeserialBlock:nil];
     }
@@ -94,11 +86,7 @@ static NSObject *lockObj = nil;
                                          deprecated:@NO
                                          resultType:[DBFILEREQUESTSDeleteFileRequestsResult class]
                                           errorType:[DBFILEREQUESTSDeleteFileRequestError class]
-                                              attrs:@{
-                                                @"auth" : @"user",
-                                                @"host" : @"api",
-                                                @"style" : @"rpc"
-                                              }
+                                              attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                               dataStructSerialBlock:nil
                             dataStructDeserialBlock:nil];
     }
@@ -114,11 +102,7 @@ static NSObject *lockObj = nil;
                                                  deprecated:@NO
                                                  resultType:[DBFILEREQUESTSDeleteAllClosedFileRequestsResult class]
                                                   errorType:[DBFILEREQUESTSDeleteAllClosedFileRequestsError class]
-                                                      attrs:@{
-                                                        @"auth" : @"user",
-                                                        @"host" : @"api",
-                                                        @"style" : @"rpc"
-                                                      }
+                                                      attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                       dataStructSerialBlock:nil
                                     dataStructDeserialBlock:nil];
     }
@@ -134,11 +118,7 @@ static NSObject *lockObj = nil;
                                      deprecated:@NO
                                      resultType:[DBFILEREQUESTSFileRequest class]
                                       errorType:[DBFILEREQUESTSGetFileRequestError class]
-                                          attrs:@{
-                                            @"auth" : @"user",
-                                            @"host" : @"api",
-                                            @"style" : @"rpc"
-                                          }
+                                          attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                           dataStructSerialBlock:nil
                         dataStructDeserialBlock:nil];
     }
@@ -154,11 +134,7 @@ static NSObject *lockObj = nil;
                                         deprecated:@NO
                                         resultType:[DBFILEREQUESTSListFileRequestsV2Result class]
                                          errorType:[DBFILEREQUESTSListFileRequestsError class]
-                                             attrs:@{
-                                               @"auth" : @"user",
-                                               @"host" : @"api",
-                                               @"style" : @"rpc"
-                                             }
+                                             attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                              dataStructSerialBlock:nil
                            dataStructDeserialBlock:nil];
     }
@@ -174,11 +150,7 @@ static NSObject *lockObj = nil;
                                       deprecated:@NO
                                       resultType:[DBFILEREQUESTSListFileRequestsResult class]
                                        errorType:[DBFILEREQUESTSListFileRequestsError class]
-                                           attrs:@{
-                                             @"auth" : @"user",
-                                             @"host" : @"api",
-                                             @"style" : @"rpc"
-                                           }
+                                           attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                            dataStructSerialBlock:nil
                          dataStructDeserialBlock:nil];
     }
@@ -194,11 +166,7 @@ static NSObject *lockObj = nil;
                                               deprecated:@NO
                                               resultType:[DBFILEREQUESTSListFileRequestsV2Result class]
                                                errorType:[DBFILEREQUESTSListFileRequestsContinueError class]
-                                                   attrs:@{
-                                                     @"auth" : @"user",
-                                                     @"host" : @"api",
-                                                     @"style" : @"rpc"
-                                                   }
+                                                   attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                    dataStructSerialBlock:nil
                                  dataStructDeserialBlock:nil];
     }
@@ -214,11 +182,7 @@ static NSObject *lockObj = nil;
                                         deprecated:@NO
                                         resultType:[DBFILEREQUESTSFileRequest class]
                                          errorType:[DBFILEREQUESTSUpdateFileRequestError class]
-                                             attrs:@{
-                                               @"auth" : @"user",
-                                               @"host" : @"api",
-                                               @"style" : @"rpc"
-                                             }
+                                             attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                              dataStructSerialBlock:nil
                            dataStructDeserialBlock:nil];
     }

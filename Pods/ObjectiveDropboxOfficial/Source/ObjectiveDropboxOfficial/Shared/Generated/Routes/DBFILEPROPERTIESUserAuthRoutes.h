@@ -64,8 +64,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// `DBFILEPROPERTIESAddPropertiesError` object on failure.
 ///
 - (DBRpcTask<DBNilObject *, DBFILEPROPERTIESAddPropertiesError *> *)
- propertiesAdd:(NSString *)path
-propertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups;
+     propertiesAdd:(NSString *)path
+    propertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups;
 
 ///
 /// Overwrite property groups associated with a file. This endpoint should be used instead of `propertiesUpdate` when
@@ -81,8 +81,8 @@ propertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups;
 /// `DBFILEPROPERTIESInvalidPropertyGroupError` object on failure.
 ///
 - (DBRpcTask<DBNilObject *, DBFILEPROPERTIESInvalidPropertyGroupError *> *)
-propertiesOverwrite:(NSString *)path
-     propertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups;
+    propertiesOverwrite:(NSString *)path
+         propertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups;
 
 ///
 /// Permanently removes the specified property group from the file. To remove specific property field key value pairs,
@@ -121,8 +121,8 @@ propertiesOverwrite:(NSString *)path
 /// success or a `DBFILEPROPERTIESPropertiesSearchError` object on failure.
 ///
 - (DBRpcTask<DBFILEPROPERTIESPropertiesSearchResult *, DBFILEPROPERTIESPropertiesSearchError *> *)
-propertiesSearch:(NSArray<DBFILEPROPERTIESPropertiesSearchQuery *> *)queries
-  templateFilter:(nullable DBFILEPROPERTIESTemplateFilter *)templateFilter;
+    propertiesSearch:(NSArray<DBFILEPROPERTIESPropertiesSearchQuery *> *)queries
+      templateFilter:(nullable DBFILEPROPERTIESTemplateFilter *)templateFilter;
 
 ///
 /// Once a cursor has been retrieved from `propertiesSearch`, use this to paginate through all search results.
@@ -133,7 +133,7 @@ propertiesSearch:(NSArray<DBFILEPROPERTIESPropertiesSearchQuery *> *)queries
 /// success or a `DBFILEPROPERTIESPropertiesSearchContinueError` object on failure.
 ///
 - (DBRpcTask<DBFILEPROPERTIESPropertiesSearchResult *, DBFILEPROPERTIESPropertiesSearchContinueError *> *)
-propertiesSearchContinue:(NSString *)cursor;
+    propertiesSearchContinue:(NSString *)cursor;
 
 ///
 /// Add, update or remove properties associated with the supplied file and templates. This endpoint should be used
@@ -148,8 +148,8 @@ propertiesSearchContinue:(NSString *)cursor;
 /// `DBFILEPROPERTIESUpdatePropertiesError` object on failure.
 ///
 - (DBRpcTask<DBNilObject *, DBFILEPROPERTIESUpdatePropertiesError *> *)
-    propertiesUpdate:(NSString *)path
-updatePropertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroupUpdate *> *)updatePropertyGroups;
+        propertiesUpdate:(NSString *)path
+    updatePropertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroupUpdate *> *)updatePropertyGroups;
 
 ///
 /// Add a template associated with a user. See `propertiesAdd` to add properties to a file. This endpoint can't be
@@ -160,9 +160,9 @@ updatePropertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroupUpdate *> *)updatePro
 /// success or a `DBFILEPROPERTIESModifyTemplateError` object on failure.
 ///
 - (DBRpcTask<DBFILEPROPERTIESAddTemplateResult *, DBFILEPROPERTIESModifyTemplateError *> *)
-templatesAddForUser:(NSString *)name
-       description_:(NSString *)description_
-             fields:(NSArray<DBFILEPROPERTIESPropertyFieldTemplate *> *)fields;
+    templatesAddForUser:(NSString *)name
+           description_:(NSString *)description_
+                 fields:(NSArray<DBFILEPROPERTIESPropertyFieldTemplate *> *)fields;
 
 ///
 /// Get the schema for a specified template. This endpoint can't be called on a team member or admin's behalf.
@@ -222,10 +222,10 @@ templatesAddForUser:(NSString *)name
 /// success or a `DBFILEPROPERTIESModifyTemplateError` object on failure.
 ///
 - (DBRpcTask<DBFILEPROPERTIESUpdateTemplateResult *, DBFILEPROPERTIESModifyTemplateError *> *)
-templatesUpdateForUser:(NSString *)templateId
-                  name:(nullable NSString *)name
-          description_:(nullable NSString *)description_
-             addFields:(nullable NSArray<DBFILEPROPERTIESPropertyFieldTemplate *> *)addFields;
+    templatesUpdateForUser:(NSString *)templateId
+                      name:(nullable NSString *)name
+              description_:(nullable NSString *)description_
+                 addFields:(nullable NSArray<DBFILEPROPERTIESPropertyFieldTemplate *> *)addFields;
 
 @end
 

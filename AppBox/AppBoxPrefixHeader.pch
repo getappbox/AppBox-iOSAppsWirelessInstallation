@@ -11,9 +11,6 @@
 
 
 #import <SSZipArchive/SSZipArchive.h>
-#import <AppCenter/AppCenter.h>
-#import <AppCenterCrashes/AppCenterCrashes.h>
-#import <AppCenterAnalytics/AppCenterAnalytics.h>
 #import <SAMKeychain/SAMKeychain.h>
 #import <AFNetworking/AFNetworking.h>
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>

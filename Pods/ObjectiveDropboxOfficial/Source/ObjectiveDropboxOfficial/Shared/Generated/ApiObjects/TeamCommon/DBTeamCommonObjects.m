@@ -184,7 +184,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMCOMMONGroupManagementType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -347,7 +347,7 @@
     jsonDict[@"member_count"] = valueObj.memberCount;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMCOMMONGroupSummary *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -524,7 +524,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMCOMMONGroupType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -721,7 +721,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMCOMMONMemberSpaceLimitType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -851,7 +851,7 @@
     jsonDict[@"end_time"] = [DBNSDateSerializer serialize:valueObj.endTime dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBTEAMCOMMONTimeRange *)deserialize:(NSDictionary<NSString *, id> *)valueDict {

@@ -154,7 +154,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBACCOUNTPhotoSourceArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -261,7 +261,7 @@
 
   jsonDict[@"photo"] = [DBACCOUNTPhotoSourceArgSerializer serialize:valueObj.photo];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBACCOUNTSetProfilePhotoArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -492,7 +492,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBACCOUNTSetProfilePhotoError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -605,7 +605,7 @@
 
   jsonDict[@"profile_photo_url"] = valueObj.profilePhotoUrl;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBACCOUNTSetProfilePhotoResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
