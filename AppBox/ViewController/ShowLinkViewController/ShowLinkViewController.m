@@ -39,7 +39,7 @@
 - (IBAction)buttonCopyToClipboardTapped:(NSButton *)sender {
     [EventTracker logEventWithType:LogEventTypeCopyToClipboard];
     [[NSPasteboard generalPasteboard] clearContents];
-    [[NSPasteboard generalPasteboard] setString:self.project.appShortShareableURL.stringValue  forType:NSStringPboardType];
+	[[NSPasteboard generalPasteboard] setString:self.project.appShortShareableURL.stringValue  forType:NSPasteboardTypeString];
     [sender setTitle:@"Copied!!"];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [sender setTitle:@"Copy to Clipboard"];

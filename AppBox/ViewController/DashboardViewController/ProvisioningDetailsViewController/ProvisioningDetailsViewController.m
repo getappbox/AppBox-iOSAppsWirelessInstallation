@@ -46,7 +46,7 @@
         [devices appendFormat:@"%@,\n",obj.deviceId];
     }];
     [[NSPasteboard generalPasteboard] clearContents];
-    [[NSPasteboard generalPasteboard] setString:devices forType:NSStringPboardType];
+	[[NSPasteboard generalPasteboard] setString:devices forType:NSPasteboardTypeString];
 }
 
 - (IBAction)showInFinderButtonTapped:(NSButton *)sender {

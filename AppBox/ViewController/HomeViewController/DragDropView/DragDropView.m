@@ -15,7 +15,7 @@
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
-    acceptedType = [NSSet setWithObjects:@"com.apple.iTunes.ipa", @"com.apple.dt.document.workspace", @"com.apple.xcode.project", NSURLPboardType, nil];
+	acceptedType = [NSSet setWithObjects:@"com.apple.iTunes.ipa", @"com.apple.dt.document.workspace", @"com.apple.xcode.project", NSPasteboardTypeURL, nil];
     readOptions = @{NSPasteboardURLReadingContentsConformToTypesKey: acceptedType.allObjects};
     [self registerForDraggedTypes:acceptedType.allObjects];
 }

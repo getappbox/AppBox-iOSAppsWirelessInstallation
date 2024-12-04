@@ -178,7 +178,7 @@
     if (ciProject.personalMessage.length != 0) {
         [textFieldMessage setStringValue:ciProject.personalMessage];
     }
-    [buttonUniqueLink setState:ciProject.keepSameLink.boolValue ? NSOnState : NSOffState];
+	[buttonUniqueLink setState:ciProject.keepSameLink.boolValue ? NSControlStateValueOn : NSControlStateValueOff];
     [self actionButtonTapped:buttonAction];
 }
 
@@ -186,7 +186,7 @@
 //IPA File Path Handler
 
 - (IBAction)buttonUniqueLinkTapped:(NSButton *)sender{
-    self.project.isKeepSameLinkEnabled = (sender.state == NSOnState);
+	self.project.isKeepSameLinkEnabled = (sender.state == NSControlStateValueOn);
 }
 
 - (IBAction)buttonSameLinkHelpTapped:(NSButton *)sender {
@@ -293,7 +293,7 @@
     
     //unique link
     [buttonUniqueLink setEnabled:finish];
-    [buttonUniqueLink setState: finish ? NSOffState : buttonUniqueLink.state];
+	[buttonUniqueLink setState: finish ? NSControlStateValueOff : buttonUniqueLink.state];
     
     //ipa or project path
     [selectedFilePath setEnabled:finish];

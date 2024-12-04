@@ -177,7 +177,7 @@ typedef enum : NSUInteger {
     ABUploadRecord *uploadRecord = [self selectedUploadRecord];
     if (uploadRecord){
         [[NSPasteboard generalPasteboard] clearContents];
-        [[NSPasteboard generalPasteboard] setString:uploadRecord.shortURL forType:NSStringPboardType];
+		[[NSPasteboard generalPasteboard] setString:uploadRecord.shortURL forType:NSPasteboardTypeString];
         [ABHudViewController showOnlyStatus:@"Copied!!" onView:self.view];
         [EventTracker logEventWithType:LogEventTypeCopyToClipboardFromDashboard];
     }
