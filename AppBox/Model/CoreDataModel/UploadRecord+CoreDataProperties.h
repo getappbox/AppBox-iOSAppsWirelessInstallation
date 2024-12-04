@@ -11,9 +11,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UploadRecord (CoreDataProperties)
+@interface ABUploadRecord (CoreDataProperties)
 
-+ (NSFetchRequest<UploadRecord *> *)fetchRequest;
++ (NSFetchRequest<ABUploadRecord *> *)fetchRequest;
 
 @property (nullable, nonatomic, copy) NSString *build;
 @property (nullable, nonatomic, copy) NSString *buildType;
@@ -33,8 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *shortURL;
 @property (nullable, nonatomic, copy) NSString *teamId;
 @property (nullable, nonatomic, copy) NSString *version;
-@property (nullable, nonatomic, retain) Project *project;
-@property (nullable, nonatomic, retain) ProvisioningProfile *provisioningProfile;
+@property (nullable, nonatomic, retain) ABProject *project;
+@property (nullable, nonatomic, retain) ABProvisioningProfile *provisioningProfile;
 @property (nullable, nonatomic, retain) AppBoxService *service;
 
 @end

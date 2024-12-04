@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class UploadRecord;
+@class ABUploadRecord;
 
 NS_ASSUME_NONNULL_BEGIN
 
