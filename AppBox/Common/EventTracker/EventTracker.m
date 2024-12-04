@@ -11,7 +11,7 @@
 @implementation EventTracker
 
 +(void)logScreen:(NSString *)name{
-    // [NSString stringWithFormat:@"Screen-%@", name]
+//	NSString *screenName = [NSString stringWithFormat:@"Screen-%@", name];
 }
 
 +(void)logEventWithName:(NSString *)eventName customAttributes:(NSDictionary *)attributes {
@@ -19,6 +19,7 @@
 }
 
 +(void)logEventWithType:(LogEventTypes)eventType{
+/*
     switch (eventType) {
         case LogEventTypeCopyToClipboard:{
             NSString *name = @"Copy to Clipboard";
@@ -159,10 +160,12 @@
         default:
             break;
     }
+*/
 }
 
 +(void)logEventSettingWithType:(LogEventSettingTypes)eventType andSettings:(NSDictionary *)currentSetting{
-    switch (eventType) {
+/*
+	switch (eventType) {
         case LogEventSettingTypeUploadIPA:{
 			NSString *name = @"Upload IPA";
         }break;
@@ -178,17 +181,21 @@
         default:
             break;
     }
+*/
 }
 
 +(void)logExceptionEvent:(NSException *)exception {
+/*
 	NSString *name = @"Exception";
 	NSDictionary *attributes = @{
 		@"debug description":exception.debugDescription,
 		@"stack":exception.callStackSymbols
 	};
+ */
 }
 
 +(void)logAppBoxVersion {
+/*
     DBManager *dbManager = [Common currentDBManager];
 	NSString *name = @"AppBox Version";
 	NSDictionary *attributes = @{
@@ -196,5 +203,6 @@
 		@"Name": dbManager.appName,
 		@"Identifier": dbManager.bundleId
 	};
+*/
 }
 @end
