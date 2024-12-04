@@ -22,6 +22,6 @@
     __weak IBOutlet NSTextField *labelProvisionedDevices;
 }
 
-@property(nonatomic, strong) UploadRecord *uploadRecord;
+@property(nonatomic, strong) ABUploadRecord *uploadRecord;
 
 @end

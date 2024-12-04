@@ -10,7 +10,7 @@
 
 #import "MobileProvision.h"
 
-@class UploadRecord;
+@class ABUploadRecord;
 
 typedef void(^ProgressBlock)(NSString *title);
 typedef void(^ErrorBlock)(NSError *error, BOOL terminate);
@@ -26,7 +26,7 @@ typedef void(^CompletionBlock)(void);
 @property(nonatomic, strong) XCProject *ciRepoProject;
 @property(nonatomic, assign) DBFileType dbFileType;
 @property(nonatomic, weak) NSViewController *currentViewController;
-@property(nonatomic, weak) UploadRecord *uploadRecord;
+@property(nonatomic, weak) ABUploadRecord *uploadRecord;
 @property(nonatomic, strong) NSBlockOperation *lastfailedOperation;
 
 //blocks

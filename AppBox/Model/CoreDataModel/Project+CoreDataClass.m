@@ -1,5 +1,5 @@
 //
-//  Project+CoreDataClass.m
+//  ABProject+CoreDataClass.m
 //  
 //
 //  Created by Vineet Choudhary on 17/10/17.
@@ -8,27 +8,27 @@
 
 #import "Project+CoreDataClass.h"
 
-@implementation Project
+@implementation ABProject
 
-+(Project *)addProjectWithXCProject:(XCProject *)xcProject{
++(ABProject *)addProjectWithXCProject:(XCProject *)xcProject{
     
     @try {
         //fetch existing project with same identifer (if any)
         NSError *error;
-        NSFetchRequest *fetchRequest = [Project fetchRequest];
+        NSFetchRequest *fetchRequest = [ABProject fetchRequest];
         [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"SELF.bundleIdentifier = %@", xcProject.identifer]];
         NSArray *projects = [[[AppDelegate appDelegate] managedObjectContext] executeFetchRequest:fetchRequest error:&error];
         if (error){
             //error in fetch request
             [Common showAlertWithTitle:@"Error" andMessage:error.localizedDescription];
         }else{
-            Project *project;
+            ABProject *project;
             if (projects.count > 0){
                 //use existing project
                 project = [projects lastObject];
             }else{
                 //create new project
-                project = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Project class]) inManagedObjectContext:[[AppDelegate appDelegate] managedObjectContext]];
+                project = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ABProject class]) inManagedObjectContext:[[AppDelegate appDelegate] managedObjectContext]];
                 [project setBundleIdentifier:xcProject.identifer];
             }
             
@@ -36,7 +36,7 @@
             [project setName:xcProject.name];
             
             //create new upload record
-            UploadRecord *uploadRecord = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([UploadRecord class]) inManagedObjectContext:[[AppDelegate appDelegate] managedObjectContext]];
+            ABUploadRecord *uploadRecord = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ABUploadRecord class]) inManagedObjectContext:[[AppDelegate appDelegate] managedObjectContext]];
             
             //set upload details
             if (xcProject.buildType){
@@ -85,27 +85,27 @@
             if (xcProject.mobileProvision){
                 @try {
                     //check either existing provisioning profile already exist or not
-                    NSFetchRequest *provisioningProfileFetchRequest = [ProvisioningProfile fetchRequest];
+                    NSFetchRequest *provisioningProfileFetchRequest = [ABProvisioningProfile fetchRequest];
                     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uuid = %@", xcProject.mobileProvision.uuid];
                     [provisioningProfileFetchRequest setPredicate:predicate];
                     NSArray *fetchedResult = [[[AppDelegate appDelegate] managedObjectContext] executeFetchRequest:provisioningProfileFetchRequest error:nil];
                     
-                    if (fetchedResult.count > 0 && [fetchedResult.firstObject isKindOfClass:[ProvisioningProfile class]]) {
+                    if (fetchedResult.count > 0 && [fetchedResult.firstObject isKindOfClass:[ABProvisioningProfile class]]) {
                         //if provisioning profile exist update records
-                        ProvisioningProfile *provisioningProfile = (ProvisioningProfile *)fetchedResult.firstObject;
+                        ABProvisioningProfile *provisioningProfile = (ABProvisioningProfile *)fetchedResult.firstObject;
                         [provisioningProfile addUploadRecordObject:uploadRecord];
                         [uploadRecord setProvisioningProfile:provisioningProfile];
                     } else {
                         //Create new provisioning profile record
-                        NSMutableOrderedSet<ProvisionedDevice *> *provisionDeviceSet = [[NSMutableOrderedSet<ProvisionedDevice *> alloc] init];
+                        NSMutableOrderedSet<ABProvisionedDevice *> *provisionDeviceSet = [[NSMutableOrderedSet<ABProvisionedDevice *> alloc] init];
                         [xcProject.mobileProvision.provisionedDevices enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                             //Create ProvisionedDevice Object and Add into Set
-                            ProvisionedDevice *device = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ProvisionedDevice class]) inManagedObjectContext:[[AppDelegate appDelegate] managedObjectContext]];
+                            ABProvisionedDevice *device = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ABProvisionedDevice class]) inManagedObjectContext:[[AppDelegate appDelegate] managedObjectContext]];
                             [device setDeviceId:obj];
                             [provisionDeviceSet addObject:device];
                         }];
                         
-                        ProvisioningProfile *provisioningProfile = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ProvisioningProfile class]) inManagedObjectContext:[[AppDelegate appDelegate] managedObjectContext]];
+                        ABProvisioningProfile *provisioningProfile = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ABProvisioningProfile class]) inManagedObjectContext:[[AppDelegate appDelegate] managedObjectContext]];
                         [provisioningProfile setUuid:xcProject.mobileProvision.uuid];
                         [provisioningProfile setTeamId:xcProject.mobileProvision.teamId];
                         [provisioningProfile setTeamName:xcProject.mobileProvision.teamName];
