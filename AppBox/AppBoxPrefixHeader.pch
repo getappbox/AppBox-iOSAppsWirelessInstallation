@@ -43,6 +43,7 @@
 #import "NSURL+URL.h"
 #import "NSDate+Date.h"
 #import "NSString+String.h"
+#import "NSException+Description.h"
 
 #import "Project+CoreDataProperties.h"
 #import "UploadRecord+CoreDataProperties.h"

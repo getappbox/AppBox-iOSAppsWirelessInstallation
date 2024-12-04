@@ -126,7 +126,7 @@
                     }
                 } @catch (NSException *exception) {
                     [EventTracker logExceptionEvent:exception];
-					DDLogInfo(@"Exception %@",exception.userInfo);
+					DDLogInfo(@"Exception %@",exception.abDescription);
                 }
             }
             
@@ -147,7 +147,7 @@
         }
     } @catch (NSException *exception) {
         [EventTracker logExceptionEvent:exception];
-		DDLogInfo(@"Exception %@",exception.userInfo);
+		DDLogInfo(@"Exception %@",exception.abDescription);
     }
     return nil;
 }

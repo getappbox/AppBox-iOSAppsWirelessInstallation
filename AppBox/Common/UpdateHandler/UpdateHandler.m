@@ -63,7 +63,7 @@
         }];
     } @catch (NSException *exception) {
         completion(false, nil);
-		DDLogInfo(@"Exception %@",exception.userInfo);
+		DDLogInfo(@"Exception %@",exception.abDescription);
     }
 }
 
