@@ -12,23 +12,7 @@
 
 -(NSURL *)ipaURL{
     NSURL *url = [NSURL fileURLWithPath:self];
-    if (url && [url.pathExtension.lowercaseString isEqualToString:@"ipa" ]) {
-        return url;
-    }
-    return nil;
-}
-
--(NSURL *)projectURL{
-    NSURL *url = [NSURL fileURLWithPath:self];
-    if (url && ([url.pathExtension.lowercaseString isEqualToString:@"xcodeproj"] || [url.pathExtension.lowercaseString isEqualToString:@"xcworkspace"])) {
-        return url;
-    }
-    return nil;
-}
-
--(NSURL *)validURL{
-    NSURL *url = [NSURL fileURLWithPath:self];
-    if (url && ([url.pathExtension.lowercaseString isEqualToString:@"xcodeproj"] || [url.pathExtension.lowercaseString isEqualToString:@"xcworkspace"] || [url.pathExtension.lowercaseString isEqualToString:@"ipa" ])) {
+    if (url && [url.pathExtension.lowercaseString isEqualToString:@"ipa"]) {
         return url;
     }
     return nil;
