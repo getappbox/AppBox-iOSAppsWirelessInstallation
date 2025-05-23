@@ -130,7 +130,7 @@
 
 - (void)initOpenFilesProcess:(NSNotification *)notification {
     if ([notification.object isKindOfClass:[NSString class]]) {
-        NSURL *fileURL = [notification.object validURL];
+        NSURL *fileURL = [notification.object ipaURL];
         if (fileURL) {
             [selectedFilePath setURL:fileURL.filePathURL];
             [self selectedFilePathHandler:selectedFilePath];
