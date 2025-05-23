@@ -70,6 +70,7 @@
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
 	DDLogInfo(@"AppBox Terminated.");
     [self saveCoreDataChanges];
+	[self deleteTemporaryFiles];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{
@@ -323,6 +324,14 @@
     }
 
     return NSTerminateNow;
+}
+
+// MARK: - Other helpers
+- (void)deleteTemporaryFiles {
+	NSArray* tmpDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:NSTemporaryDirectory() error:NULL];
+	for (NSString *file in tmpDirectory) {
+		[[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@%@", NSTemporaryDirectory(), file] error:NULL];
+	}
 }
 
 @end
