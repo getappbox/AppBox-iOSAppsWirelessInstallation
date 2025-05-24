@@ -90,8 +90,8 @@
 - (NSOperationQueue *)urlSessionDelegateQueueWithName:(NSString *)queueName {
   NSOperationQueue *sessionDelegateQueue = [[NSOperationQueue alloc] init];
   sessionDelegateQueue.maxConcurrentOperationCount = 1; // [Michael Fey, 2017-05-16] From the NSURLSession
-                                                        // documentation: "The queue should be a serial queue, in order
-                                                        // to ensure the correct ordering of callbacks."
+                                                        // documentation: "The queue should be a serial queue, in
+                                                        // order to ensure the correct ordering of callbacks."
   sessionDelegateQueue.name = queueName;
   sessionDelegateQueue.qualityOfService = NSQualityOfServiceUtility;
   return sessionDelegateQueue;

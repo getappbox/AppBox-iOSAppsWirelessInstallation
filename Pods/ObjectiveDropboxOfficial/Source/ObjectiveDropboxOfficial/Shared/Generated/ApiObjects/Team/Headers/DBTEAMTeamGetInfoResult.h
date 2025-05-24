@@ -39,6 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// of the team.
 @property (nonatomic, readonly) NSNumber *numProvisionedUsers;
 
+/// The number of licenses used on the team.
+@property (nonatomic, readonly) NSNumber *numUsedLicenses;
+
 /// (no description).
 @property (nonatomic, readonly) DBTEAMPOLICIESTeamMemberPolicies *policies;
 
@@ -46,6 +49,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
+///
+/// @param name The name of the team.
+/// @param teamId The ID of the team.
+/// @param numLicensedUsers The number of licenses available to the team.
+/// @param numProvisionedUsers The number of accounts that have been invited or
+/// are already active members of the team.
+/// @param policies (no description).
+/// @param numUsedLicenses The number of licenses used on the team.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithName:(NSString *)name
+                      teamId:(NSString *)teamId
+            numLicensedUsers:(NSNumber *)numLicensedUsers
+         numProvisionedUsers:(NSNumber *)numProvisionedUsers
+                    policies:(DBTEAMPOLICIESTeamMemberPolicies *)policies
+             numUsedLicenses:(nullable NSNumber *)numUsedLicenses;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
 ///
 /// @param name The name of the team.
 /// @param teamId The ID of the team.

@@ -24,6 +24,17 @@
 
 @implementation DBTransportBaseClient
 
+static BOOL kUseFastAsciiEncoding;
+static NSLock *kAsciiEscapeSelectorLock;
+
++ (void)initialize {
+  [super initialize];
+  if (self == [DBTransportBaseClient class]) {
+    kUseFastAsciiEncoding = NO;
+    kAsciiEscapeSelectorLock = [[NSLock alloc] init];
+  }
+}
+
 - (instancetype)initWithAccessToken:(NSString *)accessToken
                            tokenUid:(NSString *)tokenUid
                     transportConfig:(DBTransportBaseConfig *)transportConfig {
@@ -205,7 +216,37 @@
   return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
++ (BOOL)useFastAsciiEncoding {
+  BOOL result;
+
+  [kAsciiEscapeSelectorLock lock];
+  result = kUseFastAsciiEncoding;
+  [kAsciiEscapeSelectorLock unlock];
+  return result;
+}
+
++ (void)setUseFastAsciiEncoding:(BOOL)useFastAsciiEncoding {
+  [kAsciiEscapeSelectorLock lock];
+  kUseFastAsciiEncoding = useFastAsciiEncoding;
+  [kAsciiEscapeSelectorLock unlock];
+}
+
 + (NSString *)asciiEscapeWithString:(NSString *)string {
+  BOOL useFastEncoding = NO;
+  [kAsciiEscapeSelectorLock lock];
+  useFastEncoding = kUseFastAsciiEncoding;
+  [kAsciiEscapeSelectorLock unlock];
+
+  NSString *result;
+  if (useFastEncoding) {
+    result = [self fast_asciiEscapeWithString:string];
+  } else {
+    result = [self slow_asciiEscapeWithString:string];
+  }
+  return result;
+}
+
++ (NSString *)slow_asciiEscapeWithString:(NSString *)string {
   NSMutableString *result = [[NSMutableString alloc] init];
   for (NSUInteger i = 0; i < string.length; i++) {
     NSString *substring = [string substringWithRange:NSMakeRange(i, 1)];
@@ -216,6 +257,27 @@
     }
   }
   return result;
+}
+
++ (NSString *)fast_asciiEscapeWithString:(NSString *)string {
+  // if the string is already ascii, return immediately
+  if ([string canBeConvertedToEncoding:NSASCIIStringEncoding]) {
+    return [string copy];
+  }
+
+  NSMutableString *encoded = [NSMutableString stringWithCapacity:[string length]];
+  for (NSUInteger i = 0; i < [string length]; i++) {
+    unichar character = [string characterAtIndex:i];
+    // Anything that is raw ASCII (not extended) can be applied as a regular old character.
+    if (character < 128) {
+      [encoded appendFormat:@"%c", character];
+    } else {
+      // Everything else needs to be encoded, including the extended ascii set.
+      [encoded appendFormat:@"\\u%04x", character];
+    }
+  }
+
+  return [encoded copy];
 }
 
 + (DBRequestError *)dBRequestErrorWithErrorData:(NSData *)errorData

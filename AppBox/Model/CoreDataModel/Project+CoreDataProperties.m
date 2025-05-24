@@ -1,5 +1,5 @@
 //
-//  Project+CoreDataProperties.m
+//  ABProject+CoreDataProperties.m
 //  
 //
 //  Created by Vineet Choudhary on 11/10/18.
@@ -8,9 +8,9 @@
 
 #import "Project+CoreDataProperties.h"
 
-@implementation Project (CoreDataProperties)
+@implementation ABProject (CoreDataProperties)
 
-+ (NSFetchRequest<Project *> *)fetchRequest {
++ (NSFetchRequest<ABProject *> *)fetchRequest {
 	return [NSFetchRequest fetchRequestWithEntityName:@"Project"];
 }
 

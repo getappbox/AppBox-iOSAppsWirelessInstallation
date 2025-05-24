@@ -15,7 +15,7 @@
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
-    acceptedType = [NSSet setWithObjects:@"com.apple.iTunes.ipa", @"com.apple.dt.document.workspace", @"com.apple.xcode.project", NSURLPboardType, nil];
+	acceptedType = [NSSet setWithObjects:@"com.apple.iTunes.ipa", NSPasteboardTypeURL, NSPasteboardTypeFileURL, nil];
     readOptions = @{NSPasteboardURLReadingContentsConformToTypesKey: acceptedType.allObjects};
     [self registerForDraggedTypes:acceptedType.allObjects];
 }
@@ -33,7 +33,7 @@
         return NSDragOperationNone;
     }
     NSString *filePath = [self getFilePath:sender];
-    return ([acceptedType intersectsSet:[NSSet setWithArray:sender.draggingPasteboard.types]] && filePath.validURL) ? NSDragOperationCopy : NSDragOperationNone;
+    return ([acceptedType intersectsSet:[NSSet setWithArray:sender.draggingPasteboard.types]] && filePath.ipaURL) ? NSDragOperationCopy : NSDragOperationNone;
 }
 
 -(BOOL)performDragOperation:(id<NSDraggingInfo>)sender{

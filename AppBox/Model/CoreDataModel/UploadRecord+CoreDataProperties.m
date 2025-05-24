@@ -1,5 +1,5 @@
 //
-//  UploadRecord+CoreDataProperties.m
+//  ABUploadRecord+CoreDataProperties.m
 //  
 //
 //  Created by Vineet Choudhary on 25/09/21.
@@ -8,9 +8,9 @@
 
 #import "UploadRecord+CoreDataProperties.h"
 
-@implementation UploadRecord (CoreDataProperties)
+@implementation ABUploadRecord (CoreDataProperties)
 
-+ (NSFetchRequest<UploadRecord *> *)fetchRequest {
++ (NSFetchRequest<ABUploadRecord *> *)fetchRequest {
 	return [NSFetchRequest fetchRequestWithEntityName:@"UploadRecord"];
 }
 

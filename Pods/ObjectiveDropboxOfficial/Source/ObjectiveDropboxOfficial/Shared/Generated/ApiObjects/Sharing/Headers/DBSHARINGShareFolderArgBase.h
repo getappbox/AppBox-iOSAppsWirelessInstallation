@@ -40,8 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// user is on a team.
 @property (nonatomic, readonly, nullable) DBSHARINGMemberPolicy *memberPolicy;
 
-/// The path to the folder to share. If it does not exist, then a new one is
-/// created.
+/// The path or the file id to the folder to share. If it does not exist, then a
+/// new one is created.
 @property (nonatomic, readonly, copy) NSString *path;
 
 /// The policy to apply to shared links created for content inside this shared
@@ -60,8 +60,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param path The path to the folder to share. If it does not exist, then a
-/// new one is created.
+/// @param path The path or the file id to the folder to share. If it does not
+/// exist, then a new one is created.
 /// @param aclUpdatePolicy Who can add and remove members of this shared folder.
 /// @param forceAsync Whether to force the share to happen asynchronously.
 /// @param memberPolicy Who can be a member of this shared folder. Only
@@ -87,8 +87,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param path The path to the folder to share. If it does not exist, then a
-/// new one is created.
+/// @param path The path or the file id to the folder to share. If it does not
+/// exist, then a new one is created.
 ///
 /// @return An initialized instance.
 ///

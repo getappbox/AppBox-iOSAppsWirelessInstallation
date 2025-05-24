@@ -204,11 +204,12 @@
     // Set Shared Variables
     NSMutableDictionary *exportVariable = [[NSMutableDictionary alloc] init];
     [exportVariable setValue: [NSString stringWithFormat:@"%@", self.appShortShareableURL] forKey: @"APPBOX_SHARE_URL"];
-    [exportVariable setValue: [NSString stringWithFormat:@"%@", self.appLongShareableURL] forKey: @"APPBOX_LONG_SHARE_URL"];
     [exportVariable setValue: [NSString stringWithFormat:@"%@", self.ipaFileDBShareableURL] forKey: @"APPBOX_IPA_URL"];
     [exportVariable setValue: [NSString stringWithFormat:@"%@", self.manifestFileSharableURL] forKey: @"APPBOX_MANIFEST_URL"];
-    
-    NSString *path = [[NSString stringWithFormat:@"~/%@", FILE_NAME_SHARE_URL] stringByExpandingTildeInPath];
+
+	NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+	NSString *path = [documentDirectory stringByAppendingPathComponent: FILE_NAME_SHARE_URL];
+
     if([[NSFileManager defaultManager] fileExistsAtPath:path]){
         [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
     }

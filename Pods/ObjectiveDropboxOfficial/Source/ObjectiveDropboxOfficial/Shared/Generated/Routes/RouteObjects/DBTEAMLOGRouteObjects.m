@@ -34,11 +34,7 @@ static NSObject *lockObj = nil;
                                       deprecated:@NO
                                       resultType:[DBTEAMLOGGetTeamEventsResult class]
                                        errorType:[DBTEAMLOGGetTeamEventsError class]
-                                           attrs:@{
-                                             @"auth" : @"team",
-                                             @"host" : @"api",
-                                             @"style" : @"rpc"
-                                           }
+                                           attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                            dataStructSerialBlock:nil
                          dataStructDeserialBlock:nil];
     }
@@ -54,11 +50,7 @@ static NSObject *lockObj = nil;
                                               deprecated:@NO
                                               resultType:[DBTEAMLOGGetTeamEventsResult class]
                                                errorType:[DBTEAMLOGGetTeamEventsContinueError class]
-                                                   attrs:@{
-                                                     @"auth" : @"team",
-                                                     @"host" : @"api",
-                                                     @"style" : @"rpc"
-                                                   }
+                                                   attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
                                    dataStructSerialBlock:nil
                                  dataStructDeserialBlock:nil];
     }

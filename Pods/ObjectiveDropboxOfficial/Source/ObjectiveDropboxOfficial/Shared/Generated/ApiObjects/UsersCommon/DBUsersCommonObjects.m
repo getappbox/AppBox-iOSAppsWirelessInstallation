@@ -165,7 +165,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSCOMMONAccountType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {

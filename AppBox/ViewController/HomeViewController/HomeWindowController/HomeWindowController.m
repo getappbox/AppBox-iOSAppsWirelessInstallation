@@ -26,7 +26,7 @@
         NSAlert *alert = [[NSAlert alloc] init];
         [alert setMessageText: @"Are you sure you want to close the \"AppBox\"?"];
         [alert setInformativeText:@"Closing this will stop the current task."];
-        [alert setAlertStyle:NSInformationalAlertStyle];
+		[alert setAlertStyle:NSAlertStyleInformational];
         [alert addButtonWithTitle:@"Stop Tasks"];
         [alert addButtonWithTitle:@"NO"];
         if ([alert runModal] == NSAlertFirstButtonReturn){

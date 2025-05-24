@@ -64,11 +64,7 @@ static NSObject *lockObj = nil;
                                                  deprecated:@NO
                                                  resultType:nil
                                                   errorType:[DBFILEPROPERTIESAddPropertiesError class]
-                                                      attrs:@{
-                                                        @"auth" : @"user",
-                                                        @"host" : @"api",
-                                                        @"style" : @"rpc"
-                                                      }
+                                                      attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                       dataStructSerialBlock:nil
                                     dataStructDeserialBlock:nil];
     }
@@ -79,18 +75,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBFILEPROPERTIESPropertiesOverwrite {
   @synchronized(lockObj) {
     if (!DBFILEPROPERTIESPropertiesOverwrite) {
-      DBFILEPROPERTIESPropertiesOverwrite = [[DBRoute alloc] init:@"properties/overwrite"
-                                                       namespace_:@"file_properties"
-                                                       deprecated:@NO
-                                                       resultType:nil
-                                                        errorType:[DBFILEPROPERTIESInvalidPropertyGroupError class]
-                                                            attrs:@{
-                                                              @"auth" : @"user",
-                                                              @"host" : @"api",
-                                                              @"style" : @"rpc"
-                                                            }
-                                            dataStructSerialBlock:nil
-                                          dataStructDeserialBlock:nil];
+      DBFILEPROPERTIESPropertiesOverwrite =
+          [[DBRoute alloc] init:@"properties/overwrite"
+                           namespace_:@"file_properties"
+                           deprecated:@NO
+                           resultType:nil
+                            errorType:[DBFILEPROPERTIESInvalidPropertyGroupError class]
+                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBFILEPROPERTIESPropertiesOverwrite;
   }
@@ -104,11 +97,7 @@ static NSObject *lockObj = nil;
                                                     deprecated:@NO
                                                     resultType:nil
                                                      errorType:[DBFILEPROPERTIESRemovePropertiesError class]
-                                                         attrs:@{
-                                                           @"auth" : @"user",
-                                                           @"host" : @"api",
-                                                           @"style" : @"rpc"
-                                                         }
+                                                         attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                          dataStructSerialBlock:nil
                                        dataStructDeserialBlock:nil];
     }
@@ -124,11 +113,7 @@ static NSObject *lockObj = nil;
                                                     deprecated:@NO
                                                     resultType:[DBFILEPROPERTIESPropertiesSearchResult class]
                                                      errorType:[DBFILEPROPERTIESPropertiesSearchError class]
-                                                         attrs:@{
-                                                           @"auth" : @"user",
-                                                           @"host" : @"api",
-                                                           @"style" : @"rpc"
-                                                         }
+                                                         attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                          dataStructSerialBlock:nil
                                        dataStructDeserialBlock:nil];
     }
@@ -145,11 +130,7 @@ static NSObject *lockObj = nil;
                            deprecated:@NO
                            resultType:[DBFILEPROPERTIESPropertiesSearchResult class]
                             errorType:[DBFILEPROPERTIESPropertiesSearchContinueError class]
-                                attrs:@{
-                                  @"auth" : @"user",
-                                  @"host" : @"api",
-                                  @"style" : @"rpc"
-                                }
+                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                 dataStructSerialBlock:nil
               dataStructDeserialBlock:nil];
     }
@@ -165,11 +146,7 @@ static NSObject *lockObj = nil;
                                                     deprecated:@NO
                                                     resultType:nil
                                                      errorType:[DBFILEPROPERTIESUpdatePropertiesError class]
-                                                         attrs:@{
-                                                           @"auth" : @"user",
-                                                           @"host" : @"api",
-                                                           @"style" : @"rpc"
-                                                         }
+                                                         attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
                                          dataStructSerialBlock:nil
                                        dataStructDeserialBlock:nil];
     }
@@ -180,18 +157,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBFILEPROPERTIESTemplatesAddForTeam {
   @synchronized(lockObj) {
     if (!DBFILEPROPERTIESTemplatesAddForTeam) {
-      DBFILEPROPERTIESTemplatesAddForTeam = [[DBRoute alloc] init:@"templates/add_for_team"
-                                                       namespace_:@"file_properties"
-                                                       deprecated:@NO
-                                                       resultType:[DBFILEPROPERTIESAddTemplateResult class]
-                                                        errorType:[DBFILEPROPERTIESModifyTemplateError class]
-                                                            attrs:@{
-                                                              @"auth" : @"team",
-                                                              @"host" : @"api",
-                                                              @"style" : @"rpc"
-                                                            }
-                                            dataStructSerialBlock:nil
-                                          dataStructDeserialBlock:nil];
+      DBFILEPROPERTIESTemplatesAddForTeam =
+          [[DBRoute alloc] init:@"templates/add_for_team"
+                           namespace_:@"file_properties"
+                           deprecated:@NO
+                           resultType:[DBFILEPROPERTIESAddTemplateResult class]
+                            errorType:[DBFILEPROPERTIESModifyTemplateError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBFILEPROPERTIESTemplatesAddForTeam;
   }
@@ -200,18 +174,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBFILEPROPERTIESTemplatesAddForUser {
   @synchronized(lockObj) {
     if (!DBFILEPROPERTIESTemplatesAddForUser) {
-      DBFILEPROPERTIESTemplatesAddForUser = [[DBRoute alloc] init:@"templates/add_for_user"
-                                                       namespace_:@"file_properties"
-                                                       deprecated:@NO
-                                                       resultType:[DBFILEPROPERTIESAddTemplateResult class]
-                                                        errorType:[DBFILEPROPERTIESModifyTemplateError class]
-                                                            attrs:@{
-                                                              @"auth" : @"user",
-                                                              @"host" : @"api",
-                                                              @"style" : @"rpc"
-                                                            }
-                                            dataStructSerialBlock:nil
-                                          dataStructDeserialBlock:nil];
+      DBFILEPROPERTIESTemplatesAddForUser =
+          [[DBRoute alloc] init:@"templates/add_for_user"
+                           namespace_:@"file_properties"
+                           deprecated:@NO
+                           resultType:[DBFILEPROPERTIESAddTemplateResult class]
+                            errorType:[DBFILEPROPERTIESModifyTemplateError class]
+                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBFILEPROPERTIESTemplatesAddForUser;
   }
@@ -220,18 +191,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBFILEPROPERTIESTemplatesGetForTeam {
   @synchronized(lockObj) {
     if (!DBFILEPROPERTIESTemplatesGetForTeam) {
-      DBFILEPROPERTIESTemplatesGetForTeam = [[DBRoute alloc] init:@"templates/get_for_team"
-                                                       namespace_:@"file_properties"
-                                                       deprecated:@NO
-                                                       resultType:[DBFILEPROPERTIESGetTemplateResult class]
-                                                        errorType:[DBFILEPROPERTIESTemplateError class]
-                                                            attrs:@{
-                                                              @"auth" : @"team",
-                                                              @"host" : @"api",
-                                                              @"style" : @"rpc"
-                                                            }
-                                            dataStructSerialBlock:nil
-                                          dataStructDeserialBlock:nil];
+      DBFILEPROPERTIESTemplatesGetForTeam =
+          [[DBRoute alloc] init:@"templates/get_for_team"
+                           namespace_:@"file_properties"
+                           deprecated:@NO
+                           resultType:[DBFILEPROPERTIESGetTemplateResult class]
+                            errorType:[DBFILEPROPERTIESTemplateError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBFILEPROPERTIESTemplatesGetForTeam;
   }
@@ -240,18 +208,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBFILEPROPERTIESTemplatesGetForUser {
   @synchronized(lockObj) {
     if (!DBFILEPROPERTIESTemplatesGetForUser) {
-      DBFILEPROPERTIESTemplatesGetForUser = [[DBRoute alloc] init:@"templates/get_for_user"
-                                                       namespace_:@"file_properties"
-                                                       deprecated:@NO
-                                                       resultType:[DBFILEPROPERTIESGetTemplateResult class]
-                                                        errorType:[DBFILEPROPERTIESTemplateError class]
-                                                            attrs:@{
-                                                              @"auth" : @"user",
-                                                              @"host" : @"api",
-                                                              @"style" : @"rpc"
-                                                            }
-                                            dataStructSerialBlock:nil
-                                          dataStructDeserialBlock:nil];
+      DBFILEPROPERTIESTemplatesGetForUser =
+          [[DBRoute alloc] init:@"templates/get_for_user"
+                           namespace_:@"file_properties"
+                           deprecated:@NO
+                           resultType:[DBFILEPROPERTIESGetTemplateResult class]
+                            errorType:[DBFILEPROPERTIESTemplateError class]
+                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBFILEPROPERTIESTemplatesGetForUser;
   }
@@ -260,18 +225,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBFILEPROPERTIESTemplatesListForTeam {
   @synchronized(lockObj) {
     if (!DBFILEPROPERTIESTemplatesListForTeam) {
-      DBFILEPROPERTIESTemplatesListForTeam = [[DBRoute alloc] init:@"templates/list_for_team"
-                                                        namespace_:@"file_properties"
-                                                        deprecated:@NO
-                                                        resultType:[DBFILEPROPERTIESListTemplateResult class]
-                                                         errorType:[DBFILEPROPERTIESTemplateError class]
-                                                             attrs:@{
-                                                               @"auth" : @"team",
-                                                               @"host" : @"api",
-                                                               @"style" : @"rpc"
-                                                             }
-                                             dataStructSerialBlock:nil
-                                           dataStructDeserialBlock:nil];
+      DBFILEPROPERTIESTemplatesListForTeam =
+          [[DBRoute alloc] init:@"templates/list_for_team"
+                           namespace_:@"file_properties"
+                           deprecated:@NO
+                           resultType:[DBFILEPROPERTIESListTemplateResult class]
+                            errorType:[DBFILEPROPERTIESTemplateError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBFILEPROPERTIESTemplatesListForTeam;
   }
@@ -280,18 +242,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBFILEPROPERTIESTemplatesListForUser {
   @synchronized(lockObj) {
     if (!DBFILEPROPERTIESTemplatesListForUser) {
-      DBFILEPROPERTIESTemplatesListForUser = [[DBRoute alloc] init:@"templates/list_for_user"
-                                                        namespace_:@"file_properties"
-                                                        deprecated:@NO
-                                                        resultType:[DBFILEPROPERTIESListTemplateResult class]
-                                                         errorType:[DBFILEPROPERTIESTemplateError class]
-                                                             attrs:@{
-                                                               @"auth" : @"user",
-                                                               @"host" : @"api",
-                                                               @"style" : @"rpc"
-                                                             }
-                                             dataStructSerialBlock:nil
-                                           dataStructDeserialBlock:nil];
+      DBFILEPROPERTIESTemplatesListForUser =
+          [[DBRoute alloc] init:@"templates/list_for_user"
+                           namespace_:@"file_properties"
+                           deprecated:@NO
+                           resultType:[DBFILEPROPERTIESListTemplateResult class]
+                            errorType:[DBFILEPROPERTIESTemplateError class]
+                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBFILEPROPERTIESTemplatesListForUser;
   }
@@ -300,18 +259,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBFILEPROPERTIESTemplatesRemoveForTeam {
   @synchronized(lockObj) {
     if (!DBFILEPROPERTIESTemplatesRemoveForTeam) {
-      DBFILEPROPERTIESTemplatesRemoveForTeam = [[DBRoute alloc] init:@"templates/remove_for_team"
-                                                          namespace_:@"file_properties"
-                                                          deprecated:@NO
-                                                          resultType:nil
-                                                           errorType:[DBFILEPROPERTIESTemplateError class]
-                                                               attrs:@{
-                                                                 @"auth" : @"team",
-                                                                 @"host" : @"api",
-                                                                 @"style" : @"rpc"
-                                                               }
-                                               dataStructSerialBlock:nil
-                                             dataStructDeserialBlock:nil];
+      DBFILEPROPERTIESTemplatesRemoveForTeam =
+          [[DBRoute alloc] init:@"templates/remove_for_team"
+                           namespace_:@"file_properties"
+                           deprecated:@NO
+                           resultType:nil
+                            errorType:[DBFILEPROPERTIESTemplateError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBFILEPROPERTIESTemplatesRemoveForTeam;
   }
@@ -320,18 +276,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBFILEPROPERTIESTemplatesRemoveForUser {
   @synchronized(lockObj) {
     if (!DBFILEPROPERTIESTemplatesRemoveForUser) {
-      DBFILEPROPERTIESTemplatesRemoveForUser = [[DBRoute alloc] init:@"templates/remove_for_user"
-                                                          namespace_:@"file_properties"
-                                                          deprecated:@NO
-                                                          resultType:nil
-                                                           errorType:[DBFILEPROPERTIESTemplateError class]
-                                                               attrs:@{
-                                                                 @"auth" : @"user",
-                                                                 @"host" : @"api",
-                                                                 @"style" : @"rpc"
-                                                               }
-                                               dataStructSerialBlock:nil
-                                             dataStructDeserialBlock:nil];
+      DBFILEPROPERTIESTemplatesRemoveForUser =
+          [[DBRoute alloc] init:@"templates/remove_for_user"
+                           namespace_:@"file_properties"
+                           deprecated:@NO
+                           resultType:nil
+                            errorType:[DBFILEPROPERTIESTemplateError class]
+                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBFILEPROPERTIESTemplatesRemoveForUser;
   }
@@ -340,18 +293,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBFILEPROPERTIESTemplatesUpdateForTeam {
   @synchronized(lockObj) {
     if (!DBFILEPROPERTIESTemplatesUpdateForTeam) {
-      DBFILEPROPERTIESTemplatesUpdateForTeam = [[DBRoute alloc] init:@"templates/update_for_team"
-                                                          namespace_:@"file_properties"
-                                                          deprecated:@NO
-                                                          resultType:[DBFILEPROPERTIESUpdateTemplateResult class]
-                                                           errorType:[DBFILEPROPERTIESModifyTemplateError class]
-                                                               attrs:@{
-                                                                 @"auth" : @"team",
-                                                                 @"host" : @"api",
-                                                                 @"style" : @"rpc"
-                                                               }
-                                               dataStructSerialBlock:nil
-                                             dataStructDeserialBlock:nil];
+      DBFILEPROPERTIESTemplatesUpdateForTeam =
+          [[DBRoute alloc] init:@"templates/update_for_team"
+                           namespace_:@"file_properties"
+                           deprecated:@NO
+                           resultType:[DBFILEPROPERTIESUpdateTemplateResult class]
+                            errorType:[DBFILEPROPERTIESModifyTemplateError class]
+                                attrs:@{@"auth" : @"team", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBFILEPROPERTIESTemplatesUpdateForTeam;
   }
@@ -360,18 +310,15 @@ static NSObject *lockObj = nil;
 + (DBRoute *)DBFILEPROPERTIESTemplatesUpdateForUser {
   @synchronized(lockObj) {
     if (!DBFILEPROPERTIESTemplatesUpdateForUser) {
-      DBFILEPROPERTIESTemplatesUpdateForUser = [[DBRoute alloc] init:@"templates/update_for_user"
-                                                          namespace_:@"file_properties"
-                                                          deprecated:@NO
-                                                          resultType:[DBFILEPROPERTIESUpdateTemplateResult class]
-                                                           errorType:[DBFILEPROPERTIESModifyTemplateError class]
-                                                               attrs:@{
-                                                                 @"auth" : @"user",
-                                                                 @"host" : @"api",
-                                                                 @"style" : @"rpc"
-                                                               }
-                                               dataStructSerialBlock:nil
-                                             dataStructDeserialBlock:nil];
+      DBFILEPROPERTIESTemplatesUpdateForUser =
+          [[DBRoute alloc] init:@"templates/update_for_user"
+                           namespace_:@"file_properties"
+                           deprecated:@NO
+                           resultType:[DBFILEPROPERTIESUpdateTemplateResult class]
+                            errorType:[DBFILEPROPERTIESModifyTemplateError class]
+                                attrs:@{@"auth" : @"user", @"host" : @"api", @"style" : @"rpc"}
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
     }
     return DBFILEPROPERTIESTemplatesUpdateForUser;
   }

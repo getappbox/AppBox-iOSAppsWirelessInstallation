@@ -38,7 +38,7 @@
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText: title == nil ? @"Error" : title];
     [alert setInformativeText:message == nil ? @"" : message];
-    [alert setAlertStyle:NSWarningAlertStyle];
+	[alert setAlertStyle:NSAlertStyleWarning];
     return [alert runModal];
 }
 

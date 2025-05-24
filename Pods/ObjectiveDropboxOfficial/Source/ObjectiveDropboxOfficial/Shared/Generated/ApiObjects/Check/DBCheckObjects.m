@@ -97,7 +97,7 @@
 
   jsonDict[@"query"] = valueObj.query;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBCHECKEchoArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -199,7 +199,7 @@
 
   jsonDict[@"result"] = valueObj.result;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBCHECKEchoResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {

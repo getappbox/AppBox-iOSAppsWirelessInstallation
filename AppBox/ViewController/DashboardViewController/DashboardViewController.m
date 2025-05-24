@@ -23,7 +23,7 @@ typedef enum : NSUInteger {
 
 
 @implementation DashboardViewController{
-    NSMutableArray<UploadRecord *> *uploadRecords;
+    NSMutableArray<ABUploadRecord *> *uploadRecords;
     UploadManager *uploadManager;
 }
 
@@ -70,7 +70,7 @@ typedef enum : NSUInteger {
 
 -(void)loadData{
     NSError *error;
-    NSFetchRequest *fetchRequest = [UploadRecord fetchRequest];
+    NSFetchRequest *fetchRequest = [ABUploadRecord fetchRequest];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"datetime" ascending:NO];
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
     NSArray *fetchResults = [[[AppDelegate appDelegate] managedObjectContext] executeFetchRequest:fetchRequest error:&error];
@@ -96,6 +96,13 @@ typedef enum : NSUInteger {
         context.duration = 0.25;
         context.allowsImplicitAnimation = YES;
         actionViewHeightConstraint.constant = hidden ? 0 : 65;
+		self.openURLView.hidden = hidden;
+		self.cloneURLView.hidden = hidden;
+		self.showQRCodeView.hidden = hidden;
+		self.deleteBuildView.hidden = hidden;
+		self.provisioningProfileView.hidden = hidden;
+		self.showInFinderView.hidden = hidden;
+		self.showInDropboxView.hidden = hidden;
         [self.view layoutSubtreeIfNeeded];
     } completionHandler:nil];
 }
@@ -106,7 +113,7 @@ typedef enum : NSUInteger {
 }
 
 -(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row{
-    UploadRecord *uploadRecord = [uploadRecords objectAtIndex:row];
+    ABUploadRecord *uploadRecord = [uploadRecords objectAtIndex:row];
     NSTableCellView *cell = [tableView makeViewWithIdentifier:ShortURLCellId owner:nil];
     
     //Project Name
@@ -167,17 +174,17 @@ typedef enum : NSUInteger {
 
 //MARK: - Build Action
 - (IBAction)copyURLButtonTapped:(NSButton *)sender {
-    UploadRecord *uploadRecord = [self selectedUploadRecord];
+    ABUploadRecord *uploadRecord = [self selectedUploadRecord];
     if (uploadRecord){
         [[NSPasteboard generalPasteboard] clearContents];
-        [[NSPasteboard generalPasteboard] setString:uploadRecord.shortURL forType:NSStringPboardType];
+		[[NSPasteboard generalPasteboard] setString:uploadRecord.shortURL forType:NSPasteboardTypeString];
         [ABHudViewController showOnlyStatus:@"Copied!!" onView:self.view];
         [EventTracker logEventWithType:LogEventTypeCopyToClipboardFromDashboard];
     }
 }
 
 - (IBAction)deleteBuildButtonTapped:(NSButton *)sender {
-    UploadRecord *uploadRecord = [self selectedUploadRecord];
+    ABUploadRecord *uploadRecord = [self selectedUploadRecord];
 	
     if (uploadRecord){
         //Show Delete Alert
@@ -209,7 +216,7 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)provisioningDetailsButtonTapped:(NSButton *)sender {
-    UploadRecord *uploadRecord = [self selectedUploadRecord];
+    ABUploadRecord *uploadRecord = [self selectedUploadRecord];
     if (uploadRecord){
         if (uploadRecord.provisioningProfile){
             ProvisioningDetailsViewController *provisioningDetailsViewController = [[ProvisioningDetailsViewController alloc] initWithNibName:NSStringFromClass([ProvisioningDetailsViewController class]) bundle:nil];
@@ -222,7 +229,7 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)openURLButtonTapped:(NSButton *)sender {
-    UploadRecord *uploadRecord = [self selectedUploadRecord];
+    ABUploadRecord *uploadRecord = [self selectedUploadRecord];
     if (uploadRecord){
         NSURL *analyticsURL = [NSURL URLWithString:uploadRecord.shortURL];
         [[NSWorkspace sharedWorkspace] openURL:analyticsURL];
@@ -239,9 +246,9 @@ typedef enum : NSUInteger {
 
 
 - (IBAction)showInFinderButtonTapped:(NSButton *)sender {
-    UploadRecord *uploadRecord = [self selectedUploadRecord];
+    ABUploadRecord *uploadRecord = [self selectedUploadRecord];
     if (uploadRecord){
-        UploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
+        ABUploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
 		BOOL isDirectory = NO;
         if ([[NSFileManager defaultManager] fileExistsAtPath:uploadRecord.localBuildPath isDirectory:&isDirectory]) {
             NSURL *fileURL = [NSURL fileURLWithPath:uploadRecord.localBuildPath];
@@ -254,7 +261,7 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)showInDropBoxButtonTapped:(NSButton *)sender {
-    UploadRecord *uploadRecord = [self selectedUploadRecord];
+    ABUploadRecord *uploadRecord = [self selectedUploadRecord];
     if (uploadRecord){
         NSString *dropboxURLString = [NSString stringWithFormat:@"%@%@", abDropBoxAppBaseURL, uploadRecord.dbDirectroy];
         NSURL *dropboxURL = [NSURL URLWithString: dropboxURLString];
@@ -264,11 +271,11 @@ typedef enum : NSUInteger {
 }
 
 //MARK: - Helper Method
--(UploadRecord *)selectedUploadRecord{
+-(ABUploadRecord *)selectedUploadRecord{
     if (_dashboardTableView.selectedRow == -1 || uploadRecords == nil || (uploadRecords && uploadRecords.count == 0)){
         return nil;
     }
-    UploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
+    ABUploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
     return uploadRecord;
 }
 

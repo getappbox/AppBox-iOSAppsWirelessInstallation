@@ -31,7 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// possible tag states with which the
 /// `DBSHARINGFileMemberActionIndividualResult` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGFileMemberActionIndividualResultTag){
-    /// Member was successfully removed from this file. If AccessLevel is given,
+    /// Part of the response for both add_file_member and remove_file_member_v1
+    /// (deprecated). For add_file_member, indicates giving access was
+    /// successful and at what AccessLevel. For remove_file_member_v1, indicates
+    /// member was successfully removed from the file. If AccessLevel is given,
     /// the member still has access via a parent shared folder.
     DBSHARINGFileMemberActionIndividualResultSuccess,
 
@@ -43,10 +46,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGFileMemberActionIndividualResultTag){
 /// Represents the union's current tag state.
 @property (nonatomic, readonly) DBSHARINGFileMemberActionIndividualResultTag tag;
 
-/// Member was successfully removed from this file. If AccessLevel is given, the
-/// member still has access via a parent shared folder. @note Ensure the
-/// `isSuccess` method returns true before accessing, otherwise a runtime
-/// exception will be raised.
+/// Part of the response for both add_file_member and remove_file_member_v1
+/// (deprecated). For add_file_member, indicates giving access was successful
+/// and at what AccessLevel. For remove_file_member_v1, indicates member was
+/// successfully removed from the file. If AccessLevel is given, the member
+/// still has access via a parent shared folder. @note Ensure the `isSuccess`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
 @property (nonatomic, readonly, nullable) DBSHARINGAccessLevel *success;
 
 /// User was not able to perform this action. @note Ensure the `isMemberError`
@@ -59,13 +65,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGFileMemberActionIndividualResultTag){
 ///
 /// Initializes union class with tag state of "success".
 ///
-/// Description of the "success" tag state: Member was successfully removed from
-/// this file. If AccessLevel is given, the member still has access via a parent
+/// Description of the "success" tag state: Part of the response for both
+/// add_file_member and remove_file_member_v1 (deprecated). For add_file_member,
+/// indicates giving access was successful and at what AccessLevel. For
+/// remove_file_member_v1, indicates member was successfully removed from the
+/// file. If AccessLevel is given, the member still has access via a parent
 /// shared folder.
 ///
-/// @param success Member was successfully removed from this file. If
-/// AccessLevel is given, the member still has access via a parent shared
-/// folder.
+/// @param success Part of the response for both add_file_member and
+/// remove_file_member_v1 (deprecated). For add_file_member, indicates giving
+/// access was successful and at what AccessLevel. For remove_file_member_v1,
+/// indicates member was successfully removed from the file. If AccessLevel is
+/// given, the member still has access via a parent shared folder.
 ///
 /// @return An initialized instance.
 ///

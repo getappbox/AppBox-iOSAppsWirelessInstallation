@@ -1,5 +1,5 @@
 //
-//  ProvisionedDevice+CoreDataProperties.h
+//  ABProvisionedDevice+CoreDataProperties.h
 //  
 //
 //  Created by Vineet Choudhary on 11/10/18.
@@ -11,9 +11,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ProvisionedDevice (CoreDataProperties)
+@interface ABProvisionedDevice (CoreDataProperties)
 
-+ (NSFetchRequest<ProvisionedDevice *> *)fetchRequest;
++ (NSFetchRequest<ABProvisionedDevice *> *)fetchRequest;
 
 @property (nullable, nonatomic, copy) NSString *deviceId;
 

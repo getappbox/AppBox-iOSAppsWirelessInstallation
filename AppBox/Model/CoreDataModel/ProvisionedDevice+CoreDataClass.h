@@ -1,5 +1,5 @@
 //
-//  ProvisionedDevice+CoreDataClass.h
+//  ABProvisionedDevice+CoreDataClass.h
 //  
 //
 //  Created by Vineet Choudhary on 29/10/17.
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ProvisionedDevice : NSManagedObject
+@interface ABProvisionedDevice : NSManagedObject
 
 @end
 

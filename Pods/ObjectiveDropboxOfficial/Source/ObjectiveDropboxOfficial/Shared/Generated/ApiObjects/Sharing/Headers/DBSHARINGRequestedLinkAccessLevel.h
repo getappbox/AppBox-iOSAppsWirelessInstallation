@@ -39,6 +39,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGRequestedLinkAccessLevelTag){
     /// Request for the maximum access level you can set the link to.
     DBSHARINGRequestedLinkAccessLevelMax,
 
+    /// Request for the default access level the user has set.
+    DBSHARINGRequestedLinkAccessLevelDefault_,
+
     /// (no description).
     DBSHARINGRequestedLinkAccessLevelOther,
 
@@ -80,6 +83,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGRequestedLinkAccessLevelTag){
 - (instancetype)initWithMax;
 
 ///
+/// Initializes union class with tag state of "default".
+///
+/// Description of the "default" tag state: Request for the default access level
+/// the user has set.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDefault_;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -110,6 +123,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGRequestedLinkAccessLevelTag){
 /// @return Whether the union's current tag state has value "max".
 ///
 - (BOOL)isMax;
+
+///
+/// Retrieves whether the union's current tag state has value "default".
+///
+/// @return Whether the union's current tag state has value "default".
+///
+- (BOOL)isDefault_;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

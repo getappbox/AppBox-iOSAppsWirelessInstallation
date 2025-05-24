@@ -35,6 +35,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGTeamMembershipTypeTag){
     DBTEAMLOGTeamMembershipTypeFull,
 
     /// (no description).
+    DBTEAMLOGTeamMembershipTypeGuest,
+
+    /// (no description).
     DBTEAMLOGTeamMembershipTypeOther,
 
 };
@@ -57,6 +60,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGTeamMembershipTypeTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithFull;
+
+///
+/// Initializes union class with tag state of "guest".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithGuest;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -82,6 +92,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGTeamMembershipTypeTag){
 /// @return Whether the union's current tag state has value "full".
 ///
 - (BOOL)isFull;
+
+///
+/// Retrieves whether the union's current tag state has value "guest".
+///
+/// @return Whether the union's current tag state has value "guest".
+///
+- (BOOL)isGuest;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

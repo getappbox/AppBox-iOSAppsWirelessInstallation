@@ -1,5 +1,5 @@
 //
-//  ProvisionedDevice+CoreDataProperties.m
+//  ABProvisionedDevice+CoreDataProperties.m
 //  
 //
 //  Created by Vineet Choudhary on 11/10/18.
@@ -8,9 +8,9 @@
 
 #import "ProvisionedDevice+CoreDataProperties.h"
 
-@implementation ProvisionedDevice (CoreDataProperties)
+@implementation ABProvisionedDevice (CoreDataProperties)
 
-+ (NSFetchRequest<ProvisionedDevice *> *)fetchRequest {
++ (NSFetchRequest<ABProvisionedDevice *> *)fetchRequest {
 	return [NSFetchRequest fetchRequestWithEntityName:@"ProvisionedDevice"];
 }
 

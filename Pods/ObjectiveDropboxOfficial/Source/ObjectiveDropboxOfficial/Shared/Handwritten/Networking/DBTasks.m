@@ -63,7 +63,7 @@
 }
 
 + (NSError *)dropboxBadResponseErrorWithException:(NSException *)exception {
-  return [NSError errorWithDomain:@"dropbox.com" code:0 userInfo:@{ @"error_message" : exception }];
+  return [NSError errorWithDomain:@"dropbox.com" code:0 userInfo:@{@"error_message" : exception}];
 }
 
 @end

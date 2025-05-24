@@ -30,8 +30,8 @@
     [chunkSizeComboBox selectItemAtIndex:[chunkSizes indexOfObject:chunkSize]];
 	
 	//set general settings
-	[limitedLogCheckBox setState: [UserData debugLog] ? NSOffState : NSOnState];
-	[updateAlertCheckBox setState: [UserData updateAlertEnable] ? NSOnState : NSOffState];
+	[limitedLogCheckBox setState: [UserData debugLog] ? NSControlStateValueOff : NSControlStateValueOn];
+	[updateAlertCheckBox setState: [UserData updateAlertEnable] ? NSControlStateValueOn : NSControlStateValueOff];
 }
 
 - (IBAction)chunckSizeComboBoxValueChanged:(NSComboBox *)sender {
@@ -39,15 +39,15 @@
 }
 
 - (IBAction)downloadIPACheckBoxValueChanged:(NSButton *)sender {
-    [UserData setDownloadIPAEnable:(sender.state == NSOnState)];
+	[UserData setDownloadIPAEnable:(sender.state == NSControlStateValueOn)];
 }
 
 - (IBAction)moreDetailsCheckBoxValueChanged:(NSButton *)sender {
-    [UserData setMoreDetailsEnable:(sender.state == NSOnState)];
+	[UserData setMoreDetailsEnable:(sender.state == NSControlStateValueOn)];
 }
 
 - (IBAction)showPreviousVersionCheckBoxValueChanged:(NSButton *)sender {
-    [UserData setShowPreviousVersions:(sender.state == NSOffState)];
+	[UserData setShowPreviousVersions:(sender.state == NSControlStateValueOff)];
 }
 
 - (IBAction)helpDownloadIPAButtonAction:(NSButton *)sender {
@@ -67,11 +67,11 @@
 }
 
 - (IBAction)updateAlertCheckBoxChanged:(NSButton *)sender {
-	[UserData setUpdateAlertEnable:(sender.state == NSOnState)];
+	[UserData setUpdateAlertEnable:(sender.state == NSControlStateValueOn)];
 }
 
 - (IBAction)limitedLogCheckBoxChanged:(NSButton *)sender {
-	[UserData setEnableDebugLog:(sender.state != NSOnState)];
+	[UserData setEnableDebugLog:(sender.state != NSControlStateValueOn)];
 }
 
 @end
