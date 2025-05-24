@@ -4,7 +4,7 @@ site_url: https://docs.getappbox.com
 copyright: Copyright © AppBox
 repo_url: https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation
 repo_name: AppBox
-remote_branch: master
+remote_branch: gh-pages
 dev_addr: 127.0.0.1:2000 
 edit_uri: blob/master/docs/
 
