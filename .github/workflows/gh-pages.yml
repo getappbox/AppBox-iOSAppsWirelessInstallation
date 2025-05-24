@@ -35,8 +35,5 @@ jobs:
             mkdocs-material-
       - run: pip install mkdocs-material
       - run: pip install mkdocs-awesome-pages-plugin
-      - run: pip install mkdocs-git-revision-date-localized-plugin
-      - run: pip install mkdocs-git-authors-plugin
       - run: pip install mkdocs-minify-plugin
-      - run: pip install mkdocs--plugin
       - run: mkdocs gh-deploy --force

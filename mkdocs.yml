@@ -62,13 +62,6 @@ plugins:
   - search:
       lang: en
   - awesome-pages
-  - git-revision-date-localized:
-      type: timeago
-      enable_creation_date: true
-      fallback_to_build_date: true
-  - git-authors:
-      sort_authors_by: contribution
-      show_email_address: false
   - minify:
       minify_html: true    
 extra:
