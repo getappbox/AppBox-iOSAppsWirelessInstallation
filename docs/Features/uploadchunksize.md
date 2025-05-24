@@ -1,5 +1,11 @@
+---
+hide:
+  - toc
+---
 # Upload Chunk Size
 Chunk size is used to upload your large IPA file in the chunk. Default chunk size is 100MB, means AppBox will upload an IPA file with 100MB partitions. You can set chunk size from AppBox Preferences (⌘ + ,).
+
+![](../Images/ABUploadChunkSize.webp)
 
 #### Examples -
 150 MB means, If you'll try to upload a 2GB IPA then AppBox will break IPA into 14 part and upload them separately

@@ -1,0 +1,6 @@
+nav:
+  - Home: index.md
+  - Getting Started: GettingStarted
+  - Features: Features
+  - Fastlane: Fastlane
+  - FAQ: FAQ
