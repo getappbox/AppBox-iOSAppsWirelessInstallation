@@ -268,7 +268,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBSEENSTATEPlatformType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {

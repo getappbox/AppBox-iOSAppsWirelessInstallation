@@ -107,7 +107,7 @@
                                                       return elem0;
                                                     }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBCONTACTSDeleteManualContactsArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -273,7 +273,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBCONTACTSDeleteManualContactsError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {

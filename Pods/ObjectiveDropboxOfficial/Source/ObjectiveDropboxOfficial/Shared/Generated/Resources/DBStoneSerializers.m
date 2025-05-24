@@ -96,11 +96,11 @@ static NSString *sDateFormat = nil;
     // considered to be in week 0. 00, 01, ..., 53 (6)
     result = @"ww";
   } else if ([token isEqualToString:@"%c"]) { // Locale's appropriate date and time representation.
-    result = @"";                            // unsupported
+    result = @"";                             // unsupported
   } else if ([token isEqualToString:@"%x"]) { // Locale's appropriate date representation.
-    result = @"";                            // unsupported
+    result = @"";                             // unsupported
   } else if ([token isEqualToString:@"%X"]) { // Locale's appropriate time representation.
-    result = @"";                            // unsupported
+    result = @"";                             // unsupported
   } else if ([token isEqualToString:@"%%"]) { // A literal '%' character.
     result = @"";
   } else if ([token isEqualToString:@"%"]) {

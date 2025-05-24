@@ -1,5 +1,5 @@
 //
-//  UploadRecord+CoreDataClass.m
+//  ABUploadRecord+CoreDataClass.m
 //  
 //
 //  Created by Vineet Choudhary on 17/10/17.
@@ -8,7 +8,7 @@
 
 #import "UploadRecord+CoreDataClass.h"
 
-@implementation UploadRecord
+@implementation ABUploadRecord
 
 @dynamic xcProject;
 

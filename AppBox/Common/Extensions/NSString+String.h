@@ -11,8 +11,6 @@
 @interface NSString (String)
 
 -(NSURL *)ipaURL;
--(NSURL *)projectURL;
--(NSURL *)validURL;
 
 -(bool)isEmpty;
 

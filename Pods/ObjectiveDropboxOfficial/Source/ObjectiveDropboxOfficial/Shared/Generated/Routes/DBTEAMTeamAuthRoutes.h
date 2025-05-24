@@ -150,6 +150,13 @@
 @class DBTEAMRevokeLinkedAppError;
 @class DBTEAMRevokeLinkedAppStatus;
 @class DBTEAMSetCustomQuotaError;
+@class DBTEAMSharingAllowlistAddError;
+@class DBTEAMSharingAllowlistAddResponse;
+@class DBTEAMSharingAllowlistListContinueError;
+@class DBTEAMSharingAllowlistListError;
+@class DBTEAMSharingAllowlistListResponse;
+@class DBTEAMSharingAllowlistRemoveError;
+@class DBTEAMSharingAllowlistRemoveResponse;
 @class DBTEAMStorageBucket;
 @class DBTEAMTeamFolderAccessError;
 @class DBTEAMTeamFolderActivateError;
@@ -228,10 +235,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// or a `DBTEAMListMemberDevicesError` object on failure.
 ///
 - (DBRpcTask<DBTEAMListMemberDevicesResult *, DBTEAMListMemberDevicesError *> *)
-devicesListMemberDevices:(NSString *)teamMemberId
-      includeWebSessions:(nullable NSNumber *)includeWebSessions
-   includeDesktopClients:(nullable NSNumber *)includeDesktopClients
-    includeMobileClients:(nullable NSNumber *)includeMobileClients;
+    devicesListMemberDevices:(NSString *)teamMemberId
+          includeWebSessions:(nullable NSNumber *)includeWebSessions
+       includeDesktopClients:(nullable NSNumber *)includeDesktopClients
+        includeMobileClients:(nullable NSNumber *)includeMobileClients;
 
 ///
 /// List all device sessions of a team. Permission : Team member file access.
@@ -256,10 +263,10 @@ devicesListMemberDevices:(NSString *)teamMemberId
 /// or a `DBTEAMListMembersDevicesError` object on failure.
 ///
 - (DBRpcTask<DBTEAMListMembersDevicesResult *, DBTEAMListMembersDevicesError *> *)
-devicesListMembersDevices:(nullable NSString *)cursor
-       includeWebSessions:(nullable NSNumber *)includeWebSessions
-    includeDesktopClients:(nullable NSNumber *)includeDesktopClients
-     includeMobileClients:(nullable NSNumber *)includeMobileClients;
+    devicesListMembersDevices:(nullable NSString *)cursor
+           includeWebSessions:(nullable NSNumber *)includeWebSessions
+        includeDesktopClients:(nullable NSNumber *)includeDesktopClients
+         includeMobileClients:(nullable NSNumber *)includeMobileClients;
 
 ///
 /// DEPRECATED: List all device sessions of a team. Permission : Team member file access.
@@ -268,8 +275,8 @@ devicesListMembersDevices:(nullable NSString *)cursor
 /// @return Through the response callback, the caller will receive a `DBTEAMListTeamDevicesResult` object on success or
 /// a `DBTEAMListTeamDevicesError` object on failure.
 ///
-- (DBRpcTask<DBTEAMListTeamDevicesResult *, DBTEAMListTeamDevicesError *> *)devicesListTeamDevices
-    __deprecated_msg("devicesListTeamDevices is deprecated. Use devicesListMembersDevices.");
+- (DBRpcTask<DBTEAMListTeamDevicesResult *, DBTEAMListTeamDevicesError *> *)
+    devicesListTeamDevices __deprecated_msg("devicesListTeamDevices is deprecated. Use devicesListMembersDevices.");
 
 ///
 /// DEPRECATED: List all device sessions of a team. Permission : Team member file access.
@@ -285,10 +292,10 @@ devicesListMembersDevices:(nullable NSString *)cursor
 /// a `DBTEAMListTeamDevicesError` object on failure.
 ///
 - (DBRpcTask<DBTEAMListTeamDevicesResult *, DBTEAMListTeamDevicesError *> *)
-devicesListTeamDevices:(nullable NSString *)cursor
-    includeWebSessions:(nullable NSNumber *)includeWebSessions
- includeDesktopClients:(nullable NSNumber *)includeDesktopClients
-  includeMobileClients:(nullable NSNumber *)includeMobileClients
+    devicesListTeamDevices:(nullable NSString *)cursor
+        includeWebSessions:(nullable NSNumber *)includeWebSessions
+     includeDesktopClients:(nullable NSNumber *)includeDesktopClients
+      includeMobileClients:(nullable NSNumber *)includeMobileClients
     __deprecated_msg("devicesListTeamDevices is deprecated. Use devicesListMembersDevices.");
 
 ///
@@ -310,7 +317,7 @@ devicesListTeamDevices:(nullable NSString *)cursor
 /// success or a `DBTEAMRevokeDeviceSessionBatchError` object on failure.
 ///
 - (DBRpcTask<DBTEAMRevokeDeviceSessionBatchResult *, DBTEAMRevokeDeviceSessionBatchError *> *)
-devicesRevokeDeviceSessionBatch:(NSArray<DBTEAMRevokeDeviceSessionArg *> *)revokeDevices;
+    devicesRevokeDeviceSessionBatch:(NSArray<DBTEAMRevokeDeviceSessionArg *> *)revokeDevices;
 
 ///
 /// Get the values for one or more featues. This route allows you to check your account's capability for what feature
@@ -356,10 +363,10 @@ devicesRevokeDeviceSessionBatch:(NSArray<DBTEAMRevokeDeviceSessionArg *> *)revok
 /// `DBTEAMGroupCreateError` object on failure.
 ///
 - (DBRpcTask<DBTEAMGroupFullInfo *, DBTEAMGroupCreateError *> *)
-       groupsCreate:(NSString *)groupName
-  addCreatorAsOwner:(nullable NSNumber *)addCreatorAsOwner
-    groupExternalId:(nullable NSString *)groupExternalId
-groupManagementType:(nullable DBTEAMCOMMONGroupManagementType *)groupManagementType;
+           groupsCreate:(NSString *)groupName
+      addCreatorAsOwner:(nullable NSNumber *)addCreatorAsOwner
+        groupExternalId:(nullable NSString *)groupExternalId
+    groupManagementType:(nullable DBTEAMCOMMONGroupManagementType *)groupManagementType;
 
 ///
 /// Deletes a group. The group is deleted immediately. However the revoking of group-owned resources may take additional
@@ -440,8 +447,8 @@ groupManagementType:(nullable DBTEAMCOMMONGroupManagementType *)groupManagementT
 /// or a `DBTEAMGroupMembersAddError` object on failure.
 ///
 - (DBRpcTask<DBTEAMGroupMembersChangeResult *, DBTEAMGroupMembersAddError *> *)
-groupsMembersAdd:(DBTEAMGroupSelector *)group
-         members:(NSArray<DBTEAMMemberAccess *> *)members;
+    groupsMembersAdd:(DBTEAMGroupSelector *)group
+             members:(NSArray<DBTEAMMemberAccess *> *)members;
 
 ///
 /// Adds members to a group. The members are added immediately. However the granting of group-owned resources may take
@@ -455,9 +462,9 @@ groupsMembersAdd:(DBTEAMGroupSelector *)group
 /// or a `DBTEAMGroupMembersAddError` object on failure.
 ///
 - (DBRpcTask<DBTEAMGroupMembersChangeResult *, DBTEAMGroupMembersAddError *> *)
-groupsMembersAdd:(DBTEAMGroupSelector *)group
-         members:(NSArray<DBTEAMMemberAccess *> *)members
-   returnMembers:(nullable NSNumber *)returnMembers;
+    groupsMembersAdd:(DBTEAMGroupSelector *)group
+             members:(NSArray<DBTEAMMemberAccess *> *)members
+       returnMembers:(nullable NSNumber *)returnMembers;
 
 ///
 /// Lists members of a group. Permission : Team Information.
@@ -480,8 +487,8 @@ groupsMembersAdd:(DBTEAMGroupSelector *)group
 /// or a `DBTEAMGroupSelectorError` object on failure.
 ///
 - (DBRpcTask<DBTEAMGroupsMembersListResult *, DBTEAMGroupSelectorError *> *)
-groupsMembersList:(DBTEAMGroupSelector *)group
-            limit:(nullable NSNumber *)limit;
+    groupsMembersList:(DBTEAMGroupSelector *)group
+                limit:(nullable NSNumber *)limit;
 
 ///
 /// Once a cursor has been retrieved from `groupsMembersList`, use this to paginate through all members of the group.
@@ -508,8 +515,8 @@ groupsMembersList:(DBTEAMGroupSelector *)group
 /// or a `DBTEAMGroupMembersRemoveError` object on failure.
 ///
 - (DBRpcTask<DBTEAMGroupMembersChangeResult *, DBTEAMGroupMembersRemoveError *> *)
-groupsMembersRemove:(DBTEAMGroupSelector *)group
-              users:(NSArray<DBTEAMUserSelectorArg *> *)users;
+    groupsMembersRemove:(DBTEAMGroupSelector *)group
+                  users:(NSArray<DBTEAMUserSelectorArg *> *)users;
 
 ///
 /// Removes members from a group. The members are removed immediately. However the revoking of group-owned resources may
@@ -524,9 +531,9 @@ groupsMembersRemove:(DBTEAMGroupSelector *)group
 /// or a `DBTEAMGroupMembersRemoveError` object on failure.
 ///
 - (DBRpcTask<DBTEAMGroupMembersChangeResult *, DBTEAMGroupMembersRemoveError *> *)
-groupsMembersRemove:(DBTEAMGroupSelector *)group
-              users:(NSArray<DBTEAMUserSelectorArg *> *)users
-      returnMembers:(nullable NSNumber *)returnMembers;
+    groupsMembersRemove:(DBTEAMGroupSelector *)group
+                  users:(NSArray<DBTEAMUserSelectorArg *> *)users
+          returnMembers:(nullable NSNumber *)returnMembers;
 
 ///
 /// Sets a member's access type in a group. Permission : Team member management.
@@ -537,9 +544,9 @@ groupsMembersRemove:(DBTEAMGroupSelector *)group
 /// success or a `DBTEAMGroupMemberSetAccessTypeError` object on failure.
 ///
 - (DBRpcTask<NSArray<DBTEAMGroupsGetInfoItem *> *, DBTEAMGroupMemberSetAccessTypeError *> *)
-groupsMembersSetAccessType:(DBTEAMGroupSelector *)group
-                      user:(DBTEAMUserSelectorArg *)user
-                accessType:(DBTEAMGroupAccessType *)accessType;
+    groupsMembersSetAccessType:(DBTEAMGroupSelector *)group
+                          user:(DBTEAMUserSelectorArg *)user
+                    accessType:(DBTEAMGroupAccessType *)accessType;
 
 ///
 /// Sets a member's access type in a group. Permission : Team member management.
@@ -552,10 +559,10 @@ groupsMembersSetAccessType:(DBTEAMGroupSelector *)group
 /// success or a `DBTEAMGroupMemberSetAccessTypeError` object on failure.
 ///
 - (DBRpcTask<NSArray<DBTEAMGroupsGetInfoItem *> *, DBTEAMGroupMemberSetAccessTypeError *> *)
-groupsMembersSetAccessType:(DBTEAMGroupSelector *)group
-                      user:(DBTEAMUserSelectorArg *)user
-                accessType:(DBTEAMGroupAccessType *)accessType
-             returnMembers:(nullable NSNumber *)returnMembers;
+    groupsMembersSetAccessType:(DBTEAMGroupSelector *)group
+                          user:(DBTEAMUserSelectorArg *)user
+                    accessType:(DBTEAMGroupAccessType *)accessType
+                 returnMembers:(nullable NSNumber *)returnMembers;
 
 ///
 /// Updates a group's name and/or external ID. Permission : Team member management.
@@ -580,11 +587,11 @@ groupsMembersSetAccessType:(DBTEAMGroupSelector *)group
 /// `DBTEAMGroupUpdateError` object on failure.
 ///
 - (DBRpcTask<DBTEAMGroupFullInfo *, DBTEAMGroupUpdateError *> *)
-           groupsUpdate:(DBTEAMGroupSelector *)group
-          returnMembers:(nullable NSNumber *)returnMembers
-          dNewGroupName:(nullable NSString *)dNewGroupName
-    dNewGroupExternalId:(nullable NSString *)dNewGroupExternalId
-dNewGroupManagementType:(nullable DBTEAMCOMMONGroupManagementType *)dNewGroupManagementType;
+               groupsUpdate:(DBTEAMGroupSelector *)group
+              returnMembers:(nullable NSNumber *)returnMembers
+              dNewGroupName:(nullable NSString *)dNewGroupName
+        dNewGroupExternalId:(nullable NSString *)dNewGroupExternalId
+    dNewGroupManagementType:(nullable DBTEAMCOMMONGroupManagementType *)dNewGroupManagementType;
 
 ///
 /// Creates new legal hold policy. Note: Legal Holds is a paid add-on. Not all teams have the feature. Permission : Team
@@ -597,8 +604,8 @@ dNewGroupManagementType:(nullable DBTEAMCOMMONGroupManagementType *)dNewGroupMan
 /// `DBTEAMLegalHoldsPolicyCreateError` object on failure.
 ///
 - (DBRpcTask<DBTEAMLegalHoldPolicy *, DBTEAMLegalHoldsPolicyCreateError *> *)
-legalHoldsCreatePolicy:(NSString *)name
-               members:(NSArray<NSString *> *)members;
+    legalHoldsCreatePolicy:(NSString *)name
+                   members:(NSArray<NSString *> *)members;
 
 ///
 /// Creates new legal hold policy. Note: Legal Holds is a paid add-on. Not all teams have the feature. Permission : Team
@@ -614,11 +621,11 @@ legalHoldsCreatePolicy:(NSString *)name
 /// `DBTEAMLegalHoldsPolicyCreateError` object on failure.
 ///
 - (DBRpcTask<DBTEAMLegalHoldPolicy *, DBTEAMLegalHoldsPolicyCreateError *> *)
-legalHoldsCreatePolicy:(NSString *)name
-               members:(NSArray<NSString *> *)members
-          description_:(nullable NSString *)description_
-             startDate:(nullable NSDate *)startDate
-               endDate:(nullable NSDate *)endDate;
+    legalHoldsCreatePolicy:(NSString *)name
+                   members:(NSArray<NSString *> *)members
+              description_:(nullable NSString *)description_
+                 startDate:(nullable NSDate *)startDate
+                   endDate:(nullable NSDate *)endDate;
 
 ///
 /// Gets a legal hold by Id. Note: Legal Holds is a paid add-on. Not all teams have the feature. Permission : Team
@@ -641,7 +648,7 @@ legalHoldsCreatePolicy:(NSString *)name
 /// success or a `DBTEAMLegalHoldsListHeldRevisionsError` object on failure.
 ///
 - (DBRpcTask<DBTEAMLegalHoldsListHeldRevisionResult *, DBTEAMLegalHoldsListHeldRevisionsError *> *)
-legalHoldsListHeldRevisions:(NSString *)id_;
+    legalHoldsListHeldRevisions:(NSString *)id_;
 
 ///
 /// Continue listing the file metadata that's under the hold. Note: Legal Holds is a paid add-on. Not all teams have the
@@ -653,7 +660,7 @@ legalHoldsListHeldRevisions:(NSString *)id_;
 /// success or a `DBTEAMLegalHoldsListHeldRevisionsError` object on failure.
 ///
 - (DBRpcTask<DBTEAMLegalHoldsListHeldRevisionResult *, DBTEAMLegalHoldsListHeldRevisionsError *> *)
-legalHoldsListHeldRevisionsContinue:(NSString *)id_;
+    legalHoldsListHeldRevisionsContinue:(NSString *)id_;
 
 ///
 /// Continue listing the file metadata that's under the hold. Note: Legal Holds is a paid add-on. Not all teams have the
@@ -667,8 +674,8 @@ legalHoldsListHeldRevisionsContinue:(NSString *)id_;
 /// success or a `DBTEAMLegalHoldsListHeldRevisionsError` object on failure.
 ///
 - (DBRpcTask<DBTEAMLegalHoldsListHeldRevisionResult *, DBTEAMLegalHoldsListHeldRevisionsError *> *)
-legalHoldsListHeldRevisionsContinue:(NSString *)id_
-                             cursor:(nullable NSString *)cursor;
+    legalHoldsListHeldRevisionsContinue:(NSString *)id_
+                                 cursor:(nullable NSString *)cursor;
 
 ///
 /// Lists legal holds on a team. Note: Legal Holds is a paid add-on. Not all teams have the feature. Permission : Team
@@ -727,10 +734,10 @@ legalHoldsListHeldRevisionsContinue:(NSString *)id_
 /// `DBTEAMLegalHoldsPolicyUpdateError` object on failure.
 ///
 - (DBRpcTask<DBTEAMLegalHoldPolicy *, DBTEAMLegalHoldsPolicyUpdateError *> *)
-legalHoldsUpdatePolicy:(NSString *)id_
-                  name:(nullable NSString *)name
-          description_:(nullable NSString *)description_
-               members:(nullable NSArray<NSString *> *)members;
+    legalHoldsUpdatePolicy:(NSString *)id_
+                      name:(nullable NSString *)name
+              description_:(nullable NSString *)description_
+                   members:(nullable NSArray<NSString *> *)members;
 
 ///
 /// List all linked applications of the team member. Note, this endpoint does not list any team-linked applications.
@@ -775,8 +782,8 @@ legalHoldsUpdatePolicy:(NSString *)id_
 /// @return Through the response callback, the caller will receive a `DBTEAMListTeamAppsResult` object on success or a
 /// `DBTEAMListTeamAppsError` object on failure.
 ///
-- (DBRpcTask<DBTEAMListTeamAppsResult *, DBTEAMListTeamAppsError *> *)linkedAppsListTeamLinkedApps
-    __deprecated_msg("linkedAppsListTeamLinkedApps is deprecated. Use linkedAppsListMembersLinkedApps.");
+- (DBRpcTask<DBTEAMListTeamAppsResult *, DBTEAMListTeamAppsError *> *)linkedAppsListTeamLinkedApps __deprecated_msg(
+    "linkedAppsListTeamLinkedApps is deprecated. Use linkedAppsListMembersLinkedApps.");
 
 ///
 /// DEPRECATED: List all applications linked to the team members' accounts. Note, this endpoint doesn't list any
@@ -880,7 +887,7 @@ legalHoldsUpdatePolicy:(NSString *)id_
 /// or a `DBTEAMExcludedUsersListContinueError` object on failure.
 ///
 - (DBRpcTask<DBTEAMExcludedUsersListResult *, DBTEAMExcludedUsersListContinueError *> *)
-memberSpaceLimitsExcludedUsersListContinue:(NSString *)cursor;
+    memberSpaceLimitsExcludedUsersListContinue:(NSString *)cursor;
 
 ///
 /// Remove users from member space limits excluded users list.
@@ -901,11 +908,12 @@ memberSpaceLimitsExcludedUsersListContinue:(NSString *)cursor;
 /// or a `DBTEAMExcludedUsersUpdateError` object on failure.
 ///
 - (DBRpcTask<DBTEAMExcludedUsersUpdateResult *, DBTEAMExcludedUsersUpdateError *> *)
-memberSpaceLimitsExcludedUsersRemove:(nullable NSArray<DBTEAMUserSelectorArg *> *)users;
+    memberSpaceLimitsExcludedUsersRemove:(nullable NSArray<DBTEAMUserSelectorArg *> *)users;
 
 ///
-/// Get users custom quota. Returns none as the custom quota if none was set. A maximum of 1000 members can be specified
-/// in a single call.
+/// Get users custom quota. A maximum of 1000 members can be specified in a single call. Note: to apply a custom space
+/// limit, a team admin needs to set a member space limit for the team first. (the team admin can check the settings
+/// here: https://www.dropbox.com/team/admin/settings/space).
 ///
 /// @param users List of users.
 ///
@@ -916,7 +924,9 @@ memberSpaceLimitsExcludedUsersRemove:(nullable NSArray<DBTEAMUserSelectorArg *> 
     (NSArray<DBTEAMUserSelectorArg *> *)users;
 
 ///
-/// Remove users custom quota. A maximum of 1000 members can be specified in a single call.
+/// Remove users custom quota. A maximum of 1000 members can be specified in a single call. Note: to apply a custom
+/// space limit, a team admin needs to set a member space limit for the team first. (the team admin can check the
+/// settings here: https://www.dropbox.com/team/admin/settings/space).
 ///
 /// @param users List of users.
 ///
@@ -928,7 +938,8 @@ memberSpaceLimitsExcludedUsersRemove:(nullable NSArray<DBTEAMUserSelectorArg *> 
 
 ///
 /// Set users custom quota. Custom quota has to be at least 15GB. A maximum of 1000 members can be specified in a single
-/// call.
+/// call. Note: to apply a custom space limit, a team admin needs to set a member space limit for the team first. (the
+/// team admin can check the settings here: https://www.dropbox.com/team/admin/settings/space).
 ///
 /// @param usersAndQuotas List of users and their custom quotas.
 ///
@@ -1162,9 +1173,9 @@ memberSpaceLimitsExcludedUsersRemove:(nullable NSArray<DBTEAMUserSelectorArg *> 
 /// `DBTEAMMembersTransferFormerMembersFilesError` object on failure.
 ///
 - (DBRpcTask<DBASYNCLaunchEmptyResult *, DBTEAMMembersTransferFormerMembersFilesError *> *)
-membersMoveFormerMemberFiles:(DBTEAMUserSelectorArg *)user
-              transferDestId:(DBTEAMUserSelectorArg *)transferDestId
-             transferAdminId:(DBTEAMUserSelectorArg *)transferAdminId;
+    membersMoveFormerMemberFiles:(DBTEAMUserSelectorArg *)user
+                  transferDestId:(DBTEAMUserSelectorArg *)transferDestId
+                 transferAdminId:(DBTEAMUserSelectorArg *)transferAdminId;
 
 ///
 /// Once an async_job_id is returned from `membersMoveFormerMemberFiles` , use this to poll the status of the
@@ -1231,12 +1242,12 @@ membersMoveFormerMemberFiles:(DBTEAMUserSelectorArg *)user
 /// `DBTEAMMembersRemoveError` object on failure.
 ///
 - (DBRpcTask<DBASYNCLaunchEmptyResult *, DBTEAMMembersRemoveError *> *)
-   membersRemove:(DBTEAMUserSelectorArg *)user
-        wipeData:(nullable NSNumber *)wipeData
-  transferDestId:(nullable DBTEAMUserSelectorArg *)transferDestId
- transferAdminId:(nullable DBTEAMUserSelectorArg *)transferAdminId
-     keepAccount:(nullable NSNumber *)keepAccount
-retainTeamShares:(nullable NSNumber *)retainTeamShares;
+       membersRemove:(DBTEAMUserSelectorArg *)user
+            wipeData:(nullable NSNumber *)wipeData
+      transferDestId:(nullable DBTEAMUserSelectorArg *)transferDestId
+     transferAdminId:(nullable DBTEAMUserSelectorArg *)transferAdminId
+         keepAccount:(nullable NSNumber *)keepAccount
+    retainTeamShares:(nullable NSNumber *)retainTeamShares;
 
 ///
 /// Once an async_job_id is returned from `membersRemove` , use this to poll the status of the asynchronous request.
@@ -1319,8 +1330,8 @@ retainTeamShares:(nullable NSNumber *)retainTeamShares;
 /// success or a `DBTEAMMembersSetPermissions2Error` object on failure.
 ///
 - (DBRpcTask<DBTEAMMembersSetPermissions2Result *, DBTEAMMembersSetPermissions2Error *> *)
-membersSetAdminPermissionsV2:(DBTEAMUserSelectorArg *)user
-                   dNewRoles:(nullable NSArray<NSString *> *)dNewRoles;
+    membersSetAdminPermissionsV2:(DBTEAMUserSelectorArg *)user
+                       dNewRoles:(nullable NSArray<NSString *> *)dNewRoles;
 
 ///
 /// Updates a team member's permissions. Permission : Team member management.
@@ -1332,8 +1343,8 @@ membersSetAdminPermissionsV2:(DBTEAMUserSelectorArg *)user
 /// success or a `DBTEAMMembersSetPermissionsError` object on failure.
 ///
 - (DBRpcTask<DBTEAMMembersSetPermissionsResult *, DBTEAMMembersSetPermissionsError *> *)
-membersSetAdminPermissions:(DBTEAMUserSelectorArg *)user
-                  dNewRole:(DBTEAMAdminTier *)dNewRole;
+    membersSetAdminPermissions:(DBTEAMUserSelectorArg *)user
+                      dNewRole:(DBTEAMAdminTier *)dNewRole;
 
 ///
 /// Updates a team member's profile. Permission : Team member management.
@@ -1362,13 +1373,13 @@ membersSetAdminPermissions:(DBTEAMUserSelectorArg *)user
 /// a `DBTEAMMembersSetProfileError` object on failure.
 ///
 - (DBRpcTask<DBTEAMTeamMemberInfoV2Result *, DBTEAMMembersSetProfileError *> *)
-      membersSetProfileV2:(DBTEAMUserSelectorArg *)user
-                dNewEmail:(nullable NSString *)dNewEmail
-           dNewExternalId:(nullable NSString *)dNewExternalId
-            dNewGivenName:(nullable NSString *)dNewGivenName
-              dNewSurname:(nullable NSString *)dNewSurname
-         dNewPersistentId:(nullable NSString *)dNewPersistentId
-dNewIsDirectoryRestricted:(nullable NSNumber *)dNewIsDirectoryRestricted;
+          membersSetProfileV2:(DBTEAMUserSelectorArg *)user
+                    dNewEmail:(nullable NSString *)dNewEmail
+               dNewExternalId:(nullable NSString *)dNewExternalId
+                dNewGivenName:(nullable NSString *)dNewGivenName
+                  dNewSurname:(nullable NSString *)dNewSurname
+             dNewPersistentId:(nullable NSString *)dNewPersistentId
+    dNewIsDirectoryRestricted:(nullable NSNumber *)dNewIsDirectoryRestricted;
 
 ///
 /// Updates a team member's profile. Permission : Team member management.
@@ -1396,13 +1407,13 @@ dNewIsDirectoryRestricted:(nullable NSNumber *)dNewIsDirectoryRestricted;
 /// `DBTEAMMembersSetProfileError` object on failure.
 ///
 - (DBRpcTask<DBTEAMTeamMemberInfo *, DBTEAMMembersSetProfileError *> *)
-        membersSetProfile:(DBTEAMUserSelectorArg *)user
-                dNewEmail:(nullable NSString *)dNewEmail
-           dNewExternalId:(nullable NSString *)dNewExternalId
-            dNewGivenName:(nullable NSString *)dNewGivenName
-              dNewSurname:(nullable NSString *)dNewSurname
-         dNewPersistentId:(nullable NSString *)dNewPersistentId
-dNewIsDirectoryRestricted:(nullable NSNumber *)dNewIsDirectoryRestricted;
+            membersSetProfile:(DBTEAMUserSelectorArg *)user
+                    dNewEmail:(nullable NSString *)dNewEmail
+               dNewExternalId:(nullable NSString *)dNewExternalId
+                dNewGivenName:(nullable NSString *)dNewGivenName
+                  dNewSurname:(nullable NSString *)dNewSurname
+             dNewPersistentId:(nullable NSString *)dNewPersistentId
+    dNewIsDirectoryRestricted:(nullable NSNumber *)dNewIsDirectoryRestricted;
 
 ///
 /// Updates a team member's profile photo. Permission : Team member management.
@@ -1414,8 +1425,8 @@ dNewIsDirectoryRestricted:(nullable NSNumber *)dNewIsDirectoryRestricted;
 /// a `DBTEAMMembersSetProfilePhotoError` object on failure.
 ///
 - (DBRpcTask<DBTEAMTeamMemberInfoV2Result *, DBTEAMMembersSetProfilePhotoError *> *)
-membersSetProfilePhotoV2:(DBTEAMUserSelectorArg *)user
-                   photo:(DBACCOUNTPhotoSourceArg *)photo;
+    membersSetProfilePhotoV2:(DBTEAMUserSelectorArg *)user
+                       photo:(DBACCOUNTPhotoSourceArg *)photo;
 
 ///
 /// Updates a team member's profile photo. Permission : Team member management.
@@ -1427,8 +1438,8 @@ membersSetProfilePhotoV2:(DBTEAMUserSelectorArg *)user
 /// `DBTEAMMembersSetProfilePhotoError` object on failure.
 ///
 - (DBRpcTask<DBTEAMTeamMemberInfo *, DBTEAMMembersSetProfilePhotoError *> *)
-membersSetProfilePhoto:(DBTEAMUserSelectorArg *)user
-                 photo:(DBACCOUNTPhotoSourceArg *)photo;
+    membersSetProfilePhoto:(DBTEAMUserSelectorArg *)user
+                     photo:(DBACCOUNTPhotoSourceArg *)photo;
 
 ///
 /// Suspend a member from a team. Permission : Team member management Exactly one of team_member_id, email, or
@@ -1509,9 +1520,9 @@ membersSetProfilePhoto:(DBTEAMUserSelectorArg *)user
 /// success or a `DBFILEPROPERTIESModifyTemplateError` object on failure.
 ///
 - (DBRpcTask<DBFILEPROPERTIESAddTemplateResult *, DBFILEPROPERTIESModifyTemplateError *> *)
-propertiesTemplateAdd:(NSString *)name
-         description_:(NSString *)description_
-               fields:(NSArray<DBFILEPROPERTIESPropertyFieldTemplate *> *)fields
+    propertiesTemplateAdd:(NSString *)name
+             description_:(NSString *)description_
+                   fields:(NSArray<DBFILEPROPERTIESPropertyFieldTemplate *> *)fields
     __deprecated_msg("propertiesTemplateAdd is deprecated.");
 
 ///
@@ -1532,8 +1543,8 @@ propertiesTemplateAdd:(NSString *)name
 /// @return Through the response callback, the caller will receive a `DBFILEPROPERTIESListTemplateResult` object on
 /// success or a `DBFILEPROPERTIESTemplateError` object on failure.
 ///
-- (DBRpcTask<DBFILEPROPERTIESListTemplateResult *, DBFILEPROPERTIESTemplateError *> *)propertiesTemplateList
-    __deprecated_msg("propertiesTemplateList is deprecated.");
+- (DBRpcTask<DBFILEPROPERTIESListTemplateResult *, DBFILEPROPERTIESTemplateError *> *)
+    propertiesTemplateList __deprecated_msg("propertiesTemplateList is deprecated.");
 
 ///
 /// DEPRECATED: Permission : Team member file access.
@@ -1559,10 +1570,10 @@ propertiesTemplateAdd:(NSString *)name
 /// success or a `DBFILEPROPERTIESModifyTemplateError` object on failure.
 ///
 - (DBRpcTask<DBFILEPROPERTIESUpdateTemplateResult *, DBFILEPROPERTIESModifyTemplateError *> *)
-propertiesTemplateUpdate:(NSString *)templateId
-                    name:(nullable NSString *)name
-            description_:(nullable NSString *)description_
-               addFields:(nullable NSArray<DBFILEPROPERTIESPropertyFieldTemplate *> *)addFields
+    propertiesTemplateUpdate:(NSString *)templateId
+                        name:(nullable NSString *)name
+                description_:(nullable NSString *)description_
+                   addFields:(nullable NSArray<DBFILEPROPERTIESPropertyFieldTemplate *> *)addFields
     __deprecated_msg("propertiesTemplateUpdate is deprecated.");
 
 ///
@@ -1572,8 +1583,8 @@ propertiesTemplateUpdate:(NSString *)templateId
 /// @return Through the response callback, the caller will receive a `DBTEAMGetActivityReport` object on success or a
 /// `DBTEAMDateRangeError` object on failure.
 ///
-- (DBRpcTask<DBTEAMGetActivityReport *, DBTEAMDateRangeError *> *)reportsGetActivity
-    __deprecated_msg("reportsGetActivity is deprecated.");
+- (DBRpcTask<DBTEAMGetActivityReport *, DBTEAMDateRangeError *> *)
+    reportsGetActivity __deprecated_msg("reportsGetActivity is deprecated.");
 
 ///
 /// DEPRECATED: Retrieves reporting data about a team's user activity. Deprecated: Will be removed on July 1st 2021.
@@ -1596,8 +1607,8 @@ propertiesTemplateUpdate:(NSString *)templateId
 /// @return Through the response callback, the caller will receive a `DBTEAMGetDevicesReport` object on success or a
 /// `DBTEAMDateRangeError` object on failure.
 ///
-- (DBRpcTask<DBTEAMGetDevicesReport *, DBTEAMDateRangeError *> *)reportsGetDevices
-    __deprecated_msg("reportsGetDevices is deprecated.");
+- (DBRpcTask<DBTEAMGetDevicesReport *, DBTEAMDateRangeError *> *)reportsGetDevices __deprecated_msg("reportsGetDevices "
+                                                                                                    "is deprecated.");
 
 ///
 /// DEPRECATED: Retrieves reporting data about a team's linked devices. Deprecated: Will be removed on July 1st 2021.
@@ -1620,8 +1631,8 @@ propertiesTemplateUpdate:(NSString *)templateId
 /// @return Through the response callback, the caller will receive a `DBTEAMGetMembershipReport` object on success or a
 /// `DBTEAMDateRangeError` object on failure.
 ///
-- (DBRpcTask<DBTEAMGetMembershipReport *, DBTEAMDateRangeError *> *)reportsGetMembership
-    __deprecated_msg("reportsGetMembership is deprecated.");
+- (DBRpcTask<DBTEAMGetMembershipReport *, DBTEAMDateRangeError *> *)
+    reportsGetMembership __deprecated_msg("reportsGetMembership is deprecated.");
 
 ///
 /// DEPRECATED: Retrieves reporting data about a team's membership. Deprecated: Will be removed on July 1st 2021.
@@ -1644,8 +1655,8 @@ propertiesTemplateUpdate:(NSString *)templateId
 /// @return Through the response callback, the caller will receive a `DBTEAMGetStorageReport` object on success or a
 /// `DBTEAMDateRangeError` object on failure.
 ///
-- (DBRpcTask<DBTEAMGetStorageReport *, DBTEAMDateRangeError *> *)reportsGetStorage
-    __deprecated_msg("reportsGetStorage is deprecated.");
+- (DBRpcTask<DBTEAMGetStorageReport *, DBTEAMDateRangeError *> *)reportsGetStorage __deprecated_msg("reportsGetStorage "
+                                                                                                    "is deprecated.");
 
 ///
 /// DEPRECATED: Retrieves reporting data about a team's storage usage. Deprecated: Will be removed on July 1st 2021.
@@ -1660,6 +1671,93 @@ propertiesTemplateUpdate:(NSString *)templateId
 - (DBRpcTask<DBTEAMGetStorageReport *, DBTEAMDateRangeError *> *)reportsGetStorage:(nullable NSDate *)startDate
                                                                            endDate:(nullable NSDate *)endDate
     __deprecated_msg("reportsGetStorage is deprecated.");
+
+///
+/// Endpoint adds Approve List entries. Changes are effective immediately. Changes are committed in transaction. In case
+/// of single validation error - all entries are rejected. Valid domains (RFC-1034/5) and emails (RFC-5322/822) are
+/// accepted. Added entries cannot overflow limit of 10000 entries per team. Maximum 100 entries per call is allowed.
+///
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMSharingAllowlistAddResponse` object on
+/// success or a `DBTEAMSharingAllowlistAddError` object on failure.
+///
+- (DBRpcTask<DBTEAMSharingAllowlistAddResponse *, DBTEAMSharingAllowlistAddError *> *)sharingAllowlistAdd;
+
+///
+/// Endpoint adds Approve List entries. Changes are effective immediately. Changes are committed in transaction. In case
+/// of single validation error - all entries are rejected. Valid domains (RFC-1034/5) and emails (RFC-5322/822) are
+/// accepted. Added entries cannot overflow limit of 10000 entries per team. Maximum 100 entries per call is allowed.
+///
+/// @param domains List of domains represented by valid string representation (RFC-1034/5).
+/// @param emails List of emails represented by valid string representation (RFC-5322/822).
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMSharingAllowlistAddResponse` object on
+/// success or a `DBTEAMSharingAllowlistAddError` object on failure.
+///
+- (DBRpcTask<DBTEAMSharingAllowlistAddResponse *, DBTEAMSharingAllowlistAddError *> *)
+    sharingAllowlistAdd:(nullable NSArray<NSString *> *)domains
+                 emails:(nullable NSArray<NSString *> *)emails;
+
+///
+/// Lists Approve List entries for given team, from newest to oldest, returning up to `limit` entries at a time. If
+/// there are more than `limit` entries associated with the current team, more can be fetched by passing the returned
+/// `cursor` to `sharingAllowlistListContinue`.
+///
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMSharingAllowlistListResponse` object on
+/// success or a `DBTEAMSharingAllowlistListError` object on failure.
+///
+- (DBRpcTask<DBTEAMSharingAllowlistListResponse *, DBTEAMSharingAllowlistListError *> *)sharingAllowlistList;
+
+///
+/// Lists Approve List entries for given team, from newest to oldest, returning up to `limit` entries at a time. If
+/// there are more than `limit` entries associated with the current team, more can be fetched by passing the returned
+/// `cursor` to `sharingAllowlistListContinue`.
+///
+/// @param limit The number of entries to fetch at one time.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMSharingAllowlistListResponse` object on
+/// success or a `DBTEAMSharingAllowlistListError` object on failure.
+///
+- (DBRpcTask<DBTEAMSharingAllowlistListResponse *, DBTEAMSharingAllowlistListError *> *)sharingAllowlistList:
+    (nullable NSNumber *)limit;
+
+///
+/// Lists entries associated with given team, starting from a the cursor. See `sharingAllowlistList`.
+///
+/// @param cursor The cursor returned from a previous call to `sharingAllowlistList` or `sharingAllowlistListContinue`.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMSharingAllowlistListResponse` object on
+/// success or a `DBTEAMSharingAllowlistListContinueError` object on failure.
+///
+- (DBRpcTask<DBTEAMSharingAllowlistListResponse *, DBTEAMSharingAllowlistListContinueError *> *)
+    sharingAllowlistListContinue:(NSString *)cursor;
+
+///
+/// Endpoint removes Approve List entries. Changes are effective immediately. Changes are committed in transaction. In
+/// case of single validation error - all entries are rejected. Valid domains (RFC-1034/5) and emails (RFC-5322/822) are
+/// accepted. Entries being removed have to be present on the list. Maximum 1000 entries per call is allowed.
+///
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMSharingAllowlistRemoveResponse` object on
+/// success or a `DBTEAMSharingAllowlistRemoveError` object on failure.
+///
+- (DBRpcTask<DBTEAMSharingAllowlistRemoveResponse *, DBTEAMSharingAllowlistRemoveError *> *)sharingAllowlistRemove;
+
+///
+/// Endpoint removes Approve List entries. Changes are effective immediately. Changes are committed in transaction. In
+/// case of single validation error - all entries are rejected. Valid domains (RFC-1034/5) and emails (RFC-5322/822) are
+/// accepted. Entries being removed have to be present on the list. Maximum 1000 entries per call is allowed.
+///
+/// @param domains List of domains represented by valid string representation (RFC-1034/5).
+/// @param emails List of emails represented by valid string representation (RFC-5322/822).
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMSharingAllowlistRemoveResponse` object on
+/// success or a `DBTEAMSharingAllowlistRemoveError` object on failure.
+///
+- (DBRpcTask<DBTEAMSharingAllowlistRemoveResponse *, DBTEAMSharingAllowlistRemoveError *> *)
+    sharingAllowlistRemove:(nullable NSArray<NSString *> *)domains
+                    emails:(nullable NSArray<NSString *> *)emails;
 
 ///
 /// Sets an archived team folder's status to active. Permission : Team member file access.
@@ -1692,8 +1790,8 @@ propertiesTemplateUpdate:(NSString *)templateId
 /// or a `DBTEAMTeamFolderArchiveError` object on failure.
 ///
 - (DBRpcTask<DBTEAMTeamFolderArchiveLaunch *, DBTEAMTeamFolderArchiveError *> *)
-teamFolderArchive:(NSString *)teamFolderId
-    forceAsyncOff:(nullable NSNumber *)forceAsyncOff;
+    teamFolderArchive:(NSString *)teamFolderId
+        forceAsyncOff:(nullable NSNumber *)forceAsyncOff;
 
 ///
 /// Returns the status of an asynchronous job for archiving a team folder. Permission : Team member file access.
@@ -1729,8 +1827,8 @@ teamFolderArchive:(NSString *)teamFolderId
 /// `DBTEAMTeamFolderCreateError` object on failure.
 ///
 - (DBRpcTask<DBTEAMTeamFolderMetadata *, DBTEAMTeamFolderCreateError *> *)
-teamFolderCreate:(NSString *)name
-     syncSetting:(nullable DBFILESSyncSettingArg *)syncSetting;
+    teamFolderCreate:(NSString *)name
+         syncSetting:(nullable DBFILESSyncSettingArg *)syncSetting;
 
 ///
 /// Retrieves metadata for team folders. Permission : Team member file access.
@@ -1820,9 +1918,9 @@ teamFolderCreate:(NSString *)name
 /// `DBTEAMTeamFolderUpdateSyncSettingsError` object on failure.
 ///
 - (DBRpcTask<DBTEAMTeamFolderMetadata *, DBTEAMTeamFolderUpdateSyncSettingsError *> *)
-teamFolderUpdateSyncSettings:(NSString *)teamFolderId
-                 syncSetting:(nullable DBFILESSyncSettingArg *)syncSetting
-         contentSyncSettings:(nullable NSArray<DBFILESContentSyncSettingArg *> *)contentSyncSettings;
+    teamFolderUpdateSyncSettings:(NSString *)teamFolderId
+                     syncSetting:(nullable DBFILESSyncSettingArg *)syncSetting
+             contentSyncSettings:(nullable NSArray<DBFILESContentSyncSettingArg *> *)contentSyncSettings;
 
 ///
 /// Returns the member profile of the admin who generated the team access token used to make the call.

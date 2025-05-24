@@ -42,11 +42,11 @@
 
 - (IBAction)copyAllDeviceUUIDTapped:(NSButton *)sender {
     NSMutableString *devices = [[NSMutableString alloc] init];
-    [self.uploadRecord.provisioningProfile.provisionedDevices enumerateObjectsUsingBlock:^(ProvisionedDevice * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.uploadRecord.provisioningProfile.provisionedDevices enumerateObjectsUsingBlock:^(ABProvisionedDevice * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [devices appendFormat:@"%@,\n",obj.deviceId];
     }];
     [[NSPasteboard generalPasteboard] clearContents];
-    [[NSPasteboard generalPasteboard] setString:devices forType:NSStringPboardType];
+	[[NSPasteboard generalPasteboard] setString:devices forType:NSPasteboardTypeString];
 }
 
 - (IBAction)showInFinderButtonTapped:(NSButton *)sender {

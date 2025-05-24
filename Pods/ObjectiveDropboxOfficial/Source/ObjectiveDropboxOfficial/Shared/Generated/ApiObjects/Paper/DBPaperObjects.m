@@ -107,7 +107,7 @@
   jsonDict[@"member"] = [DBSHARINGMemberSelectorSerializer serialize:valueObj.member];
   jsonDict[@"permission_level"] = [DBPAPERPaperDocPermissionLevelSerializer serialize:valueObj.permissionLevel];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERAddMember *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -210,7 +210,7 @@
 
   jsonDict[@"doc_id"] = valueObj.docId;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERRefPaperDoc *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -348,7 +348,7 @@
   }
   jsonDict[@"quiet"] = valueObj.quiet;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERAddPaperDocUser *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -462,7 +462,7 @@
   jsonDict[@"member"] = [DBSHARINGMemberSelectorSerializer serialize:valueObj.member];
   jsonDict[@"result"] = [DBPAPERAddPaperDocUserResultSerializer serialize:valueObj.result];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERAddPaperDocUserMemberResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -736,7 +736,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERAddPaperDocUserResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -869,7 +869,7 @@
     jsonDict[@"expiration"] = [DBNSDateSerializer serialize:valueObj.expiration dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERCursor *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1019,7 +1019,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERPaperApiBaseError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1194,7 +1194,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERDocLookupError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1393,7 +1393,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERDocSubscriptionLevel *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1574,7 +1574,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERExportFormat *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1688,7 +1688,7 @@
   jsonDict[@"id"] = valueObj.id_;
   jsonDict[@"name"] = valueObj.name;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERFolder *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1838,7 +1838,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERFolderSharingPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2038,7 +2038,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERFolderSubscriptionLevel *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2182,7 +2182,7 @@
                                               }];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERFoldersContainingPaperDoc *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2381,7 +2381,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERImportFormat *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2501,7 +2501,7 @@
   jsonDict[@"invitee"] = [DBSHARINGInviteeInfoSerializer serialize:valueObj.invitee];
   jsonDict[@"permission_level"] = [DBPAPERPaperDocPermissionLevelSerializer serialize:valueObj.permissionLevel];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERInviteeInfoWithPermissionLevel *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2663,7 +2663,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERListDocsCursorError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2797,7 +2797,7 @@
   jsonDict[@"sort_order"] = [DBPAPERListPaperDocsSortOrderSerializer serialize:valueObj.sortOrder];
   jsonDict[@"limit"] = valueObj.limit;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERListPaperDocsArgs *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2905,7 +2905,7 @@
 
   jsonDict[@"cursor"] = valueObj.cursor;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERListPaperDocsContinueArgs *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3073,7 +3073,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERListPaperDocsFilterBy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3203,7 +3203,7 @@
   jsonDict[@"cursor"] = [DBPAPERCursorSerializer serialize:valueObj.cursor];
   jsonDict[@"has_more"] = valueObj.hasMore;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERListPaperDocsResponse *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3397,7 +3397,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERListPaperDocsSortBy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3575,7 +3575,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERListPaperDocsSortOrder *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3786,7 +3786,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERListUsersCursorError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3907,7 +3907,7 @@
   jsonDict[@"doc_id"] = valueObj.docId;
   jsonDict[@"limit"] = valueObj.limit;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERListUsersOnFolderArgs *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4014,7 +4014,7 @@
   jsonDict[@"doc_id"] = valueObj.docId;
   jsonDict[@"cursor"] = valueObj.cursor;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERListUsersOnFolderContinueArgs *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4153,7 +4153,7 @@
   jsonDict[@"cursor"] = [DBPAPERCursorSerializer serialize:valueObj.cursor];
   jsonDict[@"has_more"] = valueObj.hasMore;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERListUsersOnFolderResponse *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4281,7 +4281,7 @@
   jsonDict[@"limit"] = valueObj.limit;
   jsonDict[@"filter_by"] = [DBPAPERUserOnPaperDocFilterSerializer serialize:valueObj.filterBy];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERListUsersOnPaperDocArgs *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4392,7 +4392,7 @@
   jsonDict[@"doc_id"] = valueObj.docId;
   jsonDict[@"cursor"] = valueObj.cursor;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERListUsersOnPaperDocContinueArgs *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4540,7 +4540,7 @@
   jsonDict[@"cursor"] = [DBPAPERCursorSerializer serialize:valueObj.cursor];
   jsonDict[@"has_more"] = valueObj.hasMore;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERListUsersOnPaperDocResponse *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4766,7 +4766,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERPaperApiCursorError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -4894,7 +4894,7 @@
     jsonDict[@"parent_folder_id"] = valueObj.parentFolderId;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERPaperDocCreateArgs *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -5127,7 +5127,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERPaperDocCreateError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -5254,7 +5254,7 @@
   jsonDict[@"revision"] = valueObj.revision;
   jsonDict[@"title"] = valueObj.title;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERPaperDocCreateUpdateResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -5363,7 +5363,7 @@
   jsonDict[@"doc_id"] = valueObj.docId;
   jsonDict[@"export_format"] = [DBPAPERExportFormatSerializer serialize:valueObj.exportFormat];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERPaperDocExport *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -5487,7 +5487,7 @@
   jsonDict[@"revision"] = valueObj.revision;
   jsonDict[@"mime_type"] = valueObj.mimeType;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERPaperDocExportResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -5658,7 +5658,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERPaperDocPermissionLevel *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -5773,7 +5773,7 @@
   jsonDict[@"doc_id"] = valueObj.docId;
   jsonDict[@"sharing_policy"] = [DBPAPERSharingPolicySerializer serialize:valueObj.sharingPolicy];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERPaperDocSharingPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -5899,7 +5899,7 @@
   jsonDict[@"revision"] = valueObj.revision;
   jsonDict[@"import_format"] = [DBPAPERImportFormatSerializer serialize:valueObj.importFormat];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERPaperDocUpdateArgs *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -6201,7 +6201,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERPaperDocUpdateError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -6410,7 +6410,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERPaperDocUpdatePolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -6549,7 +6549,7 @@
     jsonDict[@"is_team_folder"] = valueObj.isTeamFolder;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERPaperFolderCreateArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -6742,7 +6742,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERPaperFolderCreateError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -6851,7 +6851,7 @@
 
   jsonDict[@"folder_id"] = valueObj.folderId;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERPaperFolderCreateResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -6958,7 +6958,7 @@
   jsonDict[@"doc_id"] = valueObj.docId;
   jsonDict[@"member"] = [DBSHARINGMemberSelectorSerializer serialize:valueObj.member];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERRemovePaperDocUser *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -7083,7 +7083,7 @@
     jsonDict[@"team_sharing_policy"] = [DBPAPERSharingTeamPolicyTypeSerializer serialize:valueObj.teamSharingPolicy];
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERSharingPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -7261,7 +7261,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERSharingTeamPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -7464,7 +7464,7 @@
                                  userInfo:nil]);
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERSharingPublicPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -7586,7 +7586,7 @@
   jsonDict[@"user"] = [DBSHARINGUserInfoSerializer serialize:valueObj.user];
   jsonDict[@"permission_level"] = [DBPAPERPaperDocPermissionLevelSerializer serialize:valueObj.permissionLevel];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERUserInfoWithPermissionLevel *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -7756,7 +7756,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBPAPERUserOnPaperDocFilter *)deserialize:(NSDictionary<NSString *, id> *)valueDict {

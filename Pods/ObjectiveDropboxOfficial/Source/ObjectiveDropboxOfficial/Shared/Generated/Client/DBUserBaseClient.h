@@ -11,6 +11,7 @@
 #import "DBFILEPROPERTIESUserAuthRoutes.h"
 #import "DBFILEREQUESTSUserAuthRoutes.h"
 #import "DBFILESUserAuthRoutes.h"
+#import "DBOPENIDUserAuthRoutes.h"
 #import "DBPAPERUserAuthRoutes.h"
 #import "DBRequestErrors.h"
 #import "DBSHARINGUserAuthRoutes.h"
@@ -53,6 +54,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Routes within the `files` namespace.
 @property (nonatomic, readonly) DBFILESUserAuthRoutes *filesRoutes;
+
+/// Routes within the `openid` namespace.
+@property (nonatomic, readonly) DBOPENIDUserAuthRoutes *openidRoutes;
 
 /// Routes within the `paper` namespace.
 @property (nonatomic, readonly) DBPAPERUserAuthRoutes *paperRoutes;

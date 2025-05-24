@@ -25,22 +25,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// (no description).
+/// Last name of user.
 @property (nonatomic, readonly, copy, nullable) NSString *familyName;
 
-/// (no description).
+/// First name of user.
 @property (nonatomic, readonly, copy, nullable) NSString *givenName;
 
-/// (no description).
+/// Email address of user.
 @property (nonatomic, readonly, copy, nullable) NSString *email;
 
-/// (no description).
+/// If user is email verified.
 @property (nonatomic, readonly, nullable) NSNumber *emailVerified;
 
-/// (no description).
+/// Issuer of token (in this case Dropbox).
 @property (nonatomic, readonly, copy) NSString *iss;
 
-/// (no description).
+/// An identifier for the user. This is the Dropbox account_id, a string value
+/// such as dbid:AAH4f99T0taONIb-OurWxbNQ6ywGRopQngc.
 @property (nonatomic, readonly, copy) NSString *sub;
 
 #pragma mark - Constructors
@@ -48,12 +49,13 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param familyName (no description).
-/// @param givenName (no description).
-/// @param email (no description).
-/// @param emailVerified (no description).
-/// @param iss (no description).
-/// @param sub (no description).
+/// @param familyName Last name of user.
+/// @param givenName First name of user.
+/// @param email Email address of user.
+/// @param emailVerified If user is email verified.
+/// @param iss Issuer of token (in this case Dropbox).
+/// @param sub An identifier for the user. This is the Dropbox account_id, a
+/// string value such as dbid:AAH4f99T0taONIb-OurWxbNQ6ywGRopQngc.
 ///
 /// @return An initialized instance.
 ///

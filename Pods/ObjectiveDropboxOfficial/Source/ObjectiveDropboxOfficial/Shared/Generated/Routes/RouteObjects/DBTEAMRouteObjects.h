@@ -253,6 +253,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// Accessor method for the reportsGetStorage route object.
 + (DBRoute *)DBTEAMReportsGetStorage;
 
+/// Accessor method for the sharingAllowlistAdd route object.
++ (DBRoute *)DBTEAMSharingAllowlistAdd;
+
+/// Accessor method for the sharingAllowlistList route object.
++ (DBRoute *)DBTEAMSharingAllowlistList;
+
+/// Accessor method for the sharingAllowlistListContinue route object.
++ (DBRoute *)DBTEAMSharingAllowlistListContinue;
+
+/// Accessor method for the sharingAllowlistRemove route object.
++ (DBRoute *)DBTEAMSharingAllowlistRemove;
+
 /// Accessor method for the teamFolderActivate route object.
 + (DBRoute *)DBTEAMTeamFolderActivate;
 

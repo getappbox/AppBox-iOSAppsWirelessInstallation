@@ -211,12 +211,18 @@
 }
 
 - (BOOL)hasFront {
-  NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
-  return [devices count] > 1;
+  AVCaptureDeviceDiscoverySession *captureDeviceDiscoverySession = [AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInWideAngleCamera]
+    mediaType:AVMediaTypeVideo
+    position:AVCaptureDevicePositionFront];
+  NSArray *devices = [captureDeviceDiscoverySession devices];
+  return [devices count] > 0;
 }
 
 - (BOOL)hasBack {
-  NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+  AVCaptureDeviceDiscoverySession *captureDeviceDiscoverySession = [AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInWideAngleCamera]
+    mediaType:AVMediaTypeVideo
+    position:AVCaptureDevicePositionBack];
+  NSArray *devices = [captureDeviceDiscoverySession devices];
   return [devices count] > 0;
 }
 
@@ -417,7 +423,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
   
   if (!self.binaryLayer && !self.delegate) { return; }
   
-  ZXHybridBinarizer *binarizer = [[ZXHybridBinarizer alloc] initWithSource:self.invert ? [source invert] : source];
+  ZXHybridBinarizer *binarizer = [[ZXHybridBinarizer alloc] initWithSource:source];
   
   if (self.binaryLayer) {
     CGImageRef image = [binarizer createImage];
@@ -436,10 +442,35 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
       dispatch_async(dispatch_get_main_queue(), ^{
         [self.delegate captureResult:self result:result];
       });
+      return;
+    }
+  }
+  
+  // Try decoding inverted image
+  if (self.binaryLayer || self.delegate) {
+    ZXHybridBinarizer *invertedBinarizer = [[ZXHybridBinarizer alloc] initWithSource:[source invert]];
+          
+    if (self.binaryLayer) {
+      CGImageRef image = [invertedBinarizer createImage];
+      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0), dispatch_get_main_queue(), ^{
+        self.binaryLayer.contents = (__bridge id)image;
+        CGImageRelease(image);
+      });
+    }
+          
+    if (self.delegate) {
+      ZXBinaryBitmap *bitmap = [[ZXBinaryBitmap alloc] initWithBinarizer:invertedBinarizer];
+              
+      NSError *error;
+      ZXResult *result = [self.reader decode:bitmap hints:self.hints error:&error];
+      if (result) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [self.delegate captureResult:self result:result];
+        });
+      }
     }
   }
 }
-
 
 /**
  * This function try to make the grayscale image darker to process
@@ -522,8 +553,11 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
   
   AVCaptureDevice *zxd = nil;
   
-  NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
-  
+  AVCaptureDeviceDiscoverySession *captureDeviceDiscoverySession = [AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInWideAngleCamera]
+    mediaType:AVMediaTypeVideo
+    position:AVCaptureDevicePositionUnspecified];
+  NSArray *devices = [captureDeviceDiscoverySession devices];
+
   if ([devices count] > 0) {
     if (self.captureDeviceIndex == -1) {
       AVCaptureDevicePosition position = AVCaptureDevicePositionBack;

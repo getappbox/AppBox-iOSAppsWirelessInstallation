@@ -105,7 +105,7 @@
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText: @"Are you sure?"];
     [alert setInformativeText:@"Do you want to logout current dropbox account?"];
-    [alert setAlertStyle:NSInformationalAlertStyle];
+	[alert setAlertStyle:NSAlertStyleInformational];
     [alert addButtonWithTitle:@"Yes"];
     [alert addButtonWithTitle:@"No"];
     if ([alert runModal] == NSAlertFirstButtonReturn){

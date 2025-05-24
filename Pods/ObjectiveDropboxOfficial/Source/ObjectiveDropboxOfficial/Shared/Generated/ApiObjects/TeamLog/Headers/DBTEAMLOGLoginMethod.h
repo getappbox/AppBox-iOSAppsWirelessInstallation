@@ -38,6 +38,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGLoginMethodTag){
     DBTEAMLOGLoginMethodGoogleOauth,
 
     /// (no description).
+    DBTEAMLOGLoginMethodLenovoOauth,
+
+    /// (no description).
     DBTEAMLOGLoginMethodPassword,
 
     /// (no description).
@@ -82,6 +85,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGLoginMethodTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithGoogleOauth;
+
+///
+/// Initializes union class with tag state of "lenovo_oauth".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLenovoOauth;
 
 ///
 /// Initializes union class with tag state of "password".
@@ -151,6 +161,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGLoginMethodTag){
 /// @return Whether the union's current tag state has value "google_oauth".
 ///
 - (BOOL)isGoogleOauth;
+
+///
+/// Retrieves whether the union's current tag state has value "lenovo_oauth".
+///
+/// @return Whether the union's current tag state has value "lenovo_oauth".
+///
+- (BOOL)isLenovoOauth;
 
 ///
 /// Retrieves whether the union's current tag state has value "password".

@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init:(id<DBTransportClient>)client;
 
 ///
-/// Creates an OAuth 2.0 access token from the supplied OAuth 1.0 access token.
+/// DEPRECATED: Creates an OAuth 2.0 access token from the supplied OAuth 1.0 access token.
 ///
 /// @param oauth1Token The supplied OAuth 1.0 access token.
 /// @param oauth1TokenSecret The token secret associated with the supplied access token.
@@ -41,7 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 - (DBRpcTask<DBAUTHTokenFromOAuth1Result *, DBAUTHTokenFromOAuth1Error *> *)tokenFromOauth1:(NSString *)oauth1Token
                                                                           oauth1TokenSecret:
-                                                                              (NSString *)oauth1TokenSecret;
+                                                                              (NSString *)oauth1TokenSecret
+    __deprecated_msg("tokenFromOauth1 is deprecated.");
 
 @end
 

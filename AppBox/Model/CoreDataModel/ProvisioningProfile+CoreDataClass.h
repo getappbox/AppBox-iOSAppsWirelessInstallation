@@ -1,5 +1,5 @@
 //
-//  ProvisioningProfile+CoreDataClass.h
+//  ABProvisioningProfile+CoreDataClass.h
 //  
 //
 //  Created by Vineet Choudhary on 29/10/17.
@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class ProvisionedDevice, UploadRecord;
+@class ABProvisionedDevice, ABUploadRecord;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ProvisioningProfile : NSManagedObject
+@interface ABProvisioningProfile : NSManagedObject
 
 @end
 

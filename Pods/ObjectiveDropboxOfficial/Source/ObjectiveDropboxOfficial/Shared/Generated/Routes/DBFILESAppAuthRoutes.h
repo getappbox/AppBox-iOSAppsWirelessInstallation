@@ -206,12 +206,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// `DBFILESThumbnailV2Error` object on failure.
 ///
 - (DBDownloadUrlTask<DBFILESPreviewResult *, DBFILESThumbnailV2Error *> *)
-getThumbnailV2Url:(DBFILESPathOrLink *)resource
-           format:(nullable DBFILESThumbnailFormat *)format
-             size:(nullable DBFILESThumbnailSize *)size
-             mode:(nullable DBFILESThumbnailMode *)mode
-        overwrite:(BOOL)overwrite
-      destination:(NSURL *)destination;
+    getThumbnailV2Url:(DBFILESPathOrLink *)resource
+               format:(nullable DBFILESThumbnailFormat *)format
+                 size:(nullable DBFILESThumbnailSize *)size
+                 mode:(nullable DBFILESThumbnailMode *)mode
+            overwrite:(BOOL)overwrite
+          destination:(NSURL *)destination;
 
 ///
 /// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
@@ -261,14 +261,14 @@ getThumbnailV2Url:(DBFILESPathOrLink *)resource
 /// `DBFILESThumbnailV2Error` object on failure.
 ///
 - (DBDownloadUrlTask<DBFILESPreviewResult *, DBFILESThumbnailV2Error *> *)
-getThumbnailV2Url:(DBFILESPathOrLink *)resource
-           format:(nullable DBFILESThumbnailFormat *)format
-             size:(nullable DBFILESThumbnailSize *)size
-             mode:(nullable DBFILESThumbnailMode *)mode
-        overwrite:(BOOL)overwrite
-      destination:(NSURL *)destination
-  byteOffsetStart:(NSNumber *)byteOffsetStart
-    byteOffsetEnd:(NSNumber *)byteOffsetEnd;
+    getThumbnailV2Url:(DBFILESPathOrLink *)resource
+               format:(nullable DBFILESThumbnailFormat *)format
+                 size:(nullable DBFILESThumbnailSize *)size
+                 mode:(nullable DBFILESThumbnailMode *)mode
+            overwrite:(BOOL)overwrite
+          destination:(NSURL *)destination
+      byteOffsetStart:(NSNumber *)byteOffsetStart
+        byteOffsetEnd:(NSNumber *)byteOffsetEnd;
 
 ///
 /// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
@@ -298,10 +298,10 @@ getThumbnailV2Url:(DBFILESPathOrLink *)resource
 /// `DBFILESThumbnailV2Error` object on failure.
 ///
 - (DBDownloadDataTask<DBFILESPreviewResult *, DBFILESThumbnailV2Error *> *)
-getThumbnailV2Data:(DBFILESPathOrLink *)resource
-            format:(nullable DBFILESThumbnailFormat *)format
-              size:(nullable DBFILESThumbnailSize *)size
-              mode:(nullable DBFILESThumbnailMode *)mode;
+    getThumbnailV2Data:(DBFILESPathOrLink *)resource
+                format:(nullable DBFILESThumbnailFormat *)format
+                  size:(nullable DBFILESThumbnailSize *)size
+                  mode:(nullable DBFILESThumbnailMode *)mode;
 
 ///
 /// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
@@ -318,9 +318,9 @@ getThumbnailV2Data:(DBFILESPathOrLink *)resource
 /// `DBFILESThumbnailV2Error` object on failure.
 ///
 - (DBDownloadDataTask<DBFILESPreviewResult *, DBFILESThumbnailV2Error *> *)
-getThumbnailV2Data:(DBFILESPathOrLink *)resource
-   byteOffsetStart:(NSNumber *)byteOffsetStart
-     byteOffsetEnd:(NSNumber *)byteOffsetEnd;
+    getThumbnailV2Data:(DBFILESPathOrLink *)resource
+       byteOffsetStart:(NSNumber *)byteOffsetStart
+         byteOffsetEnd:(NSNumber *)byteOffsetEnd;
 
 ///
 /// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
@@ -341,12 +341,12 @@ getThumbnailV2Data:(DBFILESPathOrLink *)resource
 /// `DBFILESThumbnailV2Error` object on failure.
 ///
 - (DBDownloadDataTask<DBFILESPreviewResult *, DBFILESThumbnailV2Error *> *)
-getThumbnailV2Data:(DBFILESPathOrLink *)resource
-            format:(nullable DBFILESThumbnailFormat *)format
-              size:(nullable DBFILESThumbnailSize *)size
-              mode:(nullable DBFILESThumbnailMode *)mode
-   byteOffsetStart:(NSNumber *)byteOffsetStart
-     byteOffsetEnd:(NSNumber *)byteOffsetEnd;
+    getThumbnailV2Data:(DBFILESPathOrLink *)resource
+                format:(nullable DBFILESThumbnailFormat *)format
+                  size:(nullable DBFILESThumbnailSize *)size
+                  mode:(nullable DBFILESThumbnailMode *)mode
+       byteOffsetStart:(NSNumber *)byteOffsetStart
+         byteOffsetEnd:(NSNumber *)byteOffsetEnd;
 
 ///
 /// Starts returning the contents of a folder. If the result's `hasMore` in `DBFILESListFolderResult` field is true,
@@ -409,16 +409,16 @@ getThumbnailV2Data:(DBFILESPathOrLink *)resource
 /// `DBFILESListFolderError` object on failure.
 ///
 - (DBRpcTask<DBFILESListFolderResult *, DBFILESListFolderError *> *)
-                     listFolder:(NSString *)path
-                      recursive:(nullable NSNumber *)recursive
-               includeMediaInfo:(nullable NSNumber *)includeMediaInfo
-                 includeDeleted:(nullable NSNumber *)includeDeleted
-includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMembers
-          includeMountedFolders:(nullable NSNumber *)includeMountedFolders
-                          limit:(nullable NSNumber *)limit
-                     sharedLink:(nullable DBFILESSharedLink *)sharedLink
-          includePropertyGroups:(nullable DBFILEPROPERTIESTemplateFilterBase *)includePropertyGroups
-    includeNonDownloadableFiles:(nullable NSNumber *)includeNonDownloadableFiles;
+                         listFolder:(NSString *)path
+                          recursive:(nullable NSNumber *)recursive
+                   includeMediaInfo:(nullable NSNumber *)includeMediaInfo
+                     includeDeleted:(nullable NSNumber *)includeDeleted
+    includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMembers
+              includeMountedFolders:(nullable NSNumber *)includeMountedFolders
+                              limit:(nullable NSNumber *)limit
+                         sharedLink:(nullable DBFILESSharedLink *)sharedLink
+              includePropertyGroups:(nullable DBFILEPROPERTIESTemplateFilterBase *)includePropertyGroups
+        includeNonDownloadableFiles:(nullable NSNumber *)includeNonDownloadableFiles;
 
 ///
 /// Once a cursor has been retrieved from `listFolder`, use this to paginate through all files and retrieve updates to

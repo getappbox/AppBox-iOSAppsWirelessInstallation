@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, copy) NSString *meta;
 @property (nonatomic, readonly, copy) NSString *api;
 @property (nonatomic, readonly, copy) NSString *content;
+@property (nonatomic, readonly, copy) NSString *downloadContent;
 @property (nonatomic, readonly, copy) NSString *notify;
 
 ///
@@ -50,6 +51,23 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An initialized instance with the provided hostname configuration
 ///
 - (instancetype)initWithMeta:(NSString *)meta api:(NSString *)api content:(NSString *)content notify:(NSString *)notify;
+
+///
+/// Constructor that takes in a set of custom hostnames to use for api calls.
+///
+/// @param meta the hostname to metaserver
+/// @param api the hostname to api server
+/// @param content the hostname to content server
+/// @param downloadContent the hostname to content server for download style
+/// @param notify the hostname to notify server
+///
+/// @return An initialized instance with the provided hostname configuration
+///
+- (instancetype)initWithMeta:(NSString *)meta
+                         api:(NSString *)api
+                     content:(NSString *)content
+             downloadContent:(NSString *)downloadContent
+                      notify:(NSString *)notify NS_DESIGNATED_INITIALIZER;
 
 ///
 /// Returns the prefix to use for API calls to the given route type.

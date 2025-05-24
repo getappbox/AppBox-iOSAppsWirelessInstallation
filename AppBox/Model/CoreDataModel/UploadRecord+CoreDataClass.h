@@ -1,5 +1,5 @@
 //
-//  UploadRecord+CoreDataClass.h
+//  ABUploadRecord+CoreDataClass.h
 //  
 //
 //  Created by Vineet Choudhary on 17/10/17.
@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Project;
-@class ProvisioningProfile;
+@class ABProject;
+@class ABProvisioningProfile;
 @class AppBoxService;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UploadRecord : NSManagedObject
+@interface ABUploadRecord : NSManagedObject
 
 @property(nonatomic, retain) XCProject *xcProject;
 

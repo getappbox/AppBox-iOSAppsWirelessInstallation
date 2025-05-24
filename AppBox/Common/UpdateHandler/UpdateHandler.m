@@ -16,7 +16,7 @@
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText: @"New Version Available"];
     [alert setInformativeText:@"A newer version of the \"AppBox\" is available. Do you want to update it? \n\n\n"];
-    [alert setAlertStyle:NSInformationalAlertStyle];
+	[alert setAlertStyle:NSAlertStyleInformational];
     [alert addButtonWithTitle:@"YES"];
     [alert addButtonWithTitle:@"NO"];
     if ([alert runModal] == NSAlertFirstButtonReturn){
@@ -63,7 +63,7 @@
         }];
     } @catch (NSException *exception) {
         completion(false, nil);
-		DDLogInfo(@"Exception %@",exception.userInfo);
+		DDLogInfo(@"Exception %@",exception.abDescription);
     }
 }
 

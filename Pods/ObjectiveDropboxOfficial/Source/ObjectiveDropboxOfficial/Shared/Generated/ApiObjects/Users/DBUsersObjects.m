@@ -153,7 +153,7 @@
     jsonDict[@"profile_photo_url"] = valueObj.profilePhotoUrl;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSAccount *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -345,7 +345,7 @@
     jsonDict[@"team_member_id"] = valueObj.teamMemberId;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSBasicAccount *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -518,7 +518,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSFileLockingValue *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -779,7 +779,7 @@
     jsonDict[@"team_member_id"] = valueObj.teamMemberId;
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSFullAccount *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -911,7 +911,7 @@
   jsonDict[@"id"] = valueObj.id_;
   jsonDict[@"name"] = valueObj.name;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSTeam *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1036,7 +1036,7 @@
   jsonDict[@"sharing_policies"] = [DBTEAMPOLICIESTeamSharingPoliciesSerializer serialize:valueObj.sharingPolicies];
   jsonDict[@"office_addin_policy"] = [DBTEAMPOLICIESOfficeAddInPolicySerializer serialize:valueObj.officeAddinPolicy];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSFullTeam *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1143,7 +1143,7 @@
 
   jsonDict[@"account_id"] = valueObj.accountId;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSGetAccountArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1252,7 +1252,7 @@
                                                   return elem0;
                                                 }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSGetAccountBatchArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1414,7 +1414,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSGetAccountBatchError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1568,7 +1568,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSGetAccountError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1673,7 +1673,7 @@
 
   jsonDict[@"allocated"] = valueObj.allocated;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSIndividualSpaceAllocation *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1804,7 +1804,7 @@
   jsonDict[@"display_name"] = valueObj.displayName;
   jsonDict[@"abbreviated_name"] = valueObj.abbreviatedName;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSName *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -1971,7 +1971,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSPaperAsFilesValue *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2171,7 +2171,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSSpaceAllocation *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2288,7 +2288,7 @@
   jsonDict[@"used"] = valueObj.used;
   jsonDict[@"allocation"] = [DBUSERSSpaceAllocationSerializer serialize:valueObj.allocation];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSSpaceUsage *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2422,7 +2422,7 @@
       [DBTEAMCOMMONMemberSpaceLimitTypeSerializer serialize:valueObj.userWithinTeamSpaceLimitType];
   jsonDict[@"user_within_team_space_used_cached"] = valueObj.userWithinTeamSpaceUsedCached;
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSTeamSpaceAllocation *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2599,7 +2599,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSUserFeature *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2800,7 +2800,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSUserFeatureValue *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -2917,7 +2917,7 @@
                                                return [DBUSERSUserFeatureSerializer serialize:elem0];
                                              }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSUserFeaturesGetValuesBatchArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3069,7 +3069,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSUserFeaturesGetValuesBatchError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
@@ -3182,7 +3182,7 @@
                                              return [DBUSERSUserFeatureValueSerializer serialize:elem0];
                                            }];
 
-  return [jsonDict count] > 0 ? jsonDict : nil;
+  return jsonDict;
 }
 
 + (DBUSERSUserFeaturesGetValuesBatchResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {

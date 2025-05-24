@@ -11,151 +11,198 @@
 @implementation EventTracker
 
 +(void)logScreen:(NSString *)name{
-    [MSACAnalytics trackEvent:[NSString stringWithFormat:@"Screen-%@", name]];
+//	NSString *screenName = [NSString stringWithFormat:@"Screen-%@", name];
 }
 
-+(void)logEventWithName:(NSString *)eventName customAttributes:(NSDictionary *)attributes flags:(MSACFlags)flags {
-    [MSACAnalytics trackEvent:eventName withProperties:attributes flags:flags];
++(void)logEventWithName:(NSString *)eventName customAttributes:(NSDictionary *)attributes {
+
 }
 
 +(void)logEventWithType:(LogEventTypes)eventType{
+/*
     switch (eventType) {
         case LogEventTypeCopyToClipboard:{
             NSString *name = @"Copy to Clipboard";
-            [EventTracker logEventWithName:name customAttributes:nil flags:MSACFlagsDefault];
         }break;
             
         case LogEventTypeCopyToClipboardFromDashboard:{
             NSString *name = @"Copy to Clipboard from Dashboard";
-            [EventTracker logEventWithName:name customAttributes:nil flags:MSACFlagsDefault];
         }break;
             
         case LogEventTypeUpdateExternalLink:{
-            [EventTracker logEventWithName:@"External Links" customAttributes:@{@"Title":@"Update"} flags:MSACFlagsDefault];
+			NSString *name = @"External Links";
+			NSDictionary *attributes = @{
+				@"Title": @"Update"
+			};
         }break;
             
         case LogEventTypeUploadWithCustomBDFolderName:{
-            [EventTracker logEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@"YES"} flags:MSACFlagsDefault];
+			NSString *name = @"DB Folder Name";
+			NSDictionary *attributes = @{
+				@"Custom Name": @"YES"
+			};
         }break;
             
         case LogEventTypeUploadWithDefaultDBFolderName:{
-            [EventTracker logEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@"NO"} flags:MSACFlagsDefault];
+			NSString *name = @"DB Folder Name";
+			NSDictionary *attributes = @{
+				@"Custom Name": @"NO"
+			};
         }break;
             
         case LogEventTypeShortURLFailedInFirstRequest:{
-            [EventTracker logEventWithName:@"Short URL Failed" customAttributes:@{@"Request No":@"1"} flags:MSACFlagsNormal];
+			NSString *name = @"Short URL Failed";
+			NSDictionary *attributes = @{
+				@"Request No": @"1"
+			};
         }break;
             
         case LogEventTypeShortURLFailedInSecondRequest:{
-            [EventTracker logEventWithName:@"Short URL Failed" customAttributes:@{@"Request No":@"2"} flags:MSACFlagsCritical];
+			NSString *name = @"Short URL Failed";
+			NSDictionary *attributes = @{
+				@"Request No": @"2"
+			};
         }break;
             
         case LogEventTypeShortURLSuccessInFirstRequest:{
-            [EventTracker logEventWithName:@"Short URL Success" customAttributes:@{@"Request No":@"1"} flags:MSACFlagsDefault];
+			NSString *name = @"Short URL Success";
+			NSDictionary *attributes = @{
+				@"Request No": @"1"
+			};
         }break;
             
         case LogEventTypeShortURLSuccessInSecondRequest:{
-            [EventTracker logEventWithName:@"Short URL Success" customAttributes:@{@"Request No":@"2"} flags:MSACFlagsCritical];
+			NSString *name = @"Short URL Success";
+			NSDictionary *attributes = @{
+				@"Request No": @"2"
+			};
         }break;
             
         case LogEventTypeShortURLElseBlockExecuted: {
-            [EventTracker logEventWithName:@"Short URL Else Block Executed" customAttributes:@{@"Request No":@"1"} flags:MSACFlagsCritical];
+			NSString *name = @"Short URL Else Block Executed";
+			NSDictionary *attributes = @{
+				@"Request No": @"1"
+			};
         }break;
             
         case LogEventTypeExternalLinkHelp:{
-            [EventTracker logEventWithName:@"External Links" customAttributes:@{@"Title":@"Help"} flags:MSACFlagsDefault];
+			NSString *name = @"External Links";
+			NSDictionary *attributes = @{
+				@"Title": @"Help"
+			};
         }break;
             
         case LogEventTypeExternalLinkTwitter:{
-            [EventTracker logEventWithName:@"External Links" customAttributes:@{@"Title":@"Twitter"} flags:MSACFlagsDefault];
+			NSString *name = @"External Links";
+			NSDictionary *attributes = @{
+				@"Title": @"Twitter"
+			};
         }break;
             
         case LogEventTypeExternalLinkReleaseNote:{
-            [EventTracker logEventWithName:@"External Links" customAttributes:@{@"Title":@"Release Notes"} flags:MSACFlagsDefault];
+			NSString *name = @"External Links";
+			NSDictionary *attributes = @{
+				@"Title": @"Release Notes"
+			};
         }break;
             
         case LogEventTypeExternalLinkLicense:{
-            [EventTracker logEventWithName:@"External Links" customAttributes:@{@"Title":@"License"} flags:MSACFlagsDefault];
+			NSString *name = @"External Links";
+			NSDictionary *attributes = @{
+				@"Title": @"License"
+			};
         }break;
             
         case LogEventTypeAuthDropbox:{
-            [EventTracker logEventWithName:@"Authenticating Dropbox Start" customAttributes:nil  flags:MSACFlagsDefault];
+			NSString *name = @"Authenticating Dropbox Start";
         }break;
             
         case LogEventTypeExitWithoutAuth:{
-            [EventTracker logEventWithName:@"AppBox terminated before Dropbox LoggedIN :(" customAttributes:nil flags:MSACFlagsDefault];
+			NSString *name = @"Exit Without Auth";
         }break;
             
         case LogEventTypeAuthDropboxSuccess: {
-            [EventTracker logEventWithName:@"Authenticating Dropbox Success" customAttributes:nil flags:MSACFlagsDefault];
+			NSString *name = @"Authenticating Dropbox Success";
         }break;
             
         case LogEventTypeAuthDropboxError: {
-            [EventTracker logEventWithName:@"Authenticating Dropbox Error" customAttributes:nil flags:MSACFlagsCritical];
+			NSString *name = @"Authenticating Dropbox Error";
         }break;
             
         case LogEventTypeAuthDropboxCanceled: {
-            [EventTracker logEventWithName:@"Authenticating Dropbox Canceled" customAttributes:nil flags:MSACFlagsNormal];
+			NSString *name = @"Authenticating Dropbox Canceled";
         }break;
             
         case LogEventTypeExternalLinkKeepSameLink:{
-            [EventTracker logEventWithName:@"External Links" customAttributes:@{@"Title":@"Keep Same Link"} flags:MSACFlagsDefault];
+			NSString *name = @"External Links";
+			NSDictionary *attributes = @{
+				@"Title": @"Keep Same Link"
+			};
         }break;
             
         case LogEventTypeDeleteBuild:{
-            [EventTracker logEventWithName:@"Build Deleted" customAttributes:nil flags:MSACFlagsDefault];
+			NSString *name = @"Delete Build";
         }break;
             
         case LogEventTypeOpenInFinder:{
-            [EventTracker logEventWithName:@"Open In Finder" customAttributes:nil flags:MSACFlagsDefault];
+			NSString *name = @"Open In Finder";
         }break;
             
         case LogEventTypeOpenInDropbox:{
-            [EventTracker logEventWithName:@"Open In Dropbox" customAttributes:nil flags:MSACFlagsDefault];
+			NSString *name = @"Open In Dropbox";
         }break;
             
         case LogEventTypeOpenDashboardFromShowLink:{
-            [EventTracker logEventWithName:@"Dashboard open from Show Link" customAttributes:nil flags:MSACFlagsDefault];
+			NSString *name = @"Dashboard open from Show Link";
         }break;
         
             
         default:
             break;
     }
+*/
 }
 
 +(void)logEventSettingWithType:(LogEventSettingTypes)eventType andSettings:(NSDictionary *)currentSetting{
-    switch (eventType) {
+/*
+	switch (eventType) {
         case LogEventSettingTypeUploadIPA:{
-            [EventTracker logEventWithName:@"Upload IPA" customAttributes:currentSetting flags:MSACFlagsDefault];
+			NSString *name = @"Upload IPA";
         }break;
             
         case LogEventSettingTypeArchiveAndUpload: {
-            [EventTracker logEventWithName:@"Archive and Upload IPA" customAttributes:currentSetting flags:MSACFlagsDefault];
+			NSString *name = @"Archive and Upload IPA";
         }break;
             
         case LogEventSettingTypeUploadIPASuccess: {
-            [EventTracker logEventWithName:@"IPA Uploaded Success" customAttributes:currentSetting flags:MSACFlagsDefault];
+			NSString *name = @"Upload IPA Success";
         }break;
         
         default:
             break;
     }
+*/
 }
 
 +(void)logExceptionEvent:(NSException *)exception {
-    [EventTracker logEventWithName:@"Exception"
-                  customAttributes:@{ @"debug description": exception.debugDescription,
-                                      @"stack": exception.callStackSymbols }
-                             flags:MSACFlagsCritical];
+/*
+	NSString *name = @"Exception";
+	NSDictionary *attributes = @{
+		@"debug description":exception.debugDescription,
+		@"stack":exception.callStackSymbols
+	};
+ */
 }
 
 +(void)logAppBoxVersion {
+/*
     DBManager *dbManager = [Common currentDBManager];
-    [EventTracker logEventWithName:@"AppBox Details"
-                  customAttributes:@{ @"Version": dbManager.version,
-                                      @"Name": dbManager.appName,
-                                      @"Identifier": dbManager.bundleId }
-                             flags:MSACFlagsDefault];
+	NSString *name = @"AppBox Version";
+	NSDictionary *attributes = @{
+		@"Version": dbManager.version,
+		@"Name": dbManager.appName,
+		@"Identifier": dbManager.bundleId
+	};
+*/
 }
 @end

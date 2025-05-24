@@ -190,12 +190,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// `DBFILESAlphaGetMetadataError` object on failure.
 ///
 - (DBRpcTask<DBFILESMetadata *, DBFILESAlphaGetMetadataError *> *)
-               alphaGetMetadata:(NSString *)path
-               includeMediaInfo:(nullable NSNumber *)includeMediaInfo
-                 includeDeleted:(nullable NSNumber *)includeDeleted
-includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMembers
-          includePropertyGroups:(nullable DBFILEPROPERTIESTemplateFilterBase *)includePropertyGroups
-       includePropertyTemplates:(nullable NSArray<NSString *> *)includePropertyTemplates
+                   alphaGetMetadata:(NSString *)path
+                   includeMediaInfo:(nullable NSNumber *)includeMediaInfo
+                     includeDeleted:(nullable NSNumber *)includeDeleted
+    includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMembers
+              includePropertyGroups:(nullable DBFILEPROPERTIESTemplateFilterBase *)includePropertyGroups
+           includePropertyTemplates:(nullable NSArray<NSString *> *)includePropertyTemplates
     __deprecated_msg("alphaGetMetadata is deprecated. Use getMetadata.");
 
 ///
@@ -226,15 +226,15 @@ includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMem
 /// `DBFILESUploadError` object on failure.
 ///
 - (DBUploadTask<DBFILESFileMetadata *, DBFILESUploadError *> *)
-alphaUploadUrl:(NSString *)path
-          mode:(nullable DBFILESWriteMode *)mode
-    autorename:(nullable NSNumber *)autorename
-clientModified:(nullable NSDate *)clientModified
-          mute:(nullable NSNumber *)mute
-propertyGroups:(nullable NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
-strictConflict:(nullable NSNumber *)strictConflict
-   contentHash:(nullable NSString *)contentHash
-      inputUrl:(NSString *)inputUrl __deprecated_msg("alphaUpload is deprecated. Use upload.");
+    alphaUploadUrl:(NSString *)path
+              mode:(nullable DBFILESWriteMode *)mode
+        autorename:(nullable NSNumber *)autorename
+    clientModified:(nullable NSDate *)clientModified
+              mute:(nullable NSNumber *)mute
+    propertyGroups:(nullable NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
+    strictConflict:(nullable NSNumber *)strictConflict
+       contentHash:(nullable NSString *)contentHash
+          inputUrl:(NSString *)inputUrl __deprecated_msg("alphaUpload is deprecated. Use upload.");
 
 ///
 /// DEPRECATED: Create a new file with the contents provided in the request. Note that the behavior of this alpha
@@ -264,15 +264,15 @@ strictConflict:(nullable NSNumber *)strictConflict
 /// `DBFILESUploadError` object on failure.
 ///
 - (DBUploadTask<DBFILESFileMetadata *, DBFILESUploadError *> *)
-alphaUploadData:(NSString *)path
-           mode:(nullable DBFILESWriteMode *)mode
-     autorename:(nullable NSNumber *)autorename
- clientModified:(nullable NSDate *)clientModified
-           mute:(nullable NSNumber *)mute
- propertyGroups:(nullable NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
- strictConflict:(nullable NSNumber *)strictConflict
-    contentHash:(nullable NSString *)contentHash
-      inputData:(NSData *)inputData __deprecated_msg("alphaUpload is deprecated. Use upload.");
+    alphaUploadData:(NSString *)path
+               mode:(nullable DBFILESWriteMode *)mode
+         autorename:(nullable NSNumber *)autorename
+     clientModified:(nullable NSDate *)clientModified
+               mute:(nullable NSNumber *)mute
+     propertyGroups:(nullable NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
+     strictConflict:(nullable NSNumber *)strictConflict
+        contentHash:(nullable NSString *)contentHash
+          inputData:(NSData *)inputData __deprecated_msg("alphaUpload is deprecated. Use upload.");
 
 ///
 /// DEPRECATED: Create a new file with the contents provided in the request. Note that the behavior of this alpha
@@ -302,15 +302,15 @@ alphaUploadData:(NSString *)path
 /// `DBFILESUploadError` object on failure.
 ///
 - (DBUploadTask<DBFILESFileMetadata *, DBFILESUploadError *> *)
-alphaUploadStream:(NSString *)path
-             mode:(nullable DBFILESWriteMode *)mode
-       autorename:(nullable NSNumber *)autorename
-   clientModified:(nullable NSDate *)clientModified
-             mute:(nullable NSNumber *)mute
-   propertyGroups:(nullable NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
-   strictConflict:(nullable NSNumber *)strictConflict
-      contentHash:(nullable NSString *)contentHash
-      inputStream:(NSInputStream *)inputStream __deprecated_msg("alphaUpload is deprecated. Use upload.");
+    alphaUploadStream:(NSString *)path
+                 mode:(nullable DBFILESWriteMode *)mode
+           autorename:(nullable NSNumber *)autorename
+       clientModified:(nullable NSDate *)clientModified
+                 mute:(nullable NSNumber *)mute
+       propertyGroups:(nullable NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
+       strictConflict:(nullable NSNumber *)strictConflict
+          contentHash:(nullable NSString *)contentHash
+          inputStream:(NSInputStream *)inputStream __deprecated_msg("alphaUpload is deprecated. Use upload.");
 
 ///
 /// Copy a file or folder to a different location in the user's Dropbox. If the source path is a folder all its contents
@@ -856,9 +856,9 @@ alphaUploadStream:(NSString *)path
 /// `DBFILESDownloadZipError` object on failure.
 ///
 - (DBDownloadDataTask<DBFILESDownloadZipResult *, DBFILESDownloadZipError *> *)
-downloadZipData:(NSString *)path
-byteOffsetStart:(NSNumber *)byteOffsetStart
-  byteOffsetEnd:(NSNumber *)byteOffsetEnd;
+    downloadZipData:(NSString *)path
+    byteOffsetStart:(NSNumber *)byteOffsetStart
+      byteOffsetEnd:(NSNumber *)byteOffsetEnd;
 
 ///
 /// Export a file from a user's Dropbox. This route only supports exporting files that cannot be downloaded directly
@@ -1050,11 +1050,11 @@ byteOffsetStart:(NSNumber *)byteOffsetStart
 /// `DBFILESGetMetadataError` object on failure.
 ///
 - (DBRpcTask<DBFILESMetadata *, DBFILESGetMetadataError *> *)
-                    getMetadata:(NSString *)path
-               includeMediaInfo:(nullable NSNumber *)includeMediaInfo
-                 includeDeleted:(nullable NSNumber *)includeDeleted
-includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMembers
-          includePropertyGroups:(nullable DBFILEPROPERTIESTemplateFilterBase *)includePropertyGroups;
+                        getMetadata:(NSString *)path
+                   includeMediaInfo:(nullable NSNumber *)includeMediaInfo
+                     includeDeleted:(nullable NSNumber *)includeDeleted
+    includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMembers
+              includePropertyGroups:(nullable DBFILEPROPERTIESTemplateFilterBase *)includePropertyGroups;
 
 ///
 /// Get a preview for a file. Currently, PDF previews are generated for files with the following extensions: .ai, .doc,
@@ -1286,8 +1286,8 @@ includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMem
 /// success or a `void` object on failure.
 ///
 - (DBRpcTask<DBFILESGetTemporaryUploadLinkResult *, DBNilObject *> *)
-getTemporaryUploadLink:(DBFILESCommitInfo *)commitInfo
-              duration:(nullable NSNumber *)duration;
+    getTemporaryUploadLink:(DBFILESCommitInfo *)commitInfo
+                  duration:(nullable NSNumber *)duration;
 
 ///
 /// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
@@ -1324,12 +1324,12 @@ getTemporaryUploadLink:(DBFILESCommitInfo *)commitInfo
 /// `DBFILESThumbnailError` object on failure.
 ///
 - (DBDownloadUrlTask<DBFILESFileMetadata *, DBFILESThumbnailError *> *)
-getThumbnailUrl:(NSString *)path
-         format:(nullable DBFILESThumbnailFormat *)format
-           size:(nullable DBFILESThumbnailSize *)size
-           mode:(nullable DBFILESThumbnailMode *)mode
-      overwrite:(BOOL)overwrite
-    destination:(NSURL *)destination;
+    getThumbnailUrl:(NSString *)path
+             format:(nullable DBFILESThumbnailFormat *)format
+               size:(nullable DBFILESThumbnailSize *)size
+               mode:(nullable DBFILESThumbnailMode *)mode
+          overwrite:(BOOL)overwrite
+        destination:(NSURL *)destination;
 
 ///
 /// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
@@ -1376,14 +1376,14 @@ getThumbnailUrl:(NSString *)path
 /// `DBFILESThumbnailError` object on failure.
 ///
 - (DBDownloadUrlTask<DBFILESFileMetadata *, DBFILESThumbnailError *> *)
-getThumbnailUrl:(NSString *)path
-         format:(nullable DBFILESThumbnailFormat *)format
-           size:(nullable DBFILESThumbnailSize *)size
-           mode:(nullable DBFILESThumbnailMode *)mode
-      overwrite:(BOOL)overwrite
-    destination:(NSURL *)destination
-byteOffsetStart:(NSNumber *)byteOffsetStart
-  byteOffsetEnd:(NSNumber *)byteOffsetEnd;
+    getThumbnailUrl:(NSString *)path
+             format:(nullable DBFILESThumbnailFormat *)format
+               size:(nullable DBFILESThumbnailSize *)size
+               mode:(nullable DBFILESThumbnailMode *)mode
+          overwrite:(BOOL)overwrite
+        destination:(NSURL *)destination
+    byteOffsetStart:(NSNumber *)byteOffsetStart
+      byteOffsetEnd:(NSNumber *)byteOffsetEnd;
 
 ///
 /// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
@@ -1410,10 +1410,10 @@ byteOffsetStart:(NSNumber *)byteOffsetStart
 /// `DBFILESThumbnailError` object on failure.
 ///
 - (DBDownloadDataTask<DBFILESFileMetadata *, DBFILESThumbnailError *> *)
-getThumbnailData:(NSString *)path
-          format:(nullable DBFILESThumbnailFormat *)format
-            size:(nullable DBFILESThumbnailSize *)size
-            mode:(nullable DBFILESThumbnailMode *)mode;
+    getThumbnailData:(NSString *)path
+              format:(nullable DBFILESThumbnailFormat *)format
+                size:(nullable DBFILESThumbnailSize *)size
+                mode:(nullable DBFILESThumbnailMode *)mode;
 
 ///
 /// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
@@ -1450,12 +1450,12 @@ getThumbnailData:(NSString *)path
 /// `DBFILESThumbnailError` object on failure.
 ///
 - (DBDownloadDataTask<DBFILESFileMetadata *, DBFILESThumbnailError *> *)
-getThumbnailData:(NSString *)path
-          format:(nullable DBFILESThumbnailFormat *)format
-            size:(nullable DBFILESThumbnailSize *)size
-            mode:(nullable DBFILESThumbnailMode *)mode
- byteOffsetStart:(NSNumber *)byteOffsetStart
-   byteOffsetEnd:(NSNumber *)byteOffsetEnd;
+    getThumbnailData:(NSString *)path
+              format:(nullable DBFILESThumbnailFormat *)format
+                size:(nullable DBFILESThumbnailSize *)size
+                mode:(nullable DBFILESThumbnailMode *)mode
+     byteOffsetStart:(NSNumber *)byteOffsetStart
+       byteOffsetEnd:(NSNumber *)byteOffsetEnd;
 
 ///
 /// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
@@ -1495,12 +1495,12 @@ getThumbnailData:(NSString *)path
 /// `DBFILESThumbnailV2Error` object on failure.
 ///
 - (DBDownloadUrlTask<DBFILESPreviewResult *, DBFILESThumbnailV2Error *> *)
-getThumbnailV2Url:(DBFILESPathOrLink *)resource
-           format:(nullable DBFILESThumbnailFormat *)format
-             size:(nullable DBFILESThumbnailSize *)size
-             mode:(nullable DBFILESThumbnailMode *)mode
-        overwrite:(BOOL)overwrite
-      destination:(NSURL *)destination;
+    getThumbnailV2Url:(DBFILESPathOrLink *)resource
+               format:(nullable DBFILESThumbnailFormat *)format
+                 size:(nullable DBFILESThumbnailSize *)size
+                 mode:(nullable DBFILESThumbnailMode *)mode
+            overwrite:(BOOL)overwrite
+          destination:(NSURL *)destination;
 
 ///
 /// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
@@ -1550,14 +1550,14 @@ getThumbnailV2Url:(DBFILESPathOrLink *)resource
 /// `DBFILESThumbnailV2Error` object on failure.
 ///
 - (DBDownloadUrlTask<DBFILESPreviewResult *, DBFILESThumbnailV2Error *> *)
-getThumbnailV2Url:(DBFILESPathOrLink *)resource
-           format:(nullable DBFILESThumbnailFormat *)format
-             size:(nullable DBFILESThumbnailSize *)size
-             mode:(nullable DBFILESThumbnailMode *)mode
-        overwrite:(BOOL)overwrite
-      destination:(NSURL *)destination
-  byteOffsetStart:(NSNumber *)byteOffsetStart
-    byteOffsetEnd:(NSNumber *)byteOffsetEnd;
+    getThumbnailV2Url:(DBFILESPathOrLink *)resource
+               format:(nullable DBFILESThumbnailFormat *)format
+                 size:(nullable DBFILESThumbnailSize *)size
+                 mode:(nullable DBFILESThumbnailMode *)mode
+            overwrite:(BOOL)overwrite
+          destination:(NSURL *)destination
+      byteOffsetStart:(NSNumber *)byteOffsetStart
+        byteOffsetEnd:(NSNumber *)byteOffsetEnd;
 
 ///
 /// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
@@ -1587,10 +1587,10 @@ getThumbnailV2Url:(DBFILESPathOrLink *)resource
 /// `DBFILESThumbnailV2Error` object on failure.
 ///
 - (DBDownloadDataTask<DBFILESPreviewResult *, DBFILESThumbnailV2Error *> *)
-getThumbnailV2Data:(DBFILESPathOrLink *)resource
-            format:(nullable DBFILESThumbnailFormat *)format
-              size:(nullable DBFILESThumbnailSize *)size
-              mode:(nullable DBFILESThumbnailMode *)mode;
+    getThumbnailV2Data:(DBFILESPathOrLink *)resource
+                format:(nullable DBFILESThumbnailFormat *)format
+                  size:(nullable DBFILESThumbnailSize *)size
+                  mode:(nullable DBFILESThumbnailMode *)mode;
 
 ///
 /// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
@@ -1607,9 +1607,9 @@ getThumbnailV2Data:(DBFILESPathOrLink *)resource
 /// `DBFILESThumbnailV2Error` object on failure.
 ///
 - (DBDownloadDataTask<DBFILESPreviewResult *, DBFILESThumbnailV2Error *> *)
-getThumbnailV2Data:(DBFILESPathOrLink *)resource
-   byteOffsetStart:(NSNumber *)byteOffsetStart
-     byteOffsetEnd:(NSNumber *)byteOffsetEnd;
+    getThumbnailV2Data:(DBFILESPathOrLink *)resource
+       byteOffsetStart:(NSNumber *)byteOffsetStart
+         byteOffsetEnd:(NSNumber *)byteOffsetEnd;
 
 ///
 /// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
@@ -1630,12 +1630,12 @@ getThumbnailV2Data:(DBFILESPathOrLink *)resource
 /// `DBFILESThumbnailV2Error` object on failure.
 ///
 - (DBDownloadDataTask<DBFILESPreviewResult *, DBFILESThumbnailV2Error *> *)
-getThumbnailV2Data:(DBFILESPathOrLink *)resource
-            format:(nullable DBFILESThumbnailFormat *)format
-              size:(nullable DBFILESThumbnailSize *)size
-              mode:(nullable DBFILESThumbnailMode *)mode
-   byteOffsetStart:(NSNumber *)byteOffsetStart
-     byteOffsetEnd:(NSNumber *)byteOffsetEnd;
+    getThumbnailV2Data:(DBFILESPathOrLink *)resource
+                format:(nullable DBFILESThumbnailFormat *)format
+                  size:(nullable DBFILESThumbnailSize *)size
+                  mode:(nullable DBFILESThumbnailMode *)mode
+       byteOffsetStart:(NSNumber *)byteOffsetStart
+         byteOffsetEnd:(NSNumber *)byteOffsetEnd;
 
 ///
 /// Get thumbnails for a list of images. We allow up to 25 thumbnails in a single batch. This method currently supports
@@ -1711,16 +1711,16 @@ getThumbnailV2Data:(DBFILESPathOrLink *)resource
 /// `DBFILESListFolderError` object on failure.
 ///
 - (DBRpcTask<DBFILESListFolderResult *, DBFILESListFolderError *> *)
-                     listFolder:(NSString *)path
-                      recursive:(nullable NSNumber *)recursive
-               includeMediaInfo:(nullable NSNumber *)includeMediaInfo
-                 includeDeleted:(nullable NSNumber *)includeDeleted
-includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMembers
-          includeMountedFolders:(nullable NSNumber *)includeMountedFolders
-                          limit:(nullable NSNumber *)limit
-                     sharedLink:(nullable DBFILESSharedLink *)sharedLink
-          includePropertyGroups:(nullable DBFILEPROPERTIESTemplateFilterBase *)includePropertyGroups
-    includeNonDownloadableFiles:(nullable NSNumber *)includeNonDownloadableFiles;
+                         listFolder:(NSString *)path
+                          recursive:(nullable NSNumber *)recursive
+                   includeMediaInfo:(nullable NSNumber *)includeMediaInfo
+                     includeDeleted:(nullable NSNumber *)includeDeleted
+    includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMembers
+              includeMountedFolders:(nullable NSNumber *)includeMountedFolders
+                              limit:(nullable NSNumber *)limit
+                         sharedLink:(nullable DBFILESSharedLink *)sharedLink
+              includePropertyGroups:(nullable DBFILEPROPERTIESTemplateFilterBase *)includePropertyGroups
+        includeNonDownloadableFiles:(nullable NSNumber *)includeNonDownloadableFiles;
 
 ///
 /// Once a cursor has been retrieved from `listFolder`, use this to paginate through all files and retrieve updates to
@@ -1775,16 +1775,16 @@ includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMem
 /// success or a `DBFILESListFolderError` object on failure.
 ///
 - (DBRpcTask<DBFILESListFolderGetLatestCursorResult *, DBFILESListFolderError *> *)
-      listFolderGetLatestCursor:(NSString *)path
-                      recursive:(nullable NSNumber *)recursive
-               includeMediaInfo:(nullable NSNumber *)includeMediaInfo
-                 includeDeleted:(nullable NSNumber *)includeDeleted
-includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMembers
-          includeMountedFolders:(nullable NSNumber *)includeMountedFolders
-                          limit:(nullable NSNumber *)limit
-                     sharedLink:(nullable DBFILESSharedLink *)sharedLink
-          includePropertyGroups:(nullable DBFILEPROPERTIESTemplateFilterBase *)includePropertyGroups
-    includeNonDownloadableFiles:(nullable NSNumber *)includeNonDownloadableFiles;
+          listFolderGetLatestCursor:(NSString *)path
+                          recursive:(nullable NSNumber *)recursive
+                   includeMediaInfo:(nullable NSNumber *)includeMediaInfo
+                     includeDeleted:(nullable NSNumber *)includeDeleted
+    includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMembers
+              includeMountedFolders:(nullable NSNumber *)includeMountedFolders
+                              limit:(nullable NSNumber *)limit
+                         sharedLink:(nullable DBFILESSharedLink *)sharedLink
+              includePropertyGroups:(nullable DBFILEPROPERTIESTemplateFilterBase *)includePropertyGroups
+        includeNonDownloadableFiles:(nullable NSNumber *)includeNonDownloadableFiles;
 
 ///
 /// A longpoll endpoint to wait for changes on an account. In conjunction with `listFolderContinue`, this call gives you
@@ -1819,8 +1819,8 @@ includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMem
 /// or a `DBFILESListFolderLongpollError` object on failure.
 ///
 - (DBRpcTask<DBFILESListFolderLongpollResult *, DBFILESListFolderLongpollError *> *)
-listFolderLongpoll:(NSString *)cursor
-           timeout:(nullable NSNumber *)timeout;
+    listFolderLongpoll:(NSString *)cursor
+               timeout:(nullable NSNumber *)timeout;
 
 ///
 /// Returns revisions for files based on a file path or a file id. The file path or file id is identified from the
@@ -1853,9 +1853,9 @@ listFolderLongpoll:(NSString *)cursor
 /// `DBFILESListRevisionsError` object on failure.
 ///
 - (DBRpcTask<DBFILESListRevisionsResult *, DBFILESListRevisionsError *> *)
-listRevisions:(NSString *)path
-         mode:(nullable DBFILESListRevisionsMode *)mode
-        limit:(nullable NSNumber *)limit;
+    listRevisions:(NSString *)path
+             mode:(nullable DBFILESListRevisionsMode *)mode
+            limit:(nullable NSNumber *)limit;
 
 ///
 /// Lock the files at the given paths. A locked file will be writable only by the lock holder. A successful response
@@ -2076,10 +2076,10 @@ listRevisions:(NSString *)path
 /// `DBFILESPaperUpdateError` object on failure.
 ///
 - (DBUploadTask<DBFILESPaperUpdateResult *, DBFILESPaperUpdateError *> *)
- paperUpdateUrl:(NSString *)path
-   importFormat:(DBFILESImportFormat *)importFormat
-docUpdatePolicy:(DBFILESPaperDocUpdatePolicy *)docUpdatePolicy
-       inputUrl:(NSString *)inputUrl;
+     paperUpdateUrl:(NSString *)path
+       importFormat:(DBFILESImportFormat *)importFormat
+    docUpdatePolicy:(DBFILESPaperDocUpdatePolicy *)docUpdatePolicy
+           inputUrl:(NSString *)inputUrl;
 
 ///
 /// Updates an existing Paper doc with the provided content.
@@ -2096,11 +2096,11 @@ docUpdatePolicy:(DBFILESPaperDocUpdatePolicy *)docUpdatePolicy
 /// `DBFILESPaperUpdateError` object on failure.
 ///
 - (DBUploadTask<DBFILESPaperUpdateResult *, DBFILESPaperUpdateError *> *)
- paperUpdateUrl:(NSString *)path
-   importFormat:(DBFILESImportFormat *)importFormat
-docUpdatePolicy:(DBFILESPaperDocUpdatePolicy *)docUpdatePolicy
-  paperRevision:(nullable NSNumber *)paperRevision
-       inputUrl:(NSString *)inputUrl;
+     paperUpdateUrl:(NSString *)path
+       importFormat:(DBFILESImportFormat *)importFormat
+    docUpdatePolicy:(DBFILESPaperDocUpdatePolicy *)docUpdatePolicy
+      paperRevision:(nullable NSNumber *)paperRevision
+           inputUrl:(NSString *)inputUrl;
 
 ///
 /// Updates an existing Paper doc with the provided content.
@@ -2115,10 +2115,10 @@ docUpdatePolicy:(DBFILESPaperDocUpdatePolicy *)docUpdatePolicy
 /// `DBFILESPaperUpdateError` object on failure.
 ///
 - (DBUploadTask<DBFILESPaperUpdateResult *, DBFILESPaperUpdateError *> *)
-paperUpdateData:(NSString *)path
-   importFormat:(DBFILESImportFormat *)importFormat
-docUpdatePolicy:(DBFILESPaperDocUpdatePolicy *)docUpdatePolicy
-      inputData:(NSData *)inputData;
+    paperUpdateData:(NSString *)path
+       importFormat:(DBFILESImportFormat *)importFormat
+    docUpdatePolicy:(DBFILESPaperDocUpdatePolicy *)docUpdatePolicy
+          inputData:(NSData *)inputData;
 
 ///
 /// Updates an existing Paper doc with the provided content.
@@ -2135,11 +2135,11 @@ docUpdatePolicy:(DBFILESPaperDocUpdatePolicy *)docUpdatePolicy
 /// `DBFILESPaperUpdateError` object on failure.
 ///
 - (DBUploadTask<DBFILESPaperUpdateResult *, DBFILESPaperUpdateError *> *)
-paperUpdateData:(NSString *)path
-   importFormat:(DBFILESImportFormat *)importFormat
-docUpdatePolicy:(DBFILESPaperDocUpdatePolicy *)docUpdatePolicy
-  paperRevision:(nullable NSNumber *)paperRevision
-      inputData:(NSData *)inputData;
+    paperUpdateData:(NSString *)path
+       importFormat:(DBFILESImportFormat *)importFormat
+    docUpdatePolicy:(DBFILESPaperDocUpdatePolicy *)docUpdatePolicy
+      paperRevision:(nullable NSNumber *)paperRevision
+          inputData:(NSData *)inputData;
 
 ///
 /// Updates an existing Paper doc with the provided content.
@@ -2154,10 +2154,10 @@ docUpdatePolicy:(DBFILESPaperDocUpdatePolicy *)docUpdatePolicy
 /// `DBFILESPaperUpdateError` object on failure.
 ///
 - (DBUploadTask<DBFILESPaperUpdateResult *, DBFILESPaperUpdateError *> *)
-paperUpdateStream:(NSString *)path
-     importFormat:(DBFILESImportFormat *)importFormat
-  docUpdatePolicy:(DBFILESPaperDocUpdatePolicy *)docUpdatePolicy
-      inputStream:(NSInputStream *)inputStream;
+    paperUpdateStream:(NSString *)path
+         importFormat:(DBFILESImportFormat *)importFormat
+      docUpdatePolicy:(DBFILESPaperDocUpdatePolicy *)docUpdatePolicy
+          inputStream:(NSInputStream *)inputStream;
 
 ///
 /// Updates an existing Paper doc with the provided content.
@@ -2174,11 +2174,11 @@ paperUpdateStream:(NSString *)path
 /// `DBFILESPaperUpdateError` object on failure.
 ///
 - (DBUploadTask<DBFILESPaperUpdateResult *, DBFILESPaperUpdateError *> *)
-paperUpdateStream:(NSString *)path
-     importFormat:(DBFILESImportFormat *)importFormat
-  docUpdatePolicy:(DBFILESPaperDocUpdatePolicy *)docUpdatePolicy
-    paperRevision:(nullable NSNumber *)paperRevision
-      inputStream:(NSInputStream *)inputStream;
+    paperUpdateStream:(NSString *)path
+         importFormat:(DBFILESImportFormat *)importFormat
+      docUpdatePolicy:(DBFILESPaperDocUpdatePolicy *)docUpdatePolicy
+        paperRevision:(nullable NSNumber *)paperRevision
+          inputStream:(NSInputStream *)inputStream;
 
 ///
 /// Permanently delete the file or folder at a given path (see https://www.dropbox.com/en/help/40). If the given file or
@@ -2218,8 +2218,8 @@ paperUpdateStream:(NSString *)path
 /// `DBFILEPROPERTIESAddPropertiesError` object on failure.
 ///
 - (DBRpcTask<DBNilObject *, DBFILEPROPERTIESAddPropertiesError *> *)
- propertiesAdd:(NSString *)path
-propertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
+     propertiesAdd:(NSString *)path
+    propertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
     __deprecated_msg("propertiesAdd is deprecated.");
 
 ///
@@ -2233,8 +2233,8 @@ propertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
 /// `DBFILEPROPERTIESInvalidPropertyGroupError` object on failure.
 ///
 - (DBRpcTask<DBNilObject *, DBFILEPROPERTIESInvalidPropertyGroupError *> *)
-propertiesOverwrite:(NSString *)path
-     propertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
+    propertiesOverwrite:(NSString *)path
+         propertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
     __deprecated_msg("propertiesOverwrite is deprecated.");
 
 ///
@@ -2270,8 +2270,8 @@ propertiesOverwrite:(NSString *)path
 /// @return Through the response callback, the caller will receive a `DBFILEPROPERTIESListTemplateResult` object on
 /// success or a `DBFILEPROPERTIESTemplateError` object on failure.
 ///
-- (DBRpcTask<DBFILEPROPERTIESListTemplateResult *, DBFILEPROPERTIESTemplateError *> *)propertiesTemplateList
-    __deprecated_msg("propertiesTemplateList is deprecated.");
+- (DBRpcTask<DBFILEPROPERTIESListTemplateResult *, DBFILEPROPERTIESTemplateError *> *)
+    propertiesTemplateList __deprecated_msg("propertiesTemplateList is deprecated.");
 
 ///
 /// DEPRECATED: The propertiesUpdate route
@@ -2283,8 +2283,8 @@ propertiesOverwrite:(NSString *)path
 /// `DBFILEPROPERTIESUpdatePropertiesError` object on failure.
 ///
 - (DBRpcTask<DBNilObject *, DBFILEPROPERTIESUpdatePropertiesError *> *)
-    propertiesUpdate:(NSString *)path
-updatePropertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroupUpdate *> *)updatePropertyGroups
+        propertiesUpdate:(NSString *)path
+    updatePropertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroupUpdate *> *)updatePropertyGroups
     __deprecated_msg("propertiesUpdate is deprecated.");
 
 ///
@@ -2300,7 +2300,7 @@ updatePropertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroupUpdate *> *)updatePro
 
 ///
 /// Save the data from a specified URL into a file in user's Dropbox. Note that the transfer from the URL must complete
-/// within 5 minutes, or the operation will time out and the job will fail. If the given path already exists, the file
+/// within 15 minutes, or the operation will time out and the job will fail. If the given path already exists, the file
 /// will be renamed to avoid the conflict (e.g. myfile (1).txt).
 ///
 /// @param path The path in Dropbox where the URL will be saved to.
@@ -2409,7 +2409,7 @@ updatePropertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroupUpdate *> *)updatePro
 /// 20 tags can be added to a given item.
 ///
 /// @param path Path to the item to be tagged.
-/// @param tagText The value of the tag to add.
+/// @param tagText The value of the tag to add. Will be automatically converted to lowercase letters.
 ///
 /// @return Through the response callback, the caller will receive a `void` object on success or a `DBFILESAddTagError`
 /// object on failure.
@@ -2430,7 +2430,7 @@ updatePropertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroupUpdate *> *)updatePro
 /// Remove a tag from an item.
 ///
 /// @param path Path to the item to tag.
-/// @param tagText The tag to remove.
+/// @param tagText The tag to remove. Will be automatically converted to lowercase letters.
 ///
 /// @return Through the response callback, the caller will receive a `void` object on success or a
 /// `DBFILESRemoveTagError` object on failure.
@@ -2479,15 +2479,15 @@ updatePropertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroupUpdate *> *)updatePro
 /// `DBFILESUploadError` object on failure.
 ///
 - (DBUploadTask<DBFILESFileMetadata *, DBFILESUploadError *> *)
-     uploadUrl:(NSString *)path
-          mode:(nullable DBFILESWriteMode *)mode
-    autorename:(nullable NSNumber *)autorename
-clientModified:(nullable NSDate *)clientModified
-          mute:(nullable NSNumber *)mute
-propertyGroups:(nullable NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
-strictConflict:(nullable NSNumber *)strictConflict
-   contentHash:(nullable NSString *)contentHash
-      inputUrl:(NSString *)inputUrl;
+         uploadUrl:(NSString *)path
+              mode:(nullable DBFILESWriteMode *)mode
+        autorename:(nullable NSNumber *)autorename
+    clientModified:(nullable NSDate *)clientModified
+              mute:(nullable NSNumber *)mute
+    propertyGroups:(nullable NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
+    strictConflict:(nullable NSNumber *)strictConflict
+       contentHash:(nullable NSString *)contentHash
+          inputUrl:(NSString *)inputUrl;
 
 ///
 /// Create a new file with the contents provided in the request. Do not use this to upload a file larger than 150 MB.
@@ -2518,15 +2518,15 @@ strictConflict:(nullable NSNumber *)strictConflict
 /// `DBFILESUploadError` object on failure.
 ///
 - (DBUploadTask<DBFILESFileMetadata *, DBFILESUploadError *> *)
-    uploadData:(NSString *)path
-          mode:(nullable DBFILESWriteMode *)mode
-    autorename:(nullable NSNumber *)autorename
-clientModified:(nullable NSDate *)clientModified
-          mute:(nullable NSNumber *)mute
-propertyGroups:(nullable NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
-strictConflict:(nullable NSNumber *)strictConflict
-   contentHash:(nullable NSString *)contentHash
-     inputData:(NSData *)inputData;
+        uploadData:(NSString *)path
+              mode:(nullable DBFILESWriteMode *)mode
+        autorename:(nullable NSNumber *)autorename
+    clientModified:(nullable NSDate *)clientModified
+              mute:(nullable NSNumber *)mute
+    propertyGroups:(nullable NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
+    strictConflict:(nullable NSNumber *)strictConflict
+       contentHash:(nullable NSString *)contentHash
+         inputData:(NSData *)inputData;
 
 ///
 /// Create a new file with the contents provided in the request. Do not use this to upload a file larger than 150 MB.
@@ -2557,15 +2557,15 @@ strictConflict:(nullable NSNumber *)strictConflict
 /// `DBFILESUploadError` object on failure.
 ///
 - (DBUploadTask<DBFILESFileMetadata *, DBFILESUploadError *> *)
-  uploadStream:(NSString *)path
-          mode:(nullable DBFILESWriteMode *)mode
-    autorename:(nullable NSNumber *)autorename
-clientModified:(nullable NSDate *)clientModified
-          mute:(nullable NSNumber *)mute
-propertyGroups:(nullable NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
-strictConflict:(nullable NSNumber *)strictConflict
-   contentHash:(nullable NSString *)contentHash
-   inputStream:(NSInputStream *)inputStream;
+      uploadStream:(NSString *)path
+              mode:(nullable DBFILESWriteMode *)mode
+        autorename:(nullable NSNumber *)autorename
+    clientModified:(nullable NSDate *)clientModified
+              mute:(nullable NSNumber *)mute
+    propertyGroups:(nullable NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
+    strictConflict:(nullable NSNumber *)strictConflict
+       contentHash:(nullable NSString *)contentHash
+       inputStream:(NSInputStream *)inputStream;
 
 ///
 /// Append more data to an upload session. When the parameter close is set, this call will close the session. A single
@@ -2603,10 +2603,10 @@ strictConflict:(nullable NSNumber *)strictConflict
 /// `DBFILESUploadSessionAppendError` object on failure.
 ///
 - (DBUploadTask<DBNilObject *, DBFILESUploadSessionAppendError *> *)
-uploadSessionAppendV2Url:(DBFILESUploadSessionCursor *)cursor
-                   close:(nullable NSNumber *)close
-             contentHash:(nullable NSString *)contentHash
-                inputUrl:(NSString *)inputUrl;
+    uploadSessionAppendV2Url:(DBFILESUploadSessionCursor *)cursor
+                       close:(nullable NSNumber *)close
+                 contentHash:(nullable NSString *)contentHash
+                    inputUrl:(NSString *)inputUrl;
 
 ///
 /// Append more data to an upload session. When the parameter close is set, this call will close the session. A single
@@ -2644,10 +2644,10 @@ uploadSessionAppendV2Url:(DBFILESUploadSessionCursor *)cursor
 /// `DBFILESUploadSessionAppendError` object on failure.
 ///
 - (DBUploadTask<DBNilObject *, DBFILESUploadSessionAppendError *> *)
-uploadSessionAppendV2Data:(DBFILESUploadSessionCursor *)cursor
-                    close:(nullable NSNumber *)close
-              contentHash:(nullable NSString *)contentHash
-                inputData:(NSData *)inputData;
+    uploadSessionAppendV2Data:(DBFILESUploadSessionCursor *)cursor
+                        close:(nullable NSNumber *)close
+                  contentHash:(nullable NSString *)contentHash
+                    inputData:(NSData *)inputData;
 
 ///
 /// Append more data to an upload session. When the parameter close is set, this call will close the session. A single
@@ -2663,8 +2663,8 @@ uploadSessionAppendV2Data:(DBFILESUploadSessionCursor *)cursor
 /// `DBFILESUploadSessionAppendError` object on failure.
 ///
 - (DBUploadTask<DBNilObject *, DBFILESUploadSessionAppendError *> *)
-uploadSessionAppendV2Stream:(DBFILESUploadSessionCursor *)cursor
-                inputStream:(NSInputStream *)inputStream;
+    uploadSessionAppendV2Stream:(DBFILESUploadSessionCursor *)cursor
+                    inputStream:(NSInputStream *)inputStream;
 
 ///
 /// Append more data to an upload session. When the parameter close is set, this call will close the session. A single
@@ -2685,10 +2685,10 @@ uploadSessionAppendV2Stream:(DBFILESUploadSessionCursor *)cursor
 /// `DBFILESUploadSessionAppendError` object on failure.
 ///
 - (DBUploadTask<DBNilObject *, DBFILESUploadSessionAppendError *> *)
-uploadSessionAppendV2Stream:(DBFILESUploadSessionCursor *)cursor
-                      close:(nullable NSNumber *)close
-                contentHash:(nullable NSString *)contentHash
-                inputStream:(NSInputStream *)inputStream;
+    uploadSessionAppendV2Stream:(DBFILESUploadSessionCursor *)cursor
+                          close:(nullable NSNumber *)close
+                    contentHash:(nullable NSString *)contentHash
+                    inputStream:(NSInputStream *)inputStream;
 
 ///
 /// DEPRECATED: Append more data to an upload session. A single request should not upload more than 150 MB. The maximum
@@ -2763,9 +2763,9 @@ uploadSessionAppendV2Stream:(DBFILESUploadSessionCursor *)cursor
 /// `DBFILESUploadSessionFinishError` object on failure.
 ///
 - (DBUploadTask<DBFILESFileMetadata *, DBFILESUploadSessionFinishError *> *)
-uploadSessionFinishUrl:(DBFILESUploadSessionCursor *)cursor
-                commit:(DBFILESCommitInfo *)commit
-              inputUrl:(NSString *)inputUrl;
+    uploadSessionFinishUrl:(DBFILESUploadSessionCursor *)cursor
+                    commit:(DBFILESCommitInfo *)commit
+                  inputUrl:(NSString *)inputUrl;
 
 ///
 /// Finish an upload session and save the uploaded data to the given file path. A single request should not upload more
@@ -2785,10 +2785,10 @@ uploadSessionFinishUrl:(DBFILESUploadSessionCursor *)cursor
 /// `DBFILESUploadSessionFinishError` object on failure.
 ///
 - (DBUploadTask<DBFILESFileMetadata *, DBFILESUploadSessionFinishError *> *)
-uploadSessionFinishUrl:(DBFILESUploadSessionCursor *)cursor
-                commit:(DBFILESCommitInfo *)commit
-           contentHash:(nullable NSString *)contentHash
-              inputUrl:(NSString *)inputUrl;
+    uploadSessionFinishUrl:(DBFILESUploadSessionCursor *)cursor
+                    commit:(DBFILESCommitInfo *)commit
+               contentHash:(nullable NSString *)contentHash
+                  inputUrl:(NSString *)inputUrl;
 
 ///
 /// Finish an upload session and save the uploaded data to the given file path. A single request should not upload more
@@ -2805,9 +2805,9 @@ uploadSessionFinishUrl:(DBFILESUploadSessionCursor *)cursor
 /// `DBFILESUploadSessionFinishError` object on failure.
 ///
 - (DBUploadTask<DBFILESFileMetadata *, DBFILESUploadSessionFinishError *> *)
-uploadSessionFinishData:(DBFILESUploadSessionCursor *)cursor
-                 commit:(DBFILESCommitInfo *)commit
-              inputData:(NSData *)inputData;
+    uploadSessionFinishData:(DBFILESUploadSessionCursor *)cursor
+                     commit:(DBFILESCommitInfo *)commit
+                  inputData:(NSData *)inputData;
 
 ///
 /// Finish an upload session and save the uploaded data to the given file path. A single request should not upload more
@@ -2827,10 +2827,10 @@ uploadSessionFinishData:(DBFILESUploadSessionCursor *)cursor
 /// `DBFILESUploadSessionFinishError` object on failure.
 ///
 - (DBUploadTask<DBFILESFileMetadata *, DBFILESUploadSessionFinishError *> *)
-uploadSessionFinishData:(DBFILESUploadSessionCursor *)cursor
-                 commit:(DBFILESCommitInfo *)commit
-            contentHash:(nullable NSString *)contentHash
-              inputData:(NSData *)inputData;
+    uploadSessionFinishData:(DBFILESUploadSessionCursor *)cursor
+                     commit:(DBFILESCommitInfo *)commit
+                contentHash:(nullable NSString *)contentHash
+                  inputData:(NSData *)inputData;
 
 ///
 /// Finish an upload session and save the uploaded data to the given file path. A single request should not upload more
@@ -2847,9 +2847,9 @@ uploadSessionFinishData:(DBFILESUploadSessionCursor *)cursor
 /// `DBFILESUploadSessionFinishError` object on failure.
 ///
 - (DBUploadTask<DBFILESFileMetadata *, DBFILESUploadSessionFinishError *> *)
-uploadSessionFinishStream:(DBFILESUploadSessionCursor *)cursor
-                   commit:(DBFILESCommitInfo *)commit
-              inputStream:(NSInputStream *)inputStream;
+    uploadSessionFinishStream:(DBFILESUploadSessionCursor *)cursor
+                       commit:(DBFILESCommitInfo *)commit
+                  inputStream:(NSInputStream *)inputStream;
 
 ///
 /// Finish an upload session and save the uploaded data to the given file path. A single request should not upload more
@@ -2869,10 +2869,10 @@ uploadSessionFinishStream:(DBFILESUploadSessionCursor *)cursor
 /// `DBFILESUploadSessionFinishError` object on failure.
 ///
 - (DBUploadTask<DBFILESFileMetadata *, DBFILESUploadSessionFinishError *> *)
-uploadSessionFinishStream:(DBFILESUploadSessionCursor *)cursor
-                   commit:(DBFILESCommitInfo *)commit
-              contentHash:(nullable NSString *)contentHash
-              inputStream:(NSInputStream *)inputStream;
+    uploadSessionFinishStream:(DBFILESUploadSessionCursor *)cursor
+                       commit:(DBFILESCommitInfo *)commit
+                  contentHash:(nullable NSString *)contentHash
+                  inputStream:(NSInputStream *)inputStream;
 
 ///
 /// DEPRECATED: This route helps you commit many files at once into a user's Dropbox. Use `uploadSessionStart` and
@@ -2992,10 +2992,10 @@ uploadSessionFinishStream:(DBFILESUploadSessionCursor *)cursor
 /// or a `DBFILESUploadSessionStartError` object on failure.
 ///
 - (DBUploadTask<DBFILESUploadSessionStartResult *, DBFILESUploadSessionStartError *> *)
-uploadSessionStartUrl:(nullable NSNumber *)close
-          sessionType:(nullable DBFILESUploadSessionType *)sessionType
-          contentHash:(nullable NSString *)contentHash
-             inputUrl:(NSString *)inputUrl;
+    uploadSessionStartUrl:(nullable NSNumber *)close
+              sessionType:(nullable DBFILESUploadSessionType *)sessionType
+              contentHash:(nullable NSString *)contentHash
+                 inputUrl:(NSString *)inputUrl;
 
 ///
 /// Upload sessions allow you to upload a single file in one or more requests, for example where the size of the file is
@@ -3060,10 +3060,10 @@ uploadSessionStartUrl:(nullable NSNumber *)close
 /// or a `DBFILESUploadSessionStartError` object on failure.
 ///
 - (DBUploadTask<DBFILESUploadSessionStartResult *, DBFILESUploadSessionStartError *> *)
-uploadSessionStartData:(nullable NSNumber *)close
-           sessionType:(nullable DBFILESUploadSessionType *)sessionType
-           contentHash:(nullable NSString *)contentHash
-             inputData:(NSData *)inputData;
+    uploadSessionStartData:(nullable NSNumber *)close
+               sessionType:(nullable DBFILESUploadSessionType *)sessionType
+               contentHash:(nullable NSString *)contentHash
+                 inputData:(NSData *)inputData;
 
 ///
 /// Upload sessions allow you to upload a single file in one or more requests, for example where the size of the file is
@@ -3128,10 +3128,10 @@ uploadSessionStartData:(nullable NSNumber *)close
 /// or a `DBFILESUploadSessionStartError` object on failure.
 ///
 - (DBUploadTask<DBFILESUploadSessionStartResult *, DBFILESUploadSessionStartError *> *)
-uploadSessionStartStream:(nullable NSNumber *)close
-             sessionType:(nullable DBFILESUploadSessionType *)sessionType
-             contentHash:(nullable NSString *)contentHash
-             inputStream:(NSInputStream *)inputStream;
+    uploadSessionStartStream:(nullable NSNumber *)close
+                 sessionType:(nullable DBFILESUploadSessionType *)sessionType
+                 contentHash:(nullable NSString *)contentHash
+                 inputStream:(NSInputStream *)inputStream;
 
 ///
 /// This route starts batch of upload_sessions. Please refer to `upload_session/start` usage. Calls to this endpoint
@@ -3160,8 +3160,8 @@ uploadSessionStartStream:(nullable NSNumber *)close
 /// success or a `void` object on failure.
 ///
 - (DBRpcTask<DBFILESUploadSessionStartBatchResult *, DBNilObject *> *)
-uploadSessionStartBatch:(NSNumber *)numSessions
-            sessionType:(nullable DBFILESUploadSessionType *)sessionType;
+    uploadSessionStartBatch:(NSNumber *)numSessions
+                sessionType:(nullable DBFILESUploadSessionType *)sessionType;
 
 @end
 

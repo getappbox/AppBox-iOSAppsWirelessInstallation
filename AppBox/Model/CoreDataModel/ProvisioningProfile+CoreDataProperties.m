@@ -1,5 +1,5 @@
 //
-//  ProvisioningProfile+CoreDataProperties.m
+//  ABProvisioningProfile+CoreDataProperties.m
 //  
 //
 //  Created by Vineet Choudhary on 11/10/18.
@@ -8,9 +8,9 @@
 
 #import "ProvisioningProfile+CoreDataProperties.h"
 
-@implementation ProvisioningProfile (CoreDataProperties)
+@implementation ABProvisioningProfile (CoreDataProperties)
 
-+ (NSFetchRequest<ProvisioningProfile *> *)fetchRequest {
++ (NSFetchRequest<ABProvisioningProfile *> *)fetchRequest {
 	return [NSFetchRequest fetchRequestWithEntityName:@"ProvisioningProfile"];
 }
 

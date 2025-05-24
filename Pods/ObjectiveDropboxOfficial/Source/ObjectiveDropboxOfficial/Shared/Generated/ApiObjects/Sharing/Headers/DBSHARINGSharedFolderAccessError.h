@@ -37,6 +37,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGSharedFolderAccessErrorTag){
     /// The user is not a member of the shared folder thus cannot access it.
     DBSHARINGSharedFolderAccessErrorNotAMember,
 
+    /// The user does not exist or their account is disabled.
+    DBSHARINGSharedFolderAccessErrorInvalidMember,
+
     /// Never set.
     DBSHARINGSharedFolderAccessErrorEmailUnverified,
 
@@ -71,6 +74,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGSharedFolderAccessErrorTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithNotAMember;
+
+///
+/// Initializes union class with tag state of "invalid_member".
+///
+/// Description of the "invalid_member" tag state: The user does not exist or
+/// their account is disabled.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithInvalidMember;
 
 ///
 /// Initializes union class with tag state of "email_unverified".
@@ -114,6 +127,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGSharedFolderAccessErrorTag){
 /// @return Whether the union's current tag state has value "not_a_member".
 ///
 - (BOOL)isNotAMember;
+
+///
+/// Retrieves whether the union's current tag state has value "invalid_member".
+///
+/// @return Whether the union's current tag state has value "invalid_member".
+///
+- (BOOL)isInvalidMember;
 
 ///
 /// Retrieves whether the union's current tag state has value

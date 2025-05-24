@@ -28,41 +28,6 @@
 	fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
 	[DDLog addLogger:fileLogger withLevel:logLevel];
 	DDLogInfo(@"AppBox Started.");
-    
-    //Init AppCenter
-    [[NSUserDefaults standardUserDefaults] registerDefaults: @{ @"NSApplicationCrashOnExceptions": @YES }];
-    // Setting userConfirmationHandler as documented on https://docs.microsoft.com/en-us/appcenter/sdk/crashes/macos#ask-for-the-users-consent-to-send-a-crash-log
-    [MSACCrashes setUserConfirmationHandler:^BOOL(NSArray<MSACErrorReport *> * _Nonnull errorReports)
-     {
-        NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"Sorry about that!";
-        alert.informativeText = @"Do you want to send a crash report so we can fix the issue?";
-        
-        [alert addButtonWithTitle:@"Always send"];
-        [alert addButtonWithTitle:@"Send"];
-        [alert addButtonWithTitle:@"Don't send"];
-        alert.alertStyle = NSAlertStyleWarning;
-        
-        switch ([alert runModal])
-        {
-            case NSAlertFirstButtonReturn:
-                [MSACCrashes notifyWithUserConfirmation:MSACUserConfirmationAlways];
-                break;
-            case NSAlertSecondButtonReturn:
-                [MSACCrashes notifyWithUserConfirmation:MSACUserConfirmationSend];
-                break;
-            case NSAlertThirdButtonReturn:
-                [MSACCrashes notifyWithUserConfirmation:MSACUserConfirmationDontSend];
-                break;
-            default:
-                break;
-                
-        }
-        return true; // Return true if the SDK should await user confirmation, otherwise return false.
-    }];
-        
-    NSString *appCenter = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"AppCenter"];
-    [MSACAppCenter start:appCenter withServices: @[[MSACAnalytics class], [MSACCrashes class]]];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -105,6 +70,7 @@
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
 	DDLogInfo(@"AppBox Terminated.");
     [self saveCoreDataChanges];
+	[self deleteTemporaryFiles];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{
@@ -358,6 +324,14 @@
     }
 
     return NSTerminateNow;
+}
+
+// MARK: - Other helpers
+- (void)deleteTemporaryFiles {
+	NSArray* tmpDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:NSTemporaryDirectory() error:NULL];
+	for (NSString *file in tmpDirectory) {
+		[[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@%@", NSTemporaryDirectory(), file] error:NULL];
+	}
 }
 
 @end
