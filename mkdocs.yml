@@ -2,10 +2,11 @@ site_name: AppBox Docs
 site_description: AppBox Documentation
 site_url: https://docs.getappbox.com
 copyright: Copyright © AppBox
-repo_url: https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation
+repo_url: https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation
 repo_name: AppBox
 remote_branch: master
 dev_addr: 127.0.0.1:2000 
+edit_uri: blob/master/docs/
 
 # Google Analytics
 google_analytics:
@@ -16,34 +17,59 @@ google_analytics:
 extra:
   social:
     - type: 'github'
-      link: 'https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation'
+      link: 'https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation'
     - type: 'twitter'
-      link: 'https://twitter.com/tryappbox'
+      link: 'https://twitter.com/AppBoxHQ'
 
 # Configuration
 theme:
   name: 'material'
   language: 'en'
   palette:
-    primary: 'indigo'
-    accent: 'indigo'
-  font:
-    text: 'Roboto'
-    code: 'Roboto Mono'
-pages:
-- Home: index.md
-- Getting Started: 
-  - How to use AppBox?: GettingStarted/useappbox.md
-- Continuous Integration:
-  - How to use AppBox with Jenkins and GitLab for CI and CD?: ContinuousIntegration/usewithjenkinsandgitlab.md
-- Features: 
-  - Keep Same Link: Features/keepsamelink.md
-  - Upload Chunk Size: Features/uploadchunksize.md
-  - Download IPA file from AppBox Installation Webpage: Features/downloadipa.md
-  - Get Application Details on AppBox Installation Web Page: Features/moredetails.md
-- FAQs:
-  - How to delete an uploaded app or disable a link on AppBox?: FAQs/deleteapplication.md
-  - Is there any installation limit per app on AppBox?: FAQs/installationlimit.md
-  - How long will Application Installation links be available on AppBox?: FAQs/installationlinkexpire.md
-  - What is the Maximum Upload Application Size?: FAQs/maximumuploadsize.md
-  - How to share Xcode Project Schemes?: FAQs/sharexcodeprojectschemes.md
+  - media: "(prefers-color-scheme: light)"
+    scheme: default
+    primary: white
+    toggle:
+      icon: material/lightbulb
+      name: Switch to dark mode
+  - media: "(prefers-color-scheme: dark)"
+    scheme: slate
+    primary: black
+    toggle:
+      icon: material/lightbulb-outline
+      name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.top
+    - navigation.tracking
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.annotate
+    - content.code.copy
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+plugins:
+  - search:
+      lang: en
+  - awesome-pages
+  - git-revision-date-localized:
+      type: timeago
+      enable_creation_date: true
+      fallback_to_build_date: true
+  - git-authors:
+      sort_authors_by: contribution
+      show_email_address: false
+  - minify:
+      minify_html: true    
+extra:
+  generator: false

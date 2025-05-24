@@ -1,5 +1,4 @@
 [![Support](https://img.shields.io/static/v1?logo=github&label=GitHub&message=Sponsor&color=brightgreen&style=flat-square)](https://github.com/sponsors/vineetchoudhary)
-[![Build Status](https://img.shields.io/travis/vineetchoudhary/AppBox-iOSAppsWirelessInstallation.svg?style=flat-square)](https://travis-ci.org/vineetchoudhary/AppBox-iOSAppsWirelessInstallation)
 [![GitHub Release](https://img.shields.io/github/release/vineetchoudhary/AppBox-iOSAppsWirelessInstallation.svg?style=flat-square)](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest)
 [![](https://img.shields.io/github/downloads/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/total.svg?style=flat-square)](https://getappbox.com/download)
 [![License](https://img.shields.io/badge/license-cc%20by--nd%204.0-brightgreen.svg?style=flat-square)](#user-content-license)
