@@ -1,2 +1,2 @@
-# Is there any installation limit per app on AppBox?
-No. AppBox has no limit for per-app installation. You can install app thousands or millions of times.
+# Is there an Installation Limit per App on AppBox?
+No, AppBox imposes no per-app installation limit. You can install an app thousands or millions of times.

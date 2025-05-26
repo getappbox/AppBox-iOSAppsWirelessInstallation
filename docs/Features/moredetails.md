@@ -3,11 +3,11 @@ hide:
   - toc
 ---
 
-# Get Application Details on AppBox Installation Web Page
-This feature will provide an extra option in AppBox installation page for your iOS application. In this option, you can see various details about your iOS application. Like, IPA file size, Minimum iOS Version, Device Family, Upload Date, Provisioning Profile Type, Provisioning Profile Create Date, Provisioning Profile Expire Date, Development Team, and Provisioned Device.
+# View Application Details on the AppBox Installation Web Page
+This feature adds an extra option to the AppBox installation page for your iOS application, displaying details such as IPA file size, minimum iOS version, device family, upload date, provisioning profile type, provisioning profile creation date, provisioning profile expiration date, development team, and provisioned devices.
 
 ![](../Images/ABWebMoreDetailsHome.webp)    ![](../Images/ABWebMoreDetails.webp)
 
-You can enable/disable this feature from AppBox general preferences.
+You can enable or disable this feature in AppBox general preferences.
 
 ![](../Images/ABMoreDetails.webp)
