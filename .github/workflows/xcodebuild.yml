@@ -1,0 +1,19 @@
+name: Xcode Build
+on:
+  pull_request:
+    branches: ["master"]
+  push:
+    branches: ["master"]
+jobs:
+  build:
+    name: Build AppBox
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+      - name: Use latest Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest
+      - name: Build App
+        run: xcodebuild clean build -workspace AppBox.xcworkspace -scheme AppBox CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
