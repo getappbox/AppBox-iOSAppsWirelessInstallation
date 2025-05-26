@@ -4,6 +4,7 @@ on:
   # Runs on pushes targeting the default branch
   push:
     branches: ["master"]
+    paths: ["docs/**", "mkdocs.yml"]
 
 # Sets permissions write in gh
 permissions:
