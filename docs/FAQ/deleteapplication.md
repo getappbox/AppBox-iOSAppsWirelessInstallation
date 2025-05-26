@@ -1,2 +1,2 @@
-# How to delete an uploaded app or disable a link on AppBox?
-You can delete an Application from AppBox Dashboard or you can manually delete IPA and Manifest file from your Dropbox account.
+# How to Delete an Uploaded App or Disable a Link on AppBox?
+You can remove an application from the AppBox Dashboard or manually delete the IPA and manifest files from your Dropbox account.
