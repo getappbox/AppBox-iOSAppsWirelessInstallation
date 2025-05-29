@@ -4,7 +4,7 @@ hide:
   - navigation
 ---
 
-AppBox is a tool for developers to build and deploy Development and In-house applications directly to the devices from your Dropbox account.
+AppBox is a tool for iOS developers to deploy Development, Ad-Hoc, and In-house (Enterprise) applications directly to the devices from your Dropbox account.
 
 ## Why AppBox?
 #### 1. Unlimited App Installations     
