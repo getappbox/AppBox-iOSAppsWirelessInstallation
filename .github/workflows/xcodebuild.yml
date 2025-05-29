@@ -2,8 +2,10 @@ name: Xcode Build
 on:
   pull_request:
     branches: ["master"]
+    paths: ["!docs/**", "!.github/**", "!**.md", "!**.yml"]
   push:
     branches: ["master"]
+    paths: ["!docs/**", "!.github/**", "!**.md", "!**.yml"]
 jobs:
   build:
     name: Build AppBox
