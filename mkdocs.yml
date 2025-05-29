@@ -25,6 +25,8 @@ extra:
 theme:
   name: 'material'
   language: 'en'
+  logo: Images/AppBoxIcon.png
+  favicon: Images/AppBoxIcon.png
   palette:
   - media: "(prefers-color-scheme: light)"
     scheme: default
