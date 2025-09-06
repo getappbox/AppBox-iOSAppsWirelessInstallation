@@ -11,14 +11,38 @@
 @implementation CLISupportHelper
 
 + (BOOL)install {
-	return [self runWithScript:@"install.sh"];
+	if ([self runScript:@"install.sh"]) {
+		[Common showAlertWithTitle:@"Success" andMessage:@"AppBox CLI tool installed successfully."];
+		return YES;
+	}else{
+		[Common showAlertWithTitle:@"Error" andMessage:@"Failed to install AppBox CLI tool."];
+		return NO;
+	}
 }
 
 + (BOOL)uninstall {
-	return [self runWithScript:@"uninstall.sh"];
+	NSAlert *alert = [[NSAlert alloc] init];
+	[alert setMessageText: @"Are you sure?"];
+	[alert setInformativeText:@"Do you want to uninstall AppBox CLI tool?"];
+	[alert setAlertStyle:NSAlertStyleInformational];
+	[alert addButtonWithTitle:@"Yes"];
+	[alert addButtonWithTitle:@"No"];
+	if ([alert runModal] == NSAlertFirstButtonReturn){
+		NSError *error;
+		if ([self runScript:@"uninstall.sh"]){
+			[Common showAlertWithTitle:@"Success" andMessage:@"AppBox CLI tool uninstalled successfully."];
+			return YES;
+		}else{
+			[Common showAlertWithTitle:@"Error" andMessage:[NSString stringWithFormat:@"Failed to uninstall AppBox CLI tool.\n\n%@", error.localizedDescription]];
+			return NO;
+		}
+	} else {
+		return NO;
+	}
+}
 }
 
-+ (BOOL)runWithScript:(NSString *)script {
++ (BOOL)runScript:(NSString *)script {
 	NSString * const kCLIName = @"appboxcli";
 	NSString * const kCLIInstallPath = [NSString stringWithFormat:@"/usr/local/bin/%@", kCLIName];
 
