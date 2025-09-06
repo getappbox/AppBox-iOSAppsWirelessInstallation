@@ -276,12 +276,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		DB04358D2E696299005F0173 /* Exceptions for "AppBoxCLI" folder in "" build phase */ = {
+		DB04358D2E696299005F0173 /* Exceptions for "AppBoxCLI" folder in "Copy Files" phase from "AppBox" target */ = {
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			buildPhase = DB04357E2E696172005F0173 /* CopyFiles */;
 			membershipExceptions = (
 				Scripts/install.sh,
 				Scripts/uninstall.sh,
+				Scripts/update.sh,
 			);
 		};
 /* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
@@ -290,7 +291,7 @@
 		DB0435842E696255005F0173 /* AppBoxCLI */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				DB04358D2E696299005F0173 /* Exceptions for "AppBoxCLI" folder in "" build phase */,
+				DB04358D2E696299005F0173 /* Exceptions for "AppBoxCLI" folder in "Copy Files" phase from "AppBox" target */,
 			);
 			path = AppBoxCLI;
 			sourceTree = "<group>";
@@ -1009,9 +1010,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-AppBox/Pods-AppBox-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-AppBox/Pods-AppBox-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
