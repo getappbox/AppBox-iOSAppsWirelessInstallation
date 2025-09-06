@@ -35,6 +35,7 @@
 		DB6F784F215D459A00C77966 /* AppBoxColors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB6F784E215D459A00C77966 /* AppBoxColors.xcassets */; };
 		DB831BCB1FF6B5780065B646 /* ABHudViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB831BC91FF6B5780065B646 /* ABHudViewController.m */; };
 		DB831BCC1FF6B5780065B646 /* ABHudViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB831BCA1FF6B5780065B646 /* ABHudViewController.xib */; };
+		DB8BAA912E6C433200186B7B /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = DB8BAA902E6C433200186B7B /* ArgumentParser */; };
 		DB8CE5F81FF77199003FEB65 /* DisabledView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8CE5F71FF77199003FEB65 /* DisabledView.m */; };
 		DBA66CF11FDCF4A60002A956 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBA66CF01FDCF4A60002A956 /* Main.storyboard */; };
 		DBCD1563200BCD1C00C003E6 /* PreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBCD1562200BCD1C00C003E6 /* PreferencesViewController.xib */; };
@@ -294,6 +295,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB8BAA912E6C433200186B7B /* ArgumentParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -894,6 +896,7 @@
 			);
 			name = AppBoxCLI;
 			packageProductDependencies = (
+				DB8BAA902E6C433200186B7B /* ArgumentParser */,
 			);
 			productName = AppBoxCLI;
 			productReference = DB0435832E696255005F0173 /* appboxcli */;
@@ -953,6 +956,9 @@
 				Base,
 			);
 			mainGroup = E16437C61D743A4E00CE8B7E;
+			packageReferences = (
+				DB8BAA8F2E6C433200186B7B /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+			);
 			preferredProjectObjectVersion = 46;
 			productRefGroup = E16437D01D743A4E00CE8B7E /* Products */;
 			projectDirPath = "";
@@ -1308,7 +1314,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 3.4.0;
+				MARKETING_VERSION = 3.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.developerinsider.AppBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -1360,7 +1366,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 3.4.0;
+				MARKETING_VERSION = 3.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.developerinsider.AppBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -1399,6 +1405,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DB8BAA8F2E6C433200186B7B /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DB8BAA902E6C433200186B7B /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DB8BAA8F2E6C433200186B7B /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		E16437DB1D743A4E00CE8B7E /* AppBox.xcdatamodeld */ = {

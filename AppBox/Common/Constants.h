@@ -88,7 +88,7 @@ typedef enum : NSUInteger {
 
 // CLI Arguments
 #define abArgsIPA @"ipa="
-#define abArgsEmails @"email="
+#define abArgsEmails @"emails="
 #define abArgsPersonalMessage @"message="
 #define abArgsKeepSameLink @"keepsamelink="
 #define abArgsDropBoxFolderName @"dbfolder="
