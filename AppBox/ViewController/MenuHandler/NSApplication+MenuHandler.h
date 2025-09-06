@@ -25,6 +25,10 @@
 - (IBAction)dropboxSpaceTapped:(NSMenuItem *)sender;
 - (IBAction)logoutDropBoxTapped:(NSMenuItem *)sender;
 
+//CLI
+- (void)updateCLIMenu;
+- (IBAction)cliInstallUninstallTapped:(NSMenuItem *)sender;
+
 //Help
 - (IBAction)licenseTapped:(NSMenuItem *)sender;
 - (IBAction)latestNewsTapped:(NSMenuItem *)sender;

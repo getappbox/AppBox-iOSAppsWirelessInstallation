@@ -32,7 +32,9 @@ typedef enum : NSUInteger {
     LogEventTypeDeleteBuild,
     LogEventTypeOpenInFinder,
     LogEventTypeOpenInDropbox,
-    LogEventTypeOpenDashboardFromShowLink
+    LogEventTypeOpenDashboardFromShowLink,
+	LogEventTypeCLIUninstall,
+	LogEventTypeCLIUninstallError,
 } LogEventTypes;
 
 typedef enum : NSUInteger {

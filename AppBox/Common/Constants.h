@@ -75,7 +75,7 @@ typedef enum : NSUInteger {
     DBFileTypeJson,
 } DBFileType;
 
-//CI
+// CLI Exit Codes
 #define abExitCodeForInvalidCommand 127
 #define abExitCodeForUploadFailed 124
 #define abExitCodeUnZipIPAError 121
@@ -85,11 +85,15 @@ typedef enum : NSUInteger {
 #define abExitCodeForMailFailed 111
 #define abExitCodeForSuccess 0
 
+// CLI Arguments
 #define abArgsIPA @"ipa="
 #define abArgsEmails @"email="
 #define abArgsPersonalMessage @"message="
 #define abArgsKeepSameLink @"keepsamelink="
 #define abArgsDropBoxFolderName @"dbfolder="
+
+// CLI Path
+#define abCLIPath @"/usr/local/bin/appboxcli"
 
 //Weakify & Strongify
 #define weakify(var) __weak typeof(var) AHKWeak_##var = var;
