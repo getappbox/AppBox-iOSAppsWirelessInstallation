@@ -139,7 +139,7 @@
 		[alert addButtonWithTitle:@"No"];
 		if ([alert runModal] == NSAlertFirstButtonReturn){
 			NSError *error;
-			if (true){
+			if ([CLISupportHelper uninstall]){
 				[Common showAlertWithTitle:@"Success" andMessage:@"AppBox CLI tool uninstalled successfully."];
 				[EventTracker logEventWithType: LogEventTypeCLIUninstall];
 			}else{

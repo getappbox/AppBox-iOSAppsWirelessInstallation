@@ -37,7 +37,7 @@
 #import "NetworkHandler.h"
 #import "KeychainHandler.h"
 #import "CIProjectBuilder.h"
-#import "CLISupportInstaller.h"
+#import "CLISupportHelper.h"
 #import "NSApplication+MenuHandler.h"
 
 #import "NSURL+URL.h"
