@@ -173,9 +173,9 @@
     }
 }
 
--(void)uploadIPAFileWithoutUnzip:(NSURL *)ipaURL{    
-    DDLogDebug(@"IPA Info.plist %@", self.project.ipaInfoPlist);
-    
+-(void)uploadIPAFileWithoutUnzip:(NSURL *)ipaURL{
+	DDLogDebug(@"\n=========\nInfo.plist\n========\n %@", self.project.ipaInfoPlist);
+
     //upload ipa
     self.dbFileType = DBFileTypeIPA;
     if ([AppDelegate appDelegate].isInternetConnected) {
@@ -219,7 +219,9 @@
 -(NSDictionary *)getUniqueJsonDict{
     NSError *error;
     NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:[workingDirectory stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]] options:kNilOptions error:&error];
-    DDLogDebug(@"%@ : %@",FILE_NAME_UNIQUE_JSON,dictionary);
+    if (error) {
+		DDLogInfo(@"Error while parsing unique json file - %@", error.localizedDescription);
+	}
     return dictionary;
 }
 
@@ -692,11 +694,12 @@
     //create app info file short sharable url
     else if (self.dbFileType == DBFileTypeJson){
         NSString *shareableLink = [url substringToIndex:url.length-5];
-        DDLogDebug(@"APPInfo Sharable link - %@",shareableLink);
+        DDLogDebug(@"AppInfo Sharable link - %@",shareableLink);
         self.project.uniquelinkShareableURL = [NSURL URLWithString:shareableLink];
-        NSMutableDictionary *dictUniqueFile = [[self getUniqueJsonDict] mutableCopy];
-        [dictUniqueFile setObject:shareableLink forKey:UNIQUE_LINK_SHARED];
-        [self writeUniqueJsonWithDict:dictUniqueFile];
+        NSMutableDictionary *dictUniqueLink = [[self getUniqueJsonDict] mutableCopy];
+        [dictUniqueLink setObject:shareableLink forKey:UNIQUE_LINK_SHARED];
+        [self writeUniqueJsonWithDict:dictUniqueLink];
+		DDLogDebug(@"\n=======\nAppInfo\n=======\n %@", dictUniqueLink);
         if(self.project.appShortShareableURL){
             self.completionBlock();
         }else{

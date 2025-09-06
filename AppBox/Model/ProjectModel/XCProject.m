@@ -54,8 +54,8 @@
     NSMutableDictionary *manifestDict = [[NSMutableDictionary alloc] init];
     [manifestDict setValue:[NSArray arrayWithObjects:mainItemDict, nil] forKey:@"items"];
     
-	DDLogDebug(@"\n\n======\nManifest\n======\n\n %@",manifestDict);
-    
+	DDLogDebug(@"\n========\nManifest\n========\n %@", manifestDict);
+
     NSString *manifestPath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"manifest.plist"];
     if ([manifestDict writeToFile:manifestPath atomically:YES]){
         DDLogDebug(@"Menifest File Created and Saved at %@", manifestPath);
