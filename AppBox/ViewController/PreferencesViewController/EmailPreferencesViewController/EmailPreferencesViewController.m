@@ -34,12 +34,15 @@
 //MARK: - Control Actions
 - (IBAction)saveButtonTapped:(NSButton *)sender {
     [self.view.window makeFirstResponder:self.view];
-    if (![self isValidEmailDetails]) {
-        return;
+	if (emailTextField.stringValue.isEmpty && personalMessageTextField.stringValue.isEmpty) {
+		[UserData setUserEmail:emailTextField.stringValue];
+		[UserData setUserMessage:personalMessageTextField.stringValue];
+		[ABHudViewController showStatus:@"Details Cleared!" forSuccess:YES onView:self.view];
+	} else if ([self isValidEmailDetails]) {
+		[UserData setUserEmail:emailTextField.stringValue];
+		[UserData setUserMessage:personalMessageTextField.stringValue];
+		[ABHudViewController showStatus:@"Details Saved!" forSuccess:YES onView:self.view];
     }
-    [UserData setUserEmail:emailTextField.stringValue];
-    [UserData setUserMessage:personalMessageTextField.stringValue];
-    [ABHudViewController showStatus:@"Details Saved!" forSuccess:YES onView:self.view];
 }
 
 - (IBAction)sendTestMailButtonTapped:(NSButton *)sender {
@@ -60,13 +63,17 @@
     
     //send mail
     [ABHudViewController showStatus:@"Sending Test Mail" onView:self.view];
+	weakify(self);
     [MailGun sendMailWithProject:project.abpProject complition:^(BOOL success, NSError *error) {
-        [ABHudViewController hideAllHudFromView:self.view after:0];
-        if (success) {
-            [ABHudViewController showStatus:@"Mail Sent" forSuccess:YES onView:self.view];
-        } else {
-            [ABHudViewController showStatus:@"Mail Failed" forSuccess:NO onView:self.view];
-        }
+		dispatch_async(dispatch_get_main_queue(), ^{
+			strongify(self);
+			[ABHudViewController hideAllHudFromView:self.view after:0];
+			if (success) {
+				[ABHudViewController showStatus:@"Mail Sent" forSuccess:YES onView:self.view];
+			} else {
+				[ABHudViewController showStatus:@"Mail Failed" forSuccess:NO onView:self.view];
+			}
+		});
     }];
 }
 

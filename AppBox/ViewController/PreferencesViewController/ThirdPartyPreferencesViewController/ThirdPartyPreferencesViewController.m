@@ -12,25 +12,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do view setup here.
     
     [slackChannelTextField setStringValue:[UserData userSlackChannel]];
-    [hangoutChatTextField setStringValue:[UserData userHangoutChatWebHook]];
     [microsoftTeamWebHook setStringValue:[UserData userMicrosoftTeamWebHook]];
     [slackMessageTextField setStringValue:[UserData userSlackMessage]];
 }
 
 
-- (BOOL)validateWebHookURLWithSlack:(BOOL)slack hangout:(BOOL)hangout msTeams:(BOOL)msTeams{
+- (BOOL)validateWebHookURLWithSlack:(BOOL)slack msTeams:(BOOL)msTeams{
     NSString *slackURL = [slackChannelTextField.stringValue stringByRemovingPercentEncoding];
     if ([NSURL URLWithString:slackURL] == nil && slack) {
         [Common showAlertWithTitle:@"Error" andMessage:@"Please enter a valid Slack WebHook URL."];
-        return NO;
-    }
-    
-    NSString *hangoutURL = [hangoutChatTextField.stringValue stringByRemovingPercentEncoding];
-    if ([NSURL URLWithString:hangoutURL] == nil && hangout) {
-        [Common showAlertWithTitle:@"Error" andMessage:@"Please enter a valid Hangout Chat WebHook URL."];
         return NO;
     }
     
@@ -44,11 +36,10 @@
 
 - (IBAction)saveButtonTapped:(NSButton *)sender {
     [self.view.window makeFirstResponder:self.view];
-    if (![self validateWebHookURLWithSlack:YES hangout:YES msTeams:YES]) {
+    if (![self validateWebHookURLWithSlack:YES msTeams:YES]) {
         return;
     }
     [UserData setUserSlackChannel:slackChannelTextField.stringValue];
-    [UserData setUserHangoutChatWebHook:hangoutChatTextField.stringValue];
     [UserData setUserMicrosoftTeamWebHook:microsoftTeamWebHook.stringValue];
     [UserData setUserSlackMessage:slackMessageTextField.stringValue];
     [ABHudViewController showStatus:@"Details Saved!" forSuccess:YES onView:self.view];
@@ -56,27 +47,13 @@
 
 - (IBAction)testSlackButtonTapped:(NSButton *)sender {
     [self.view.window makeFirstResponder:self.view];
-    if (![self validateWebHookURLWithSlack:YES hangout:NO msTeams:NO]) {
+    if (![self validateWebHookURLWithSlack:YES msTeams:NO]) {
         return;
     }
+	NSString *webhook = [slackChannelTextField.stringValue stringByRemovingPercentEncoding];
+	NSString *message = slackMessageTextField.stringValue;
     [ABHudViewController showStatus:@"Sending Test Message..." onView:self.view];
-    [SlackClient sendMessageForProject:[self demoProject] completion:^(BOOL success) {
-        [ABHudViewController hideAllHudFromView:self.view after:0];
-        if (success) {
-            [ABHudViewController showStatus:@"Message Sent." forSuccess:YES onView:self.view];
-        } else {
-            [ABHudViewController showStatus:@"Message Failed." forSuccess:NO onView:self.view];
-        }
-    }];
-}
-
-- (IBAction)testHangoutChatButtonTapped:(NSButton *)sender {
-    [self.view.window makeFirstResponder:self.view];
-    if (![self validateWebHookURLWithSlack:NO hangout:YES msTeams:NO]) {
-        return;
-    }
-    [ABHudViewController showStatus:@"Sending Test Message..." onView:self.view];
-    [HangoutClient sendMessageForProject:[self demoProject] completion:^(BOOL success) {
+	[SlackClient sendMessageForProject:[self demoProject] webhook:webhook message:message completion:^(BOOL success) {
         [ABHudViewController hideAllHudFromView:self.view after:0];
         if (success) {
             [ABHudViewController showStatus:@"Message Sent." forSuccess:YES onView:self.view];
@@ -88,11 +65,13 @@
 
 - (IBAction)testMicrosoftTeamButtonTapped:(NSButton *)sender {
     [self.view.window makeFirstResponder:self.view];
-    if (![self validateWebHookURLWithSlack:NO hangout:NO msTeams:YES]) {
+    if (![self validateWebHookURLWithSlack:NO msTeams:YES]) {
         return;
     }
+	NSString *webhook = [microsoftTeamWebHook.stringValue stringByRemovingPercentEncoding];
+	NSString *message = slackMessageTextField.stringValue;
     [ABHudViewController showStatus:@"Sending Test Message..." onView:self.view];
-    [MSTeamsClient sendMessageForProject:[self demoProject] completion:^(BOOL success) {
+    [MSTeamsClient sendMessageForProject:[self demoProject] webhook:webhook message:message completion:^(BOOL success) {
         [ABHudViewController hideAllHudFromView:self.view after:0];
         if (success) {
             [ABHudViewController showStatus:@"Message Sent." forSuccess:YES onView:self.view];
