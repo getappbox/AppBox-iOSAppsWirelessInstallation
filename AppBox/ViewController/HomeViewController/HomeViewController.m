@@ -38,9 +38,10 @@
     [UploadManager setupDBClientsManager];
     [self setupUploadManager];
     
-    //update user account menu details
+    //update cli tool and user account menu details
+	[[NSApplication sharedApplication] updateCLIMenu];
     [[NSApplication sharedApplication] updateAccountsMenu];
-    
+
     //Start monitoring internet connection
     weakify(self);
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {

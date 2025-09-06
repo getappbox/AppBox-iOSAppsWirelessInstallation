@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -151,6 +151,19 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="CLI" id="t4q-ee-CcQ" userLabel="CLI">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="CLI" autoenablesItems="NO" id="ref-hY-r0L">
+                                    <items>
+                                        <menuItem title="Install" id="ksW-5j-Rkb" userLabel="Install">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="cliInstallUninstallTapped:" target="hnw-xV-0zn" id="wjh-fD-fln"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="Window" id="4eX-h0-ncF">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Window" systemMenu="window" id="QBC-m6-GiV">
@@ -209,6 +222,7 @@
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
                     <connections>
+                        <outlet property="cliInstallUninstallButton" destination="ksW-5j-Rkb" id="S8e-cI-Hoi"/>
                         <outlet property="dropboxAccountButton" destination="JEl-Yw-mVa" id="Dh1-Db-3xd"/>
                         <outlet property="dropboxLogoutButton" destination="sBp-fs-Uyn" id="afh-vo-oE7"/>
                         <outlet property="dropboxNameButton" destination="fNu-KF-egc" id="6zP-OH-eD7"/>
@@ -1530,7 +1544,7 @@ Gw
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Uyb-q3-B4B"/>
+        <segue reference="4nc-Zt-qRE"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Browser" width="32" height="32"/>

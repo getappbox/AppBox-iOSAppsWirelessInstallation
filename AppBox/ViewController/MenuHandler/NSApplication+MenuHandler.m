@@ -118,6 +118,43 @@
     [self updateAccountsMenu];
 }
 
+//MARK: - CLI
+- (void)updateCLIMenu{
+	NSMenuItem *cliInstallUninstallButton = [[AppDelegate appDelegate] cliInstallUninstallButton];
+	if ([[NSFileManager defaultManager] fileExistsAtPath:abCLIPath]){
+		[cliInstallUninstallButton setTitle:@"Uninstall CLI Tool"];
+	}else{
+		[cliInstallUninstallButton setTitle:@"Install CLI Tool"];
+	}
+}
+
+- (IBAction)cliInstallUninstallTapped:(NSMenuItem *)sender {
+	if ([[NSFileManager defaultManager] fileExistsAtPath:abCLIPath]){
+		//uninstall
+		NSAlert *alert = [[NSAlert alloc] init];
+		[alert setMessageText: @"Are you sure?"];
+		[alert setInformativeText:@"Do you want to uninstall AppBox CLI tool?"];
+		[alert setAlertStyle:NSAlertStyleInformational];
+		[alert addButtonWithTitle:@"Yes"];
+		[alert addButtonWithTitle:@"No"];
+		if ([alert runModal] == NSAlertFirstButtonReturn){
+			NSError *error;
+			if (true){
+				[Common showAlertWithTitle:@"Success" andMessage:@"AppBox CLI tool uninstalled successfully."];
+				[EventTracker logEventWithType: LogEventTypeCLIUninstall];
+			}else{
+				[Common showAlertWithTitle:@"Error" andMessage:[NSString stringWithFormat:@"Failed to uninstall AppBox CLI tool.\n\n%@", error.localizedDescription]];
+				[EventTracker logEventWithType: LogEventTypeCLIUninstallError];
+			}
+			[self updateCLIMenu];
+		}
+	} else {
+		[CLISupportInstaller install];
+		[self updateCLIMenu];
+	}
+}
+
+
 //MARK: - Help
 - (IBAction)helpButtonTapped:(NSMenuItem *)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abDocumentationURL]];
