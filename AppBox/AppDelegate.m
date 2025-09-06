@@ -10,6 +10,8 @@
 
 @implementation AppDelegate {
 	DDFileLogger *fileLogger;
+	DDOSLogger *osLogger;
+	DDTTYLogger *ttyLogger;
 }
 
 - (void)awakeFromNib{
@@ -27,6 +29,16 @@
 	fileLogger.doNotReuseLogFiles = true;
 	fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
 	[DDLog addLogger:fileLogger withLevel:logLevel];
+
+	//OS Logger
+	osLogger = [DDOSLogger sharedInstance];
+	[DDLog addLogger:osLogger withLevel:logLevel];
+
+	//TTY Logger
+	#if !DEBUG
+	ttyLogger = [DDTTYLogger sharedInstance];
+	[DDLog addLogger:ttyLogger withLevel:logLevel];
+	#endif
 	DDLogInfo(@"AppBox Started.");
 }
 
