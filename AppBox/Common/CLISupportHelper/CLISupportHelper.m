@@ -1,14 +1,14 @@
 //
-//  CLISupportInstaller.h
+//  CLISupportHelper.h
 //  AppBox
 //
 //  Created by Vineet Choudhary on 30/12/16.
 //  Copyright © 2016 Developer Insider. All rights reserved.
 //
 
-#import "CLISupportInstaller.h"
+#import "CLISupportHelper.h"
 
-@implementation CLISupportInstaller
+@implementation CLISupportHelper
 
 + (BOOL)install {
     NSString * const kInstallerName = @"install.sh";

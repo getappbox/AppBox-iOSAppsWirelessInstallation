@@ -13,7 +13,7 @@
 		449BD6B9282111B0008EFB2B /* AppBoxService+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 449BD6B5282111B0008EFB2B /* AppBoxService+CoreDataClass.m */; };
 		84A31BD8650851B3675A1797 /* libPods-AppBox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */; };
 		DB04358B2E69628F005F0173 /* appboxcli in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB0435832E696255005F0173 /* appboxcli */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		DB0435912E6962EA005F0173 /* CLISupportInstaller.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0435902E6962EA005F0173 /* CLISupportInstaller.m */; };
+		DB0435912E6962EA005F0173 /* CLISupportHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0435902E6962EA005F0173 /* CLISupportHelper.m */; };
 		DB1A06622160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DB1A06612160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel */; };
 		DB1C84412079F54E007AC74C /* NSString+String.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1C84402079F54E007AC74C /* NSString+String.m */; };
 		DB1FC5901FDEED5400179799 /* HomeWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1FC58F1FDEED5400179799 /* HomeWindowController.m */; };
@@ -137,8 +137,8 @@
 		ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AppBox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6359ECA7EF9D4D3F8BE63F /* Pods-AppBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppBox/Pods-AppBox.debug.xcconfig"; sourceTree = "<group>"; };
 		DB0435832E696255005F0173 /* appboxcli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = appboxcli; sourceTree = BUILT_PRODUCTS_DIR; };
-		DB04358F2E6962EA005F0173 /* CLISupportInstaller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLISupportInstaller.h; sourceTree = "<group>"; };
-		DB0435902E6962EA005F0173 /* CLISupportInstaller.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLISupportInstaller.m; sourceTree = "<group>"; };
+		DB04358F2E6962EA005F0173 /* CLISupportHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLISupportHelper.h; sourceTree = "<group>"; };
+		DB0435902E6962EA005F0173 /* CLISupportHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLISupportHelper.m; sourceTree = "<group>"; };
 		DB1A06592160D47C008D33FD /* AppBox3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppBox3.xcdatamodel; sourceTree = "<group>"; };
 		DB1A06612160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = CoreDataMigration2to3.xcmappingmodel; sourceTree = "<group>"; };
 		DB1C843F2079F54E007AC74C /* NSString+String.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+String.h"; sourceTree = "<group>"; };
@@ -282,7 +282,8 @@
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			buildPhase = DB04357E2E696172005F0173 /* CopyFiles */;
 			membershipExceptions = (
-				install.sh,
+				Scripts/install.sh,
+				Scripts/uninstall.sh,
 			);
 		};
 /* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
@@ -325,13 +326,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		DB04358E2E6962DB005F0173 /* CLISupportInstaller */ = {
+		DB04358E2E6962DB005F0173 /* CLISupportHelper */ = {
 			isa = PBXGroup;
 			children = (
-				DB04358F2E6962EA005F0173 /* CLISupportInstaller.h */,
-				DB0435902E6962EA005F0173 /* CLISupportInstaller.m */,
+				DB04358F2E6962EA005F0173 /* CLISupportHelper.h */,
+				DB0435902E6962EA005F0173 /* CLISupportHelper.m */,
 			);
-			path = CLISupportInstaller;
+			path = CLISupportHelper;
 			sourceTree = "<group>";
 		};
 		DB1A06602160DC70008D33FD /* CoreDataMigration */ = {
@@ -843,7 +844,7 @@
 		E1CFC65B1D7E7FD9005872BE /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				DB04358E2E6962DB005F0173 /* CLISupportInstaller */,
+				DB04358E2E6962DB005F0173 /* CLISupportHelper */,
 				E1902B611E1662E300C3E0F6 /* KeychainHandler */,
 				E11633961E558609005EAB31 /* MobileProvision */,
 				E13161EF1E97775100586052 /* CIProjectBuilder */,
@@ -1090,7 +1091,7 @@
 				DB1C84412079F54E007AC74C /* NSString+String.m in Sources */,
 				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,
 				E11633991E558635005EAB31 /* MobileProvision.m in Sources */,
-				DB0435912E6962EA005F0173 /* CLISupportInstaller.m in Sources */,
+				DB0435912E6962EA005F0173 /* CLISupportHelper.m in Sources */,
 				E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */,
 				449BD6B8282111B0008EFB2B /* AppBoxService+CoreDataProperties.m in Sources */,
 				E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */,
