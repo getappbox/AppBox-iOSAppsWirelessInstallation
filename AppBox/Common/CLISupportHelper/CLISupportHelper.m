@@ -12,7 +12,15 @@
 
 + (BOOL)install {
 	if ([self runScript:@"install.sh"]) {
-		[Common showAlertWithTitle:@"Success" andMessage:@"AppBox CLI tool installed successfully."];
+		NSAlert *alert = [[NSAlert alloc] init];
+		[alert setMessageText: @"Success"];
+		[alert setInformativeText:@"AppBox CLI tool installed successfully.\n\nYou can use it from terminal using the command \"appboxcli\"."];
+		[alert setAlertStyle:NSAlertStyleInformational];
+		[alert addButtonWithTitle:@"OK"];
+		[alert addButtonWithTitle:@"Learn More"];
+		if ([alert runModal] == NSAlertSecondButtonReturn){
+			[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com"]];
+		}
 		return YES;
 	}else{
 		[Common showAlertWithTitle:@"Error" andMessage:@"Failed to install AppBox CLI tool."];
@@ -40,6 +48,23 @@
 		return NO;
 	}
 }
+
++ (BOOL)installPromptAfterLogin {
+	NSAlert *alert = [[NSAlert alloc] init];
+	[alert setMessageText: @"Install CLI Tool"];
+	[alert setInformativeText:@"Do you want to install AppBox CLI tool to use AppBox from terminal?"];
+	[alert setAlertStyle:NSAlertStyleInformational];
+	[alert addButtonWithTitle:@"Install"];
+	[alert addButtonWithTitle:@"Not Now"];
+	if ([alert runModal] == NSAlertFirstButtonReturn){
+		return [self install];
+	} else {
+		NSAlert *laterInstallOption = [[NSAlert alloc] init];
+		[laterInstallOption setMessageText: @"You can install AppBox CLI tool later from the \"CLI\" menu bar option."];
+		[laterInstallOption setAlertStyle:NSAlertStyleInformational];
+		[laterInstallOption addButtonWithTitle:@"OK"];
+		return NO;
+	}
 }
 
 + (BOOL)runScript:(NSString *)script {
