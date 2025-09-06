@@ -13,8 +13,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //log screen
-    [EventTracker logScreen:@"QR Code View"];
     
     //create qr code and show in imageview
     NSString *url;

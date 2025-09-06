@@ -19,7 +19,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [EventTracker logScreen:@"AppBox ShareLink"];
     [textFieldAppLink setStringValue: self.project.appShortShareableURL.stringValue];
     if ([self.project.appShortShareableURL isEqualTo:self.project.appLongShareableURL]) {
         [textFieldHint setStringValue:LongURLUserHint];
@@ -37,7 +36,6 @@
 
 
 - (IBAction)buttonCopyToClipboardTapped:(NSButton *)sender {
-    [EventTracker logEventWithType:LogEventTypeCopyToClipboard];
     [[NSPasteboard generalPasteboard] clearContents];
 	[[NSPasteboard generalPasteboard] setString:self.project.appShortShareableURL.stringValue  forType:NSPasteboardTypeString];
     [sender setTitle:@"Copied!!"];
@@ -48,7 +46,6 @@
 
 - (IBAction)buttonOpenURLAction:(NSButton *)sender {
     [[NSWorkspace sharedWorkspace] openURL:self.project.appShortShareableURL];
-    [EventTracker logEventWithType:LogEventTypeOpenInDropbox];
 }
 
 
@@ -60,8 +57,6 @@
 -(void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender{
     if ([segue.destinationController isKindOfClass:[QRCodeViewController class]]){
         ((QRCodeViewController *) segue.destinationController).project = self.project;
-    } else if([segue.destinationController isKindOfClass:[DashboardViewController class]]) {
-        [EventTracker logEventWithType:LogEventTypeOpenDashboardFromShowLink];
     }
 }
 

@@ -131,15 +131,12 @@
         if (authResult != nil) {
             if ([authResult isSuccess]) {
 				DDLogInfo(@"Success! User is logged into Dropbox.");
-                [EventTracker logEventWithType:LogEventTypeAuthDropboxSuccess];
                 [[NSNotificationCenter defaultCenter] postNotificationName:abDropBoxLoggedInNotification object:nil];
             } else if ([authResult isCancel]) {
 				DDLogInfo(@"Authorization flow was manually canceled by user.");
-                [EventTracker logEventWithType:LogEventTypeAuthDropboxCanceled];
                 [Common showAlertWithTitle:@"Authorization Canceled." andMessage:abEmptyString];
             } else if ([authResult isError]) {
 				DDLogInfo(@"Error: %@", authResult.errorDescription);
-                [EventTracker logEventWithType:LogEventTypeAuthDropboxError];
                 [Common showAlertWithTitle:@"Authorization Canceled." andMessage:abEmptyString];
             }
         } else if (url != nil) {

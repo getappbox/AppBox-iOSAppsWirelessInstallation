@@ -59,7 +59,6 @@
     } else {
         [Common showAlertWithTitle:@"Error" andMessage:@"File not found."];
     }
-    [EventTracker logEventWithType:LogEventTypeOpenInFinder];
 }
 
 - (IBAction)closeButtonTapped:(NSButton *)sender {

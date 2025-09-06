@@ -36,10 +36,7 @@ typedef enum : NSUInteger {
     //Load data
     [self loadData];
     [self setupUploadManager];
-    
-    //Track screen
-    [EventTracker logScreen:@"Dashboard Screen"];
-    
+
     //Coredata changes notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadData) name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
 }
@@ -179,7 +176,6 @@ typedef enum : NSUInteger {
         [[NSPasteboard generalPasteboard] clearContents];
 		[[NSPasteboard generalPasteboard] setString:uploadRecord.shortURL forType:NSPasteboardTypeString];
         [ABHudViewController showOnlyStatus:@"Copied!!" onView:self.view];
-        [EventTracker logEventWithType:LogEventTypeCopyToClipboardFromDashboard];
     }
 }
 
@@ -210,8 +206,6 @@ typedef enum : NSUInteger {
 			[uploadManager setProject: uploadRecord.xcProject];
 			[uploadManager deleteBuildFromDashboard];
 		}
-		
-        [EventTracker logEventWithType: LogEventTypeDeleteBuild];
     }
 }
 
@@ -256,7 +250,6 @@ typedef enum : NSUInteger {
         } else {
             [Common showAlertWithTitle:@"Error" andMessage:@"File not found."];
         }
-        [EventTracker logEventWithType:LogEventTypeOpenInFinder];
     }
 }
 
@@ -266,7 +259,6 @@ typedef enum : NSUInteger {
         NSString *dropboxURLString = [NSString stringWithFormat:@"%@%@", abDropBoxAppBaseURL, uploadRecord.dbDirectroy];
         NSURL *dropboxURL = [NSURL URLWithString: dropboxURLString];
         [[NSWorkspace sharedWorkspace] openURL:dropboxURL];
-        [EventTracker logEventWithType:LogEventTypeOpenInDropbox];
     }
 }
 

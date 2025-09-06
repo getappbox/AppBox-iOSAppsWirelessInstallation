@@ -43,7 +43,6 @@
 		DBDCFBBE1F99C7860022097B /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDCFBBD1F99C7860022097B /* UploadManager.m */; };
 		DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF290D51FA64A590046D5CE /* ProvisioningDetailsViewController.m */; };
 		DBF290D81FA64A590046D5CE /* ProvisioningDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBF290D61FA64A590046D5CE /* ProvisioningDetailsViewController.xib */; };
-		DBFC680D1F6AE957007A4ED2 /* EventTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFC680C1F6AE957007A4ED2 /* EventTracker.m */; };
 		E11633991E558635005EAB31 /* MobileProvision.m in Sources */ = {isa = PBXBuildFile; fileRef = E11633981E558635005EAB31 /* MobileProvision.m */; };
 		E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E6D081D8FC77D0054814D /* DashboardViewController.m */; };
 		E13161F21E9777DF00586052 /* CIProjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = E13161F11E9777DF00586052 /* CIProjectBuilder.m */; };
@@ -189,8 +188,6 @@
 		DBF290D41FA64A590046D5CE /* ProvisioningDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProvisioningDetailsViewController.h; sourceTree = "<group>"; };
 		DBF290D51FA64A590046D5CE /* ProvisioningDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProvisioningDetailsViewController.m; sourceTree = "<group>"; };
 		DBF290D61FA64A590046D5CE /* ProvisioningDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProvisioningDetailsViewController.xib; sourceTree = "<group>"; };
-		DBFC680B1F6AE957007A4ED2 /* EventTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventTracker.h; sourceTree = "<group>"; };
-		DBFC680C1F6AE957007A4ED2 /* EventTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventTracker.m; sourceTree = "<group>"; };
 		DBFEEA551FA5BA4700F09ECD /* AppBox2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppBox2.xcdatamodel; sourceTree = "<group>"; };
 		E11633971E558635005EAB31 /* MobileProvision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileProvision.h; sourceTree = "<group>"; };
 		E11633981E558635005EAB31 /* MobileProvision.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobileProvision.m; sourceTree = "<group>"; };
@@ -442,15 +439,6 @@
 				DBF290D61FA64A590046D5CE /* ProvisioningDetailsViewController.xib */,
 			);
 			path = ProvisioningDetailsViewController;
-			sourceTree = "<group>";
-		};
-		DBFC680A1F6AE942007A4ED2 /* EventTracker */ = {
-			isa = PBXGroup;
-			children = (
-				DBFC680B1F6AE957007A4ED2 /* EventTracker.h */,
-				DBFC680C1F6AE957007A4ED2 /* EventTracker.m */,
-			);
-			path = EventTracker;
 			sourceTree = "<group>";
 		};
 		E11633961E558609005EAB31 /* MobileProvision */ = {
@@ -857,7 +845,6 @@
 				DB2629781F95ED8900C4C647 /* Extensions */,
 				E1902B4B1E16617B00C3E0F6 /* MailHandler */,
 				E1DC25FA1ECDBC16001EF106 /* ProgressHUD */,
-				DBFC680A1F6AE942007A4ED2 /* EventTracker */,
 				E1902B4F1E16617B00C3E0F6 /* UpdateHandler */,
 				DB425C021F8A514E008CB032 /* DefaultSettings */,
 				E1DC25F91ECD826C001EF106 /* OtherServicesKeys.h */,
@@ -1097,7 +1084,6 @@
 				E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */,
 				4410D18E26FF76A20046E5F9 /* DBAccountManager.m in Sources */,
 				E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */,
-				DBFC680D1F6AE957007A4ED2 /* EventTracker.m in Sources */,
 				E1C024711E9B4E6C00C87CC9 /* SlackClient.m in Sources */,
 				DB358B64216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataProperties.m in Sources */,
 				DB358B6D216FB1AC0080CAC0 /* Project+CoreDataClass.m in Sources */,

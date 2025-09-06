@@ -146,14 +146,10 @@
                         return;
                     }
                     
-                    //set dropbox folder name & log if user changing folder name or not
-                    if (self.project.bundleDirectory.absoluteString.length == 0){
-                        [EventTracker logEventWithType:LogEventTypeUploadWithDefaultDBFolderName];
-                    }else{
-                        [self.project upadteDbDirectoryByBundleDirectory];
-                        [EventTracker logEventWithType:LogEventTypeUploadWithCustomBDFolderName];
+                    //set dropbox folder name
+                    if (!self.project.bundleDirectory.absoluteString.isEmpty){
+						[self.project upadteDbDirectoryByBundleDirectory];
                     }
-                    
                     
                     if (![AppDelegate appDelegate].isInternetConnected){
                         [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
