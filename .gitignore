@@ -25,3 +25,4 @@ xcuserdata/
 *.dSYM
 Frameworks/.DS_Store
 .DS_Store
+default.profraw
