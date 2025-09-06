@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CLISupportHelper : NSObject
 
 + (BOOL)install;
++ (BOOL)uninstall;
 
 @end
 
