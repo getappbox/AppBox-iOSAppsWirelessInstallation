@@ -8,5 +8,5 @@
 
 import Foundation
 
-print("Hello, World!")
-
+var command = AppBoxCLI.parseOrExit()
+command.run()
