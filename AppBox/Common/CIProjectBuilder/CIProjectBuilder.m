@@ -50,11 +50,9 @@ NSString *const RepoITCPassword = @"itcpassword";
     DDLogDebug(@"All Command Line Arguments = %@",arguments);
     for (NSString *argument in arguments) {
         
-        
         //Project Emails
         if ([argument containsString:abArgsEmails]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsEmails];
-            DDLogDebug(@"Email Components = %@", components);
             if (components.count == 2) {
 				DDLogInfo(@"Changing project Emails to \"%@\" from \"%@\"", [components lastObject], project.emails);
                 project.emails = [components lastObject];
@@ -67,7 +65,6 @@ NSString *const RepoITCPassword = @"itcpassword";
         //Project Personal Messages
         else if ([argument containsString:abArgsPersonalMessage]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsPersonalMessage];
-            DDLogDebug(@"Personal Message Components = %@", components);
             if (components.count == 2) {
 				DDLogInfo(@"Changing project personal message to \"%@\" from \"%@\"", [components lastObject], project.personalMessage);
                 project.personalMessage = [components lastObject];
@@ -80,7 +77,6 @@ NSString *const RepoITCPassword = @"itcpassword";
         //Project Keep Same Link
         else if ([argument containsString:abArgsKeepSameLink]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsKeepSameLink];
-            DDLogDebug(@"Keep Same Links Components = %@", components);
             if (components.count == 2) {
 				DDLogInfo(@"Changing Keep Same Link to \"%@\" from \"%@\"", [components lastObject], project.keepSameLink);
                 project.keepSameLink = ([[components lastObject] isEqualToString:@"0"] || ((BOOL)[[components lastObject] boolValue]) == NO) ? @0 : @1;
@@ -93,7 +89,6 @@ NSString *const RepoITCPassword = @"itcpassword";
         //Project dropbox folder name
         else if ([argument containsString:abArgsDropBoxFolderName]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsDropBoxFolderName];
-            DDLogDebug(@"Dropbox folder Components = %@", components);
             if (components.count == 2) {
 				DDLogInfo(@"Changing Dropbox folder name to \"%@\" from \"%@\"", [components lastObject], project.personalMessage);
                 NSString *bundlePath = [NSString stringWithFormat:@"/%@",[components lastObject]];

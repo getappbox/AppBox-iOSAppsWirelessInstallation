@@ -53,7 +53,6 @@
     for (NSString *argument in arguments) {
         if ([argument containsString:abArgsIPA]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsIPA];
-            DDLogDebug(@"IPA Components = %@",components);
             if (components.count == 2) {
                 [self handleIPAAtPath:[components lastObject]];
             } else {
