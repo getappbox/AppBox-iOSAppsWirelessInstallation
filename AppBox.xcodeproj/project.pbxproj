@@ -77,7 +77,6 @@
 		E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B5F1E1661BE00C3E0F6 /* UpdateHandler.m */; };
 		E1902B641E16633A00C3E0F6 /* KeychainHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B631E16633A00C3E0F6 /* KeychainHandler.m */; };
 		E19473F5205F9FC800CF12F9 /* MSTeamsClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E19473F4205F9FC800CF12F9 /* MSTeamsClient.m */; };
-		E19473F8205F9FDC00CF12F9 /* HangoutClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E19473F7205F9FDC00CF12F9 /* HangoutClient.m */; };
 		E19473FB205FD14C00CF12F9 /* NSColor+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = E19473FA205FD14C00CF12F9 /* NSColor+Color.m */; };
 		E19473FF205FD3F100CF12F9 /* AppBoxTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = E19473FE205FD3F100CF12F9 /* AppBoxTableRowView.m */; };
 		E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */; };
@@ -255,8 +254,6 @@
 		E1902B631E16633A00C3E0F6 /* KeychainHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainHandler.m; sourceTree = "<group>"; };
 		E19473F3205F9FC800CF12F9 /* MSTeamsClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MSTeamsClient.h; sourceTree = "<group>"; };
 		E19473F4205F9FC800CF12F9 /* MSTeamsClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MSTeamsClient.m; sourceTree = "<group>"; };
-		E19473F6205F9FDC00CF12F9 /* HangoutClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HangoutClient.h; sourceTree = "<group>"; };
-		E19473F7205F9FDC00CF12F9 /* HangoutClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HangoutClient.m; sourceTree = "<group>"; };
 		E19473F9205FD14C00CF12F9 /* NSColor+Color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSColor+Color.h"; sourceTree = "<group>"; };
 		E19473FA205FD14C00CF12F9 /* NSColor+Color.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSColor+Color.m"; sourceTree = "<group>"; };
 		E19473FD205FD3F100CF12F9 /* AppBoxTableRowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppBoxTableRowView.h; sourceTree = "<group>"; };
@@ -802,19 +799,9 @@
 			isa = PBXGroup;
 			children = (
 				E19473F2205F9F8600CF12F9 /* MSTeamsClient */,
-				E19473F1205F9F7100CF12F9 /* HangoutClient */,
 				E1C0246E1E9B4E4C00C87CC9 /* SlackClient */,
 			);
 			path = ServiceIntegrations;
-			sourceTree = "<group>";
-		};
-		E19473F1205F9F7100CF12F9 /* HangoutClient */ = {
-			isa = PBXGroup;
-			children = (
-				E19473F6205F9FDC00CF12F9 /* HangoutClient.h */,
-				E19473F7205F9FDC00CF12F9 /* HangoutClient.m */,
-			);
-			path = HangoutClient;
 			sourceTree = "<group>";
 		};
 		E19473F2205F9F8600CF12F9 /* MSTeamsClient */ = {
@@ -1099,7 +1086,6 @@
 				DB1A06622160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel in Sources */,
 				E16BB8C020284236002E9B5A /* SelectAccountViewController.m in Sources */,
 				DB53856E20838913004BFC84 /* DragDropView.m in Sources */,
-				E19473F8205F9FDC00CF12F9 /* HangoutClient.m in Sources */,
 				DB53856A2083622A004BFC84 /* NSURL+URL.m in Sources */,
 				DB1C84412079F54E007AC74C /* NSString+String.m in Sources */,
 				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,
