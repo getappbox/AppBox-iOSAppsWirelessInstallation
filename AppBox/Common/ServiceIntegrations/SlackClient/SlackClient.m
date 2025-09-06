@@ -10,39 +10,41 @@
 
 @implementation SlackClient
 
-+ (void)sendMessageForProject:(XCProject *)project completion:(void (^) (BOOL success))completion {
-    if ([UserData userSlackChannel].length > 0) {
-        //set slack channel url and image
-        NSString *slackImage = abSlackImage;
-        NSString *channelURL = [UserData userSlackChannel];
-        
-        //set slack message
-        NSString *slackMessage;
-        if ([UserData userSlackMessage].length > 0) {
-            slackMessage = [MailHandler parseMessage:[UserData userSlackMessage] forProject:project];
-        } else {
-            slackMessage = [NSString stringWithFormat:@"%@ - %@ (%@) link - %@", project.name, project.version, project.build, project.appShortShareableURL];
-        }
-        
-        //create parameters dictionary
-        NSDictionary *parameters = @{@"username": @"AppBox",
-                                     @"icon_url": slackImage,
-                                     @"text": slackMessage,};
-        
-        //send message
-        [NetworkHandler requestWithURL:channelURL withParameters:parameters andRequestType:RequestPOST andCompletetion:^(id responseObj, NSInteger httpStatus, NSError *error) {
-            if (responseObj && error == nil) {
-				DDLogInfo(@"Slack Response - %@", responseObj);
-                completion(YES);
-            } else if (error) {
-				DDLogInfo(@"Slack Error - %@", error.localizedDescription);
-                completion(NO);
-            } else {
-				DDLogInfo(@"Slack Error - Unknown Error");
-                completion(NO);
-            }
-        }];
-    }
++ (void)sendMessageForProject:(XCProject *)project
+					  webhook:(NSString *)webhook
+					  message:(NSString *)message
+				   completion:(void (^) (BOOL success))completion {
+	//set slack channel url and image
+	NSString *slackImage = abSlackImage;
+
+	//set slack message
+	NSString *finalMessage;
+	if (message.length > 0) {
+		finalMessage = [MailHandler parseMessage:message forProject:project];
+	} else {
+		finalMessage = [NSString stringWithFormat:@"%@ - %@ (%@) link - %@", project.name, project.version, project.build, project.appShortShareableURL];
+	}
+
+	//create parameters dictionary
+	NSDictionary *parameters = @{
+		@"username": @"AppBox",
+		@"icon_url": slackImage,
+		@"text": finalMessage
+	};
+
+	//send message
+	[NetworkHandler requestWithURL:webhook withParameters:parameters andRequestType:RequestPOST andCompletetion:^(id responseObj, NSInteger httpStatus, NSError *error) {
+		if (responseObj && error == nil) {
+			DDLogInfo(@"Slack Response - %@", responseObj);
+			completion(YES);
+		} else if (error) {
+			DDLogInfo(@"Slack Error - %@", error.localizedDescription);
+			completion(NO);
+		} else {
+			DDLogInfo(@"Slack Error - Unknown Error");
+			completion(NO);
+		}
+	}];
 }
 
 @end

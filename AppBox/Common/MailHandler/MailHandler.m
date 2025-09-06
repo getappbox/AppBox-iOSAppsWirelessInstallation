@@ -33,10 +33,10 @@
     messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{BUILD_NAME}" withString:project.name];
     messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{BUILD_NUMBER}" withString:project.build];
     messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{BUILD_VERSION}" withString:project.version];
-    messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{DOWNLOAD_URL}" withString: project.appShortShareableURL.absoluteString];
-    
-    // If DOWNLOAD_URL keyword was not used, append it for compatibility
-    if (![[UserData userSlackMessage] containsString: @"{DOWNLOAD_URL}"]) {
+    messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{SHARE_URL}" withString: project.appShortShareableURL.absoluteString];
+
+    // If SHARE_URL keyword was not used, append it for compatibility
+    if (![message containsString: @"{SHARE_URL}"]) {
         messageCopy = [messageCopy stringByAppendingFormat:@" - %@", project.appShortShareableURL];
     }
     
