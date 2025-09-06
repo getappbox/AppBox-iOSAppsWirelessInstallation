@@ -82,6 +82,15 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:abAppBoxReadyToUseNotification object:self];
 }
 
+-(void)viewDidAppear {
+	[super viewDidAppear];
+
+	//update cli tool if needed
+	if ([CLISupportHelper updatePromptAfterVersionUpdate]) {
+		[[NSApplication sharedApplication] updateCLIMenu];
+	}
+}
+
 //MARK: - Upload Manager
 -(void)setupUploadManager{
     self.uploadManager = [[UploadManager alloc] init];

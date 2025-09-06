@@ -32,6 +32,7 @@
 #define abCICDAppStore @"https://docs.getappbox.com/ContinuousIntegration/cicdforappstore/"
 #define abShareXcodeProjectSchemeURL @"https://docs.getappbox.com/FAQs/sharexcodeprojectschemes/"
 #define abDontShowPerviousBuildURL @"https://docs.getappbox.com/Features/keepsamelink/#12-install-previous-versions:~:text=How%20to%20Create%20Two%20Different%20Links%20for%20the%20Same%20Build%20with%20the%20%22Keep%20Same%20Link%22%20Option%3F"
+#define abAppBoxCLIHelpURL @"https://docs.getappbox.com/CommandLineInterface/"
 
 //Unique links
 static NSString *const UNIQUE_LINK_SHARED = @"uniqueLinkShared";

@@ -64,4 +64,8 @@
 +(BOOL)updateAlertEnable;
 +(void)setUpdateAlertEnable:(BOOL)updateAlert;
 
+//CLI Settings
++(NSString *)cliVersion;
++(void)setCLIVersion:(NSString *)cliVersion;
+
 @end
