@@ -30,7 +30,6 @@
 #import "UploadManager.h"
 #import "MailHandler.h"
 #import "SlackClient.h"
-#import "HangoutClient.h"
 #import "MSTeamsClient.h"
 #import "EventTracker.h"
 #import "UpdateHandler.h"
