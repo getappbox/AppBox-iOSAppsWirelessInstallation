@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 73;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,8 @@
 		449BD6B8282111B0008EFB2B /* AppBoxService+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 449BD6B4282111B0008EFB2B /* AppBoxService+CoreDataProperties.m */; };
 		449BD6B9282111B0008EFB2B /* AppBoxService+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 449BD6B5282111B0008EFB2B /* AppBoxService+CoreDataClass.m */; };
 		84A31BD8650851B3675A1797 /* libPods-AppBox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */; };
+		DB04358B2E69628F005F0173 /* appboxcli in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB0435832E696255005F0173 /* appboxcli */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		DB0435912E6962EA005F0173 /* CLISupportInstaller.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0435902E6962EA005F0173 /* CLISupportInstaller.m */; };
 		DB1A06622160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DB1A06612160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel */; };
 		DB1C84412079F54E007AC74C /* NSString+String.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1C84402079F54E007AC74C /* NSString+String.m */; };
 		DB1FC5901FDEED5400179799 /* HomeWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1FC58F1FDEED5400179799 /* HomeWindowController.m */; };
@@ -91,50 +93,24 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		E101D2BC200DE72A0062078B /* CopyFiles */ = {
+		DB04357E2E696172005F0173 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = xcpretty/bin;
-			dstSubfolderSpec = 7;
+			dstPath = "";
+			dstSubfolderSpec = 12;
 			files = (
+				DB04358B2E69628F005F0173 /* appboxcli in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E185337A200DF9AE00E88529 /* CopyFiles */ = {
+		DB0435812E696255005F0173 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = xcpretty/lib;
-			dstSubfolderSpec = 7;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E185337C200DF9DD00E88529 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = xcpretty/lib/xcpretty;
-			dstSubfolderSpec = 7;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E1853384200DFA0900E88529 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = xcpretty/lib/xcpretty/formatters;
-			dstSubfolderSpec = 7;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E185338A200DFA2A00E88529 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = xcpretty/lib/xcpretty/reporters;
-			dstSubfolderSpec = 7;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 		E19973332091D2640035CCE9 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -161,6 +137,9 @@
 		44DCC66B25EEA1910074AB1E /* AppBox4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppBox4.xcdatamodel; sourceTree = "<group>"; };
 		ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AppBox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6359ECA7EF9D4D3F8BE63F /* Pods-AppBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppBox/Pods-AppBox.debug.xcconfig"; sourceTree = "<group>"; };
+		DB0435832E696255005F0173 /* appboxcli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = appboxcli; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB04358F2E6962EA005F0173 /* CLISupportInstaller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLISupportInstaller.h; sourceTree = "<group>"; };
+		DB0435902E6962EA005F0173 /* CLISupportInstaller.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLISupportInstaller.m; sourceTree = "<group>"; };
 		DB1A06592160D47C008D33FD /* AppBox3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppBox3.xcdatamodel; sourceTree = "<group>"; };
 		DB1A06612160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = CoreDataMigration2to3.xcmappingmodel; sourceTree = "<group>"; };
 		DB1C843F2079F54E007AC74C /* NSString+String.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+String.h"; sourceTree = "<group>"; };
@@ -301,7 +280,28 @@
 		E1FECA821E83EE5000C4E9AE /* HTTPStatusCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPStatusCode.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		DB04358D2E696299005F0173 /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = DB04357E2E696172005F0173 /* CopyFiles */;
+			membershipExceptions = (
+				install.sh,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		DB0435842E696255005F0173 /* AppBoxCLI */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (DB04358D2E696299005F0173 /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = AppBoxCLI; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		DB0435802E696255005F0173 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E16437CC1D743A4E00CE8B7E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -326,6 +326,15 @@
 				179DF69BDB018D0F7E295C95 /* Pods-AppBox.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		DB04358E2E6962DB005F0173 /* CLISupportInstaller */ = {
+			isa = PBXGroup;
+			children = (
+				DB04358F2E6962EA005F0173 /* CLISupportInstaller.h */,
+				DB0435902E6962EA005F0173 /* CLISupportInstaller.m */,
+			);
+			path = CLISupportInstaller;
 			sourceTree = "<group>";
 		};
 		DB1A06602160DC70008D33FD /* CoreDataMigration */ = {
@@ -541,6 +550,7 @@
 			isa = PBXGroup;
 			children = (
 				E16437D11D743A4E00CE8B7E /* AppBox */,
+				DB0435842E696255005F0173 /* AppBoxCLI */,
 				E164389A1D743ECA00CE8B7E /* Frameworks */,
 				E16437D01D743A4E00CE8B7E /* Products */,
 				63BFBD3370FA9F1D2661A6F5 /* Pods */,
@@ -551,6 +561,7 @@
 			isa = PBXGroup;
 			children = (
 				E16437CF1D743A4E00CE8B7E /* AppBox.app */,
+				DB0435832E696255005F0173 /* appboxcli */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -845,6 +856,7 @@
 		E1CFC65B1D7E7FD9005872BE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				DB04358E2E6962DB005F0173 /* CLISupportInstaller */,
 				E1902B611E1662E300C3E0F6 /* KeychainHandler */,
 				E11633961E558609005EAB31 /* MobileProvision */,
 				E13161EF1E97775100586052 /* CIProjectBuilder */,
@@ -890,6 +902,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		DB0435822E696255005F0173 /* AppBoxCLI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB0435872E696255005F0173 /* Build configuration list for PBXNativeTarget "AppBoxCLI" */;
+			buildPhases = (
+				DB04357F2E696255005F0173 /* Sources */,
+				DB0435802E696255005F0173 /* Frameworks */,
+				DB0435812E696255005F0173 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				DB0435842E696255005F0173 /* AppBoxCLI */,
+			);
+			name = AppBoxCLI;
+			packageProductDependencies = (
+			);
+			productName = AppBoxCLI;
+			productReference = DB0435832E696255005F0173 /* appboxcli */;
+			productType = "com.apple.product-type.tool";
+		};
 		E16437CE1D743A4E00CE8B7E /* AppBox */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E16437E61D743A4E00CE8B7E /* Build configuration list for PBXNativeTarget "AppBox" */;
@@ -900,11 +934,7 @@
 				E16437CC1D743A4E00CE8B7E /* Frameworks */,
 				E16437CD1D743A4E00CE8B7E /* Resources */,
 				7D6EE5393594D016BF9A0389 /* [CP] Copy Pods Resources */,
-				E101D2BC200DE72A0062078B /* CopyFiles */,
-				E185337A200DF9AE00E88529 /* CopyFiles */,
-				E185337C200DF9DD00E88529 /* CopyFiles */,
-				E1853384200DFA0900E88529 /* CopyFiles */,
-				E185338A200DFA2A00E88529 /* CopyFiles */,
+				DB04357E2E696172005F0173 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -921,9 +951,13 @@
 		E16437C71D743A4E00CE8B7E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1410;
 				ORGANIZATIONNAME = "Developer Insider";
 				TargetAttributes = {
+					DB0435822E696255005F0173 = {
+						CreatedOnToolsVersion = 16.4;
+					};
 					E16437CE1D743A4E00CE8B7E = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 3PQ7E4L589;
@@ -937,7 +971,6 @@
 				};
 			};
 			buildConfigurationList = E16437CA1D743A4E00CE8B7E /* Build configuration list for PBXProject "AppBox" */;
-			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -945,11 +978,13 @@
 				Base,
 			);
 			mainGroup = E16437C61D743A4E00CE8B7E;
+			preferredProjectObjectVersion = 46;
 			productRefGroup = E16437D01D743A4E00CE8B7E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				E16437CE1D743A4E00CE8B7E /* AppBox */,
+				DB0435822E696255005F0173 /* AppBoxCLI */,
 			);
 		};
 /* End PBXProject section */
@@ -1023,6 +1058,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		DB04357F2E696255005F0173 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E16437CB1D743A4E00CE8B7E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1062,6 +1104,7 @@
 				DB1C84412079F54E007AC74C /* NSString+String.m in Sources */,
 				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,
 				E11633991E558635005EAB31 /* MobileProvision.m in Sources */,
+				DB0435912E6962EA005F0173 /* CLISupportInstaller.m in Sources */,
 				E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */,
 				449BD6B8282111B0008EFB2B /* AppBoxService+CoreDataProperties.m in Sources */,
 				E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */,
@@ -1093,6 +1136,54 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		DB0435882E696255005F0173 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3PQ7E4L589;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = appboxcli;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		DB0435892E696255005F0173 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3PQ7E4L589;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = appboxcli;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		E16437E41D743A4E00CE8B7E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1211,7 +1302,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3PQ7E4L589;
-				ENABLE_APP_SANDBOX = YES;
+				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1239,11 +1330,15 @@
 				INFOPLIST_FILE = AppBox/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_DYLIB_INSTALL_NAME = "";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 3.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.developerinsider.AppBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
 			};
 			name = Debug;
@@ -1259,7 +1354,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3PQ7E4L589;
-				ENABLE_APP_SANDBOX = YES;
+				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1287,11 +1382,15 @@
 				INFOPLIST_FILE = AppBox/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_DYLIB_INSTALL_NAME = "";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 3.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.developerinsider.AppBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
 			};
 			name = Release;
@@ -1299,6 +1398,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		DB0435872E696255005F0173 /* Build configuration list for PBXNativeTarget "AppBoxCLI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB0435882E696255005F0173 /* Debug */,
+				DB0435892E696255005F0173 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E16437CA1D743A4E00CE8B7E /* Build configuration list for PBXProject "AppBox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
