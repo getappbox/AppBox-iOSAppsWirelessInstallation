@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@interface CLISupportInstaller : NSObject
+@interface CLISupportHelper : NSObject
 
 + (BOOL)install;
 

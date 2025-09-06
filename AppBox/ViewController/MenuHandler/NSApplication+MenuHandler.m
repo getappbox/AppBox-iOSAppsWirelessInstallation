@@ -149,7 +149,7 @@
 			[self updateCLIMenu];
 		}
 	} else {
-		[CLISupportInstaller install];
+		[CLISupportHelper install];
 		[self updateCLIMenu];
 	}
 }
