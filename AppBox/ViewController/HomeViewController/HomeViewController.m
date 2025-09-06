@@ -118,7 +118,7 @@
 		weakify(self);
 		[self shareURLOnEmailComplition:^(BOOL success) {
 			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-				strongify(self)
+				strongify(self);
 				[self showLinkViewControllerIfNeededWithExitCode:success ? abExitCodeForSuccess : abExitCodeForMailFailed];
 			});
 		}];
@@ -185,6 +185,7 @@
         [textFieldMessage setStringValue:ciProject.personalMessage];
     }
 	[buttonUniqueLink setState:ciProject.keepSameLink.boolValue ? NSControlStateValueOn : NSControlStateValueOff];
+	[self buttonUniqueLinkTapped:buttonUniqueLink];
     [self actionButtonTapped:buttonAction];
 }
 
@@ -197,7 +198,6 @@
 
 - (IBAction)buttonSameLinkHelpTapped:(NSButton *)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abKeepSameLinkReadMoreURL]];
-    [EventTracker logEventWithType:LogEventTypeExternalLinkKeepSameLink];
 }
 
 
@@ -257,6 +257,7 @@
 - (void)handleLoggedInNotification:(NSNotification *)notification{
     [self updateMenuButtons];
     [self viewStateForProgressFinish:YES];
+	[self promptCLIInstallIfNeeded];
 }
 
 - (void)dropboxLogoutHandler:(id)sender{
@@ -277,6 +278,14 @@
 		//show login page
 		[self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
     }
+}
+
+- (void)promptCLIInstallIfNeeded{
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		if (![[NSFileManager defaultManager] fileExistsAtPath:abCLIPath]) {
+			[CLISupportHelper installPromptAfterLogin];
+		}
+	});
 }
 
 

@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BOOL)install;
 + (BOOL)uninstall;
++ (BOOL)installPromptAfterLogin;
 
 @end
 
