@@ -30,10 +30,6 @@
 	fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
 	[DDLog addLogger:fileLogger withLevel:logLevel];
 
-	//OS Logger
-	osLogger = [DDOSLogger sharedInstance];
-	[DDLog addLogger:osLogger withLevel:logLevel];
-
 	//TTY Logger
 	#if !DEBUG
 	ttyLogger = [DDTTYLogger sharedInstance];
