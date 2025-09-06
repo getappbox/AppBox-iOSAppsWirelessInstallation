@@ -21,7 +21,6 @@
     [alert addButtonWithTitle:@"NO"];
     if ([alert runModal] == NSAlertFirstButtonReturn){
         [[NSWorkspace sharedWorkspace] openURL:url];
-        [EventTracker logEventWithType:LogEventTypeUpdateExternalLink];
     }
 }
 
@@ -58,7 +57,7 @@
 				}
 			}
 			@catch (NSException *exception) {
-				[EventTracker logExceptionEvent:exception];
+				DDLogError(@"Exception %@",exception.abDescription);
 			}
         }];
     } @catch (NSException *exception) {

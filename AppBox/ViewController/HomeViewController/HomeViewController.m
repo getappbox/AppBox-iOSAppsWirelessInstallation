@@ -34,7 +34,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initOpenFilesProcess:) name:abUseOpenFilesNotification object:nil];
     
     //setup dropbox
-    [EventTracker logAppBoxVersion];
     [UploadManager setupDBClientsManager];
     [self setupUploadManager];
     
@@ -61,9 +60,6 @@
         }
     }];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-    
-    //Track screen
-    [EventTracker logScreen:@"Home Screen"];
 }
 
 - (void)viewWillAppear{
@@ -115,7 +111,7 @@
     
     [self.uploadManager setCompletionBlock:^(){
         strongify(self);
-		[self logUploadEventAndShowNotification];
+		[self showUploadCompleteNotification];
         [self exportSharedURLInSystemFile];
 		[self shareURLOnSlackMSTeamChannel];
 
@@ -246,11 +242,9 @@
         //set processing flag
         [[AppDelegate appDelegate] setProcessing:true];
         [[textFieldEmail window] makeFirstResponder:self.view];
-        
-        NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:nil];
-        [EventTracker logEventSettingWithType:LogEventSettingTypeUploadIPA andSettings:currentSetting];
+
+		// start upload process
         [self.uploadManager uploadIPAFile:self.project.ipaFullPath];
-        
         [self viewStateForProgressFinish:![AppDelegate appDelegate].processing];
     }else{
         [MailHandler showInvalidEmailAddressAlert];
@@ -304,7 +298,7 @@
     //unique link
     [buttonUniqueLink setEnabled:finish];
 	[buttonUniqueLink setState: finish ? NSControlStateValueOff : buttonUniqueLink.state];
-    
+
     //ipa or project path
     [selectedFilePath setEnabled:finish];
     [selectedFilePath setURL: finish ? nil : selectedFilePath.URL.filePathURL];
@@ -403,11 +397,7 @@
 }
 
 //MARK: - Share URL -
--(void)logUploadEventAndShowNotification {
-	NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"Dropbox"}];
-	[EventTracker logEventSettingWithType:LogEventSettingTypeUploadIPASuccess andSettings:currentSetting];
-
-	// Show upload notification
+-(void)showUploadCompleteNotification {
 	[Common showUploadNotificationWithName:self.project.name andURL:self.project.appShortShareableURL];
 }
 

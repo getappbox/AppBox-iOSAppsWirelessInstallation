@@ -125,8 +125,7 @@
                         [uploadRecord setProvisioningProfile:provisioningProfile];
                     }
                 } @catch (NSException *exception) {
-                    [EventTracker logExceptionEvent:exception];
-					DDLogInfo(@"Exception %@",exception.abDescription);
+					DDLogError(@"Exception %@",exception.abDescription);
                 }
             }
             
@@ -146,8 +145,7 @@
             return project;
         }
     } @catch (NSException *exception) {
-        [EventTracker logExceptionEvent:exception];
-		DDLogInfo(@"Exception %@",exception.abDescription);
+		DDLogError(@"Exception %@",exception.abDescription);
     }
     return nil;
 }

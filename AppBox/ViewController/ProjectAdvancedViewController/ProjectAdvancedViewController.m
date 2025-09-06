@@ -14,7 +14,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [EventTracker logScreen:@"Project Advanced Settings"];
+
     if (self.project.bundleDirectory) {
         [self.dbFolderNameTextField setStringValue:self.project.bundleDirectory.lastPathComponent];
     }
