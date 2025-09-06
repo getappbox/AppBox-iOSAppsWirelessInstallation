@@ -12,7 +12,6 @@
 //Base URL's
 #define abGitHubReleaseBaseURL @"https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/releases/tag/"
 #define abDropBoxAppBaseURL @"https://www.dropbox.com/home/Apps/AppBox%20-%20Build%2C%20Test%20and%20Distribute%20iOS%20Apps"
-#define abDropBoxDirectDownload @"https://dl.dropboxusercontent.com"
 
 //Other URL's
 #define abDefaultLatestDownloadURL @"https://getappbox.com/download"

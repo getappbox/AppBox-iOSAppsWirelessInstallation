@@ -397,8 +397,6 @@
               //reset retry count
 			  self->retryCount = 0;
               
-              DDLogDebug(@"Uploaded file metadata = %@", response);
-              
               //AppInfo.json file uploaded and creating shared url
               if(self.dbFileType == DBFileTypeJson){
                   self.project.uniqueLinkJsonMetaData = response;
@@ -648,8 +646,6 @@
     //Create manifest file with share IPA url and upload manifest file
     if (self.dbFileType == DBFileTypeIPA) {
         NSString *shareableLink = url;
-		shareableLink = [shareableLink stringByReplacingOccurrencesOfString:@"https://www.dropbox.com" withString:abDropBoxDirectDownload];
-		shareableLink = [shareableLink stringByReplacingOccurrencesOfString:@"https://dropbox.com" withString:abDropBoxDirectDownload];
 		shareableLink = [shareableLink substringToIndex:shareableLink.length-5];
         self.project.ipaFileDBShareableURL = [NSURL URLWithString:shareableLink];
         [self.project createManifestWithIPAURL:self.project.ipaFileDBShareableURL completion:^(NSURL *manifestURL) {
