@@ -12,6 +12,11 @@
 
 + (BOOL)install {
 	if ([self runScript:@"install.sh"]) {
+		// Save app version as CLI version
+		NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
+		[UserData setCLIVersion:appVersion];
+
+		// Show success alert
 		NSAlert *alert = [[NSAlert alloc] init];
 		[alert setMessageText: @"Success"];
 		[alert setInformativeText:@"AppBox CLI tool installed successfully.\n\nYou can use it from terminal using the command \"appboxcli\"."];
@@ -19,7 +24,7 @@
 		[alert addButtonWithTitle:@"OK"];
 		[alert addButtonWithTitle:@"Learn More"];
 		if ([alert runModal] == NSAlertSecondButtonReturn){
-			[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com"]];
+			[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abAppBoxCLIHelpURL]];
 		}
 		return YES;
 	}else{
@@ -64,6 +69,42 @@
 		[laterInstallOption setAlertStyle:NSAlertStyleInformational];
 		[laterInstallOption addButtonWithTitle:@"OK"];
 		return NO;
+	}
+}
+
++ (BOOL)updatePromptAfterVersionUpdate {
+	NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
+	NSString *cliVersion = [UserData cliVersion];
+	if (appVersion == cliVersion || cliVersion.isEmpty) {
+		return NO;
+	}
+
+	BOOL hasNewCLIVersion = YES;
+	if (![NSFileManager.defaultManager fileExistsAtPath:abCLIPath] || !hasNewCLIVersion) {
+		return NO;
+	}
+
+	NSAlert *alert = [[NSAlert alloc] init];
+	[alert setMessageText: @"Update CLI Tool"];
+	[alert setInformativeText:@"A newer version of AppBox CLI tool is available. You must update it to use with the latest version of AppBox."];
+	[alert setAlertStyle:NSAlertStyleInformational];
+	[alert addButtonWithTitle:@"Update"];
+	[alert addButtonWithTitle:@"Uninstall"];
+	if ([alert runModal] == NSAlertFirstButtonReturn){
+		if ([self runScript:@"update.sh"]) {
+			[UserData setCLIVersion:appVersion];
+			[Common showAlertWithTitle:@"Success" andMessage:@"AppBox CLI tool updated successfully."];
+			return YES;
+		} else {
+			[Common showAlertWithTitle:@"Error" andMessage:@"Failed to update AppBox CLI tool."];
+			return NO;
+		}
+	} else {
+		if ([self uninstall]) {
+			return YES;
+		} else {
+			return [self updatePromptAfterVersionUpdate];
+		}
 	}
 }
 
