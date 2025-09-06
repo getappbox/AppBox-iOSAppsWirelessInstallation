@@ -115,8 +115,17 @@
     
     [self.uploadManager setCompletionBlock:^(){
         strongify(self);
+		[self logUploadEventAndShowNotification];
         [self exportSharedURLInSystemFile];
-        [self logAppUploadEventAndShareURLOnSlackChannel];
+		[self shareURLOnSlackMSTeamChannel];
+
+		weakify(self);
+		[self shareURLOnEmailComplition:^(BOOL success) {
+			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+				strongify(self)
+				[self showLinkViewControllerIfNeededWithExitCode:success ? abExitCodeForSuccess : abExitCodeForMailFailed];
+			});
+		}];
     }];
 }
 
@@ -393,79 +402,68 @@
     
 }
 
-//MARK: - Navigation -
--(void)logAppUploadEventAndShareURLOnSlackChannel{
-    //Log IPA Upload Success Rate with Other Options
-    NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"Dropbox"}];
-    [EventTracker logEventSettingWithType:LogEventSettingTypeUploadIPASuccess andSettings:currentSetting];
-    
-    //Show Notification
-    if (self.ciRepoProject == nil) {
-        [Common showUploadNotificationWithName:self.project.name andURL:self.project.appShortShareableURL];
-    }
+//MARK: - Share URL -
+-(void)logUploadEventAndShowNotification {
+	NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"Dropbox"}];
+	[EventTracker logEventSettingWithType:LogEventSettingTypeUploadIPASuccess andSettings:currentSetting];
+
+	// Show upload notification
+	[Common showUploadNotificationWithName:self.project.name andURL:self.project.appShortShareableURL];
+}
+
+-(void)shareURLOnSlackMSTeamChannel {
+	// Share URL on Slack/Microsoft Team Channel
+	NSString *message = [UserData userSlackMessage];
+	NSString *slackWebhook = [UserData userSlackChannel];
+	if (slackWebhook.length > 0){
+		[self showStatus:@"Sending Message on Slack..." andShowProgressBar:YES withProgress:-1];
+		[SlackClient sendMessageForProject:self.project
+								   webhook:slackWebhook
+								   message:message
+								completion:^(BOOL success) {}];
+	}
+
+	NSString *msTeamWebhook = [UserData userMicrosoftTeamWebHook];
+	if (msTeamWebhook.length > 0){
+		[self showStatus:@"Sending Message on Microsoft Team..." andShowProgressBar:YES withProgress:-1];
+		[MSTeamsClient sendMessageForProject:self.project
+									 webhook:msTeamWebhook
+									 message:message
+								  completion:^(BOOL success) {}];
+	}
+}
+
+-(void)shareURLOnEmailComplition:(void (^) (BOOL success))completion  {
+	if (textFieldEmail.stringValue.length > 0 && [MailHandler isAllValidEmail:textFieldEmail.stringValue]) {
+		[self showStatus:@"Sending Mail..." andShowProgressBar:YES withProgress:-1];
+		[MailGun sendMailWithProject:self.project.abpProject complition:^(BOOL success, NSError *error) {
+			dispatch_async(dispatch_get_main_queue(), ^{
+				if (success) {
+					[ABHudViewController showStatus:@"Mail Sent" forSuccess:YES onView:self.view];
+					completion(YES);
+				} else {
+					[ABHudViewController showStatus:@"Mail Failed" forSuccess:NO onView:self.view];
+					completion(NO);
+				}
+			});
+		}];
+	} else {
+		completion(YES);
+	}
+}
+
+-(void)showLinkViewControllerIfNeededWithExitCode:(int)exitCode {
 	DDLogInfo(@"\n\n\nSHARE URL - %@\n\n\n.", self.project.appShortShareableURL);
-    
-    
-    if ([UserData userSlackMessage].length > 0) {
-        if ([UserData userSlackChannel].length > 0){
-            [self showStatus:@"Sending Message on Slack..." andShowProgressBar:YES withProgress:-1];
-            [SlackClient sendMessageForProject:self.project completion:^(BOOL success) {}];
-        }
-        if ([UserData userHangoutChatWebHook].length > 0){
-            [self showStatus:@"Sending Message on Hangout..." andShowProgressBar:YES withProgress:-1];
-            [HangoutClient sendMessageForProject:self.project completion:^(BOOL success) {}];
-        }
-        if ([UserData userMicrosoftTeamWebHook].length > 0){
-            [self showStatus:@"Sending Message on Microsoft Team..." andShowProgressBar:YES withProgress:-1];
-            [MSTeamsClient sendMessageForProject:self.project completion:^(BOOL success) {}];
-        }
-        
-    }
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self handleAppURLAfterSlack];
-    });
+	if (self.ciRepoProject == nil){
+		[self performSegueWithIdentifier:@"ShowLink" sender:self];
+	}else{
+		[self viewStateForProgressFinish:YES];
+		exit(exitCode);
+	}
 }
 
-
--(void) handleAppURLAfterSlack {
-    //Send mail if valid email address othervise show link
-    if (textFieldEmail.stringValue.length > 0 && [MailHandler isAllValidEmail:textFieldEmail.stringValue]) {
-        [self showStatus:@"Sending Mail..." andShowProgressBar:YES withProgress:-1];
-        [MailGun sendMailWithProject:self.project.abpProject complition:^(BOOL success, NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (success) {
-                    [ABHudViewController showStatus:@"Mail Sent" forSuccess:YES onView:self.view];
-                    if(![self.presentedViewControllers.lastObject isKindOfClass:[ShowLinkViewController class]]){
-                        if (self.ciRepoProject == nil){
-                            [self performSegueWithIdentifier:@"ShowLink" sender:self];
-                        }else{
-                            [self viewStateForProgressFinish:YES];
-                            exit(abExitCodeForSuccess);
-                        }
-                    }
-                } else {
-                    [ABHudViewController showStatus:@"Mail Failed" forSuccess:NO onView:self.view];
-                    if (self.ciRepoProject == nil){
-                        [self performSegueWithIdentifier:@"ShowLink" sender:self];
-                    }else{
-                        [self viewStateForProgressFinish:YES];
-                        exit(abExitCodeForMailFailed);
-                    }
-                }
-            });
-        }];
-    }else{
-        if (self.ciRepoProject == nil){
-            [self performSegueWithIdentifier:@"ShowLink" sender:self];
-        }else{
-            [self viewStateForProgressFinish:YES];
-            exit(abExitCodeForSuccess);
-        }
-    }
-}
-
+//MARK: - Navigation -
 -(void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender{
-    
     //prepare to show link
     if ([segue.destinationController isKindOfClass:[ShowLinkViewController class]]) {
         //set project to destination
