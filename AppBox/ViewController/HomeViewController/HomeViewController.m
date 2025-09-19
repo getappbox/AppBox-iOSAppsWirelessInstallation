@@ -421,8 +421,19 @@
 
 -(void)shareURLOnSlackMSTeamChannel {
 	// Share URL on Slack/Microsoft Team Channel
-	NSString *message = [UserData userSlackMessage];
-	NSString *slackWebhook = [UserData userSlackChannel];
+	NSString *message;
+	if (self.project.webhookMessage) {
+		message = self.project.webhookMessage;
+	} else {
+		message = [UserData userSlackMessage];
+	}
+
+	NSString *slackWebhook;
+	if (self.project.slackWebhook) {
+		slackWebhook = self.project.slackWebhook;
+	} else {
+		slackWebhook = [UserData userSlackChannel];
+	}
 	if (slackWebhook.length > 0){
 		[self showStatus:@"Sending Message on Slack..." andShowProgressBar:YES withProgress:-1];
 		[SlackClient sendMessageForProject:self.project
@@ -431,7 +442,12 @@
 								completion:^(BOOL success) {}];
 	}
 
-	NSString *msTeamWebhook = [UserData userMicrosoftTeamWebHook];
+	NSString *msTeamWebhook;
+	if (self.project.msTeamsWebhook) {
+		msTeamWebhook = self.project.msTeamsWebhook;
+	} else {
+		msTeamWebhook = [UserData userMicrosoftTeamWebHook];
+	}
 	if (msTeamWebhook.length > 0){
 		[self showStatus:@"Sending Message on Microsoft Team..." andShowProgressBar:YES withProgress:-1];
 		[MSTeamsClient sendMessageForProject:self.project

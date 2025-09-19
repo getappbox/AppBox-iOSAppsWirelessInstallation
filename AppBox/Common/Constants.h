@@ -91,6 +91,9 @@ typedef enum : NSUInteger {
 #define abArgsPersonalMessage @"message="
 #define abArgsKeepSameLink @"keepsamelink="
 #define abArgsDropBoxFolderName @"dbfolder="
+#define abArgsWebHookMessage @"webhookmessage="
+#define abArgsSlackWebHook @"slackwebhook="
+#define abArgsMSTeamsWebHook @"msteamswebhook="
 
 // CLI Path
 #define abCLIPath @"/usr/local/bin/appboxcli"
