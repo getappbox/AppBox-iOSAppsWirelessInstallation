@@ -12,33 +12,62 @@ import ArgumentParser
 struct AppBoxCLI: ParsableCommand {
 	static let configuration = CommandConfiguration(
 		commandName: "appboxcli",
-		abstract: "AppBox CLI is a command line tool to upload and distribute iOS applications using AppBox and Dropbox."
+		abstract: "AppBox is a tool for iOS developers to deploy Development, Ad-Hoc, and In-house (Enterprise) applications directly to the devices from your Dropbox account."
 	)
 
 	@Option(
 		name: .customLong("ipa"),
-		help: "IPA file path in local file system")
+		help: .init(
+			"[Required] \nIPA file path in local file system\n",
+			valueName: "ipa path"))
 	var ipaPath: String
 
 	@Option(
 		name: .customLong("emails"),
-		help: "Comma-separated list of email address that should receive application installation link.")
+		help: .init(
+			"[Optional] \nComma-separated list of email address that should receive application installation link.\n",
+			valueName: "emails"))
 	var emails: String?
 
 	@Option(
 		name: .customLong("message"),
-		help: "Attach personal message in the email. Supported Keywords: {PROJECT_NAME}, {BUILD_VERSION}, and {BUILD_NUMBER}")
+		help: .init(
+			"[Optional] \nAttach personal message in the email. \nSupported Keywords: {PROJECT_NAME}, {BUILD_VERSION}, and {BUILD_NUMBER}\n",
+			valueName: "email message"))
 	var message: String?
-
-	@Option(
-		name: .customLong("dbfolder"),
-		help: "Custom Dropbox Folder Name. By default folder name will be the application bundle identifier.")
-	var dropboxFolder: String?
 
 	@Flag(
 		name: .customLong("keepsamelink"),
-		help: "Keep same short URL for all future IPA uploaded with same bundle identifier.")
+		help: "[Optional] \nKeep same short URL for all future IPA uploaded with same bundle identifier.\n")
 	var keepSameLink = false
+
+	@Option(
+		name: .customLong("dbfolder"),
+		help: .init(
+			"[Optional] \nCustom Dropbox Folder Name. By default folder name will be the application bundle identifier.\n",
+			valueName: "dropbox folder"))
+	var dropboxFolder: String?
+
+	@Option(
+		name: .customLong("webhookmessage"),
+		help: .init(
+			"[Optional] \nCustom message to send along with Slack or Microsoft Teams notification. \nSupported Keywords: {BUILD_NAME}, {BUILD_VERSION}, {BUILD_NUMBER}, {SHARE_URL}\n",
+			valueName: "webhook message"))
+	var webhookMessage: String?
+
+	@Option(
+		name: .customLong("slackwebhook"),
+		help: .init(
+			"[Optional] \nSlack Incoming Webhook URL to send notification to a Slack channel.\n",
+			valueName: "slack webhook"))
+	var slackWebhook: String?
+
+	@Option(
+		name: .customLong("msteamswebhook"),
+		help: .init(
+			"[Optional] \nMicrosoft Teams Incoming Webhook URL to send notification to a Teams channel.\n",
+			valueName: "msteams webhook"))
+	var msTeamsWebhook: String?
 
 	mutating func run() {
 		startAppBox()
@@ -85,6 +114,18 @@ extension AppBoxCLI {
 
 		if keepSameLink {
 			arguments.append("keepsamelink=1")
+		}
+
+		if let webhookMessage, !webhookMessage.isEmpty {
+			arguments.append("webhookmessage=\(webhookMessage)")
+		}
+
+		if let slackWebhook, !slackWebhook.isEmpty {
+			arguments.append("slackwebhook=\(slackWebhook)")
+		}
+
+		if let msTeamsWebhook, !msTeamsWebhook.isEmpty {
+			arguments.append("msteamswebhook=\(msTeamsWebhook)")
 		}
 
 		return arguments
