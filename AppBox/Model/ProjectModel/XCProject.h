@@ -55,6 +55,9 @@
 @property(nonatomic, retain) NSString *emails;
 @property(nonatomic, retain) NSNumber *keepSameLink;
 @property(nonatomic, retain) NSString *personalMessage;
+@property(nonatomic, retain) NSString *webhookMessage;
+@property(nonatomic, retain) NSString *slackWebhook;
+@property(nonatomic, retain) NSString *msTeamsWebhook;
 
 - (instancetype)initEmpty;
 - (BOOL)isValidProjectInfoPlist;
