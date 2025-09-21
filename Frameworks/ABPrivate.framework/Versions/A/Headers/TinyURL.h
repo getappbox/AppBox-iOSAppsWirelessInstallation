@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ABPProject.h"
+#import "ABPIPAUploadInfo.h"
 
 typedef void(^TinyURLShortenerCompletionBlock)(NSURL *shortURL, NSError *error);
 
@@ -17,6 +17,6 @@ typedef void(^TinyURLShortenerCompletionBlock)(NSURL *shortURL, NSError *error);
 -(instancetype)init NS_UNAVAILABLE;
 +(instancetype)new NS_UNAVAILABLE;
 
--(void)shortenURLForProject:(ABPProject *)project completion:(TinyURLShortenerCompletionBlock)completionBlock;
+-(void)shortenURLWithIPAUploadInfo:(ABPIPAUploadInfo *)ipaUploadInfo completion:(TinyURLShortenerCompletionBlock)completionBlock;
 
 @end
