@@ -13,7 +13,7 @@
     __weak IBOutlet NSImageView *imageViewQRCode;
 }
 
-@property(nonatomic, strong) XCProject *project;
+@property(nonatomic, strong) IPAUploadInfo *ipaUploadInfo;
 @property(nonatomic, strong) ABUploadRecord *uploadRecord;
 
 - (IBAction)buttonCloseTapped:(NSButton *)sender;

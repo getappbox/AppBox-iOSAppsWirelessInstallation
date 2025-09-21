@@ -10,9 +10,9 @@
 #import "MobileProvision.h"
 #import "DropboxViewController.h"
 #import "ShowLinkViewController.h"
-#import "ProjectAdvancedViewController.h"
+#import "UploadAdvancedSettingViewController.h"
 
-@interface HomeViewController : NSViewController <NSTabViewDelegate, ProjectAdvancedViewDelegate>{
+@interface HomeViewController : NSViewController <NSTabViewDelegate, UploadAdvancedSettingViewDelegate>{
 
     //Build & Upload IPA
 	__weak IBOutlet NSPathControl *selectedFilePath;

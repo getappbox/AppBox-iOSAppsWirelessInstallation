@@ -1,14 +1,14 @@
 //
-//  XCProject.m
+//  IPAUploadInfo.m
 //  AppBox
 //
 //  Created by Vineet Choudhary on 03/12/16.
 //  Copyright © 2016 Developer Insider. All rights reserved.
 //
 
-#import "XCProject.h"
+#import "IPAUploadInfo.h"
 
-@implementation XCProject
+@implementation IPAUploadInfo
 
 //MARK: - Init
 
@@ -68,8 +68,8 @@
     }
 }
 
-//validate info plist for current project
-- (BOOL)isValidProjectInfoPlist{
+//validate info plist for current ipa file
+- (BOOL)isValidInfoPlist{
     if (self.ipaInfoPlist == nil){
         return false;
     }

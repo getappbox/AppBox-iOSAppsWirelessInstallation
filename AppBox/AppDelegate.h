@@ -15,7 +15,7 @@
 
 //stored properties
 @property (nonatomic) BOOL processing;
-@property (nonatomic) BOOL isReadyToBuild;
+@property (nonatomic) BOOL isReadyToUpload;
 @property (nonatomic) BOOL isInternetConnected;
 
 //menu iboutlet

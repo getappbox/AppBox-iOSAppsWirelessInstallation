@@ -32,7 +32,7 @@ struct AppBoxCLI: ParsableCommand {
 	@Option(
 		name: .customLong("message"),
 		help: .init(
-			"[Optional] \nAttach personal message in the email. \nSupported Keywords: {PROJECT_NAME}, {BUILD_VERSION}, and {BUILD_NUMBER}\n",
+			"[Optional] \nAttach personal message in the email. \nSupported Keywords: {BUILD_NAME}, {BUILD_VERSION}, and {BUILD_NUMBER}\n",
 			valueName: "email message"))
 	var message: String?
 

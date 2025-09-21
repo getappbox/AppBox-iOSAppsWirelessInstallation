@@ -19,7 +19,7 @@
     __weak IBOutlet NSLayoutConstraint *linkHintHeightConstraint;
 }
 
-@property(nonatomic, strong) XCProject *project;
+@property(nonatomic, strong) IPAUploadInfo *ipaUploadInfo;
 
 - (IBAction)buttonCloseTapped:(NSButton *)sender;
 - (IBAction)buttonCopyToClipboardTapped:(NSButton *)sender;

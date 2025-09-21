@@ -1,5 +1,5 @@
 //
-//  XCProject.h
+//  IPAUploadInfo.h
 //  AppBox
 //
 //  Created by Vineet Choudhary on 03/12/16.
@@ -10,10 +10,7 @@
 
 #import "MobileProvision.h"
 
-#define AppStoreUploadToolAL @"Application Loader"
-#define AppStoreUploadToolXcode @"Xcode"
-
-@interface XCProject : NSObject
+@interface IPAUploadInfo : NSObject
 
 //Project Basic Properties
 @property(nonatomic, retain) NSString *uuid;
@@ -60,7 +57,7 @@
 @property(nonatomic, retain) NSString *msTeamsWebhook;
 
 - (instancetype)initEmpty;
-- (BOOL)isValidProjectInfoPlist;
+- (BOOL)isValidInfoPlist;
 - (BOOL)exportSharedURLInSystemFile;
 - (void)createUDIDAndIsNew:(BOOL)isNew;
 - (void)upadteDbDirectoryByBundleDirectory;

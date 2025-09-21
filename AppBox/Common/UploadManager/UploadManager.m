@@ -103,12 +103,12 @@
                     }
                     
                     //Get embedded mobile provision
-                    if (self.project.mobileProvision == nil){
+                    if (self.ipaUploadInfo.mobileProvision == nil){
                         NSString *mobileProvisionPath = [payloadEntry stringByAppendingPathComponent:@"embedded.mobileprovision"].lowercaseString;
                         if ([entry.lowercaseString isEqualToString:mobileProvisionPath]){
                             DDLogDebug(@"Found mobileprovision at path = %@",mobileProvisionPath);
 							mobileProvisionPath = [self->workingDirectory stringByAppendingPathComponent: mobileProvisionPath];
-                            self.project.mobileProvision = [[MobileProvision alloc] initWithPath:mobileProvisionPath];
+                            self.ipaUploadInfo.mobileProvision = [[MobileProvision alloc] initWithPath:mobileProvisionPath];
                         }
                     }
                     
@@ -120,7 +120,7 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (error) {
                         //show error and return
-                        if (self.ciRepoProject) {
+                        if (self.isCLIActive) {
 							DDLogInfo(@"Error - %@", error.localizedDescription);
                             exit(abExitCodeUnZipIPAError);
                         } else {
@@ -132,11 +132,11 @@
                     
                     //get info.plist
                     DDLogDebug(@"Final Info.plist path = %@",infoPlistPath);
-					[self.project setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[self->workingDirectory stringByAppendingPathComponent:infoPlistPath]]];
+					[self.ipaUploadInfo setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[self->workingDirectory stringByAppendingPathComponent:infoPlistPath]]];
                     
                     //show error if info.plist is nil or invalid
-                    if (![self.project isValidProjectInfoPlist]) {
-                        if (self.ciRepoProject) {
+                    if (![self.ipaUploadInfo isValidInfoPlist]) {
+                        if (self.isCLIActive) {
 							DDLogInfo(@"AppBox was not able to find Info.plist in your IPA.");
                             exit(abExitCodeInfoPlistNotFound);
                         } else {
@@ -147,8 +147,8 @@
                     }
                     
                     //set dropbox folder name
-                    if (!self.project.bundleDirectory.absoluteString.isEmpty){
-						[self.project upadteDbDirectoryByBundleDirectory];
+                    if (!self.ipaUploadInfo.bundleDirectory.absoluteString.isEmpty){
+						[self.ipaUploadInfo upadteDbDirectoryByBundleDirectory];
                     }
                     
                     if (![AppDelegate appDelegate].isInternetConnected){
@@ -156,15 +156,15 @@
                     }
                     
                     //prepare for upload and check ipa type
-                    NSURL *ipaFileURL = ([self.project.ipaFullPath isFileURL]) ? self.project.ipaFullPath : [NSURL fileURLWithPath:ipaPath];
-                    [self.project setIpaFullPath:ipaFileURL];
+                    NSURL *ipaFileURL = ([self.ipaUploadInfo.ipaFullPath isFileURL]) ? self.ipaUploadInfo.ipaFullPath : [NSURL fileURLWithPath:ipaPath];
+                    [self.ipaUploadInfo setIpaFullPath:ipaFileURL];
 					[self uploadIPAFileWithoutUnzip:ipaFileURL];
                 });
             }];
         });
     }else{
 		DDLogInfo(@"\n\n======\nFile Not Exist - %@\n======\n\n",ipaPath);
-        if (self.ciRepoProject) {
+        if (self.isCLIActive) {
             exit(abExitCodeIPAFileNotFound);
         } else {
             [Common showAlertWithTitle:@"IPA File Missing" andMessage:[NSString stringWithFormat:@"AppBox was not able to find IPA file at %@.",ipaFileURL.absoluteString]];
@@ -174,15 +174,15 @@
 }
 
 -(void)uploadIPAFileWithoutUnzip:(NSURL *)ipaURL{
-	DDLogDebug(@"\n=========\nInfo.plist\n========\n %@", self.project.ipaInfoPlist);
+	DDLogDebug(@"\n=========\nInfo.plist\n========\n %@", self.ipaUploadInfo.ipaInfoPlist);
 
     //upload ipa
     self.dbFileType = DBFileTypeIPA;
     if ([AppDelegate appDelegate].isInternetConnected) {
-        [self dbUploadFile:ipaURL.resourceSpecifier.stringByRemovingPercentEncoding to:self.project.dbIPAFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
+        [self dbUploadFile:ipaURL.resourceSpecifier.stringByRemovingPercentEncoding to:self.ipaUploadInfo.dbIPAFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
     } else {
         self.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
-            [self dbUploadFile:ipaURL.resourceSpecifier.stringByRemovingPercentEncoding to:self.project.dbIPAFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
+            [self dbUploadFile:ipaURL.resourceSpecifier.stringByRemovingPercentEncoding to:self.ipaUploadInfo.dbIPAFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
         }];
     }
 }
@@ -190,11 +190,11 @@
 
 //MARK: - UNIQUE Link Handlers
 -(void)handleAfterUniqueJsonMetaDataLoaded{
-    if(self.project.uniqueLinkJsonMetaData){
+    if(self.ipaUploadInfo.uniqueLinkJsonMetaData){
         NSURL *path = [NSURL fileURLWithPath:[workingDirectory stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]];
 		weakify(self);
         //download appinfo.json file
-        [[[DBClientsManager authorizedClient].filesRoutes downloadUrl:self.project.uniqueLinkJsonMetaData.pathDisplay overwrite:YES destination:path]
+        [[[DBClientsManager authorizedClient].filesRoutes downloadUrl:self.ipaUploadInfo.uniqueLinkJsonMetaData.pathDisplay overwrite:YES destination:path]
          setResponseBlock:^(DBFILESFileMetadata * _Nullable response, DBFILESDownloadError * _Nullable routeError, DBRequestError * _Nullable error, NSURL * _Nonnull destination) {
 			strongify(self);
              if (response){
@@ -256,52 +256,52 @@
     } else {
         NSNumber *currentTimeStamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]];
         NSMutableDictionary *latestVersion = [[NSMutableDictionary alloc] init];
-        [latestVersion setObject:self.project.name forKey:@"name"];
-        [latestVersion setObject:self.project.version forKey:@"version"];
-        [latestVersion setObject:self.project.build forKey:@"build"];
-        [latestVersion setObject:self.project.identifer forKey:@"identifier"];
-        [latestVersion setObject:self.project.manifestFileSharableURL.absoluteString forKey:@"manifestLink"];
+        [latestVersion setObject:self.ipaUploadInfo.name forKey:@"name"];
+        [latestVersion setObject:self.ipaUploadInfo.version forKey:@"version"];
+        [latestVersion setObject:self.ipaUploadInfo.build forKey:@"build"];
+        [latestVersion setObject:self.ipaUploadInfo.identifer forKey:@"identifier"];
+        [latestVersion setObject:self.ipaUploadInfo.manifestFileSharableURL.absoluteString forKey:@"manifestLink"];
         [latestVersion setObject:currentTimeStamp forKey:@"timestamp"];
         
         //check if developer want to show donwload button IPA file button to the user
         if ([UserData downloadIPAEnable]) {
-            [latestVersion setObject:self.project.ipaFileDBShareableURL.absoluteString forKey:@"ipaFileLink"];
+            [latestVersion setObject:self.ipaUploadInfo.ipaFileDBShareableURL.absoluteString forKey:@"ipaFileLink"];
         }
         
         //check if developer want to show more information about build
         if ([UserData moreDetailsEnable]) {
             //set basic details of app
-            if (self.project.miniOSVersion){
-                [latestVersion setObject:self.project.miniOSVersion forKey:@"minosversion"];
+            if (self.ipaUploadInfo.miniOSVersion){
+                [latestVersion setObject:self.ipaUploadInfo.miniOSVersion forKey:@"minosversion"];
             }
-            if (self.project.supportedDevice){
-                [latestVersion setObject:self.project.supportedDevice forKey:@"supporteddevice"];
+            if (self.ipaUploadInfo.supportedDevice){
+                [latestVersion setObject:self.ipaUploadInfo.supportedDevice forKey:@"supporteddevice"];
             }
-            if (self.project.buildType){
-                [latestVersion setObject:self.project.buildType forKey:@"buildtype"];
+            if (self.ipaUploadInfo.buildType){
+                [latestVersion setObject:self.ipaUploadInfo.buildType forKey:@"buildtype"];
             }
-            if (self.project.ipaFileSize) {
-                [latestVersion setObject:self.project.ipaFileSize forKey:@"ipafilesize"];
+            if (self.ipaUploadInfo.ipaFileSize) {
+                [latestVersion setObject:self.ipaUploadInfo.ipaFileSize forKey:@"ipafilesize"];
             }
             
             //set details which obtains from mobile provisioing profile
             NSMutableDictionary *mobileProvision = [[NSMutableDictionary alloc] init];
-            if (self.project.mobileProvision.createDate) {
-                NSNumber *create = [NSNumber numberWithDouble: self.project.mobileProvision.createDate.timeIntervalSince1970];
+            if (self.ipaUploadInfo.mobileProvision.createDate) {
+                NSNumber *create = [NSNumber numberWithDouble: self.ipaUploadInfo.mobileProvision.createDate.timeIntervalSince1970];
                 [mobileProvision setObject:create forKey:@"createdate"];
             }
-            if (self.project.mobileProvision.expirationDate) {
-                NSNumber *expire = [NSNumber numberWithDouble: self.project.mobileProvision.expirationDate.timeIntervalSince1970];
+            if (self.ipaUploadInfo.mobileProvision.expirationDate) {
+                NSNumber *expire = [NSNumber numberWithDouble: self.ipaUploadInfo.mobileProvision.expirationDate.timeIntervalSince1970];
                 [mobileProvision setObject:expire forKey:@"expirationdata"];
             }
-            if (self.project.mobileProvision.teamId) {
-                [mobileProvision setObject:self.project.mobileProvision.teamId forKey:@"teamid"];
+            if (self.ipaUploadInfo.mobileProvision.teamId) {
+                [mobileProvision setObject:self.ipaUploadInfo.mobileProvision.teamId forKey:@"teamid"];
             }
-            if (self.project.mobileProvision.teamName) {
-                [mobileProvision setObject:self.project.mobileProvision.teamName forKey:@"teamname"];
+            if (self.ipaUploadInfo.mobileProvision.teamName) {
+                [mobileProvision setObject:self.ipaUploadInfo.mobileProvision.teamName forKey:@"teamname"];
             }
-            if (self.project.mobileProvision.uuid) {
-                [mobileProvision setObject:self.project.mobileProvision.uuid forKey:@"uuid"];
+            if (self.ipaUploadInfo.mobileProvision.uuid) {
+                [mobileProvision setObject:self.ipaUploadInfo.mobileProvision.uuid forKey:@"uuid"];
             }
             if (mobileProvision.allKeys.count > 0) {
                 [latestVersion setObject:mobileProvision forKey:@"mobileprovision"];
@@ -309,7 +309,7 @@
             
             //Hide some information of provisioned deviecs UDIDs
             NSMutableArray *modifiedProvisionedDevices = [[NSMutableArray alloc] init];
-            [self.project.mobileProvision.provisionedDevices enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self.ipaUploadInfo.mobileProvision.provisionedDevices enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 if (obj.length > 30) {
                     NSString *modifiedProvisioning = [obj stringByReplacingCharactersInRange:NSMakeRange(10, 20) withString:@"....."];
                     [modifiedProvisionedDevices addObject:modifiedProvisioning];
@@ -318,7 +318,7 @@
 					[modifiedProvisionedDevices addObject:modifiedProvisioning];
 				}
             }];
-            if (self.project.mobileProvision.provisionedDevices) {
+            if (self.ipaUploadInfo.mobileProvision.provisionedDevices) {
                 [mobileProvision setObject:modifiedProvisionedDevices forKey:@"devicesudid"];
             }
         }
@@ -336,8 +336,8 @@
         [dictUniqueLink setObject:latestVersion forKey:@"latestVersion"];
     }
     [self writeUniqueJsonWithDict:dictUniqueLink];
-    self.project.uniquelinkShareableURL = [NSURL URLWithString:[dictUniqueLink objectForKey:UNIQUE_LINK_SHARED]];
-    self.project.appShortShareableURL = [NSURL URLWithString:[dictUniqueLink objectForKey:UNIQUE_LINK_SHORT]];
+    self.ipaUploadInfo.uniquelinkShareableURL = [NSURL URLWithString:[dictUniqueLink objectForKey:UNIQUE_LINK_SHARED]];
+    self.ipaUploadInfo.appShortShareableURL = [NSURL URLWithString:[dictUniqueLink objectForKey:UNIQUE_LINK_SHORT]];
     [self uploadUniqueLinkJsonFile];
 }
 
@@ -356,20 +356,20 @@
     NSURL *path = [NSURL fileURLWithPath:[workingDirectory stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]];
     
     //set mode for appinfo.json file to upload/update
-    DBFILESWriteMode *mode = (self.project.uniqueLinkJsonMetaData) ? [[DBFILESWriteMode alloc] initWithUpdate:self.project.uniqueLinkJsonMetaData.rev] : [[DBFILESWriteMode alloc] initWithOverwrite];
-    [self dbUploadFile:path.resourceSpecifier to:self.project.dbAppInfoJSONFullPath.absoluteString mode:mode];
+    DBFILESWriteMode *mode = (self.ipaUploadInfo.uniqueLinkJsonMetaData) ? [[DBFILESWriteMode alloc] initWithUpdate:self.ipaUploadInfo.uniqueLinkJsonMetaData.rev] : [[DBFILESWriteMode alloc] initWithOverwrite];
+    [self dbUploadFile:path.resourceSpecifier to:self.ipaUploadInfo.dbAppInfoJSONFullPath.absoluteString mode:mode];
 }
 
 //MARK: - Update AppInfo.JSON file
 -(void)loadAppInfoMetaData{
 	weakify(self);
     DBFILESListRevisionsMode *revisionMode = [[DBFILESListRevisionsMode alloc] initWithPath];
-    [[[DBClientsManager authorizedClient].filesRoutes listRevisions:self.project.dbAppInfoJSONFullPath.absoluteString mode:revisionMode limit:@1 ] setResponseBlock:^(DBFILESListRevisionsResult * _Nullable response, DBFILESListRevisionsError * _Nullable routeError, DBRequestError * _Nullable error) {
+    [[[DBClientsManager authorizedClient].filesRoutes listRevisions:self.ipaUploadInfo.dbAppInfoJSONFullPath.absoluteString mode:revisionMode limit:@1 ] setResponseBlock:^(DBFILESListRevisionsResult * _Nullable response, DBFILESListRevisionsError * _Nullable routeError, DBRequestError * _Nullable error) {
 		strongify(self);
         //check there is any rev available
         if (response && response.isDeleted.boolValue == NO && response.entries.count > 0){
             DDLogDebug(@"Loaded Meta Data %@",response);
-            self.project.uniqueLinkJsonMetaData = [response.entries firstObject];
+            self.ipaUploadInfo.uniqueLinkJsonMetaData = [response.entries firstObject];
         }
         
         //handle meta data
@@ -384,7 +384,7 @@
 	DDLogInfo(@"Uploading - %@", file.lastPathComponent);
     
     //Upload large ipa file with dropbox session api
-    if (_project.ipaFileSize.integerValue > 150 && self.dbFileType == DBFileTypeIPA) {
+    if (self.ipaUploadInfo.ipaFileSize.integerValue > 150 && self.dbFileType == DBFileTypeIPA) {
         [self dbUploadLargeFile:file to:path mode:mode];
         return;
     }
@@ -401,8 +401,8 @@
               
               //AppInfo.json file uploaded and creating shared url
               if(self.dbFileType == DBFileTypeJson){
-                  self.project.uniqueLinkJsonMetaData = response;
-                  if(self.project.appShortShareableURL){
+                  self.ipaUploadInfo.uniqueLinkJsonMetaData = response;
+                  if(self.ipaUploadInfo.appShortShareableURL){
                       if (self.uploadRecord) {
                           [self deleteBuildFolder];
                       } else {
@@ -550,10 +550,11 @@
     else {
         retryCount = 0;
         
-        //Exit AppBox if CI Project
-        if (self.ciRepoProject) {
+        //Exit AppBox if running from CLI
+        if (self.isCLIActive) {
             exit(abExitCodeForUploadFailed);
         }
+
         //Call Error Block
         self.errorBlock(nil, YES);
         
@@ -633,7 +634,7 @@
     
     //Handle other errors
     else {
-        if (self.ciRepoProject) {
+        if (self.isCLIActive) {
             exit(abExitCodeForUploadFailed);
         }
         retryCount = 0;
@@ -649,12 +650,12 @@
     if (self.dbFileType == DBFileTypeIPA) {
         NSString *shareableLink = url;
 		shareableLink = [shareableLink substringToIndex:shareableLink.length-5];
-        self.project.ipaFileDBShareableURL = [NSURL URLWithString:shareableLink];
-        [self.project createManifestWithIPAURL:self.project.ipaFileDBShareableURL completion:^(NSURL *manifestURL) {
+        self.ipaUploadInfo.ipaFileDBShareableURL = [NSURL URLWithString:shareableLink];
+        [self.ipaUploadInfo createManifestWithIPAURL:self.ipaUploadInfo.ipaFileDBShareableURL completion:^(NSURL *manifestURL) {
 			strongify(self);
             if (manifestURL == nil){
                 //show error if manifest file url is nil
-                if (self.ciRepoProject) {
+                if (self.isCLIActive) {
                     exit(abExitCodeUnableToCreateManiFestFile);
                 }
                 [Common showAlertWithTitle:@"Error" andMessage:@"Unable to create manifest file!!"];
@@ -662,7 +663,7 @@
             } else {
                 //change file type and upload manifest
                 self.dbFileType = DBFileTypeManifest;
-                [self dbUploadFile:manifestURL.resourceSpecifier to:self.project.dbManifestFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
+                [self dbUploadFile:manifestURL.resourceSpecifier to:self.ipaUploadInfo.dbManifestFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
             }
         }];
         
@@ -671,16 +672,16 @@
     else if (self.dbFileType == DBFileTypeManifest){
         NSString *shareableLink = [url substringToIndex:url.length-5];
         DDLogDebug(@"Manifest Sharable link - %@",shareableLink);
-        self.project.manifestFileSharableURL = [NSURL URLWithString:shareableLink];
-        if(self.project.isKeepSameLinkEnabled){
+        self.ipaUploadInfo.manifestFileSharableURL = [NSURL URLWithString:shareableLink];
+        if(self.ipaUploadInfo.isKeepSameLinkEnabled){
             //Download previously uploaded appinfo
             DBFILESListRevisionsMode *revisionMode = [[DBFILESListRevisionsMode alloc] initWithPath];
-            [[[DBClientsManager authorizedClient].filesRoutes listRevisions:self.project.dbAppInfoJSONFullPath.absoluteString mode:revisionMode  limit:@1] setResponseBlock:^(DBFILESListRevisionsResult * _Nullable response, DBFILESListRevisionsError * _Nullable routeError, DBRequestError * _Nullable error) {
+            [[[DBClientsManager authorizedClient].filesRoutes listRevisions:self.ipaUploadInfo.dbAppInfoJSONFullPath.absoluteString mode:revisionMode  limit:@1] setResponseBlock:^(DBFILESListRevisionsResult * _Nullable response, DBFILESListRevisionsError * _Nullable routeError, DBRequestError * _Nullable error) {
 				strongify(self);
                 //check there is any rev available
                 if (response && response.isDeleted.boolValue == NO && response.entries.count > 0){
                     DDLogDebug(@"Loaded Meta Data %@",response);
-                    self.project.uniqueLinkJsonMetaData = [response.entries firstObject];
+                    self.ipaUploadInfo.uniqueLinkJsonMetaData = [response.entries firstObject];
                 }
                 
                 //handle meta data
@@ -695,12 +696,12 @@
     else if (self.dbFileType == DBFileTypeJson){
         NSString *shareableLink = [url substringToIndex:url.length-5];
         DDLogDebug(@"AppInfo Sharable link - %@",shareableLink);
-        self.project.uniquelinkShareableURL = [NSURL URLWithString:shareableLink];
+        self.ipaUploadInfo.uniquelinkShareableURL = [NSURL URLWithString:shareableLink];
         NSMutableDictionary *dictUniqueLink = [[self getUniqueJsonDict] mutableCopy];
         [dictUniqueLink setObject:shareableLink forKey:UNIQUE_LINK_SHARED];
         [self writeUniqueJsonWithDict:dictUniqueLink];
 		DDLogDebug(@"\n=======\nAppInfo\n=======\n %@", dictUniqueLink);
-        if(self.project.appShortShareableURL){
+        if(self.ipaUploadInfo.appShortShareableURL){
             self.completionBlock();
         }else{
             [self createUniqueShortSharableUrl];
@@ -712,11 +713,11 @@
 -(void)createUniqueShortSharableUrl{
     //Create Short URL
 	weakify(self);
-    [[TinyURL shared] shortenURLForProject:self.project.abpProject completion:^(NSURL *shortURL, NSError *error) {
+    [[TinyURL shared] shortenURLForProject:self.ipaUploadInfo.abpProject completion:^(NSURL *shortURL, NSError *error) {
 		strongify(self);
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
-                self.project.appLongShareableURL = shortURL;
+                self.ipaUploadInfo.appLongShareableURL = shortURL;
 				DDLogInfo(@"Error in creating short URL - %@", error.localizedDescription);
             }
             [self createAndUploadJsonWithURL:shortURL];
@@ -725,7 +726,7 @@
 }
 
 -(void)createAndUploadJsonWithURL:(NSURL *)shareURL{
-    self.project.appShortShareableURL = shareURL;
+    self.ipaUploadInfo.appShortShareableURL = shareURL;
     NSMutableDictionary *dictUniqueFile = [[self getUniqueJsonDict] mutableCopy];
     [dictUniqueFile setObject:shareURL.absoluteString forKey:UNIQUE_LINK_SHORT];
     [self writeUniqueJsonWithDict:dictUniqueFile];
@@ -739,7 +740,7 @@
 -(void)deleteBuildFromDropboxAndDashboard {
 	[self createNewWorkingDirectory];
     [self showStatus:@"Deleting..." andShowProgressBar:YES withProgress:-1];
-    if (self.project.isKeepSameLinkEnabled) {
+    if (self.ipaUploadInfo.isKeepSameLinkEnabled) {
         [self deleteBuildDetailsFromAppInfoJSON];
     } else {
         [self deleteBuildFolder];
@@ -753,7 +754,7 @@
 
 -(void)deleteBuildFolder {
 	weakify(self);
-    [[[[DBClientsManager authorizedClient] filesRoutes] delete_V2:self.project.dbDirectory.absoluteString] setResponseBlock:^(DBFILESDeleteResult * _Nullable result, DBFILESDeleteError * _Nullable routeError, DBRequestError * _Nullable networkError) {
+    [[[[DBClientsManager authorizedClient] filesRoutes] delete_V2:self.ipaUploadInfo.dbDirectory.absoluteString] setResponseBlock:^(DBFILESDeleteResult * _Nullable result, DBFILESDeleteError * _Nullable routeError, DBRequestError * _Nullable networkError) {
 		strongify(self);
         [ABHudViewController hideAllHudFromView:self.currentViewController.view after:0];
         if (result) {
