@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ABPProject.h"
+#import "ABPIPAUploadInfo.h"
 
 @interface MailGun : NSObject
 
-+ (void)sendMailWithProject:(ABPProject *)project complition:(void (^) (BOOL success, NSError *error))complition;
++ (void)sendMailWithIPAUploadInfo:(ABPIPAUploadInfo *)ipaUploadInfo complition:(void (^) (BOOL success, NSError *error))complition;
 
 @end

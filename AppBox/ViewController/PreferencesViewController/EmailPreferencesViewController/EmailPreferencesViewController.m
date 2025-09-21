@@ -64,7 +64,7 @@
     //send mail
     [ABHudViewController showStatus:@"Sending Test Mail" onView:self.view];
 	weakify(self);
-    [MailGun sendMailWithProject:ipaUploadInfo.abpProject complition:^(BOOL success, NSError *error) {
+    [MailGun sendMailWithIPAUploadInfo:ipaUploadInfo.abpIPAUploadInfo complition:^(BOOL success, NSError *error) {
 		dispatch_async(dispatch_get_main_queue(), ^{
 			strongify(self);
 			[ABHudViewController hideAllHudFromView:self.view after:0];

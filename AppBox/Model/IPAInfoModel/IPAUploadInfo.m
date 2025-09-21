@@ -87,28 +87,28 @@
     return _uuid;
 }
 
--(ABPProject *)abpProject{
-    ABPProject *project = [[ABPProject alloc] init];
-    [project setName:self.name];
-    [project setVersion:self.version];
-    [project setBuild:self.build];
-    [project setIdentifer:self.identifer];
-    [project setBuildType:self.buildType];
-    [project setIpaFileSize:self.ipaFileSize];
-    [project setMiniOSVersion:self.miniOSVersion];
-    [project setSupportedDevice:self.supportedDevice];
+-(ABPIPAUploadInfo *)abpIPAUploadInfo{
+	ABPIPAUploadInfo *ipaUploadInfo = [[ABPIPAUploadInfo alloc] init];
+    [ipaUploadInfo setName:self.name];
+    [ipaUploadInfo setVersion:self.version];
+    [ipaUploadInfo setBuild:self.build];
+    [ipaUploadInfo setIdentifer:self.identifer];
+    [ipaUploadInfo setBuildType:self.buildType];
+    [ipaUploadInfo setIpaFileSize:self.ipaFileSize];
+    [ipaUploadInfo setMiniOSVersion:self.miniOSVersion];
+    [ipaUploadInfo setSupportedDevice:self.supportedDevice];
     
-    [project setIsKeepSameLinkEnabled:self.isKeepSameLinkEnabled];
-    [project setUniquelinkShareableURL:self.uniquelinkShareableURL];
+    [ipaUploadInfo setIsKeepSameLinkEnabled:self.isKeepSameLinkEnabled];
+    [ipaUploadInfo setUniquelinkShareableURL:self.uniquelinkShareableURL];
     
-    [project setDbAppInfoJSONFullPath:self.dbAppInfoJSONFullPath];
-    [project setAppShortShareableURL:self.appShortShareableURL];
+    [ipaUploadInfo setDbAppInfoJSONFullPath:self.dbAppInfoJSONFullPath];
+    [ipaUploadInfo setAppShortShareableURL:self.appShortShareableURL];
     
-    [project setEmails:self.emails];
-    [project setPersonalMessage:self.personalMessage];
-    [project setDbManager:[Common currentDBManager]];
+    [ipaUploadInfo setEmails:self.emails];
+    [ipaUploadInfo setPersonalMessage:self.personalMessage];
+    [ipaUploadInfo setDbManager:[Common currentDBManager]];
     
-    return project;
+    return ipaUploadInfo;
 }
 
 //MARK: - Setter

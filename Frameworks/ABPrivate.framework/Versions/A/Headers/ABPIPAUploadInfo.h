@@ -1,5 +1,5 @@
 //
-//  ABPProject.h
+//  ABPIPAUploadInfo.h
 //  ABPrivate
 //
 //  Created by Vineet Choudhary on 25/04/18.
@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "DBManager.h"
 
-@interface ABPProject : NSObject
+@interface ABPIPAUploadInfo : NSObject
 
-//Project Basic Properties
+//Basic Properties
 @property(nonatomic, retain) NSString *name;
 @property(nonatomic, retain) NSString *version;
 @property(nonatomic, retain) NSString *build;
@@ -21,7 +21,6 @@
 @property(nonatomic, retain) NSNumber *ipaFileSize;
 @property(nonatomic, retain) NSString *miniOSVersion;
 @property(nonatomic, retain) NSString *supportedDevice;
-@property(nonatomic, retain) NSString *selectedSchemes;
 
 //UniqueLink.json
 @property(nonatomic, assign) BOOL isKeepSameLinkEnabled;
@@ -33,10 +32,7 @@
 
 //Emails
 @property(nonatomic, retain) NSString *emails;
-@property(nonatomic, assign) BOOL isBuildsuccess;
-@property(nonatomic, retain) NSString *subjectPrefix;
 @property(nonatomic, retain) NSString *personalMessage;
-@property(nonatomic, retain) NSString *appStoreMessage;
 
 //Client
 @property(nonatomic, retain) DBManager *dbManager;

@@ -713,7 +713,7 @@
 -(void)createUniqueShortSharableUrl{
     //Create Short URL
 	weakify(self);
-    [[TinyURL shared] shortenURLForProject:self.ipaUploadInfo.abpProject completion:^(NSURL *shortURL, NSError *error) {
+    [[TinyURL shared] shortenURLWithIPAUploadInfo:self.ipaUploadInfo.abpIPAUploadInfo completion:^(NSURL *shortURL, NSError *error) {
 		strongify(self);
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {

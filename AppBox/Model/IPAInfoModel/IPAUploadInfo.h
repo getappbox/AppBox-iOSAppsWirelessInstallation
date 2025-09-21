@@ -22,7 +22,7 @@
 @property(nonatomic, retain) NSNumber *ipaFileSize;
 @property(nonatomic, retain) NSString *miniOSVersion;
 @property(nonatomic, retain) NSString *supportedDevice;
-@property(nonatomic, retain, readonly) ABPProject *abpProject;
+@property(nonatomic, retain, readonly) ABPIPAUploadInfo *abpIPAUploadInfo;
 
 //Local URLS
 @property(nonatomic, retain) NSURL *ipaFullPath;

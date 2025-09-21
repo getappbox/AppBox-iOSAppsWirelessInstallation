@@ -456,7 +456,7 @@
 -(void)shareURLOnEmailComplition:(void (^) (BOOL success))completion  {
 	if (textFieldEmail.stringValue.length > 0 && [MailHandler isAllValidEmail:textFieldEmail.stringValue]) {
 		[self showStatus:@"Sending Mail..." andShowProgressBar:YES withProgress:-1];
-		[MailGun sendMailWithProject:self.ipaUploadInfo.abpProject complition:^(BOOL success, NSError *error) {
+		[MailGun sendMailWithIPAUploadInfo:self.ipaUploadInfo.abpIPAUploadInfo complition:^(BOOL success, NSError *error) {
 			dispatch_async(dispatch_get_main_queue(), ^{
 				if (success) {
 					[ABHudViewController showStatus:@"Mail Sent" forSuccess:YES onView:self.view];
