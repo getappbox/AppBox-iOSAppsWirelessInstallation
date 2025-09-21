@@ -221,11 +221,6 @@
     BOOL isAllMailVaild = sender.stringValue.length > 0 && [MailHandler isAllValidEmail:sender.stringValue];
     if (isAllMailVaild){
         [self.project setEmails:sender.stringValue];
-        
-        //save user emails, if they doesn't have any
-        if ([[UserData userEmail] isEqualToString:abEmptyString]){
-            [UserData setUserEmail:sender.stringValue];
-        }
     } else if (sender.stringValue.length > 0) {
         [MailHandler showInvalidEmailAddressAlert];
     }
@@ -233,9 +228,6 @@
 
 //developer message text field
 - (IBAction)textFieldDevMessageValueChanged:(NSTextField *)sender {
-	if ([[UserData userMessage] isEqualToString:abEmptyString]) {
-		[UserData setUserMessage:sender.stringValue];
-	}
 	[self.project setPersonalMessage:sender.stringValue];
 }
 
