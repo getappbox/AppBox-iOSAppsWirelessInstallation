@@ -32,15 +32,15 @@ The AppBox CLI tool can be installed directly from the AppBox application using 
     ```
     ![](Screenshots/ABCLIHelp.webp)
 
-The installation process will:
-- Create a symbolic link to the CLI tool in `/usr/local/bin/`
-- Make the `appboxcli` command available system-wide
-- Configure proper permissions for command execution
+The installation process will:    
+- Create a symbolic link to the CLI tool in `/usr/local/bin/`   
+- Make the `appboxcli` command available system-wide    
+- Configure proper permissions for command execution    
 
-This authentication is required because the CLI tool installation process needs administrative privileges to:
-- Create symbolic links in system directories
-- Set appropriate file permissions
-- Configure the CLI environment
+This authentication is required because the CLI tool installation process needs administrative privileges to:   
+- Create symbolic links in system directories   
+- Set appropriate file permissions    
+- Configure the CLI environment   
 
 ## Uninstallation
 
@@ -177,15 +177,15 @@ appboxcli --ipa MyApp.ipa \
 
 ## Error Handling
 
-The CLI tool provides comprehensive error handling and logging:
-- **Exit Code 0**: Success
-- **Exit Code 111**: Email sending failed
-- **Exit Code 118**: Unable to create manifest file
-- **Exit Code 119**: IPA file not found
-- **Exit Code 120**: Info.plist not found in IPA
-- **Exit Code 121**: Unable to unzip IPA file
-- **Exit Code 124**: Upload failed
-- **Exit Code 127**: Invalid command
+The CLI tool provides comprehensive error handling and logging:   
+- **Exit Code 0**: Success    
+- **Exit Code 111**: Email sending failed   
+- **Exit Code 118**: Unable to create manifest file   
+- **Exit Code 119**: IPA file not found   
+- **Exit Code 120**: Info.plist not found in IPA    
+- **Exit Code 121**: Unable to unzip IPA file   
+- **Exit Code 124**: Upload failed    
+- **Exit Code 127**: Invalid command    
 
 ## Troubleshooting
 
@@ -206,16 +206,16 @@ The CLI tool provides comprehensive error handling and logging:
    ```
 
 3. **AppBox Not Found Error**
-   - Ensure AppBox.app is installed in `/Applications/` folder
-   - Verify AppBox is properly configured with Dropbox access
+    - Ensure AppBox.app is installed in `/Applications/` folder
+    - Verify AppBox is properly configured with Dropbox access
 
 4. **Upload Failures**
-   - Check internet connection
-   - Verify Dropbox account has sufficient storage
-   - Ensure IPA file is valid and not corrupted
+    - Check internet connection
+    - Verify Dropbox account has sufficient storage
+    - Ensure IPA file is valid and not corrupted
 
 ### Getting Help
-For additional help and support:
-- Run `appboxcli --help` for command-line options
-- Visit the [AppBox Documentation](https://docs.getappbox.com)
-- Report issues on [GitHub](https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/issues)
+For additional help and support:    
+- Run `appboxcli --help` for command-line options   
+- Visit the [AppBox Documentation](https://docs.getappbox.com)    
+- Report issues on [GitHub](https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/issues)   
