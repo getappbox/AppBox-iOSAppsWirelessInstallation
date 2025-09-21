@@ -138,9 +138,7 @@
 //MARK: - Build Repo / Open Files Notification
 - (void)initCLIUpload:(NSNotification *)notification {
     if ([notification.object isKindOfClass:[IPAUploadInfo class]]) {
-		self.isCLIActive = YES;
-        self.ipaUploadInfo = notification.object;
-        [self initCLIUploadProcessWithIPAUploadInfo:self.ipaUploadInfo];
+        [self initCLIUploadProcessWithIPAUploadInfo:[notification object]];
     }
 }
 
@@ -179,22 +177,24 @@
     }
 }
 
-- (void)initCLIUploadProcessWithIPAUploadInfo:(IPAUploadInfo *)ciProject {
-    NSURL *ipaURL = ciProject.ipaFullPath;
+- (void)initCLIUploadProcessWithIPAUploadInfo:(IPAUploadInfo *)ipaUploadInfo {
+    NSURL *ipaURL = ipaUploadInfo.ipaFullPath;
     if (ipaURL == nil) {
         return;
     }
 
-    [self viewStateForProgressFinish:YES];
+	self.isCLIActive = YES;
+	self.ipaUploadInfo = ipaUploadInfo;
     [self.ipaUploadInfo setIpaFullPath:ipaURL];
+	[self.uploadManager setIpaUploadInfo:self.ipaUploadInfo];
     [selectedFilePath setURL:ipaURL];
-    if (ciProject.emails.length != 0) {
-        [textFieldEmail setStringValue:ciProject.emails];
+    if (ipaUploadInfo.emails.length != 0) {
+        [textFieldEmail setStringValue:ipaUploadInfo.emails];
     }
-    if (ciProject.personalMessage.length != 0) {
-        [textFieldMessage setStringValue:ciProject.personalMessage];
+    if (ipaUploadInfo.personalMessage.length != 0) {
+        [textFieldMessage setStringValue:ipaUploadInfo.personalMessage];
     }
-	[buttonUniqueLink setState:ciProject.keepSameLink.boolValue ? NSControlStateValueOn : NSControlStateValueOff];
+	[buttonUniqueLink setState:ipaUploadInfo.keepSameLink.boolValue ? NSControlStateValueOn : NSControlStateValueOff];
 	[self buttonUniqueLinkTapped:buttonUniqueLink];
     [self actionButtonTapped:buttonAction];
 }
@@ -433,9 +433,9 @@
 	if (slackWebhook.length > 0){
 		[self showStatus:@"Sending Message on Slack..." andShowProgressBar:YES withProgress:-1];
 		[SlackClient sendMessage:self.ipaUploadInfo
-								   webhook:slackWebhook
-								   message:message
-								completion:^(BOOL success) {}];
+						 webhook:slackWebhook
+						 message:message
+					  completion:^(BOOL success) {}];
 	}
 
 	NSString *msTeamWebhook;

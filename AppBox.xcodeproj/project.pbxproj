@@ -70,7 +70,7 @@
 		E18186DC1E8A47C10002509F /* AccountPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186DB1E8A47C10002509F /* AccountPreferencesViewController.m */; };
 		E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186DE1E8A47CD0002509F /* EmailPreferencesViewController.m */; };
 		E18186E21E8A47D60002509F /* HelpPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186E11E8A47D60002509F /* HelpPreferencesViewController.m */; };
-		E1902B481E16423200C3E0F6 /* ProjectAdvancedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B471E16423200C3E0F6 /* ProjectAdvancedViewController.m */; };
+		E1902B481E16423200C3E0F6 /* UploadAdvancedSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B471E16423200C3E0F6 /* UploadAdvancedSettingViewController.m */; };
 		E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B4E1E16617B00C3E0F6 /* NetworkHandler.m */; };
 		E1902B541E16617B00C3E0F6 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B521E16617B00C3E0F6 /* UserData.m */; };
 		E1902B5D1E1661B300C3E0F6 /* MailHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B5C1E1661B300C3E0F6 /* MailHandler.m */; };
@@ -238,8 +238,8 @@
 		E18186DE1E8A47CD0002509F /* EmailPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailPreferencesViewController.m; sourceTree = "<group>"; };
 		E18186E01E8A47D60002509F /* HelpPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpPreferencesViewController.h; sourceTree = "<group>"; };
 		E18186E11E8A47D60002509F /* HelpPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpPreferencesViewController.m; sourceTree = "<group>"; };
-		E1902B461E16423200C3E0F6 /* ProjectAdvancedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectAdvancedViewController.h; sourceTree = "<group>"; };
-		E1902B471E16423200C3E0F6 /* ProjectAdvancedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectAdvancedViewController.m; sourceTree = "<group>"; };
+		E1902B461E16423200C3E0F6 /* UploadAdvancedSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadAdvancedSettingViewController.h; sourceTree = "<group>"; };
+		E1902B471E16423200C3E0F6 /* UploadAdvancedSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadAdvancedSettingViewController.m; sourceTree = "<group>"; };
 		E1902B4D1E16617B00C3E0F6 /* NetworkHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkHandler.h; sourceTree = "<group>"; };
 		E1902B4E1E16617B00C3E0F6 /* NetworkHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkHandler.m; sourceTree = "<group>"; };
 		E1902B511E16617B00C3E0F6 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
@@ -599,7 +599,7 @@
 				E15C26671D7FD5A9004243B9 /* ShowLinkViewController */,
 				E1AA0F411E2F325F00BA81A1 /* QRCodeViewController */,
 				E12E6D061D8FC6E20054814D /* DashboardViewController */,
-				E1902B451E16420C00C3E0F6 /* ProjectAdvancedViewController */,
+				E1902B451E16420C00C3E0F6 /* UploadAdvancedSettingViewController */,
 				E16D72E61E8935060031FB7C /* PreferencesViewController */,
 			);
 			path = ViewController;
@@ -737,13 +737,13 @@
 			path = HelpPreferencesViewController;
 			sourceTree = "<group>";
 		};
-		E1902B451E16420C00C3E0F6 /* ProjectAdvancedViewController */ = {
+		E1902B451E16420C00C3E0F6 /* UploadAdvancedSettingViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E1902B461E16423200C3E0F6 /* ProjectAdvancedViewController.h */,
-				E1902B471E16423200C3E0F6 /* ProjectAdvancedViewController.m */,
+				E1902B461E16423200C3E0F6 /* UploadAdvancedSettingViewController.h */,
+				E1902B471E16423200C3E0F6 /* UploadAdvancedSettingViewController.m */,
 			);
-			path = ProjectAdvancedViewController;
+			path = UploadAdvancedSettingViewController;
 			sourceTree = "<group>";
 		};
 		E1902B4B1E16617B00C3E0F6 /* MailHandler */ = {
@@ -1063,7 +1063,7 @@
 				E16437DD1D743A4E00CE8B7E /* AppBox.xcdatamodeld in Sources */,
 				E16437D71D743A4E00CE8B7E /* main.m in Sources */,
 				DB831BCB1FF6B5780065B646 /* ABHudViewController.m in Sources */,
-				E1902B481E16423200C3E0F6 /* ProjectAdvancedViewController.m in Sources */,
+				E1902B481E16423200C3E0F6 /* UploadAdvancedSettingViewController.m in Sources */,
 				DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.m in Sources */,
 				DB358B66216FB1AC0080CAC0 /* UploadRecord+CoreDataClass.m in Sources */,
 				E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */,

@@ -36,6 +36,14 @@
 @property(nonatomic, retain) NSURL *uniquelinkShareableURL;
 @property(nonatomic, retain) DBFILESFileMetadata *uniqueLinkJsonMetaData;
 
+//Share Settings
+@property(nonatomic, retain) NSString *emails;
+@property(nonatomic, retain) NSNumber *keepSameLink;
+@property(nonatomic, retain) NSString *personalMessage;
+@property(nonatomic, retain) NSString *webhookMessage;
+@property(nonatomic, retain) NSString *slackWebhook;
+@property(nonatomic, retain) NSString *msTeamsWebhook;
+
 //Shareable URL DropBox or Google Shortern
 @property(nonatomic, retain) NSURL *dbDirectory;
 @property(nonatomic, retain) NSURL *dbIPAFullPath;
@@ -47,14 +55,6 @@
 @property(nonatomic, retain) NSURL *manifestFileSharableURL;
 @property(nonatomic, retain) NSURL *appLongShareableURL;
 @property(nonatomic, retain) NSURL *appShortShareableURL;
-
-//CI Settings
-@property(nonatomic, retain) NSString *emails;
-@property(nonatomic, retain) NSNumber *keepSameLink;
-@property(nonatomic, retain) NSString *personalMessage;
-@property(nonatomic, retain) NSString *webhookMessage;
-@property(nonatomic, retain) NSString *slackWebhook;
-@property(nonatomic, retain) NSString *msTeamsWebhook;
 
 - (instancetype)initEmpty;
 - (BOOL)isValidInfoPlist;
