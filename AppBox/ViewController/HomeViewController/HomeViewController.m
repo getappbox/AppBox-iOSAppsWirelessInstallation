@@ -416,7 +416,9 @@
 
 //MARK: - Share URL -
 -(void)showUploadCompleteNotification {
-	[Common showUploadNotificationWithName:self.project.name andURL:self.project.appShortShareableURL];
+	if (self.ciRepoProject == nil) {
+		[Common showUploadNotificationWithName:self.project.name andURL:self.project.appShortShareableURL];
+	}
 }
 
 -(void)shareURLOnSlackMSTeamChannel {
