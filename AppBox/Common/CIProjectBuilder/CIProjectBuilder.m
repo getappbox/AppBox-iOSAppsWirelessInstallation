@@ -47,7 +47,6 @@ NSString *const RepoITCPassword = @"itcpassword";
 //MARK: - Common Arguments
 +(void)setCommonArgumentsToProject:(XCProject *)project {
     NSArray *arguments = [[NSProcessInfo processInfo] arguments];
-    DDLogDebug(@"All Command Line Arguments = %@",arguments);
 	for (NSString *argument in arguments) {
 
 		//Project Emails
