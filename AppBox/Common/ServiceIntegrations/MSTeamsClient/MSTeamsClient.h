@@ -10,6 +10,9 @@
 
 @interface MSTeamsClient : NSObject
 
-+ (void)sendMessageForProject:(XCProject *)project completion:(void (^) (BOOL success))completion;
++ (void)sendMessage:(IPAUploadInfo *)ipaUploadInfo
+			webhook:(NSString *)webhook
+			message:(NSString *)message
+		 completion:(void (^) (BOOL success))completion;
 
 @end

@@ -10,17 +10,16 @@
 #define Constants_h
 
 //Base URL's
-#define abGitHubReleaseBaseURL @"https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/tag/"
+#define abGitHubReleaseBaseURL @"https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/releases/tag/"
 #define abDropBoxAppBaseURL @"https://www.dropbox.com/home/Apps/AppBox%20-%20Build%2C%20Test%20and%20Distribute%20iOS%20Apps"
-#define abDropBoxDirectDownload @"https://dl.dropboxusercontent.com"
 
 //Other URL's
 #define abDefaultLatestDownloadURL @"https://getappbox.com/download"
 #define abDocumentationURL @"https://docs.getappbox.com"
-#define abLicenseURL @"https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation#user-content-license"
-#define abGitHubLatestRelease @"https://api.github.com/repos/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest"
+#define abLicenseURL @"https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/blob/master/LICENSE.md"
+#define abGitHubLatestRelease @"https://api.github.com/repos/getappbox/AppBox-iOSAppsWirelessInstallation/releases/latest"
 #define abTwitterURL @"https://twitter.com/AppBoxHQ"
-#define abSlackImage @"https://s3-us-west-2.amazonaws.com/slack-files2/avatars/2017-04-06/165993935268_ec0c0ba40483382c7192_512.png"
+#define abSlackImage @"https://getappbox.com/images/AppBoxIcon.png"
 #define abWebHookSetupURL @"https://my.slack.com/apps/new/A0F7XDUAZ-incoming-webhooks"
 
 //Help URL
@@ -28,10 +27,8 @@
 #define abMoreDetailsHelpURL @"https://docs.getappbox.com/Features/moredetails/"
 #define abKeepSameLinkReadMoreURL @"https://docs.getappbox.com/Features/keepsamelink/"
 #define abUploadChunkSizeHelpURL @"https://docs.getappbox.com/Features/uploadchunksize/"
-#define abMultipleXcodeVersionURL @"https://docs.getappbox.com/FAQs/cimultiplexcodeversion/"
-#define abCICDAppStore @"https://docs.getappbox.com/ContinuousIntegration/cicdforappstore/"
-#define abShareXcodeProjectSchemeURL @"https://docs.getappbox.com/FAQs/sharexcodeprojectschemes/"
-#define abDontShowPerviousBuildURL @"https://docs.getappbox.com/Features/keepsamelink/#3-how-to-keep-the-same-link-but-also-hide-the-previous-version-from-the-installation-page"
+#define abDontShowPerviousBuildURL @"https://docs.getappbox.com/Features/keepsamelink/#12-install-previous-versions:~:text=How%20to%20Create%20Two%20Different%20Links%20for%20the%20Same%20Build%20with%20the%20%22Keep%20Same%20Link%22%20Option%3F"
+#define abAppBoxCLIHelpURL @"https://docs.getappbox.com/CommandLineInterface/"
 
 //Unique links
 static NSString *const UNIQUE_LINK_SHARED = @"uniqueLinkShared";
@@ -75,7 +72,7 @@ typedef enum : NSUInteger {
     DBFileTypeJson,
 } DBFileType;
 
-//CI
+// CLI Exit Codes
 #define abExitCodeForInvalidCommand 127
 #define abExitCodeForUploadFailed 124
 #define abExitCodeUnZipIPAError 121
@@ -85,11 +82,18 @@ typedef enum : NSUInteger {
 #define abExitCodeForMailFailed 111
 #define abExitCodeForSuccess 0
 
+// CLI Arguments
 #define abArgsIPA @"ipa="
-#define abArgsEmails @"email="
+#define abArgsEmails @"emails="
 #define abArgsPersonalMessage @"message="
 #define abArgsKeepSameLink @"keepsamelink="
 #define abArgsDropBoxFolderName @"dbfolder="
+#define abArgsWebHookMessage @"webhookmessage="
+#define abArgsSlackWebHook @"slackwebhook="
+#define abArgsMSTeamsWebHook @"msteamswebhook="
+
+// CLI Path
+#define abCLIPath @"/usr/local/bin/appboxcli"
 
 //Weakify & Strongify
 #define weakify(var) __weak typeof(var) AHKWeak_##var = var;

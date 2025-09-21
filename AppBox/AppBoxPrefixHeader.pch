@@ -9,7 +9,6 @@
 #ifndef AppBoxPrefixHeader_pch
 #define AppBoxPrefixHeader_pch
 
-
 #import <SSZipArchive/SSZipArchive.h>
 #import <SAMKeychain/SAMKeychain.h>
 #import <AFNetworking/AFNetworking.h>
@@ -20,24 +19,23 @@
 #import "MBProgressHUD+ProgressHud.h"
 
 #import "UserData.h"
-#import "XCProject.h"
-#import "AppDelegate.h"
 #import "Constants.h"
+#import "AppDelegate.h"
+#import "IPAUploadInfo.h"
 #import "HTTPStatusCode.h"
 #import "OtherServicesKeys.h"
 
 #import "Common.h"
+#import "CLIIPAUpload.h"
 #import "UploadManager.h"
 #import "MailHandler.h"
 #import "SlackClient.h"
-#import "HangoutClient.h"
 #import "MSTeamsClient.h"
-#import "EventTracker.h"
 #import "UpdateHandler.h"
 #import "DBErrorHandler.h"
 #import "NetworkHandler.h"
 #import "KeychainHandler.h"
-#import "CIProjectBuilder.h"
+#import "CLISupportHelper.h"
 #import "NSApplication+MenuHandler.h"
 
 #import "NSURL+URL.h"

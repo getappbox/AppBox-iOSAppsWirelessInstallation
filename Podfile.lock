@@ -14,9 +14,9 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - CMDQueryStringSerialization (0.4.1):
     - ISO8601
-  - CocoaLumberjack (3.8.5):
-    - CocoaLumberjack/Core (= 3.8.5)
-  - CocoaLumberjack/Core (3.8.5)
+  - CocoaLumberjack (3.9.0):
+    - CocoaLumberjack/Core (= 3.9.0)
+  - CocoaLumberjack/Core (3.9.0)
   - ISO8601 (0.6.0)
   - ObjectiveDropboxOfficial (7.4.1)
   - SAMKeychain (1.5.3)
@@ -48,7 +48,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
   CMDQueryStringSerialization: 4bb0a2f5e7d8d8678d911d88072274952cbef4e5
-  CocoaLumberjack: 6a459bc897d6d80bd1b8c78482ec7ad05dffc3f0
+  CocoaLumberjack: 5644158777912b7de7469fa881f8a3f259c2512a
   ISO8601: d3ea3ba9b752820cf92c6b47a9ee327e9f0e13fc
   ObjectiveDropboxOfficial: 8699fa65969a94f8305d8dabf9c9a8dd856ac598
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c

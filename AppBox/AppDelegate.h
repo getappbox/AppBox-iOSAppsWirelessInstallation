@@ -15,7 +15,7 @@
 
 //stored properties
 @property (nonatomic) BOOL processing;
-@property (nonatomic) BOOL isReadyToBuild;
+@property (nonatomic) BOOL isReadyToUpload;
 @property (nonatomic) BOOL isInternetConnected;
 
 //menu iboutlet
@@ -23,6 +23,8 @@
 @property (nonatomic, weak) IBOutlet NSMenuItem *dropboxSpaceButton;
 @property (nonatomic, weak) IBOutlet NSMenuItem *dropboxAccountButton;
 @property (nonatomic, weak) IBOutlet NSMenuItem *dropboxNameButton;
+@property (nonatomic, weak) IBOutlet NSMenuItem *cliInstallUninstallButton;
+
 
 //coredata
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;

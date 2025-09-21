@@ -19,9 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [EventTracker logScreen:@"AppBox ShareLink"];
-    [textFieldAppLink setStringValue: self.project.appShortShareableURL.stringValue];
-    if ([self.project.appShortShareableURL isEqualTo:self.project.appLongShareableURL]) {
+    [textFieldAppLink setStringValue: self.ipaUploadInfo.appShortShareableURL.stringValue];
+    if ([self.ipaUploadInfo.appShortShareableURL isEqualTo:self.ipaUploadInfo.appLongShareableURL]) {
         [textFieldHint setStringValue:LongURLUserHint];
         [linkHeightConstraint setConstant:70];
         [linkHintHeightConstraint setConstant:40];
@@ -32,14 +31,13 @@
     }
     
     //Save Project Details
-    [ABProject addProjectWithXCProject:self.project];
+    [ABProject addProjectWithIPAUploadInfo:self.ipaUploadInfo];
 }
 
 
 - (IBAction)buttonCopyToClipboardTapped:(NSButton *)sender {
-    [EventTracker logEventWithType:LogEventTypeCopyToClipboard];
     [[NSPasteboard generalPasteboard] clearContents];
-	[[NSPasteboard generalPasteboard] setString:self.project.appShortShareableURL.stringValue  forType:NSPasteboardTypeString];
+	[[NSPasteboard generalPasteboard] setString:self.ipaUploadInfo.appShortShareableURL.stringValue  forType:NSPasteboardTypeString];
     [sender setTitle:@"Copied!!"];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [sender setTitle:@"Copy to Clipboard"];
@@ -47,8 +45,7 @@
 }
 
 - (IBAction)buttonOpenURLAction:(NSButton *)sender {
-    [[NSWorkspace sharedWorkspace] openURL:self.project.appShortShareableURL];
-    [EventTracker logEventWithType:LogEventTypeOpenInDropbox];
+    [[NSWorkspace sharedWorkspace] openURL:self.ipaUploadInfo.appShortShareableURL];
 }
 
 
@@ -59,9 +56,7 @@
 //MARK: - Navigation
 -(void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender{
     if ([segue.destinationController isKindOfClass:[QRCodeViewController class]]){
-        ((QRCodeViewController *) segue.destinationController).project = self.project;
-    } else if([segue.destinationController isKindOfClass:[DashboardViewController class]]) {
-        [EventTracker logEventWithType:LogEventTypeOpenDashboardFromShowLink];
+        ((QRCodeViewController *) segue.destinationController).ipaUploadInfo = self.ipaUploadInfo;
     }
 }
 

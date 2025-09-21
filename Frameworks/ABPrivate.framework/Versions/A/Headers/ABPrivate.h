@@ -19,5 +19,5 @@ FOUNDATION_EXPORT const unsigned char ABPrivateVersionString[];
 #import "MailGun.h"
 #import "TinyURL.h"
 #import "DBManager.h"
-#import "ABPProject.h"
+#import "ABPIPAUploadInfo.h"
 

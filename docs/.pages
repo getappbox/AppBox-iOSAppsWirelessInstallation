@@ -3,4 +3,6 @@ nav:
   - Getting Started: GettingStarted
   - Features: Features
   - Fastlane: Fastlane
+  - CLI: CommandLineInterface
+  - Configuration: Configuration
   - FAQ: FAQ
