@@ -10,9 +10,9 @@ AppBox provides a powerful command-line interface that allows you to automate yo
 
 ## Prerequisites
 
-Before installing/using the AppBox CLI tool, ensure that:
-1. The AppBox application must be installed in `/Applications/AppBox.app`
-2. You must have linked your Dropbox account with AppBox
+Before installing/using the AppBox CLI tool, ensure that:   
+1. The AppBox application must be installed in `/Applications/AppBox.app`   
+2. You must have linked your Dropbox account with AppBox    
 
 ## Installation
 The AppBox CLI tool can be installed directly from the AppBox application using the built-in installation manager.
