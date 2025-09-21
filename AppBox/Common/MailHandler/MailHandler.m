@@ -27,17 +27,17 @@
     [Common showAlertWithTitle:@"Invalid email address" andMessage:@"The email address entered was invalid. Please reenter it (Example: username@example.com).\n\nFor multiple email please enter like (username@example.com,username2@example.com,username@example2.com)."];
 }
 
-//MARK: - Parse customised message with project details
-+ (NSString *)parseMessage:(NSString *)message forProject:(XCProject *)project {
+//MARK: - Parse customised message with IPA Upload Info
++ (NSString *)parseMessage:(NSString *)message forIPAUploadInfo:(IPAUploadInfo *)ipaUploadInfo {
     NSString *messageCopy = message.copy;
-    messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{BUILD_NAME}" withString:project.name];
-    messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{BUILD_NUMBER}" withString:project.build];
-    messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{BUILD_VERSION}" withString:project.version];
-    messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{DOWNLOAD_URL}" withString: project.appShortShareableURL.absoluteString];
-    
-    // If DOWNLOAD_URL keyword was not used, append it for compatibility
-    if (![[UserData userSlackMessage] containsString: @"{DOWNLOAD_URL}"]) {
-        messageCopy = [messageCopy stringByAppendingFormat:@" - %@", project.appShortShareableURL];
+    messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{BUILD_NAME}" withString:ipaUploadInfo.name];
+    messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{BUILD_NUMBER}" withString:ipaUploadInfo.build];
+    messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{BUILD_VERSION}" withString:ipaUploadInfo.version];
+    messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{SHARE_URL}" withString: ipaUploadInfo.appShortShareableURL.absoluteString];
+
+    // If SHARE_URL keyword was not used, append it for compatibility
+    if (![message containsString: @"{SHARE_URL}"]) {
+        messageCopy = [messageCopy stringByAppendingFormat:@" - %@", ipaUploadInfo.appShortShareableURL];
     }
     
     return messageCopy;

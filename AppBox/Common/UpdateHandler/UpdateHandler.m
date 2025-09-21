@@ -21,7 +21,6 @@
     [alert addButtonWithTitle:@"NO"];
     if ([alert runModal] == NSAlertFirstButtonReturn){
         [[NSWorkspace sharedWorkspace] openURL:url];
-        [EventTracker logEventWithType:LogEventTypeUpdateExternalLink];
     }
 }
 
@@ -49,7 +48,7 @@
 					NSString *currentVersion = [[versionString componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:abEmptyString];
 					
 					//log current and latest version
-					DDLogDebug(@"\n\nCurrent Version - %@ <=> Latest Version - %@\n\n", versionString, tag);
+					DDLogDebug(@"Current Version - %@ <=> Latest Version - %@", versionString, tag);
 					
 					//return result based on version strings
 					completion(([newVesion compare:currentVersion] == NSOrderedDescending),[NSURL URLWithString:[responseObj valueForKey:@"html_url"]]);
@@ -58,7 +57,7 @@
 				}
 			}
 			@catch (NSException *exception) {
-				[EventTracker logExceptionEvent:exception];
+				DDLogError(@"Exception %@",exception.abDescription);
 			}
         }];
     } @catch (NSException *exception) {

@@ -34,12 +34,15 @@
 //MARK: - Control Actions
 - (IBAction)saveButtonTapped:(NSButton *)sender {
     [self.view.window makeFirstResponder:self.view];
-    if (![self isValidEmailDetails]) {
-        return;
+	if (emailTextField.stringValue.isEmpty && personalMessageTextField.stringValue.isEmpty) {
+		[UserData setUserEmail:emailTextField.stringValue];
+		[UserData setUserMessage:personalMessageTextField.stringValue];
+		[ABHudViewController showStatus:@"Details Cleared!" forSuccess:YES onView:self.view];
+	} else if ([self isValidEmailDetails]) {
+		[UserData setUserEmail:emailTextField.stringValue];
+		[UserData setUserMessage:personalMessageTextField.stringValue];
+		[ABHudViewController showStatus:@"Details Saved!" forSuccess:YES onView:self.view];
     }
-    [UserData setUserEmail:emailTextField.stringValue];
-    [UserData setUserMessage:personalMessageTextField.stringValue];
-    [ABHudViewController showStatus:@"Details Saved!" forSuccess:YES onView:self.view];
 }
 
 - (IBAction)sendTestMailButtonTapped:(NSButton *)sender {
@@ -49,24 +52,28 @@
         return;
     }
     
-    //create a test project for demo email
-    XCProject *project = [[XCProject alloc] init];
-    [project setName:@"TestApp"];
-    [project setVersion:@"1.0"];
-    [project setBuild:@"1"];
-    [project setEmails: emailTextField.stringValue];
-    [project setAppShortShareableURL:[NSURL URLWithString:@"https://getappbox.com"]];
-    [project setPersonalMessage: [MailHandler parseMessage:personalMessageTextField.stringValue forProject:project]];
+    //create a test ipa upload info for demo email
+    IPAUploadInfo *ipaUploadInfo = [[IPAUploadInfo alloc] init];
+    [ipaUploadInfo setName:@"TestApp"];
+    [ipaUploadInfo setVersion:@"1.0"];
+    [ipaUploadInfo setBuild:@"1"];
+    [ipaUploadInfo setEmails: emailTextField.stringValue];
+    [ipaUploadInfo setAppShortShareableURL:[NSURL URLWithString:@"https://getappbox.com"]];
+    [ipaUploadInfo setPersonalMessage: [MailHandler parseMessage:personalMessageTextField.stringValue forIPAUploadInfo:ipaUploadInfo]];
     
     //send mail
     [ABHudViewController showStatus:@"Sending Test Mail" onView:self.view];
-    [MailGun sendMailWithProject:project.abpProject complition:^(BOOL success, NSError *error) {
-        [ABHudViewController hideAllHudFromView:self.view after:0];
-        if (success) {
-            [ABHudViewController showStatus:@"Mail Sent" forSuccess:YES onView:self.view];
-        } else {
-            [ABHudViewController showStatus:@"Mail Failed" forSuccess:NO onView:self.view];
-        }
+	weakify(self);
+    [MailGun sendMailWithIPAUploadInfo:ipaUploadInfo.abpIPAUploadInfo complition:^(BOOL success, NSError *error) {
+		dispatch_async(dispatch_get_main_queue(), ^{
+			strongify(self);
+			[ABHudViewController hideAllHudFromView:self.view after:0];
+			if (success) {
+				[ABHudViewController showStatus:@"Mail Sent" forSuccess:YES onView:self.view];
+			} else {
+				[ABHudViewController showStatus:@"Mail Failed" forSuccess:NO onView:self.view];
+			}
+		});
     }];
 }
 

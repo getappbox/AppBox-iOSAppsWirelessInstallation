@@ -13,6 +13,6 @@
 + (void)showInvalidEmailAddressAlert;
 + (BOOL)isValidEmail:(NSString *)checkString;
 + (BOOL)isAllValidEmail:(NSString *)checkString;
-+ (NSString *)parseMessage:(NSString *)message forProject:(XCProject *)project;
++ (NSString *)parseMessage:(NSString *)message forIPAUploadInfo:(IPAUploadInfo *)ipaUploadInfo;
 
 @end

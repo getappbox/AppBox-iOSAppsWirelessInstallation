@@ -227,4 +227,16 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+//MARK: - CLI Settings -
+#define CLIVersion @"CLIVersion"
++(NSString *)cliVersion{
+	NSString *cliVersion = [[NSUserDefaults standardUserDefaults] stringForKey:CLIVersion];
+	return cliVersion == nil ? abEmptyString : cliVersion;
+}
+
++(void)setCLIVersion:(NSString *)cliVersion{
+	[[NSUserDefaults standardUserDefaults] setValue:cliVersion forKey:CLIVersion];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 @end

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,8 @@
 		449BD6B8282111B0008EFB2B /* AppBoxService+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 449BD6B4282111B0008EFB2B /* AppBoxService+CoreDataProperties.m */; };
 		449BD6B9282111B0008EFB2B /* AppBoxService+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 449BD6B5282111B0008EFB2B /* AppBoxService+CoreDataClass.m */; };
 		84A31BD8650851B3675A1797 /* libPods-AppBox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */; };
+		DB04358B2E69628F005F0173 /* appboxcli in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB0435832E696255005F0173 /* appboxcli */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		DB0435912E6962EA005F0173 /* CLISupportHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0435902E6962EA005F0173 /* CLISupportHelper.m */; };
 		DB1A06622160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DB1A06612160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel */; };
 		DB1C84412079F54E007AC74C /* NSString+String.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1C84402079F54E007AC74C /* NSString+String.m */; };
 		DB1FC5901FDEED5400179799 /* HomeWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1FC58F1FDEED5400179799 /* HomeWindowController.m */; };
@@ -33,6 +35,7 @@
 		DB6F784F215D459A00C77966 /* AppBoxColors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB6F784E215D459A00C77966 /* AppBoxColors.xcassets */; };
 		DB831BCB1FF6B5780065B646 /* ABHudViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB831BC91FF6B5780065B646 /* ABHudViewController.m */; };
 		DB831BCC1FF6B5780065B646 /* ABHudViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB831BCA1FF6B5780065B646 /* ABHudViewController.xib */; };
+		DB8BAA912E6C433200186B7B /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = DB8BAA902E6C433200186B7B /* ArgumentParser */; };
 		DB8CE5F81FF77199003FEB65 /* DisabledView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8CE5F71FF77199003FEB65 /* DisabledView.m */; };
 		DBA66CF11FDCF4A60002A956 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBA66CF01FDCF4A60002A956 /* Main.storyboard */; };
 		DBCD1563200BCD1C00C003E6 /* PreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBCD1562200BCD1C00C003E6 /* PreferencesViewController.xib */; };
@@ -41,11 +44,10 @@
 		DBDCFBBE1F99C7860022097B /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDCFBBD1F99C7860022097B /* UploadManager.m */; };
 		DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF290D51FA64A590046D5CE /* ProvisioningDetailsViewController.m */; };
 		DBF290D81FA64A590046D5CE /* ProvisioningDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBF290D61FA64A590046D5CE /* ProvisioningDetailsViewController.xib */; };
-		DBFC680D1F6AE957007A4ED2 /* EventTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFC680C1F6AE957007A4ED2 /* EventTracker.m */; };
 		E11633991E558635005EAB31 /* MobileProvision.m in Sources */ = {isa = PBXBuildFile; fileRef = E11633981E558635005EAB31 /* MobileProvision.m */; };
 		E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E6D081D8FC77D0054814D /* DashboardViewController.m */; };
-		E13161F21E9777DF00586052 /* CIProjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = E13161F11E9777DF00586052 /* CIProjectBuilder.m */; };
-		E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */ = {isa = PBXBuildFile; fileRef = E13946111DF2AFCF00B3FAD0 /* XCProject.m */; };
+		E13161F21E9777DF00586052 /* CLIIPAUpload.m in Sources */ = {isa = PBXBuildFile; fileRef = E13161F11E9777DF00586052 /* CLIIPAUpload.m */; };
+		E13946121DF2AFCF00B3FAD0 /* IPAUploadInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E13946111DF2AFCF00B3FAD0 /* IPAUploadInfo.m */; };
 		E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E14F33331E1A64CA00C3DD34 /* NSApplication+MenuHandler.m */; };
 		E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15C26691D7FD5CE004243B9 /* ShowLinkViewController.m */; };
 		E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16018EF1DEC0BC200E3A377 /* DropboxViewController.m */; };
@@ -68,14 +70,13 @@
 		E18186DC1E8A47C10002509F /* AccountPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186DB1E8A47C10002509F /* AccountPreferencesViewController.m */; };
 		E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186DE1E8A47CD0002509F /* EmailPreferencesViewController.m */; };
 		E18186E21E8A47D60002509F /* HelpPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186E11E8A47D60002509F /* HelpPreferencesViewController.m */; };
-		E1902B481E16423200C3E0F6 /* ProjectAdvancedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B471E16423200C3E0F6 /* ProjectAdvancedViewController.m */; };
+		E1902B481E16423200C3E0F6 /* UploadAdvancedSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B471E16423200C3E0F6 /* UploadAdvancedSettingViewController.m */; };
 		E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B4E1E16617B00C3E0F6 /* NetworkHandler.m */; };
 		E1902B541E16617B00C3E0F6 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B521E16617B00C3E0F6 /* UserData.m */; };
 		E1902B5D1E1661B300C3E0F6 /* MailHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B5C1E1661B300C3E0F6 /* MailHandler.m */; };
 		E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B5F1E1661BE00C3E0F6 /* UpdateHandler.m */; };
 		E1902B641E16633A00C3E0F6 /* KeychainHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B631E16633A00C3E0F6 /* KeychainHandler.m */; };
 		E19473F5205F9FC800CF12F9 /* MSTeamsClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E19473F4205F9FC800CF12F9 /* MSTeamsClient.m */; };
-		E19473F8205F9FDC00CF12F9 /* HangoutClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E19473F7205F9FDC00CF12F9 /* HangoutClient.m */; };
 		E19473FB205FD14C00CF12F9 /* NSColor+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = E19473FA205FD14C00CF12F9 /* NSColor+Color.m */; };
 		E19473FF205FD3F100CF12F9 /* AppBoxTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = E19473FE205FD3F100CF12F9 /* AppBoxTableRowView.m */; };
 		E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */; };
@@ -91,50 +92,24 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		E101D2BC200DE72A0062078B /* CopyFiles */ = {
+		DB04357E2E696172005F0173 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = xcpretty/bin;
-			dstSubfolderSpec = 7;
+			dstPath = "";
+			dstSubfolderSpec = 12;
 			files = (
+				DB04358B2E69628F005F0173 /* appboxcli in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E185337A200DF9AE00E88529 /* CopyFiles */ = {
+		DB0435812E696255005F0173 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = xcpretty/lib;
-			dstSubfolderSpec = 7;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E185337C200DF9DD00E88529 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = xcpretty/lib/xcpretty;
-			dstSubfolderSpec = 7;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E1853384200DFA0900E88529 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = xcpretty/lib/xcpretty/formatters;
-			dstSubfolderSpec = 7;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E185338A200DFA2A00E88529 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = xcpretty/lib/xcpretty/reporters;
-			dstSubfolderSpec = 7;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 		E19973332091D2640035CCE9 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -161,6 +136,9 @@
 		44DCC66B25EEA1910074AB1E /* AppBox4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppBox4.xcdatamodel; sourceTree = "<group>"; };
 		ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AppBox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6359ECA7EF9D4D3F8BE63F /* Pods-AppBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppBox/Pods-AppBox.debug.xcconfig"; sourceTree = "<group>"; };
+		DB0435832E696255005F0173 /* appboxcli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = appboxcli; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB04358F2E6962EA005F0173 /* CLISupportHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLISupportHelper.h; sourceTree = "<group>"; };
+		DB0435902E6962EA005F0173 /* CLISupportHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLISupportHelper.m; sourceTree = "<group>"; };
 		DB1A06592160D47C008D33FD /* AppBox3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppBox3.xcdatamodel; sourceTree = "<group>"; };
 		DB1A06612160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = CoreDataMigration2to3.xcmappingmodel; sourceTree = "<group>"; };
 		DB1C843F2079F54E007AC74C /* NSString+String.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+String.h"; sourceTree = "<group>"; };
@@ -211,17 +189,15 @@
 		DBF290D41FA64A590046D5CE /* ProvisioningDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProvisioningDetailsViewController.h; sourceTree = "<group>"; };
 		DBF290D51FA64A590046D5CE /* ProvisioningDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProvisioningDetailsViewController.m; sourceTree = "<group>"; };
 		DBF290D61FA64A590046D5CE /* ProvisioningDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProvisioningDetailsViewController.xib; sourceTree = "<group>"; };
-		DBFC680B1F6AE957007A4ED2 /* EventTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventTracker.h; sourceTree = "<group>"; };
-		DBFC680C1F6AE957007A4ED2 /* EventTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventTracker.m; sourceTree = "<group>"; };
 		DBFEEA551FA5BA4700F09ECD /* AppBox2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppBox2.xcdatamodel; sourceTree = "<group>"; };
 		E11633971E558635005EAB31 /* MobileProvision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileProvision.h; sourceTree = "<group>"; };
 		E11633981E558635005EAB31 /* MobileProvision.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobileProvision.m; sourceTree = "<group>"; };
 		E12E6D071D8FC77D0054814D /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
 		E12E6D081D8FC77D0054814D /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
-		E13161F01E9777DF00586052 /* CIProjectBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CIProjectBuilder.h; sourceTree = "<group>"; };
-		E13161F11E9777DF00586052 /* CIProjectBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CIProjectBuilder.m; sourceTree = "<group>"; };
-		E13946101DF2AFCF00B3FAD0 /* XCProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCProject.h; sourceTree = "<group>"; };
-		E13946111DF2AFCF00B3FAD0 /* XCProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCProject.m; sourceTree = "<group>"; };
+		E13161F01E9777DF00586052 /* CLIIPAUpload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLIIPAUpload.h; sourceTree = "<group>"; };
+		E13161F11E9777DF00586052 /* CLIIPAUpload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLIIPAUpload.m; sourceTree = "<group>"; };
+		E13946101DF2AFCF00B3FAD0 /* IPAUploadInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPAUploadInfo.h; sourceTree = "<group>"; };
+		E13946111DF2AFCF00B3FAD0 /* IPAUploadInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPAUploadInfo.m; sourceTree = "<group>"; };
 		E13946131DF2AFFF00B3FAD0 /* AppBoxPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppBoxPrefixHeader.pch; sourceTree = "<group>"; };
 		E14F33321E1A64CA00C3DD34 /* NSApplication+MenuHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+MenuHandler.h"; sourceTree = "<group>"; };
 		E14F33331E1A64CA00C3DD34 /* NSApplication+MenuHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+MenuHandler.m"; sourceTree = "<group>"; };
@@ -251,7 +227,6 @@
 		E16BB8C420285A38002E9B5A /* SelectAccountCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectAccountCellView.m; sourceTree = "<group>"; };
 		E16BB8C7202873FA002E9B5A /* AccountCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountCellView.h; sourceTree = "<group>"; };
 		E16BB8C8202873FA002E9B5A /* AccountCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountCellView.m; sourceTree = "<group>"; };
-		E178C9891E95067F008D2CAF /* appbox.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = appbox.plist; sourceTree = "<group>"; };
 		E18186CC1E8A3BC00002509F /* PreferencesTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesTabViewController.h; sourceTree = "<group>"; };
 		E18186CD1E8A3BC00002509F /* PreferencesTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesTabViewController.m; sourceTree = "<group>"; };
 		E18186D41E8A45C30002509F /* PreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesViewController.h; sourceTree = "<group>"; };
@@ -262,8 +237,8 @@
 		E18186DE1E8A47CD0002509F /* EmailPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailPreferencesViewController.m; sourceTree = "<group>"; };
 		E18186E01E8A47D60002509F /* HelpPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpPreferencesViewController.h; sourceTree = "<group>"; };
 		E18186E11E8A47D60002509F /* HelpPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpPreferencesViewController.m; sourceTree = "<group>"; };
-		E1902B461E16423200C3E0F6 /* ProjectAdvancedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectAdvancedViewController.h; sourceTree = "<group>"; };
-		E1902B471E16423200C3E0F6 /* ProjectAdvancedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectAdvancedViewController.m; sourceTree = "<group>"; };
+		E1902B461E16423200C3E0F6 /* UploadAdvancedSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadAdvancedSettingViewController.h; sourceTree = "<group>"; };
+		E1902B471E16423200C3E0F6 /* UploadAdvancedSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadAdvancedSettingViewController.m; sourceTree = "<group>"; };
 		E1902B4D1E16617B00C3E0F6 /* NetworkHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkHandler.h; sourceTree = "<group>"; };
 		E1902B4E1E16617B00C3E0F6 /* NetworkHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkHandler.m; sourceTree = "<group>"; };
 		E1902B511E16617B00C3E0F6 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
@@ -276,8 +251,6 @@
 		E1902B631E16633A00C3E0F6 /* KeychainHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainHandler.m; sourceTree = "<group>"; };
 		E19473F3205F9FC800CF12F9 /* MSTeamsClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MSTeamsClient.h; sourceTree = "<group>"; };
 		E19473F4205F9FC800CF12F9 /* MSTeamsClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MSTeamsClient.m; sourceTree = "<group>"; };
-		E19473F6205F9FDC00CF12F9 /* HangoutClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HangoutClient.h; sourceTree = "<group>"; };
-		E19473F7205F9FDC00CF12F9 /* HangoutClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HangoutClient.m; sourceTree = "<group>"; };
 		E19473F9205FD14C00CF12F9 /* NSColor+Color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSColor+Color.h"; sourceTree = "<group>"; };
 		E19473FA205FD14C00CF12F9 /* NSColor+Color.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSColor+Color.m"; sourceTree = "<group>"; };
 		E19473FD205FD3F100CF12F9 /* AppBoxTableRowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppBoxTableRowView.h; sourceTree = "<group>"; };
@@ -301,7 +274,38 @@
 		E1FECA821E83EE5000C4E9AE /* HTTPStatusCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPStatusCode.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		DB04358D2E696299005F0173 /* Exceptions for "AppBoxCLI" folder in "Copy Files" phase from "AppBox" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = DB04357E2E696172005F0173 /* CopyFiles */;
+			membershipExceptions = (
+				Scripts/install.sh,
+				Scripts/uninstall.sh,
+				Scripts/update.sh,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		DB0435842E696255005F0173 /* AppBoxCLI */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				DB04358D2E696299005F0173 /* Exceptions for "AppBoxCLI" folder in "Copy Files" phase from "AppBox" target */,
+			);
+			path = AppBoxCLI;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		DB0435802E696255005F0173 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB8BAA912E6C433200186B7B /* ArgumentParser in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E16437CC1D743A4E00CE8B7E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -326,6 +330,15 @@
 				179DF69BDB018D0F7E295C95 /* Pods-AppBox.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		DB04358E2E6962DB005F0173 /* CLISupportHelper */ = {
+			isa = PBXGroup;
+			children = (
+				DB04358F2E6962EA005F0173 /* CLISupportHelper.h */,
+				DB0435902E6962EA005F0173 /* CLISupportHelper.m */,
+			);
+			path = CLISupportHelper;
 			sourceTree = "<group>";
 		};
 		DB1A06602160DC70008D33FD /* CoreDataMigration */ = {
@@ -437,15 +450,6 @@
 			path = ProvisioningDetailsViewController;
 			sourceTree = "<group>";
 		};
-		DBFC680A1F6AE942007A4ED2 /* EventTracker */ = {
-			isa = PBXGroup;
-			children = (
-				DBFC680B1F6AE957007A4ED2 /* EventTracker.h */,
-				DBFC680C1F6AE957007A4ED2 /* EventTracker.m */,
-			);
-			path = EventTracker;
-			sourceTree = "<group>";
-		};
 		E11633961E558609005EAB31 /* MobileProvision */ = {
 			isa = PBXGroup;
 			children = (
@@ -492,22 +496,22 @@
 			path = DashboardViewController;
 			sourceTree = "<group>";
 		};
-		E13161EF1E97775100586052 /* CIProjectBuilder */ = {
+		E13161EF1E97775100586052 /* CLIIPAUpload */ = {
 			isa = PBXGroup;
 			children = (
-				E13161F01E9777DF00586052 /* CIProjectBuilder.h */,
-				E13161F11E9777DF00586052 /* CIProjectBuilder.m */,
+				E13161F01E9777DF00586052 /* CLIIPAUpload.h */,
+				E13161F11E9777DF00586052 /* CLIIPAUpload.m */,
 			);
-			path = CIProjectBuilder;
+			path = CLIIPAUpload;
 			sourceTree = "<group>";
 		};
-		E139460F1DF2AFC200B3FAD0 /* ProjectModel */ = {
+		E139460F1DF2AFC200B3FAD0 /* IPAInfoModel */ = {
 			isa = PBXGroup;
 			children = (
-				E13946101DF2AFCF00B3FAD0 /* XCProject.h */,
-				E13946111DF2AFCF00B3FAD0 /* XCProject.m */,
+				E13946101DF2AFCF00B3FAD0 /* IPAUploadInfo.h */,
+				E13946111DF2AFCF00B3FAD0 /* IPAUploadInfo.m */,
 			);
-			path = ProjectModel;
+			path = IPAInfoModel;
 			sourceTree = "<group>";
 		};
 		E14F332E1E1A3D1300C3DD34 /* MenuHandler */ = {
@@ -541,6 +545,7 @@
 			isa = PBXGroup;
 			children = (
 				E16437D11D743A4E00CE8B7E /* AppBox */,
+				DB0435842E696255005F0173 /* AppBoxCLI */,
 				E164389A1D743ECA00CE8B7E /* Frameworks */,
 				E16437D01D743A4E00CE8B7E /* Products */,
 				63BFBD3370FA9F1D2661A6F5 /* Pods */,
@@ -551,6 +556,7 @@
 			isa = PBXGroup;
 			children = (
 				E16437CF1D743A4E00CE8B7E /* AppBox.app */,
+				DB0435832E696255005F0173 /* appboxcli */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -576,7 +582,6 @@
 				E16437D61D743A4E00CE8B7E /* main.m */,
 				E16437E31D743A4E00CE8B7E /* Info.plist */,
 				E13946131DF2AFFF00B3FAD0 /* AppBoxPrefixHeader.pch */,
-				E178C9891E95067F008D2CAF /* appbox.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -592,7 +597,7 @@
 				E15C26671D7FD5A9004243B9 /* ShowLinkViewController */,
 				E1AA0F411E2F325F00BA81A1 /* QRCodeViewController */,
 				E12E6D061D8FC6E20054814D /* DashboardViewController */,
-				E1902B451E16420C00C3E0F6 /* ProjectAdvancedViewController */,
+				E1902B451E16420C00C3E0F6 /* UploadAdvancedSettingViewController */,
 				E16D72E61E8935060031FB7C /* PreferencesViewController */,
 			);
 			path = ViewController;
@@ -601,7 +606,7 @@
 		E16437EB1D743A9300CE8B7E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E139460F1DF2AFC200B3FAD0 /* ProjectModel */,
+				E139460F1DF2AFC200B3FAD0 /* IPAInfoModel */,
 				E12A9AAA1E49F360002DDA3C /* CoreDataModel */,
 				DB1A06602160DC70008D33FD /* CoreDataMigration */,
 				E16437DB1D743A4E00CE8B7E /* AppBox.xcdatamodeld */,
@@ -730,13 +735,13 @@
 			path = HelpPreferencesViewController;
 			sourceTree = "<group>";
 		};
-		E1902B451E16420C00C3E0F6 /* ProjectAdvancedViewController */ = {
+		E1902B451E16420C00C3E0F6 /* UploadAdvancedSettingViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E1902B461E16423200C3E0F6 /* ProjectAdvancedViewController.h */,
-				E1902B471E16423200C3E0F6 /* ProjectAdvancedViewController.m */,
+				E1902B461E16423200C3E0F6 /* UploadAdvancedSettingViewController.h */,
+				E1902B471E16423200C3E0F6 /* UploadAdvancedSettingViewController.m */,
 			);
-			path = ProjectAdvancedViewController;
+			path = UploadAdvancedSettingViewController;
 			sourceTree = "<group>";
 		};
 		E1902B4B1E16617B00C3E0F6 /* MailHandler */ = {
@@ -791,19 +796,9 @@
 			isa = PBXGroup;
 			children = (
 				E19473F2205F9F8600CF12F9 /* MSTeamsClient */,
-				E19473F1205F9F7100CF12F9 /* HangoutClient */,
 				E1C0246E1E9B4E4C00C87CC9 /* SlackClient */,
 			);
 			path = ServiceIntegrations;
-			sourceTree = "<group>";
-		};
-		E19473F1205F9F7100CF12F9 /* HangoutClient */ = {
-			isa = PBXGroup;
-			children = (
-				E19473F6205F9FDC00CF12F9 /* HangoutClient.h */,
-				E19473F7205F9FDC00CF12F9 /* HangoutClient.m */,
-			);
-			path = HangoutClient;
 			sourceTree = "<group>";
 		};
 		E19473F2205F9F8600CF12F9 /* MSTeamsClient */ = {
@@ -845,9 +840,10 @@
 		E1CFC65B1D7E7FD9005872BE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				DB04358E2E6962DB005F0173 /* CLISupportHelper */,
 				E1902B611E1662E300C3E0F6 /* KeychainHandler */,
 				E11633961E558609005EAB31 /* MobileProvision */,
-				E13161EF1E97775100586052 /* CIProjectBuilder */,
+				E13161EF1E97775100586052 /* CLIIPAUpload */,
 				DB2629821F961F3100C4C647 /* DBErrorHandler */,
 				DBDCFBBB1F99C7860022097B /* UploadManager */,
 				E1902B4C1E16617B00C3E0F6 /* NetworkHandler */,
@@ -857,7 +853,6 @@
 				DB2629781F95ED8900C4C647 /* Extensions */,
 				E1902B4B1E16617B00C3E0F6 /* MailHandler */,
 				E1DC25FA1ECDBC16001EF106 /* ProgressHUD */,
-				DBFC680A1F6AE942007A4ED2 /* EventTracker */,
 				E1902B4F1E16617B00C3E0F6 /* UpdateHandler */,
 				DB425C021F8A514E008CB032 /* DefaultSettings */,
 				E1DC25F91ECD826C001EF106 /* OtherServicesKeys.h */,
@@ -890,6 +885,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		DB0435822E696255005F0173 /* AppBoxCLI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB0435872E696255005F0173 /* Build configuration list for PBXNativeTarget "AppBoxCLI" */;
+			buildPhases = (
+				DB04357F2E696255005F0173 /* Sources */,
+				DB0435802E696255005F0173 /* Frameworks */,
+				DB0435812E696255005F0173 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				DB0435842E696255005F0173 /* AppBoxCLI */,
+			);
+			name = AppBoxCLI;
+			packageProductDependencies = (
+				DB8BAA902E6C433200186B7B /* ArgumentParser */,
+			);
+			productName = AppBoxCLI;
+			productReference = DB0435832E696255005F0173 /* appboxcli */;
+			productType = "com.apple.product-type.tool";
+		};
 		E16437CE1D743A4E00CE8B7E /* AppBox */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E16437E61D743A4E00CE8B7E /* Build configuration list for PBXNativeTarget "AppBox" */;
@@ -900,11 +918,7 @@
 				E16437CC1D743A4E00CE8B7E /* Frameworks */,
 				E16437CD1D743A4E00CE8B7E /* Resources */,
 				7D6EE5393594D016BF9A0389 /* [CP] Copy Pods Resources */,
-				E101D2BC200DE72A0062078B /* CopyFiles */,
-				E185337A200DF9AE00E88529 /* CopyFiles */,
-				E185337C200DF9DD00E88529 /* CopyFiles */,
-				E1853384200DFA0900E88529 /* CopyFiles */,
-				E185338A200DFA2A00E88529 /* CopyFiles */,
+				DB04357E2E696172005F0173 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -921,13 +935,15 @@
 		E16437C71D743A4E00CE8B7E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1410;
 				ORGANIZATIONNAME = "Developer Insider";
 				TargetAttributes = {
+					DB0435822E696255005F0173 = {
+						CreatedOnToolsVersion = 16.4;
+					};
 					E16437CE1D743A4E00CE8B7E = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 3PQ7E4L589;
-						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.Mac = {
 								enabled = 0;
@@ -937,7 +953,6 @@
 				};
 			};
 			buildConfigurationList = E16437CA1D743A4E00CE8B7E /* Build configuration list for PBXProject "AppBox" */;
-			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -945,11 +960,16 @@
 				Base,
 			);
 			mainGroup = E16437C61D743A4E00CE8B7E;
+			packageReferences = (
+				DB8BAA8F2E6C433200186B7B /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+			);
+			preferredProjectObjectVersion = 77;
 			productRefGroup = E16437D01D743A4E00CE8B7E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				E16437CE1D743A4E00CE8B7E /* AppBox */,
+				DB0435822E696255005F0173 /* AppBoxCLI */,
 			);
 		};
 /* End PBXProject section */
@@ -983,19 +1003,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AppBox/Pods-AppBox-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AppBox/Pods-AppBox-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/CocoaLumberjack/CocoaLumberjackPrivacy.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/ObjectiveDropboxOfficial/ObjectiveDropboxPrivacyInfo.bundle",
-				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/SSZipArchive/SSZipArchive.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AppBox/Pods-AppBox-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CocoaLumberjackPrivacy.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ObjectiveDropboxPrivacyInfo.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SSZipArchive.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1007,11 +1024,15 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-AppBox-checkManifestLockResult.txt",
 			);
@@ -1023,6 +1044,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		DB04357F2E696255005F0173 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E16437CB1D743A4E00CE8B7E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1033,7 +1061,7 @@
 				E16437DD1D743A4E00CE8B7E /* AppBox.xcdatamodeld in Sources */,
 				E16437D71D743A4E00CE8B7E /* main.m in Sources */,
 				DB831BCB1FF6B5780065B646 /* ABHudViewController.m in Sources */,
-				E1902B481E16423200C3E0F6 /* ProjectAdvancedViewController.m in Sources */,
+				E1902B481E16423200C3E0F6 /* UploadAdvancedSettingViewController.m in Sources */,
 				DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.m in Sources */,
 				DB358B66216FB1AC0080CAC0 /* UploadRecord+CoreDataClass.m in Sources */,
 				E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */,
@@ -1057,17 +1085,16 @@
 				DB1A06622160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel in Sources */,
 				E16BB8C020284236002E9B5A /* SelectAccountViewController.m in Sources */,
 				DB53856E20838913004BFC84 /* DragDropView.m in Sources */,
-				E19473F8205F9FDC00CF12F9 /* HangoutClient.m in Sources */,
 				DB53856A2083622A004BFC84 /* NSURL+URL.m in Sources */,
 				DB1C84412079F54E007AC74C /* NSString+String.m in Sources */,
 				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,
 				E11633991E558635005EAB31 /* MobileProvision.m in Sources */,
+				DB0435912E6962EA005F0173 /* CLISupportHelper.m in Sources */,
 				E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */,
 				449BD6B8282111B0008EFB2B /* AppBoxService+CoreDataProperties.m in Sources */,
 				E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */,
 				4410D18E26FF76A20046E5F9 /* DBAccountManager.m in Sources */,
-				E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */,
-				DBFC680D1F6AE957007A4ED2 /* EventTracker.m in Sources */,
+				E13946121DF2AFCF00B3FAD0 /* IPAUploadInfo.m in Sources */,
 				E1C024711E9B4E6C00C87CC9 /* SlackClient.m in Sources */,
 				DB358B64216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataProperties.m in Sources */,
 				DB358B6D216FB1AC0080CAC0 /* Project+CoreDataClass.m in Sources */,
@@ -1081,7 +1108,7 @@
 				DBDCFBBE1F99C7860022097B /* UploadManager.m in Sources */,
 				E18186D61E8A45C30002509F /* PreferencesViewController.m in Sources */,
 				E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.m in Sources */,
-				E13161F21E9777DF00586052 /* CIProjectBuilder.m in Sources */,
+				E13161F21E9777DF00586052 /* CLIIPAUpload.m in Sources */,
 				4410D19C26FF851D0046E5F9 /* CoreDataMigration3to4.xcmappingmodel in Sources */,
 				DB2629851F961F4700C4C647 /* DBErrorHandler.m in Sources */,
 				E18186E21E8A47D60002509F /* HelpPreferencesViewController.m in Sources */,
@@ -1093,6 +1120,63 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		DB0435882E696255005F0173 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3PQ7E4L589;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.developerinsider.AppBoxCLI;
+				PRODUCT_NAME = appboxcli;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		DB0435892E696255005F0173 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = 3PQ7E4L589;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.developerinsider.AppBoxCLI;
+				PRODUCT_NAME = appboxcli;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		E16437E41D743A4E00CE8B7E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1211,7 +1295,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3PQ7E4L589;
-				ENABLE_APP_SANDBOX = YES;
+				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1239,11 +1323,16 @@
 				INFOPLIST_FILE = AppBox/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_DYLIB_INSTALL_NAME = "";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 3.4.0;
+				MARKETING_VERSION = 3.5.0;
+				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.developerinsider.AppBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
 			};
 			name = Debug;
@@ -1254,12 +1343,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AppBox/AppBox.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Vineet Choudhary (3PQ7E4L589)";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 3PQ7E4L589;
-				ENABLE_APP_SANDBOX = YES;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = 3PQ7E4L589;
+				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1287,11 +1378,18 @@
 				INFOPLIST_FILE = AppBox/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_DYLIB_INSTALL_NAME = "";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 3.4.0;
+				MARKETING_VERSION = 3.5.0;
+				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.developerinsider.AppBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "AppBox Developer ID";
+				REGISTER_APP_GROUPS = YES;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
 			};
 			name = Release;
@@ -1299,6 +1397,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		DB0435872E696255005F0173 /* Build configuration list for PBXNativeTarget "AppBoxCLI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB0435882E696255005F0173 /* Debug */,
+				DB0435892E696255005F0173 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E16437CA1D743A4E00CE8B7E /* Build configuration list for PBXProject "AppBox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1318,6 +1425,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DB8BAA8F2E6C433200186B7B /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DB8BAA902E6C433200186B7B /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DB8BAA8F2E6C433200186B7B /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		E16437DB1D743A4E00CE8B7E /* AppBox.xcdatamodeld */ = {

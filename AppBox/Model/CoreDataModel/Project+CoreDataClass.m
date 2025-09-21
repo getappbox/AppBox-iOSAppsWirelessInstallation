@@ -10,13 +10,13 @@
 
 @implementation ABProject
 
-+(ABProject *)addProjectWithXCProject:(XCProject *)xcProject{
++(ABProject *)addProjectWithIPAUploadInfo:(IPAUploadInfo *)ipaUploadInfo{
     
     @try {
         //fetch existing project with same identifer (if any)
         NSError *error;
         NSFetchRequest *fetchRequest = [ABProject fetchRequest];
-        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"SELF.bundleIdentifier = %@", xcProject.identifer]];
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"SELF.bundleIdentifier = %@", ipaUploadInfo.identifer]];
         NSArray *projects = [[[AppDelegate appDelegate] managedObjectContext] executeFetchRequest:fetchRequest error:&error];
         if (error){
             //error in fetch request
@@ -29,64 +29,63 @@
             }else{
                 //create new project
                 project = [NSEntityDescription insertNewObjectForEntityForName:@"Project" inManagedObjectContext:[[AppDelegate appDelegate] managedObjectContext]];
-                [project setBundleIdentifier:xcProject.identifer];
+                [project setBundleIdentifier:ipaUploadInfo.identifer];
             }
             
             //set other project properties
-            [project setName:xcProject.name];
+            [project setName:ipaUploadInfo.name];
             
             //create new upload record
             ABUploadRecord *uploadRecord = [NSEntityDescription insertNewObjectForEntityForName:@"UploadRecord" inManagedObjectContext:[[AppDelegate appDelegate] managedObjectContext]];
 
             //set upload details
-            if (xcProject.buildType){
-                [uploadRecord setBuildType:xcProject.buildType];
+            if (ipaUploadInfo.buildType){
+                [uploadRecord setBuildType:ipaUploadInfo.buildType];
             }
-            if (xcProject.dbAppInfoJSONFullPath){
-                [uploadRecord setDbAppInfoFullPath:xcProject.dbAppInfoJSONFullPath.absoluteString];
+            if (ipaUploadInfo.dbAppInfoJSONFullPath){
+                [uploadRecord setDbAppInfoFullPath:ipaUploadInfo.dbAppInfoJSONFullPath.absoluteString];
             }
-            if (xcProject.dbDirectory){
-                [uploadRecord setDbDirectroy:xcProject.dbDirectory.absoluteString];
-                NSArray *pathComponents = [xcProject.dbDirectory pathComponents];
+            if (ipaUploadInfo.dbDirectory){
+                [uploadRecord setDbDirectroy:ipaUploadInfo.dbDirectory.absoluteString];
+                NSArray *pathComponents = [ipaUploadInfo.dbDirectory pathComponents];
                 if (pathComponents.count > 1) {
                     [uploadRecord setDbFolderName:[NSString stringWithFormat:@"%@%@", pathComponents[0], pathComponents[1]]];
                 }
             }
-            if (xcProject.dbIPAFullPath){
-                [uploadRecord setDbIPAFullPath:xcProject.dbIPAFullPath.absoluteString];
+            if (ipaUploadInfo.dbIPAFullPath){
+                [uploadRecord setDbIPAFullPath:ipaUploadInfo.dbIPAFullPath.absoluteString];
             }
-            if (xcProject.dbManifestFullPath){
-                [uploadRecord setDbManifestFullPath:xcProject.dbManifestFullPath.absoluteString];
+            if (ipaUploadInfo.dbManifestFullPath){
+                [uploadRecord setDbManifestFullPath:ipaUploadInfo.dbManifestFullPath.absoluteString];
             }
-            //[uploadRecord setDbSharedAppInfoURL:xcProject.ipaFileDBShareableURL.absoluteString];
-            if (xcProject.ipaFileDBShareableURL){
-                [uploadRecord setDbSharedIPAURL:xcProject.ipaFileDBShareableURL.absoluteString];
+            if (ipaUploadInfo.ipaFileDBShareableURL){
+                [uploadRecord setDbSharedIPAURL:ipaUploadInfo.ipaFileDBShareableURL.absoluteString];
             }
-            if (xcProject.manifestFileSharableURL){
-                [uploadRecord setDbSharedManifestURL:xcProject.manifestFileSharableURL.absoluteString];
-            }
-            
-            if (xcProject.ipaFullPath){
-                [uploadRecord setLocalBuildPath:[xcProject.ipaFullPath.resourceSpecifier stringByRemovingPercentEncoding]];
-            }
-            if (xcProject.appShortShareableURL){
-                [uploadRecord setShortURL:xcProject.appShortShareableURL.stringValue];
-            }
-            if (xcProject.build){
-                [uploadRecord setBuild:xcProject.build];
-            }
-            if (xcProject.version){
-                [uploadRecord setVersion:xcProject.version];
+            if (ipaUploadInfo.manifestFileSharableURL){
+                [uploadRecord setDbSharedManifestURL:ipaUploadInfo.manifestFileSharableURL.absoluteString];
             }
             
-            [uploadRecord setKeepSameLink:[NSNumber numberWithBool:xcProject.isKeepSameLinkEnabled]];
+            if (ipaUploadInfo.ipaFullPath){
+                [uploadRecord setLocalBuildPath:[ipaUploadInfo.ipaFullPath.resourceSpecifier stringByRemovingPercentEncoding]];
+            }
+            if (ipaUploadInfo.appShortShareableURL){
+                [uploadRecord setShortURL:ipaUploadInfo.appShortShareableURL.stringValue];
+            }
+            if (ipaUploadInfo.build){
+                [uploadRecord setBuild:ipaUploadInfo.build];
+            }
+            if (ipaUploadInfo.version){
+                [uploadRecord setVersion:ipaUploadInfo.version];
+            }
+            
+            [uploadRecord setKeepSameLink:[NSNumber numberWithBool:ipaUploadInfo.isKeepSameLinkEnabled]];
             [uploadRecord setDatetime:[NSDate date]];
             
-            if (xcProject.mobileProvision){
+            if (ipaUploadInfo.mobileProvision){
                 @try {
                     //check either existing provisioning profile already exist or not
                     NSFetchRequest *provisioningProfileFetchRequest = [ABProvisioningProfile fetchRequest];
-                    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uuid = %@", xcProject.mobileProvision.uuid];
+                    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uuid = %@", ipaUploadInfo.mobileProvision.uuid];
                     [provisioningProfileFetchRequest setPredicate:predicate];
                     NSArray *fetchedResult = [[[AppDelegate appDelegate] managedObjectContext] executeFetchRequest:provisioningProfileFetchRequest error:nil];
                     
@@ -98,7 +97,7 @@
                     } else {
                         //Create new provisioning profile record
                         NSMutableOrderedSet<ABProvisionedDevice *> *provisionDeviceSet = [[NSMutableOrderedSet<ABProvisionedDevice *> alloc] init];
-                        [xcProject.mobileProvision.provisionedDevices enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        [ipaUploadInfo.mobileProvision.provisionedDevices enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                             //Create ProvisionedDevice Object and Add into Set
                             ABProvisionedDevice *device = [NSEntityDescription insertNewObjectForEntityForName:@"ProvisionedDevice" inManagedObjectContext:[[AppDelegate appDelegate] managedObjectContext]];
                             [device setDeviceId:obj];
@@ -106,12 +105,12 @@
                         }];
                         
                         ABProvisioningProfile *provisioningProfile = [NSEntityDescription insertNewObjectForEntityForName:@"ProvisioningProfile" inManagedObjectContext:[[AppDelegate appDelegate] managedObjectContext]];
-                        [provisioningProfile setUuid:xcProject.mobileProvision.uuid];
-                        [provisioningProfile setTeamId:xcProject.mobileProvision.teamId];
-                        [provisioningProfile setTeamName:xcProject.mobileProvision.teamName];
-                        [provisioningProfile setBuildType:xcProject.mobileProvision.buildType];
-                        [provisioningProfile setCreateDate:xcProject.mobileProvision.createDate];
-                        [provisioningProfile setExpirationDate:xcProject.mobileProvision.expirationDate];
+                        [provisioningProfile setUuid:ipaUploadInfo.mobileProvision.uuid];
+                        [provisioningProfile setTeamId:ipaUploadInfo.mobileProvision.teamId];
+                        [provisioningProfile setTeamName:ipaUploadInfo.mobileProvision.teamName];
+                        [provisioningProfile setBuildType:ipaUploadInfo.mobileProvision.buildType];
+                        [provisioningProfile setCreateDate:ipaUploadInfo.mobileProvision.createDate];
+                        [provisioningProfile setExpirationDate:ipaUploadInfo.mobileProvision.expirationDate];
                         [provisioningProfile addProvisionedDevices:provisionDeviceSet];
                         
                         NSMutableOrderedSet *uploadRecordsSet;
@@ -125,8 +124,7 @@
                         [uploadRecord setProvisioningProfile:provisioningProfile];
                     }
                 } @catch (NSException *exception) {
-                    [EventTracker logExceptionEvent:exception];
-					DDLogInfo(@"Exception %@",exception.abDescription);
+					DDLogError(@"Exception %@",exception.abDescription);
                 }
             }
             
@@ -146,8 +144,7 @@
             return project;
         }
     } @catch (NSException *exception) {
-        [EventTracker logExceptionEvent:exception];
-		DDLogInfo(@"Exception %@",exception.abDescription);
+		DDLogError(@"Exception %@",exception.abDescription);
     }
     return nil;
 }

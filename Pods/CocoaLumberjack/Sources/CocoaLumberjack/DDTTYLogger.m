@@ -1,6 +1,6 @@
 // Software License Agreement (BSD License)
 //
-// Copyright (c) 2010-2024, Deusty, LLC
+// Copyright (c) 2010-2025, Deusty, LLC
 // All rights reserved.
 //
 // Redistribution and use of this software in source and binary forms,
@@ -823,12 +823,6 @@ static DDTTYLogger *sharedInstance;
     if (sharedInstance != nil) {
         return nil;
     }
-
-#if !defined(DD_CLI) || __has_include(<AppKit/NSColor.h>)
-    if (@available(iOS 10.0, macOS 10.12, tvOS 10.0, watchOS 3.0, *)) {
-        NSLogWarn(@"CocoaLumberjack: Warning: Usage of DDTTYLogger detected when DDOSLogger is available and can be used! Please consider migrating to DDOSLogger.");
-    }
-#endif
 
     if ((self = [super init])) {
         // Initialize 'app' variable (char *)

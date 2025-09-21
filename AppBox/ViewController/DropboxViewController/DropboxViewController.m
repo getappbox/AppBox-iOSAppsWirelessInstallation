@@ -14,9 +14,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //Log Screen
-    [EventTracker logScreen:@"Dropbox Login"];
-    
     //DB Authentication Notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLoggedInNotification:) name:abDropBoxLoggedInNotification object:nil];
 	
@@ -25,8 +22,6 @@
 }
 
 - (IBAction)buttonConnectDropboxTapped:(NSButton *)sender {
-    [EventTracker logEventWithType:LogEventTypeAuthDropbox];
-    
 	//Authenticate user
 	[DBClientsManager authorizeFromControllerDesktopV2:[NSWorkspace sharedWorkspace] controller:self loadingStatusDelegate:nil openURL:^(NSURL * _Nonnull url) {
 		[[NSWorkspace sharedWorkspace] openURL:url];
@@ -34,7 +29,6 @@
 }
 
 - (IBAction)buttonQuitTapped:(NSButton *)sender {
-    [EventTracker logEventWithType:LogEventTypeExitWithoutAuth];
     [self dismissController:self];
 	if (![UserData isLoggedIn]) {
 		[NSApp terminate:self];

@@ -1,6 +1,6 @@
 // Software License Agreement (BSD License)
 //
-// Copyright (c) 2010-2024, Deusty, LLC
+// Copyright (c) 2010-2025, Deusty, LLC
 // All rights reserved.
 //
 // Redistribution and use of this software in source and binary forms,
@@ -190,6 +190,18 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
 /// The log message serializer.
 @property (nonatomic, readonly, strong) id<DDFileLogMessageSerializer> logMessageSerializer;
 
+/// The file manager to  use. Defaults to `[NSFileManager defaultManager]`.
+@property (nonatomic, readonly, strong) NSFileManager *fileManager;
+
+/// Whether the log file should be locked by the file logger before writing to it (and unlocked after).
+/// - Parameter logFilePath: The path to the log file for which to decide locking.
+/// - Remark: Logging from multiple processes (e.g. an app extensions) to the same log file without file locking will result in interleaved and possibly even overwritten log messages.
+///           Without locking, the resulting logfile could be described as "best effort" and might become corrupted.
+///           The downside of locking is that if the process holds the file lock when it gets suspended by the system, the system will kill the process.
+///           This could happen by inproper handling of app suspension (e.g. not properly calling `+[DDLog flushLog]` and waiting for its completion before suspension).
+///           Regardless of locking, you should always call `+[DDLog flushLog]` before your app gets suspended or terminated to make sure every log message makes it to your disk.
+- (BOOL)shouldLockLogFile:(NSString *)logFilePath;
+
 /// Manually perform a cleanup of the log files managed by this manager.
 /// This can be called from any queue!
 - (BOOL)cleanupLogFilesWithError:(NSError **)error;
@@ -318,6 +330,9 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
 
 /// The log message serializer.
 @property (nonatomic, strong) id<DDFileLogMessageSerializer> logMessageSerializer;
+
+/// The file manager to  use. Defaults to `[NSFileManager defaultManager]`.
+@property (nonatomic, strong) NSFileManager *fileManager;
 
 /* Inherited from DDLogFileManager protocol:
 
@@ -550,10 +565,14 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
 
 @property (nonatomic, readwrite) BOOL isArchived;
 
-+ (nullable instancetype)logFileWithPath:(nullable NSString *)filePath NS_SWIFT_UNAVAILABLE("Use init(filePath:)");
++ (nullable instancetype)logFileWithPath:(nullable NSString *)filePath
+    __attribute__((deprecated("Check file path for nil and pass it to the initializer instead")))
+    NS_SWIFT_UNAVAILABLE("Use init(filePath:)");
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithFilePath:(NSString *)filePath NS_DESIGNATED_INITIALIZER;
+// TODO: This should really become the designated initializer.
+- (instancetype)initWithFilePath:(NSString *)filePath fileManager:(NSFileManager *)fileManager;
 
 - (void)reset;
 - (void)renameFile:(NSString *)newFileName NS_SWIFT_NAME(renameFile(to:));

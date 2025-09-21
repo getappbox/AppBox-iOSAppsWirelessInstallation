@@ -10,6 +10,8 @@
 
 @implementation AppDelegate {
 	DDFileLogger *fileLogger;
+	DDOSLogger *osLogger;
+	DDTTYLogger *ttyLogger;
 }
 
 - (void)awakeFromNib{
@@ -27,6 +29,12 @@
 	fileLogger.doNotReuseLogFiles = true;
 	fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
 	[DDLog addLogger:fileLogger withLevel:logLevel];
+
+	//TTY Logger
+	#if !DEBUG
+	ttyLogger = [DDTTYLogger sharedInstance];
+	[DDLog addLogger:ttyLogger withLevel:logLevel];
+	#endif
 	DDLogInfo(@"AppBox Started.");
 }
 
@@ -53,7 +61,6 @@
     for (NSString *argument in arguments) {
         if ([argument containsString:abArgsIPA]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsIPA];
-            DDLogDebug(@"IPA Components = %@",components);
             if (components.count == 2) {
                 [self handleIPAAtPath:[components lastObject]];
             } else {
@@ -86,7 +93,7 @@
 }
 
 -(void)openFileWithPath:(NSString *)filePath{
-    if (self.isReadyToBuild) {
+    if (self.isReadyToUpload) {
         DDLogDebug(@"AppBox is ready to use.");
         [[NSNotificationCenter defaultCenter] postNotificationName:abUseOpenFilesNotification object:filePath];
     } else {
@@ -118,7 +125,7 @@
 	if (latestLogFile == nil) {
 		DDLogInfo(@"No log file found.");
 	} else {
-		[[NSWorkspace sharedWorkspace] openFile:latestLogFile];
+		[[NSWorkspace sharedWorkspace] openURL:[NSURL fileURLWithPath:latestLogFile]];
 	}
 }
 
@@ -132,15 +139,12 @@
         if (authResult != nil) {
             if ([authResult isSuccess]) {
 				DDLogInfo(@"Success! User is logged into Dropbox.");
-                [EventTracker logEventWithType:LogEventTypeAuthDropboxSuccess];
                 [[NSNotificationCenter defaultCenter] postNotificationName:abDropBoxLoggedInNotification object:nil];
             } else if ([authResult isCancel]) {
 				DDLogInfo(@"Authorization flow was manually canceled by user.");
-                [EventTracker logEventWithType:LogEventTypeAuthDropboxCanceled];
                 [Common showAlertWithTitle:@"Authorization Canceled." andMessage:abEmptyString];
             } else if ([authResult isError]) {
 				DDLogInfo(@"Error: %@", authResult.errorDescription);
-                [EventTracker logEventWithType:LogEventTypeAuthDropboxError];
                 [Common showAlertWithTitle:@"Authorization Canceled." andMessage:abEmptyString];
             }
         } else if (url != nil) {
@@ -153,14 +157,14 @@
 }
 
 -(void)handleIPAAtPath:(NSString *)ipaPath {
-    XCProject *project = [CIProjectBuilder xcProjectWithIPAPath:ipaPath];
-    if (self.isReadyToBuild) {
+    IPAUploadInfo *ipaUploadInfo = [CLIIPAUpload ipaUploadInfoWithIPAPath:ipaPath];
+    if (self.isReadyToUpload) {
 		DDLogInfo(@"AppBox is ready to upload IPA.");
-        [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
+        [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:ipaUploadInfo];
     } else {
         [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToUseNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
 			DDLogInfo(@"AppBox is ready to upload IPA. [Block]");
-            [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
+            [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:ipaUploadInfo];
         }];
     }
 }

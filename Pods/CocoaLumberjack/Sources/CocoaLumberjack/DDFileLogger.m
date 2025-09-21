@@ -1,6 +1,6 @@
 // Software License Agreement (BSD License)
 //
-// Copyright (c) 2010-2024, Deusty, LLC
+// Copyright (c) 2010-2025, Deusty, LLC
 // All rights reserved.
 //
 // Redistribution and use of this software in source and binary forms,
@@ -89,6 +89,7 @@ NSTimeInterval     const kDDRollingLeeway              = 1.0;              // 1s
 
 @implementation DDLogFileManagerDefault
 
+@synthesize fileManager = _fileManager;
 @synthesize maximumNumberOfLogFiles = _maximumNumberOfLogFiles;
 @synthesize logFilesDiskQuota = _logFilesDiskQuota;
 @synthesize logMessageSerializer = _logMessageSerializer;
@@ -103,6 +104,8 @@ NSTimeInterval     const kDDRollingLeeway              = 1.0;              // 1s
         [_fileDateFormatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
         [_fileDateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
         [_fileDateFormatter setDateFormat: @"yyyy'-'MM'-'dd'--'HH'-'mm'-'ss'-'SSS'"];
+
+        _fileManager = [NSFileManager defaultManager];
 
         if (aLogsDirectory.length > 0) {
             _logsDirectory = [aLogsDirectory copy];
@@ -240,12 +243,13 @@ NSTimeInterval     const kDDRollingLeeway              = 1.0;              // 1s
     }
 
     if (firstIndexToDelete != NSNotFound) {
+        __auto_type fileManager = self.fileManager;
         // removing all log files starting with firstIndexToDelete
         for (NSUInteger i = firstIndexToDelete; i < sortedLogFileInfos.count; i++) {
             __auto_type logFileInfo = sortedLogFileInfos[i];
 
             __autoreleasing NSError *deletionError = nil;
-            __auto_type success = [[NSFileManager defaultManager] removeItemAtPath:logFileInfo.filePath error:&deletionError];
+            __auto_type success = [fileManager removeItemAtPath:logFileInfo.filePath error:&deletionError];
             if (success) {
                 NSLogInfo(@"DDLogFileManagerDefault: Deleting file: %@", logFileInfo.fileName);
             } else {
@@ -295,10 +299,10 @@ NSTimeInterval     const kDDRollingLeeway              = 1.0;              // 1s
     NSAssert(_logsDirectory.length > 0, @"Directory must be set.");
 
     __autoreleasing NSError *error = nil;
-    __auto_type success = [[NSFileManager defaultManager] createDirectoryAtPath:_logsDirectory
-                                                    withIntermediateDirectories:YES
-                                                                     attributes:nil
-                                                                          error:&error];
+    __auto_type success = [self.fileManager createDirectoryAtPath:_logsDirectory
+                                      withIntermediateDirectories:YES
+                                                       attributes:nil
+                                                            error:&error];
     if (!success) {
         NSLogError(@"DDFileLogManagerDefault: Error creating logsDirectory: %@", error);
     }
@@ -322,7 +326,7 @@ NSTimeInterval     const kDDRollingLeeway              = 1.0;              // 1s
     __auto_type logsDirectory = [self logsDirectory];
 
     __autoreleasing NSError *error = nil;
-    __auto_type fileNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:logsDirectory error:&error];
+    __auto_type fileNames = [self.fileManager contentsOfDirectoryAtPath:logsDirectory error:&error];
     if (!fileNames && error) {
         NSLogError(@"DDFileLogManagerDefault: Error listing log file directory: %@", error);
         return [[NSArray alloc] init];
@@ -512,9 +516,9 @@ NSTimeInterval     const kDDRollingLeeway              = 1.0;              // 1s
             // want (even if device is locked). Thats why that attribute have to be changed to
             // NSFileProtectionCompleteUntilFirstUserAuthentication.
             NSDictionary *attributes = @{NSFileProtectionKey: [self logFileProtection]};
-            success = [[NSFileManager defaultManager] setAttributes:attributes
-                                                       ofItemAtPath:filePath
-                                                              error:&currentError];
+            success = [self.fileManager setAttributes:attributes
+                                         ofItemAtPath:filePath
+                                                error:&currentError];
         }
 #endif
 
@@ -1086,8 +1090,9 @@ NSTimeInterval     const kDDRollingLeeway              = 1.0;              // 1s
         }
         _currentLogFileInfo = newCurrentLogFile;
     } else {
+        const __auto_type logFileManagerImplementsModernCreationMethod = [_logFileManager respondsToSelector:@selector(createNewLogFileWithError:)];
         NSString *currentLogFilePath;
-        if ([_logFileManager respondsToSelector:@selector(createNewLogFileWithError:)]) {
+        if (logFileManagerImplementsModernCreationMethod) {
             __autoreleasing NSError *error; // Don't initialize error to nil since it will be done in -createNewLogFileWithError:
             currentLogFilePath = [_logFileManager createNewLogFileWithError:&error];
             if (!currentLogFilePath) {
@@ -1104,8 +1109,13 @@ NSTimeInterval     const kDDRollingLeeway              = 1.0;              // 1s
                 NSLogError(@"DDFileLogger: Failed to create new log file");
             }
         }
-        // Use static factory method here, since it checks for nil (and is unavailable to Swift).
-        _currentLogFileInfo = [DDLogFileInfo logFileWithPath:currentLogFilePath];
+        if (!currentLogFilePath) {
+            _currentLogFileInfo = nil;
+        } else {
+            const __auto_type logFileManagerProvidesFileManager = [_logFileManager respondsToSelector:@selector(fileManager)];
+            __auto_type fileManager = logFileManagerProvidesFileManager ? _logFileManager.fileManager : [NSFileManager defaultManager];
+            _currentLogFileInfo = [[DDLogFileInfo alloc] initWithFilePath:currentLogFilePath fileManager:fileManager];
+        }
     }
 
     return _currentLogFileInfo;
@@ -1206,6 +1216,8 @@ NSTimeInterval     const kDDRollingLeeway              = 1.0;              // 1s
 
             [self lt_scheduleTimerToRollLogFileDueToAge];
             [self lt_monitorCurrentLogFileForExternalChanges];
+        } else {
+            NSLogWarn(@"NSFileHandle returned nil for writing to log file at path: %@", logFilePath);
         }
     }
 
@@ -1336,11 +1348,13 @@ static int exception_count = 0;
 - (void)lt_logData:(NSData *)data {
     static __auto_type implementsDeprecatedWillLog = NO;
     static __auto_type implementsDeprecatedDidLog = NO;
+    static __auto_type implementsShouldLock = NO;
 
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         implementsDeprecatedWillLog = [self respondsToSelector:@selector(willLogMessage)];
         implementsDeprecatedDidLog = [self respondsToSelector:@selector(didLogMessage)];
+        implementsShouldLock = [self.logFileManager respondsToSelector:@selector(shouldLockLogFile:)];
     });
 
     DDAbstractLoggerAssertOnInternalLoggerQueue();
@@ -1363,26 +1377,36 @@ static int exception_count = 0;
         }
 
         // use an advisory lock to coordinate write with other processes
+        __auto_type shouldLock = implementsShouldLock && [self.logFileManager shouldLockLogFile:_currentLogFileInfo.filePath];
         __auto_type fd = [handle fileDescriptor];
-        while(flock(fd, LOCK_EX) != 0) {
-            NSLogError(@"DDFileLogger: Could not lock logfile, retrying in 1ms: %s (%d)", strerror(errno), errno);
-            usleep(1000);
-        }
-        if (@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)) {
-            __autoreleasing NSError *error = nil;
-            __auto_type success = [handle seekToEndReturningOffset:nil error:&error];
-            if (!success) {
-                NSLogError(@"DDFileLogger: Failed to seek to end of file: %@", error);
+        if (shouldLock) {
+            while(flock(fd, LOCK_EX) != 0) {
+                NSLogError(@"DDFileLogger: Could not lock logfile, retrying in 1ms: %s (%d)", strerror(errno), errno);
+                usleep(1000);
             }
-            success =  [handle writeData:data error:&error];
-            if (!success) {
-                NSLogError(@"DDFileLogger: Failed to write data: %@", error);
-            }
-        } else {
-            [handle seekToEndOfFile];
-            [handle writeData:data];
         }
-        flock(fd, LOCK_UN);
+
+        @try {
+            if (@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)) {
+                __autoreleasing NSError *error = nil;
+                __auto_type success = [handle seekToEndReturningOffset:nil error:&error];
+                if (!success) {
+                    NSLogError(@"DDFileLogger: Failed to seek to end of file: %@", error);
+                }
+                success = [handle writeData:data error:&error];
+                if (!success) {
+                    NSLogError(@"DDFileLogger: Failed to write data: %@", error);
+                }
+            } else {
+                [handle seekToEndOfFile];
+                [handle writeData:data];
+            }
+        }
+        @finally {
+            if (shouldLock) {
+                flock(fd, LOCK_UN);
+            }
+        }
 
         if (implementsDeprecatedDidLog) {
 #pragma clang diagnostic push
@@ -1450,6 +1474,8 @@ static NSString * const kDDXAttrArchivedName = @"lumberjack.log.archived";
     __strong NSString *_filePath;
     __strong NSString *_fileName;
 
+    __strong NSFileManager *_fileManager;
+
     __strong NSDictionary *_fileAttributes;
 
     __strong NSDate *_creationDate;
@@ -1491,6 +1517,16 @@ static NSString * const kDDXAttrArchivedName = @"lumberjack.log.archived";
     NSParameterAssert(aFilePath);
     if ((self = [super init])) {
         filePath = [aFilePath copy];
+        _fileManager = [NSFileManager defaultManager];
+    }
+
+    return self;
+}
+
+- (instancetype)initWithFilePath:(NSString *)aFilePath fileManager:(NSFileManager *)fileManager {
+    NSParameterAssert(fileManager);
+    if ((self = [self initWithFilePath:aFilePath])) {
+        _fileManager = fileManager;
     }
 
     return self;
@@ -1503,7 +1539,7 @@ static NSString * const kDDXAttrArchivedName = @"lumberjack.log.archived";
 - (NSDictionary *)fileAttributes {
     if (_fileAttributes == nil && filePath != nil) {
         __autoreleasing NSError *error = nil;
-        _fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:&error];
+        _fileAttributes = [_fileManager attributesOfItemAtPath:filePath error:&error];
         if (!_fileAttributes) {
             NSLogError(@"DDLogFileInfo: Failed to read file attributes: %@", error);
         }
@@ -1595,7 +1631,6 @@ static NSString * const kDDXAttrArchivedName = @"lumberjack.log.archived";
     // See full explanation in the header file.
 
     if (![newFileName isEqualToString:[self fileName]]) {
-        __auto_type fileManager = [NSFileManager defaultManager];
         __auto_type fileDir = [filePath stringByDeletingLastPathComponent];
         __auto_type newFilePath = [fileDir stringByAppendingPathComponent:newFileName];
 
@@ -1603,17 +1638,17 @@ static NSString * const kDDXAttrArchivedName = @"lumberjack.log.archived";
         // (in which case the file might not exist anymore and neither does it parent folder).
 #if defined(DEBUG) && (!defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR)
         __auto_type directory = NO;
-        [fileManager fileExistsAtPath:fileDir isDirectory:&directory];
+        [_fileManager fileExistsAtPath:fileDir isDirectory:&directory];
         NSAssert(directory, @"Containing directory must exist.");
 #endif
 
         __autoreleasing NSError *error = nil;
-        __auto_type success = [fileManager removeItemAtPath:newFilePath error:&error];
+        __auto_type success = [_fileManager removeItemAtPath:newFilePath error:&error];
         if (!success && error.code != NSFileNoSuchFileError) {
             NSLogError(@"DDLogFileInfo: Error deleting archive (%@): %@", self.fileName, error);
         }
 
-        success = [fileManager moveItemAtPath:filePath toPath:newFilePath error:&error];
+        success = [_fileManager moveItemAtPath:filePath toPath:newFilePath error:&error];
 
         // When a log file is deleted, moved or renamed on the simulator, we attempt to rename it as a
         // result of "archiving" it, but since the file doesn't exist anymore, needless error logs are printed

@@ -43,7 +43,7 @@
 				[UserData setLoggedInUserDisplayName:result.name.displayName];
 				[self updateDropboxButton];
 			} @catch (NSException *exception) {
-				[EventTracker logExceptionEvent:exception];
+				DDLogError(@"Exception %@",exception.abDescription);
 			}
 		}
 	}];
@@ -70,7 +70,7 @@
                      [Common showAlertWithTitle:@"Warning" andMessage:[NSString stringWithFormat:@"You're running out of Dropbox space\n\n %@MB of %@MB used.", usage, allocated]];
                  }
              } @catch (NSException *exception) {
-                 [EventTracker logExceptionEvent:exception];
+				 DDLogError(@"Exception %@",exception.abDescription);
              }
          }
      }];
@@ -118,19 +118,36 @@
     [self updateAccountsMenu];
 }
 
+//MARK: - CLI
+- (void)updateCLIMenu{
+	NSMenuItem *cliInstallUninstallButton = [[AppDelegate appDelegate] cliInstallUninstallButton];
+	if ([[NSFileManager defaultManager] fileExistsAtPath:abCLIPath]){
+		[cliInstallUninstallButton setTitle:@"Uninstall CLI Tool"];
+	}else{
+		[cliInstallUninstallButton setTitle:@"Install CLI Tool"];
+	}
+}
+
+- (IBAction)cliInstallUninstallTapped:(NSMenuItem *)sender {
+	if ([[NSFileManager defaultManager] fileExistsAtPath:abCLIPath]){
+		[CLISupportHelper uninstall];
+	} else {
+		[CLISupportHelper install];
+	}
+	[self updateCLIMenu];
+}
+
+
 //MARK: - Help
 - (IBAction)helpButtonTapped:(NSMenuItem *)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abDocumentationURL]];
-    [EventTracker logEventWithType:LogEventTypeExternalLinkHelp];
 }
 
 - (IBAction)latestNewsTapped:(NSMenuItem *)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abTwitterURL]];
-    [EventTracker logEventWithType:LogEventTypeExternalLinkTwitter];
 }
 
 - (IBAction)releaseNotesTapped:(NSMenuItem *)sender {
-    [EventTracker logEventWithType:LogEventTypeExternalLinkReleaseNote];
     NSString *versionString = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",abGitHubReleaseBaseURL,versionString]]];
 }
@@ -142,7 +159,6 @@
 }
 
 - (IBAction)licenseTapped:(NSMenuItem *)sender {
-    [EventTracker logEventWithType:LogEventTypeExternalLinkLicense];
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abLicenseURL]];
     
 }
