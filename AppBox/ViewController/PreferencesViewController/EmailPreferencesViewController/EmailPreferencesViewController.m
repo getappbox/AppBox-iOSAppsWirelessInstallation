@@ -52,19 +52,19 @@
         return;
     }
     
-    //create a test project for demo email
-    XCProject *project = [[XCProject alloc] init];
-    [project setName:@"TestApp"];
-    [project setVersion:@"1.0"];
-    [project setBuild:@"1"];
-    [project setEmails: emailTextField.stringValue];
-    [project setAppShortShareableURL:[NSURL URLWithString:@"https://getappbox.com"]];
-    [project setPersonalMessage: [MailHandler parseMessage:personalMessageTextField.stringValue forProject:project]];
+    //create a test ipa upload info for demo email
+    IPAUploadInfo *ipaUploadInfo = [[IPAUploadInfo alloc] init];
+    [ipaUploadInfo setName:@"TestApp"];
+    [ipaUploadInfo setVersion:@"1.0"];
+    [ipaUploadInfo setBuild:@"1"];
+    [ipaUploadInfo setEmails: emailTextField.stringValue];
+    [ipaUploadInfo setAppShortShareableURL:[NSURL URLWithString:@"https://getappbox.com"]];
+    [ipaUploadInfo setPersonalMessage: [MailHandler parseMessage:personalMessageTextField.stringValue forIPAUploadInfo:ipaUploadInfo]];
     
     //send mail
     [ABHudViewController showStatus:@"Sending Test Mail" onView:self.view];
 	weakify(self);
-    [MailGun sendMailWithProject:project.abpProject complition:^(BOOL success, NSError *error) {
+    [MailGun sendMailWithProject:ipaUploadInfo.abpProject complition:^(BOOL success, NSError *error) {
 		dispatch_async(dispatch_get_main_queue(), ^{
 			strongify(self);
 			[ABHudViewController hideAllHudFromView:self.view after:0];

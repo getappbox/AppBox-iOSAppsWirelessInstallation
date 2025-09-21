@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ABUploadRecord : NSManagedObject
 
-@property(nonatomic, retain) XCProject *xcProject;
+@property(nonatomic, retain) IPAUploadInfo *ipaUploadInfo;
 
 @end
 

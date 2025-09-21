@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ABProject : NSManagedObject
 
-+(ABProject *)addProjectWithXCProject:(XCProject *)xcProject;
++(ABProject *)addProjectWithIPAUploadInfo:(IPAUploadInfo *)ipaUploadInfo;
 
 @end
 

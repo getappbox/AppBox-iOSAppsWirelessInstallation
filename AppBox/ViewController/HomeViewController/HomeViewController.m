@@ -10,8 +10,8 @@
 
 @interface HomeViewController()
 
-@property (nonatomic, strong) XCProject *project;
-@property (nonatomic, strong) XCProject *ciRepoProject;
+@property (nonatomic, assign) BOOL isCLIActive;
+@property (nonatomic, strong) IPAUploadInfo *ipaUploadInfo;
 @property (nonatomic, strong) UploadManager *uploadManager;
 @property (nonatomic, assign) NSInteger processExecuteCount;
 
@@ -24,11 +24,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.project = [[XCProject alloc] init];
+    self.ipaUploadInfo = [[IPAUploadInfo alloc] init];
     buildOptionBoxHeightConstraint.constant = 0;
     
     //Notification Handler
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initCIProcess:) name:abBuildRepoNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initCLIUpload:) name:abBuildRepoNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dropboxLogoutHandler:) name:abDropBoxLoggedOutNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLoggedInNotification:) name:abDropBoxLoggedInNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initOpenFilesProcess:) name:abUseOpenFilesNotification object:nil];
@@ -78,7 +78,7 @@
 			}
         }];
     }
-    [[AppDelegate appDelegate] setIsReadyToBuild:YES];
+    [[AppDelegate appDelegate] setIsReadyToUpload:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:abAppBoxReadyToUseNotification object:self];
 }
 
@@ -94,8 +94,8 @@
 //MARK: - Upload Manager
 -(void)setupUploadManager{
     self.uploadManager = [[UploadManager alloc] init];
-    [self.uploadManager setProject:self.project];
-    [self.uploadManager setCiRepoProject:self.ciRepoProject];
+    [self.uploadManager setIpaUploadInfo:self.ipaUploadInfo];
+    [self.uploadManager setIsCLIActive:self.isCLIActive];
     [self.uploadManager setCurrentViewController:self];
     
     weakify(self);
@@ -105,7 +105,7 @@
     
     [self.uploadManager setErrorBlock:^(NSError *error, BOOL terminate){
         strongify(self);
-        if (terminate && self.ciRepoProject) {
+        if (terminate && self.isCLIActive) {
             exit(abExitCodeForUploadFailed);
         }
         if (terminate) {
@@ -136,10 +136,11 @@
 
 
 //MARK: - Build Repo / Open Files Notification
-- (void)initCIProcess:(NSNotification *)notification {
-    if ([notification.object isKindOfClass:[XCProject class]]) {
-        self.ciRepoProject = notification.object;
-        [self initIPAUploadProcessForCIProject:self.ciRepoProject];
+- (void)initCLIUpload:(NSNotification *)notification {
+    if ([notification.object isKindOfClass:[IPAUploadInfo class]]) {
+		self.isCLIActive = YES;
+        self.ipaUploadInfo = notification.object;
+        [self initCLIUploadProcessWithIPAUploadInfo:self.ipaUploadInfo];
     }
 }
 
@@ -155,8 +156,8 @@
 }
 
 - (void)exportSharedURLInSystemFile{
-    if (self.ciRepoProject) {
-        [self.project exportSharedURLInSystemFile];
+    if (self.isCLIActive) {
+        [self.ipaUploadInfo exportSharedURLInSystemFile];
     }
 }
 
@@ -165,9 +166,9 @@
 //Project Path Handler
 - (IBAction)selectedFilePathHandler:(NSPathControl *)sender {
     NSURL *url = [sender.URL filePathURL];
-    if (url.isIPA && ![self.project.ipaFullPath isEqual:url]) {
+    if (url.isIPA && ![self.ipaUploadInfo.ipaFullPath isEqual:url]) {
         [self viewStateForProgressFinish:YES];
-        [self.project setIpaFullPath: url];
+        [self.ipaUploadInfo setIpaFullPath: url];
         [selectedFilePath setURL:url];
         [self updateViewState];
 		
@@ -178,14 +179,14 @@
     }
 }
 
-- (void)initIPAUploadProcessForCIProject:(XCProject *)ciProject {
+- (void)initCLIUploadProcessWithIPAUploadInfo:(IPAUploadInfo *)ciProject {
     NSURL *ipaURL = ciProject.ipaFullPath;
     if (ipaURL == nil) {
         return;
     }
 
     [self viewStateForProgressFinish:YES];
-    [self.project setIpaFullPath:ipaURL];
+    [self.ipaUploadInfo setIpaFullPath:ipaURL];
     [selectedFilePath setURL:ipaURL];
     if (ciProject.emails.length != 0) {
         [textFieldEmail setStringValue:ciProject.emails];
@@ -202,7 +203,7 @@
 //IPA File Path Handler
 
 - (IBAction)buttonUniqueLinkTapped:(NSButton *)sender{
-	self.project.isKeepSameLinkEnabled = (sender.state == NSControlStateValueOn);
+	self.ipaUploadInfo.isKeepSameLinkEnabled = (sender.state == NSControlStateValueOn);
 }
 
 - (IBAction)buttonSameLinkHelpTapped:(NSButton *)sender {
@@ -220,7 +221,7 @@
     //check all mails vaild or not and setup mailed option based on this
     BOOL isAllMailVaild = sender.stringValue.length > 0 && [MailHandler isAllValidEmail:sender.stringValue];
     if (isAllMailVaild){
-        [self.project setEmails:sender.stringValue];
+        [self.ipaUploadInfo setEmails:sender.stringValue];
     } else if (sender.stringValue.length > 0) {
         [MailHandler showInvalidEmailAddressAlert];
     }
@@ -228,7 +229,7 @@
 
 //developer message text field
 - (IBAction)textFieldDevMessageValueChanged:(NSTextField *)sender {
-	[self.project setPersonalMessage:sender.stringValue];
+	[self.ipaUploadInfo setPersonalMessage:sender.stringValue];
 }
 
 #pragma mark → Final Action Button (Build/IPA/CI)
@@ -245,7 +246,7 @@
         [[textFieldEmail window] makeFirstResponder:self.view];
 
 		// start upload process
-        [self.uploadManager uploadIPAFile:self.project.ipaFullPath];
+        [self.uploadManager uploadIPAFile:self.ipaUploadInfo.ipaFullPath];
         [self viewStateForProgressFinish:![AppDelegate appDelegate].processing];
     }else{
         [MailHandler showInvalidEmailAddressAlert];
@@ -295,12 +296,12 @@
 -(void)viewStateForProgressFinish:(BOOL)finish{
     DDLogDebug(@"Updating view setting for finish - %@", [NSNumber numberWithBool:finish]);
     [[AppDelegate appDelegate] setProcessing:!finish];
-    [[AppDelegate appDelegate] setIsReadyToBuild:finish];
+    [[AppDelegate appDelegate] setIsReadyToUpload:finish];
     
-    //reset project
+    //reset ipa upload info
     if (finish){
-        self.project = [[XCProject alloc] init];
-        [self.uploadManager setProject:self.project];
+        self.ipaUploadInfo = [[IPAUploadInfo alloc] init];
+        [self.uploadManager setIpaUploadInfo:self.ipaUploadInfo];
         [ABHudViewController hudForView:self.view hide:YES];
         buildOptionBoxHeightConstraint.constant = 0;
     }
@@ -309,7 +310,7 @@
     [buttonUniqueLink setEnabled:finish];
 	[buttonUniqueLink setState: finish ? NSControlStateValueOff : buttonUniqueLink.state];
 
-    //ipa or project path
+    //ipa
     [selectedFilePath setEnabled:finish];
     [selectedFilePath setURL: finish ? nil : selectedFilePath.URL.filePathURL];
     
@@ -398,63 +399,64 @@
 }
 
 //MARK: - ProjectAdvancedViewDelegate - 
-- (void)projectAdvancedSaveButtonTapped:(NSButton *)sender{
+- (void)uploadAdvancedSettingSaveButtonTapped:(NSButton *)sender{
 
 }
 
-- (void)projectAdvancedCancelButtonTapped:(NSButton *)sender{
+- (void)uploadAdvancedSettingCancelButtonTapped:(NSButton *)sender{
     
 }
 
 //MARK: - Share URL -
 -(void)showUploadCompleteNotification {
-	if (self.ciRepoProject == nil) {
-		[Common showUploadNotificationWithName:self.project.name andURL:self.project.appShortShareableURL];
+	if (self.isCLIActive) {
+		return;
 	}
+	[Common showUploadNotificationWithName:self.ipaUploadInfo.name andURL:self.ipaUploadInfo.appShortShareableURL];
 }
 
 -(void)shareURLOnSlackMSTeamChannel {
 	// Share URL on Slack/Microsoft Team Channel
 	NSString *message;
-	if (self.project.webhookMessage) {
-		message = self.project.webhookMessage;
+	if (self.ipaUploadInfo.webhookMessage) {
+		message = self.ipaUploadInfo.webhookMessage;
 	} else {
 		message = [UserData userSlackMessage];
 	}
 
 	NSString *slackWebhook;
-	if (self.project.slackWebhook) {
-		slackWebhook = self.project.slackWebhook;
+	if (self.ipaUploadInfo.slackWebhook) {
+		slackWebhook = self.ipaUploadInfo.slackWebhook;
 	} else {
 		slackWebhook = [UserData userSlackChannel];
 	}
 	if (slackWebhook.length > 0){
 		[self showStatus:@"Sending Message on Slack..." andShowProgressBar:YES withProgress:-1];
-		[SlackClient sendMessageForProject:self.project
+		[SlackClient sendMessage:self.ipaUploadInfo
 								   webhook:slackWebhook
 								   message:message
 								completion:^(BOOL success) {}];
 	}
 
 	NSString *msTeamWebhook;
-	if (self.project.msTeamsWebhook) {
-		msTeamWebhook = self.project.msTeamsWebhook;
+	if (self.ipaUploadInfo.msTeamsWebhook) {
+		msTeamWebhook = self.ipaUploadInfo.msTeamsWebhook;
 	} else {
 		msTeamWebhook = [UserData userMicrosoftTeamWebHook];
 	}
 	if (msTeamWebhook.length > 0){
 		[self showStatus:@"Sending Message on Microsoft Team..." andShowProgressBar:YES withProgress:-1];
-		[MSTeamsClient sendMessageForProject:self.project
-									 webhook:msTeamWebhook
-									 message:message
-								  completion:^(BOOL success) {}];
+		[MSTeamsClient sendMessage:self.ipaUploadInfo
+						   webhook:msTeamWebhook
+						   message:message
+						completion:^(BOOL success) {}];
 	}
 }
 
 -(void)shareURLOnEmailComplition:(void (^) (BOOL success))completion  {
 	if (textFieldEmail.stringValue.length > 0 && [MailHandler isAllValidEmail:textFieldEmail.stringValue]) {
 		[self showStatus:@"Sending Mail..." andShowProgressBar:YES withProgress:-1];
-		[MailGun sendMailWithProject:self.project.abpProject complition:^(BOOL success, NSError *error) {
+		[MailGun sendMailWithProject:self.ipaUploadInfo.abpProject complition:^(BOOL success, NSError *error) {
 			dispatch_async(dispatch_get_main_queue(), ^{
 				if (success) {
 					[ABHudViewController showStatus:@"Mail Sent" forSuccess:YES onView:self.view];
@@ -471,12 +473,12 @@
 }
 
 -(void)showLinkViewControllerIfNeededWithExitCode:(int)exitCode {
-	DDLogInfo(@"\n\n\nSHARE URL - %@\n\n\n.", self.project.appShortShareableURL);
-	if (self.ciRepoProject == nil){
-		[self performSegueWithIdentifier:@"ShowLink" sender:self];
-	}else{
+	DDLogInfo(@"\n\n\nSHARE URL - %@\n\n\n.", self.ipaUploadInfo.appShortShareableURL);
+	if (self.isCLIActive){
 		[self viewStateForProgressFinish:YES];
 		exit(exitCode);
+	}else{
+		[self performSegueWithIdentifier:@"ShowLink" sender:self];
 	}
 }
 
@@ -484,15 +486,15 @@
 -(void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender{
     //prepare to show link
     if ([segue.destinationController isKindOfClass:[ShowLinkViewController class]]) {
-        //set project to destination
-        [((ShowLinkViewController *)segue.destinationController) setProject:self.project];
+        //set ipa upload info to destination
+        [((ShowLinkViewController *)segue.destinationController) setIpaUploadInfo:self.ipaUploadInfo];
         [self viewStateForProgressFinish:YES];
     }
     
-    //prepare to show advanced project settings
-    else if([segue.destinationController isKindOfClass:[ProjectAdvancedViewController class]]){
-        ProjectAdvancedViewController *projectAdvancedViewController = ((ProjectAdvancedViewController *)segue.destinationController);
-        [projectAdvancedViewController setProject:self.project];
+    //prepare to show advanced upload settings
+    else if([segue.destinationController isKindOfClass:[UploadAdvancedSettingViewController class]]){
+        UploadAdvancedSettingViewController *projectAdvancedViewController = ((UploadAdvancedSettingViewController *)segue.destinationController);
+        [projectAdvancedViewController setIpaUploadInfo:self.ipaUploadInfo];
         [projectAdvancedViewController setDelegate:self];
     }
 }

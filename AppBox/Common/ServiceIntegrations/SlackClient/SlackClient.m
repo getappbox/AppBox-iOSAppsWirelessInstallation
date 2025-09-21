@@ -10,19 +10,19 @@
 
 @implementation SlackClient
 
-+ (void)sendMessageForProject:(XCProject *)project
-					  webhook:(NSString *)webhook
-					  message:(NSString *)message
-				   completion:(void (^) (BOOL success))completion {
++ (void)sendMessage:(IPAUploadInfo *)ipaUploadInfo
+			webhook:(NSString *)webhook
+			message:(NSString *)message
+		 completion:(void (^) (BOOL success))completion {
 	//set slack channel url and image
 	NSString *slackImage = abSlackImage;
 
 	//set slack message
 	NSString *finalMessage;
 	if (message.length > 0) {
-		finalMessage = [MailHandler parseMessage:message forProject:project];
+		finalMessage = [MailHandler parseMessage:message forIPAUploadInfo:ipaUploadInfo];
 	} else {
-		finalMessage = [NSString stringWithFormat:@"%@ - %@ (%@) link - %@", project.name, project.version, project.build, project.appShortShareableURL];
+		finalMessage = [NSString stringWithFormat:@"%@ - %@ (%@) link - %@", ipaUploadInfo.name, ipaUploadInfo.version, ipaUploadInfo.build, ipaUploadInfo.appShortShareableURL];
 	}
 
 	//create parameters dictionary

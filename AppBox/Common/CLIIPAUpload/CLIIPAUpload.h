@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-#import "XCProject.h"
+#import "IPAUploadInfo.h"
 
-@interface CIProjectBuilder : NSObject {
+@interface CLIIPAUpload : NSObject {
     
 }
 
-+ (XCProject *)xcProjectWithIPAPath:(NSString *)ipaPath;
++ (IPAUploadInfo *)ipaUploadInfoWithIPAPath:(NSString *)ipaPath;
 
 @end

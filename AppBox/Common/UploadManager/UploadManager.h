@@ -22,8 +22,8 @@ typedef void(^CompletionBlock)(void);
     
 }
 
-@property(nonatomic, strong) XCProject *project;
-@property(nonatomic, strong) XCProject *ciRepoProject;
+@property(nonatomic, assign) BOOL isCLIActive;
+@property(nonatomic, strong) IPAUploadInfo *ipaUploadInfo;
 @property(nonatomic, assign) DBFileType dbFileType;
 @property(nonatomic, weak) NSViewController *currentViewController;
 @property(nonatomic, weak) ABUploadRecord *uploadRecord;

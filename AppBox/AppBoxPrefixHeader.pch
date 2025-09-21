@@ -19,13 +19,14 @@
 #import "MBProgressHUD+ProgressHud.h"
 
 #import "UserData.h"
-#import "XCProject.h"
-#import "AppDelegate.h"
 #import "Constants.h"
+#import "AppDelegate.h"
+#import "IPAUploadInfo.h"
 #import "HTTPStatusCode.h"
 #import "OtherServicesKeys.h"
 
 #import "Common.h"
+#import "CLIIPAUpload.h"
 #import "UploadManager.h"
 #import "MailHandler.h"
 #import "SlackClient.h"
@@ -34,7 +35,6 @@
 #import "DBErrorHandler.h"
 #import "NetworkHandler.h"
 #import "KeychainHandler.h"
-#import "CIProjectBuilder.h"
 #import "CLISupportHelper.h"
 #import "NSApplication+MenuHandler.h"
 

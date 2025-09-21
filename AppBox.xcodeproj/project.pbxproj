@@ -46,8 +46,8 @@
 		DBF290D81FA64A590046D5CE /* ProvisioningDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBF290D61FA64A590046D5CE /* ProvisioningDetailsViewController.xib */; };
 		E11633991E558635005EAB31 /* MobileProvision.m in Sources */ = {isa = PBXBuildFile; fileRef = E11633981E558635005EAB31 /* MobileProvision.m */; };
 		E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E6D081D8FC77D0054814D /* DashboardViewController.m */; };
-		E13161F21E9777DF00586052 /* CIProjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = E13161F11E9777DF00586052 /* CIProjectBuilder.m */; };
-		E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */ = {isa = PBXBuildFile; fileRef = E13946111DF2AFCF00B3FAD0 /* XCProject.m */; };
+		E13161F21E9777DF00586052 /* CLIIPAUpload.m in Sources */ = {isa = PBXBuildFile; fileRef = E13161F11E9777DF00586052 /* CLIIPAUpload.m */; };
+		E13946121DF2AFCF00B3FAD0 /* IPAUploadInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E13946111DF2AFCF00B3FAD0 /* IPAUploadInfo.m */; };
 		E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E14F33331E1A64CA00C3DD34 /* NSApplication+MenuHandler.m */; };
 		E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15C26691D7FD5CE004243B9 /* ShowLinkViewController.m */; };
 		E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16018EF1DEC0BC200E3A377 /* DropboxViewController.m */; };
@@ -194,10 +194,10 @@
 		E11633981E558635005EAB31 /* MobileProvision.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobileProvision.m; sourceTree = "<group>"; };
 		E12E6D071D8FC77D0054814D /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
 		E12E6D081D8FC77D0054814D /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
-		E13161F01E9777DF00586052 /* CIProjectBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CIProjectBuilder.h; sourceTree = "<group>"; };
-		E13161F11E9777DF00586052 /* CIProjectBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CIProjectBuilder.m; sourceTree = "<group>"; };
-		E13946101DF2AFCF00B3FAD0 /* XCProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCProject.h; sourceTree = "<group>"; };
-		E13946111DF2AFCF00B3FAD0 /* XCProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCProject.m; sourceTree = "<group>"; };
+		E13161F01E9777DF00586052 /* CLIIPAUpload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLIIPAUpload.h; sourceTree = "<group>"; };
+		E13161F11E9777DF00586052 /* CLIIPAUpload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLIIPAUpload.m; sourceTree = "<group>"; };
+		E13946101DF2AFCF00B3FAD0 /* IPAUploadInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPAUploadInfo.h; sourceTree = "<group>"; };
+		E13946111DF2AFCF00B3FAD0 /* IPAUploadInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPAUploadInfo.m; sourceTree = "<group>"; };
 		E13946131DF2AFFF00B3FAD0 /* AppBoxPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppBoxPrefixHeader.pch; sourceTree = "<group>"; };
 		E14F33321E1A64CA00C3DD34 /* NSApplication+MenuHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+MenuHandler.h"; sourceTree = "<group>"; };
 		E14F33331E1A64CA00C3DD34 /* NSApplication+MenuHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+MenuHandler.m"; sourceTree = "<group>"; };
@@ -276,7 +276,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		DB04358D2E696299005F0173 /* Exceptions for "AppBoxCLI" folder in "" build phase */ = {
+		DB04358D2E696299005F0173 /* Exceptions for "AppBoxCLI" folder in "Copy Files" phase from "AppBox" target */ = {
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			buildPhase = DB04357E2E696172005F0173 /* CopyFiles */;
 			membershipExceptions = (
@@ -291,7 +291,7 @@
 		DB0435842E696255005F0173 /* AppBoxCLI */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				DB04358D2E696299005F0173 /* Exceptions for "AppBoxCLI" folder in "" build phase */,
+				DB04358D2E696299005F0173 /* Exceptions for "AppBoxCLI" folder in "Copy Files" phase from "AppBox" target */,
 			);
 			path = AppBoxCLI;
 			sourceTree = "<group>";
@@ -497,22 +497,22 @@
 			path = DashboardViewController;
 			sourceTree = "<group>";
 		};
-		E13161EF1E97775100586052 /* CIProjectBuilder */ = {
+		E13161EF1E97775100586052 /* CLIIPAUpload */ = {
 			isa = PBXGroup;
 			children = (
-				E13161F01E9777DF00586052 /* CIProjectBuilder.h */,
-				E13161F11E9777DF00586052 /* CIProjectBuilder.m */,
+				E13161F01E9777DF00586052 /* CLIIPAUpload.h */,
+				E13161F11E9777DF00586052 /* CLIIPAUpload.m */,
 			);
-			path = CIProjectBuilder;
+			path = CLIIPAUpload;
 			sourceTree = "<group>";
 		};
-		E139460F1DF2AFC200B3FAD0 /* ProjectModel */ = {
+		E139460F1DF2AFC200B3FAD0 /* IPAInfoModel */ = {
 			isa = PBXGroup;
 			children = (
-				E13946101DF2AFCF00B3FAD0 /* XCProject.h */,
-				E13946111DF2AFCF00B3FAD0 /* XCProject.m */,
+				E13946101DF2AFCF00B3FAD0 /* IPAUploadInfo.h */,
+				E13946111DF2AFCF00B3FAD0 /* IPAUploadInfo.m */,
 			);
-			path = ProjectModel;
+			path = IPAInfoModel;
 			sourceTree = "<group>";
 		};
 		E14F332E1E1A3D1300C3DD34 /* MenuHandler */ = {
@@ -608,7 +608,7 @@
 		E16437EB1D743A9300CE8B7E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E139460F1DF2AFC200B3FAD0 /* ProjectModel */,
+				E139460F1DF2AFC200B3FAD0 /* IPAInfoModel */,
 				E12A9AAA1E49F360002DDA3C /* CoreDataModel */,
 				DB1A06602160DC70008D33FD /* CoreDataMigration */,
 				E16437DB1D743A4E00CE8B7E /* AppBox.xcdatamodeld */,
@@ -845,7 +845,7 @@
 				DB04358E2E6962DB005F0173 /* CLISupportHelper */,
 				E1902B611E1662E300C3E0F6 /* KeychainHandler */,
 				E11633961E558609005EAB31 /* MobileProvision */,
-				E13161EF1E97775100586052 /* CIProjectBuilder */,
+				E13161EF1E97775100586052 /* CLIIPAUpload */,
 				DB2629821F961F3100C4C647 /* DBErrorHandler */,
 				DBDCFBBB1F99C7860022097B /* UploadManager */,
 				E1902B4C1E16617B00C3E0F6 /* NetworkHandler */,
@@ -1008,9 +1008,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-AppBox/Pods-AppBox-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-AppBox/Pods-AppBox-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1092,7 +1096,7 @@
 				449BD6B8282111B0008EFB2B /* AppBoxService+CoreDataProperties.m in Sources */,
 				E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */,
 				4410D18E26FF76A20046E5F9 /* DBAccountManager.m in Sources */,
-				E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */,
+				E13946121DF2AFCF00B3FAD0 /* IPAUploadInfo.m in Sources */,
 				E1C024711E9B4E6C00C87CC9 /* SlackClient.m in Sources */,
 				DB358B64216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataProperties.m in Sources */,
 				DB358B6D216FB1AC0080CAC0 /* Project+CoreDataClass.m in Sources */,
@@ -1106,7 +1110,7 @@
 				DBDCFBBE1F99C7860022097B /* UploadManager.m in Sources */,
 				E18186D61E8A45C30002509F /* PreferencesViewController.m in Sources */,
 				E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.m in Sources */,
-				E13161F21E9777DF00586052 /* CIProjectBuilder.m in Sources */,
+				E13161F21E9777DF00586052 /* CLIIPAUpload.m in Sources */,
 				4410D19C26FF851D0046E5F9 /* CoreDataMigration3to4.xcmappingmodel in Sources */,
 				DB2629851F961F4700C4C647 /* DBErrorHandler.m in Sources */,
 				E18186E21E8A47D60002509F /* HelpPreferencesViewController.m in Sources */,

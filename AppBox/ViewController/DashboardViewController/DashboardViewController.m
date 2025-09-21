@@ -113,10 +113,10 @@ typedef enum : NSUInteger {
     ABUploadRecord *uploadRecord = [uploadRecords objectAtIndex:row];
     NSTableCellView *cell = [tableView makeViewWithIdentifier:ShortURLCellId owner:nil];
     
-    //Project Name
+    //Name
     if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnName]) {
-        NSString *projectName = uploadRecord.project.name == nil ? @"N/A" : uploadRecord.project.name;
-        [cell.textField setStringValue: projectName];
+        NSString *name = uploadRecord.project.name == nil ? @"N/A" : uploadRecord.project.name;
+        [cell.textField setStringValue: name];
     }
     
     //Bundle Identifer
@@ -187,7 +187,7 @@ typedef enum : NSUInteger {
         NSAlert *alert = [[NSAlert alloc] init];
         [alert setMessageText: @"Are you sure you want to delete this build?"];
         [alert setInformativeText:[NSString stringWithFormat:@"You're about to delete \"%@-%@(%@)\". This is permanent!", uploadRecord.project.name, uploadRecord.version, uploadRecord.build]];
-        [alert setAlertStyle:NSInformationalAlertStyle];
+		[alert setAlertStyle:NSAlertStyleInformational];
 		[alert addButtonWithTitle: @"Delete from Dropbox and Dashboard"];
         [alert addButtonWithTitle: @"Delete only from Dashboard"];
         [alert addButtonWithTitle: @"Cancel"];
@@ -196,14 +196,14 @@ typedef enum : NSUInteger {
 		//delete from dropbox and dashboard
         if (modelResponse == NSAlertFirstButtonReturn) {
             [uploadManager setUploadRecord: uploadRecord];
-            [uploadManager setProject: uploadRecord.xcProject];
+            [uploadManager setIpaUploadInfo: uploadRecord.ipaUploadInfo];
             [uploadManager deleteBuildFromDropboxAndDashboard];
 		}
 		
 		//delete only from dashboard
 		else if (modelResponse == NSAlertSecondButtonReturn) {
 			[uploadManager setUploadRecord: uploadRecord];
-			[uploadManager setProject: uploadRecord.xcProject];
+			[uploadManager setIpaUploadInfo: uploadRecord.ipaUploadInfo];
 			[uploadManager deleteBuildFromDashboard];
 		}
     }

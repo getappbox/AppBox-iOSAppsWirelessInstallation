@@ -16,8 +16,8 @@
     
     //create qr code and show in imageview
     NSString *url;
-    if (self.project) {
-        url = self.project.appShortShareableURL.stringValue;
+    if (self.ipaUploadInfo) {
+        url = self.ipaUploadInfo.appShortShareableURL.stringValue;
     } else if (self.uploadRecord){
         url = self.uploadRecord.shortURL;
     } else {

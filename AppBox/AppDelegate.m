@@ -93,7 +93,7 @@
 }
 
 -(void)openFileWithPath:(NSString *)filePath{
-    if (self.isReadyToBuild) {
+    if (self.isReadyToUpload) {
         DDLogDebug(@"AppBox is ready to use.");
         [[NSNotificationCenter defaultCenter] postNotificationName:abUseOpenFilesNotification object:filePath];
     } else {
@@ -125,7 +125,7 @@
 	if (latestLogFile == nil) {
 		DDLogInfo(@"No log file found.");
 	} else {
-		[[NSWorkspace sharedWorkspace] openFile:latestLogFile];
+		[[NSWorkspace sharedWorkspace] openURL:[NSURL fileURLWithPath:latestLogFile]];
 	}
 }
 
@@ -157,14 +157,14 @@
 }
 
 -(void)handleIPAAtPath:(NSString *)ipaPath {
-    XCProject *project = [CIProjectBuilder xcProjectWithIPAPath:ipaPath];
-    if (self.isReadyToBuild) {
+    IPAUploadInfo *ipaUploadInfo = [CLIIPAUpload ipaUploadInfoWithIPAPath:ipaPath];
+    if (self.isReadyToUpload) {
 		DDLogInfo(@"AppBox is ready to upload IPA.");
-        [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
+        [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:ipaUploadInfo];
     } else {
         [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToUseNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
 			DDLogInfo(@"AppBox is ready to upload IPA. [Block]");
-            [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
+            [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:ipaUploadInfo];
         }];
     }
 }

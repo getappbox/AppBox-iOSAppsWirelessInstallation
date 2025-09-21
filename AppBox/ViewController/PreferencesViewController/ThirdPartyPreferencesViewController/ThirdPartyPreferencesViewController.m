@@ -53,7 +53,7 @@
 	NSString *webhook = [slackChannelTextField.stringValue stringByRemovingPercentEncoding];
 	NSString *message = slackMessageTextField.stringValue;
     [ABHudViewController showStatus:@"Sending Test Message..." onView:self.view];
-	[SlackClient sendMessageForProject:[self demoProject] webhook:webhook message:message completion:^(BOOL success) {
+	[SlackClient sendMessage:[self demoIPAUploadInfo] webhook:webhook message:message completion:^(BOOL success) {
         [ABHudViewController hideAllHudFromView:self.view after:0];
         if (success) {
             [ABHudViewController showStatus:@"Message Sent." forSuccess:YES onView:self.view];
@@ -71,7 +71,7 @@
 	NSString *webhook = [microsoftTeamWebHook.stringValue stringByRemovingPercentEncoding];
 	NSString *message = slackMessageTextField.stringValue;
     [ABHudViewController showStatus:@"Sending Test Message..." onView:self.view];
-    [MSTeamsClient sendMessageForProject:[self demoProject] webhook:webhook message:message completion:^(BOOL success) {
+    [MSTeamsClient sendMessage:[self demoIPAUploadInfo] webhook:webhook message:message completion:^(BOOL success) {
         [ABHudViewController hideAllHudFromView:self.view after:0];
         if (success) {
             [ABHudViewController showStatus:@"Message Sent." forSuccess:YES onView:self.view];
@@ -85,14 +85,14 @@
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abWebHookSetupURL]];
 }
 
--(XCProject *)demoProject{
-    //create a test project for demo email
-    XCProject *project = [[XCProject alloc] init];
-    [project setName:@"TestApp"];
-    [project setVersion:@"1.0"];
-    [project setBuild:@"1"];
-    [project setAppShortShareableURL:[NSURL URLWithString:@"https://getappbox.com"]];
-    return project;
+-(IPAUploadInfo *)demoIPAUploadInfo{
+    //create a test ipa upload info for demo email
+    IPAUploadInfo *ipaUploadInfo = [[IPAUploadInfo alloc] init];
+    [ipaUploadInfo setName:@"TestApp"];
+    [ipaUploadInfo setVersion:@"1.0"];
+    [ipaUploadInfo setBuild:@"1"];
+    [ipaUploadInfo setAppShortShareableURL:[NSURL URLWithString:@"https://getappbox.com"]];
+    return ipaUploadInfo;
 }
 
 @end
