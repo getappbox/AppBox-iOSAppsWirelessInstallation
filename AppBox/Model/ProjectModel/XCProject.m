@@ -207,8 +207,8 @@
     [exportVariable setValue: [NSString stringWithFormat:@"%@", self.ipaFileDBShareableURL] forKey: @"APPBOX_IPA_URL"];
     [exportVariable setValue: [NSString stringWithFormat:@"%@", self.manifestFileSharableURL] forKey: @"APPBOX_MANIFEST_URL"];
 
-	NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-	NSString *path = [documentDirectory stringByAppendingPathComponent: FILE_NAME_SHARE_URL];
+	NSString *homeDirectory = NSHomeDirectory();
+	NSString *path = [homeDirectory stringByAppendingPathComponent: FILE_NAME_SHARE_URL];
 
     if([[NSFileManager defaultManager] fileExistsAtPath:path]){
         [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
