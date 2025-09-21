@@ -42,7 +42,7 @@ This authentication is required because the CLI tool installation process needs 
 - Set appropriate file permissions
 - Configure the CLI environment
 
-### Uninstallation
+## Uninstallation
 
 To uninstall the CLI tool, AppBox provides an easy uninstallation process:
 
@@ -215,13 +215,7 @@ The CLI tool provides comprehensive error handling and logging:
    - Ensure IPA file is valid and not corrupted
 
 ### Getting Help
-
 For additional help and support:
-
 - Run `appboxcli --help` for command-line options
 - Visit the [AppBox Documentation](https://docs.getappbox.com)
 - Report issues on [GitHub](https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/issues)
-
-
-The AppBox CLI tool provides a powerful and flexible way to automate your iOS app distribution workflow, making it easy to integrate with any development and deployment process.
-
