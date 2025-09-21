@@ -26,8 +26,44 @@
     NSArray *arguments = [[NSProcessInfo processInfo] arguments];
 	for (NSString *argument in arguments) {
 
+		//Webhook Message
+		if ([argument containsString:abArgsWebHookMessage]) {
+			NSArray *components = [argument componentsSeparatedByString:abArgsWebHookMessage];
+			if (components.count == 2) {
+				DDLogInfo(@"Set Webhook message to \"%@\"", [components lastObject]);
+				ipaUploadInfo.webhookMessage = [components lastObject];
+			} else {
+				DDLogInfo(@"Invalid Webhook Message Argument \"%@\"",arguments);
+				exit(abExitCodeForInvalidCommand);
+			}
+		}
+
+		//Slack Webhook
+		else if ([argument containsString:abArgsSlackWebHook]) {
+			NSArray *components = [argument componentsSeparatedByString:abArgsSlackWebHook];
+			if (components.count == 2) {
+				DDLogInfo(@"Set Slack Webhook to \"%@\"", [components lastObject]);
+				ipaUploadInfo.slackWebhook = [components lastObject];
+			} else {
+				DDLogInfo(@"Invalid Slack Webhook Argument \"%@\"",arguments);
+				exit(abExitCodeForInvalidCommand);
+			}
+		}
+
+		//MS Teams Webhook
+		else if ([argument containsString:abArgsMSTeamsWebHook]) {
+			NSArray *components = [argument componentsSeparatedByString:abArgsMSTeamsWebHook];
+			if (components.count == 2) {
+				DDLogInfo(@"Set MS Teams Webhook to \"%@\"", [components lastObject]);
+				ipaUploadInfo.msTeamsWebhook = [components lastObject];
+			} else {
+				DDLogInfo(@"Invalid MS Teams Webhook Argument \"%@\"",arguments);
+				exit(abExitCodeForInvalidCommand);
+			}
+		}
+
 		//Emails
-		if ([argument containsString:abArgsEmails]) {
+		else if ([argument containsString:abArgsEmails]) {
 			NSArray *components = [argument componentsSeparatedByString:abArgsEmails];
 			if (components.count == 2) {
 				DDLogInfo(@"Changing Emails to \"%@\" from \"%@\"", [components lastObject], ipaUploadInfo.emails);
@@ -72,42 +108,6 @@
 				ipaUploadInfo.bundleDirectory = [NSURL URLWithString:bundlePath];
 			} else {
 				DDLogInfo(@"Invalid Dropbox Folder Name Argument \"%@\"",arguments);
-				exit(abExitCodeForInvalidCommand);
-			}
-		}
-
-		//Message
-		else if ([argument containsString:abArgsWebHookMessage]) {
-			NSArray *components = [argument componentsSeparatedByString:abArgsWebHookMessage];
-			if (components.count == 2) {
-				DDLogInfo(@"Set Webhook message to \"%@\"", [components lastObject]);
-				ipaUploadInfo.webhookMessage = [components lastObject];
-			} else {
-				DDLogInfo(@"Invalid Webhook Message Argument \"%@\"",arguments);
-				exit(abExitCodeForInvalidCommand);
-			}
-		}
-
-		//Webhook
-		else if ([argument containsString:abArgsSlackWebHook]) {
-			NSArray *components = [argument componentsSeparatedByString:abArgsSlackWebHook];
-			if (components.count == 2) {
-				DDLogInfo(@"Set Slack Webhook to \"%@\"", [components lastObject]);
-				ipaUploadInfo.slackWebhook = [components lastObject];
-			} else {
-				DDLogInfo(@"Invalid Slack Webhook Argument \"%@\"",arguments);
-				exit(abExitCodeForInvalidCommand);
-			}
-		}
-
-		//MS Teams Webhook
-		else if ([argument containsString:abArgsMSTeamsWebHook]) {
-			NSArray *components = [argument componentsSeparatedByString:abArgsMSTeamsWebHook];
-			if (components.count == 2) {
-				DDLogInfo(@"Set MS Teams Webhook to \"%@\"", [components lastObject]);
-				ipaUploadInfo.msTeamsWebhook = [components lastObject];
-			} else {
-				DDLogInfo(@"Invalid MS Teams Webhook Argument \"%@\"",arguments);
 				exit(abExitCodeForInvalidCommand);
 			}
 		}
