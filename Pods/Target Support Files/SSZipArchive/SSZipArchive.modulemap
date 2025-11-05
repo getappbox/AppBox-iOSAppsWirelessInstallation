@@ -1,4 +1,4 @@
-module SSZipArchive {
+framework module SSZipArchive {
   umbrella header "SSZipArchive-umbrella.h"
 
   export *

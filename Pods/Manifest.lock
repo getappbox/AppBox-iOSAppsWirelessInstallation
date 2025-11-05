@@ -20,6 +20,7 @@ PODS:
   - ISO8601 (0.6.0)
   - ObjectiveDropboxOfficial (7.4.1)
   - SAMKeychain (1.5.3)
+  - Sparkle (2.8.0)
   - SSZipArchive (2.6.0)
   - ZXingObjC (3.6.9):
     - ZXingObjC/All (= 3.6.9)
@@ -31,6 +32,7 @@ DEPENDENCIES:
   - CocoaLumberjack
   - ObjectiveDropboxOfficial
   - SAMKeychain
+  - Sparkle
   - SSZipArchive
   - ZXingObjC
 
@@ -42,6 +44,7 @@ SPEC REPOS:
     - ISO8601
     - ObjectiveDropboxOfficial
     - SAMKeychain
+    - Sparkle
     - SSZipArchive
     - ZXingObjC
 
@@ -52,9 +55,10 @@ SPEC CHECKSUMS:
   ISO8601: d3ea3ba9b752820cf92c6b47a9ee327e9f0e13fc
   ObjectiveDropboxOfficial: 8699fa65969a94f8305d8dabf9c9a8dd856ac598
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
+  Sparkle: 16aaef9876ab6b3d49633d26e8e5b77e0d52b0e2
   SSZipArchive: 8a6ee5677c8e304bebc109e39cf0da91ccef22ea
   ZXingObjC: 8898711ab495761b2dbbdec76d90164a6d7e14c5
 
-PODFILE CHECKSUM: eee5157c39733e497ec6b54d1a19cd78946e8582
+PODFILE CHECKSUM: fba81fe946ca8e587ac9171c4332088b06f8852c
 
 COCOAPODS: 1.16.2
