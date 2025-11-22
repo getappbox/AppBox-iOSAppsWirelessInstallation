@@ -3,7 +3,7 @@
 [![](https://img.shields.io/github/downloads/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/total.svg?style=flat-square)](https://getappbox.com/download)
 [![License](https://img.shields.io/badge/license-cc%20by--nd%204.0-brightgreen.svg?style=flat-square)](#user-content-license)
 
-# AppBox - iOS Apps Wireless Installation 
+# AppBox - iOS Apps Wireless Installation
 AppBox is a tool for iOS developers to deploy Development, Ad-Hoc and In-house (Enterprise) applications directly to the devices from your Dropbox account.
 
 
@@ -14,25 +14,31 @@ AppBox is a tool for iOS developers to deploy Development, Ad-Hoc and In-house (
 - 🔗 Keep same installation link for the same app
 - 🖇️ Install previous version with same installation link
 - ✉️ Auto e-mail app distribution link
-- 🔥 Auto restart upload after network change or failure 
+- 🔥 Auto restart upload after network change or failure
 - 🎩 Easy setup assistant to get started in a few minutes
 - 🔧 Slack, Microsoft Teams and Hangout Chat webhook integration
 - 😘 Dashboard to manage uploaded apps
 - 🚀 Fastlane support [read more](https://github.com/getappbox/fastlane-plugin-appbox)
- 
+
 # Installation
 
-### Using curl
-You can install AppBox by running following command in your terminal -
+### Using cURL
+You can install AppBox via cURL by running following command in your terminal
 ```bash
 curl -s https://getappbox.com/install.sh | bash
+```
+
+### Using Homebrew
+You can install AppBox via Homebrew by running following command in your terminal
+```bash
+brew install --cask appbox
 ```
 
 ### Manual
 If you face any issue using above command then you can manually install AppBox by downloading it from [here](http://tryappbox.com/download). After that, unzip `AppBox.app.zip` and move `AppBox.app` into `/Applications` directory.
 
 
-# How to use AppBox 
+# How to use AppBox
 
 | Step | Description |
 | :--- | :--- |
