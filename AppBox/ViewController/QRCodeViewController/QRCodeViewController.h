@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <ZXingObjC/ZXingObjC.h>
 
 @interface QRCodeViewController : NSViewController{
     __weak IBOutlet NSImageView *imageViewQRCode;
