@@ -14,7 +14,7 @@ static NSString *const abDBAccountService = @"AppBox Linked Dropbox Account";
 
 + (NSArray *)getAllDBAccounts {
 	NSMutableArray *filteredDBAccounts = [[NSMutableArray alloc] init];
-	NSArray *dbAccounts = [SAMKeychain accountsForService:abDBAccountService];
+	NSArray *dbAccounts = [KeychainHandler accountsForService:abDBAccountService];
 	for (NSDictionary *dbAccount in dbAccounts) {
 		if ([dbAccount.allKeys containsObject:kSAMKeychainAccountKey]) {
 			[filteredDBAccounts addObject:dbAccount];
