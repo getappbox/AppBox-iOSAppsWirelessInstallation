@@ -30,10 +30,10 @@
 		if ([argument containsString:abArgsWebHookMessage]) {
 			NSArray *components = [argument componentsSeparatedByString:abArgsWebHookMessage];
 			if (components.count == 2) {
-				DDLogInfo(@"Set Webhook message to \"%@\"", [components lastObject]);
+				DDLogInfo(@"Webhook message configured.");
 				ipaUploadInfo.webhookMessage = [components lastObject];
 			} else {
-				DDLogInfo(@"Invalid Webhook Message Argument \"%@\"",arguments);
+				DDLogInfo(@"Invalid Webhook Message Argument.");
 				exit(abExitCodeForInvalidCommand);
 			}
 		}
@@ -42,10 +42,10 @@
 		else if ([argument containsString:abArgsSlackWebHook]) {
 			NSArray *components = [argument componentsSeparatedByString:abArgsSlackWebHook];
 			if (components.count == 2) {
-				DDLogInfo(@"Set Slack Webhook to \"%@\"", [components lastObject]);
+				DDLogInfo(@"Slack webhook configured.");
 				ipaUploadInfo.slackWebhook = [components lastObject];
 			} else {
-				DDLogInfo(@"Invalid Slack Webhook Argument \"%@\"",arguments);
+				DDLogInfo(@"Invalid Slack Webhook Argument.");
 				exit(abExitCodeForInvalidCommand);
 			}
 		}
@@ -54,10 +54,10 @@
 		else if ([argument containsString:abArgsMSTeamsWebHook]) {
 			NSArray *components = [argument componentsSeparatedByString:abArgsMSTeamsWebHook];
 			if (components.count == 2) {
-				DDLogInfo(@"Set MS Teams Webhook to \"%@\"", [components lastObject]);
+				DDLogInfo(@"MS Teams webhook configured.");
 				ipaUploadInfo.msTeamsWebhook = [components lastObject];
 			} else {
-				DDLogInfo(@"Invalid MS Teams Webhook Argument \"%@\"",arguments);
+				DDLogInfo(@"Invalid MS Teams Webhook Argument.");
 				exit(abExitCodeForInvalidCommand);
 			}
 		}
@@ -66,10 +66,10 @@
 		else if ([argument containsString:abArgsEmails]) {
 			NSArray *components = [argument componentsSeparatedByString:abArgsEmails];
 			if (components.count == 2) {
-				DDLogInfo(@"Changing Emails to \"%@\" from \"%@\"", [components lastObject], ipaUploadInfo.emails);
+				DDLogInfo(@"Email recipients configured.");
 				ipaUploadInfo.emails = [components lastObject];
 			} else {
-				DDLogInfo(@"Invalid Emails Argument \"%@\"",arguments);
+				DDLogInfo(@"Invalid Emails Argument.");
 				exit(abExitCodeForInvalidCommand);
 			}
 		}
@@ -78,10 +78,10 @@
 		else if ([argument containsString:abArgsPersonalMessage]) {
 			NSArray *components = [argument componentsSeparatedByString:abArgsPersonalMessage];
 			if (components.count == 2) {
-				DDLogInfo(@"Changing personal message to \"%@\" from \"%@\"", [components lastObject], ipaUploadInfo.personalMessage);
+				DDLogInfo(@"Personal message configured.");
 				ipaUploadInfo.personalMessage = [components lastObject];
 			} else {
-				DDLogInfo(@"Invalid Personal Message Argument \"%@\"",arguments);
+				DDLogInfo(@"Invalid Personal Message Argument.");
 				exit(abExitCodeForInvalidCommand);
 			}
 		}
@@ -90,10 +90,10 @@
 		else if ([argument containsString:abArgsKeepSameLink]) {
 			NSArray *components = [argument componentsSeparatedByString:abArgsKeepSameLink];
 			if (components.count == 2) {
-				DDLogInfo(@"Changing Keep Same Link to \"%@\" from \"%@\"", [components lastObject], ipaUploadInfo.keepSameLink);
+				DDLogInfo(@"Keep Same Link set to \"%@\".", [components lastObject]);
 				ipaUploadInfo.keepSameLink = ([[components lastObject] isEqualToString:@"0"] || ((BOOL)[[components lastObject] boolValue]) == NO) ? @0 : @1;
 			} else {
-				DDLogInfo(@"Invalid Keep Same Link Argument \"%@\"",arguments);
+				DDLogInfo(@"Invalid Keep Same Link Argument.");
 				exit(abExitCodeForInvalidCommand);
 			}
 		}
@@ -102,12 +102,12 @@
 		else if ([argument containsString:abArgsDropBoxFolderName]) {
 			NSArray *components = [argument componentsSeparatedByString:abArgsDropBoxFolderName];
 			if (components.count == 2) {
-				DDLogInfo(@"Changing Dropbox folder name to \"%@\" from \"%@\"", [components lastObject], ipaUploadInfo.personalMessage);
+				DDLogInfo(@"Dropbox folder name configured.");
 				NSString *bundlePath = [NSString stringWithFormat:@"/%@",[components lastObject]];
 				bundlePath = [bundlePath stringByReplacingOccurrencesOfString:@" " withString:abEmptyString];
 				ipaUploadInfo.bundleDirectory = [NSURL URLWithString:bundlePath];
 			} else {
-				DDLogInfo(@"Invalid Dropbox Folder Name Argument \"%@\"",arguments);
+				DDLogInfo(@"Invalid Dropbox Folder Name Argument.");
 				exit(abExitCodeForInvalidCommand);
 			}
 		}
