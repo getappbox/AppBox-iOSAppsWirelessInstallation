@@ -8,10 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
+#import <UserNotifications/UserNotifications.h>
 
 #import "DefaultSettings.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, NSUserNotificationCenterDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, UNUserNotificationCenterDelegate>
 
 //stored properties
 @property (nonatomic) BOOL processing;

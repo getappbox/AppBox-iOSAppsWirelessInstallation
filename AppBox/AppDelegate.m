@@ -7,11 +7,14 @@
 //
 
 #import "AppDelegate.h"
+#import <UserNotifications/UserNotifications.h>
 
 @implementation AppDelegate {
 	DDFileLogger *fileLogger;
 	DDOSLogger *osLogger;
 	DDTTYLogger *ttyLogger;
+	id _openFileObserver;
+	id _ipaUploadObserver;
 }
 
 - (void)awakeFromNib{
@@ -39,8 +42,15 @@
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
+    // Request notification authorization using modern UNUserNotificationCenter
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     [center setDelegate:self];
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionSound)
+                          completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        if (error) {
+            DDLogError(@"Notification authorization error: %@", error.localizedDescription);
+        }
+    }];
     
     //Default Setting
     [DefaultSettings setFirstTimeSettings];
@@ -76,6 +86,15 @@
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
 	DDLogInfo(@"AppBox Terminated.");
+    // Clean up notification observers
+    if (_openFileObserver) {
+        [[NSNotificationCenter defaultCenter] removeObserver:_openFileObserver];
+        _openFileObserver = nil;
+    }
+    if (_ipaUploadObserver) {
+        [[NSNotificationCenter defaultCenter] removeObserver:_ipaUploadObserver];
+        _ipaUploadObserver = nil;
+    }
     [self saveCoreDataChanges];
 	[self deleteTemporaryFiles];
 }
@@ -97,7 +116,11 @@
         DDLogDebug(@"AppBox is ready to use.");
         [[NSNotificationCenter defaultCenter] postNotificationName:abUseOpenFilesNotification object:filePath];
     } else {
-        [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToUseNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        // Remove any previous observer before adding a new one
+        if (_openFileObserver) {
+            [[NSNotificationCenter defaultCenter] removeObserver:_openFileObserver];
+        }
+        _openFileObserver = [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToUseNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
             DDLogDebug(@"AppBox is ready to use. [Block]");
             [[NSNotificationCenter defaultCenter] postNotificationName:abUseOpenFilesNotification object:filePath];
         }];
@@ -162,16 +185,25 @@
 		DDLogInfo(@"AppBox is ready to upload IPA.");
         [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:ipaUploadInfo];
     } else {
-        [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToUseNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        // Remove any previous observer before adding a new one
+        if (_ipaUploadObserver) {
+            [[NSNotificationCenter defaultCenter] removeObserver:_ipaUploadObserver];
+        }
+        _ipaUploadObserver = [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToUseNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
 			DDLogInfo(@"AppBox is ready to upload IPA. [Block]");
             [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:ipaUploadInfo];
         }];
     }
 }
 
-//MARK: - Notification Center Delegate
--(void)userNotificationCenter:(NSUserNotificationCenter *)center didActivateNotification:(NSUserNotification *)notification {
-    [center removeDeliveredNotification:notification];
+//MARK: - UNUserNotificationCenter Delegate
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
+    [center removeDeliveredNotificationsWithIdentifiers:@[response.notification.request.identifier]];
+    completionHandler();
+}
+
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+    completionHandler(UNNotificationPresentationOptionList | UNNotificationPresentationOptionBanner | UNNotificationPresentationOptionSound);
 }
 
 //MARK: - Core Data stack

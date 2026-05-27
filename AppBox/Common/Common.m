@@ -7,6 +7,7 @@
 //
 
 #import "Common.h"
+#import <UserNotifications/UserNotifications.h>
 
 @implementation Common
 
@@ -50,14 +51,20 @@
     NSString *title = [NSString stringWithFormat:@"%@ Uploaded.", name];
     NSString *message = [NSString stringWithFormat:@"Share URL - %@", url.absoluteString];
     
-    NSUserNotification *notification = [[NSUserNotification alloc] init];
-    [notification setTitle: title];
-    [notification setInformativeText: message];
-    [notification setSoundName:NSUserNotificationDefaultSoundName];
-    [notification setDeliveryDate:[NSDate dateWithTimeInterval:1 sinceDate:[NSDate date]]];
+    UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
+    content.title = title;
+    content.body = message;
+    content.sound = [UNNotificationSound defaultSound];
     
-    NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
-    [center scheduleNotification:notification];
+    UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:1 repeats:NO];
+    NSString *identifier = [[NSUUID UUID] UUIDString];
+    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:identifier content:content trigger:trigger];
+    
+    [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+        if (error) {
+            DDLogError(@"Failed to schedule notification: %@", error.localizedDescription);
+        }
+    }];
 }
 
 + (DBManager *)currentDBManager {
