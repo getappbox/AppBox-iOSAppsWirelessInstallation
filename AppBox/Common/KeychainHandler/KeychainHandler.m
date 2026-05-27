@@ -7,10 +7,40 @@
 //
 
 #import "KeychainHandler.h"
+#import <Security/Security.h>
+
+// Raw SecItem attribute keys, identical to the values SAMKeychain exposed.
+NSString *const kSAMKeychainAccountKey = @"acct";
+NSString *const kSAMKeychainLabelKey = @"labl";
+
 static NSString *const CERTIFICATE_KEY = @"CerKey";
 static NSString *const CERTIFICATE_KEY_READABLE = @"CerKeyReadable";
 
 @implementation KeychainHandler
+
+//MARK: - Accounts
+
++ (NSArray<NSDictionary *> *)accountsForService:(NSString *)service {
+    NSMutableDictionary *query = [NSMutableDictionary dictionary];
+    query[(__bridge id)kSecClass] = (__bridge id)kSecClassGenericPassword;
+    if (service) {
+        query[(__bridge id)kSecAttrService] = service;
+    }
+    query[(__bridge id)kSecReturnAttributes] = (__bridge id)kCFBooleanTrue;
+    query[(__bridge id)kSecMatchLimit] = (__bridge id)kSecMatchLimitAll;
+
+    CFTypeRef result = NULL;
+    OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query, &result);
+    if (status != errSecSuccess) {
+        if (result) {
+            CFRelease(result);
+        }
+        return @[];
+    }
+
+    NSArray *accounts = (__bridge_transfer NSArray *)result;
+    return accounts ?: @[];
+}
 
 //MARK: - ITC Accounts
 + (NSArray *)getAllITCAccounts {
