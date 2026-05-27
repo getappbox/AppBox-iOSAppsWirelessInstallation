@@ -46,11 +46,19 @@
         return nil;
     }
 
+    __block CIColor *onColor = nil;
+    [self.view.effectiveAppearance performAsCurrentDrawingAppearance:^{
+        onColor = [CIColor colorWithCGColor:NSColor.labelColor.CGColor];
+    }];
+    if (onColor == nil) {
+        onColor = [CIColor colorWithCGColor:NSColor.labelColor.CGColor];
+    }
+
     // Map the black data modules to the label color and the white background to clear.
     CIFilter *colorFilter = [CIFilter filterWithName:@"CIFalseColor"];
     [colorFilter setValue:qrImage forKey:kCIInputImageKey];
-    [colorFilter setValue:[CIColor colorWithCGColor:NSColor.labelColor.CGColor] forKey:@"inputColor0"];
-    [colorFilter setValue:[CIColor colorWithCGColor:NSColor.clearColor.CGColor] forKey:@"inputColor1"];
+    [colorFilter setValue:onColor forKey:@"inputColor0"];
+    [colorFilter setValue:[CIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.0] forKey:@"inputColor1"];
     CIImage *coloredImage = colorFilter.outputImage ?: qrImage;
 
     // Scale up using nearest-neighbour sampling so the modules stay crisp.
