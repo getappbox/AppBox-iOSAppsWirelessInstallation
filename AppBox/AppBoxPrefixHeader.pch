@@ -9,12 +9,10 @@
 #ifndef AppBoxPrefixHeader_pch
 #define AppBoxPrefixHeader_pch
 
-#import <SSZipArchive/SSZipArchive.h>
-#import <SAMKeychain/SAMKeychain.h>
-#import <AFNetworking/AFNetworking.h>
+@import ZipArchive;
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 #import <ABPrivate/ABPrivate.h>
-#import <CocoaLumberjack/CocoaLumberjack.h>
+@import CocoaLumberjack;
 
 #import "MBProgressHUD+ProgressHud.h"
 
