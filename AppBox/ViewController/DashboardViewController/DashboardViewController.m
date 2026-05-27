@@ -49,8 +49,8 @@ typedef enum : NSUInteger {
 -(void)setupUploadManager{
     uploadManager = [[UploadManager alloc] init];
     [uploadManager setCurrentViewController:self];
-    __unsafe_unretained typeof(self) weakSelf = self;
-    __unsafe_unretained typeof(UploadManager *) weakUploadManager = uploadManager;
+    __weak typeof(self) weakSelf = self;
+    __weak UploadManager *weakUploadManager = uploadManager;
     [uploadManager setCompletionBlock:^{
         [ABHudViewController hideAllHudFromView:weakSelf.view after:0];
         if (weakUploadManager.uploadRecord){

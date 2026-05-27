@@ -58,7 +58,7 @@ static NSString *const CERTIFICATE_KEY_READABLE = @"CerKeyReadable";
 
 +(NSString *)errorMessageForStatus:(OSStatus)status {
     CFStringRef errorMessage = SecCopyErrorMessageString(status, NULL);
-    NSString *errorString = (__bridge NSString *)errorMessage;
+    NSString *errorString = (__bridge_transfer NSString *)errorMessage;
     return errorString;
 }
 

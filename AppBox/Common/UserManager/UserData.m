@@ -24,7 +24,6 @@
 
 +(void)setLoggedInUserEmail:(NSString *)loggedInUserEmail {
 	[[NSUserDefaults standardUserDefaults] setValue:loggedInUserEmail forKey:LoggedInUserEmail];
-	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #define LoggedInUserDisplayName @"LoggedInUserDisplayName"
@@ -35,7 +34,6 @@
 
 +(void)setLoggedInUserDisplayName:(NSString *)loggedInUserDisplayName {
 	[[NSUserDefaults standardUserDefaults] setValue:loggedInUserDisplayName forKey:LoggedInUserDisplayName];
-	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 //MARK: - Dropbox -
@@ -48,7 +46,6 @@
 
 +(void)setDropboxUsedSpace:(NSNumber *)usedSpace{
 	[[NSUserDefaults standardUserDefaults] setInteger:usedSpace.integerValue forKey:DropboxUsedSpace];
-	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 //MARK: - Preferences...
@@ -63,7 +60,6 @@
 
 +(void)setUserEmail:(NSString *)userEmail{
     [[NSUserDefaults standardUserDefaults] setValue:userEmail forKey:UserEmail];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #define UserMessage @"UserMessage"
@@ -75,7 +71,6 @@
 
 +(void)setUserMessage:(NSString *)userMessage{
     [[NSUserDefaults standardUserDefaults] setValue:userMessage forKey:UserMessage];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #define UserSlackChannel @"UserSlackChannel"
@@ -87,7 +82,6 @@
 
 +(void)setUserSlackChannel:(NSString *)slackChannel {
     [[NSUserDefaults standardUserDefaults] setValue:slackChannel forKey:UserSlackChannel];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #define UserHangoutChatWebHook @"UserHangoutChatWebHook"
@@ -99,7 +93,6 @@
 
 +(void)setUserHangoutChatWebHook:(NSString *)slackChannel {
     [[NSUserDefaults standardUserDefaults] setValue:slackChannel forKey:UserHangoutChatWebHook];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #define UserMicrosoftTeamWebHook @"UserMicrosoftTeamWebHook"
@@ -111,7 +104,6 @@
 
 +(void)setUserMicrosoftTeamWebHook:(NSString *)slackChannel {
     [[NSUserDefaults standardUserDefaults] setValue:slackChannel forKey:UserMicrosoftTeamWebHook];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #define UserSlackMessage @"UserSlackMessage"
@@ -123,7 +115,6 @@
 
 +(void)setUserSlackMessage:(NSString *)slackMessage {
     [[NSUserDefaults standardUserDefaults] setValue:slackMessage forKey:UserSlackMessage];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #define DropboxAvailableSpace @"DropboxAvailableSpace"
@@ -134,7 +125,6 @@
 
 +(void)setDropboxAvailableSpace:(NSNumber *)availableSpace{
     [[NSUserDefaults standardUserDefaults] setInteger:availableSpace.integerValue forKey:DropboxAvailableSpace];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 //MARK: - AppBox Installation Page Settings -
@@ -145,7 +135,6 @@
 
 +(void)setDownloadIPAEnable:(BOOL)downloadIPA{
     [[NSUserDefaults standardUserDefaults] setBool:downloadIPA forKey:DonwloadIPAEnable];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #define MoreDetailsEnable @"MoreDetailsEnable"
@@ -155,7 +144,6 @@
 
 +(void)setMoreDetailsEnable:(BOOL)moreDetails{
     [[NSUserDefaults standardUserDefaults] setBool:moreDetails forKey:MoreDetailsEnable];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #define ShowPreviousVersions @"ShowPreviousVersions"
@@ -165,7 +153,6 @@
 
 +(void)setShowPreviousVersions:(BOOL)previousVersion{
     [[NSUserDefaults standardUserDefaults] setBool:previousVersion forKey:ShowPreviousVersions];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 
@@ -177,7 +164,6 @@
 
 +(void)setIsFirstTime:(BOOL)isFirstTime{
     [[NSUserDefaults standardUserDefaults] setBool:isFirstTime forKey:AppSettingIsFirstTime];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 +(NSString *)appSettingIsFirstTimeAfterUpdate{
@@ -191,7 +177,6 @@
 
 +(void)setIsFirstTimeAfterUpdate:(BOOL)isFirstTime{
     [[NSUserDefaults standardUserDefaults] setBool:isFirstTime forKey:[self appSettingIsFirstTimeAfterUpdate]];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 //MARK: - Chunk Size -
@@ -203,7 +188,6 @@
 
 +(void)setUploadChunkSize:(NSInteger)chunkSize{
     [[NSUserDefaults standardUserDefaults] setInteger:chunkSize forKey:UploadChunkSize];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 //MARK: - CI Settings -
@@ -214,7 +198,6 @@
 
 +(void)setEnableDebugLog:(BOOL)debugLog{
     [[NSUserDefaults standardUserDefaults] setBool:debugLog forKey:DebugLogEnable];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #define UpdateAlertEnable @"UpdateAlertEnable"
@@ -224,7 +207,6 @@
 
 +(void)setUpdateAlertEnable:(BOOL)updateAlert{
     [[NSUserDefaults standardUserDefaults] setBool:updateAlert forKey:UpdateAlertEnable];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 //MARK: - CLI Settings -
@@ -236,7 +218,6 @@
 
 +(void)setCLIVersion:(NSString *)cliVersion{
 	[[NSUserDefaults standardUserDefaults] setValue:cliVersion forKey:CLIVersion];
-	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end
