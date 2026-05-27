@@ -42,8 +42,13 @@
 		else if ([argument containsString:abArgsSlackWebHook]) {
 			NSArray *components = [argument componentsSeparatedByString:abArgsSlackWebHook];
 			if (components.count == 2) {
+				NSString *webhookURL = [components lastObject];
+				if (![Common isValidWebhookURL:webhookURL]) {
+					DDLogError(@"Invalid Slack Webhook URL format. Must be a valid HTTP/HTTPS URL.");
+					exit(abExitCodeForInvalidCommand);
+				}
 				DDLogInfo(@"Slack webhook configured.");
-				ipaUploadInfo.slackWebhook = [components lastObject];
+				ipaUploadInfo.slackWebhook = webhookURL;
 			} else {
 				DDLogInfo(@"Invalid Slack Webhook Argument.");
 				exit(abExitCodeForInvalidCommand);
@@ -54,8 +59,13 @@
 		else if ([argument containsString:abArgsMSTeamsWebHook]) {
 			NSArray *components = [argument componentsSeparatedByString:abArgsMSTeamsWebHook];
 			if (components.count == 2) {
+				NSString *webhookURL = [components lastObject];
+				if (![Common isValidWebhookURL:webhookURL]) {
+					DDLogError(@"Invalid MS Teams Webhook URL format. Must be a valid HTTP/HTTPS URL.");
+					exit(abExitCodeForInvalidCommand);
+				}
 				DDLogInfo(@"MS Teams webhook configured.");
-				ipaUploadInfo.msTeamsWebhook = [components lastObject];
+				ipaUploadInfo.msTeamsWebhook = webhookURL;
 			} else {
 				DDLogInfo(@"Invalid MS Teams Webhook Argument.");
 				exit(abExitCodeForInvalidCommand);
@@ -66,8 +76,13 @@
 		else if ([argument containsString:abArgsEmails]) {
 			NSArray *components = [argument componentsSeparatedByString:abArgsEmails];
 			if (components.count == 2) {
+				NSString *emailList = [components lastObject];
+				if (![MailHandler isAllValidEmail:emailList]) {
+					DDLogError(@"Invalid email format. Provide comma-separated valid email addresses.");
+					exit(abExitCodeForInvalidCommand);
+				}
 				DDLogInfo(@"Email recipients configured.");
-				ipaUploadInfo.emails = [components lastObject];
+				ipaUploadInfo.emails = emailList;
 			} else {
 				DDLogInfo(@"Invalid Emails Argument.");
 				exit(abExitCodeForInvalidCommand);
@@ -128,4 +143,3 @@
 }
 
 @end
-

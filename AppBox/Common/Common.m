@@ -33,6 +33,13 @@
     return [NSError errorWithDomain:NSCocoaErrorDomain code:code userInfo:errorInfo];
 }
 
++ (BOOL)isValidWebhookURL:(NSString *)urlString {
+    if (urlString.length == 0) return NO;
+    NSURL *url = [NSURL URLWithString:urlString];
+    return (url != nil && url.scheme != nil && url.host != nil &&
+            ([url.scheme isEqualToString:@"https"] || [url.scheme isEqualToString:@"http"]));
+}
+
 //MARK: - Notifications
 + (NSModalResponse)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message{
 	DDLogInfo(@"ALERT -\nTitle - %@ Message - %@", title, message);

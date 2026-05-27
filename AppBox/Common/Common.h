@@ -14,6 +14,7 @@
 + (NSString*)generateUUID;
 + (NSURL *)getFileDirectoryForFilePath:(NSURL *)filePath;
 + (NSError *)errorWithDesc:(NSString *)error andCode:(NSInteger)code;
++ (BOOL)isValidWebhookURL:(NSString *)urlString;
 
 + (void)showNoInternetConnectionAvailabeAlert;
 + (void)showUploadNotificationWithName:(NSString *)name andURL:(NSURL *)url;
