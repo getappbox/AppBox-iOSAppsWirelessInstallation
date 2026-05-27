@@ -122,7 +122,7 @@
                         //show error and return
                         if (self.isCLIActive) {
 							DDLogInfo(@"Error - %@", error.localizedDescription);
-                            exit(abExitCodeUnZipIPAError);
+                            [AppDelegate terminateWithExitCode:abExitCodeUnZipIPAError];
                         } else {
                             [Common showAlertWithTitle:@"AppBox - Error" andMessage:error.localizedDescription];
                         }
@@ -138,7 +138,7 @@
                     if (![self.ipaUploadInfo isValidInfoPlist]) {
                         if (self.isCLIActive) {
 							DDLogInfo(@"AppBox was not able to find Info.plist in your IPA.");
-                            exit(abExitCodeInfoPlistNotFound);
+                            [AppDelegate terminateWithExitCode:abExitCodeInfoPlistNotFound];
                         } else {
                             [Common showAlertWithTitle:@"AppBox - Error" andMessage:@"AppBox was not able to find Info.plist in your IPA."];
                         }
@@ -165,7 +165,7 @@
     }else{
 		DDLogInfo(@"\n\n======\nFile Not Exist - %@\n======\n\n",ipaPath);
         if (self.isCLIActive) {
-            exit(abExitCodeIPAFileNotFound);
+            [AppDelegate terminateWithExitCode:abExitCodeIPAFileNotFound];
         } else {
             [Common showAlertWithTitle:@"IPA File Missing" andMessage:[NSString stringWithFormat:@"AppBox was not able to find IPA file at %@.",ipaFileURL.absoluteString]];
         }
@@ -552,7 +552,7 @@
         
         //Exit AppBox if running from CLI
         if (self.isCLIActive) {
-            exit(abExitCodeForUploadFailed);
+            [AppDelegate terminateWithExitCode:abExitCodeForUploadFailed];
         }
 
         //Call Error Block
@@ -656,7 +656,7 @@
     //Handle other errors
     else {
         if (self.isCLIActive) {
-            exit(abExitCodeForUploadFailed);
+            [AppDelegate terminateWithExitCode:abExitCodeForUploadFailed];
         }
         retryCount = 0;
         [DBErrorHandler handleNetworkErrorWith:error abErrorMessage:@"Unable to create a share URL for the file."];
@@ -677,7 +677,7 @@
             if (manifestURL == nil){
                 //show error if manifest file url is nil
                 if (self.isCLIActive) {
-                    exit(abExitCodeUnableToCreateManiFestFile);
+                    [AppDelegate terminateWithExitCode:abExitCodeUnableToCreateManiFestFile];
                 }
                 [Common showAlertWithTitle:@"Error" andMessage:@"Unable to create manifest file!!"];
                 self.errorBlock(nil, YES);

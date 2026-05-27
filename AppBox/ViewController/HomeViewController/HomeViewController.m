@@ -110,7 +110,7 @@
     [self.uploadManager setErrorBlock:^(NSError *error, BOOL terminate){
         strongify(self);
         if (terminate && self.isCLIActive) {
-            exit(abExitCodeForUploadFailed);
+            [AppDelegate terminateWithExitCode:abExitCodeForUploadFailed];
         }
         if (terminate) {
             [self viewStateForProgressFinish:YES];
@@ -480,7 +480,7 @@
 	DDLogInfo(@"\n\n\nSHARE URL - %@\n\n\n.", self.ipaUploadInfo.appShortShareableURL);
 	if (self.isCLIActive){
 		[self viewStateForProgressFinish:YES];
-		exit(exitCode);
+		[AppDelegate terminateWithExitCode:exitCode];
 	}else{
 		[self performSegueWithIdentifier:@"ShowLink" sender:self];
 	}

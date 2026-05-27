@@ -34,7 +34,7 @@
 				ipaUploadInfo.webhookMessage = [components lastObject];
 			} else {
 				DDLogInfo(@"Invalid Webhook Message Argument.");
-				exit(abExitCodeForInvalidCommand);
+				[AppDelegate terminateWithExitCode:abExitCodeForInvalidCommand];
 			}
 		}
 
@@ -45,13 +45,13 @@
 				NSString *webhookURL = [components lastObject];
 				if (![Common isValidWebhookURL:webhookURL]) {
 					DDLogError(@"Invalid Slack Webhook URL format. Must be a valid HTTP/HTTPS URL.");
-					exit(abExitCodeForInvalidCommand);
+					[AppDelegate terminateWithExitCode:abExitCodeForInvalidCommand];
 				}
 				DDLogInfo(@"Slack webhook configured.");
 				ipaUploadInfo.slackWebhook = webhookURL;
 			} else {
 				DDLogInfo(@"Invalid Slack Webhook Argument.");
-				exit(abExitCodeForInvalidCommand);
+				[AppDelegate terminateWithExitCode:abExitCodeForInvalidCommand];
 			}
 		}
 
@@ -62,13 +62,13 @@
 				NSString *webhookURL = [components lastObject];
 				if (![Common isValidWebhookURL:webhookURL]) {
 					DDLogError(@"Invalid MS Teams Webhook URL format. Must be a valid HTTP/HTTPS URL.");
-					exit(abExitCodeForInvalidCommand);
+					[AppDelegate terminateWithExitCode:abExitCodeForInvalidCommand];
 				}
 				DDLogInfo(@"MS Teams webhook configured.");
 				ipaUploadInfo.msTeamsWebhook = webhookURL;
 			} else {
 				DDLogInfo(@"Invalid MS Teams Webhook Argument.");
-				exit(abExitCodeForInvalidCommand);
+				[AppDelegate terminateWithExitCode:abExitCodeForInvalidCommand];
 			}
 		}
 
@@ -79,13 +79,13 @@
 				NSString *emailList = [components lastObject];
 				if (![MailHandler isAllValidEmail:emailList]) {
 					DDLogError(@"Invalid email format. Provide comma-separated valid email addresses.");
-					exit(abExitCodeForInvalidCommand);
+					[AppDelegate terminateWithExitCode:abExitCodeForInvalidCommand];
 				}
 				DDLogInfo(@"Email recipients configured.");
 				ipaUploadInfo.emails = emailList;
 			} else {
 				DDLogInfo(@"Invalid Emails Argument.");
-				exit(abExitCodeForInvalidCommand);
+				[AppDelegate terminateWithExitCode:abExitCodeForInvalidCommand];
 			}
 		}
 
@@ -97,7 +97,7 @@
 				ipaUploadInfo.personalMessage = [components lastObject];
 			} else {
 				DDLogInfo(@"Invalid Personal Message Argument.");
-				exit(abExitCodeForInvalidCommand);
+				[AppDelegate terminateWithExitCode:abExitCodeForInvalidCommand];
 			}
 		}
 
@@ -109,7 +109,7 @@
 				ipaUploadInfo.keepSameLink = ([[components lastObject] isEqualToString:@"0"] || ((BOOL)[[components lastObject] boolValue]) == NO) ? @0 : @1;
 			} else {
 				DDLogInfo(@"Invalid Keep Same Link Argument.");
-				exit(abExitCodeForInvalidCommand);
+				[AppDelegate terminateWithExitCode:abExitCodeForInvalidCommand];
 			}
 		}
 
@@ -123,7 +123,7 @@
 				ipaUploadInfo.bundleDirectory = [NSURL URLWithString:bundlePath];
 			} else {
 				DDLogInfo(@"Invalid Dropbox Folder Name Argument.");
-				exit(abExitCodeForInvalidCommand);
+				[AppDelegate terminateWithExitCode:abExitCodeForInvalidCommand];
 			}
 		}
 

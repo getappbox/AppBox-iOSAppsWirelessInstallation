@@ -18,6 +18,7 @@
 @property (nonatomic) BOOL processing;
 @property (nonatomic) BOOL isReadyToUpload;
 @property (nonatomic) BOOL isInternetConnected;
+@property (nonatomic) NSInteger exitCode;
 
 //menu iboutlet
 @property (nonatomic, weak) IBOutlet NSMenuItem *dropboxLogoutButton;
@@ -34,6 +35,7 @@
 -(void)saveCoreDataChanges;
 
 +(AppDelegate *)appDelegate;
++(void)terminateWithExitCode:(NSInteger)code;
 -(void)openLatestLogFile;
 -(void)openFileWithPath:(NSString *)filePath;
 

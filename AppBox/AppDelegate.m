@@ -75,7 +75,7 @@
                 [self handleIPAAtPath:[components lastObject]];
             } else {
 				DDLogInfo(@"Invalid IPA Argument %@",arguments);
-                exit(abExitCodeForInvalidCommand);
+                [AppDelegate terminateWithExitCode:abExitCodeForInvalidCommand];
             }
             break;
         }
@@ -97,6 +97,10 @@
     }
     [self saveCoreDataChanges];
 	[self deleteTemporaryFiles];
+    // Exit with specific code for CI if set
+    if (self.exitCode != 0) {
+        exit((int)self.exitCode);
+    }
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{
@@ -141,6 +145,11 @@
 
 +(AppDelegate *)appDelegate{
     return ((AppDelegate *)[[NSApplication sharedApplication] delegate]);
+}
+
++(void)terminateWithExitCode:(NSInteger)code {
+    [AppDelegate appDelegate].exitCode = code;
+    [[NSApplication sharedApplication] performSelectorOnMainThread:@selector(terminate:) withObject:nil waitUntilDone:NO];
 }
 
 -(void)openLatestLogFile {
