@@ -7,6 +7,7 @@
 //
 
 #import "HomeViewController.h"
+#import <Network/Network.h>
 
 @interface HomeViewController()
 
@@ -18,7 +19,7 @@
 @end
 
 @implementation HomeViewController{
-    
+    nw_path_monitor_t _pathMonitor;
 }
 
 - (void)viewDidLoad {
@@ -43,11 +44,14 @@
 
     //Start monitoring internet connection
     weakify(self);
-    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+    _pathMonitor = nw_path_monitor_create();
+    nw_path_monitor_set_queue(_pathMonitor, dispatch_get_main_queue());
+    nw_path_monitor_set_update_handler(_pathMonitor, ^(nw_path_t _Nonnull path) {
         strongify(self);
-        [[AppDelegate appDelegate] setIsInternetConnected:!(status == AFNetworkReachabilityStatusNotReachable)];
+        BOOL connected = (nw_path_get_status(path) == nw_path_status_satisfied);
+        [[AppDelegate appDelegate] setIsInternetConnected:connected];
         if ([AppDelegate appDelegate].processing){
-            if (status == AFNetworkReachabilityStatusNotReachable){
+            if (!connected){
                 [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
             }else{
                 //[self showStatus:abConnectedToInternet andShowProgressBar:NO withProgress:-1];
@@ -58,8 +62,8 @@
                 }
             }
         }
-    }];
-    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    });
+    nw_path_monitor_start(_pathMonitor);
 }
 
 - (void)viewWillAppear{
