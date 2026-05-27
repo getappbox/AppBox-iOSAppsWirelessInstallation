@@ -16,6 +16,7 @@
 	
 	__weak IBOutlet NSButton *updateAlertCheckBox;
 	__weak IBOutlet NSButton *limitedLogCheckBox;
+	__weak IBOutlet NSButton *defaultIPAHandlerCheckBox;
 }
 
 //AppBox Upload Settings
@@ -33,6 +34,7 @@
 //General
 - (IBAction)updateAlertCheckBoxChanged:(NSButton *)sender;
 - (IBAction)limitedLogCheckBoxChanged:(NSButton *)sender;
+- (IBAction)defaultIPAHandlerCheckBoxChanged:(NSButton *)sender;
 
 
 @end

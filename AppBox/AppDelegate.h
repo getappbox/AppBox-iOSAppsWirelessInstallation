@@ -36,6 +36,9 @@
 
 +(AppDelegate *)appDelegate;
 +(void)terminateWithExitCode:(NSInteger)code;
++(BOOL)isDefaultIPAHandler;
++(BOOL)setAsDefaultIPAHandler;
++(void)removeAsDefaultIPAHandler;
 -(void)openLatestLogFile;
 -(void)openFileWithPath:(NSString *)filePath;
 

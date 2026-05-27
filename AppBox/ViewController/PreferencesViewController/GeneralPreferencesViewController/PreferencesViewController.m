@@ -32,6 +32,7 @@
 	//set general settings
 	[limitedLogCheckBox setState: [UserData debugLog] ? NSControlStateValueOff : NSControlStateValueOn];
 	[updateAlertCheckBox setState: [UserData updateAlertEnable] ? NSControlStateValueOn : NSControlStateValueOff];
+	[defaultIPAHandlerCheckBox setState: [AppDelegate isDefaultIPAHandler] ? NSControlStateValueOn : NSControlStateValueOff];
 }
 
 - (IBAction)chunckSizeComboBoxValueChanged:(NSComboBox *)sender {
@@ -72,6 +73,17 @@
 
 - (IBAction)limitedLogCheckBoxChanged:(NSButton *)sender {
 	[UserData setEnableDebugLog:(sender.state != NSControlStateValueOn)];
+}
+
+- (IBAction)defaultIPAHandlerCheckBoxChanged:(NSButton *)sender {
+	if (sender.state == NSControlStateValueOn) {
+		if (![AppDelegate setAsDefaultIPAHandler]) {
+			[sender setState:NSControlStateValueOff];
+			[Common showAlertWithTitle:@"Error" andMessage:@"Failed to set AppBox as the default application for .ipa files. You can set it manually via Finder: right-click an .ipa → Get Info → Open with → Change All."];
+		}
+	} else {
+		[AppDelegate removeAsDefaultIPAHandler];
+	}
 }
 
 @end
