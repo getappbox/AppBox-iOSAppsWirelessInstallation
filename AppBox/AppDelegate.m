@@ -364,9 +364,19 @@
 
 // MARK: - Other helpers
 - (void)deleteTemporaryFiles {
-	NSArray* tmpDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:NSTemporaryDirectory() error:NULL];
+	NSError *error = nil;
+	NSArray* tmpDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:NSTemporaryDirectory() error:&error];
+	if (error) {
+		DDLogError(@"Failed to list temporary directory: %@", error.localizedDescription);
+		return;
+	}
 	for (NSString *file in tmpDirectory) {
-		[[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@%@", NSTemporaryDirectory(), file] error:NULL];
+		NSError *removeError = nil;
+		NSString *filePath = [NSString stringWithFormat:@"%@%@", NSTemporaryDirectory(), file];
+		[[NSFileManager defaultManager] removeItemAtPath:filePath error:&removeError];
+		if (removeError) {
+			DDLogError(@"Failed to remove temp file %@: %@", file, removeError.localizedDescription);
+		}
 	}
 }
 

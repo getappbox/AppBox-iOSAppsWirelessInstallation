@@ -16,8 +16,10 @@
 - (instancetype)initWithPath:(NSString *)path {
     self = [super init];
     if (self) {
-        NSString *binaryString = [NSString stringWithContentsOfFile:path encoding:NSISOLatin1StringEncoding error:NULL];
+        NSError *readError = nil;
+        NSString *binaryString = [NSString stringWithContentsOfFile:path encoding:NSISOLatin1StringEncoding error:&readError];
         if (!binaryString) {
+            DDLogError(@"Failed to read provisioning profile at %@: %@", path, readError.localizedDescription);
         }
         
         NSScanner *scanner = [NSScanner scannerWithString:binaryString];
