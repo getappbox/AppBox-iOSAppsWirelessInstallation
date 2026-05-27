@@ -533,14 +533,14 @@
 						   uploadError:(DBFILESUploadError * _Nullable)uploadError
 						  networkError:(DBRequestError * _Nullable)networkError
 							retryBlock:(NSBlockOperation *)operation {
-    //Handle Internet Connection Lost
-    if (networkError && networkError.nsError.code == -1009) {
+    BOOL connectivityLost = (networkError != nil && [UploadManager isConnectivityError:networkError.nsError]);
+
+    if (connectivityLost && ![[AppDelegate appDelegate] isInternetConnected]) {
         self.lastfailedOperation = operation;
     }
-    
-    //Handle DB Client and Server error by Retrying Upto 3 times
+
     else if (networkError && retryCount < abOnErrorMaxRetryCount && [[AppDelegate appDelegate] isInternetConnected] &&
-             (networkError.tag == DBRequestErrorClient || networkError.tag == DBRequestErrorInternalServer)) {
+             (connectivityLost || networkError.tag == DBRequestErrorClient || networkError.tag == DBRequestErrorInternalServer)) {
         retryCount++;
 		DDLogInfo(@"Retrying (%ld) IPA Upload due to some error.", (long)retryCount);
         [operation start];
@@ -568,6 +568,27 @@
         } else {
             [DBErrorHandler handleNetworkErrorWith:networkError abErrorMessage:nil];
         }
+    }
+}
+
+// NSURLError codes that mean the network path is unavailable, so the upload
+// should pause and resume on reconnect rather than be treated as a hard failure.
++ (BOOL)isConnectivityError:(NSError *)error {
+    if (error == nil || ![error.domain isEqualToString:NSURLErrorDomain]) {
+        return NO;
+    }
+    switch (error.code) {
+        case NSURLErrorNotConnectedToInternet:  // -1009
+        case NSURLErrorNetworkConnectionLost:   // -1005
+        case NSURLErrorCannotConnectToHost:     // -1004
+        case NSURLErrorCannotFindHost:          // -1003
+        case NSURLErrorDNSLookupFailed:         // -1006
+        case NSURLErrorTimedOut:                // -1001
+        case NSURLErrorDataNotAllowed:          // -1020
+        case NSURLErrorInternationalRoamingOff: // -1018
+            return YES;
+        default:
+            return NO;
     }
 }
 
