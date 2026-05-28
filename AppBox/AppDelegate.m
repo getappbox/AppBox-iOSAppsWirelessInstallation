@@ -280,15 +280,49 @@
     
     if (!shouldFail && !error) {
         NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-        NSURL *url = [applicationDocumentsDirectory URLByAppendingPathComponent:@"OSXCoreDataObjC.storedata"];
-        NSDictionary *presistentStoreOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
+        NSURL *xmlStoreURL = [applicationDocumentsDirectory URLByAppendingPathComponent:@"OSXCoreDataObjC.storedata"];
+        NSURL *sqliteStoreURL = [applicationDocumentsDirectory URLByAppendingPathComponent:@"OSXCoreDataObjC.sqlite"];
+        NSDictionary *persistentStoreOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
                                                  NSMigratePersistentStoresAutomaticallyOption: @YES};
-        if (![coordinator addPersistentStoreWithType: NSXMLStoreType
-                                       configuration: nil
-                                                 URL: url
-                                             options: presistentStoreOptions
-                                               error: &error]) {
-            coordinator = nil;
+        
+        // Use SQLite store for new installs; migrate existing XML stores for backward compatibility
+        BOOL xmlStoreExists = [fileManager fileExistsAtPath:xmlStoreURL.path];
+        BOOL sqliteStoreExists = [fileManager fileExistsAtPath:sqliteStoreURL.path];
+        
+        if (xmlStoreExists && !sqliteStoreExists) {
+            // Migrate existing XML store to SQLite
+            NSPersistentStore *xmlStore = [coordinator addPersistentStoreWithType:NSXMLStoreType
+                                                                   configuration:nil
+                                                                             URL:xmlStoreURL
+                                                                         options:persistentStoreOptions
+                                                                           error:&error];
+            if (xmlStore) {
+                NSPersistentStore *sqliteStore = [coordinator migratePersistentStore:xmlStore
+                                                                              toURL:sqliteStoreURL
+                                                                            options:persistentStoreOptions
+                                                                           withType:NSSQLiteStoreType
+                                                                              error:&error];
+                if (sqliteStore) {
+                    DDLogInfo(@"Successfully migrated Core Data store from XML to SQLite.");
+                    // Remove old XML store file after successful migration
+                    [fileManager removeItemAtURL:xmlStoreURL error:nil];
+                } else {
+                    DDLogError(@"Failed to migrate to SQLite store: %@", error.localizedDescription);
+                    coordinator = nil;
+                }
+            } else {
+                DDLogError(@"Failed to open existing XML store for migration: %@", error.localizedDescription);
+                coordinator = nil;
+            }
+        } else {
+            // Use SQLite store (new install or already migrated)
+            if (![coordinator addPersistentStoreWithType:NSSQLiteStoreType
+                                          configuration:nil
+                                                    URL:sqliteStoreURL
+                                                options:persistentStoreOptions
+                                                  error:&error]) {
+                coordinator = nil;
+            }
         }
         _persistentStoreCoordinator = coordinator;
     }
@@ -301,7 +335,7 @@
         if (error) {
             dict[NSUnderlyingErrorKey] = error;
         }
-        error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
+        error = [NSError errorWithDomain:@"com.developerinsider.AppBox" code:9999 userInfo:dict];
         [[NSApplication sharedApplication] presentError:error];
     }
     return _persistentStoreCoordinator;
