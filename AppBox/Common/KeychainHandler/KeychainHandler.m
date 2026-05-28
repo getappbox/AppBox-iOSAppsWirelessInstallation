@@ -72,11 +72,19 @@ static NSString *const CERTIFICATE_KEY_READABLE = @"CerKeyReadable";
     // Also delete all stored cookies!
     NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     NSArray *cookies = [cookieStorage cookies];
-    id cookie;
-    for (cookie in cookies) {
+    for (NSHTTPCookie *cookie in cookies) {
         [cookieStorage deleteCookie:cookie];
     }
     
+    // Remove app-specific keychain items
+    NSDictionary *keychainQuery = @{
+        (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword
+    };
+    OSStatus keychainStatus = SecItemDelete((__bridge CFDictionaryRef)keychainQuery);
+    if (keychainStatus != errSecSuccess && keychainStatus != errSecItemNotFound) {
+        DDLogWarn(@"Failed to clear keychain items: %@", [self errorMessageForStatus:keychainStatus]);
+    }
+
     NSDictionary *credentialsDict = [[NSURLCredentialStorage sharedCredentialStorage] allCredentials];
     if ([credentialsDict count] > 0) {
         // the credentialsDict has NSURLProtectionSpace objs as keys and dicts of userName => NSURLCredential
@@ -89,7 +97,6 @@ static NSString *const CERTIFICATE_KEY_READABLE = @"CerKeyReadable";
             // iterate over all usernames for this protectionspace, which are the keys for the actual NSURLCredentials
             while (userName = [userNameEnumerator nextObject]) {
                 NSURLCredential *cred = [[credentialsDict objectForKey:urlProtectionSpace] objectForKey:userName];
-                //NSLog(@"credentials to be removed: %@", cred);
                 [[NSURLCredentialStorage sharedCredentialStorage] removeCredential:cred forProtectionSpace:urlProtectionSpace];
             }
         }
