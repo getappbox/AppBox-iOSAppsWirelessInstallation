@@ -75,13 +75,14 @@
 }
 
 + (DBManager *)currentDBManager {
-    static DBManager *manager = NULL;
-    if (manager == NULL) {
+    static DBManager *manager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         manager = [[DBManager alloc] init];
         manager.appName = [NSBundle.mainBundle.infoDictionary objectForKey:(NSString *)kCFBundleNameKey];
         manager.version = [NSBundle.mainBundle.infoDictionary objectForKey:@"CFBundleShortVersionString"];
         manager.bundleId = [NSBundle.mainBundle.infoDictionary objectForKey:(NSString *)kCFBundleIdentifierKey];
-    }
+    });
     return manager;
 }
 
