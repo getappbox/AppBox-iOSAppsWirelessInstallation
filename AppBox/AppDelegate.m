@@ -179,7 +179,16 @@
 
 //URISchem URL Handler
 -(void)handleGetURLWithEvent:(NSAppleEventDescriptor *)event andReply:(NSAppleEventDescriptor *)reply{
-    NSURL *url = [NSURL URLWithString:[[event paramDescriptorForKeyword:keyDirectObject] stringValue]];
+    NSString *urlString = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
+    if (!urlString || urlString.length == 0) {
+        DDLogWarn(@"Received empty URL event");
+        return;
+    }
+    NSURL *url = [NSURL URLWithString:urlString];
+    if (!url) {
+        DDLogWarn(@"Failed to parse URL: %@", urlString);
+        return;
+    }
 	DDLogInfo(@"Handling URL = %@",url);
     
     //Check for Dropbox auth
