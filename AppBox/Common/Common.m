@@ -13,8 +13,11 @@
 
 + (NSString*)generateUUID {
     NSMutableData *data = [NSMutableData dataWithLength:32];
-    int result = SecRandomCopyBytes(NULL, 32, data.mutableBytes);
-    NSAssert(result == 0, @"Error generating random bytes: %d", errno);
+    int result = SecRandomCopyBytes(kSecRandomDefault, 32, data.mutableBytes);
+    if (result != 0) {
+        DDLogError(@"Error generating random bytes: %d", errno);
+        return [[NSUUID UUID] UUIDString];
+    }
     NSString *base64EncodedData = [data base64EncodedStringWithOptions:0];
     base64EncodedData = [base64EncodedData stringByReplacingOccurrencesOfString:@"/" withString:abEmptyString];
     return base64EncodedData;
