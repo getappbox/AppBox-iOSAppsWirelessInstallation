@@ -40,8 +40,37 @@
     self = [super init];
     if (self) {
         retryCount = 0;
+        fileHandle = nil;
     }
     return self;
+}
+
+- (void)dealloc {
+    [self closeFileHandle];
+    [self cleanupWorkingDirectory];
+}
+
+- (void)closeFileHandle {
+    if (fileHandle) {
+        @try {
+            [fileHandle closeFile];
+        } @catch (NSException *exception) {
+            DDLogError(@"Error closing file handle: %@", exception);
+        }
+        fileHandle = nil;
+    }
+}
+
+- (void)cleanupWorkingDirectory {
+    if (workingDirectory && [[NSFileManager defaultManager] fileExistsAtPath:workingDirectory]) {
+        NSError *error = nil;
+        [[NSFileManager defaultManager] removeItemAtPath:workingDirectory error:&error];
+        if (error) {
+            DDLogWarn(@"Failed to clean temp directory: %@", error.localizedDescription);
+        } else {
+            DDLogDebug(@"Cleaned up working directory: %@", workingDirectory);
+        }
+    }
 }
 
 - (void)createNewWorkingDirectory {
@@ -462,6 +491,8 @@
     offset = 0;
     chunkSize = [UserData uploadChunkSize] * abBytesToMB;
     ipaFileData = [NSData dataWithContentsOfFile:file];
+    // Close any previously open file handle before opening a new one
+    [self closeFileHandle];
     fileHandle = [NSFileHandle fileHandleForReadingAtPath:file];
     nextChunkToUpload = [fileHandle readDataOfLength:chunkSize];
     fileCommitInfo = [[DBFILESCommitInfo alloc] initWithPath:path mode:mode autorename:@NO clientModified:nil mute:@NO propertyGroups:nil strictConflict:@NO];
@@ -490,6 +521,8 @@
     if (nextChunkToUpload.length < chunkSize) {
         [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionFinishData:cursor commit:fileCommitInfo inputData:nextChunkToUpload] setResponseBlock:^(DBFILESFileMetadata * _Nullable result, DBFILESUploadSessionFinishError * _Nullable routeError, DBRequestError * _Nullable networkError) {
 			strongify(self);
+            // Close file handle after upload finishes
+            [self closeFileHandle];
             if (result) {
                 //reset retry count
                 self->retryCount = 0;
