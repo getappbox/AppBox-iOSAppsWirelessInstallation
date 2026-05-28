@@ -165,7 +165,9 @@
 
 +(void)terminateWithExitCode:(NSInteger)code {
     [AppDelegate appDelegate].exitCode = code;
-    [[NSApplication sharedApplication] performSelectorOnMainThread:@selector(terminate:) withObject:nil waitUntilDone:NO];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSApplication sharedApplication] terminate:nil];
+    });
 }
 
 -(void)openLatestLogFile {
