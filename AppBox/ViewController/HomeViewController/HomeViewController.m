@@ -503,4 +503,12 @@
     }
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    if (_pathMonitor) {
+        nw_path_monitor_cancel(_pathMonitor);
+        _pathMonitor = nil;
+    }
+}
+
 @end

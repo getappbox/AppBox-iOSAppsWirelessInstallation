@@ -41,6 +41,8 @@
     [self dismissController:self];
 }
 
-
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 @end
