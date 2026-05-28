@@ -710,13 +710,26 @@
     }
 }
 
+// Safely removes the "?dl=1" suffix from Dropbox shared URLs
+-(NSString *)removeDLSuffixFromURL:(NSString *)url{
+    if (!url || url.length == 0) {
+        DDLogWarn(@"Received nil or empty URL for DL suffix removal");
+        return url ?: @"";
+    }
+    NSString *suffix = @"?dl=1";
+    if ([url hasSuffix:suffix]) {
+        return [url substringToIndex:url.length - suffix.length];
+    }
+    DDLogDebug(@"URL does not have expected ?dl=1 suffix: %@", url);
+    return url;
+}
+
 -(void)handleSharedURLResult:(NSString *)url{
 	weakify(self);
 	
     //Create manifest file with share IPA url and upload manifest file
     if (self.dbFileType == DBFileTypeIPA) {
-        NSString *shareableLink = url;
-		shareableLink = [shareableLink substringToIndex:shareableLink.length-5];
+        NSString *shareableLink = [self removeDLSuffixFromURL:url];
         self.ipaUploadInfo.ipaFileDBShareableURL = [NSURL URLWithString:shareableLink];
         [self.ipaUploadInfo createManifestWithIPAURL:self.ipaUploadInfo.ipaFileDBShareableURL completion:^(NSURL *manifestURL) {
 			strongify(self);
@@ -738,7 +751,7 @@
     }
     //if same link enable load appinfo.json otherwise Create short shareable url of manifest
     else if (self.dbFileType == DBFileTypeManifest){
-        NSString *shareableLink = [url substringToIndex:url.length-5];
+        NSString *shareableLink = [self removeDLSuffixFromURL:url];
         DDLogDebug(@"Manifest Sharable link - %@",shareableLink);
         self.ipaUploadInfo.manifestFileSharableURL = [NSURL URLWithString:shareableLink];
         if(self.ipaUploadInfo.isKeepSameLinkEnabled){
@@ -763,7 +776,7 @@
     
     //create app info file short sharable url
     else if (self.dbFileType == DBFileTypeJson){
-        NSString *shareableLink = [url substringToIndex:url.length-5];
+        NSString *shareableLink = [self removeDLSuffixFromURL:url];
         DDLogDebug(@"AppInfo Sharable link - %@",shareableLink);
         self.ipaUploadInfo.uniquelinkShareableURL = [NSURL URLWithString:shareableLink];
         NSMutableDictionary *dictUniqueLink = [[self getUniqueJsonDict] mutableCopy];
