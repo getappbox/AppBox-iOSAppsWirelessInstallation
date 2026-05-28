@@ -12,10 +12,16 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v1
+		uses: actions/checkout@v4
       - name: Use latest Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: latest
       - name: Build App
-        run: xcodebuild clean build -workspace AppBox.xcworkspace -scheme AppBox CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
+        run: |
+          set -o pipefail
+          xcodebuild clean build -project AppBox.xcodeproj -scheme AppBox CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO 2>&1 | tee build.log
+          if [ ${PIPESTATUS[0]} -ne 0 ]; then
+            echo "::error::Build failed"
+            exit 1
+          fi
