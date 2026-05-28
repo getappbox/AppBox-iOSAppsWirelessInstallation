@@ -11,7 +11,7 @@
 @implementation UploadManager {
     //For Large Upload
     NSString *sessionId;
-    NSData *ipaFileData;
+    NSUInteger ipaFileSize;
     NSData *nextChunkToUpload;
     NSUInteger chunkSize;
     NSUInteger offset;
@@ -378,7 +378,15 @@
     }
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict options:NSJSONWritingPrettyPrinted error:&error];
-    [jsonData writeToFile:path atomically:YES];
+    if (error) {
+        DDLogError(@"Failed to serialize JSON: %@", error.localizedDescription);
+        return;
+    }
+    NSError *writeError = nil;
+    BOOL success = [jsonData writeToFile:path options:NSDataWritingAtomic error:&writeError];
+    if (!success) {
+        DDLogError(@"Failed to write JSON file: %@", writeError.localizedDescription);
+    }
 }
 
 -(void)uploadUniqueLinkJsonFile{
@@ -494,10 +502,25 @@
 -(void)dbUploadLargeFile:(NSString *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
     offset = 0;
     chunkSize = [UserData uploadChunkSize] * abBytesToMB;
-    ipaFileData = [NSData dataWithContentsOfFile:file];
+    
+    // Get file size from attributes instead of loading entire file into memory
+    NSError *fileSizeError = nil;
+    NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:file error:&fileSizeError];
+    if (fileSizeError || !fileAttributes) {
+        DDLogError(@"Failed to get file attributes: %@", fileSizeError.localizedDescription);
+        self.errorBlock(fileSizeError, YES);
+        return;
+    }
+    ipaFileSize = [fileAttributes fileSize];
+    
     // Close any previously open file handle before opening a new one
     [self closeFileHandle];
     fileHandle = [NSFileHandle fileHandleForReadingAtPath:file];
+    if (!fileHandle) {
+        DDLogError(@"Failed to open file for reading: %@", file);
+        self.errorBlock(nil, YES);
+        return;
+    }
     nextChunkToUpload = [fileHandle readDataOfLength:chunkSize];
     fileCommitInfo = [[DBFILESCommitInfo alloc] initWithPath:path mode:mode autorename:@NO clientModified:nil mute:@NO propertyGroups:nil strictConflict:@NO];
     
@@ -638,8 +661,9 @@
 
 -(void)updateProgressBytesWritten:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite{
     //CGFloat progress = ((totalBytesWritten * 100) / totalBytesExpectedToWrite) ;
+    if (ipaFileSize == 0) return;
     NSUInteger newBytesWritten = offset + totalBytesWritten;
-    CGFloat progress = (newBytesWritten * 100 / ipaFileData.length );
+    CGFloat progress = (newBytesWritten * 100 / ipaFileSize);
     NSString *status = [NSString stringWithFormat:@"Uploading IPA (%@%%)", [NSNumber numberWithInt:progress]];
     [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
 }
