@@ -26,7 +26,11 @@
         // Parse the body as JSON (mirrors AFJSONResponseSerializer).
         id responseObject = nil;
         if (data.length > 0) {
-            responseObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSError *jsonError = nil;
+            responseObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+            if (jsonError) {
+                DDLogDebug(@"JSON parsing failed for URL: %@", jsonError.localizedDescription);
+            }
         }
 
         BOOL httpSuccess = (statusCode >= 200 && statusCode < 300);
