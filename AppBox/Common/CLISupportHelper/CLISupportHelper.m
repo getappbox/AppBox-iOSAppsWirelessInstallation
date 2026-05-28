@@ -41,12 +41,11 @@
 	[alert addButtonWithTitle:@"Yes"];
 	[alert addButtonWithTitle:@"No"];
 	if ([alert runModal] == NSAlertFirstButtonReturn){
-		NSError *error;
 		if ([self runScript:@"uninstall.sh"]){
 			[Common showAlertWithTitle:@"Success" andMessage:@"AppBox CLI tool uninstalled successfully."];
 			return YES;
 		}else{
-			[Common showAlertWithTitle:@"Error" andMessage:[NSString stringWithFormat:@"Failed to uninstall AppBox CLI tool.\n\n%@", error.localizedDescription]];
+			[Common showAlertWithTitle:@"Error" andMessage:@"Failed to uninstall AppBox CLI tool."];
 			return NO;
 		}
 	} else {
@@ -75,12 +74,11 @@
 + (BOOL)updatePromptAfterVersionUpdate {
 	NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
 	NSString *cliVersion = [UserData cliVersion];
-	if (appVersion == cliVersion || cliVersion.isEmpty) {
+	if ([appVersion isEqualToString:cliVersion] || cliVersion.isEmpty) {
 		return NO;
 	}
 
-	BOOL hasNewCLIVersion = YES;
-	if (![NSFileManager.defaultManager fileExistsAtPath:abCLIPath] || !hasNewCLIVersion) {
+	if (![NSFileManager.defaultManager fileExistsAtPath:abCLIPath]) {
 		return NO;
 	}
 
