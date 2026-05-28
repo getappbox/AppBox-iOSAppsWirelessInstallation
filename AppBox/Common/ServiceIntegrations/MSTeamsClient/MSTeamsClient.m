@@ -14,6 +14,13 @@
 			webhook:(NSString *)webhook
 			message:(NSString *)message
 		 completion:(void (^) (BOOL success))completion{
+	// Validate webhook URL
+	if (![Common isValidWebhookURL:webhook]) {
+		DDLogError(@"MS Teams Error - Invalid webhook URL: %@", webhook);
+		completion(NO);
+		return;
+	}
+
 	//set slack message
 	NSString *finalMessage;
 	if (message.length > 0) {

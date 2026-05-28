@@ -14,6 +14,13 @@
 			webhook:(NSString *)webhook
 			message:(NSString *)message
 		 completion:(void (^) (BOOL success))completion {
+	// Validate webhook URL
+	if (![Common isValidWebhookURL:webhook]) {
+		DDLogError(@"Slack Error - Invalid webhook URL: %@", webhook);
+		completion(NO);
+		return;
+	}
+
 	//set slack channel url and image
 	NSString *slackImage = abSlackImage;
 
