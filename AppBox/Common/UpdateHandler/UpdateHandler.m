@@ -35,23 +35,30 @@
         [NetworkHandler requestWithURL:abGitHubLatestRelease withParameters:nil andRequestType:RequestGET andCompletetion:^(id responseObj, NSInteger httpStatus, NSError *error) {
             //handle error and check for all required keys
 			@try {
-				if (error == nil &&
+				if (error == nil && [responseObj isKindOfClass:[NSDictionary class]] &&
 					[((NSDictionary *)responseObj).allKeys containsObject:@"tag_name"] &&
 					[((NSDictionary *)responseObj).allKeys containsObject:@"html_url"]){
 					
 					//get tag name, because it's always be latest version
 					NSString *tag = [responseObj valueForKey:@"tag_name"];
-					NSString *newVesion = [[tag componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:abEmptyString];
 					
 					//get version string from bundle info.plist
 					NSString *versionString = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
-					NSString *currentVersion = [[versionString componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:abEmptyString];
+					if (!versionString || !tag) {
+						completion(false, nil);
+						return;
+					}
 					
 					//log current and latest version
 					DDLogDebug(@"Current Version - %@ <=> Latest Version - %@", versionString, tag);
 					
+					// Use proper numeric version comparison
+					NSString *latestVersion = [self extractVersionString:tag];
+					NSString *currentVersion = [self extractVersionString:versionString];
+					NSComparisonResult result = [latestVersion compare:currentVersion options:NSNumericSearch];
+					
 					//return result based on version strings
-					completion(([newVesion compare:currentVersion] == NSOrderedDescending),[NSURL URLWithString:[responseObj valueForKey:@"html_url"]]);
+					completion((result == NSOrderedDescending), [NSURL URLWithString:[responseObj valueForKey:@"html_url"]]);
 				}else{
 					completion(false, nil);
 				}
@@ -64,6 +71,27 @@
         completion(false, nil);
 		DDLogInfo(@"Exception %@",exception.abDescription);
     }
+}
+
++ (NSString *)extractVersionString:(NSString *)input {
+    if (!input) return @"0";
+    // Remove everything except digits and dots
+    NSMutableString *version = [NSMutableString string];
+    BOOL foundDigit = NO;
+    for (NSUInteger i = 0; i < input.length; i++) {
+        unichar c = [input characterAtIndex:i];
+        if (c >= '0' && c <= '9') {
+            [version appendFormat:@"%C", c];
+            foundDigit = YES;
+        } else if (c == '.' && foundDigit) {
+            [version appendFormat:@"%C", c];
+        }
+    }
+    // Remove trailing dot if any
+    if (version.length > 0 && [version characterAtIndex:version.length - 1] == '.') {
+        [version deleteCharactersInRange:NSMakeRange(version.length - 1, 1)];
+    }
+    return version.length > 0 ? [version copy] : @"0";
 }
 
 
