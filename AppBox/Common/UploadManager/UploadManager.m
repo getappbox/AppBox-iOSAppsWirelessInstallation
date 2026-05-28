@@ -226,6 +226,7 @@
         [[[DBClientsManager authorizedClient].filesRoutes downloadUrl:self.ipaUploadInfo.uniqueLinkJsonMetaData.pathDisplay overwrite:YES destination:path]
          setResponseBlock:^(DBFILESFileMetadata * _Nullable response, DBFILESDownloadError * _Nullable routeError, DBRequestError * _Nullable error, NSURL * _Nonnull destination) {
 			strongify(self);
+             if (!self) return;
              if (response){
                  if([response.name hasSuffix:FILE_NAME_UNIQUE_JSON]){
                      [self updateUniquLinkDictinory:[[self getUniqueJsonDict] mutableCopy]];
@@ -395,6 +396,7 @@
     DBFILESListRevisionsMode *revisionMode = [[DBFILESListRevisionsMode alloc] initWithPath];
     [[[DBClientsManager authorizedClient].filesRoutes listRevisions:self.ipaUploadInfo.dbAppInfoJSONFullPath.absoluteString mode:revisionMode limit:@1 ] setResponseBlock:^(DBFILESListRevisionsResult * _Nullable response, DBFILESListRevisionsError * _Nullable routeError, DBRequestError * _Nullable error) {
 		strongify(self);
+        if (!self) return;
         //check there is any rev available
         if (response && response.isDeleted.boolValue == NO && response.entries.count > 0){
             DDLogDebug(@"Loaded Meta Data %@",response);
@@ -424,6 +426,7 @@
       //Track response with result and error
       setResponseBlock:^(DBFILESFileMetadata * _Nullable response, DBFILESUploadError * _Nullable routeError, DBRequestError * _Nullable error) {
 		strongify(self);
+          if (!self) return;
           if (response) {
               //reset retry count
 			  self->retryCount = 0;
@@ -470,6 +473,7 @@
      //Track and show upload progress
      setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
 		strongify(self);
+         if (!self) return;
          if (!self.uploadRecord) {
              //Calculate and show progress based on file type
              CGFloat progress = ((totalBytesWritten * 100) / totalBytesExpectedToWrite) ;
@@ -500,6 +504,7 @@
 	weakify(self);
     [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionStartData:nextChunkToUpload] setResponseBlock:^(DBFILESUploadSessionStartResult * _Nullable result, DBFILESUploadSessionStartError * _Nullable routeError, DBRequestError * _Nullable networkError) {
 		strongify(self);
+        if (!self) return;
         if (result) {
 			self->sessionId = result.sessionId;
 			self->offset += self->nextChunkToUpload.length;
@@ -521,8 +526,11 @@
     if (nextChunkToUpload.length < chunkSize) {
         [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionFinishData:cursor commit:fileCommitInfo inputData:nextChunkToUpload] setResponseBlock:^(DBFILESFileMetadata * _Nullable result, DBFILESUploadSessionFinishError * _Nullable routeError, DBRequestError * _Nullable networkError) {
 			strongify(self);
+            if (!self) return;
+            
             // Close file handle after upload finishes
             [self closeFileHandle];
+            
             if (result) {
                 //reset retry count
                 self->retryCount = 0;
@@ -540,11 +548,13 @@
             }
         }] setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
 			strongify(self);
+            if (!self) return;
             [self updateProgressBytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
         }];
     } else {
         [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionAppendV2Data:cursor inputData:nextChunkToUpload] setResponseBlock:^(DBNilObject * _Nullable result, DBFILESUploadSessionAppendError * _Nullable routeError, DBRequestError * _Nullable networkError) {
 			strongify(self);
+            if (!self) return;
             if (result) {
 				self->offset += self->nextChunkToUpload.length;
                 [self uploadNextChunk];
@@ -554,6 +564,7 @@
             }
         }] setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
 			strongify(self);
+            if (!self) return;
             [self updateProgressBytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
         }];
     }
@@ -640,6 +651,7 @@
      //Track response with result and error
      setResponseBlock:^(DBSHARINGSharedLinkMetadata * _Nullable response, DBSHARINGCreateSharedLinkWithSettingsError * _Nullable routeError, DBRequestError * _Nullable error) {
 		strongify(self);
+         if (!self) return;
          if (response){
              [self handleSharedURLResult:response.url];
          }else{
@@ -652,6 +664,7 @@
 	weakify(self);
     [[[DBClientsManager authorizedClient].sharingRoutes listSharedLinks:file cursor:nil directOnly:nil] setResponseBlock:^(DBSHARINGListSharedLinksResult * _Nullable response, DBSHARINGListSharedLinksError * _Nullable routeError, DBRequestError * _Nullable error) {
 		strongify(self);
+        if (!self) return;
         if (response && response.links && response.links.count > 0){
             [self handleSharedURLResult:[[response.links firstObject] url]];
         }else{
@@ -707,6 +720,7 @@
         self.ipaUploadInfo.ipaFileDBShareableURL = [NSURL URLWithString:shareableLink];
         [self.ipaUploadInfo createManifestWithIPAURL:self.ipaUploadInfo.ipaFileDBShareableURL completion:^(NSURL *manifestURL) {
 			strongify(self);
+            if (!self) return;
             if (manifestURL == nil){
                 //show error if manifest file url is nil
                 if (self.isCLIActive) {
@@ -732,6 +746,7 @@
             DBFILESListRevisionsMode *revisionMode = [[DBFILESListRevisionsMode alloc] initWithPath];
             [[[DBClientsManager authorizedClient].filesRoutes listRevisions:self.ipaUploadInfo.dbAppInfoJSONFullPath.absoluteString mode:revisionMode  limit:@1] setResponseBlock:^(DBFILESListRevisionsResult * _Nullable response, DBFILESListRevisionsError * _Nullable routeError, DBRequestError * _Nullable error) {
 				strongify(self);
+                if (!self) return;
                 //check there is any rev available
                 if (response && response.isDeleted.boolValue == NO && response.entries.count > 0){
                     DDLogDebug(@"Loaded Meta Data %@",response);
@@ -810,6 +825,7 @@
 	weakify(self);
     [[[[DBClientsManager authorizedClient] filesRoutes] delete_V2:self.ipaUploadInfo.dbDirectory.absoluteString] setResponseBlock:^(DBFILESDeleteResult * _Nullable result, DBFILESDeleteError * _Nullable routeError, DBRequestError * _Nullable networkError) {
 		strongify(self);
+        if (!self) return;
         [ABHudViewController hideAllHudFromView:self.currentViewController.view after:0];
         if (result) {
             self.completionBlock();
@@ -825,6 +841,7 @@
 	weakify(self);
     [[[[DBClientsManager authorizedClient] filesRoutes] delete_V2:self.uploadRecord.dbFolderName] setResponseBlock:^(DBFILESDeleteResult * _Nullable result, DBFILESDeleteError * _Nullable routeError, DBRequestError * _Nullable networkError) {
 		strongify(self);
+        if (!self) return;
         [ABHudViewController hideAllHudFromView:self.currentViewController.view after:0];
         if (result) {
             self.completionBlock();
