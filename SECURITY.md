@@ -9,4 +9,4 @@
 
 ## Reporting a Vulnerability
 
-To report a vulnerability, please email me at developerinsider.co@gmail.com.
+To report a vulnerability, please email me at publisher@developerinsider.co.
