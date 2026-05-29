@@ -110,6 +110,9 @@ typedef enum : NSUInteger {
 }
 
 -(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row{
+    if (row < 0 || row >= (NSInteger)uploadRecords.count) {
+        return nil;
+    }
     ABUploadRecord *uploadRecord = [uploadRecords objectAtIndex:row];
     NSTableCellView *cell = [tableView makeViewWithIdentifier:ShortURLCellId owner:nil];
     
@@ -242,7 +245,6 @@ typedef enum : NSUInteger {
 - (IBAction)showInFinderButtonTapped:(NSButton *)sender {
     ABUploadRecord *uploadRecord = [self selectedUploadRecord];
     if (uploadRecord){
-        ABUploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
 		BOOL isDirectory = NO;
         if ([[NSFileManager defaultManager] fileExistsAtPath:uploadRecord.localBuildPath isDirectory:&isDirectory]) {
             NSURL *fileURL = [NSURL fileURLWithPath:uploadRecord.localBuildPath];
@@ -264,11 +266,11 @@ typedef enum : NSUInteger {
 
 //MARK: - Helper Method
 -(ABUploadRecord *)selectedUploadRecord{
-    if (_dashboardTableView.selectedRow == -1 || uploadRecords == nil || (uploadRecords && uploadRecords.count == 0)){
+    NSInteger selectedRow = _dashboardTableView.selectedRow;
+    if (selectedRow < 0 || uploadRecords == nil || selectedRow >= (NSInteger)uploadRecords.count){
         return nil;
     }
-    ABUploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
-    return uploadRecord;
+    return [uploadRecords objectAtIndex:selectedRow];
 }
 
 @end
