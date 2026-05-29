@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "AB1C7CD1-7F99-468E-87A1-0D81FAE3DF2C",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:AppBox.xcodeproj",
+        "identifier" : "367F0DC24506E92D3530690B",
+        "name" : "AppBoxTests"
+      }
+    }
+  ],
+  "version" : 1
+}

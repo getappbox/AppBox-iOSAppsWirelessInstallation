@@ -7,15 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D4C02332FC22A63EFF72F8D /* NSStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30509E5843B9CCEA2AFB2874 /* NSStringTests.m */; };
+		407C8032774422D6217359B9 /* NSExceptionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B386EED60B876CEE11BBF89B /* NSExceptionTests.m */; };
 		4410D18E26FF76A20046E5F9 /* DBAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4410D18D26FF76A20046E5F9 /* DBAccountManager.m */; };
 		4410D19C26FF851D0046E5F9 /* CoreDataMigration3to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4410D19B26FF851D0046E5F9 /* CoreDataMigration3to4.xcmappingmodel */; };
 		449BD6B8282111B0008EFB2B /* AppBoxService+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 449BD6B4282111B0008EFB2B /* AppBoxService+CoreDataProperties.m */; };
 		449BD6B9282111B0008EFB2B /* AppBoxService+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 449BD6B5282111B0008EFB2B /* AppBoxService+CoreDataClass.m */; };
 		4D3E492303A5E78B0417E17F /* ObjectiveDropboxOfficial.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656E98171CB7E85AA663AFE8 /* ObjectiveDropboxOfficial.xcframework */; };
+		5D20E6B57EA90CA7D6EA21F7 /* IPAUploadInfoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65C0AF09D32F39F4259167 /* IPAUploadInfoTests.m */; };
 		6968AADC9DEB5554A06F19BD /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = 33146DD70AA7C380685E53AA /* CocoaLumberjack */; };
+		7288A761B4712E54C04CE3CA /* NSURLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA16F2A781DF1BAB101AACAE /* NSURLTests.m */; };
 		771E1F8D4D831C50C1178A75 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09E11F809EFA1C7844F25D6B /* Cocoa.framework */; };
 		AC4CF046F7F2B76CF56BF8E4 /* ObjectiveDropboxOfficial.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 656E98171CB7E85AA663AFE8 /* ObjectiveDropboxOfficial.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CE169D69B9BA8383673CB6A6 /* AppBoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49339F0F4810664BDDE096F8 /* AppBoxTests.swift */; };
+		D9E5B24A6827FC5AD68D29D0 /* CommonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 544B2D28AEC66102492FA05E /* CommonTests.m */; };
 		DB04358B2E69628F005F0173 /* appboxcli in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB0435832E696255005F0173 /* appboxcli */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		DB0435912E6962EA005F0173 /* CLISupportHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0435902E6962EA005F0173 /* CLISupportHelper.m */; };
 		DB1A06622160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DB1A06612160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel */; };
@@ -93,6 +97,7 @@
 		E1D12EEC1EC31AC80065E59A /* AccountPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D12EEB1EC31AC80065E59A /* AccountPreferencesViewController.xib */; };
 		E1D12EEE1EC320760065E59A /* HelpPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D12EED1EC320760065E59A /* HelpPreferencesViewController.xib */; };
 		E1DC26001ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DC25FF1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m */; };
+		E6BF0C7BDA3380B61FA14F6C /* NSDateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5177E6B8643457D0035658 /* NSDateTests.m */; };
 		F6AEC01BE879A2BB998E829D /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = EFE5EA7464F3539F2562A787 /* ZipArchive */; };
 /* End PBXBuildFile section */
 
@@ -142,7 +147,8 @@
 
 /* Begin PBXFileReference section */
 		09E11F809EFA1C7844F25D6B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
-		410508CD3AC54858C78C571E /* AppBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		30509E5843B9CCEA2AFB2874 /* NSStringTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NSStringTests.m; sourceTree = "<group>"; };
+		3E65C0AF09D32F39F4259167 /* IPAUploadInfoTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = IPAUploadInfoTests.m; sourceTree = "<group>"; };
 		4410D18C26FF76A20046E5F9 /* DBAccountManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBAccountManager.h; sourceTree = "<group>"; };
 		4410D18D26FF76A20046E5F9 /* DBAccountManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DBAccountManager.m; sourceTree = "<group>"; };
 		4410D19B26FF851D0046E5F9 /* CoreDataMigration3to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = CoreDataMigration3to4.xcmappingmodel; sourceTree = "<group>"; };
@@ -151,8 +157,11 @@
 		449BD6B6282111B0008EFB2B /* AppBoxService+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppBoxService+CoreDataProperties.h"; sourceTree = "<group>"; };
 		449BD6B7282111B0008EFB2B /* AppBoxService+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppBoxService+CoreDataClass.h"; sourceTree = "<group>"; };
 		44DCC66B25EEA1910074AB1E /* AppBox4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppBox4.xcdatamodel; sourceTree = "<group>"; };
-		49339F0F4810664BDDE096F8 /* AppBoxTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppBoxTests.swift; sourceTree = "<group>"; };
+		544B2D28AEC66102492FA05E /* CommonTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CommonTests.m; sourceTree = "<group>"; };
 		656E98171CB7E85AA663AFE8 /* ObjectiveDropboxOfficial.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ObjectiveDropboxOfficial.xcframework; path = Frameworks/ObjectiveDropboxOfficial.xcframework; sourceTree = "<group>"; };
+		7E5177E6B8643457D0035658 /* NSDateTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NSDateTests.m; sourceTree = "<group>"; };
+		B386EED60B876CEE11BBF89B /* NSExceptionTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NSExceptionTests.m; sourceTree = "<group>"; };
+		BA16F2A781DF1BAB101AACAE /* NSURLTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NSURLTests.m; sourceTree = "<group>"; };
 		DB0435832E696255005F0173 /* appboxcli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = appboxcli; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB04358F2E6962EA005F0173 /* CLISupportHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLISupportHelper.h; sourceTree = "<group>"; };
 		DB0435902E6962EA005F0173 /* CLISupportHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLISupportHelper.m; sourceTree = "<group>"; };
@@ -189,6 +198,8 @@
 		DB5385692083622A004BFC84 /* NSURL+URL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURL+URL.m"; sourceTree = "<group>"; };
 		DB53856C20838913004BFC84 /* DragDropView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DragDropView.h; sourceTree = "<group>"; };
 		DB53856D20838913004BFC84 /* DragDropView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DragDropView.m; sourceTree = "<group>"; };
+		DB5BA11E2FC9C91D00A150BA /* AppBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB5BA12A2FC9C94E00A150BA /* AppBoxTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = AppBoxTests.xctestplan; sourceTree = "<group>"; };
 		DB5C5A4D2D00BA9C000C4A20 /* NSException+Description.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSException+Description.h"; sourceTree = "<group>"; };
 		DB5C5A4E2D00BA9C000C4A20 /* NSException+Description.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSException+Description.m"; sourceTree = "<group>"; };
 		DB6F784E215D459A00C77966 /* AppBoxColors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppBoxColors.xcassets; sourceTree = "<group>"; };
@@ -292,7 +303,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		DB04358D2E696299005F0173 /* Exceptions for "AppBoxCLI" folder in "" build phase */ = {
+		DB04358D2E696299005F0173 /* Exceptions for "AppBoxCLI" folder in "Copy Files" phase from "AppBox" target */ = {
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			buildPhase = DB04357E2E696172005F0173 /* CopyFiles */;
 			membershipExceptions = (
@@ -307,7 +318,7 @@
 		DB0435842E696255005F0173 /* AppBoxCLI */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				DB04358D2E696299005F0173 /* Exceptions for "AppBoxCLI" folder in "" build phase */,
+				DB04358D2E696299005F0173 /* Exceptions for "AppBoxCLI" folder in "Copy Files" phase from "AppBox" target */,
 			);
 			path = AppBoxCLI;
 			sourceTree = "<group>";
@@ -361,9 +372,14 @@
 		AECBA8D5D0C166DA17FF6ED0 /* AppBoxTests */ = {
 			isa = PBXGroup;
 			children = (
-				49339F0F4810664BDDE096F8 /* AppBoxTests.swift */,
+				DB5BA12A2FC9C94E00A150BA /* AppBoxTests.xctestplan */,
+				3E65C0AF09D32F39F4259167 /* IPAUploadInfoTests.m */,
+				30509E5843B9CCEA2AFB2874 /* NSStringTests.m */,
+				BA16F2A781DF1BAB101AACAE /* NSURLTests.m */,
+				7E5177E6B8643457D0035658 /* NSDateTests.m */,
+				B386EED60B876CEE11BBF89B /* NSExceptionTests.m */,
+				544B2D28AEC66102492FA05E /* CommonTests.m */,
 			);
-			name = AppBoxTests;
 			path = AppBoxTests;
 			sourceTree = "<group>";
 		};
@@ -592,6 +608,7 @@
 			children = (
 				E16437CF1D743A4E00CE8B7E /* AppBox.app */,
 				DB0435832E696255005F0173 /* appboxcli */,
+				DB5BA11E2FC9C91D00A150BA /* AppBoxTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -936,7 +953,7 @@
 			);
 			name = AppBoxTests;
 			productName = AppBoxTests;
-			productReference = 410508CD3AC54858C78C571E /* AppBoxTests.xctest */;
+			productReference = DB5BA11E2FC9C91D00A150BA /* AppBoxTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		DB0435822E696255005F0173 /* AppBoxCLI */ = {
@@ -1072,7 +1089,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE169D69B9BA8383673CB6A6 /* AppBoxTests.swift in Sources */,
+				5D20E6B57EA90CA7D6EA21F7 /* IPAUploadInfoTests.m in Sources */,
+				0D4C02332FC22A63EFF72F8D /* NSStringTests.m in Sources */,
+				7288A761B4712E54C04CE3CA /* NSURLTests.m in Sources */,
+				E6BF0C7BDA3380B61FA14F6C /* NSDateTests.m in Sources */,
+				407C8032774422D6217359B9 /* NSExceptionTests.m in Sources */,
+				D9E5B24A6827FC5AD68D29D0 /* CommonTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1165,16 +1187,30 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 3PQ7E4L589;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = AppBox/AppBoxPrefixHeader.pch;
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AppBox/**",
+					"$(PROJECT_DIR)/Frameworks/**",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.developerinsider.AppBoxTests;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppBox.app/Contents/MacOS/AppBox";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
 			};
 			name = Release;
 		};
@@ -1182,16 +1218,30 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 3PQ7E4L589;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = AppBox/AppBoxPrefixHeader.pch;
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AppBox/**",
+					"$(PROJECT_DIR)/Frameworks/**",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.developerinsider.AppBoxTests;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppBox.app/Contents/MacOS/AppBox";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
 			};
 			name = Debug;
 		};
