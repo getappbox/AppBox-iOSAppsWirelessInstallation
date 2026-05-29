@@ -7,6 +7,18 @@
 
 set -e
 
+# Timeout per test in seconds (kill test if it hangs)
+TEST_TIMEOUT=900 # 15 minutes
+
+# Parse arguments: pass test numbers to run specific tests
+# Usage: ./test_cli.sh          (run all tests)
+#        ./test_cli.sh 15       (run only test 15)
+#        ./test_cli.sh 1,2,15   (run tests 1, 2, and 15)
+RUN_TESTS=""
+if [ -n "$1" ]; then
+    RUN_TESTS=",$1,"
+fi
+
 # ============================================================
 # CONFIGURATION - Replace these with real values before running
 # ============================================================
@@ -64,14 +76,50 @@ run_test() {
     local cmd="$@"
 
     TEST_NUM=$((TEST_NUM + 1))
+
+    # Skip if not in the filter list
+    if [ -n "$RUN_TESTS" ] && [[ "$RUN_TESTS" != *",$TEST_NUM,"* ]]; then
+        return
+    fi
+
     log "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     log "${CYAN}TEST $TEST_NUM: $test_name${NC}"
     log "${CYAN}CMD:  $cmd${NC}"
     log "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 
     local output
-    output=$(eval "$cmd" 2>&1)
-    local exit_code=$?
+    local exit_code
+    local tmp_output
+    tmp_output=$(mktemp)
+
+    # Run command in background with timeout
+    bash -c "$cmd" > "$tmp_output" 2>&1 &
+    local cmd_pid=$!
+
+    # Wait with timeout
+    local elapsed=0
+    while kill -0 "$cmd_pid" 2>/dev/null; do
+        if [ $elapsed -ge $TEST_TIMEOUT ]; then
+            kill -9 "$cmd_pid" 2>/dev/null
+            wait "$cmd_pid" 2>/dev/null
+            output=$(cat "$tmp_output")
+            rm -f "$tmp_output"
+            log "${RED}⏱️  TIMEOUT: $test_name (exceeded ${TEST_TIMEOUT}s)${NC}"
+            FAIL_COUNT=$((FAIL_COUNT + 1))
+            if [ -n "$output" ]; then
+                echo "$output" >> "$LOG_FILE"
+            fi
+            log ""
+            return
+        fi
+        sleep 1
+        elapsed=$((elapsed + 1))
+    done
+
+    exit_code=0
+    wait "$cmd_pid" || exit_code=$?
+    output=$(cat "$tmp_output")
+    rm -f "$tmp_output"
 
     if [ $exit_code -eq 0 ]; then
         log "${GREEN}✅ PASSED: $test_name${NC}"
@@ -93,6 +141,12 @@ skip_test() {
     local reason="$2"
 
     TEST_NUM=$((TEST_NUM + 1))
+
+    # Skip if not in the filter list
+    if [ -n "$RUN_TESTS" ] && [[ "$RUN_TESTS" != *",$TEST_NUM,"* ]]; then
+        return
+    fi
+
     log "${YELLOW}⏭️  SKIPPED TEST $TEST_NUM: $test_name${NC}"
     log "${YELLOW}    Reason: $reason${NC}"
     SKIP_COUNT=$((SKIP_COUNT + 1))
