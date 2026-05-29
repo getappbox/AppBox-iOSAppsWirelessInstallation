@@ -28,7 +28,6 @@
 }
 
 -(NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender{
-    NSLog(@"draggingEntered");
     if (sender.draggingPasteboard.pasteboardItems.count > 1 || [AppDelegate appDelegate].processing) {
         return NSDragOperationNone;
     }
@@ -38,7 +37,7 @@
 
 -(BOOL)performDragOperation:(id<NSDraggingInfo>)sender{
     NSString *filePath = [self getFilePath:sender];
-    NSLog(@"%@", filePath);
+    DDLogDebug(@"Dropped file: %@", filePath);
     [[AppDelegate appDelegate] openFileWithPath:filePath];
     return YES;
 }

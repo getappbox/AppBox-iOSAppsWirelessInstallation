@@ -25,12 +25,14 @@
         NSScanner *scanner = [NSScanner scannerWithString:binaryString];
         BOOL ok = [scanner scanUpToString:@"<plist" intoString:nil];
         if (!ok) {
-            NSLog(@"unable to find beginning of plist");
+            DDLogError(@"Unable to find beginning of plist in provisioning profile at %@", path);
+            return self;
         }
         NSString *plistString;
         ok = [scanner scanUpToString:@"</plist>" intoString:&plistString];
         if (!ok) {
-            NSLog(@"unable to find end of plist");
+            DDLogError(@"Unable to find end of plist in provisioning profile at %@", path);
+            return self;
         }
         plistString = [NSString stringWithFormat:@"%@</plist>",plistString];
         
@@ -39,7 +41,7 @@
         mobileProvision = [NSPropertyListSerialization propertyListWithData:plistdata_latin1 options:NSPropertyListImmutable format:NULL error:&error];
         self.isValid = (mobileProvision != nil);
         if (error) {
-            NSLog(@"error parsing extracted plist — %@",error);
+            DDLogError(@"Error parsing extracted plist — %@", error);
             return self;
         }
         
