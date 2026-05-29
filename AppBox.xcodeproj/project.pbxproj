@@ -99,6 +99,8 @@
 		AA11BB22CC33DD44EE550012 /* MobileProvisionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550002 /* MobileProvisionTests.m */; };
 		AA11BB22CC33DD44EE550013 /* KeychainHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550003 /* KeychainHandlerTests.m */; };
 		AA11BB22CC33DD44EE550014 /* UserDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550004 /* UserDataTests.m */; };
+		AA11BB22CC33DD44EE550015 /* MailHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550005 /* MailHandlerTests.m */; };
+		AA11BB22CC33DD44EE550016 /* UpdateHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550006 /* UpdateHandlerTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -300,6 +302,8 @@
 		AA11BB22CC33DD44EE550002 /* MobileProvisionTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MobileProvisionTests.m; path = Common/MobileProvision/MobileProvisionTests.m; sourceTree = "<group>"; };
 		AA11BB22CC33DD44EE550003 /* KeychainHandlerTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KeychainHandlerTests.m; path = Common/KeychainHandler/KeychainHandlerTests.m; sourceTree = "<group>"; };
 		AA11BB22CC33DD44EE550004 /* UserDataTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = UserDataTests.m; path = Common/UserManager/UserDataTests.m; sourceTree = "<group>"; };
+		AA11BB22CC33DD44EE550005 /* MailHandlerTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MailHandlerTests.m; path = Common/MailHandler/MailHandlerTests.m; sourceTree = "<group>"; };
+		AA11BB22CC33DD44EE550006 /* UpdateHandlerTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = UpdateHandlerTests.m; path = Common/UpdateHandler/UpdateHandlerTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
@@ -401,6 +405,22 @@
 			name = UserManager;
 			sourceTree = "<group>";
 		};
+		AA11BB22CC33DD44EE550027 /* MailHandler */ = {
+			isa = PBXGroup;
+			children = (
+				AA11BB22CC33DD44EE550005 /* MailHandlerTests.m */,
+			);
+			name = MailHandler;
+			sourceTree = "<group>";
+		};
+		AA11BB22CC33DD44EE550028 /* UpdateHandler */ = {
+			isa = PBXGroup;
+			children = (
+				AA11BB22CC33DD44EE550006 /* UpdateHandlerTests.m */,
+			);
+			name = UpdateHandler;
+			sourceTree = "<group>";
+		};
 		AA11BB22CC33DD44EE550021 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -409,6 +429,8 @@
 				AA11BB22CC33DD44EE550023 /* MobileProvision */,
 				AA11BB22CC33DD44EE550024 /* KeychainHandler */,
 				AA11BB22CC33DD44EE550025 /* UserManager */,
+				AA11BB22CC33DD44EE550027 /* MailHandler */,
+				AA11BB22CC33DD44EE550028 /* UpdateHandler */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -1143,6 +1165,8 @@
 				AA11BB22CC33DD44EE550012 /* MobileProvisionTests.m in Sources */,
 				AA11BB22CC33DD44EE550013 /* KeychainHandlerTests.m in Sources */,
 				AA11BB22CC33DD44EE550014 /* UserDataTests.m in Sources */,
+				AA11BB22CC33DD44EE550015 /* MailHandlerTests.m in Sources */,
+				AA11BB22CC33DD44EE550016 /* UpdateHandlerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

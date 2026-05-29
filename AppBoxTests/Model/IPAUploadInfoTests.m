@@ -10,6 +10,10 @@
 #import "IPAUploadInfo.h"
 #import "Constants.h"
 
+@interface IPAUploadInfo (Testing)
+- (NSString *)validURLString:(NSString *)urlString;
+@end
+
 @interface IPAUploadInfoTests : XCTestCase
 @end
 
@@ -200,6 +204,164 @@
     };
     info.ipaInfoPlist = plist;
     XCTAssertEqualObjects(info.name, @"MyCoolApp");
+}
+
+#pragma mark - validURLString Tests
+
+- (void)testValidURLString_WithNormalString_ReturnsSameString {
+    IPAUploadInfo *info = [[IPAUploadInfo alloc] initEmpty];
+    NSString *result = [info validURLString:@"MyApp"];
+    XCTAssertEqualObjects(result, @"MyApp");
+}
+
+- (void)testValidURLString_WithEmptyString_ReturnsAppBox {
+    IPAUploadInfo *info = [[IPAUploadInfo alloc] initEmpty];
+    NSString *result = [info validURLString:@""];
+    XCTAssertEqualObjects(result, @"AppBox");
+}
+
+- (void)testValidURLString_WithNilString_ReturnsAppBox {
+    IPAUploadInfo *info = [[IPAUploadInfo alloc] initEmpty];
+    NSString *result = [info validURLString:nil];
+    XCTAssertEqualObjects(result, @"AppBox");
+}
+
+- (void)testValidURLString_StripsInvalidURLCharacters {
+    IPAUploadInfo *info = [[IPAUploadInfo alloc] initEmpty];
+    NSString *result = [info validURLString:@"My App"];
+    // Space is allowed in URLQueryAllowedCharacterSet, so it stays
+    XCTAssertNotNil(result);
+    XCTAssertGreaterThan(result.length, 0);
+}
+
+- (void)testValidURLString_WithSpecialCharacters_RemovesDisallowedChars {
+    IPAUploadInfo *info = [[IPAUploadInfo alloc] initEmpty];
+    // Characters NOT in URLQueryAllowedCharacterSet get stripped
+    NSString *input = [NSString stringWithFormat:@"App%cBox", 0x01];
+    NSString *result = [info validURLString:input];
+    XCTAssertEqualObjects(result, @"AppBox");
+}
+
+- (void)testValidURLString_WithVersion_PreservesDotsAndNumbers {
+    IPAUploadInfo *info = [[IPAUploadInfo alloc] initEmpty];
+    NSString *result = [info validURLString:@"1.2.3"];
+    XCTAssertEqualObjects(result, @"1.2.3");
+}
+
+- (void)testValidURLString_WithSlashes_PreservesSlashes {
+    IPAUploadInfo *info = [[IPAUploadInfo alloc] initEmpty];
+    NSString *result = [info validURLString:@"/com.example.app"];
+    XCTAssertEqualObjects(result, @"/com.example.app");
+}
+
+#pragma mark - upadteDbDirectoryByBundleDirectory Tests
+
+- (void)testUpdateDbDirectory_SetsDbDirectory {
+    IPAUploadInfo *info = [[IPAUploadInfo alloc] initEmpty];
+    NSDictionary *plist = @{
+        @"CFBundleName": @"TestApp",
+        @"CFBundleVersion": @"5",
+        @"CFBundleIdentifier": @"com.test.myapp",
+        @"CFBundleShortVersionString": @"2.0"
+    };
+    info.ipaInfoPlist = plist;
+    XCTAssertNotNil(info.dbDirectory);
+    NSString *dbDirStr = info.dbDirectory.absoluteString;
+    XCTAssertTrue([dbDirStr containsString:@"TestApp"]);
+    XCTAssertTrue([dbDirStr containsString:@"ver2.0"]);
+    XCTAssertTrue([dbDirStr containsString:@"(5)"]);
+}
+
+- (void)testUpdateDbDirectory_SetsDbIPAFullPath {
+    IPAUploadInfo *info = [[IPAUploadInfo alloc] initEmpty];
+    NSDictionary *plist = @{
+        @"CFBundleName": @"TestApp",
+        @"CFBundleVersion": @"1",
+        @"CFBundleIdentifier": @"com.test.app",
+        @"CFBundleShortVersionString": @"1.0"
+    };
+    info.ipaInfoPlist = plist;
+    XCTAssertNotNil(info.dbIPAFullPath);
+    NSString *path = info.dbIPAFullPath.absoluteString;
+    XCTAssertTrue([path hasSuffix:@".ipa"]);
+    XCTAssertTrue([path containsString:@"TestApp"]);
+}
+
+- (void)testUpdateDbDirectory_SetsManifestPath {
+    IPAUploadInfo *info = [[IPAUploadInfo alloc] initEmpty];
+    NSDictionary *plist = @{
+        @"CFBundleName": @"TestApp",
+        @"CFBundleVersion": @"1",
+        @"CFBundleIdentifier": @"com.test.app",
+        @"CFBundleShortVersionString": @"1.0"
+    };
+    info.ipaInfoPlist = plist;
+    XCTAssertNotNil(info.dbManifestFullPath);
+    XCTAssertTrue([info.dbManifestFullPath.absoluteString hasSuffix:@"manifest.plist"]);
+}
+
+- (void)testUpdateDbDirectory_SetsAppInfoJSONPath {
+    IPAUploadInfo *info = [[IPAUploadInfo alloc] initEmpty];
+    NSDictionary *plist = @{
+        @"CFBundleName": @"TestApp",
+        @"CFBundleVersion": @"1",
+        @"CFBundleIdentifier": @"com.test.app",
+        @"CFBundleShortVersionString": @"1.0"
+    };
+    info.ipaInfoPlist = plist;
+    XCTAssertNotNil(info.dbAppInfoJSONFullPath);
+    XCTAssertTrue([info.dbAppInfoJSONFullPath.absoluteString containsString:FILE_NAME_UNIQUE_JSON]);
+}
+
+- (void)testUpdateDbDirectory_WithKeepSameLink_JSONInBundleDir {
+    IPAUploadInfo *info = [[IPAUploadInfo alloc] initEmpty];
+    info.isKeepSameLinkEnabled = YES;
+    NSDictionary *plist = @{
+        @"CFBundleName": @"TestApp",
+        @"CFBundleVersion": @"1",
+        @"CFBundleIdentifier": @"com.test.app",
+        @"CFBundleShortVersionString": @"1.0"
+    };
+    info.ipaInfoPlist = plist;
+    NSString *jsonPath = info.dbAppInfoJSONFullPath.absoluteString;
+    // With keep same link, JSON goes in bundle directory (not versioned path)
+    XCTAssertFalse([jsonPath containsString:@"ver1.0"]);
+    XCTAssertTrue([jsonPath containsString:FILE_NAME_UNIQUE_JSON]);
+}
+
+#pragma mark - isValidInfoPlist Validation Edge Cases
+
+- (void)testIsValidInfoPlist_WithMissingVersion_ReturnsNO {
+    IPAUploadInfo *info = [[IPAUploadInfo alloc] initEmpty];
+    NSDictionary *plist = @{
+        @"CFBundleName": @"TestApp",
+        @"CFBundleVersion": @"1",
+        @"CFBundleIdentifier": @"com.test.app"
+    };
+    info.ipaInfoPlist = plist;
+    XCTAssertFalse([info isValidInfoPlist]);
+}
+
+- (void)testIsValidInfoPlist_WithMissingBuild_ReturnsNO {
+    IPAUploadInfo *info = [[IPAUploadInfo alloc] initEmpty];
+    NSDictionary *plist = @{
+        @"CFBundleName": @"TestApp",
+        @"CFBundleIdentifier": @"com.test.app",
+        @"CFBundleShortVersionString": @"1.0"
+    };
+    info.ipaInfoPlist = plist;
+    XCTAssertFalse([info isValidInfoPlist]);
+}
+
+- (void)testIsValidInfoPlist_WithMissingIdentifier_ReturnsNO {
+    IPAUploadInfo *info = [[IPAUploadInfo alloc] initEmpty];
+    NSDictionary *plist = @{
+        @"CFBundleName": @"TestApp",
+        @"CFBundleVersion": @"1",
+        @"CFBundleShortVersionString": @"1.0"
+    };
+    info.ipaInfoPlist = plist;
+    XCTAssertFalse([info isValidInfoPlist]);
 }
 
 @end
