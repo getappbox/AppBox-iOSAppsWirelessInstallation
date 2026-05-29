@@ -129,7 +129,7 @@
         }break;
             
         case DBFILESUploadSessionLookupErrorNotFound:{
-            [Common showAlertWithTitle:@"Error" andMessage:@"he upload session ID was not found or has expired. Upload sessions are valid for 48 hours. Please try again."];
+            [Common showAlertWithTitle:@"Error" andMessage:@"The upload session ID was not found or has expired. Upload sessions are valid for 48 hours. Please try again."];
         }break;
             
         case DBFILESUploadSessionLookupErrorNotClosed:{
