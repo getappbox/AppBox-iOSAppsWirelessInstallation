@@ -79,7 +79,7 @@ extension AppBoxCLI {
 		let appBoxPath = "/Applications/AppBox.app/Contents/MacOS/AppBox"
 		guard FileManager.default.fileExists(atPath: appBoxPath) else {
 			print("\nAppBox is not installed in /Applications folder. AppBox must be installed at /Applications/AppBox.app to use the AppBox CLI tool.")
-			return
+			Foundation.exit(1)
 		}
 
 		let task = Process()
@@ -90,8 +90,10 @@ extension AppBoxCLI {
 		do {
 			try task.run()
 			task.waitUntilExit()
+			Foundation.exit(task.terminationStatus)
 		} catch {
 			print("Failed to start AppBox: \(error)")
+			Foundation.exit(1)
 		}
 	}
 
