@@ -15,10 +15,10 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate, UNUserNotificationCenterDelegate>
 
 //stored properties
-@property (nonatomic) BOOL processing;
-@property (nonatomic) BOOL isReadyToUpload;
-@property (nonatomic) BOOL isInternetConnected;
-@property (nonatomic) NSInteger exitCode;
+@property (atomic) BOOL processing;
+@property (atomic) BOOL isReadyToUpload;
+@property (atomic) BOOL isInternetConnected;
+@property (atomic) NSInteger exitCode;
 
 //menu iboutlet
 @property (nonatomic, weak) IBOutlet NSMenuItem *dropboxLogoutButton;
