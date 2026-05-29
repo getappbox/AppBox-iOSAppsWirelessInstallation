@@ -26,6 +26,7 @@
         if ([hudDictionary.allKeys containsObject:view.description]) {
             ABHudViewController *hud = [hudDictionary objectForKey:view.description];
             [hud.view removeFromSuperview];
+            [hudDictionary removeObjectForKey:view.description];
         }
         return nil;
     } else {
