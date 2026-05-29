@@ -440,9 +440,15 @@
 		DDLogError(@"Failed to list temporary directory: %@", error.localizedDescription);
 		return;
 	}
+	// Only remove files created by AppBox: UUID-named working directories and manifest.plist
+	NSString *uuidPattern = @"^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$";
+	NSPredicate *uuidPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES[c] %@", uuidPattern];
 	for (NSString *file in tmpDirectory) {
+		if (![file isEqualToString:@"manifest.plist"] && ![uuidPredicate evaluateWithObject:file]) {
+			continue;
+		}
 		NSError *removeError = nil;
-		NSString *filePath = [NSString stringWithFormat:@"%@%@", NSTemporaryDirectory(), file];
+		NSString *filePath = [NSTemporaryDirectory() stringByAppendingPathComponent:file];
 		[[NSFileManager defaultManager] removeItemAtPath:filePath error:&removeError];
 		if (removeError) {
 			DDLogError(@"Failed to remove temp file %@: %@", file, removeError.localizedDescription);

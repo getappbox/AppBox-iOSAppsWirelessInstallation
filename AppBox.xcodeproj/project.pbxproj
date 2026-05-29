@@ -11,6 +11,9 @@
 		4410D19C26FF851D0046E5F9 /* CoreDataMigration3to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4410D19B26FF851D0046E5F9 /* CoreDataMigration3to4.xcmappingmodel */; };
 		449BD6B8282111B0008EFB2B /* AppBoxService+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 449BD6B4282111B0008EFB2B /* AppBoxService+CoreDataProperties.m */; };
 		449BD6B9282111B0008EFB2B /* AppBoxService+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 449BD6B5282111B0008EFB2B /* AppBoxService+CoreDataClass.m */; };
+		4D3E492303A5E78B0417E17F /* ObjectiveDropboxOfficial.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656E98171CB7E85AA663AFE8 /* ObjectiveDropboxOfficial.xcframework */; };
+		6968AADC9DEB5554A06F19BD /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = 33146DD70AA7C380685E53AA /* CocoaLumberjack */; };
+		AC4CF046F7F2B76CF56BF8E4 /* ObjectiveDropboxOfficial.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 656E98171CB7E85AA663AFE8 /* ObjectiveDropboxOfficial.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DB04358B2E69628F005F0173 /* appboxcli in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB0435832E696255005F0173 /* appboxcli */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		DB0435912E6962EA005F0173 /* CLISupportHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0435902E6962EA005F0173 /* CLISupportHelper.m */; };
 		DB1A06622160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DB1A06612160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel */; };
@@ -35,15 +38,11 @@
 		DB831BCB1FF6B5780065B646 /* ABHudViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB831BC91FF6B5780065B646 /* ABHudViewController.m */; };
 		DB831BCC1FF6B5780065B646 /* ABHudViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB831BCA1FF6B5780065B646 /* ABHudViewController.xib */; };
 		DB8BAA912E6C433200186B7B /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = DB8BAA902E6C433200186B7B /* ArgumentParser */; };
-		6968AADC9DEB5554A06F19BD /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = 33146DD70AA7C380685E53AA /* CocoaLumberjack */; };
-		F6AEC01BE879A2BB998E829D /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = EFE5EA7464F3539F2562A787 /* ZipArchive */; };
 		DB8CE5F81FF77199003FEB65 /* DisabledView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8CE5F71FF77199003FEB65 /* DisabledView.m */; };
 		DBA66CF11FDCF4A60002A956 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBA66CF01FDCF4A60002A956 /* Main.storyboard */; };
 		DBCD1563200BCD1C00C003E6 /* PreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBCD1562200BCD1C00C003E6 /* PreferencesViewController.xib */; };
 		DBD1CE2F2156230800549C0A /* ABPrivate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD1CE2D2156230400549C0A /* ABPrivate.framework */; };
 		DBD1CE302156230800549C0A /* ABPrivate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBD1CE2D2156230400549C0A /* ABPrivate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4D3E492303A5E78B0417E17F /* ObjectiveDropboxOfficial.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656E98171CB7E85AA663AFE8 /* ObjectiveDropboxOfficial.xcframework */; };
-		AC4CF046F7F2B76CF56BF8E4 /* ObjectiveDropboxOfficial.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 656E98171CB7E85AA663AFE8 /* ObjectiveDropboxOfficial.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DBDCFBBE1F99C7860022097B /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDCFBBD1F99C7860022097B /* UploadManager.m */; };
 		DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF290D51FA64A590046D5CE /* ProvisioningDetailsViewController.m */; };
 		DBF290D81FA64A590046D5CE /* ProvisioningDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBF290D61FA64A590046D5CE /* ProvisioningDetailsViewController.xib */; };
@@ -92,6 +91,7 @@
 		E1D12EEC1EC31AC80065E59A /* AccountPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D12EEB1EC31AC80065E59A /* AccountPreferencesViewController.xib */; };
 		E1D12EEE1EC320760065E59A /* HelpPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D12EED1EC320760065E59A /* HelpPreferencesViewController.xib */; };
 		E1DC26001ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DC25FF1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m */; };
+		F6AEC01BE879A2BB998E829D /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = EFE5EA7464F3539F2562A787 /* ZipArchive */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -137,6 +137,7 @@
 		449BD6B6282111B0008EFB2B /* AppBoxService+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppBoxService+CoreDataProperties.h"; sourceTree = "<group>"; };
 		449BD6B7282111B0008EFB2B /* AppBoxService+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppBoxService+CoreDataClass.h"; sourceTree = "<group>"; };
 		44DCC66B25EEA1910074AB1E /* AppBox4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppBox4.xcdatamodel; sourceTree = "<group>"; };
+		656E98171CB7E85AA663AFE8 /* ObjectiveDropboxOfficial.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ObjectiveDropboxOfficial.xcframework; path = Frameworks/ObjectiveDropboxOfficial.xcframework; sourceTree = "<group>"; };
 		DB0435832E696255005F0173 /* appboxcli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = appboxcli; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB04358F2E6962EA005F0173 /* CLISupportHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLISupportHelper.h; sourceTree = "<group>"; };
 		DB0435902E6962EA005F0173 /* CLISupportHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLISupportHelper.m; sourceTree = "<group>"; };
@@ -184,7 +185,6 @@
 		DBA66CF01FDCF4A60002A956 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		DBCD1562200BCD1C00C003E6 /* PreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesViewController.xib; sourceTree = "<group>"; };
 		DBD1CE2D2156230400549C0A /* ABPrivate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ABPrivate.framework; path = Frameworks/ABPrivate.framework; sourceTree = "<group>"; };
-		656E98171CB7E85AA663AFE8 /* ObjectiveDropboxOfficial.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ObjectiveDropboxOfficial.xcframework; path = Frameworks/ObjectiveDropboxOfficial.xcframework; sourceTree = "<group>"; };
 		DBD1CE3221562EC300549C0A /* AppBox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppBox.entitlements; sourceTree = "<group>"; };
 		DBDCFBBC1F99C7860022097B /* UploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadManager.h; sourceTree = "<group>"; };
 		DBDCFBBD1F99C7860022097B /* UploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadManager.m; sourceTree = "<group>"; };
@@ -277,7 +277,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		DB04358D2E696299005F0173 /* Exceptions for "AppBoxCLI" folder in "" build phase */ = {
+		DB04358D2E696299005F0173 /* Exceptions for "AppBoxCLI" folder in "Copy Files" phase from "AppBox" target */ = {
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			buildPhase = DB04357E2E696172005F0173 /* CopyFiles */;
 			membershipExceptions = (
@@ -292,7 +292,7 @@
 		DB0435842E696255005F0173 /* AppBoxCLI */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				DB04358D2E696299005F0173 /* Exceptions for "AppBoxCLI" folder in "" build phase */,
+				DB04358D2E696299005F0173 /* Exceptions for "AppBoxCLI" folder in "Copy Files" phase from "AppBox" target */,
 			);
 			path = AppBoxCLI;
 			sourceTree = "<group>";
@@ -1256,9 +1256,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppBox/AppBoxPrefixHeader.pch;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = AppBox/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_DYLIB_INSTALL_NAME = "";
@@ -1267,7 +1265,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 3.6.0;
+				MARKETING_VERSION = 3.7.0;
 				OTHER_CODE_SIGN_FLAGS = "";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1302,9 +1300,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppBox/AppBoxPrefixHeader.pch;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = AppBox/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_DYLIB_INSTALL_NAME = "";
@@ -1313,7 +1309,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 3.6.0;
+				MARKETING_VERSION = 3.7.0;
 				OTHER_CODE_SIGN_FLAGS = "";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1361,14 +1357,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		DB8BAA8F2E6C433200186B7B /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.6.1;
-			};
-		};
 		9B9E6A9753976BA4489435DD /* XCRemoteSwiftPackageReference "CocoaLumberjack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/CocoaLumberjack/CocoaLumberjack.git";
@@ -1385,18 +1373,26 @@
 				minimumVersion = 2.6.0;
 			};
 		};
+		DB8BAA8F2E6C433200186B7B /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		DB8BAA902E6C433200186B7B /* ArgumentParser */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DB8BAA8F2E6C433200186B7B /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
-			productName = ArgumentParser;
-		};
 		33146DD70AA7C380685E53AA /* CocoaLumberjack */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9B9E6A9753976BA4489435DD /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
 			productName = CocoaLumberjack;
+		};
+		DB8BAA902E6C433200186B7B /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DB8BAA8F2E6C433200186B7B /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
 		};
 		EFE5EA7464F3539F2562A787 /* ZipArchive */ = {
 			isa = XCSwiftPackageProductDependency;
