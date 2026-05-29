@@ -24,6 +24,17 @@ DB_FOLDER="TestScriptBuilds"
 # Path to appboxcli binary (adjust if needed)
 CLI="appboxcli"
 
+# Log file (overwritten each run)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+LOG_FILE="$SCRIPT_DIR/test_cli.log"
+> "$LOG_FILE"
+
+# Tee helper: write to both stdout and log file (strips color codes for log)
+log() {
+    echo -e "$@"
+    echo -e "$@" | sed 's/\x1b\[[0-9;]*m//g' >> "$LOG_FILE"
+}
+
 # ============================================================
 # TEST HELPERS
 # ============================================================
@@ -40,11 +51,11 @@ CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
 print_header() {
-    echo ""
-    echo "============================================================"
-    echo " AppBox CLI Test Suite"
-    echo "============================================================"
-    echo ""
+    log ""
+    log "============================================================"
+    log " AppBox CLI Test Suite"
+    log "============================================================"
+    log ""
 }
 
 run_test() {
@@ -53,20 +64,28 @@ run_test() {
     local cmd="$@"
 
     TEST_NUM=$((TEST_NUM + 1))
-    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo -e "${CYAN}TEST $TEST_NUM: $test_name${NC}"
-    echo -e "${CYAN}CMD:  $cmd${NC}"
-    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    log "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    log "${CYAN}TEST $TEST_NUM: $test_name${NC}"
+    log "${CYAN}CMD:  $cmd${NC}"
+    log "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 
-    if eval "$cmd"; then
-        echo -e "${GREEN}✅ PASSED: $test_name${NC}"
+    local output
+    output=$(eval "$cmd" 2>&1)
+    local exit_code=$?
+
+    if [ $exit_code -eq 0 ]; then
+        log "${GREEN}✅ PASSED: $test_name${NC}"
         PASS_COUNT=$((PASS_COUNT + 1))
     else
-        local exit_code=$?
-        echo -e "${RED}❌ FAILED: $test_name (exit code: $exit_code)${NC}"
+        log "${RED}❌ FAILED: $test_name (exit code: $exit_code)${NC}"
         FAIL_COUNT=$((FAIL_COUNT + 1))
     fi
-    echo ""
+
+    # Log command output
+    if [ -n "$output" ]; then
+        echo "$output" >> "$LOG_FILE"
+    fi
+    log ""
 }
 
 skip_test() {
@@ -74,23 +93,24 @@ skip_test() {
     local reason="$2"
 
     TEST_NUM=$((TEST_NUM + 1))
-    echo -e "${YELLOW}⏭️  SKIPPED TEST $TEST_NUM: $test_name${NC}"
-    echo -e "${YELLOW}    Reason: $reason${NC}"
+    log "${YELLOW}⏭️  SKIPPED TEST $TEST_NUM: $test_name${NC}"
+    log "${YELLOW}    Reason: $reason${NC}"
     SKIP_COUNT=$((SKIP_COUNT + 1))
-    echo ""
+    log ""
 }
 
 print_summary() {
-    echo ""
-    echo "============================================================"
-    echo " TEST SUMMARY"
-    echo "============================================================"
-    echo -e " Total:   $TEST_NUM"
-    echo -e " ${GREEN}Passed:  $PASS_COUNT${NC}"
-    echo -e " ${RED}Failed:  $FAIL_COUNT${NC}"
-    echo -e " ${YELLOW}Skipped: $SKIP_COUNT${NC}"
-    echo "============================================================"
-    echo ""
+    log ""
+    log "============================================================"
+    log " TEST SUMMARY"
+    log "============================================================"
+    log " Total:   $TEST_NUM"
+    log " ${GREEN}Passed:  $PASS_COUNT${NC}"
+    log " ${RED}Failed:  $FAIL_COUNT${NC}"
+    log " ${YELLOW}Skipped: $SKIP_COUNT${NC}"
+    log "============================================================"
+    log ""
+    log "Log file: $LOG_FILE"
 
     if [ $FAIL_COUNT -gt 0 ]; then
         exit 1
@@ -98,36 +118,36 @@ print_summary() {
 }
 
 check_prerequisites() {
-    echo "Checking prerequisites..."
+    log "Checking prerequisites..."
 
     # Check CLI exists
     if ! command -v "$CLI" &>/dev/null; then
-        echo -e "${RED}ERROR: '$CLI' not found in PATH.${NC}"
-        echo "  Install with: AppBox > Menu > Install CLI"
-        echo "  Or set CLI variable to the full binary path."
+        log "${RED}ERROR: '$CLI' not found in PATH.${NC}"
+        log "  Install with: AppBox > Menu > Install CLI"
+        log "  Or set CLI variable to the full binary path."
         exit 1
     fi
-    echo "  ✓ CLI found: $(which $CLI)"
+    log "  ✓ CLI found: $(which $CLI)"
 
     # Check IPA exists
     if [ ! -f "$IPA_PATH" ]; then
-        echo -e "${RED}ERROR: IPA file not found at: $IPA_PATH${NC}"
-        echo "  Update IPA_PATH in this script."
+        log "${RED}ERROR: IPA file not found at: $IPA_PATH${NC}"
+        log "  Update IPA_PATH in this script."
         exit 1
     fi
-    echo "  ✓ IPA found: $IPA_PATH ($(du -h "$IPA_PATH" | cut -f1))"
+    log "  ✓ IPA found: $IPA_PATH ($(du -h "$IPA_PATH" | cut -f1))"
 
     # Check large IPA exists
     if [ ! -f "$LARGE_IPA_PATH" ]; then
-        echo -e "${YELLOW}WARNING: Large IPA file not found at: $LARGE_IPA_PATH${NC}"
-        echo "  Large file test will be skipped."
+        log "${YELLOW}WARNING: Large IPA file not found at: $LARGE_IPA_PATH${NC}"
+        log "  Large file test will be skipped."
     else
-        echo "  ✓ Large IPA found: $LARGE_IPA_PATH ($(du -h "$LARGE_IPA_PATH" | cut -f1))"
+        log "  ✓ Large IPA found: $LARGE_IPA_PATH ($(du -h "$LARGE_IPA_PATH" | cut -f1))"
     fi
 
     # Check Dropbox auth (CLI requires AppBox to be authenticated)
-    echo "  ⚠ Make sure AppBox has an active Dropbox session."
-    echo ""
+    log "  ⚠ Make sure AppBox has an active Dropbox session."
+    log ""
 }
 
 # ============================================================
