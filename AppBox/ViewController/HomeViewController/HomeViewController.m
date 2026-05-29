@@ -75,11 +75,13 @@
         [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
     } else {
         [[[DBClientsManager authorizedClient].usersRoutes getCurrentAccount] setResponseBlock:^(DBUSERSFullAccount * _Nullable result, DBNilObject * _Nullable routeError, DBRequestError * _Nullable networkError) {
-            if (result) {
-                [[Common currentDBManager] registerUserId:result.email];
-            } else if (networkError.tag == DBRequestErrorAuth) {
-				[[NSNotificationCenter defaultCenter] postNotificationName:abDropBoxLoggedOutNotification object:self];
-			}
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (result) {
+                    [[Common currentDBManager] registerUserId:result.email];
+                } else if (networkError.tag == DBRequestErrorAuth) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:abDropBoxLoggedOutNotification object:self];
+                }
+            });
         }];
     }
     [[AppDelegate appDelegate] setIsReadyToUpload:YES];

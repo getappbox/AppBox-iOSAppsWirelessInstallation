@@ -41,7 +41,9 @@
 			@try {
 				[UserData setLoggedInUserEmail:result.email];
 				[UserData setLoggedInUserDisplayName:result.name.displayName];
-				[self updateDropboxButton];
+				dispatch_async(dispatch_get_main_queue(), ^{
+					[self updateDropboxButton];
+				});
 			} @catch (NSException *exception) {
 				DDLogError(@"Exception %@",exception.abDescription);
 			}
@@ -59,16 +61,19 @@
                  //save space usage in user default
                  [UserData setDropboxUsedSpace:usage];
                  [UserData setDropboxAvailableSpace:allocated];
-                 [self updateDropboxButton];
                  
                  //log space usage
 				 DDLogInfo(@"DropBox Used Space : %@MB", usage);
 				 DDLogInfo(@"DropBox Available Space : %@MB", allocated);
                  
-                 //check if dopbox running out of space
-                 if ((allocated.integerValue - usage.integerValue) < abDropboxOutOfSpaceWarningSize){
-                     [Common showAlertWithTitle:@"Warning" andMessage:[NSString stringWithFormat:@"You're running out of Dropbox space\n\n %@MB of %@MB used.", usage, allocated]];
-                 }
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     [self updateDropboxButton];
+                     
+                     //check if dopbox running out of space
+                     if ((allocated.integerValue - usage.integerValue) < abDropboxOutOfSpaceWarningSize){
+                         [Common showAlertWithTitle:@"Warning" andMessage:[NSString stringWithFormat:@"You're running out of Dropbox space\n\n %@MB of %@MB used.", usage, allocated]];
+                     }
+                 });
              } @catch (NSException *exception) {
 				 DDLogError(@"Exception %@",exception.abDescription);
              }
