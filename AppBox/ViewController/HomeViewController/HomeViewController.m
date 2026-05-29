@@ -190,6 +190,7 @@
 	self.isCLIActive = YES;
 	self.ipaUploadInfo = ipaUploadInfo;
     [self.ipaUploadInfo setIpaFullPath:ipaURL];
+	[self.uploadManager setIsCLIActive:YES];
 	[self.uploadManager setIpaUploadInfo:self.ipaUploadInfo];
     [selectedFilePath setURL:ipaURL];
     if (ipaUploadInfo.emails.length != 0) {
