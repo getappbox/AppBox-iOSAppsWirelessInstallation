@@ -75,6 +75,11 @@
     NSString *finalURLString = urlString;
     NSData *bodyData = nil;
 
+    // Enforce HTTPS for security
+    if (finalURLString && [finalURLString hasPrefix:@"http://"]) {
+        finalURLString = [@"https://" stringByAppendingString:[finalURLString substringFromIndex:7]];
+    }
+
     if (requestType == RequestPOST) {
         if (parameters != nil) {
             NSError *jsonError = nil;
