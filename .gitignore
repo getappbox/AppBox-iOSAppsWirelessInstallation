@@ -26,3 +26,6 @@ xcuserdata/
 Frameworks/.DS_Store
 .DS_Store
 default.profraw
+
+## Test logs
+Scripts/test_cli.log
