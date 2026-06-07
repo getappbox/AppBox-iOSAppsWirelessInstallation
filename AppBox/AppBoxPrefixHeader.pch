@@ -34,6 +34,7 @@
 #import "NetworkHandler.h"
 #import "KeychainHandler.h"
 #import "CLISupportHelper.h"
+#import "DefaultAppHandler.h"
 #import "NSApplication+MenuHandler.h"
 
 #import "NSURL+URL.h"

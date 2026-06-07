@@ -131,32 +131,6 @@
     }
 }
 
-//MARK: - Default Application
-+(BOOL)isDefaultIPAHandler {
-    NSString *bundleId = [[NSBundle mainBundle] bundleIdentifier];
-    CFStringRef defaultHandler = LSCopyDefaultRoleHandlerForContentType(CFSTR("com.apple.itunes.ipa"), kLSRolesAll);
-    if (defaultHandler == NULL) return NO;
-    BOOL isDefault = [(__bridge_transfer NSString *)defaultHandler isEqualToString:bundleId];
-    return isDefault;
-}
-
-+(BOOL)setAsDefaultIPAHandler {
-    NSString *bundleId = [[NSBundle mainBundle] bundleIdentifier];
-    OSStatus status = LSSetDefaultRoleHandlerForContentType(CFSTR("com.apple.itunes.ipa"), kLSRolesAll, (__bridge CFStringRef)bundleId);
-    if (status != noErr) {
-        DDLogError(@"Failed to set AppBox as default IPA handler (error %d).", (int)status);
-        return NO;
-    }
-    DDLogInfo(@"AppBox set as default application for .ipa files.");
-    return YES;
-}
-
-+(void)removeAsDefaultIPAHandler {
-    // Reset to system default by setting handler to empty — this effectively removes our claim
-    LSSetDefaultRoleHandlerForContentType(CFSTR("com.apple.itunes.ipa"), kLSRolesAll, CFSTR(""));
-    DDLogInfo(@"AppBox removed as default application for .ipa files.");
-}
-
 //MARK: - AppDelegate Helper
 
 +(AppDelegate *)appDelegate{

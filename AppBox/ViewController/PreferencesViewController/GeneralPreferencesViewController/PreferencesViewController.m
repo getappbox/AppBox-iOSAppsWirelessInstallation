@@ -32,7 +32,17 @@
 	//set general settings
 	[limitedLogCheckBox setState: [UserData debugLog] ? NSControlStateValueOff : NSControlStateValueOn];
 	[updateAlertCheckBox setState: [UserData updateAlertEnable] ? NSControlStateValueOn : NSControlStateValueOff];
-	[defaultIPAHandlerCheckBox setState: [AppDelegate isDefaultIPAHandler] ? NSControlStateValueOn : NSControlStateValueOff];
+	[defaultIPAHandlerCheckBox setState: [DefaultAppHandler isDefaultIPAHandler] ? NSControlStateValueOn : NSControlStateValueOff];
+    
+    // Observe default IPA handler changes
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(defaultIPAHandlerDidChange:)
+                                                 name:ABDefaultIPAHandlerDidChangeNotification
+                                               object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ABDefaultIPAHandlerDidChangeNotification object:nil];
 }
 
 - (IBAction)chunckSizeComboBoxValueChanged:(NSComboBox *)sender {
@@ -77,13 +87,15 @@
 
 - (IBAction)defaultIPAHandlerCheckBoxChanged:(NSButton *)sender {
 	if (sender.state == NSControlStateValueOn) {
-		if (![AppDelegate setAsDefaultIPAHandler]) {
-			[sender setState:NSControlStateValueOff];
-			[Common showAlertWithTitle:@"Error" andMessage:@"Failed to set AppBox as the default application for .ipa files. You can set it manually via Finder: right-click an .ipa → Get Info → Open with → Change All."];
-		}
+		[DefaultAppHandler setAsDefaultIPAHandler];
 	} else {
-		[AppDelegate removeAsDefaultIPAHandler];
+		[DefaultAppHandler removeAsDefaultIPAHandler];
 	}
+}
+
+- (void)defaultIPAHandlerDidChange:(NSNotification *)notification {
+    BOOL isDefault = [notification.userInfo[@"isDefault"] boolValue];
+    [defaultIPAHandlerCheckBox setState:isDefault ? NSControlStateValueOn : NSControlStateValueOff];
 }
 
 @end

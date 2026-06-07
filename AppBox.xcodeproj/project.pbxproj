@@ -15,7 +15,14 @@
 		5D20E6B57EA90CA7D6EA21F7 /* IPAUploadInfoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65C0AF09D32F39F4259167 /* IPAUploadInfoTests.m */; };
 		6968AADC9DEB5554A06F19BD /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = 33146DD70AA7C380685E53AA /* CocoaLumberjack */; };
 		771E1F8D4D831C50C1178A75 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09E11F809EFA1C7844F25D6B /* Cocoa.framework */; };
+		AA11BB22CC33DD44EE550011 /* NetworkHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550001 /* NetworkHandlerTests.m */; };
+		AA11BB22CC33DD44EE550012 /* MobileProvisionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550002 /* MobileProvisionTests.m */; };
+		AA11BB22CC33DD44EE550013 /* KeychainHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550003 /* KeychainHandlerTests.m */; };
+		AA11BB22CC33DD44EE550014 /* UserDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550004 /* UserDataTests.m */; };
+		AA11BB22CC33DD44EE550015 /* MailHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550005 /* MailHandlerTests.m */; };
+		AA11BB22CC33DD44EE550016 /* UpdateHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550006 /* UpdateHandlerTests.m */; };
 		AC4CF046F7F2B76CF56BF8E4 /* ObjectiveDropboxOfficial.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 656E98171CB7E85AA663AFE8 /* ObjectiveDropboxOfficial.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B472C718BB3B23CCB6C65599 /* DefaultAppHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AE09E956E87164818B25F099 /* DefaultAppHandler.m */; };
 		D9E5B24A6827FC5AD68D29D0 /* CommonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 544B2D28AEC66102492FA05E /* CommonTests.m */; };
 		DB04358B2E69628F005F0173 /* appboxcli in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB0435832E696255005F0173 /* appboxcli */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		DB0435912E6962EA005F0173 /* CLISupportHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0435902E6962EA005F0173 /* CLISupportHelper.m */; };
@@ -95,12 +102,6 @@
 		E1D12EEE1EC320760065E59A /* HelpPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D12EED1EC320760065E59A /* HelpPreferencesViewController.xib */; };
 		E1DC26001ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DC25FF1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m */; };
 		F6AEC01BE879A2BB998E829D /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = EFE5EA7464F3539F2562A787 /* ZipArchive */; };
-		AA11BB22CC33DD44EE550011 /* NetworkHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550001 /* NetworkHandlerTests.m */; };
-		AA11BB22CC33DD44EE550012 /* MobileProvisionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550002 /* MobileProvisionTests.m */; };
-		AA11BB22CC33DD44EE550013 /* KeychainHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550003 /* KeychainHandlerTests.m */; };
-		AA11BB22CC33DD44EE550014 /* UserDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550004 /* UserDataTests.m */; };
-		AA11BB22CC33DD44EE550015 /* MailHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550005 /* MailHandlerTests.m */; };
-		AA11BB22CC33DD44EE550016 /* UpdateHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550006 /* UpdateHandlerTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,6 +149,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		07AC024B5902E74BBBD280F9 /* DefaultAppHandler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = DefaultAppHandler.h; sourceTree = "<group>"; };
 		09E11F809EFA1C7844F25D6B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		3E65C0AF09D32F39F4259167 /* IPAUploadInfoTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IPAUploadInfoTests.m; path = Model/IPAUploadInfoTests.m; sourceTree = "<group>"; };
 		4410D18C26FF76A20046E5F9 /* DBAccountManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBAccountManager.h; sourceTree = "<group>"; };
@@ -160,6 +162,13 @@
 		44DCC66B25EEA1910074AB1E /* AppBox4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppBox4.xcdatamodel; sourceTree = "<group>"; };
 		544B2D28AEC66102492FA05E /* CommonTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CommonTests.m; path = Common/CommonTests.m; sourceTree = "<group>"; };
 		656E98171CB7E85AA663AFE8 /* ObjectiveDropboxOfficial.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ObjectiveDropboxOfficial.xcframework; path = Frameworks/ObjectiveDropboxOfficial.xcframework; sourceTree = "<group>"; };
+		AA11BB22CC33DD44EE550001 /* NetworkHandlerTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NetworkHandlerTests.m; path = Common/NetworkHandler/NetworkHandlerTests.m; sourceTree = "<group>"; };
+		AA11BB22CC33DD44EE550002 /* MobileProvisionTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MobileProvisionTests.m; path = Common/MobileProvision/MobileProvisionTests.m; sourceTree = "<group>"; };
+		AA11BB22CC33DD44EE550003 /* KeychainHandlerTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KeychainHandlerTests.m; path = Common/KeychainHandler/KeychainHandlerTests.m; sourceTree = "<group>"; };
+		AA11BB22CC33DD44EE550004 /* UserDataTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = UserDataTests.m; path = Common/UserManager/UserDataTests.m; sourceTree = "<group>"; };
+		AA11BB22CC33DD44EE550005 /* MailHandlerTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MailHandlerTests.m; path = Common/MailHandler/MailHandlerTests.m; sourceTree = "<group>"; };
+		AA11BB22CC33DD44EE550006 /* UpdateHandlerTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = UpdateHandlerTests.m; path = Common/UpdateHandler/UpdateHandlerTests.m; sourceTree = "<group>"; };
+		AE09E956E87164818B25F099 /* DefaultAppHandler.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = DefaultAppHandler.m; sourceTree = "<group>"; };
 		DB0435832E696255005F0173 /* appboxcli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = appboxcli; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB04358F2E6962EA005F0173 /* CLISupportHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLISupportHelper.h; sourceTree = "<group>"; };
 		DB0435902E6962EA005F0173 /* CLISupportHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLISupportHelper.m; sourceTree = "<group>"; };
@@ -298,12 +307,6 @@
 		E1DC25FE1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+ProgressHud.h"; sourceTree = "<group>"; };
 		E1DC25FF1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+ProgressHud.m"; sourceTree = "<group>"; };
 		E1FECA821E83EE5000C4E9AE /* HTTPStatusCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPStatusCode.h; sourceTree = "<group>"; };
-		AA11BB22CC33DD44EE550001 /* NetworkHandlerTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NetworkHandlerTests.m; path = Common/NetworkHandler/NetworkHandlerTests.m; sourceTree = "<group>"; };
-		AA11BB22CC33DD44EE550002 /* MobileProvisionTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MobileProvisionTests.m; path = Common/MobileProvision/MobileProvisionTests.m; sourceTree = "<group>"; };
-		AA11BB22CC33DD44EE550003 /* KeychainHandlerTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KeychainHandlerTests.m; path = Common/KeychainHandler/KeychainHandlerTests.m; sourceTree = "<group>"; };
-		AA11BB22CC33DD44EE550004 /* UserDataTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = UserDataTests.m; path = Common/UserManager/UserDataTests.m; sourceTree = "<group>"; };
-		AA11BB22CC33DD44EE550005 /* MailHandlerTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MailHandlerTests.m; path = Common/MailHandler/MailHandlerTests.m; sourceTree = "<group>"; };
-		AA11BB22CC33DD44EE550006 /* UpdateHandlerTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = UpdateHandlerTests.m; path = Common/UpdateHandler/UpdateHandlerTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
@@ -365,12 +368,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		704A0BB2FE5A7E33851F5FDB /* DefaultAppHandler */ = {
+			isa = PBXGroup;
+			children = (
+				07AC024B5902E74BBBD280F9 /* DefaultAppHandler.h */,
+				AE09E956E87164818B25F099 /* DefaultAppHandler.m */,
+			);
+			path = DefaultAppHandler;
+			sourceTree = "<group>";
+		};
 		9BB2CCACA72911C65FE295AF /* OS X */ = {
 			isa = PBXGroup;
 			children = (
 				09E11F809EFA1C7844F25D6B /* Cocoa.framework */,
 			);
 			name = "OS X";
+			sourceTree = "<group>";
+		};
+		AA11BB22CC33DD44EE550021 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				544B2D28AEC66102492FA05E /* CommonTests.m */,
+				AA11BB22CC33DD44EE550022 /* NetworkHandler */,
+				AA11BB22CC33DD44EE550023 /* MobileProvision */,
+				AA11BB22CC33DD44EE550024 /* KeychainHandler */,
+				AA11BB22CC33DD44EE550025 /* UserManager */,
+				AA11BB22CC33DD44EE550027 /* MailHandler */,
+				AA11BB22CC33DD44EE550028 /* UpdateHandler */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 		AA11BB22CC33DD44EE550022 /* NetworkHandler */ = {
@@ -405,6 +431,14 @@
 			name = UserManager;
 			sourceTree = "<group>";
 		};
+		AA11BB22CC33DD44EE550026 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3E65C0AF09D32F39F4259167 /* IPAUploadInfoTests.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		AA11BB22CC33DD44EE550027 /* MailHandler */ = {
 			isa = PBXGroup;
 			children = (
@@ -419,28 +453,6 @@
 				AA11BB22CC33DD44EE550006 /* UpdateHandlerTests.m */,
 			);
 			name = UpdateHandler;
-			sourceTree = "<group>";
-		};
-		AA11BB22CC33DD44EE550021 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				544B2D28AEC66102492FA05E /* CommonTests.m */,
-				AA11BB22CC33DD44EE550022 /* NetworkHandler */,
-				AA11BB22CC33DD44EE550023 /* MobileProvision */,
-				AA11BB22CC33DD44EE550024 /* KeychainHandler */,
-				AA11BB22CC33DD44EE550025 /* UserManager */,
-				AA11BB22CC33DD44EE550027 /* MailHandler */,
-				AA11BB22CC33DD44EE550028 /* UpdateHandler */,
-			);
-			name = Common;
-			sourceTree = "<group>";
-		};
-		AA11BB22CC33DD44EE550026 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				3E65C0AF09D32F39F4259167 /* IPAUploadInfoTests.m */,
-			);
-			name = Model;
 			sourceTree = "<group>";
 		};
 		AECBA8D5D0C166DA17FF6ED0 /* AppBoxTests */ = {
@@ -963,11 +975,13 @@
 		E1CFC65B1D7E7FD9005872BE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				E13161EF1E97775100586052 /* CLIIPAUpload */,
 				DB04358E2E6962DB005F0173 /* CLISupportHelper */,
+				DB2629821F961F3100C4C647 /* DBErrorHandler */,
+				704A0BB2FE5A7E33851F5FDB /* DefaultAppHandler */,
+				DB425C021F8A514E008CB032 /* DefaultSettings */,
 				E1902B611E1662E300C3E0F6 /* KeychainHandler */,
 				E11633961E558609005EAB31 /* MobileProvision */,
-				E13161EF1E97775100586052 /* CLIIPAUpload */,
-				DB2629821F961F3100C4C647 /* DBErrorHandler */,
 				DBDCFBBB1F99C7860022097B /* UploadManager */,
 				E1902B4C1E16617B00C3E0F6 /* NetworkHandler */,
 				E19473FC205FD3B700CF12F9 /* UISubClasses */,
@@ -977,7 +991,6 @@
 				E1902B4B1E16617B00C3E0F6 /* MailHandler */,
 				E1DC25FA1ECDBC16001EF106 /* ProgressHUD */,
 				E1902B4F1E16617B00C3E0F6 /* UpdateHandler */,
-				DB425C021F8A514E008CB032 /* DefaultSettings */,
 				E1DC25F91ECD826C001EF106 /* OtherServicesKeys.h */,
 				E16018F11DEC0EB700E3A377 /* Constants.h */,
 				E1CFC65C1D7E7FEA005872BE /* Common.h */,
@@ -1240,6 +1253,7 @@
 				E18186E21E8A47D60002509F /* HelpPreferencesViewController.m in Sources */,
 				E18186CE1E8A3BC00002509F /* PreferencesTabViewController.m in Sources */,
 				E16BB8C9202873FA002E9B5A /* AccountCellView.m in Sources */,
+				B472C718BB3B23CCB6C65599 /* DefaultAppHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
