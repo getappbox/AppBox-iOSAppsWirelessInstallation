@@ -18,6 +18,8 @@
 #define abDocumentationURL @"https://docs.getappbox.com"
 #define abLicenseURL @"https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/blob/master/LICENSE.md"
 #define abGitHubLatestRelease @"https://api.github.com/repos/getappbox/AppBox-iOSAppsWirelessInstallation/releases/latest"
+#define abGitHubLatestReleaseURL @"https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/releases/latest"
+#define abHomebrewCaskAPI @"https://formulae.brew.sh/api/cask/appbox.json"
 #define abTwitterURL @"https://twitter.com/AppBoxHQ"
 #define abSlackImage @"https://getappbox.com/images/AppBoxIcon.png"
 #define abWebHookSetupURL @"https://my.slack.com/apps/new/A0F7XDUAZ-incoming-webhooks"

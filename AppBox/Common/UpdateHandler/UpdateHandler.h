@@ -10,8 +10,10 @@
 
 @interface UpdateHandler : NSObject
 
++ (BOOL)isInstalledViaHomebrew;
 + (void)showAlreadyUptoDateAlert;
 + (void)showUpdateAlertWithUpdateURL:(NSURL *)url;
++ (void)showHomebrewUpdateAlert;
 + (void)isNewVersionAvailableCompletion:(void (^)(bool available, NSURL *url))completion;
 
 @end

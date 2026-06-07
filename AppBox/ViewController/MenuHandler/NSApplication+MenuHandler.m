@@ -15,7 +15,11 @@
 - (IBAction)checkForUpdateTapped:(NSMenuItem *)sender {
     [UpdateHandler isNewVersionAvailableCompletion:^(bool available, NSURL *url) {
         if (available){
-            [UpdateHandler showUpdateAlertWithUpdateURL:url];
+            if (url == nil && [UpdateHandler isInstalledViaHomebrew]) {
+                [UpdateHandler showHomebrewUpdateAlert];
+            } else {
+                [UpdateHandler showUpdateAlertWithUpdateURL:url];
+            }
         }else{
             [UpdateHandler showAlreadyUptoDateAlert];
         }

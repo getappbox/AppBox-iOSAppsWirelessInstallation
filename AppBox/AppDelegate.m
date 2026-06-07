@@ -60,7 +60,11 @@
     [UpdateHandler isNewVersionAvailableCompletion:^(bool available, NSURL *url) {
         if (available){
             if (![UserData updateAlertEnable]){
-                [UpdateHandler showUpdateAlertWithUpdateURL:url];
+                if (url == nil && [UpdateHandler isInstalledViaHomebrew]) {
+                    [UpdateHandler showHomebrewUpdateAlert];
+                } else {
+                    [UpdateHandler showUpdateAlertWithUpdateURL:url];
+                }
             }
         }
     }];
