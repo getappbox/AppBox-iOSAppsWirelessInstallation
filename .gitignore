@@ -29,3 +29,13 @@ default.profraw
 
 ## Test logs
 Scripts/test_cli.log
+
+## Secrets (generated from .env by Scripts/generate-secrets.sh)
+.env
+/Generated/
+
+## Agents implementation plans and progress
+plans
+
+## Release artifacts (Scripts/build-release.sh)
+dist/

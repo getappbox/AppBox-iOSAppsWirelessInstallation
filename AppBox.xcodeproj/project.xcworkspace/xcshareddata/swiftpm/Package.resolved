@@ -1,15 +1,6 @@
 {
-  "originHash" : "4ff60d7e9aa08c861ff2386e3968e5d45ee8bb43150847dfeb59cad7690170fb",
+  "originHash" : "25681a66f8e3f871f936d2f569bcca89640f9554b9d8c8096cdbc1f0b08ed6d3",
   "pins" : [
-    {
-      "identity" : "cocoalumberjack",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/CocoaLumberjack/CocoaLumberjack.git",
-      "state" : {
-        "revision" : "c5f2ed4d219866117e135cf648180dc7b66739d3",
-        "version" : "3.9.1"
-      }
-    },
     {
       "identity" : "swift-argument-parser",
       "kind" : "remoteSourceControl",
@@ -20,21 +11,21 @@
       }
     },
     {
-      "identity" : "swift-log",
+      "identity" : "swiftydropbox",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-log",
+      "location" : "https://github.com/dropbox/SwiftyDropbox.git",
       "state" : {
-        "revision" : "7dc6101ae4dbe95cd3bc9cebad3b7cf8e49a7a63",
-        "version" : "1.13.0"
+        "revision" : "e315e0b14edb83f022134aef389deb4e8bee6bbf",
+        "version" : "10.2.4"
       }
     },
     {
-      "identity" : "ziparchive",
+      "identity" : "zipfoundation",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ZipArchive/ZipArchive.git",
+      "location" : "https://github.com/weichsel/ZIPFoundation.git",
       "state" : {
-        "revision" : "df35718ea19a94e015b91dc4881dee028ce4cdba",
-        "version" : "2.6.0"
+        "revision" : "22787ffb59de99e5dc1fbfe80b19c97a904ad48d",
+        "version" : "0.9.20"
       }
     }
   ],
