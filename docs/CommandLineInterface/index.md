@@ -10,51 +10,59 @@ AppBox provides a powerful command-line interface that allows you to automate yo
 
 ## Prerequisites
 
-Before installing/using the AppBox CLI tool, ensure that: 
-1. The AppBox application must be installed in `/Applications/AppBox.app` 
-2. You must have linked your Dropbox account with AppBox 
+Before installing/using the AppBox CLI tool, ensure that, AppBox application must be installed in `/Applications/AppBox.app` 
 
 ## Installation
-The AppBox CLI tool can be installed directly from the AppBox application using the built-in installation manager.
+The AppBox CLI tool can be installed directly from the AppBox macOS application using the built-in installation manager.
 
 1. Open the AppBox application
-2. Click on CLI menu options
-3. Click "Install CLI Tool"
- ![](Screenshots/ABCLIMenu.webp)
-4. AppBox will install the CLI tool and display a success message once the installation is complete.
+2. Open AppBox Preferences (`Cmd + ,`)
+3. In the General tab, click "Install" in the "Command-Line Tool" section
+ ![](Screenshots/ABCLINotInstalled.webp)
+4. AppBox will prompt you to enter your system password to authorize the installation. Enter your password and click "OK".
+ ![](Screenshots/ABCLIInstallPassword.webp)
+5. AppBox will install the CLI tool and display a success message once the installation is complete.
  ![](Screenshots/ABCLIInstallSuccess.webp)
-5. After installation, you can verify that the CLI tool is properly installed by running:
+6. After installation, you can verify that the CLI tool is properly installed by running:
 
  ```bash
  appboxcli -h
  ```
 
+ ![](Screenshots/ABCLIHelp.webp)
+
 The installation process will: 
 - Create a symbolic link to the CLI tool in `/usr/local/bin/` 
 - Make the `appboxcli` command available system-wide 
-
-Installation runs as your user — no administrator password is required. If `/usr/local/bin` isn't writable by your user, AppBox shows a one-line `sudo` command you can copy and paste into Terminal instead.
 
 ## Uninstallation
 
 To uninstall the CLI tool, AppBox provides an easy uninstallation process:
 
 1. Open AppBox application
-2. Click on CLI menu options
-3. Click "Uninstall CLI Tool"
-4. Confirm the uninstallation when prompted
+2. Open AppBox Preferences (`Cmd + ,`)
+3. In the General tab, click "Uninstall" in the "Command-Line Tool" section
+  ![](Screenshots/ABCLIInstalled.webp)
+4. AppBox will prompt you to confirm the uninstallation. Click "Yes" to proceed.
  ![](Screenshots/ABCLIUninstallConfirm.webp)
-5. The system will remove the CLI tool and display a success message
- ![](Screenshots/ABCLIUninstallSuccessfully.webp)
+5. AppBox will prompt you to enter your system password to authorize the uninstallation. Enter your password and click "OK".
+ ![](Screenshots/ABCLIUninstallPassword.webp)
+6. The system will remove the CLI tool and display a success message
+ ![](Screenshots/ABCLIUninstallSuccess.webp)
 
 
 ## Command Reference
 
 The AppBox CLI tool provides comprehensive options for uploading and distributing your iOS applications.
 
-### Subcommands (v4)
+### Subcommands
 
-`upload` is the default subcommand, so the historical `appboxcli --ipa <path> …` invocation keeps working. The CLI also provides:
+`upload` is the default subcommand, so the historical `appboxcli --ipa <path> …` invocation keeps working. 
+
+![](Screenshots/ABCLIUploadHelp.webp)
+
+
+The CLI also provides:
 
 | Command | Description |
 | --- | --- |
