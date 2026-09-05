@@ -42,9 +42,6 @@ struct AccountPreferencesView: View {
                 }
             }
 
-            Text("More upload destinations (like Amazon S3) are coming soon.")
-                .font(IslandTypography.caption).foregroundColor(.secondary)
-
             Spacer(minLength: 0)
         }
         .padding(IslandMetrics.padding)
