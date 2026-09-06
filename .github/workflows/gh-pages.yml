@@ -1,10 +1,9 @@
 name: Deploy docs to GitHub pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["master"]
-    paths: ["docs/**", "mkdocs.yml"]
+  workflow_dispatch:
 
 # Sets permissions write in gh
 permissions:
