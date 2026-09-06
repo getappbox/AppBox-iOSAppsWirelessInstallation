@@ -70,6 +70,7 @@ Every release also attaches `AppBox.dmg` and `AppBox.app.zip` directly, along wi
 ![](docs/Images/Readme/ABPref1.webp)
 ![](docs/Images/Readme/ABPref2.webp)
 ![](docs/Images/Readme/ABPref3.webp)
+![](docs/Images/Readme/ABPref4.webp)
 
 ### Installation and All Builds WebPage
 ![](docs/Images/Readme/ABWeb1.webp)        ![](docs/Images/Readme/ABWeb2.webp)
