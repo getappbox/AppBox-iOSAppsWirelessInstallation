@@ -6,14 +6,26 @@ hide:
 
 ## Installation
 
+AppBox requires macOS 15 Sequoia or later.
+
 ### 1. Quick Install
 You can install AppBox by running following command in your terminal -
 ```bash
 curl -s https://getappbox.com/install.sh | bash
 ```
 
-### 2. Manual Install
-If you face any issue using above command then you can manually install AppBox by downloading it from [here](https://getappbox.com/download/). After that, unzip `AppBox.app.zip` and move `AppBox.app` into `/Applications` directory.
+### 2. Using Homebrew
+You can install AppBox via Homebrew by running following command in your terminal -
+```bash
+brew install --cask appbox
+```
+
+Update it later with `brew upgrade --cask appbox`.
+
+### 3. Manual Install
+If you face any issue using above commands then you can manually install AppBox by downloading [AppBox.dmg](https://getappbox.com/download/). Open the DMG and drag `AppBox.app` into your `Applications` folder.
+
+Every release also attaches `AppBox.dmg` and `AppBox.app.zip` directly, along with `appboxcli.zip` for the standalone command-line tool, see [Releases](https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/releases/latest).
 
 ## How to use AppBox 
 1. Open AppBox.
