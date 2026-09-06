@@ -7,10 +7,9 @@
 #  release directory:
 #
 #    dist/AppBox-<version>/
-#      AppBox.app.zip     the GUI app (appboxcli embedded in Contents/SharedSupport)
-#      AppBox.tar.gz      the same AppBox.app, tarred
+#      AppBox.dmg         the GUI app, drag-to-Applications (what getappbox.com/download serves)
+#      AppBox.app.zip     the same AppBox.app, zipped (what install.sh downloads)
 #      appboxcli.zip      the standalone CLI (binary + AppBoxCore resource bundle + install.sh)
-#      appboxcli.tar.gz   the same CLI payload, tarred
 #
 #  Usage:  Scripts/build-release.sh [actions] [targets] [options]
 #  Run    Scripts/build-release.sh --help  for the flag list.
@@ -36,7 +35,9 @@ BUILD_GUI=0
 BUILD_CLI=0
 
 SIGN=1
-MAKE_DMG=0
+# On by default: getappbox.com/download links straight at the release's
+# AppBox.dmg, so a GUI release without one 404s for every visitor.
+MAKE_DMG=1
 CLEAN=0
 VERBOSE=0
 VERSION_OVERRIDE=""
@@ -68,7 +69,9 @@ Options
   -s, --suite <core|app|all>  Suites -t runs (default: all). core = the AppBoxCore package,
                               app = the AppBoxTests test plan.
   -T, --test-timeout <secs>   Per-suite watchdog (default: 1200). See the note below.
-  -d, --dmg                   Also produce a DMG for the GUI (implies -b).
+  -d, --dmg                   Produce a DMG for the GUI (implies -b). On by default.
+      --no-dmg                Skip the DMG. Faster, but do not ship such a build:
+                              getappbox.com/download links directly at AppBox.dmg.
   -i, --identity <name>       Signing identity (default: "Developer ID Application").
   -k, --keychain-profile <p>  notarytool keychain profile to notarize with.
   -V, --release-version <v>   Override the version in the release directory name.
@@ -161,6 +164,7 @@ while [ $# -gt 0 ]; do
 		-g|--gui) BUILD_GUI=1 ;;
 		-c|--cli) BUILD_CLI=1 ;;
 		-d|--dmg) MAKE_DMG=1; DO_BUILD=1 ;;
+		--no-dmg) MAKE_DMG=0 ;;
 		-s|--suite) TEST_SUITES="${2:?-s needs core, app or all}"; shift ;;
 		-T|--test-timeout) TEST_TIMEOUT="${2:?-T needs a value in seconds}"; shift ;;
 		-i|--identity) SIGN_IDENTITY="${2:?-i needs an identity name}"; shift ;;
@@ -517,19 +521,6 @@ zip_artifact() {
 	ditto -c -k --sequesterRsrc --keepParent "$source" "$destination"
 }
 
-tar_artifact() {
-	local source="$1" destination="$2"
-	rm -f "$destination"
-	tar -czf "$destination" -C "$(dirname "$source")" "$(basename "$source")"
-}
-
-# Both archive formats of one payload, so a re-package after stapling stays a single call.
-package_both() {
-	local source="$1" zip_path="$2" tar_path="$3"
-	zip_artifact "$source" "$zip_path"
-	tar_artifact "$source" "$tar_path"
-}
-
 make_dmg() {
 	local app="$1" version="$2"
 	local dmg="$RELEASE_DIR/AppBox.dmg"
@@ -598,15 +589,14 @@ ARTIFACTS=()
 if [ "$BUILD_GUI" -eq 1 ]; then
 	build_gui "$VERSION"
 	GUI_ZIP="$RELEASE_DIR/AppBox.app.zip"
-	GUI_TAR="$RELEASE_DIR/AppBox.tar.gz"
-	package_both "$GUI_APP" "$GUI_ZIP" "$GUI_TAR"
+	zip_artifact "$GUI_APP" "$GUI_ZIP"
 	if [ "$NOTARIZE" -eq 1 ]; then
 		notarize_artifact "$GUI_ZIP"
 		xcrun stapler staple "$GUI_APP"
-		package_both "$GUI_APP" "$GUI_ZIP" "$GUI_TAR"
+		zip_artifact "$GUI_APP" "$GUI_ZIP"
 		spctl --assess --type exec --verbose=2 "$GUI_APP" 2>&1 | sed 's/^/    /' || warn "spctl rejected AppBox.app"
 	fi
-	ARTIFACTS+=("$GUI_ZIP" "$GUI_TAR")
+	ARTIFACTS+=("$GUI_ZIP")
 	if [ "$MAKE_DMG" -eq 1 ]; then
 		make_dmg "$GUI_APP" "$VERSION"
 		if [ "$NOTARIZE" -eq 1 ]; then
@@ -620,13 +610,12 @@ fi
 if [ "$BUILD_CLI" -eq 1 ]; then
 	build_cli "$VERSION"
 	CLI_ZIP="$RELEASE_DIR/appboxcli.zip"
-	CLI_TAR="$RELEASE_DIR/appboxcli.tar.gz"
-	package_both "$CLI_STAGE" "$CLI_ZIP" "$CLI_TAR"
+	zip_artifact "$CLI_STAGE" "$CLI_ZIP"
 	if [ "$NOTARIZE" -eq 1 ]; then
 		notarize_artifact "$CLI_ZIP"
 		warn "a bare executable cannot be stapled; Gatekeeper checks the CLI's notarization online on first run."
 	fi
-	ARTIFACTS+=("$CLI_ZIP" "$CLI_TAR")
+	ARTIFACTS+=("$CLI_ZIP")
 fi
 
 log "Release $VERSION — $RELEASE_DIR"

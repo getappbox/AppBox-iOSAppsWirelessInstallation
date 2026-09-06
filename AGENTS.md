@@ -100,7 +100,7 @@ Scripts/build-release.sh                # both products, Developer ID signed
 Scripts/build-release.sh -tb            # test, then build
 Scripts/build-release.sh -t -s core     # only the AppBoxCore package tests, nothing built
 Scripts/build-release.sh -bc            # build only the standalone CLI
-Scripts/build-release.sh -tbndk AppBox  # test, build, DMG, notarize + staple
+Scripts/build-release.sh -tbnk AppBox   # test, build, notarize + staple (DMG is default)
 ```
 
 The flags are composable actions — `-t/--test`, `-b/--build`, `-n/--notarize` (implies `-b`) — combined with targets `-g/--gui` and `-c/--cli` (neither means both). Short flags cluster (`-tb`), only the last flag of a cluster may take a value (`-tbndk AppBox`), and every long option also accepts `--name=value`. With no action flag the script builds; `-t` on its own tests and exits.
@@ -109,11 +109,14 @@ Everything shippable lands in one versioned directory:
 
 ```
 dist/AppBox-<version>/
-  AppBox.app.zip      AppBox.app, zipped with ditto
-  AppBox.tar.gz       the same AppBox.app, tarred (the name drops .app)
+  AppBox.dmg          drag-to-Applications image — what getappbox.com/download serves
+  AppBox.app.zip      the same AppBox.app, zipped with ditto — what install.sh downloads
   appboxcli.zip       appboxcli/ — binary + AppBoxCore_AppBoxCore.bundle + install.sh
-  appboxcli.tar.gz    the same CLI payload, tarred
 ```
+
+**Every release must include `AppBox.dmg`.** The download page links straight at `releases/latest/download/AppBox.dmg` (no GitHub API, so no rate limit), so a release published without one 404s for every visitor. The DMG is therefore built by default with the GUI; `--no-dmg` skips it for fast local iteration only.
+
+The `.tar.gz` artifacts are gone — nothing consumed them once `install.sh` moved to the zip, which is the format `ditto` produces and consumes.
 
 Build intermediates (`AppBox.xcarchive`, `gui-export/`, `cli-derived/`, `cli-stage/`, `logs/`) stay directly under `dist/`, so the release directory holds only distributable files. Both products are signed with `Developer ID Application` (team `3PQ7E4L589`), hardened runtime, secure timestamp. Notarization needs a stored `notarytool` profile (`xcrun notarytool store-credentials`) or `APPLE_ID`/`APPLE_TEAM_ID`/`APPLE_APP_PASSWORD`; a `.app` and a `.dmg` get stapled, a bare executable cannot be, so the CLI's ticket is verified online.
 
