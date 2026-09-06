@@ -17,8 +17,6 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: 'https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation'
-    - icon: fontawesome/brands/x-twitter
-      link: 'https://twitter.com/AppBoxHQ'
 
 # Configuration
 theme:
