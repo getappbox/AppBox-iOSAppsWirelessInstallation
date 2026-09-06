@@ -7,101 +7,79 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4410D18E26FF76A20046E5F9 /* DBAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4410D18D26FF76A20046E5F9 /* DBAccountManager.m */; };
-		4410D19C26FF851D0046E5F9 /* CoreDataMigration3to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4410D19B26FF851D0046E5F9 /* CoreDataMigration3to4.xcmappingmodel */; };
-		449BD6B8282111B0008EFB2B /* AppBoxService+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 449BD6B4282111B0008EFB2B /* AppBoxService+CoreDataProperties.m */; };
-		449BD6B9282111B0008EFB2B /* AppBoxService+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 449BD6B5282111B0008EFB2B /* AppBoxService+CoreDataClass.m */; };
-		4D3E492303A5E78B0417E17F /* ObjectiveDropboxOfficial.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656E98171CB7E85AA663AFE8 /* ObjectiveDropboxOfficial.xcframework */; };
-		5D20E6B57EA90CA7D6EA21F7 /* IPAUploadInfoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65C0AF09D32F39F4259167 /* IPAUploadInfoTests.m */; };
-		6968AADC9DEB5554A06F19BD /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = 33146DD70AA7C380685E53AA /* CocoaLumberjack */; };
-		771E1F8D4D831C50C1178A75 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09E11F809EFA1C7844F25D6B /* Cocoa.framework */; };
-		AA11BB22CC33DD44EE550011 /* NetworkHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550001 /* NetworkHandlerTests.m */; };
-		AA11BB22CC33DD44EE550012 /* MobileProvisionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550002 /* MobileProvisionTests.m */; };
-		AA11BB22CC33DD44EE550013 /* KeychainHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550003 /* KeychainHandlerTests.m */; };
-		AA11BB22CC33DD44EE550014 /* UserDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550004 /* UserDataTests.m */; };
-		AA11BB22CC33DD44EE550015 /* MailHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550005 /* MailHandlerTests.m */; };
-		AA11BB22CC33DD44EE550016 /* UpdateHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550006 /* UpdateHandlerTests.m */; };
-		AC4CF046F7F2B76CF56BF8E4 /* ObjectiveDropboxOfficial.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 656E98171CB7E85AA663AFE8 /* ObjectiveDropboxOfficial.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B472C718BB3B23CCB6C65599 /* DefaultAppHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AE09E956E87164818B25F099 /* DefaultAppHandler.m */; };
-		D9E5B24A6827FC5AD68D29D0 /* CommonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 544B2D28AEC66102492FA05E /* CommonTests.m */; };
+		5D20E6B57EA90CA7D6EA21F7 /* IPAUploadInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E65C0AF09D32F39F4259167 /* IPAUploadInfoTests.swift */; };
+		AA11BB22CC33DD44EE550012 /* MobileProvisionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550002 /* MobileProvisionTests.swift */; };
+		AA11BB22CC33DD44EE550014 /* UserDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550004 /* UserDataTests.swift */; };
+		AA11BB22CC33DD44EE550015 /* MailHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550005 /* MailHandlerTests.swift */; };
+		AA11BB22CC33DD44EE550041 /* DBErrorHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550031 /* DBErrorHandlerTests.swift */; };
+		AA11BB22CC33DD44EE550042 /* CLISupportHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550032 /* CLISupportHelperTests.swift */; };
+		AB00C0DE0000000000000007 /* AppServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00C0DE0000000000000006 /* AppServices.swift */; };
+		AB00C0DE0000000000000009 /* AppBoxSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00C0DE0000000000000008 /* AppBoxSecrets.swift */; };
+		AB00C0DE000000000000000C /* AppBoxSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00C0DE000000000000000D /* AppBoxSecrets.swift */; };
+		AB00DA7A0000000000000020 /* ABProject+AppBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00DA7A0000000000000011 /* ABProject+AppBox.swift */; };
+		AB00DA7A0000000000000021 /* ABUploadRecord+AppBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00DA7A0000000000000013 /* ABUploadRecord+AppBox.swift */; };
+		AB00F1E50000000000000052 /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00F1E50000000000000051 /* QRCodeView.swift */; };
+		AB00F1E50000000000000062 /* ShowLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00F1E50000000000000061 /* ShowLinkView.swift */; };
+		AB00F1E50000000000000072 /* ProvisioningDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00F1E50000000000000071 /* ProvisioningDetailsView.swift */; };
+		AB00F1E50000000000000082 /* ThirdPartyPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00F1E50000000000000081 /* ThirdPartyPreferencesView.swift */; };
+		AB00F1E50000000000000092 /* EmailPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00F1E50000000000000091 /* EmailPreferencesView.swift */; };
+		AB00F1E500000000000000A2 /* GeneralPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00F1E500000000000000A1 /* GeneralPreferencesView.swift */; };
+		AB00F1E500000000000000B2 /* IslandStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00F1E500000000000000B1 /* IslandStyle.swift */; };
+		AB00F1E500000000000000C2 /* HelpPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00F1E500000000000000C1 /* HelpPreferencesView.swift */; };
+		AB00F1E500000000000000D2 /* PreferencesContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00F1E500000000000000D1 /* PreferencesContainerView.swift */; };
+		AB00F1E500000000000000E2 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00F1E500000000000000E1 /* DashboardView.swift */; };
+		AB00F1E500000000000000F2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00F1E500000000000000F1 /* HomeView.swift */; };
+		AB00F1E5000000000000AC02 /* AccountPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00F1E5000000000000AC01 /* AccountPreferencesView.swift */; };
+		AB00F1E5000000000000AD02 /* UploadAdvancedSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00F1E5000000000000AD01 /* UploadAdvancedSettingView.swift */; };
+		AB00F1E5000000000000C0A2 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00F1E5000000000000C0A1 /* Common.swift */; };
+		AB00F1E5000000000000DA02 /* DefaultAppHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00F1E5000000000000DA01 /* DefaultAppHandler.swift */; };
+		AB00F1E5000000000000DA12 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00F1E5000000000000DA11 /* UserData.swift */; };
+		AB00F1E5000000000000DB02 /* DropboxLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00F1E5000000000000DB01 /* DropboxLoginView.swift */; };
+		AB00F1E5000000000000DE02 /* DefaultSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00F1E5000000000000DE01 /* DefaultSettings.swift */; };
+		AB00F1E5000000000000EE02 /* DBErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00F1E5000000000000EE01 /* DBErrorHandler.swift */; };
+		D9E5B24A6827FC5AD68D29D0 /* CommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544B2D28AEC66102492FA05E /* CommonTests.swift */; };
 		DB04358B2E69628F005F0173 /* appboxcli in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB0435832E696255005F0173 /* appboxcli */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		DB0435912E6962EA005F0173 /* CLISupportHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0435902E6962EA005F0173 /* CLISupportHelper.m */; };
-		DB1A06622160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DB1A06612160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel */; };
-		DB1C84412079F54E007AC74C /* NSString+String.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1C84402079F54E007AC74C /* NSString+String.m */; };
-		DB1FC5901FDEED5400179799 /* HomeWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1FC58F1FDEED5400179799 /* HomeWindowController.m */; };
-		DB26297B1F95ED9A00C4C647 /* NSDate+Date.m in Sources */ = {isa = PBXBuildFile; fileRef = DB26297A1F95ED9A00C4C647 /* NSDate+Date.m */; };
+		DB04358C2E69628F005F0173 /* AppBoxCore_AppBoxCore.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB04358D2E69628F005F0173 /* AppBoxCore_AppBoxCore.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		DB0435912E6962EA005F0173 /* CLISupportHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0435902E6962EA005F0173 /* CLISupportHelper.swift */; };
+		DB1C84412079F54E007AC74C /* NSString+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1C84402079F54E007AC74C /* NSString+String.swift */; };
+		DB26297B1F95ED9A00C4C647 /* NSDate+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26297A1F95ED9A00C4C647 /* NSDate+Date.swift */; };
 		DB26297D1F95F35C00C4C647 /* AppBoxIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB26297C1F95F35C00C4C647 /* AppBoxIcons.xcassets */; };
-		DB2629851F961F4700C4C647 /* DBErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2629841F961F4700C4C647 /* DBErrorHandler.m */; };
-		DB358B64216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B4C216FB1AA0080CAC0 /* ProvisioningProfile+CoreDataProperties.m */; };
-		DB358B66216FB1AC0080CAC0 /* UploadRecord+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B4E216FB1AA0080CAC0 /* UploadRecord+CoreDataClass.m */; };
-		DB358B68216FB1AC0080CAC0 /* ProvisionedDevice+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B50216FB1AB0080CAC0 /* ProvisionedDevice+CoreDataClass.m */; };
-		DB358B6A216FB1AC0080CAC0 /* ProvisionedDevice+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B53216FB1AB0080CAC0 /* ProvisionedDevice+CoreDataProperties.m */; };
-		DB358B6B216FB1AC0080CAC0 /* UploadRecord+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B57216FB1AB0080CAC0 /* UploadRecord+CoreDataProperties.m */; };
-		DB358B6C216FB1AC0080CAC0 /* Project+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B58216FB1AB0080CAC0 /* Project+CoreDataProperties.m */; };
-		DB358B6D216FB1AC0080CAC0 /* Project+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B59216FB1AB0080CAC0 /* Project+CoreDataClass.m */; };
-		DB358B6E216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B5B216FB1AB0080CAC0 /* ProvisioningProfile+CoreDataClass.m */; };
-		DB425C051F8A517D008CB032 /* DefaultSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DB425C041F8A517D008CB032 /* DefaultSettings.m */; };
-		DB53856A2083622A004BFC84 /* NSURL+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5385692083622A004BFC84 /* NSURL+URL.m */; };
-		DB53856E20838913004BFC84 /* DragDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB53856D20838913004BFC84 /* DragDropView.m */; };
-		DB5C5A4F2D00BA9C000C4A20 /* NSException+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5C5A4E2D00BA9C000C4A20 /* NSException+Description.m */; };
+		DB53856A2083622A004BFC84 /* NSURL+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5385692083622A004BFC84 /* NSURL+URL.swift */; };
+		DB5F76E62FE1622700CBF093 /* AppBoxCore in Frameworks */ = {isa = PBXBuildFile; productRef = AB00C0DE0000000000000002 /* AppBoxCore */; };
+		DB5F76E72FE1622700CBF093 /* AppBoxCore in Frameworks */ = {isa = PBXBuildFile; productRef = AB00C0DE0000000000000003 /* AppBoxCore */; };
 		DB6F784F215D459A00C77966 /* AppBoxColors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB6F784E215D459A00C77966 /* AppBoxColors.xcassets */; };
-		DB831BCB1FF6B5780065B646 /* ABHudViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB831BC91FF6B5780065B646 /* ABHudViewController.m */; };
-		DB831BCC1FF6B5780065B646 /* ABHudViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB831BCA1FF6B5780065B646 /* ABHudViewController.xib */; };
+		DB831BCB1FF6B5780065B646 /* ABHudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB831BC91FF6B5780065B646 /* ABHudViewController.swift */; };
 		DB8BAA912E6C433200186B7B /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = DB8BAA902E6C433200186B7B /* ArgumentParser */; };
-		DB8CE5F81FF77199003FEB65 /* DisabledView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8CE5F71FF77199003FEB65 /* DisabledView.m */; };
-		DBA66CF11FDCF4A60002A956 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBA66CF01FDCF4A60002A956 /* Main.storyboard */; };
-		DBCD1563200BCD1C00C003E6 /* PreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBCD1562200BCD1C00C003E6 /* PreferencesViewController.xib */; };
-		DBD1CE2F2156230800549C0A /* ABPrivate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD1CE2D2156230400549C0A /* ABPrivate.framework */; };
-		DBD1CE302156230800549C0A /* ABPrivate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBD1CE2D2156230400549C0A /* ABPrivate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DBDCFBBE1F99C7860022097B /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDCFBBD1F99C7860022097B /* UploadManager.m */; };
-		DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF290D51FA64A590046D5CE /* ProvisioningDetailsViewController.m */; };
-		DBF290D81FA64A590046D5CE /* ProvisioningDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBF290D61FA64A590046D5CE /* ProvisioningDetailsViewController.xib */; };
-		E11633991E558635005EAB31 /* MobileProvision.m in Sources */ = {isa = PBXBuildFile; fileRef = E11633981E558635005EAB31 /* MobileProvision.m */; };
-		E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E6D081D8FC77D0054814D /* DashboardViewController.m */; };
-		E13161F21E9777DF00586052 /* CLIIPAUpload.m in Sources */ = {isa = PBXBuildFile; fileRef = E13161F11E9777DF00586052 /* CLIIPAUpload.m */; };
-		E13946121DF2AFCF00B3FAD0 /* IPAUploadInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E13946111DF2AFCF00B3FAD0 /* IPAUploadInfo.m */; };
-		E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E14F33331E1A64CA00C3DD34 /* NSApplication+MenuHandler.m */; };
-		E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15C26691D7FD5CE004243B9 /* ShowLinkViewController.m */; };
-		E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16018EF1DEC0BC200E3A377 /* DropboxViewController.m */; };
-		E16437D41D743A4E00CE8B7E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E16437D31D743A4E00CE8B7E /* AppDelegate.m */; };
-		E16437D71D743A4E00CE8B7E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E16437D61D743A4E00CE8B7E /* main.m */; };
-		E16437DD1D743A4E00CE8B7E /* AppBox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E16437DB1D743A4E00CE8B7E /* AppBox.xcdatamodeld */; };
+		DBDCFBBE1F99C7860022097B /* UploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDCFBBD1F99C7860022097B /* UploadManager.swift */; };
+		DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF290D51FA64A590046D5CE /* ProvisioningDetailsViewController.swift */; };
+		E11633991E558635005EAB31 /* MobileProvision.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11633981E558635005EAB31 /* MobileProvision.swift */; };
+		E12E6D0A1D8FC77D0054814D /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E6D081D8FC77D0054814D /* DashboardViewController.swift */; };
+		E13946121DF2AFCF00B3FAD0 /* IPAUploadInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13946111DF2AFCF00B3FAD0 /* IPAUploadInfo.swift */; };
+		E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14F33331E1A64CA00C3DD34 /* NSApplication+MenuHandler.swift */; };
+		E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15C26691D7FD5CE004243B9 /* ShowLinkViewController.swift */; };
+		E16018F01DEC0BC200E3A377 /* DropboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16018EF1DEC0BC200E3A377 /* DropboxViewController.swift */; };
+		E16437D41D743A4E00CE8B7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16437D31D743A4E00CE8B7E /* AppDelegate.swift */; };
+		E16437D71D743A4E00CE8B7E /* AppBoxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16437D61D743A4E00CE8B7E /* AppBoxApp.swift */; };
 		E16437DF1D743A4E00CE8B7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E16437DE1D743A4E00CE8B7E /* Assets.xcassets */; };
-		E16437F31D743B6800CE8B7E /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16437F21D743B6800CE8B7E /* HomeViewController.m */; };
+		E16437F31D743B6800CE8B7E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16437F21D743B6800CE8B7E /* HomeViewController.swift */; };
 		E16438971D743EA300CE8B7E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16438961D743EA300CE8B7E /* WebKit.framework */; };
 		E16438991D743EAA00CE8B7E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16438981D743EAA00CE8B7E /* Cocoa.framework */; };
 		E16438A01D7469CD00CE8B7E /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E164389F1D7469CD00CE8B7E /* AppKit.framework */; };
 		E16438A21D7469D200CE8B7E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16438A11D7469D200CE8B7E /* CoreData.framework */; };
 		E16438A41D7469D900CE8B7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16438A31D7469D900CE8B7E /* Foundation.framework */; };
-		E16BB8C020284236002E9B5A /* SelectAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16BB8BE20284236002E9B5A /* SelectAccountViewController.m */; };
-		E16BB8C120284236002E9B5A /* SelectAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16BB8BF20284236002E9B5A /* SelectAccountViewController.xib */; };
-		E16BB8C520285A38002E9B5A /* SelectAccountCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E16BB8C420285A38002E9B5A /* SelectAccountCellView.m */; };
-		E16BB8C9202873FA002E9B5A /* AccountCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E16BB8C8202873FA002E9B5A /* AccountCellView.m */; };
-		E18186CE1E8A3BC00002509F /* PreferencesTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186CD1E8A3BC00002509F /* PreferencesTabViewController.m */; };
-		E18186D61E8A45C30002509F /* PreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186D51E8A45C30002509F /* PreferencesViewController.m */; };
-		E18186DC1E8A47C10002509F /* AccountPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186DB1E8A47C10002509F /* AccountPreferencesViewController.m */; };
-		E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186DE1E8A47CD0002509F /* EmailPreferencesViewController.m */; };
-		E18186E21E8A47D60002509F /* HelpPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186E11E8A47D60002509F /* HelpPreferencesViewController.m */; };
-		E1902B481E16423200C3E0F6 /* UploadAdvancedSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B471E16423200C3E0F6 /* UploadAdvancedSettingViewController.m */; };
-		E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B4E1E16617B00C3E0F6 /* NetworkHandler.m */; };
-		E1902B541E16617B00C3E0F6 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B521E16617B00C3E0F6 /* UserData.m */; };
-		E1902B5D1E1661B300C3E0F6 /* MailHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B5C1E1661B300C3E0F6 /* MailHandler.m */; };
-		E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B5F1E1661BE00C3E0F6 /* UpdateHandler.m */; };
-		E1902B641E16633A00C3E0F6 /* KeychainHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B631E16633A00C3E0F6 /* KeychainHandler.m */; };
-		E19473F5205F9FC800CF12F9 /* MSTeamsClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E19473F4205F9FC800CF12F9 /* MSTeamsClient.m */; };
-		E19473FB205FD14C00CF12F9 /* NSColor+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = E19473FA205FD14C00CF12F9 /* NSColor+Color.m */; };
-		E19473FF205FD3F100CF12F9 /* AppBoxTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = E19473FE205FD3F100CF12F9 /* AppBoxTableRowView.m */; };
-		E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */; };
-		E1C024711E9B4E6C00C87CC9 /* SlackClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C024701E9B4E6C00C87CC9 /* SlackClient.m */; };
-		E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CFC65D1D7E7FEA005872BE /* Common.m */; };
-		E1D12EE31EC2F17B0065E59A /* ThirdPartyPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D12EE11EC2F17B0065E59A /* ThirdPartyPreferencesViewController.m */; };
-		E1D12EE41EC2F17B0065E59A /* ThirdPartyPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D12EE21EC2F17B0065E59A /* ThirdPartyPreferencesViewController.xib */; };
-		E1D12EE81EC2F4360065E59A /* PreferencesTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D12EE71EC2F4360065E59A /* PreferencesTabViewController.xib */; };
-		E1D12EEA1EC2F5230065E59A /* EmailPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D12EE91EC2F5230065E59A /* EmailPreferencesViewController.xib */; };
-		E1D12EEC1EC31AC80065E59A /* AccountPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D12EEB1EC31AC80065E59A /* AccountPreferencesViewController.xib */; };
-		E1D12EEE1EC320760065E59A /* HelpPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D12EED1EC320760065E59A /* HelpPreferencesViewController.xib */; };
-		E1DC26001ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DC25FF1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m */; };
-		F6AEC01BE879A2BB998E829D /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = EFE5EA7464F3539F2562A787 /* ZipArchive */; };
+		E18186CE1E8A3BC00002509F /* PreferencesTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18186CD1E8A3BC00002509F /* PreferencesTabViewController.swift */; };
+		E18186D61E8A45C30002509F /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18186D51E8A45C30002509F /* PreferencesViewController.swift */; };
+		E18186DC1E8A47C10002509F /* AccountPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18186DB1E8A47C10002509F /* AccountPreferencesViewController.swift */; };
+		E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18186DE1E8A47CD0002509F /* EmailPreferencesViewController.swift */; };
+		E18186E21E8A47D60002509F /* HelpPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18186E11E8A47D60002509F /* HelpPreferencesViewController.swift */; };
+		E1902B481E16423200C3E0F6 /* UploadAdvancedSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1902B471E16423200C3E0F6 /* UploadAdvancedSettingViewController.swift */; };
+		E1902B5D1E1661B300C3E0F6 /* MailHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1902B5C1E1661B300C3E0F6 /* MailHandler.swift */; };
+		E1902B601E1661BE00C3E0F6 /* UpdateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1902B5F1E1661BE00C3E0F6 /* UpdateHandler.swift */; };
+		E19473F5205F9FC800CF12F9 /* MSTeamsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19473F4205F9FC800CF12F9 /* MSTeamsClient.swift */; };
+		E19473FF205FD3F100CF12F9 /* AppBoxTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19473FE205FD3F100CF12F9 /* AppBoxTableRowView.swift */; };
+		E1AA0F441E2F328300BA81A1 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AA0F431E2F328300BA81A1 /* QRCodeViewController.swift */; };
+		E1C024711E9B4E6C00C87CC9 /* SlackClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C024701E9B4E6C00C87CC9 /* SlackClient.swift */; };
+		E1D12EE31EC2F17B0065E59A /* ThirdPartyPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D12EE11EC2F17B0065E59A /* ThirdPartyPreferencesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +89,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = E16437CE1D743A4E00CE8B7E;
 			remoteInfo = AppBox;
+		};
+		AB00C0DE0000000000000004 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E16437C71D743A4E00CE8B7E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB0435822E696255005F0173;
+			remoteInfo = AppBoxCLI;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -122,211 +107,93 @@
 			dstSubfolderSpec = 12;
 			files = (
 				DB04358B2E69628F005F0173 /* appboxcli in CopyFiles */,
+				DB04358C2E69628F005F0173 /* AppBoxCore_AppBoxCore.bundle in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DB0435812E696255005F0173 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-		E19973332091D2640035CCE9 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				DBD1CE302156230800549C0A /* ABPrivate.framework in Embed Frameworks */,
-				AC4CF046F7F2B76CF56BF8E4 /* ObjectiveDropboxOfficial.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		07AC024B5902E74BBBD280F9 /* DefaultAppHandler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = DefaultAppHandler.h; sourceTree = "<group>"; };
-		09E11F809EFA1C7844F25D6B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
-		3E65C0AF09D32F39F4259167 /* IPAUploadInfoTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IPAUploadInfoTests.m; path = Model/IPAUploadInfoTests.m; sourceTree = "<group>"; };
-		4410D18C26FF76A20046E5F9 /* DBAccountManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBAccountManager.h; sourceTree = "<group>"; };
-		4410D18D26FF76A20046E5F9 /* DBAccountManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DBAccountManager.m; sourceTree = "<group>"; };
-		4410D19B26FF851D0046E5F9 /* CoreDataMigration3to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = CoreDataMigration3to4.xcmappingmodel; sourceTree = "<group>"; };
-		449BD6B4282111B0008EFB2B /* AppBoxService+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppBoxService+CoreDataProperties.m"; sourceTree = "<group>"; };
-		449BD6B5282111B0008EFB2B /* AppBoxService+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppBoxService+CoreDataClass.m"; sourceTree = "<group>"; };
-		449BD6B6282111B0008EFB2B /* AppBoxService+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppBoxService+CoreDataProperties.h"; sourceTree = "<group>"; };
-		449BD6B7282111B0008EFB2B /* AppBoxService+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppBoxService+CoreDataClass.h"; sourceTree = "<group>"; };
-		44DCC66B25EEA1910074AB1E /* AppBox4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppBox4.xcdatamodel; sourceTree = "<group>"; };
-		544B2D28AEC66102492FA05E /* CommonTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CommonTests.m; path = Common/CommonTests.m; sourceTree = "<group>"; };
-		656E98171CB7E85AA663AFE8 /* ObjectiveDropboxOfficial.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ObjectiveDropboxOfficial.xcframework; path = Frameworks/ObjectiveDropboxOfficial.xcframework; sourceTree = "<group>"; };
-		AA11BB22CC33DD44EE550001 /* NetworkHandlerTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NetworkHandlerTests.m; path = Common/NetworkHandler/NetworkHandlerTests.m; sourceTree = "<group>"; };
-		AA11BB22CC33DD44EE550002 /* MobileProvisionTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MobileProvisionTests.m; path = Common/MobileProvision/MobileProvisionTests.m; sourceTree = "<group>"; };
-		AA11BB22CC33DD44EE550003 /* KeychainHandlerTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KeychainHandlerTests.m; path = Common/KeychainHandler/KeychainHandlerTests.m; sourceTree = "<group>"; };
-		AA11BB22CC33DD44EE550004 /* UserDataTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = UserDataTests.m; path = Common/UserManager/UserDataTests.m; sourceTree = "<group>"; };
-		AA11BB22CC33DD44EE550005 /* MailHandlerTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MailHandlerTests.m; path = Common/MailHandler/MailHandlerTests.m; sourceTree = "<group>"; };
-		AA11BB22CC33DD44EE550006 /* UpdateHandlerTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = UpdateHandlerTests.m; path = Common/UpdateHandler/UpdateHandlerTests.m; sourceTree = "<group>"; };
-		AE09E956E87164818B25F099 /* DefaultAppHandler.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = DefaultAppHandler.m; sourceTree = "<group>"; };
+		3E65C0AF09D32F39F4259167 /* IPAUploadInfoTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IPAUploadInfoTests.swift; path = Model/IPAUploadInfoTests.swift; sourceTree = "<group>"; };
+		544B2D28AEC66102492FA05E /* CommonTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CommonTests.swift; path = Common/CommonTests.swift; sourceTree = "<group>"; };
+		AA11BB22CC33DD44EE550002 /* MobileProvisionTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MobileProvisionTests.swift; path = Common/MobileProvision/MobileProvisionTests.swift; sourceTree = "<group>"; };
+		AA11BB22CC33DD44EE550004 /* UserDataTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UserDataTests.swift; path = Common/UserManager/UserDataTests.swift; sourceTree = "<group>"; };
+		AA11BB22CC33DD44EE550005 /* MailHandlerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MailHandlerTests.swift; path = Common/MailHandler/MailHandlerTests.swift; sourceTree = "<group>"; };
+		AA11BB22CC33DD44EE550031 /* DBErrorHandlerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DBErrorHandlerTests.swift; path = Common/DBErrorHandlerTests.swift; sourceTree = "<group>"; };
+		AA11BB22CC33DD44EE550032 /* CLISupportHelperTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CLISupportHelperTests.swift; path = Common/CLISupportHelperTests.swift; sourceTree = "<group>"; };
+		AB00C0DE0000000000000006 /* AppServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppServices.swift; sourceTree = "<group>"; };
+		AB00C0DE0000000000000008 /* AppBoxSecrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppBoxSecrets.swift; path = Generated/AppBox/AppBoxSecrets.swift; sourceTree = SOURCE_ROOT; };
+		AB00C0DE000000000000000D /* AppBoxSecrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppBoxSecrets.swift; path = Generated/AppBoxCLI/AppBoxSecrets.swift; sourceTree = SOURCE_ROOT; };
+		AB00DA7A0000000000000011 /* ABProject+AppBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ABProject+AppBox.swift"; sourceTree = "<group>"; };
+		AB00DA7A0000000000000013 /* ABUploadRecord+AppBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ABUploadRecord+AppBox.swift"; sourceTree = "<group>"; };
+		AB00F1E50000000000000051 /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
+		AB00F1E50000000000000061 /* ShowLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLinkView.swift; sourceTree = "<group>"; };
+		AB00F1E50000000000000071 /* ProvisioningDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvisioningDetailsView.swift; sourceTree = "<group>"; };
+		AB00F1E50000000000000081 /* ThirdPartyPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyPreferencesView.swift; sourceTree = "<group>"; };
+		AB00F1E50000000000000091 /* EmailPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPreferencesView.swift; sourceTree = "<group>"; };
+		AB00F1E500000000000000A1 /* GeneralPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPreferencesView.swift; sourceTree = "<group>"; };
+		AB00F1E500000000000000B1 /* IslandStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IslandStyle.swift; path = SwiftUI/IslandStyle.swift; sourceTree = "<group>"; };
+		AB00F1E500000000000000C1 /* HelpPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpPreferencesView.swift; sourceTree = "<group>"; };
+		AB00F1E500000000000000D1 /* PreferencesContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesContainerView.swift; sourceTree = "<group>"; };
+		AB00F1E500000000000000E1 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		AB00F1E500000000000000F1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		AB00F1E5000000000000AC01 /* AccountPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPreferencesView.swift; sourceTree = "<group>"; };
+		AB00F1E5000000000000AD01 /* UploadAdvancedSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAdvancedSettingView.swift; sourceTree = "<group>"; };
+		AB00F1E5000000000000C0A1 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		AB00F1E5000000000000DA01 /* DefaultAppHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAppHandler.swift; sourceTree = "<group>"; };
+		AB00F1E5000000000000DA11 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		AB00F1E5000000000000DB01 /* DropboxLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropboxLoginView.swift; sourceTree = "<group>"; };
+		AB00F1E5000000000000DE01 /* DefaultSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSettings.swift; sourceTree = "<group>"; };
+		AB00F1E5000000000000EE01 /* DBErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBErrorHandler.swift; sourceTree = "<group>"; };
 		DB0435832E696255005F0173 /* appboxcli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = appboxcli; sourceTree = BUILT_PRODUCTS_DIR; };
-		DB04358F2E6962EA005F0173 /* CLISupportHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLISupportHelper.h; sourceTree = "<group>"; };
-		DB0435902E6962EA005F0173 /* CLISupportHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLISupportHelper.m; sourceTree = "<group>"; };
-		DB1A06592160D47C008D33FD /* AppBox3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppBox3.xcdatamodel; sourceTree = "<group>"; };
-		DB1A06612160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = CoreDataMigration2to3.xcmappingmodel; sourceTree = "<group>"; };
-		DB1C843F2079F54E007AC74C /* NSString+String.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+String.h"; sourceTree = "<group>"; };
-		DB1C84402079F54E007AC74C /* NSString+String.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+String.m"; sourceTree = "<group>"; };
-		DB1FC58E1FDEED5400179799 /* HomeWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeWindowController.h; sourceTree = "<group>"; };
-		DB1FC58F1FDEED5400179799 /* HomeWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeWindowController.m; sourceTree = "<group>"; };
-		DB2629791F95ED9A00C4C647 /* NSDate+Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Date.h"; sourceTree = "<group>"; };
-		DB26297A1F95ED9A00C4C647 /* NSDate+Date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Date.m"; sourceTree = "<group>"; };
+		DB04358D2E69628F005F0173 /* AppBoxCore_AppBoxCore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppBoxCore_AppBoxCore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB0435902E6962EA005F0173 /* CLISupportHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLISupportHelper.swift; sourceTree = "<group>"; };
+		DB1C84402079F54E007AC74C /* NSString+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSString+String.swift"; sourceTree = "<group>"; };
+		DB26297A1F95ED9A00C4C647 /* NSDate+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDate+Date.swift"; sourceTree = "<group>"; };
 		DB26297C1F95F35C00C4C647 /* AppBoxIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppBoxIcons.xcassets; sourceTree = "<group>"; };
-		DB2629831F961F4700C4C647 /* DBErrorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBErrorHandler.h; sourceTree = "<group>"; };
-		DB2629841F961F4700C4C647 /* DBErrorHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBErrorHandler.m; sourceTree = "<group>"; };
-		DB358B4C216FB1AA0080CAC0 /* ProvisioningProfile+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProvisioningProfile+CoreDataProperties.m"; sourceTree = "<group>"; };
-		DB358B4E216FB1AA0080CAC0 /* UploadRecord+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UploadRecord+CoreDataClass.m"; sourceTree = "<group>"; };
-		DB358B50216FB1AB0080CAC0 /* ProvisionedDevice+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProvisionedDevice+CoreDataClass.m"; sourceTree = "<group>"; };
-		DB358B52216FB1AB0080CAC0 /* UploadRecord+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UploadRecord+CoreDataProperties.h"; sourceTree = "<group>"; };
-		DB358B53216FB1AB0080CAC0 /* ProvisionedDevice+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProvisionedDevice+CoreDataProperties.m"; sourceTree = "<group>"; };
-		DB358B54216FB1AB0080CAC0 /* Project+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Project+CoreDataClass.h"; sourceTree = "<group>"; };
-		DB358B57216FB1AB0080CAC0 /* UploadRecord+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UploadRecord+CoreDataProperties.m"; sourceTree = "<group>"; };
-		DB358B58216FB1AB0080CAC0 /* Project+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Project+CoreDataProperties.m"; sourceTree = "<group>"; };
-		DB358B59216FB1AB0080CAC0 /* Project+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Project+CoreDataClass.m"; sourceTree = "<group>"; };
-		DB358B5A216FB1AB0080CAC0 /* ProvisionedDevice+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProvisionedDevice+CoreDataProperties.h"; sourceTree = "<group>"; };
-		DB358B5B216FB1AB0080CAC0 /* ProvisioningProfile+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProvisioningProfile+CoreDataClass.m"; sourceTree = "<group>"; };
-		DB358B5E216FB1AB0080CAC0 /* ProvisionedDevice+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProvisionedDevice+CoreDataClass.h"; sourceTree = "<group>"; };
-		DB358B5F216FB1AB0080CAC0 /* Project+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Project+CoreDataProperties.h"; sourceTree = "<group>"; };
-		DB358B61216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProvisioningProfile+CoreDataClass.h"; sourceTree = "<group>"; };
-		DB358B62216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProvisioningProfile+CoreDataProperties.h"; sourceTree = "<group>"; };
-		DB358B63216FB1AC0080CAC0 /* UploadRecord+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UploadRecord+CoreDataClass.h"; sourceTree = "<group>"; };
-		DB425C031F8A517D008CB032 /* DefaultSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultSettings.h; sourceTree = "<group>"; };
-		DB425C041F8A517D008CB032 /* DefaultSettings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultSettings.m; sourceTree = "<group>"; };
-		DB5385682083622A004BFC84 /* NSURL+URL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSURL+URL.h"; sourceTree = "<group>"; };
-		DB5385692083622A004BFC84 /* NSURL+URL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURL+URL.m"; sourceTree = "<group>"; };
-		DB53856C20838913004BFC84 /* DragDropView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DragDropView.h; sourceTree = "<group>"; };
-		DB53856D20838913004BFC84 /* DragDropView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DragDropView.m; sourceTree = "<group>"; };
+		DB5385692083622A004BFC84 /* NSURL+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSURL+URL.swift"; sourceTree = "<group>"; };
 		DB5BA11E2FC9C91D00A150BA /* AppBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB5BA12A2FC9C94E00A150BA /* AppBoxTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = AppBoxTests.xctestplan; sourceTree = "<group>"; };
-		DB5C5A4D2D00BA9C000C4A20 /* NSException+Description.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSException+Description.h"; sourceTree = "<group>"; };
-		DB5C5A4E2D00BA9C000C4A20 /* NSException+Description.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSException+Description.m"; sourceTree = "<group>"; };
 		DB6F784E215D459A00C77966 /* AppBoxColors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppBoxColors.xcassets; sourceTree = "<group>"; };
-		DB831BC81FF6B5780065B646 /* ABHudViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABHudViewController.h; sourceTree = "<group>"; };
-		DB831BC91FF6B5780065B646 /* ABHudViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABHudViewController.m; sourceTree = "<group>"; };
-		DB831BCA1FF6B5780065B646 /* ABHudViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ABHudViewController.xib; sourceTree = "<group>"; };
-		DB8CE5F61FF77199003FEB65 /* DisabledView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DisabledView.h; sourceTree = "<group>"; };
-		DB8CE5F71FF77199003FEB65 /* DisabledView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DisabledView.m; sourceTree = "<group>"; };
-		DBA66CF01FDCF4A60002A956 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		DBCD1562200BCD1C00C003E6 /* PreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesViewController.xib; sourceTree = "<group>"; };
-		DBD1CE2D2156230400549C0A /* ABPrivate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ABPrivate.framework; path = Frameworks/ABPrivate.framework; sourceTree = "<group>"; };
+		DB831BC91FF6B5780065B646 /* ABHudViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABHudViewController.swift; sourceTree = "<group>"; };
 		DBD1CE3221562EC300549C0A /* AppBox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppBox.entitlements; sourceTree = "<group>"; };
-		DBDCFBBC1F99C7860022097B /* UploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadManager.h; sourceTree = "<group>"; };
-		DBDCFBBD1F99C7860022097B /* UploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadManager.m; sourceTree = "<group>"; };
-		DBF290D41FA64A590046D5CE /* ProvisioningDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProvisioningDetailsViewController.h; sourceTree = "<group>"; };
-		DBF290D51FA64A590046D5CE /* ProvisioningDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProvisioningDetailsViewController.m; sourceTree = "<group>"; };
-		DBF290D61FA64A590046D5CE /* ProvisioningDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProvisioningDetailsViewController.xib; sourceTree = "<group>"; };
-		DBFEEA551FA5BA4700F09ECD /* AppBox2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppBox2.xcdatamodel; sourceTree = "<group>"; };
-		E11633971E558635005EAB31 /* MobileProvision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileProvision.h; sourceTree = "<group>"; };
-		E11633981E558635005EAB31 /* MobileProvision.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobileProvision.m; sourceTree = "<group>"; };
-		E12E6D071D8FC77D0054814D /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
-		E12E6D081D8FC77D0054814D /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
-		E13161F01E9777DF00586052 /* CLIIPAUpload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLIIPAUpload.h; sourceTree = "<group>"; };
-		E13161F11E9777DF00586052 /* CLIIPAUpload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLIIPAUpload.m; sourceTree = "<group>"; };
-		E13946101DF2AFCF00B3FAD0 /* IPAUploadInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPAUploadInfo.h; sourceTree = "<group>"; };
-		E13946111DF2AFCF00B3FAD0 /* IPAUploadInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPAUploadInfo.m; sourceTree = "<group>"; };
-		E13946131DF2AFFF00B3FAD0 /* AppBoxPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppBoxPrefixHeader.pch; sourceTree = "<group>"; };
-		E14F33321E1A64CA00C3DD34 /* NSApplication+MenuHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+MenuHandler.h"; sourceTree = "<group>"; };
-		E14F33331E1A64CA00C3DD34 /* NSApplication+MenuHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+MenuHandler.m"; sourceTree = "<group>"; };
-		E15C26681D7FD5CE004243B9 /* ShowLinkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowLinkViewController.h; sourceTree = "<group>"; };
-		E15C26691D7FD5CE004243B9 /* ShowLinkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowLinkViewController.m; sourceTree = "<group>"; };
-		E16018EE1DEC0BC200E3A377 /* DropboxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxViewController.h; sourceTree = "<group>"; };
-		E16018EF1DEC0BC200E3A377 /* DropboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxViewController.m; sourceTree = "<group>"; };
-		E16018F11DEC0EB700E3A377 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		DBDCFBBD1F99C7860022097B /* UploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadManager.swift; sourceTree = "<group>"; };
+		DBF290D51FA64A590046D5CE /* ProvisioningDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvisioningDetailsViewController.swift; sourceTree = "<group>"; };
+		E11633981E558635005EAB31 /* MobileProvision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileProvision.swift; sourceTree = "<group>"; };
+		E12E6D081D8FC77D0054814D /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		E13946111DF2AFCF00B3FAD0 /* IPAUploadInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPAUploadInfo.swift; sourceTree = "<group>"; };
+		E14F33331E1A64CA00C3DD34 /* NSApplication+MenuHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+MenuHandler.swift"; sourceTree = "<group>"; };
+		E15C26691D7FD5CE004243B9 /* ShowLinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLinkViewController.swift; sourceTree = "<group>"; };
+		E16018EF1DEC0BC200E3A377 /* DropboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropboxViewController.swift; sourceTree = "<group>"; };
 		E16437CF1D743A4E00CE8B7E /* AppBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E16437D21D743A4E00CE8B7E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		E16437D31D743A4E00CE8B7E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E16437D61D743A4E00CE8B7E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		E16437DC1D743A4E00CE8B7E /* AppBox.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppBox.xcdatamodel; sourceTree = "<group>"; };
+		E16437D31D743A4E00CE8B7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E16437D61D743A4E00CE8B7E /* AppBoxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBoxApp.swift; sourceTree = "<group>"; };
 		E16437DE1D743A4E00CE8B7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = AppBox/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		E16437E31D743A4E00CE8B7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E16437F11D743B6800CE8B7E /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
-		E16437F21D743B6800CE8B7E /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		E16437F21D743B6800CE8B7E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E16438961D743EA300CE8B7E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		E16438981D743EAA00CE8B7E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E164389F1D7469CD00CE8B7E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		E16438A11D7469D200CE8B7E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E16438A31D7469D900CE8B7E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		E16BB8BD20284236002E9B5A /* SelectAccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectAccountViewController.h; sourceTree = "<group>"; };
-		E16BB8BE20284236002E9B5A /* SelectAccountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectAccountViewController.m; sourceTree = "<group>"; };
-		E16BB8BF20284236002E9B5A /* SelectAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectAccountViewController.xib; sourceTree = "<group>"; };
-		E16BB8C320285A38002E9B5A /* SelectAccountCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectAccountCellView.h; sourceTree = "<group>"; };
-		E16BB8C420285A38002E9B5A /* SelectAccountCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectAccountCellView.m; sourceTree = "<group>"; };
-		E16BB8C7202873FA002E9B5A /* AccountCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountCellView.h; sourceTree = "<group>"; };
-		E16BB8C8202873FA002E9B5A /* AccountCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountCellView.m; sourceTree = "<group>"; };
-		E18186CC1E8A3BC00002509F /* PreferencesTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesTabViewController.h; sourceTree = "<group>"; };
-		E18186CD1E8A3BC00002509F /* PreferencesTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesTabViewController.m; sourceTree = "<group>"; };
-		E18186D41E8A45C30002509F /* PreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesViewController.h; sourceTree = "<group>"; };
-		E18186D51E8A45C30002509F /* PreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesViewController.m; sourceTree = "<group>"; };
-		E18186DA1E8A47C10002509F /* AccountPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountPreferencesViewController.h; sourceTree = "<group>"; };
-		E18186DB1E8A47C10002509F /* AccountPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountPreferencesViewController.m; sourceTree = "<group>"; };
-		E18186DD1E8A47CD0002509F /* EmailPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailPreferencesViewController.h; sourceTree = "<group>"; };
-		E18186DE1E8A47CD0002509F /* EmailPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailPreferencesViewController.m; sourceTree = "<group>"; };
-		E18186E01E8A47D60002509F /* HelpPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpPreferencesViewController.h; sourceTree = "<group>"; };
-		E18186E11E8A47D60002509F /* HelpPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpPreferencesViewController.m; sourceTree = "<group>"; };
-		E1902B461E16423200C3E0F6 /* UploadAdvancedSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadAdvancedSettingViewController.h; sourceTree = "<group>"; };
-		E1902B471E16423200C3E0F6 /* UploadAdvancedSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadAdvancedSettingViewController.m; sourceTree = "<group>"; };
-		E1902B4D1E16617B00C3E0F6 /* NetworkHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkHandler.h; sourceTree = "<group>"; };
-		E1902B4E1E16617B00C3E0F6 /* NetworkHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkHandler.m; sourceTree = "<group>"; };
-		E1902B511E16617B00C3E0F6 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
-		E1902B521E16617B00C3E0F6 /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
-		E1902B5B1E1661B300C3E0F6 /* MailHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailHandler.h; sourceTree = "<group>"; };
-		E1902B5C1E1661B300C3E0F6 /* MailHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailHandler.m; sourceTree = "<group>"; };
-		E1902B5E1E1661BE00C3E0F6 /* UpdateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateHandler.h; sourceTree = "<group>"; };
-		E1902B5F1E1661BE00C3E0F6 /* UpdateHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateHandler.m; sourceTree = "<group>"; };
-		E1902B621E16633A00C3E0F6 /* KeychainHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainHandler.h; sourceTree = "<group>"; };
-		E1902B631E16633A00C3E0F6 /* KeychainHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainHandler.m; sourceTree = "<group>"; };
-		E19473F3205F9FC800CF12F9 /* MSTeamsClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MSTeamsClient.h; sourceTree = "<group>"; };
-		E19473F4205F9FC800CF12F9 /* MSTeamsClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MSTeamsClient.m; sourceTree = "<group>"; };
-		E19473F9205FD14C00CF12F9 /* NSColor+Color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSColor+Color.h"; sourceTree = "<group>"; };
-		E19473FA205FD14C00CF12F9 /* NSColor+Color.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSColor+Color.m"; sourceTree = "<group>"; };
-		E19473FD205FD3F100CF12F9 /* AppBoxTableRowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppBoxTableRowView.h; sourceTree = "<group>"; };
-		E19473FE205FD3F100CF12F9 /* AppBoxTableRowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppBoxTableRowView.m; sourceTree = "<group>"; };
-		E1AA0F421E2F328300BA81A1 /* QRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeViewController.h; sourceTree = "<group>"; };
-		E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeViewController.m; sourceTree = "<group>"; };
-		E1C0246F1E9B4E6C00C87CC9 /* SlackClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlackClient.h; sourceTree = "<group>"; };
-		E1C024701E9B4E6C00C87CC9 /* SlackClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlackClient.m; sourceTree = "<group>"; };
-		E1CFC65C1D7E7FEA005872BE /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
-		E1CFC65D1D7E7FEA005872BE /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
-		E1D12EE01EC2F17B0065E59A /* ThirdPartyPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdPartyPreferencesViewController.h; sourceTree = "<group>"; };
-		E1D12EE11EC2F17B0065E59A /* ThirdPartyPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdPartyPreferencesViewController.m; sourceTree = "<group>"; };
-		E1D12EE21EC2F17B0065E59A /* ThirdPartyPreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThirdPartyPreferencesViewController.xib; sourceTree = "<group>"; };
-		E1D12EE71EC2F4360065E59A /* PreferencesTabViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesTabViewController.xib; sourceTree = "<group>"; };
-		E1D12EE91EC2F5230065E59A /* EmailPreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailPreferencesViewController.xib; sourceTree = "<group>"; };
-		E1D12EEB1EC31AC80065E59A /* AccountPreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountPreferencesViewController.xib; sourceTree = "<group>"; };
-		E1D12EED1EC320760065E59A /* HelpPreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpPreferencesViewController.xib; sourceTree = "<group>"; };
-		E1DC25F91ECD826C001EF106 /* OtherServicesKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OtherServicesKeys.h; sourceTree = "<group>"; };
-		E1DC25FE1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+ProgressHud.h"; sourceTree = "<group>"; };
-		E1DC25FF1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+ProgressHud.m"; sourceTree = "<group>"; };
-		E1FECA821E83EE5000C4E9AE /* HTTPStatusCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPStatusCode.h; sourceTree = "<group>"; };
+		E18186CD1E8A3BC00002509F /* PreferencesTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesTabViewController.swift; sourceTree = "<group>"; };
+		E18186D51E8A45C30002509F /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		E18186DB1E8A47C10002509F /* AccountPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPreferencesViewController.swift; sourceTree = "<group>"; };
+		E18186DE1E8A47CD0002509F /* EmailPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPreferencesViewController.swift; sourceTree = "<group>"; };
+		E18186E11E8A47D60002509F /* HelpPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpPreferencesViewController.swift; sourceTree = "<group>"; };
+		E1902B471E16423200C3E0F6 /* UploadAdvancedSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAdvancedSettingViewController.swift; sourceTree = "<group>"; };
+		E1902B5C1E1661B300C3E0F6 /* MailHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailHandler.swift; sourceTree = "<group>"; };
+		E1902B5F1E1661BE00C3E0F6 /* UpdateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateHandler.swift; sourceTree = "<group>"; };
+		E19473F4205F9FC800CF12F9 /* MSTeamsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSTeamsClient.swift; sourceTree = "<group>"; };
+		E19473FE205FD3F100CF12F9 /* AppBoxTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBoxTableRowView.swift; sourceTree = "<group>"; };
+		E1AA0F431E2F328300BA81A1 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
+		E1C024701E9B4E6C00C87CC9 /* SlackClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackClient.swift; sourceTree = "<group>"; };
+		E1D12EE11EC2F17B0065E59A /* ThirdPartyPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyPreferencesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		DB04358D2E696299005F0173 /* Exceptions for "AppBoxCLI" folder in "Copy Files" phase from "AppBox" target */ = {
-			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
-			buildPhase = DB04357E2E696172005F0173 /* CopyFiles */;
-			membershipExceptions = (
-				Scripts/install.sh,
-				Scripts/uninstall.sh,
-				Scripts/update.sh,
-			);
-		};
-/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		DB0435842E696255005F0173 /* AppBoxCLI */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				DB04358D2E696299005F0173 /* Exceptions for "AppBoxCLI" folder in "Copy Files" phase from "AppBox" target */,
-			);
 			path = AppBoxCLI;
 			sourceTree = "<group>";
 		};
@@ -337,7 +204,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				771E1F8D4D831C50C1178A75 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +211,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB5F76E72FE1622700CBF093 /* AppBoxCore in Frameworks */,
 				DB8BAA912E6C433200186B7B /* ArgumentParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,15 +220,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB5F76E62FE1622700CBF093 /* AppBoxCore in Frameworks */,
 				E16438A01D7469CD00CE8B7E /* AppKit.framework in Frameworks */,
 				E16438A41D7469D900CE8B7E /* Foundation.framework in Frameworks */,
 				E16438A21D7469D200CE8B7E /* CoreData.framework in Frameworks */,
 				E16438971D743EA300CE8B7E /* WebKit.framework in Frameworks */,
-				DBD1CE2F2156230800549C0A /* ABPrivate.framework in Frameworks */,
-				4D3E492303A5E78B0417E17F /* ObjectiveDropboxOfficial.xcframework in Frameworks */,
 				E16438991D743EAA00CE8B7E /* Cocoa.framework in Frameworks */,
-				6968AADC9DEB5554A06F19BD /* CocoaLumberjack in Frameworks */,
-				F6AEC01BE879A2BB998E829D /* ZipArchive in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,27 +235,19 @@
 		704A0BB2FE5A7E33851F5FDB /* DefaultAppHandler */ = {
 			isa = PBXGroup;
 			children = (
-				07AC024B5902E74BBBD280F9 /* DefaultAppHandler.h */,
-				AE09E956E87164818B25F099 /* DefaultAppHandler.m */,
+				AB00F1E5000000000000DA01 /* DefaultAppHandler.swift */,
 			);
 			path = DefaultAppHandler;
-			sourceTree = "<group>";
-		};
-		9BB2CCACA72911C65FE295AF /* OS X */ = {
-			isa = PBXGroup;
-			children = (
-				09E11F809EFA1C7844F25D6B /* Cocoa.framework */,
-			);
-			name = "OS X";
 			sourceTree = "<group>";
 		};
 		AA11BB22CC33DD44EE550021 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				544B2D28AEC66102492FA05E /* CommonTests.m */,
+				544B2D28AEC66102492FA05E /* CommonTests.swift */,
+				AA11BB22CC33DD44EE550032 /* CLISupportHelperTests.swift */,
+				AA11BB22CC33DD44EE550031 /* DBErrorHandlerTests.swift */,
 				AA11BB22CC33DD44EE550022 /* NetworkHandler */,
 				AA11BB22CC33DD44EE550023 /* MobileProvision */,
-				AA11BB22CC33DD44EE550024 /* KeychainHandler */,
 				AA11BB22CC33DD44EE550025 /* UserManager */,
 				AA11BB22CC33DD44EE550027 /* MailHandler */,
 				AA11BB22CC33DD44EE550028 /* UpdateHandler */,
@@ -402,7 +258,6 @@
 		AA11BB22CC33DD44EE550022 /* NetworkHandler */ = {
 			isa = PBXGroup;
 			children = (
-				AA11BB22CC33DD44EE550001 /* NetworkHandlerTests.m */,
 			);
 			name = NetworkHandler;
 			sourceTree = "<group>";
@@ -410,23 +265,15 @@
 		AA11BB22CC33DD44EE550023 /* MobileProvision */ = {
 			isa = PBXGroup;
 			children = (
-				AA11BB22CC33DD44EE550002 /* MobileProvisionTests.m */,
+				AA11BB22CC33DD44EE550002 /* MobileProvisionTests.swift */,
 			);
 			name = MobileProvision;
-			sourceTree = "<group>";
-		};
-		AA11BB22CC33DD44EE550024 /* KeychainHandler */ = {
-			isa = PBXGroup;
-			children = (
-				AA11BB22CC33DD44EE550003 /* KeychainHandlerTests.m */,
-			);
-			name = KeychainHandler;
 			sourceTree = "<group>";
 		};
 		AA11BB22CC33DD44EE550025 /* UserManager */ = {
 			isa = PBXGroup;
 			children = (
-				AA11BB22CC33DD44EE550004 /* UserDataTests.m */,
+				AA11BB22CC33DD44EE550004 /* UserDataTests.swift */,
 			);
 			name = UserManager;
 			sourceTree = "<group>";
@@ -434,7 +281,7 @@
 		AA11BB22CC33DD44EE550026 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3E65C0AF09D32F39F4259167 /* IPAUploadInfoTests.m */,
+				3E65C0AF09D32F39F4259167 /* IPAUploadInfoTests.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -442,7 +289,7 @@
 		AA11BB22CC33DD44EE550027 /* MailHandler */ = {
 			isa = PBXGroup;
 			children = (
-				AA11BB22CC33DD44EE550005 /* MailHandlerTests.m */,
+				AA11BB22CC33DD44EE550005 /* MailHandlerTests.swift */,
 			);
 			name = MailHandler;
 			sourceTree = "<group>";
@@ -450,7 +297,6 @@
 		AA11BB22CC33DD44EE550028 /* UpdateHandler */ = {
 			isa = PBXGroup;
 			children = (
-				AA11BB22CC33DD44EE550006 /* UpdateHandlerTests.m */,
 			);
 			name = UpdateHandler;
 			sourceTree = "<group>";
@@ -468,43 +314,17 @@
 		DB04358E2E6962DB005F0173 /* CLISupportHelper */ = {
 			isa = PBXGroup;
 			children = (
-				DB04358F2E6962EA005F0173 /* CLISupportHelper.h */,
-				DB0435902E6962EA005F0173 /* CLISupportHelper.m */,
+				DB0435902E6962EA005F0173 /* CLISupportHelper.swift */,
 			);
 			path = CLISupportHelper;
-			sourceTree = "<group>";
-		};
-		DB1A06602160DC70008D33FD /* CoreDataMigration */ = {
-			isa = PBXGroup;
-			children = (
-				DB1A06612160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel */,
-				4410D19B26FF851D0046E5F9 /* CoreDataMigration3to4.xcmappingmodel */,
-			);
-			path = CoreDataMigration;
-			sourceTree = "<group>";
-		};
-		DB1FC58D1FDEEC6A00179799 /* HomeWindowController */ = {
-			isa = PBXGroup;
-			children = (
-				DB1FC58E1FDEED5400179799 /* HomeWindowController.h */,
-				DB1FC58F1FDEED5400179799 /* HomeWindowController.m */,
-			);
-			path = HomeWindowController;
 			sourceTree = "<group>";
 		};
 		DB2629781F95ED8900C4C647 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				DB2629791F95ED9A00C4C647 /* NSDate+Date.h */,
-				DB26297A1F95ED9A00C4C647 /* NSDate+Date.m */,
-				E19473F9205FD14C00CF12F9 /* NSColor+Color.h */,
-				E19473FA205FD14C00CF12F9 /* NSColor+Color.m */,
-				DB1C843F2079F54E007AC74C /* NSString+String.h */,
-				DB1C84402079F54E007AC74C /* NSString+String.m */,
-				DB5385682083622A004BFC84 /* NSURL+URL.h */,
-				DB5385692083622A004BFC84 /* NSURL+URL.m */,
-				DB5C5A4D2D00BA9C000C4A20 /* NSException+Description.h */,
-				DB5C5A4E2D00BA9C000C4A20 /* NSException+Description.m */,
+				DB26297A1F95ED9A00C4C647 /* NSDate+Date.swift */,
+				DB1C84402079F54E007AC74C /* NSString+String.swift */,
+				DB5385692083622A004BFC84 /* NSURL+URL.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -512,63 +332,39 @@
 		DB2629821F961F3100C4C647 /* DBErrorHandler */ = {
 			isa = PBXGroup;
 			children = (
-				DB2629831F961F4700C4C647 /* DBErrorHandler.h */,
-				DB2629841F961F4700C4C647 /* DBErrorHandler.m */,
+				AB00F1E5000000000000EE01 /* DBErrorHandler.swift */,
 			);
 			path = DBErrorHandler;
+			sourceTree = "<group>";
+		};
+		DB2D46D33031838200F551CE /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				AB00C0DE000000000000000D /* AppBoxSecrets.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		DB425C021F8A514E008CB032 /* DefaultSettings */ = {
 			isa = PBXGroup;
 			children = (
-				DB425C031F8A517D008CB032 /* DefaultSettings.h */,
-				DB425C041F8A517D008CB032 /* DefaultSettings.m */,
+				AB00F1E5000000000000DE01 /* DefaultSettings.swift */,
 			);
 			path = DefaultSettings;
-			sourceTree = "<group>";
-		};
-		DB53856B208388F3004BFC84 /* DragDropView */ = {
-			isa = PBXGroup;
-			children = (
-				DB53856C20838913004BFC84 /* DragDropView.h */,
-				DB53856D20838913004BFC84 /* DragDropView.m */,
-			);
-			path = DragDropView;
 			sourceTree = "<group>";
 		};
 		DB831BC21FF6B5240065B646 /* ABHudViewController */ = {
 			isa = PBXGroup;
 			children = (
-				DB8CE5F51FF77185003FEB65 /* DisabledView */,
-				DB831BC81FF6B5780065B646 /* ABHudViewController.h */,
-				DB831BC91FF6B5780065B646 /* ABHudViewController.m */,
-				DB831BCA1FF6B5780065B646 /* ABHudViewController.xib */,
+				DB831BC91FF6B5780065B646 /* ABHudViewController.swift */,
 			);
 			path = ABHudViewController;
-			sourceTree = "<group>";
-		};
-		DB8CE5F51FF77185003FEB65 /* DisabledView */ = {
-			isa = PBXGroup;
-			children = (
-				DB8CE5F61FF77199003FEB65 /* DisabledView.h */,
-				DB8CE5F71FF77199003FEB65 /* DisabledView.m */,
-			);
-			path = DisabledView;
-			sourceTree = "<group>";
-		};
-		DBA66CEF1FDCF4A60002A956 /* Storyboard */ = {
-			isa = PBXGroup;
-			children = (
-				DBA66CF01FDCF4A60002A956 /* Main.storyboard */,
-			);
-			path = Storyboard;
 			sourceTree = "<group>";
 		};
 		DBDCFBBB1F99C7860022097B /* UploadManager */ = {
 			isa = PBXGroup;
 			children = (
-				DBDCFBBC1F99C7860022097B /* UploadManager.h */,
-				DBDCFBBD1F99C7860022097B /* UploadManager.m */,
+				DBDCFBBD1F99C7860022097B /* UploadManager.swift */,
 			);
 			path = UploadManager;
 			sourceTree = "<group>";
@@ -576,9 +372,8 @@
 		DBF290D31FA64A3E0046D5CE /* ProvisioningDetailsViewController */ = {
 			isa = PBXGroup;
 			children = (
-				DBF290D41FA64A590046D5CE /* ProvisioningDetailsViewController.h */,
-				DBF290D51FA64A590046D5CE /* ProvisioningDetailsViewController.m */,
-				DBF290D61FA64A590046D5CE /* ProvisioningDetailsViewController.xib */,
+				DBF290D51FA64A590046D5CE /* ProvisioningDetailsViewController.swift */,
+				AB00F1E50000000000000071 /* ProvisioningDetailsView.swift */,
 			);
 			path = ProvisioningDetailsViewController;
 			sourceTree = "<group>";
@@ -586,8 +381,7 @@
 		E11633961E558609005EAB31 /* MobileProvision */ = {
 			isa = PBXGroup;
 			children = (
-				E11633971E558635005EAB31 /* MobileProvision.h */,
-				E11633981E558635005EAB31 /* MobileProvision.m */,
+				E11633981E558635005EAB31 /* MobileProvision.swift */,
 			);
 			path = MobileProvision;
 			sourceTree = "<group>";
@@ -595,26 +389,8 @@
 		E12A9AAA1E49F360002DDA3C /* CoreDataModel */ = {
 			isa = PBXGroup;
 			children = (
-				449BD6B7282111B0008EFB2B /* AppBoxService+CoreDataClass.h */,
-				449BD6B5282111B0008EFB2B /* AppBoxService+CoreDataClass.m */,
-				449BD6B6282111B0008EFB2B /* AppBoxService+CoreDataProperties.h */,
-				449BD6B4282111B0008EFB2B /* AppBoxService+CoreDataProperties.m */,
-				DB358B54216FB1AB0080CAC0 /* Project+CoreDataClass.h */,
-				DB358B59216FB1AB0080CAC0 /* Project+CoreDataClass.m */,
-				DB358B5F216FB1AB0080CAC0 /* Project+CoreDataProperties.h */,
-				DB358B58216FB1AB0080CAC0 /* Project+CoreDataProperties.m */,
-				DB358B5E216FB1AB0080CAC0 /* ProvisionedDevice+CoreDataClass.h */,
-				DB358B50216FB1AB0080CAC0 /* ProvisionedDevice+CoreDataClass.m */,
-				DB358B5A216FB1AB0080CAC0 /* ProvisionedDevice+CoreDataProperties.h */,
-				DB358B53216FB1AB0080CAC0 /* ProvisionedDevice+CoreDataProperties.m */,
-				DB358B61216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataClass.h */,
-				DB358B5B216FB1AB0080CAC0 /* ProvisioningProfile+CoreDataClass.m */,
-				DB358B62216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataProperties.h */,
-				DB358B4C216FB1AA0080CAC0 /* ProvisioningProfile+CoreDataProperties.m */,
-				DB358B63216FB1AC0080CAC0 /* UploadRecord+CoreDataClass.h */,
-				DB358B4E216FB1AA0080CAC0 /* UploadRecord+CoreDataClass.m */,
-				DB358B52216FB1AB0080CAC0 /* UploadRecord+CoreDataProperties.h */,
-				DB358B57216FB1AB0080CAC0 /* UploadRecord+CoreDataProperties.m */,
+				AB00DA7A0000000000000011 /* ABProject+AppBox.swift */,
+				AB00DA7A0000000000000013 /* ABUploadRecord+AppBox.swift */,
 			);
 			path = CoreDataModel;
 			sourceTree = "<group>";
@@ -623,26 +399,16 @@
 			isa = PBXGroup;
 			children = (
 				DBF290D31FA64A3E0046D5CE /* ProvisioningDetailsViewController */,
-				E12E6D071D8FC77D0054814D /* DashboardViewController.h */,
-				E12E6D081D8FC77D0054814D /* DashboardViewController.m */,
+				E12E6D081D8FC77D0054814D /* DashboardViewController.swift */,
+				AB00F1E500000000000000E1 /* DashboardView.swift */,
 			);
 			path = DashboardViewController;
-			sourceTree = "<group>";
-		};
-		E13161EF1E97775100586052 /* CLIIPAUpload */ = {
-			isa = PBXGroup;
-			children = (
-				E13161F01E9777DF00586052 /* CLIIPAUpload.h */,
-				E13161F11E9777DF00586052 /* CLIIPAUpload.m */,
-			);
-			path = CLIIPAUpload;
 			sourceTree = "<group>";
 		};
 		E139460F1DF2AFC200B3FAD0 /* IPAInfoModel */ = {
 			isa = PBXGroup;
 			children = (
-				E13946101DF2AFCF00B3FAD0 /* IPAUploadInfo.h */,
-				E13946111DF2AFCF00B3FAD0 /* IPAUploadInfo.m */,
+				E13946111DF2AFCF00B3FAD0 /* IPAUploadInfo.swift */,
 			);
 			path = IPAInfoModel;
 			sourceTree = "<group>";
@@ -650,8 +416,7 @@
 		E14F332E1E1A3D1300C3DD34 /* MenuHandler */ = {
 			isa = PBXGroup;
 			children = (
-				E14F33321E1A64CA00C3DD34 /* NSApplication+MenuHandler.h */,
-				E14F33331E1A64CA00C3DD34 /* NSApplication+MenuHandler.m */,
+				E14F33331E1A64CA00C3DD34 /* NSApplication+MenuHandler.swift */,
 			);
 			path = MenuHandler;
 			sourceTree = "<group>";
@@ -659,8 +424,8 @@
 		E15C26671D7FD5A9004243B9 /* ShowLinkViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E15C26681D7FD5CE004243B9 /* ShowLinkViewController.h */,
-				E15C26691D7FD5CE004243B9 /* ShowLinkViewController.m */,
+				E15C26691D7FD5CE004243B9 /* ShowLinkViewController.swift */,
+				AB00F1E50000000000000061 /* ShowLinkView.swift */,
 			);
 			path = ShowLinkViewController;
 			sourceTree = "<group>";
@@ -668,8 +433,8 @@
 		E16018ED1DEC0BA600E3A377 /* DropboxViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E16018EE1DEC0BC200E3A377 /* DropboxViewController.h */,
-				E16018EF1DEC0BC200E3A377 /* DropboxViewController.m */,
+				E16018EF1DEC0BC200E3A377 /* DropboxViewController.swift */,
+				AB00F1E5000000000000DB01 /* DropboxLoginView.swift */,
 			);
 			path = DropboxViewController;
 			sourceTree = "<group>";
@@ -682,6 +447,7 @@
 				E164389A1D743ECA00CE8B7E /* Frameworks */,
 				E16437D01D743A4E00CE8B7E /* Products */,
 				AECBA8D5D0C166DA17FF6ED0 /* AppBoxTests */,
+				DB2D46D33031838200F551CE /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -690,6 +456,7 @@
 			children = (
 				E16437CF1D743A4E00CE8B7E /* AppBox.app */,
 				DB0435832E696255005F0173 /* appboxcli */,
+				DB04358D2E69628F005F0173 /* AppBoxCore_AppBoxCore.bundle */,
 				DB5BA11E2FC9C91D00A150BA /* AppBoxTests.xctest */,
 			);
 			name = Products;
@@ -704,8 +471,7 @@
 				E16437EB1D743A9300CE8B7E /* Model */,
 				E16437EA1D743A8800CE8B7E /* ViewController */,
 				E16437D51D743A4E00CE8B7E /* Supporting Files */,
-				E16437D21D743A4E00CE8B7E /* AppDelegate.h */,
-				E16437D31D743A4E00CE8B7E /* AppDelegate.m */,
+				E16437D31D743A4E00CE8B7E /* AppDelegate.swift */,
 			);
 			path = AppBox;
 			sourceTree = "<group>";
@@ -713,9 +479,8 @@
 		E16437D51D743A4E00CE8B7E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E16437D61D743A4E00CE8B7E /* main.m */,
+				E16437D61D743A4E00CE8B7E /* AppBoxApp.swift */,
 				E16437E31D743A4E00CE8B7E /* Info.plist */,
-				E13946131DF2AFFF00B3FAD0 /* AppBoxPrefixHeader.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -724,7 +489,6 @@
 			isa = PBXGroup;
 			children = (
 				DB831BC21FF6B5240065B646 /* ABHudViewController */,
-				DBA66CEF1FDCF4A60002A956 /* Storyboard */,
 				E14F332E1E1A3D1300C3DD34 /* MenuHandler */,
 				E16018ED1DEC0BA600E3A377 /* DropboxViewController */,
 				E16437F01D743B3600CE8B7E /* HomeViewController */,
@@ -733,6 +497,7 @@
 				E12E6D061D8FC6E20054814D /* DashboardViewController */,
 				E1902B451E16420C00C3E0F6 /* UploadAdvancedSettingViewController */,
 				E16D72E61E8935060031FB7C /* PreferencesViewController */,
+				AB00F1E500000000000000B1 /* IslandStyle.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -742,8 +507,6 @@
 			children = (
 				E139460F1DF2AFC200B3FAD0 /* IPAInfoModel */,
 				E12A9AAA1E49F360002DDA3C /* CoreDataModel */,
-				DB1A06602160DC70008D33FD /* CoreDataMigration */,
-				E16437DB1D743A4E00CE8B7E /* AppBox.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -761,10 +524,8 @@
 		E16437F01D743B3600CE8B7E /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
-				DB53856B208388F3004BFC84 /* DragDropView */,
-				DB1FC58D1FDEEC6A00179799 /* HomeWindowController */,
-				E16437F11D743B6800CE8B7E /* HomeViewController.h */,
-				E16437F21D743B6800CE8B7E /* HomeViewController.m */,
+				E16437F21D743B6800CE8B7E /* HomeViewController.swift */,
+				AB00F1E500000000000000F1 /* HomeView.swift */,
 			);
 			path = HomeViewController;
 			sourceTree = "<group>";
@@ -772,45 +533,13 @@
 		E164389A1D743ECA00CE8B7E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DBD1CE2D2156230400549C0A /* ABPrivate.framework */,
-				656E98171CB7E85AA663AFE8 /* ObjectiveDropboxOfficial.xcframework */,
 				E16438A31D7469D900CE8B7E /* Foundation.framework */,
 				E16438A11D7469D200CE8B7E /* CoreData.framework */,
 				E164389F1D7469CD00CE8B7E /* AppKit.framework */,
 				E16438981D743EAA00CE8B7E /* Cocoa.framework */,
 				E16438961D743EA300CE8B7E /* WebKit.framework */,
-				9BB2CCACA72911C65FE295AF /* OS X */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E16BB8BC20284207002E9B5A /* SelectAccountViewController */ = {
-			isa = PBXGroup;
-			children = (
-				E16BB8C220284493002E9B5A /* SelectAccountCellView */,
-				E16BB8BD20284236002E9B5A /* SelectAccountViewController.h */,
-				E16BB8BE20284236002E9B5A /* SelectAccountViewController.m */,
-				E16BB8BF20284236002E9B5A /* SelectAccountViewController.xib */,
-			);
-			path = SelectAccountViewController;
-			sourceTree = "<group>";
-		};
-		E16BB8C220284493002E9B5A /* SelectAccountCellView */ = {
-			isa = PBXGroup;
-			children = (
-				E16BB8C320285A38002E9B5A /* SelectAccountCellView.h */,
-				E16BB8C420285A38002E9B5A /* SelectAccountCellView.m */,
-			);
-			path = SelectAccountCellView;
-			sourceTree = "<group>";
-		};
-		E16BB8C6202873E1002E9B5A /* AccountCellView */ = {
-			isa = PBXGroup;
-			children = (
-				E16BB8C7202873FA002E9B5A /* AccountCellView.h */,
-				E16BB8C8202873FA002E9B5A /* AccountCellView.m */,
-			);
-			path = AccountCellView;
 			sourceTree = "<group>";
 		};
 		E16D72E61E8935060031FB7C /* PreferencesViewController */ = {
@@ -821,9 +550,8 @@
 				E18186D71E8A479E0002509F /* AccountPreferencesViewController */,
 				E18186D81E8A479E0002509F /* EmailPreferencesViewController */,
 				E18186D91E8A479E0002509F /* HelpPreferencesViewController */,
-				E18186CC1E8A3BC00002509F /* PreferencesTabViewController.h */,
-				E18186CD1E8A3BC00002509F /* PreferencesTabViewController.m */,
-				E1D12EE71EC2F4360065E59A /* PreferencesTabViewController.xib */,
+				E18186CD1E8A3BC00002509F /* PreferencesTabViewController.swift */,
+				AB00F1E500000000000000D1 /* PreferencesContainerView.swift */,
 			);
 			path = PreferencesViewController;
 			sourceTree = "<group>";
@@ -831,9 +559,8 @@
 		E18186D31E8A45C30002509F /* GeneralPreferencesViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E18186D41E8A45C30002509F /* PreferencesViewController.h */,
-				E18186D51E8A45C30002509F /* PreferencesViewController.m */,
-				DBCD1562200BCD1C00C003E6 /* PreferencesViewController.xib */,
+				E18186D51E8A45C30002509F /* PreferencesViewController.swift */,
+				AB00F1E500000000000000A1 /* GeneralPreferencesView.swift */,
 			);
 			path = GeneralPreferencesViewController;
 			sourceTree = "<group>";
@@ -841,11 +568,8 @@
 		E18186D71E8A479E0002509F /* AccountPreferencesViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E16BB8C6202873E1002E9B5A /* AccountCellView */,
-				E16BB8BC20284207002E9B5A /* SelectAccountViewController */,
-				E18186DA1E8A47C10002509F /* AccountPreferencesViewController.h */,
-				E18186DB1E8A47C10002509F /* AccountPreferencesViewController.m */,
-				E1D12EEB1EC31AC80065E59A /* AccountPreferencesViewController.xib */,
+				E18186DB1E8A47C10002509F /* AccountPreferencesViewController.swift */,
+				AB00F1E5000000000000AC01 /* AccountPreferencesView.swift */,
 			);
 			path = AccountPreferencesViewController;
 			sourceTree = "<group>";
@@ -853,9 +577,8 @@
 		E18186D81E8A479E0002509F /* EmailPreferencesViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E18186DD1E8A47CD0002509F /* EmailPreferencesViewController.h */,
-				E18186DE1E8A47CD0002509F /* EmailPreferencesViewController.m */,
-				E1D12EE91EC2F5230065E59A /* EmailPreferencesViewController.xib */,
+				E18186DE1E8A47CD0002509F /* EmailPreferencesViewController.swift */,
+				AB00F1E50000000000000091 /* EmailPreferencesView.swift */,
 			);
 			path = EmailPreferencesViewController;
 			sourceTree = "<group>";
@@ -863,9 +586,8 @@
 		E18186D91E8A479E0002509F /* HelpPreferencesViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E18186E01E8A47D60002509F /* HelpPreferencesViewController.h */,
-				E18186E11E8A47D60002509F /* HelpPreferencesViewController.m */,
-				E1D12EED1EC320760065E59A /* HelpPreferencesViewController.xib */,
+				E18186E11E8A47D60002509F /* HelpPreferencesViewController.swift */,
+				AB00F1E500000000000000C1 /* HelpPreferencesView.swift */,
 			);
 			path = HelpPreferencesViewController;
 			sourceTree = "<group>";
@@ -873,8 +595,8 @@
 		E1902B451E16420C00C3E0F6 /* UploadAdvancedSettingViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E1902B461E16423200C3E0F6 /* UploadAdvancedSettingViewController.h */,
-				E1902B471E16423200C3E0F6 /* UploadAdvancedSettingViewController.m */,
+				E1902B471E16423200C3E0F6 /* UploadAdvancedSettingViewController.swift */,
+				AB00F1E5000000000000AD01 /* UploadAdvancedSettingView.swift */,
 			);
 			path = UploadAdvancedSettingViewController;
 			sourceTree = "<group>";
@@ -882,27 +604,15 @@
 		E1902B4B1E16617B00C3E0F6 /* MailHandler */ = {
 			isa = PBXGroup;
 			children = (
-				E1902B5B1E1661B300C3E0F6 /* MailHandler.h */,
-				E1902B5C1E1661B300C3E0F6 /* MailHandler.m */,
+				E1902B5C1E1661B300C3E0F6 /* MailHandler.swift */,
 			);
 			path = MailHandler;
-			sourceTree = "<group>";
-		};
-		E1902B4C1E16617B00C3E0F6 /* NetworkHandler */ = {
-			isa = PBXGroup;
-			children = (
-				E1902B4D1E16617B00C3E0F6 /* NetworkHandler.h */,
-				E1902B4E1E16617B00C3E0F6 /* NetworkHandler.m */,
-				E1FECA821E83EE5000C4E9AE /* HTTPStatusCode.h */,
-			);
-			path = NetworkHandler;
 			sourceTree = "<group>";
 		};
 		E1902B4F1E16617B00C3E0F6 /* UpdateHandler */ = {
 			isa = PBXGroup;
 			children = (
-				E1902B5E1E1661BE00C3E0F6 /* UpdateHandler.h */,
-				E1902B5F1E1661BE00C3E0F6 /* UpdateHandler.m */,
+				E1902B5F1E1661BE00C3E0F6 /* UpdateHandler.swift */,
 			);
 			path = UpdateHandler;
 			sourceTree = "<group>";
@@ -910,21 +620,9 @@
 		E1902B501E16617B00C3E0F6 /* UserManager */ = {
 			isa = PBXGroup;
 			children = (
-				E1902B511E16617B00C3E0F6 /* UserData.h */,
-				E1902B521E16617B00C3E0F6 /* UserData.m */,
-				4410D18C26FF76A20046E5F9 /* DBAccountManager.h */,
-				4410D18D26FF76A20046E5F9 /* DBAccountManager.m */,
+				AB00F1E5000000000000DA11 /* UserData.swift */,
 			);
 			path = UserManager;
-			sourceTree = "<group>";
-		};
-		E1902B611E1662E300C3E0F6 /* KeychainHandler */ = {
-			isa = PBXGroup;
-			children = (
-				E1902B621E16633A00C3E0F6 /* KeychainHandler.h */,
-				E1902B631E16633A00C3E0F6 /* KeychainHandler.m */,
-			);
-			path = KeychainHandler;
 			sourceTree = "<group>";
 		};
 		E19473F0205F9F2900CF12F9 /* ServiceIntegrations */ = {
@@ -939,8 +637,7 @@
 		E19473F2205F9F8600CF12F9 /* MSTeamsClient */ = {
 			isa = PBXGroup;
 			children = (
-				E19473F3205F9FC800CF12F9 /* MSTeamsClient.h */,
-				E19473F4205F9FC800CF12F9 /* MSTeamsClient.m */,
+				E19473F4205F9FC800CF12F9 /* MSTeamsClient.swift */,
 			);
 			path = MSTeamsClient;
 			sourceTree = "<group>";
@@ -948,8 +645,7 @@
 		E19473FC205FD3B700CF12F9 /* UISubClasses */ = {
 			isa = PBXGroup;
 			children = (
-				E19473FD205FD3F100CF12F9 /* AppBoxTableRowView.h */,
-				E19473FE205FD3F100CF12F9 /* AppBoxTableRowView.m */,
+				E19473FE205FD3F100CF12F9 /* AppBoxTableRowView.swift */,
 			);
 			path = UISubClasses;
 			sourceTree = "<group>";
@@ -957,8 +653,8 @@
 		E1AA0F411E2F325F00BA81A1 /* QRCodeViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E1AA0F421E2F328300BA81A1 /* QRCodeViewController.h */,
-				E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */,
+				E1AA0F431E2F328300BA81A1 /* QRCodeViewController.swift */,
+				AB00F1E50000000000000051 /* QRCodeView.swift */,
 			);
 			path = QRCodeViewController;
 			sourceTree = "<group>";
@@ -966,8 +662,7 @@
 		E1C0246E1E9B4E4C00C87CC9 /* SlackClient */ = {
 			isa = PBXGroup;
 			children = (
-				E1C0246F1E9B4E6C00C87CC9 /* SlackClient.h */,
-				E1C024701E9B4E6C00C87CC9 /* SlackClient.m */,
+				E1C024701E9B4E6C00C87CC9 /* SlackClient.swift */,
 			);
 			path = SlackClient;
 			sourceTree = "<group>";
@@ -975,26 +670,21 @@
 		E1CFC65B1D7E7FD9005872BE /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				E13161EF1E97775100586052 /* CLIIPAUpload */,
 				DB04358E2E6962DB005F0173 /* CLISupportHelper */,
 				DB2629821F961F3100C4C647 /* DBErrorHandler */,
 				704A0BB2FE5A7E33851F5FDB /* DefaultAppHandler */,
 				DB425C021F8A514E008CB032 /* DefaultSettings */,
-				E1902B611E1662E300C3E0F6 /* KeychainHandler */,
 				E11633961E558609005EAB31 /* MobileProvision */,
 				DBDCFBBB1F99C7860022097B /* UploadManager */,
-				E1902B4C1E16617B00C3E0F6 /* NetworkHandler */,
 				E19473FC205FD3B700CF12F9 /* UISubClasses */,
 				E19473F0205F9F2900CF12F9 /* ServiceIntegrations */,
 				E1902B501E16617B00C3E0F6 /* UserManager */,
 				DB2629781F95ED8900C4C647 /* Extensions */,
 				E1902B4B1E16617B00C3E0F6 /* MailHandler */,
-				E1DC25FA1ECDBC16001EF106 /* ProgressHUD */,
 				E1902B4F1E16617B00C3E0F6 /* UpdateHandler */,
-				E1DC25F91ECD826C001EF106 /* OtherServicesKeys.h */,
-				E16018F11DEC0EB700E3A377 /* Constants.h */,
-				E1CFC65C1D7E7FEA005872BE /* Common.h */,
-				E1CFC65D1D7E7FEA005872BE /* Common.m */,
+				AB00F1E5000000000000C0A1 /* Common.swift */,
+				AB00C0DE0000000000000006 /* AppServices.swift */,
+				AB00C0DE0000000000000008 /* AppBoxSecrets.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1002,20 +692,10 @@
 		E1D12EDF1EC2F1420065E59A /* ThirdPartyPreferencesViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E1D12EE01EC2F17B0065E59A /* ThirdPartyPreferencesViewController.h */,
-				E1D12EE11EC2F17B0065E59A /* ThirdPartyPreferencesViewController.m */,
-				E1D12EE21EC2F17B0065E59A /* ThirdPartyPreferencesViewController.xib */,
+				E1D12EE11EC2F17B0065E59A /* ThirdPartyPreferencesViewController.swift */,
+				AB00F1E50000000000000081 /* ThirdPartyPreferencesView.swift */,
 			);
 			path = ThirdPartyPreferencesViewController;
-			sourceTree = "<group>";
-		};
-		E1DC25FA1ECDBC16001EF106 /* ProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				E1DC25FE1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.h */,
-				E1DC25FF1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m */,
-			);
-			path = ProgressHUD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1043,9 +723,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DB0435872E696255005F0173 /* Build configuration list for PBXNativeTarget "AppBoxCLI" */;
 			buildPhases = (
+				AB00C0DE000000000000000B /* Generate Secrets */,
 				DB04357F2E696255005F0173 /* Sources */,
 				DB0435802E696255005F0173 /* Frameworks */,
-				DB0435812E696255005F0173 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -1057,6 +737,7 @@
 			name = AppBoxCLI;
 			packageProductDependencies = (
 				DB8BAA902E6C433200186B7B /* ArgumentParser */,
+				AB00C0DE0000000000000003 /* AppBoxCore */,
 			);
 			productName = AppBoxCLI;
 			productReference = DB0435832E696255005F0173 /* appboxcli */;
@@ -1066,7 +747,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E16437E61D743A4E00CE8B7E /* Build configuration list for PBXNativeTarget "AppBox" */;
 			buildPhases = (
-				E19973332091D2640035CCE9 /* Embed Frameworks */,
+				AB00C0DE000000000000000A /* Generate Secrets */,
 				E16437CB1D743A4E00CE8B7E /* Sources */,
 				E16437CC1D743A4E00CE8B7E /* Frameworks */,
 				E16437CD1D743A4E00CE8B7E /* Resources */,
@@ -1075,11 +756,11 @@
 			buildRules = (
 			);
 			dependencies = (
+				AB00C0DE0000000000000005 /* PBXTargetDependency */,
 			);
 			name = AppBox;
 			packageProductDependencies = (
-				33146DD70AA7C380685E53AA /* CocoaLumberjack */,
-				EFE5EA7464F3539F2562A787 /* ZipArchive */,
+				AB00C0DE0000000000000002 /* AppBoxCore */,
 			);
 			productName = AppBox;
 			productReference = E16437CF1D743A4E00CE8B7E /* AppBox.app */;
@@ -1122,8 +803,7 @@
 			mainGroup = E16437C61D743A4E00CE8B7E;
 			packageReferences = (
 				DB8BAA8F2E6C433200186B7B /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
-				9B9E6A9753976BA4489435DD /* XCRemoteSwiftPackageReference "CocoaLumberjack" */,
-				A10AAE9CF3D9BEAE4947FEBC /* XCRemoteSwiftPackageReference "ZipArchive" */,
+				AB00C0DE0000000000000001 /* XCLocalSwiftPackageReference "AppBoxCore" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E16437D01D743A4E00CE8B7E /* Products */;
@@ -1149,37 +829,61 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBF290D81FA64A590046D5CE /* ProvisioningDetailsViewController.xib in Resources */,
-				E16BB8C120284236002E9B5A /* SelectAccountViewController.xib in Resources */,
-				E1D12EE41EC2F17B0065E59A /* ThirdPartyPreferencesViewController.xib in Resources */,
-				E1D12EEA1EC2F5230065E59A /* EmailPreferencesViewController.xib in Resources */,
-				DBCD1563200BCD1C00C003E6 /* PreferencesViewController.xib in Resources */,
-				E1D12EE81EC2F4360065E59A /* PreferencesTabViewController.xib in Resources */,
 				DB26297D1F95F35C00C4C647 /* AppBoxIcons.xcassets in Resources */,
 				E16437DF1D743A4E00CE8B7E /* Assets.xcassets in Resources */,
-				E1D12EEE1EC320760065E59A /* HelpPreferencesViewController.xib in Resources */,
-				DBA66CF11FDCF4A60002A956 /* Main.storyboard in Resources */,
 				DB6F784F215D459A00C77966 /* AppBoxColors.xcassets in Resources */,
-				E1D12EEC1EC31AC80065E59A /* AccountPreferencesViewController.xib in Resources */,
-				DB831BCC1FF6B5780065B646 /* ABHudViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AB00C0DE000000000000000A /* Generate Secrets */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Secrets";
+			outputPaths = (
+				"$(SRCROOT)/Generated/AppBox/AppBoxSecrets.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$SRCROOT/Scripts/generate-secrets.sh\"\n";
+		};
+		AB00C0DE000000000000000B /* Generate Secrets */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Secrets";
+			outputPaths = (
+				"$(SRCROOT)/Generated/AppBoxCLI/AppBoxSecrets.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$SRCROOT/Scripts/generate-secrets.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4A568FBC3E2A1A064341626E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D20E6B57EA90CA7D6EA21F7 /* IPAUploadInfoTests.m in Sources */,
-				D9E5B24A6827FC5AD68D29D0 /* CommonTests.m in Sources */,
-				AA11BB22CC33DD44EE550011 /* NetworkHandlerTests.m in Sources */,
-				AA11BB22CC33DD44EE550012 /* MobileProvisionTests.m in Sources */,
-				AA11BB22CC33DD44EE550013 /* KeychainHandlerTests.m in Sources */,
-				AA11BB22CC33DD44EE550014 /* UserDataTests.m in Sources */,
-				AA11BB22CC33DD44EE550015 /* MailHandlerTests.m in Sources */,
-				AA11BB22CC33DD44EE550016 /* UpdateHandlerTests.m in Sources */,
+				5D20E6B57EA90CA7D6EA21F7 /* IPAUploadInfoTests.swift in Sources */,
+				D9E5B24A6827FC5AD68D29D0 /* CommonTests.swift in Sources */,
+				AA11BB22CC33DD44EE550012 /* MobileProvisionTests.swift in Sources */,
+				AA11BB22CC33DD44EE550014 /* UserDataTests.swift in Sources */,
+				AA11BB22CC33DD44EE550042 /* CLISupportHelperTests.swift in Sources */,
+				AA11BB22CC33DD44EE550041 /* DBErrorHandlerTests.swift in Sources */,
+				AA11BB22CC33DD44EE550015 /* MailHandlerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1187,6 +891,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB00C0DE000000000000000C /* AppBoxSecrets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1194,66 +899,58 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E19473FF205FD3F100CF12F9 /* AppBoxTableRowView.m in Sources */,
-				E19473FB205FD14C00CF12F9 /* NSColor+Color.m in Sources */,
-				E1902B541E16617B00C3E0F6 /* UserData.m in Sources */,
-				E16437DD1D743A4E00CE8B7E /* AppBox.xcdatamodeld in Sources */,
-				E16437D71D743A4E00CE8B7E /* main.m in Sources */,
-				DB831BCB1FF6B5780065B646 /* ABHudViewController.m in Sources */,
-				E1902B481E16423200C3E0F6 /* UploadAdvancedSettingViewController.m in Sources */,
-				DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.m in Sources */,
-				DB358B66216FB1AC0080CAC0 /* UploadRecord+CoreDataClass.m in Sources */,
-				E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */,
-				DB358B6E216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataClass.m in Sources */,
-				E16437D41D743A4E00CE8B7E /* AppDelegate.m in Sources */,
-				DB358B6C216FB1AC0080CAC0 /* Project+CoreDataProperties.m in Sources */,
-				DB358B6B216FB1AC0080CAC0 /* UploadRecord+CoreDataProperties.m in Sources */,
-				DB358B68216FB1AC0080CAC0 /* ProvisionedDevice+CoreDataClass.m in Sources */,
-				DB5C5A4F2D00BA9C000C4A20 /* NSException+Description.m in Sources */,
-				DB8CE5F81FF77199003FEB65 /* DisabledView.m in Sources */,
-				DB358B6A216FB1AC0080CAC0 /* ProvisionedDevice+CoreDataProperties.m in Sources */,
-				E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */,
-				E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */,
-				DB1FC5901FDEED5400179799 /* HomeWindowController.m in Sources */,
-				DB425C051F8A517D008CB032 /* DefaultSettings.m in Sources */,
-				E18186DC1E8A47C10002509F /* AccountPreferencesViewController.m in Sources */,
-				449BD6B9282111B0008EFB2B /* AppBoxService+CoreDataClass.m in Sources */,
-				E19473F5205F9FC800CF12F9 /* MSTeamsClient.m in Sources */,
-				E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */,
-				E1D12EE31EC2F17B0065E59A /* ThirdPartyPreferencesViewController.m in Sources */,
-				DB1A06622160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel in Sources */,
-				E16BB8C020284236002E9B5A /* SelectAccountViewController.m in Sources */,
-				DB53856E20838913004BFC84 /* DragDropView.m in Sources */,
-				DB53856A2083622A004BFC84 /* NSURL+URL.m in Sources */,
-				DB1C84412079F54E007AC74C /* NSString+String.m in Sources */,
-				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,
-				E11633991E558635005EAB31 /* MobileProvision.m in Sources */,
-				DB0435912E6962EA005F0173 /* CLISupportHelper.m in Sources */,
-				E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */,
-				449BD6B8282111B0008EFB2B /* AppBoxService+CoreDataProperties.m in Sources */,
-				E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */,
-				4410D18E26FF76A20046E5F9 /* DBAccountManager.m in Sources */,
-				E13946121DF2AFCF00B3FAD0 /* IPAUploadInfo.m in Sources */,
-				E1C024711E9B4E6C00C87CC9 /* SlackClient.m in Sources */,
-				DB358B64216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataProperties.m in Sources */,
-				DB358B6D216FB1AC0080CAC0 /* Project+CoreDataClass.m in Sources */,
-				E16437F31D743B6800CE8B7E /* HomeViewController.m in Sources */,
-				E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */,
-				DB26297B1F95ED9A00C4C647 /* NSDate+Date.m in Sources */,
-				E16BB8C520285A38002E9B5A /* SelectAccountCellView.m in Sources */,
-				E1902B641E16633A00C3E0F6 /* KeychainHandler.m in Sources */,
-				E1902B5D1E1661B300C3E0F6 /* MailHandler.m in Sources */,
-				E1DC26001ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m in Sources */,
-				DBDCFBBE1F99C7860022097B /* UploadManager.m in Sources */,
-				E18186D61E8A45C30002509F /* PreferencesViewController.m in Sources */,
-				E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.m in Sources */,
-				E13161F21E9777DF00586052 /* CLIIPAUpload.m in Sources */,
-				4410D19C26FF851D0046E5F9 /* CoreDataMigration3to4.xcmappingmodel in Sources */,
-				DB2629851F961F4700C4C647 /* DBErrorHandler.m in Sources */,
-				E18186E21E8A47D60002509F /* HelpPreferencesViewController.m in Sources */,
-				E18186CE1E8A3BC00002509F /* PreferencesTabViewController.m in Sources */,
-				E16BB8C9202873FA002E9B5A /* AccountCellView.m in Sources */,
-				B472C718BB3B23CCB6C65599 /* DefaultAppHandler.m in Sources */,
+				E19473FF205FD3F100CF12F9 /* AppBoxTableRowView.swift in Sources */,
+				AB00F1E5000000000000DA12 /* UserData.swift in Sources */,
+				E16437D71D743A4E00CE8B7E /* AppBoxApp.swift in Sources */,
+				DB831BCB1FF6B5780065B646 /* ABHudViewController.swift in Sources */,
+				E1902B481E16423200C3E0F6 /* UploadAdvancedSettingViewController.swift in Sources */,
+				AB00F1E5000000000000AD02 /* UploadAdvancedSettingView.swift in Sources */,
+				DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.swift in Sources */,
+				AB00F1E50000000000000072 /* ProvisioningDetailsView.swift in Sources */,
+				E16018F01DEC0BC200E3A377 /* DropboxViewController.swift in Sources */,
+				AB00F1E5000000000000DB02 /* DropboxLoginView.swift in Sources */,
+				E16437D41D743A4E00CE8B7E /* AppDelegate.swift in Sources */,
+				AB00DA7A0000000000000020 /* ABProject+AppBox.swift in Sources */,
+				AB00DA7A0000000000000021 /* ABUploadRecord+AppBox.swift in Sources */,
+				AB00F1E5000000000000C0A2 /* Common.swift in Sources */,
+				AB00C0DE0000000000000007 /* AppServices.swift in Sources */,
+				AB00C0DE0000000000000009 /* AppBoxSecrets.swift in Sources */,
+				AB00F1E5000000000000DE02 /* DefaultSettings.swift in Sources */,
+				E18186DC1E8A47C10002509F /* AccountPreferencesViewController.swift in Sources */,
+				AB00F1E5000000000000AC02 /* AccountPreferencesView.swift in Sources */,
+				E19473F5205F9FC800CF12F9 /* MSTeamsClient.swift in Sources */,
+				E12E6D0A1D8FC77D0054814D /* DashboardViewController.swift in Sources */,
+				AB00F1E500000000000000E2 /* DashboardView.swift in Sources */,
+				E1D12EE31EC2F17B0065E59A /* ThirdPartyPreferencesViewController.swift in Sources */,
+				AB00F1E50000000000000082 /* ThirdPartyPreferencesView.swift in Sources */,
+				DB53856A2083622A004BFC84 /* NSURL+URL.swift in Sources */,
+				DB1C84412079F54E007AC74C /* NSString+String.swift in Sources */,
+				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.swift in Sources */,
+				AB00F1E50000000000000062 /* ShowLinkView.swift in Sources */,
+				E11633991E558635005EAB31 /* MobileProvision.swift in Sources */,
+				DB0435912E6962EA005F0173 /* CLISupportHelper.swift in Sources */,
+				E1902B601E1661BE00C3E0F6 /* UpdateHandler.swift in Sources */,
+				E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.swift in Sources */,
+				E13946121DF2AFCF00B3FAD0 /* IPAUploadInfo.swift in Sources */,
+				E1C024711E9B4E6C00C87CC9 /* SlackClient.swift in Sources */,
+				E16437F31D743B6800CE8B7E /* HomeViewController.swift in Sources */,
+				AB00F1E500000000000000F2 /* HomeView.swift in Sources */,
+				E1AA0F441E2F328300BA81A1 /* QRCodeViewController.swift in Sources */,
+				AB00F1E50000000000000052 /* QRCodeView.swift in Sources */,
+				AB00F1E500000000000000B2 /* IslandStyle.swift in Sources */,
+				DB26297B1F95ED9A00C4C647 /* NSDate+Date.swift in Sources */,
+				E1902B5D1E1661B300C3E0F6 /* MailHandler.swift in Sources */,
+				DBDCFBBE1F99C7860022097B /* UploadManager.swift in Sources */,
+				E18186D61E8A45C30002509F /* PreferencesViewController.swift in Sources */,
+				AB00F1E500000000000000A2 /* GeneralPreferencesView.swift in Sources */,
+				E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.swift in Sources */,
+				AB00F1E50000000000000092 /* EmailPreferencesView.swift in Sources */,
+				AB00F1E5000000000000EE02 /* DBErrorHandler.swift in Sources */,
+				E18186E21E8A47D60002509F /* HelpPreferencesViewController.swift in Sources */,
+				AB00F1E500000000000000C2 /* HelpPreferencesView.swift in Sources */,
+				E18186CE1E8A3BC00002509F /* PreferencesTabViewController.swift in Sources */,
+				AB00F1E500000000000000D2 /* PreferencesContainerView.swift in Sources */,
+				AB00F1E5000000000000DA02 /* DefaultAppHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1266,6 +963,12 @@
 			target = E16437CE1D743A4E00CE8B7E /* AppBox */;
 			targetProxy = 36376D9B366B3D16A6DDD659 /* PBXContainerItemProxy */;
 		};
+		AB00C0DE0000000000000005 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AppBoxCLI;
+			target = DB0435822E696255005F0173 /* AppBoxCLI */;
+			targetProxy = AB00C0DE0000000000000004 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -1277,26 +980,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3PQ7E4L589;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/**",
-					"$(PROJECT_DIR)/Frameworks",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = AppBox/AppBoxPrefixHeader.pch;
 				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/AppBox/**",
-					"$(PROJECT_DIR)/Frameworks/**",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 12.4;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.developerinsider.AppBoxTests;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppBox.app/Contents/MacOS/AppBox";
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
 			};
 			name = Release;
 		};
@@ -1308,26 +999,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3PQ7E4L589;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/**",
-					"$(PROJECT_DIR)/Frameworks",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = AppBox/AppBoxPrefixHeader.pch;
 				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/AppBox/**",
-					"$(PROJECT_DIR)/Frameworks/**",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 12.4;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.developerinsider.AppBoxTests;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppBox.app/Contents/MacOS/AppBox";
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
 			};
 			name = Debug;
 		};
@@ -1344,10 +1023,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3PQ7E4L589;
 				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.developerinsider.AppBoxCLI;
@@ -1374,10 +1057,14 @@
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=macosx*]" = 3PQ7E4L589;
 				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.developerinsider.AppBoxCLI;
 				PRODUCT_NAME = appboxcli;
@@ -1438,7 +1125,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -1489,7 +1176,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};
@@ -1500,40 +1187,24 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AppBox/AppBox.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3PQ7E4L589;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/**",
-					"$(PROJECT_DIR)/AppBox",
-					"$(PROJECT_DIR)/Frameworks",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = AppBox/AppBoxPrefixHeader.pch;
-				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = AppBox/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
-				LD_DYLIB_INSTALL_NAME = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 3.7.0;
-				OTHER_CODE_SIGN_FLAGS = "";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 4.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.developerinsider.AppBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				REGISTER_APP_GROUPS = YES;
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1545,41 +1216,25 @@
 				CODE_SIGN_IDENTITY = "Developer ID Application: Vineet Choudhary (3PQ7E4L589)";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=macosx*]" = 3PQ7E4L589;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/**",
-					"$(PROJECT_DIR)/AppBox",
-					"$(PROJECT_DIR)/Frameworks",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = AppBox/AppBoxPrefixHeader.pch;
-				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = AppBox/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
-				LD_DYLIB_INSTALL_NAME = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 3.7.0;
-				OTHER_CODE_SIGN_FLAGS = "";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 4.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.developerinsider.AppBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "AppBox Developer ID";
-				REGISTER_APP_GROUPS = YES;
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -1624,23 +1279,14 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		AB00C0DE0000000000000001 /* XCLocalSwiftPackageReference "AppBoxCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = AppBoxCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
-		9B9E6A9753976BA4489435DD /* XCRemoteSwiftPackageReference "CocoaLumberjack" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/CocoaLumberjack/CocoaLumberjack.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.9.1;
-			};
-		};
-		A10AAE9CF3D9BEAE4947FEBC /* XCRemoteSwiftPackageReference "ZipArchive" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ZipArchive/ZipArchive.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.6.0;
-			};
-		};
 		DB8BAA8F2E6C433200186B7B /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
@@ -1652,39 +1298,22 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		33146DD70AA7C380685E53AA /* CocoaLumberjack */ = {
+		AB00C0DE0000000000000002 /* AppBoxCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9B9E6A9753976BA4489435DD /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
-			productName = CocoaLumberjack;
+			package = AB00C0DE0000000000000001 /* XCLocalSwiftPackageReference "AppBoxCore" */;
+			productName = AppBoxCore;
+		};
+		AB00C0DE0000000000000003 /* AppBoxCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AB00C0DE0000000000000001 /* XCLocalSwiftPackageReference "AppBoxCore" */;
+			productName = AppBoxCore;
 		};
 		DB8BAA902E6C433200186B7B /* ArgumentParser */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DB8BAA8F2E6C433200186B7B /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
 			productName = ArgumentParser;
 		};
-		EFE5EA7464F3539F2562A787 /* ZipArchive */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A10AAE9CF3D9BEAE4947FEBC /* XCRemoteSwiftPackageReference "ZipArchive" */;
-			productName = ZipArchive;
-		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		E16437DB1D743A4E00CE8B7E /* AppBox.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				44DCC66B25EEA1910074AB1E /* AppBox4.xcdatamodel */,
-				DB1A06592160D47C008D33FD /* AppBox3.xcdatamodel */,
-				DBFEEA551FA5BA4700F09ECD /* AppBox2.xcdatamodel */,
-				E16437DC1D743A4E00CE8B7E /* AppBox.xcdatamodel */,
-			);
-			currentVersion = 44DCC66B25EEA1910074AB1E /* AppBox4.xcdatamodel */;
-			name = AppBox.xcdatamodeld;
-			path = ../AppBox.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = E16437C71D743A4E00CE8B7E /* Project object */;
 }

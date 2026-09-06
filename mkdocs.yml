@@ -8,17 +8,16 @@ remote_branch: gh-pages
 dev_addr: 127.0.0.1:2000 
 edit_uri: blob/master/docs/
 
-# Google Analytics
-google_analytics:
-  - 'UA-85215717-4'
-  - 'auto'
-
-# Customization
+# Customization (single `extra:` block — a second one later in the file would silently
+# replace this whole mapping, YAML last-key-wins). The removed `google_analytics:` option
+# pointed at a discontinued Universal Analytics property; use Material's `extra.analytics`
+# with a GA4 property if analytics is wanted again.
 extra:
+  generator: false
   social:
-    - type: 'github'
+    - icon: fontawesome/brands/github
       link: 'https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation'
-    - type: 'twitter'
+    - icon: fontawesome/brands/x-twitter
       link: 'https://twitter.com/AppBoxHQ'
 
 # Configuration
@@ -65,6 +64,4 @@ plugins:
       lang: en
   - awesome-pages
   - minify:
-      minify_html: true    
-extra:
-  generator: false
+      minify_html: true

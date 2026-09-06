@@ -9,6 +9,15 @@
     }
   ],
   "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:AppBox.xcodeproj",
+          "identifier" : "E16437CE1D743A4E00CE8B7E",
+          "name" : "AppBox"
+        }
+      ]
+    },
     "performanceAntipatternCheckerEnabled" : true,
     "uiTestingScreenshotsLifetime" : "keepNever"
   },

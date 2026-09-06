@@ -42,31 +42,31 @@ If you face any issue using above command then you can manually install AppBox b
 
 | Step | Description |
 | :--- | :--- |
-| 1. |	Link your Dropbox account with AppBox. |
-| 2.	| Select and upload the iOS application. |
-| 3. |	Send the link to your testers, clients, friends or even use it yourself. |
-| 4.	| Open the link in the browser on the device and click on install. |
+| 1. | Link your Dropbox account with AppBox. |
+| 2. | Select or drag the IPA file and click upload. |
+| 3. | Send the link to your testers, clients, friends or even use it yourself. |
+| 4. | Open the link in the browser on the device and click on install. |
 
 
 # Current Version Screenshot
 
 ### Upload IPA
-![](docs/Images/Readme/AB.png)
-![](docs/Images/Readme/ABIPAUpload.png)
+![](docs/Images/Readme/AB.webp)
+![](docs/Images/Readme/ABIPAUpload.webp)
 
 ### Share URL
-![](docs/Images/Readme/ABShareURL.png)
+![](docs/Images/Readme/ABShareURL.webp)
 
 ### Dashboard
-![](docs/Images/Readme/ABDashboard.png)
+![](docs/Images/Readme/ABDashboard.webp)
 
 ### Preferences
-![](docs/Images/Readme/ABPref1.png)
-![](docs/Images/Readme/ABPref2.png)
-![](docs/Images/Readme/ABPref3.png)
+![](docs/Images/Readme/ABPref1.webp)
+![](docs/Images/Readme/ABPref2.webp)
+![](docs/Images/Readme/ABPref3.webp)
 
 ### Installation and All Builds WebPage
-![](docs/Images/Readme/ABWeb1.png)        ![](docs/Images/Readme/ABWeb2.png)
+![](docs/Images/Readme/ABWeb1.webp)        ![](docs/Images/Readme/ABWeb2.webp)
 
 
 # Contributions

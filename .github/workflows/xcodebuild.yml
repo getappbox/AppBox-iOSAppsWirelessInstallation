@@ -1,27 +1,75 @@
-name: Xcode Build
+name: Xcode Build & Test
 on:
   pull_request:
-    branches: ["master"]
-    paths: ["!docs/**", "!.github/**", "!**.md", "!**.yml"]
+    branches: ["master", "develop"]
+    paths-ignore: ["docs/**", "**.md", "mkdocs.yml"]
   push:
-    branches: ["master"]
-    paths: ["!docs/**", "!.github/**", "!**.md", "!**.yml"]
+    branches: ["master", "develop"]
+    paths-ignore: ["docs/**", "**.md", "mkdocs.yml"]
 jobs:
-  build:
-    name: Build AppBox
+  build-test:
+    name: Build & Test AppBox
     runs-on: macos-latest
     steps:
       - name: Checkout repository
-		uses: actions/checkout@v4
-      - name: Use latest Xcode
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: latest
-      - name: Build App
+          # Use latest-stable to avoid beta toolchains. A maintainer can pin an
+          # exact version here (e.g. '16.4') for full reproducibility.
+          xcode-version: latest-stable
+
+      - name: Cache Swift Package Manager dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/Library/Caches/org.swift.swiftpm
+            ~/Library/Developer/Xcode/DerivedData/**/SourcePackages
+          # Hash BOTH resolved files: the standalone `swift test` step resolves from
+          # AppBoxCore/Package.resolved, not the workspace one.
+          key: spm-${{ runner.os }}-${{ hashFiles('AppBox.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved', 'AppBoxCore/Package.resolved') }}
+          restore-keys: |
+            spm-${{ runner.os }}-
+
+      - name: Test AppBoxCore package
         run: |
           set -o pipefail
-          xcodebuild clean build -project AppBox.xcodeproj -scheme AppBox CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO 2>&1 | tee build.log
+          cd AppBoxCore
+          swift test 2>&1 | tee ../appboxcore-test.log
           if [ ${PIPESTATUS[0]} -ne 0 ]; then
-            echo "::error::Build failed"
+            echo "::error::AppBoxCore package tests failed"
             exit 1
           fi
+
+      - name: Build & Test
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project AppBox.xcodeproj \
+            -scheme AppBoxTests \
+            -testPlan AppBoxTests \
+            -destination 'platform=macOS' \
+            -resultBundlePath TestResults.xcresult \
+            CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO \
+            2>&1 | tee build.log
+          if [ ${PIPESTATUS[0]} -ne 0 ]; then
+            echo "::error::Build or tests failed"
+            exit 1
+          fi
+
+      - name: Report code coverage
+        if: always()
+        run: |
+          if [ -d TestResults.xcresult ]; then
+            xcrun xccov view --report TestResults.xcresult || true
+          fi
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: TestResults
+          path: TestResults.xcresult
+          if-no-files-found: ignore
