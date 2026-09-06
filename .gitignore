@@ -39,3 +39,6 @@ plans
 
 ## Release artifacts (Scripts/build-release.sh)
 dist/
+
+# Local-only agent context (this repo is public).
+AGENTS.local.md

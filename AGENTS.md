@@ -10,15 +10,16 @@ There is also a small command‑line tool (`appboxcli`).
 
 ## Related repositories (local paths)
 
+Local, non-public context lives in `AGENTS.local.md` (gitignored) — read it too if it is present.
+
 | Repo | Local Path | What |
 |------|------------|------|
 | https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation | `~/Projects/AppBox-iOSAppsWirelessInstallation` | **Main macOS app** GUI and CLI app (Swift/SwiftUI). |
 | https://github.com/getappbox/install-helper | `~/Projects/install-helper` | **The AppBox backend** (Swift/Vapor, Docker). |
 | https://github.com/getappbox/WebApp | `~/Projects/WebApp` | **Production** repo for the OTA install web page `web.getappbox.com`. |
-| https://github.com/getappbox/WebApp-Dev | `~/Projects/WebApp-Dev` | **Development** repo for the OTA install web page (`web.getappbox.com`)|
-| https://github.com/getappbox/fastlane-plugin-appbox | `~/Projects/fastlane-plugin-appbox` | **Fastlane plugin** for AppBox (ruby)). |
+| https://github.com/getappbox/fastlane-plugin-appbox | `~/Projects/fastlane-plugin-appbox` | **Fastlane plugin** for AppBox (Ruby). |
 | https://github.com/getappbox/AppBox-iOS-SDK | `~/Projects/AppBox-iOS-SDK` | **iOS SDK** for integrating app updates via AppBox (Swift). |
-| https://github.com/getappbox/Home | `~/Projects/AppBox-Home` | **Home** repo for the AppBox website (Swift/Vapor). |
+| https://github.com/getappbox/Home | `~/Projects/AppBox-Home` | **Home** repo for the AppBox website `getappbox.com` (static HTML). |
 
 ## Architecture
 The app is three modules:
