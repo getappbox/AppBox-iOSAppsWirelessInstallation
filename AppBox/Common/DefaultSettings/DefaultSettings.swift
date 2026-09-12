@@ -3,6 +3,7 @@
 //  AppBox
 
 import Foundation
+import AppBoxCore
 
 public final class DefaultSettings: NSObject {
 
@@ -12,6 +13,7 @@ public final class DefaultSettings: NSObject {
             UserData.setDownloadIPAEnable(false)
             UserData.setMoreDetailsEnable(true)
             UserData.setShowPreviousVersions(true)
+            UserData.setUploadChunkSize(UploadSettings.defaultChunkSizeMB)
         }
 
         UserData.recordLaunchedVersion()

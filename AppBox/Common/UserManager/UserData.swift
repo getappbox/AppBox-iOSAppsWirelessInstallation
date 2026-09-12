@@ -145,7 +145,7 @@ public final class UserData: NSObject {
 
     public class func uploadChunkSize() -> Int {
         let chunkSize = defaults.integer(forKey: "UploadChunkSize")
-        return chunkSize > 0 ? chunkSize : 100
+        return chunkSize > 0 ? chunkSize : UploadSettings.defaultChunkSizeMB
     }
 
 	public class func setUploadChunkSize(_ chunkSize: Int) {

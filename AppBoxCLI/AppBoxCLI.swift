@@ -191,6 +191,35 @@ struct Upload: AsyncParsableCommand {
 			valueName: "dropbox folder"))
 	var dropboxFolder: String?
 
+	// Install-page settings. Each one defaults to the AppBox app's preference and
+	// is overridden only when the flag is actually passed, so a CI job can pin the
+	// settings it needs without depending on how the runner's AppBox is configured.
+
+	@Flag(
+		name: .customLong("moredetails"), inversion: .prefixedNo,
+		help: .init(
+			"[Optional] \nShow the expanded build details on the install page (minimum iOS version, supported devices, build type, IPA size and provisioning profile). \nDefaults to the AppBox app setting.\n"))
+	var moreDetails: Bool?
+
+	@Flag(
+		name: .customLong("ipalink"), inversion: .prefixedNo,
+		help: .init(
+			"[Optional] \nShow the direct IPA download link on the install page. \nDefaults to the AppBox app setting.\n"))
+	var includeIPALink: Bool?
+
+	@Flag(
+		name: .customLong("previousversions"), inversion: .prefixedNo,
+		help: .init(
+			"[Optional] \nKeep earlier builds listed on the install page. \nDefaults to the AppBox app setting.\n"))
+	var keepPreviousVersions: Bool?
+
+	@Option(
+		name: .customLong("chunksize"),
+		help: .init(
+			"[Optional] \nDropbox upload chunk size in MB (1-150). \nDefaults to the AppBox app setting.\n",
+			valueName: "MB"))
+	var chunkSizeMB: Int?
+
 	/// Retired in 4.0 — the notification text is generated. Still accepted so existing CI scripts don't fail on an unknown option.
 	@Option(name: .customLong("webhookmessage"), help: .hidden)
 	var webhookMessage: String?
@@ -249,6 +278,11 @@ extension Upload {
 			print("ERROR - Invalid Microsoft Teams Webhook URL. Only https:// webhook URLs are supported.")
 			throw ExitCode(127)
 		}
+		// 150 MB is Dropbox's ceiling for a single upload-session chunk.
+		if let chunkSizeMB, !(1...150).contains(chunkSizeMB) {
+			print("ERROR - --chunksize must be between 1 and 150 MB.")
+			throw ExitCode(127)
+		}
 	}
 
 	private func publish() async throws {
@@ -263,7 +297,14 @@ extension Upload {
 
 		let request = BuildUploadRequest(
 			ipaURL: ipaURL,
-			settings: UploadSettings(),
+			// The app's install-page preferences, with any flag passed on this
+			// invocation taking precedence. The CLI has its own defaults domain,
+			// so the stored settings have to be read from the app's explicitly.
+			settings: AppPreferences.uploadSettings(applying: UploadSettingsOverrides(
+				chunkSizeMB: chunkSizeMB,
+				includeIPALink: includeIPALink,
+				includeDetails: moreDetails,
+				keepPreviousVersions: keepPreviousVersions)),
 			share: share,
 			keepSameLink: keepSameLink,
 			bundleDirectory: dropboxFolder.map { "/" + $0.replacingOccurrences(of: " ", with: "") })

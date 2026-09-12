@@ -136,6 +136,35 @@ Microsoft Teams Incoming Webhook URL to send notifications to a Teams channel.
 appboxcli --ipa app.ipa --msteamswebhook "https://outlook.office.com/webhook/YOUR/TEAMS/WEBHOOK"
 ```
 
+## Install Page Settings
+
+Four settings control what the install page shows. Each is resolved in this order:
+
+1. the flag passed to `appboxcli`, if any
+2. otherwise the AppBox app's setting, if AppBox is installed and configured on the machine
+3. otherwise the built-in default
+
+| Setting | Flag | Built-in default |
+| --- | --- | --- |
+| Expanded build details: minimum iOS version, supported devices, build type, IPA size, and provisioning profile (team, expiry, masked device UDIDs) | `--moredetails` / `--no-moredetails` | On |
+| Direct IPA download link next to the install button | `--ipalink` / `--no-ipalink` | Off |
+| Earlier builds listed on the page | `--previousversions` / `--no-previousversions` | On |
+| Dropbox upload chunk size, 1-150 MB | `--chunksize <MB>` | 100 MB |
+
+The app writes these same defaults on its first launch, so a fresh install and a machine that has never run AppBox behave identically.
+
+Pass the flags in CI, where the settings belong to the pipeline rather than to whatever the build machine's AppBox is configured for:
+
+```bash
+appboxcli --ipa app.ipa \
+  --emails "qa@example.com" \
+  --moredetails \
+  --no-ipalink \
+  --chunksize 50
+```
+
+Change the app-side values in **AppBox > Settings > General**.
+
 ## Usage Examples
 
 ### Simple Upload
