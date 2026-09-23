@@ -129,14 +129,15 @@ struct List: ParsableCommand {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
 
-		var rows: [(date: String, app: String, version: String, type: String, link: String)] =
-			[(date: "DATE", app: "APP", version: "VERSION", type: "TYPE", link: "LINK")]
+		var rows: [(date: String, app: String, version: String, type: String, sameLink: String, link: String)] =
+			[(date: "DATE", app: "APP", version: "VERSION", type: "TYPE", sameLink: "SAME LINK", link: "LINK")]
 		for b in builds {
 			rows.append((
 				date: b.datetime.map { dateFormatter.string(from: $0) } ?? "—",
 				app: b.appName ?? b.bundleIdentifier ?? "—",
 				version: "\(b.version ?? "—") (\(b.build ?? "—"))",
 				type: b.buildType ?? "—",
+				sameLink: b.link.keepSameLink ? (b.link.folder?.relativePath ?? "—") : "no",
 				link: b.shortURL ?? "—"))
 		}
 
@@ -144,10 +145,11 @@ struct List: ParsableCommand {
 		let wApp = rows.map { $0.app.count }.max() ?? 0
 		let wVersion = rows.map { $0.version.count }.max() ?? 0
 		let wType = rows.map { $0.type.count }.max() ?? 0
+		let wSameLink = rows.map { $0.sameLink.count }.max() ?? 0
 		func pad(_ s: String, _ width: Int) -> String { s.padding(toLength: width, withPad: " ", startingAt: 0) }
 
 		for row in rows {
-			print("\(pad(row.date, wDate))  \(pad(row.app, wApp))  \(pad(row.version, wVersion))  \(pad(row.type, wType))  \(row.link)")
+			print("\(pad(row.date, wDate))  \(pad(row.app, wApp))  \(pad(row.version, wVersion))  \(pad(row.type, wType))  \(pad(row.sameLink, wSameLink))  \(row.link)")
 		}
 	}
 }
@@ -246,7 +248,7 @@ struct Upload: AsyncParsableCommand {
 extension Upload {
 
 	/// Streams each pipeline stage to stdout so a CI log shows the same progress the GUI HUD would.
-	private final class PrintingProgressReporter: ProgressReporter {
+	private final class PrintingProgressReporter: AppBoxCore.ProgressReporter {
 		private var lastLine = ""
 
 		func report(stage: UploadStage, message: String?, fractionCompleted: Double?) {

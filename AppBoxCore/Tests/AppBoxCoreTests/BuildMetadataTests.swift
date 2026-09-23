@@ -85,6 +85,65 @@ final class BuildMetadataTests: XCTestCase {
         XCTAssertEqual(paths.bundleDirectory, "/com.example.myapp")
     }
 
+    func testResolvedBundleDirectoryMatchesTheUploadLayout() {
+        XCTAssertEqual(BuildRemotePaths.resolvedBundleDirectory(requested: nil, identifier: "com.example.myapp"),
+                       "/com.example.myapp")
+        XCTAssertEqual(BuildRemotePaths.resolvedBundleDirectory(requested: "", identifier: "com.example.myapp"),
+                       "/com.example.myapp")
+        XCTAssertEqual(BuildRemotePaths.resolvedBundleDirectory(requested: "/Team/QA", identifier: "com.example.myapp"),
+                       "/Team/QA")
+
+        let paths = BuildRemotePaths(metadata: metadata, uuid: "ABC123", bundleDirectory: "/Team/QA", keepSameLink: true)
+        XCTAssertEqual(paths.bundleDirectory,
+                       BuildRemotePaths.resolvedBundleDirectory(requested: "/Team/QA", identifier: metadata.identifier))
+    }
+
+    // MARK: - App folder of a stored build
+
+    func testAppFolderOfAKeptBuildComesFromItsAppInfoPath() {
+        let folder = BuildRemotePaths.appFolder(keepSameLink: true,
+                                                appInfoPath: "/Team/QA/appinfo.json",
+                                                buildDirectory: "/Team/QA/MyApp-ver1.2(345)-ABC123",
+                                                folderName: "/Team")
+        XCTAssertEqual(folder?.relativePath, "Team/QA")
+    }
+
+    func testAppFolderOfAKeptBuildFallsBackToItsBuildDirectory() {
+        let folder = BuildRemotePaths.appFolder(keepSameLink: true,
+                                                appInfoPath: nil,
+                                                buildDirectory: "/Team/QA/MyApp-ver1.2(345)-ABC123",
+                                                folderName: "/Team")
+        XCTAssertEqual(folder?.relativePath, "Team/QA")
+    }
+
+    func testAppFolderOfAnUnkeptBuildIsItsBuildDirectorysParent() {
+        let folder = BuildRemotePaths.appFolder(keepSameLink: false,
+                                                appInfoPath: "/com.example.myapp/MyApp-ver1.2(345)-ABC123/appinfo.json",
+                                                buildDirectory: "/com.example.myapp/MyApp-ver1.2(345)-ABC123",
+                                                folderName: "AppBoxMyApp-ver1.2(345)-ABC123")
+        XCTAssertEqual(folder?.relativePath, "com.example.myapp")
+    }
+
+    func testAppFolderFallsBackToTheStoredFolderNameWithoutPaths() {
+        let folder = BuildRemotePaths.appFolder(keepSameLink: true, appInfoPath: "", buildDirectory: nil,
+                                                folderName: "/com.example.myapp")
+        XCTAssertEqual(folder?.relativePath, "com.example.myapp")
+    }
+
+    func testAppFolderIsNilWhenItWouldBeTheStorageRoot() {
+        XCTAssertNil(BuildRemotePaths.appFolder(keepSameLink: true,
+                                                appInfoPath: "/appinfo.json",
+                                                buildDirectory: "//MyApp-ver1.2(345)-ABC123",
+                                                folderName: "/com.example.myapp"))
+        XCTAssertNil(BuildRemotePaths.appFolder(keepSameLink: false, appInfoPath: nil, buildDirectory: nil, folderName: nil))
+    }
+
+    func testAppFolderIsNilForAFolderThatSanitizesToTheRoot() {
+        let paths = BuildRemotePaths(metadata: metadata, uuid: "ABC123", bundleDirectory: "//", keepSameLink: true)
+        XCTAssertNil(BuildRemotePaths.appFolder(keepSameLink: true, appInfoPath: paths.appInfo.path,
+                                                buildDirectory: paths.buildDirectory, folderName: paths.bundleDirectory))
+    }
+
     // MARK: - Share URL export
 
     func testWritesShareURLsAsJSON() throws {

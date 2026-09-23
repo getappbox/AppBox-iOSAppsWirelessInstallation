@@ -71,4 +71,14 @@ public final class IPAExtractor {
             mobileProvisionURL: layout.mobileProvisionPath.map { destination.appendingPathComponent($0) }
         )
     }
+
+    /// Reads the build metadata straight from the IPA's `Info.plist`, without unzipping the rest.
+    public func metadata(ofIPAAt ipaURL: URL) throws -> BuildMetadata {
+        guard let layout = ExtractedIPALocator.locate(entries: try archiveExtractor.entries(ofArchiveAt: ipaURL)),
+              let metadata = BuildMetadata.read(
+                fromInfoPlistData: try archiveExtractor.contents(ofEntry: layout.infoPlistPath, inArchiveAt: ipaURL)) else {
+            throw IPAExtractionError.invalidIPA
+        }
+        return metadata
+    }
 }

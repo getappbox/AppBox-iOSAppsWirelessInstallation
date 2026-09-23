@@ -15,19 +15,32 @@ public final class BuildRow: NSObject {
     public let date: String
     public let buildType: String
     public let team: String
+    public let keepSameLink: Bool
+    public let folder: String
 
-    public init(recordIndex: Int, name: String, bundleId: String, versionBuild: String, shortURL: String,
-                date: String, buildType: String, team: String) {
-        self.recordIndex = recordIndex
-        self.name = name
-        self.bundleId = bundleId
-        self.versionBuild = versionBuild
-        self.shortURL = shortURL
-        self.date = date
-        self.buildType = buildType
-        self.team = team
-        super.init()
-    }
+    public init(
+		recordIndex: Int,
+		name: String,
+		bundleId: String,
+		versionBuild: String,
+		shortURL: String,
+		date: String,
+		buildType: String,
+		team: String,
+		keepSameLink: Bool,
+		folder: String) {
+			self.recordIndex = recordIndex
+			self.name = name
+			self.bundleId = bundleId
+			self.versionBuild = versionBuild
+			self.shortURL = shortURL
+			self.date = date
+			self.buildType = buildType
+			self.team = team
+			self.keepSameLink = keepSameLink
+			self.folder = folder
+			super.init()
+		}
 }
 
 /// Bridges the build list + actions between the controller and the SwiftUI view.
@@ -51,7 +64,7 @@ public final class DashboardModel: NSObject, ObservableObject {
         requestedShortURL = shortURL
     }
 
-    /// Distinct app names, sorted alphabetically (case-insensitive) for stable, predictable ordering — so deleting a build never reshuffles the app list by upload date.
+    /// Distinct app names, sorted alphabetically (case-insensitive).
     static func orderedApps(_ builds: [BuildRow]) -> [String] {
         var seen = Set<String>()
         var names: [String] = []
@@ -65,7 +78,6 @@ public final class DashboardModel: NSObject, ObservableObject {
 
 struct DashboardView: View {
     @ObservedObject var model: DashboardModel
-    // @Published ("publishing changes from within view updates").
     @State private var selectedAppName: String?
     @State private var selection: Int?
 
@@ -162,13 +174,18 @@ struct DashboardView: View {
 
     private func buildRow(_ build: BuildRow) -> some View {
         HStack(spacing: 10) {
-            Image(systemName: "shippingbox.fill")
-                .font(IslandTypography.title3).foregroundColor(.accentColor).frame(width: 22)
+            BuildRowIcon()
             VStack(alignment: .leading, spacing: 2) {
                 Text(build.versionBuild).font(IslandTypography.body).fontWeight(.medium).lineLimit(1)
                 Text(build.date).font(IslandTypography.caption).foregroundColor(.secondary).lineLimit(1)
             }
             Spacer()
+            if build.keepSameLink {
+                Image(systemName: "link")
+                    .font(IslandTypography.caption)
+                    .foregroundColor(.secondary)
+                    .help("Uploaded with Keep the same link")
+            }
         }
         .padding(.vertical, 4)
     }
@@ -198,6 +215,8 @@ struct DashboardView: View {
                     detailRow("Team", build.team)
                     detailRow("Uploaded", build.date)
                     detailRow("Short URL", build.shortURL)
+                    detailRow("Keep same link", build.keepSameLink ? "On" : "Off")
+                    detailRow("Dropbox folder", build.folder)
                 }
 
                 actions(recordIndex: build.recordIndex)
@@ -247,6 +266,17 @@ struct DashboardView: View {
             Text("Builds you upload will appear here.").foregroundColor(.secondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
+private struct BuildRowIcon: View {
+    @Environment(\.backgroundProminence) private var backgroundProminence
+
+    var body: some View {
+        Image(systemName: "shippingbox.fill")
+            .font(IslandTypography.title3)
+            .foregroundColor(backgroundProminence == .increased ? .white : .accentColor)
+            .frame(width: 22)
     }
 }
 

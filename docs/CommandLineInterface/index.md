@@ -71,7 +71,7 @@ The CLI also provides:
 | `appboxcli logout [--force]` | Log out of Dropbox. **Note:** the CLI and the AppBox app share one Dropbox session, so this signs the app out too (it asks for confirmation unless `--force`). |
 | `appboxcli whoami` | Show the Dropbox account you're logged in as. |
 | `appboxcli space` | Show Dropbox storage usage. |
-| `appboxcli list` | List your upload history (the app's Dashboard data), newest first. |
+| `appboxcli list` | List your upload history (the app's Dashboard data), newest first. The `SAME LINK` column shows the Dropbox folder of builds uploaded with keep same link, or `no`. |
 | `appboxcli delete [--dashboard-only]` | Interactively delete a build from Dropbox and the dashboard; `--dashboard-only` leaves the Dropbox files in place. Quit AppBox.app first — both can't safely write the history store at once. |
 
 ### Basic Syntax
@@ -108,12 +108,14 @@ appboxcli --ipa app.ipa --message "New build v is ready for testing!"
 #### `--keepsamelink`
 Keep the same short URL for all future uploads of IPAs with the same bundle identifier. This is useful for maintaining consistent installation links.
 
+Unlike the app, the CLI doesn't remember this from earlier uploads, so pass it on every run that should keep the link.
+
 ```bash
 appboxcli --ipa app.ipa --keepsamelink
 ```
 
 #### `--dbfolder <folder-name>`
-Specify a custom Dropbox folder name. By default, the folder name will be the application's bundle identifier. This is used with keepsamelink option.
+Specify a custom Dropbox folder name. By default, the folder name will be the application's bundle identifier. With `--keepsamelink`, every upload to the same folder shares one short URL; without it, the build still goes into this folder but gets a new link.
 
 ```bash
 appboxcli --ipa app.ipa --keepsamelink --dbfolder "MyCustomFolder"

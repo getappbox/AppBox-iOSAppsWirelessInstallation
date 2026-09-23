@@ -50,22 +50,12 @@ public final class BuildDeletionService {
 				try? FileManager.default.removeItem(at: workingDirectory)
 			}
             let plan: DeletePlan = try context.performAndWait {
-                let keepSameLink = record.keepSameLink?.boolValue ?? false
-                let appInfoPath = record.dbAppInfoFullPath ?? ""
-                let appFolder = record.dbFolderName ?? ""
-                let buildFolder = record.dbDirectroy ?? ""
-                let requiredPaths = keepSameLink ? [appInfoPath, appFolder] : [buildFolder]
-                guard requiredPaths.allSatisfy({ !$0.isEmpty }) else {
+                do {
+                    return try DeletePlan(record: record, workingDirectory: workingDirectory)
+                } catch is UnusableBuildLocationError {
                     throw NSError(domain: "com.developerinsider.AppBox", code: 9997, userInfo: [
                         NSLocalizedDescriptionKey: "This record is missing its Dropbox location. Use --dashboard-only to remove it from the dashboard."])
                 }
-                return DeletePlan(
-                    keepSameLink: keepSameLink,
-                    appInfoRemotePath: RemotePath(path: appInfoPath),
-                    manifestLinkToRemove: record.dbSharedManifestURL ?? "",
-                    appFolderPath: RemotePath(path: appFolder),
-                    buildFolderPath: RemotePath(path: buildFolder),
-                    workingDirectory: workingDirectory)
             }
             _ = try await DeleteCoordinator(provider: providerFactory()).run(plan)
         }
@@ -80,4 +70,25 @@ public final class BuildDeletionService {
     private func makeWorkingDirectory() throws -> URL {
         try ABStorePaths.makeTemporaryWorkingDirectory(prefix: "delete-")
     }
+}
+
+extension DeletePlan {
+    /// The delete for a stored build; throws `UnusableBuildLocationError` unless the folder it may remove is known and isn't the storage root.
+	public init(record: ABUploadRecord, workingDirectory: URL) throws {
+		let link = record.linkSettings
+		let appInfoPath = RemotePath(path: record.dbAppInfoFullPath ?? "")
+		let buildFolder = RemotePath(path: record.dbDirectroy ?? "")
+		let hasLocation = link.keepSameLink
+			? appInfoPath.components.last == UploadCoordinator.appInfoFilename && link.folder != nil
+			: !buildFolder.components.isEmpty
+		guard hasLocation else { throw UnusableBuildLocationError() }
+
+		self.init(
+			keepSameLink: link.keepSameLink,
+			appInfoRemotePath: appInfoPath,
+			manifestLinkToRemove: record.dbSharedManifestURL ?? "",
+			appFolderPath: link.folder ?? RemotePath([]),
+			buildFolderPath: buildFolder,
+			workingDirectory: workingDirectory)
+	}
 }

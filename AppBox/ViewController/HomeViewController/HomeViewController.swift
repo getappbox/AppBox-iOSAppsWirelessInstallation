@@ -162,7 +162,43 @@ public final class HomeViewController: NSViewController, UploadAdvancedSettingVi
             model?.setFileName(fileURL.lastPathComponent)
             model?.emailsText = UserData.userEmail()
             model?.messageText = UserData.userMessage()
+            prefillSameLink(forIPAAt: fileURL)
         }
+    }
+
+    /// Turns "Keep the same link" on, with its folder, when the app's latest upload kept its link.
+    private func prefillSameLink(forIPAAt fileURL: URL) {
+        let info = ipaUploadInfo
+        Task { [weak self] in
+            let metadata = try? await Task.detached(priority: .userInitiated) {
+                try IPAExtractor(archiveExtractor: ZipFoundationArchiveExtractor()).metadata(ofIPAAt: fileURL)
+            }.value
+            guard let self, let metadata, info === self.ipaUploadInfo, !AppDelegate.appDelegate.processing else {
+                return
+            }
+            info.identifer = metadata.identifier
+            do {
+                if let link = try BuildHistoryStore(stack: .shared).latestLink(forBundleIdentifier: metadata.identifier),
+                   link.keepSameLink, let folder = link.folder {
+                    self.model?.keepSameLinkEnabled = true
+                    info.bundleDirectory = URL(string: folder.path)
+                }
+            } catch {
+                Self.log.error("Unable to read the upload history: \(error.localizedDescription)")
+            }
+            self.refreshLinkFolderHint()
+        }
+    }
+
+    private func refreshLinkFolderHint() {
+        let requested = ipaUploadInfo.bundleDirectory?.absoluteString ?? ""
+        let identifier = ipaUploadInfo.identifer ?? ""
+        guard !requested.isEmpty || !identifier.isEmpty else {
+            model?.setLinkFolder(nil)
+            return
+        }
+        let folder = RemotePath(path: BuildRemotePaths.resolvedBundleDirectory(requested: requested, identifier: identifier))
+        model?.setLinkFolder(folder.components.isEmpty ? "/" : folder.relativePath)
     }
 
     // MARK: - Actions
@@ -239,6 +275,7 @@ public final class HomeViewController: NSViewController, UploadAdvancedSettingVi
             model?.emailsText = ""
             model?.messageText = ""
             model?.keepSameLinkEnabled = false
+            model?.setLinkFolder(nil)
         }
         model?.setProcessing(!finish)
     }
@@ -262,7 +299,9 @@ public final class HomeViewController: NSViewController, UploadAdvancedSettingVi
 
     // MARK: - UploadAdvancedSettingViewDelegate
 
-    public func uploadAdvancedSettingSaveButtonTapped(_ sender: NSButton?) {}
+    public func uploadAdvancedSettingSaveButtonTapped(_ sender: NSButton?) {
+        refreshLinkFolderHint()
+    }
     public func uploadAdvancedSettingCancelButtonTapped(_ sender: NSButton?) {}
 
     // MARK: - Share URL

@@ -26,3 +26,12 @@ You can modify the link by specifying a unique "Custom Dropbox Folder Name" in t
 ## 3. How to Maintain the Same Link While Hiding Previous Versions on the Installation Page?
 In AppBox preferences, enable the "Don't show previous versions on app installation page" option. When both this option and the "Keep Same Link" feature are enabled during upload, the AppBox installation page will not display previous versions.
 ![](../Images/ABDontShowOldBuild.webp)
+
+## 4. AppBox Remembers the Setting for Each App
+When you select an IPA, AppBox looks at the latest upload of the same app (matched by bundle identifier). If that upload used "Keep Same Link", the option is turned on for you and the "Custom Dropbox Folder Name" in "Other Settings" is filled in with the folder it used, so the new build keeps the same short URL. The folder is shown under the option. If the latest upload didn't keep its link, the option stays off.
+
+You can still change either setting before you upload. With "Keep Same Link" turned off, the build goes into the bundle identifier folder.
+
+The Dashboard shows whether each build was uploaded with "Keep Same Link" and which Dropbox folder it went into. Builds that kept their link also have a link icon in the build list.
+
+The command-line tool never turns this on by itself: pass `--keepsamelink` (and `--dbfolder` for a custom folder) on every run. See [Command Line Interface](../CommandLineInterface/index.md).

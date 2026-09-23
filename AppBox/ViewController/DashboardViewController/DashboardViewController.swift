@@ -126,6 +126,7 @@ public final class DashboardViewController: NSViewController {
         } else {
             team = "N/A"
         }
+        let link = record.linkSettings
         return BuildRow(
 			recordIndex: index,
 			name: name,
@@ -134,7 +135,9 @@ public final class DashboardViewController: NSViewController {
 			shortURL: shortURL,
 			date: date,
 			buildType: buildType,
-			team: team)
+			team: team,
+			keepSameLink: link.keepSameLink,
+			folder: link.folder?.relativePath ?? "N/A")
     }
 
     private func record(at index: Int) -> ABUploadRecord? {

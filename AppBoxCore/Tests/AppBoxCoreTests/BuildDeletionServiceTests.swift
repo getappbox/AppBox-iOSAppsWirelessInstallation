@@ -8,6 +8,8 @@ private final class RecordingProvider: StorageProvider {
     var currentAccount: StorageAccount?
     var deleteError: StorageError?
 
+    var appInfoJSON: Data?
+
     private(set) var deletedPaths: [RemotePath] = []
     private(set) var downloadedPaths: [RemotePath] = []
     private(set) var uploadedPaths: [RemotePath] = []
@@ -22,7 +24,11 @@ private final class RecordingProvider: StorageProvider {
         if let deleteError { throw deleteError }
         deletedPaths.append(remotePath)
     }
-    func download(from remotePath: RemotePath, to localURL: URL) async throws { downloadedPaths.append(remotePath) }
+    func download(from remotePath: RemotePath, to localURL: URL) async throws {
+        downloadedPaths.append(remotePath)
+        guard let appInfoJSON else { throw StorageError.notFound }
+        try appInfoJSON.write(to: localURL)
+    }
 
     var usedAtAll: Bool { !deletedPaths.isEmpty || !downloadedPaths.isEmpty || !uploadedPaths.isEmpty }
 }
@@ -80,7 +86,8 @@ final class BuildDeletionServiceTests: XCTestCase {
     }
 
     private func seedRecord(_ stack: CoreDataStack, name: String, keepSameLink: Bool,
-                            buildFolder: String, manifestLink: String) throws {
+                            buildFolder: String, manifestLink: String,
+                            folderName: String? = nil, appInfoPath: String? = nil) throws {
         let ctx = try stack.loadViewContext()
         let project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: ctx) as! ABProject
         project.name = name; project.bundleIdentifier = "com.\(name)"
@@ -89,11 +96,21 @@ final class BuildDeletionServiceTests: XCTestCase {
         record.shortURL = "https://s/\(name)"
         record.keepSameLink = NSNumber(value: keepSameLink)
         record.dbDirectroy = buildFolder
-        record.dbFolderName = "/\(name)"
-        record.dbAppInfoFullPath = "/\(name)/appinfo.json"
+        record.dbFolderName = folderName ?? "/\(name)"
+        record.dbAppInfoFullPath = appInfoPath ?? "/\(name)/appinfo.json"
         record.dbSharedManifestURL = manifestLink
         record.project = project
         try stack.saveChanges()
+    }
+
+    private func appInfoJSON(manifestLinks: [String]) throws -> Data {
+        let entries = manifestLinks.map {
+            AppInfoJSON.makeEntry(AppVersionInput(name: "App", version: "1", build: "1", identifier: "com.x",
+                                                  manifestLink: $0, timestamp: 1, shareableIPALink: "ipa",
+                                                  includeIPALink: false, includeDetails: false))
+        }
+        return try JSONEncoder().encode(AppInfoFile(latestVersion: entries.last, versions: entries,
+                                                    uniqueLinkShared: "https://s/full", uniqueLinkShort: "https://s/abc"))
     }
 
     private func recordCount(_ stack: CoreDataStack) throws -> Int {
@@ -143,6 +160,59 @@ final class BuildDeletionServiceTests: XCTestCase {
         } catch let error as StorageError {
             XCTAssertEqual(error, .notAuthenticated)
         }
+        XCTAssertEqual(try recordCount(stack), 1)
+    }
+
+    func testDeleteFromDropbox_keptNestedFolderWithTruncatedName_deletesTheWholeAppFolderOnly() async throws {
+        let stack = writableStack(makeModel())
+        try seedRecord(stack, name: "App", keepSameLink: true, buildFolder: "/Team/QA/App-ver1.0(1)-X", manifestLink: "m1",
+                       folderName: "/Team", appInfoPath: "/Team/QA/appinfo.json")
+        let provider = RecordingProvider()
+        provider.appInfoJSON = try appInfoJSON(manifestLinks: ["m1"])
+        let service = BuildDeletionService(stack: stack, providerFactory: { provider })
+
+        try service.loadBuilds()
+        try await service.delete(at: 0, fromDropbox: true)
+
+        XCTAssertEqual(provider.deletedPaths.map(\.path), ["/Team/QA"])
+        XCTAssertEqual(try recordCount(stack), 0)
+    }
+
+    func testDeleteFromDropbox_keptRecordAtTheStorageRoot_refusesWithoutTouchingDropbox() async throws {
+        let stack = writableStack(makeModel())
+        try seedRecord(stack, name: "App", keepSameLink: true, buildFolder: "//App-ver1.0(1)-X", manifestLink: "m1",
+                       folderName: "//", appInfoPath: "/appinfo.json")
+        let provider = RecordingProvider()
+        provider.appInfoJSON = try appInfoJSON(manifestLinks: ["m1"])
+        let service = BuildDeletionService(stack: stack, providerFactory: { provider })
+
+        try service.loadBuilds()
+        do {
+            try await service.delete(at: 0, fromDropbox: true)
+            XCTFail("expected a delete at the storage root to be refused")
+        } catch {
+            XCTAssertTrue((error as NSError).localizedDescription.contains("missing its Dropbox location"))
+        }
+        XCTAssertFalse(provider.usedAtAll)
+        XCTAssertEqual(try recordCount(stack), 1)
+    }
+
+    func testDeleteFromDropbox_keptRecordWhoseAppInfoPathIsNotAnAppInfoFile_refuses() async throws {
+        let stack = writableStack(makeModel())
+        try seedRecord(stack, name: "App", keepSameLink: true, buildFolder: "/Team/MyApp/App-ver1.0(1)-X", manifestLink: "m1",
+                       folderName: "/Team", appInfoPath: "/Team/MyApp")
+        let provider = RecordingProvider()
+        provider.appInfoJSON = try appInfoJSON(manifestLinks: ["m1"])
+        let service = BuildDeletionService(stack: stack, providerFactory: { provider })
+
+        try service.loadBuilds()
+        do {
+            try await service.delete(at: 0, fromDropbox: true)
+            XCTFail("expected a delete without a recorded appinfo.json to be refused")
+        } catch {
+            XCTAssertTrue((error as NSError).localizedDescription.contains("missing its Dropbox location"))
+        }
+        XCTAssertFalse(provider.usedAtAll)
         XCTAssertEqual(try recordCount(stack), 1)
     }
 

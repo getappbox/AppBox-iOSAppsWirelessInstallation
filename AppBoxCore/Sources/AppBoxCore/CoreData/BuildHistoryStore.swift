@@ -1,7 +1,7 @@
 import CoreData
 import Foundation
 
-/// One row of AppBox upload history — the data the GUI Dashboard shows, as plain values so the CLI never touches `NSManagedObject`.
+/// One row of AppBox upload history, as plain values.
 public struct BuildHistoryEntry: Equatable {
     public let appName: String?
     public let bundleIdentifier: String?
@@ -11,6 +11,7 @@ public struct BuildHistoryEntry: Equatable {
     public let teamName: String?
     public let datetime: Date?
     public let shortURL: String?
+    public let link: BuildLinkSettings
 
     init(record: ABUploadRecord) {
         appName = record.project?.name
@@ -21,10 +22,11 @@ public struct BuildHistoryEntry: Equatable {
         teamName = record.provisioningProfile?.teamName
         datetime = record.datetime
         shortURL = record.shortURL
+        link = record.linkSettings
     }
 }
 
-/// Reads the AppBox upload history from the shared Core Data store for the CLI — the counterpart to `DropboxCLISession` (which reads Dropbox).
+/// Reads the AppBox upload history from the shared Core Data store.
 public final class BuildHistoryStore {
 
     private let stack: CoreDataStack
@@ -46,6 +48,18 @@ public final class BuildHistoryStore {
             let request = NSFetchRequest<ABUploadRecord>(entityName: "UploadRecord")
             request.sortDescriptors = [NSSortDescriptor(key: "datetime", ascending: false)]
             return try context.fetch(request).map(BuildHistoryEntry.init)
+        }
+    }
+
+    /// The link settings of the newest upload of `bundleIdentifier`, or nil when that app was never uploaded.
+    public func latestLink(forBundleIdentifier bundleIdentifier: String) throws -> BuildLinkSettings? {
+        let context = try stack.loadViewContext()
+        return try context.performAndWait {
+            let request = NSFetchRequest<ABUploadRecord>(entityName: "UploadRecord")
+            request.predicate = NSPredicate(format: "project.bundleIdentifier == %@", bundleIdentifier)
+            request.sortDescriptors = [NSSortDescriptor(key: "datetime", ascending: false)]
+            request.fetchLimit = 1
+            return try context.fetch(request).first?.linkSettings
         }
     }
 }

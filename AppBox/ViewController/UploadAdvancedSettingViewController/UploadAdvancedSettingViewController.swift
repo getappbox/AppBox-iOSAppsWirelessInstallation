@@ -3,6 +3,7 @@
 //  AppBox
 
 import AppKit
+import AppBoxCore
 
 public protocol UploadAdvancedSettingViewDelegate: AnyObject {
     func uploadAdvancedSettingSaveButtonTapped(_ sender: NSButton?)
@@ -15,11 +16,14 @@ public final class UploadAdvancedSettingViewController: NSViewController {
     public weak var delegate: UploadAdvancedSettingViewDelegate?
 
     private var model: AdvancedSettingsModel?
+    private var initialFolder = ""
 
     public override func loadView() {
-        let folder = ipaUploadInfo?.bundleDirectory?.lastPathComponent ?? ""
-        let model = AdvancedSettingsModel(folderName: folder,
-                                          fieldEnabled: ipaUploadInfo?.isKeepSameLinkEnabled ?? false)
+        initialFolder = RemotePath(path: ipaUploadInfo?.bundleDirectory?.absoluteString ?? "").relativePath
+        let model = AdvancedSettingsModel(
+			folderName: initialFolder,
+			fieldEnabled: ipaUploadInfo?.isKeepSameLinkEnabled ?? false,
+			placeholder: ipaUploadInfo?.identifer ?? "e.g. MyApp")
         self.model = model
         model.onSave = { [weak self] in self?.saveSettings() }
         model.onCancel = { [weak self] in self?.cancelSettings() }
@@ -34,13 +38,16 @@ public final class UploadAdvancedSettingViewController: NSViewController {
     }
 
     private func saveSettings() {
-        delegate?.uploadAdvancedSettingSaveButtonTapped(nil)
-
-        if let folder = model?.folderNameText, folder != ipaUploadInfo?.identifer, !folder.isEmpty {
-            let bundlePath = "/\(folder)".replacingOccurrences(of: " ", with: "")
-            ipaUploadInfo?.bundleDirectory = URL(string: bundlePath)
+        let folder = (model?.folderNameText ?? "").trimmingCharacters(in: .whitespaces)
+        if folder != initialFolder {
+            if folder.isEmpty || folder == ipaUploadInfo?.identifer {
+                ipaUploadInfo?.bundleDirectory = nil
+            } else {
+                ipaUploadInfo?.bundleDirectory = URL(string: "/\(folder)".replacingOccurrences(of: " ", with: ""))
+            }
         }
 
+        delegate?.uploadAdvancedSettingSaveButtonTapped(nil)
         dismiss(self)
     }
 }

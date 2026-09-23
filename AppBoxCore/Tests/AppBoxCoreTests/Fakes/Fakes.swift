@@ -132,7 +132,7 @@ final class StubReachability: Reachability {
     init(isConnected: Bool = true) { self.isConnected = isConnected }
 }
 
-final class RecordingProgressReporter: ProgressReporter {
+final class RecordingProgressReporter: AppBoxCore.ProgressReporter {
     struct Entry: Equatable { let stage: UploadStage; let message: String?; let fraction: Double? }
     private(set) var entries: [Entry] = []
 

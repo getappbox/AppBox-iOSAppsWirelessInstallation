@@ -42,4 +42,22 @@ final class ArchiveExtractorTests: XCTestCase {
         try ZipFoundationArchiveExtractor().extract(archiveAt: archive, to: outDir)
         XCTAssertTrue(fileManager.fileExists(atPath: outDir.appendingPathComponent("src/f.txt").path))
     }
+
+    func testReadsOneEntryWithoutExtracting() throws {
+        let fileManager = FileManager.default
+        let tmp = fileManager.temporaryDirectory.appendingPathComponent(UUID().uuidString, isDirectory: true)
+        try fileManager.createDirectory(at: tmp, withIntermediateDirectories: true)
+        defer { try? fileManager.removeItem(at: tmp) }
+
+        let sourceDir = tmp.appendingPathComponent("Payload", isDirectory: true)
+        try fileManager.createDirectory(at: sourceDir, withIntermediateDirectories: true)
+        try Data("AppBox".utf8).write(to: sourceDir.appendingPathComponent("Info.txt"))
+        let archive = tmp.appendingPathComponent("app.zip")
+        try fileManager.zipItem(at: sourceDir, to: archive, compressionMethod: .deflate)
+
+        let extractor = ZipFoundationArchiveExtractor()
+        let data = try extractor.contents(ofEntry: "Payload/Info.txt", inArchiveAt: archive)
+        XCTAssertEqual(String(decoding: data, as: UTF8.self), "AppBox")
+        XCTAssertThrowsError(try extractor.contents(ofEntry: "Payload/Missing.txt", inArchiveAt: archive))
+    }
 }

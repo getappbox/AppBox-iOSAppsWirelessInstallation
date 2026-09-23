@@ -7,4 +7,7 @@ public protocol ArchiveExtractor: AnyObject {
 
     /// Lists the entry paths inside the zip (without extracting) — used to locate the payload before unzipping.
     func entries(ofArchiveAt archiveURL: URL) throws -> [String]
+
+    /// Reads one entry's bytes without extracting the rest of the archive.
+    func contents(ofEntry path: String, inArchiveAt archiveURL: URL) throws -> Data
 }

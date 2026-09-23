@@ -86,7 +86,7 @@ public final class UploadManager: NSObject {
             ipaURL: ipaURL,
             settings: settings,
             keepSameLink: info.isKeepSameLinkEnabled,
-            bundleDirectory: info.bundleDirectory?.absoluteString,
+            bundleDirectory: info.isKeepSameLinkEnabled ? info.bundleDirectory?.absoluteString : nil,
             uuid: info.uuid ?? Common.generateUUID())
 
         let reachability = ClosureReachability { AppDelegate.appDelegate.isInternetConnected }
@@ -178,12 +178,10 @@ public final class UploadManager: NSObject {
     // MARK: - Delete
 
     public func deleteBuildFromDropboxAndDashboard() {
-        let keepSameLink = ipaUploadInfo?.isKeepSameLinkEnabled ?? false
-        let appInfoPath = ipaUploadInfo?.dbAppInfoJSONFullPath?.absoluteString ?? ""
-        let appFolder = uploadRecord?.dbFolderName ?? ""
-        let buildFolder = ipaUploadInfo?.dbDirectory?.absoluteString ?? ""
-        let requiredPaths = keepSameLink ? [appInfoPath, appFolder] : [buildFolder]
-        guard requiredPaths.allSatisfy({ !$0.isEmpty }) else {
+        createNewWorkingDirectory()
+        guard let record = uploadRecord,
+              let plan = try? DeletePlan(record: record, workingDirectory: URL(fileURLWithPath: workingDirectory ?? "")) else {
+            cleanupWorkingDirectory()
             _ = Common.showAlert(
                 withTitle: "Can't delete from Dropbox",
                 andMessage: "This build is missing its Dropbox location, so AppBox doesn't know what to remove.\n\nUse \"Delete only from Dashboard\" to remove the record.")
@@ -191,16 +189,7 @@ public final class UploadManager: NSObject {
             return
         }
 
-        createNewWorkingDirectory()
         showStatus("Deleting...", showProgressBar: true, withProgress: -1)
-
-        let plan = DeletePlan(
-            keepSameLink: keepSameLink,
-            appInfoRemotePath: RemotePath(path: appInfoPath),
-            manifestLinkToRemove: uploadRecord?.dbSharedManifestURL ?? "",
-            appFolderPath: RemotePath(path: appFolder),
-            buildFolderPath: RemotePath(path: buildFolder),
-            workingDirectory: URL(fileURLWithPath: workingDirectory ?? ""))
 
         let chunkSizeBytes = UserData.uploadChunkSize() * (1024 * 1024)
         let reachability = ClosureReachability { AppDelegate.appDelegate.isInternetConnected }
@@ -283,7 +272,7 @@ private final class ClosureReachability: Reachability {
 	}
 }
 
-private final class ClosureProgressReporter: ProgressReporter {
+private final class ClosureProgressReporter: AppBoxCore.ProgressReporter {
     private let block: (String?, Double) -> Void
 
 	init(_ block: @escaping (String?, Double) -> Void) {
