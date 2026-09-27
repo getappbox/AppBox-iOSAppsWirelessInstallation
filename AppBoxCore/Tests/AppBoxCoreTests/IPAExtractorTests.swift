@@ -82,4 +82,83 @@ final class IPAExtractorTests: XCTestCase {
                 .extract(ipaAt: zip, to: tmp.appendingPathComponent("out"))
         )
     }
+
+    // MARK: - Metadata without extracting
+
+    private func makeIPA(in tmp: URL, infoPlistName: String = "Info.plist", infoPlist: Data? = nil,
+                         compressionMethod: CompressionMethod = .none) throws -> URL {
+        let appDir = tmp.appendingPathComponent("Payload/MyApp.app", isDirectory: true)
+        try FileManager.default.createDirectory(at: appDir, withIntermediateDirectories: true)
+        let plist: [String: Any] = [
+            "CFBundleName": "My App",
+            "CFBundleShortVersionString": "1.2",
+            "CFBundleVersion": "345",
+            "CFBundleIdentifier": "com.example.myapp"
+        ]
+        let data = try infoPlist ?? PropertyListSerialization.data(fromPropertyList: plist, format: .binary, options: 0)
+        try data.write(to: appDir.appendingPathComponent(infoPlistName))
+        try Data(repeating: 7, count: 64 * 1024).write(to: appDir.appendingPathComponent("MyApp"))
+
+        let ipa = tmp.appendingPathComponent("app.ipa")
+        try FileManager.default.zipItem(at: tmp.appendingPathComponent("Payload"), to: ipa,
+                                        compressionMethod: compressionMethod)
+        return ipa
+    }
+
+    private func withTemporaryDirectory(_ body: (URL) throws -> Void) throws {
+        let tmp = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString, isDirectory: true)
+        try FileManager.default.createDirectory(at: tmp, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: tmp) }
+        try body(tmp)
+    }
+
+    func testReadsMetadataFromAStoredIPA() throws {
+        try withTemporaryDirectory { tmp in
+            let metadata = try IPAExtractor(archiveExtractor: ZipFoundationArchiveExtractor())
+                .metadata(ofIPAAt: makeIPA(in: tmp))
+            XCTAssertEqual(metadata.identifier, "com.example.myapp")
+            XCTAssertEqual(metadata.name, "MyApp")
+            XCTAssertEqual(metadata.version, "1.2")
+            XCTAssertEqual(metadata.build, "345")
+        }
+    }
+
+    func testReadsMetadataFromADeflatedIPA() throws {
+        try withTemporaryDirectory { tmp in
+            let metadata = try IPAExtractor(archiveExtractor: ZipFoundationArchiveExtractor())
+                .metadata(ofIPAAt: makeIPA(in: tmp, compressionMethod: .deflate))
+            XCTAssertEqual(metadata.identifier, "com.example.myapp")
+        }
+    }
+
+    func testReadsMetadataFromALowercaseInfoPlist() throws {
+        try withTemporaryDirectory { tmp in
+            let metadata = try IPAExtractor(archiveExtractor: ZipFoundationArchiveExtractor())
+                .metadata(ofIPAAt: makeIPA(in: tmp, infoPlistName: "info.plist"))
+            XCTAssertEqual(metadata.identifier, "com.example.myapp")
+        }
+    }
+
+    func testMetadataThrowsForAnUnreadableInfoPlist() throws {
+        try withTemporaryDirectory { tmp in
+            let ipa = try makeIPA(in: tmp, infoPlist: Data("not a plist".utf8))
+            XCTAssertThrowsError(try IPAExtractor(archiveExtractor: ZipFoundationArchiveExtractor()).metadata(ofIPAAt: ipa)) {
+                XCTAssertEqual($0 as? IPAExtractionError, .invalidIPA)
+            }
+        }
+    }
+
+    func testMetadataThrowsOnNonIPAZip() throws {
+        try withTemporaryDirectory { tmp in
+            let junk = tmp.appendingPathComponent("junk", isDirectory: true)
+            try FileManager.default.createDirectory(at: junk, withIntermediateDirectories: true)
+            try Data("x".utf8).write(to: junk.appendingPathComponent("readme.txt"))
+            let zip = tmp.appendingPathComponent("junk.zip")
+            try FileManager.default.zipItem(at: junk, to: zip)
+
+            XCTAssertThrowsError(try IPAExtractor(archiveExtractor: ZipFoundationArchiveExtractor()).metadata(ofIPAAt: zip)) {
+                XCTAssertEqual($0 as? IPAExtractionError, .invalidIPA)
+            }
+        }
+    }
 }

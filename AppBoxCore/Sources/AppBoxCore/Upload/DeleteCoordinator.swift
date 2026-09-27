@@ -26,6 +26,15 @@ public struct DeletePlan {
     }
 }
 
+/// A build whose recorded location is missing or resolves to the storage root, so nothing can be deleted safely.
+public struct UnusableBuildLocationError: LocalizedError, Equatable {
+    public init() {}
+
+    public var errorDescription: String? {
+        "This build is missing its Dropbox location, so AppBox doesn't know what to remove."
+    }
+}
+
 /// What a delete did: removed a whole folder, or removed one version and re-uploaded `appinfo.json`.
 public enum DeleteOutcome: Equatable {
     case deletedFolder(RemotePath)
@@ -86,6 +95,7 @@ public final class DeleteCoordinator {
     // MARK: - Steps
 
     private func delete(_ remotePath: RemotePath) async throws {
+        guard !remotePath.components.isEmpty else { throw UnusableBuildLocationError() }
         progress.report(stage: .preparing, message: "Deleting…", fractionCompleted: nil)
         try await withRetry { try await self.provider.delete(at: remotePath) }
     }

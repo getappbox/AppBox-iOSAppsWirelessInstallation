@@ -146,6 +146,26 @@ final class DeleteCoordinatorTests: XCTestCase {
         XCTAssertTrue(provider.uploads.isEmpty)
     }
 
+    func testRefusesToDeleteTheStorageRoot() async throws {
+        let provider = DeleteFakeProvider()
+        provider.existingAppInfoJSON = appInfoData(versions: [entry("m1")], latest: entry("m1"))
+        var unkept = plan(keepSameLink: false)
+        unkept.buildFolderPath = RemotePath([])
+        var kept = plan(keepSameLink: true, manifestToRemove: "m1")
+        kept.appFolderPath = RemotePath(path: "/")
+
+        for rootPlan in [unkept, kept] {
+            do {
+                _ = try await DeleteCoordinator(provider: provider).run(rootPlan)
+                XCTFail("expected a delete of the storage root to be refused")
+            } catch {
+                XCTAssertEqual(error as? UnusableBuildLocationError, UnusableBuildLocationError())
+            }
+        }
+        XCTAssertTrue(provider.deletedPaths.isEmpty)
+        XCTAssertTrue(provider.uploads.isEmpty)
+    }
+
     func testKeepSameLink_appInfoMissing_isNoOp() async throws {
         let provider = DeleteFakeProvider()
         let outcome = try await DeleteCoordinator(provider: provider).run(plan(keepSameLink: true))

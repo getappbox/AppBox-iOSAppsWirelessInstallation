@@ -3,6 +3,7 @@
 //  AppBoxTests
 
 import XCTest
+import AppBoxCore
 @testable import AppBox
 
 private let uniqueJSON = "appinfo.json"
@@ -190,6 +191,28 @@ final class IPAUploadInfoTests: XCTestCase {
         let jsonPath = info.dbAppInfoJSONFullPath?.absoluteString ?? ""
         XCTAssertFalse(jsonPath.contains("ver1.0"))
         XCTAssertTrue(jsonPath.contains(uniqueJSON))
+    }
+
+    // MARK: - buildRecordInput
+
+    func testBuildRecordInput_KeepsTheFullNestedBundleDirectory() {
+        let info = IPAUploadInfo()
+        info.isKeepSameLinkEnabled = true
+        info.bundleDirectory = URL(string: "/Team/MyApp")
+        info.dbDirectory = URL(string: "/Team/MyApp/MyApp-ver1.0(1)-UUID")
+        info.dbAppInfoJSONFullPath = URL(string: "/Team/MyApp/\(uniqueJSON)")
+
+        let input = info.buildRecordInput
+        XCTAssertTrue(input.keepSameLink)
+        XCTAssertEqual(input.bundleDirectory, "/Team/MyApp")
+        XCTAssertEqual(input.buildDirectory, "/Team/MyApp/MyApp-ver1.0(1)-UUID")
+        XCTAssertEqual(input.appInfoRemotePath, "/Team/MyApp/\(uniqueJSON)")
+    }
+
+    func testBuildRecordInput_CarriesTheSharedAppInfoLink() {
+        let info = IPAUploadInfo()
+        info.uniquelinkShareableURL = URL(string: "https://www.dropbox.com/s/abc/\(uniqueJSON)")
+        XCTAssertEqual(info.buildRecordInput.sharedAppInfoURL, "https://www.dropbox.com/s/abc/\(uniqueJSON)")
     }
 
 }

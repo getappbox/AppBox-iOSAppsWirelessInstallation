@@ -129,14 +129,15 @@ struct List: ParsableCommand {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
 
-		var rows: [(date: String, app: String, version: String, type: String, link: String)] =
-			[(date: "DATE", app: "APP", version: "VERSION", type: "TYPE", link: "LINK")]
+		var rows: [(date: String, app: String, version: String, type: String, sameLink: String, link: String)] =
+			[(date: "DATE", app: "APP", version: "VERSION", type: "TYPE", sameLink: "SAME LINK", link: "LINK")]
 		for b in builds {
 			rows.append((
 				date: b.datetime.map { dateFormatter.string(from: $0) } ?? "—",
 				app: b.appName ?? b.bundleIdentifier ?? "—",
 				version: "\(b.version ?? "—") (\(b.build ?? "—"))",
 				type: b.buildType ?? "—",
+				sameLink: b.link.keepSameLink ? (b.link.folder?.relativePath ?? "—") : "no",
 				link: b.shortURL ?? "—"))
 		}
 
@@ -144,10 +145,11 @@ struct List: ParsableCommand {
 		let wApp = rows.map { $0.app.count }.max() ?? 0
 		let wVersion = rows.map { $0.version.count }.max() ?? 0
 		let wType = rows.map { $0.type.count }.max() ?? 0
+		let wSameLink = rows.map { $0.sameLink.count }.max() ?? 0
 		func pad(_ s: String, _ width: Int) -> String { s.padding(toLength: width, withPad: " ", startingAt: 0) }
 
 		for row in rows {
-			print("\(pad(row.date, wDate))  \(pad(row.app, wApp))  \(pad(row.version, wVersion))  \(pad(row.type, wType))  \(row.link)")
+			print("\(pad(row.date, wDate))  \(pad(row.app, wApp))  \(pad(row.version, wVersion))  \(pad(row.type, wType))  \(pad(row.sameLink, wSameLink))  \(row.link)")
 		}
 	}
 }
@@ -191,6 +193,35 @@ struct Upload: AsyncParsableCommand {
 			valueName: "dropbox folder"))
 	var dropboxFolder: String?
 
+	// Install-page settings. Each one defaults to the AppBox app's preference and
+	// is overridden only when the flag is actually passed, so a CI job can pin the
+	// settings it needs without depending on how the runner's AppBox is configured.
+
+	@Flag(
+		name: .customLong("moredetails"), inversion: .prefixedNo,
+		help: .init(
+			"[Optional] \nShow the expanded build details on the install page (minimum iOS version, supported devices, build type, IPA size and provisioning profile). \nDefaults to the AppBox app setting.\n"))
+	var moreDetails: Bool?
+
+	@Flag(
+		name: .customLong("ipalink"), inversion: .prefixedNo,
+		help: .init(
+			"[Optional] \nShow the direct IPA download link on the install page. \nDefaults to the AppBox app setting.\n"))
+	var includeIPALink: Bool?
+
+	@Flag(
+		name: .customLong("previousversions"), inversion: .prefixedNo,
+		help: .init(
+			"[Optional] \nKeep earlier builds listed on the install page. \nDefaults to the AppBox app setting.\n"))
+	var keepPreviousVersions: Bool?
+
+	@Option(
+		name: .customLong("chunksize"),
+		help: .init(
+			"[Optional] \nDropbox upload chunk size in MB (1-150). \nDefaults to the AppBox app setting.\n",
+			valueName: "MB"))
+	var chunkSizeMB: Int?
+
 	/// Retired in 4.0 — the notification text is generated. Still accepted so existing CI scripts don't fail on an unknown option.
 	@Option(name: .customLong("webhookmessage"), help: .hidden)
 	var webhookMessage: String?
@@ -217,7 +248,7 @@ struct Upload: AsyncParsableCommand {
 extension Upload {
 
 	/// Streams each pipeline stage to stdout so a CI log shows the same progress the GUI HUD would.
-	private final class PrintingProgressReporter: ProgressReporter {
+	private final class PrintingProgressReporter: AppBoxCore.ProgressReporter {
 		private var lastLine = ""
 
 		func report(stage: UploadStage, message: String?, fractionCompleted: Double?) {
@@ -249,6 +280,11 @@ extension Upload {
 			print("ERROR - Invalid Microsoft Teams Webhook URL. Only https:// webhook URLs are supported.")
 			throw ExitCode(127)
 		}
+		// 150 MB is Dropbox's ceiling for a single upload-session chunk.
+		if let chunkSizeMB, !(1...150).contains(chunkSizeMB) {
+			print("ERROR - --chunksize must be between 1 and 150 MB.")
+			throw ExitCode(127)
+		}
 	}
 
 	private func publish() async throws {
@@ -263,7 +299,14 @@ extension Upload {
 
 		let request = BuildUploadRequest(
 			ipaURL: ipaURL,
-			settings: UploadSettings(),
+			// The app's install-page preferences, with any flag passed on this
+			// invocation taking precedence. The CLI has its own defaults domain,
+			// so the stored settings have to be read from the app's explicitly.
+			settings: AppPreferences.uploadSettings(applying: UploadSettingsOverrides(
+				chunkSizeMB: chunkSizeMB,
+				includeIPALink: includeIPALink,
+				includeDetails: moreDetails,
+				keepPreviousVersions: keepPreviousVersions)),
 			share: share,
 			keepSameLink: keepSameLink,
 			bundleDirectory: dropboxFolder.map { "/" + $0.replacingOccurrences(of: " ", with: "") })

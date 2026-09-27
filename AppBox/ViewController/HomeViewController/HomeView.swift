@@ -12,6 +12,7 @@ public final class HomeModel: NSObject, ObservableObject {
     @Published fileprivate var emails: String = ""
     @Published fileprivate var message: String = ""
     @Published fileprivate var keepSameLink: Bool = false
+    @Published fileprivate(set) var linkFolder: String?
 
     public var onChooseFile: (() -> Void)?
     public var onFileDropped: ((String) -> Void)?
@@ -25,6 +26,7 @@ public final class HomeModel: NSObject, ObservableObject {
 
     public func setFileName(_ name: String?) { fileName = name }
     public func setProcessing(_ processing: Bool) { isProcessing = processing }
+    public func setLinkFolder(_ folder: String?) { linkFolder = folder }
 }
 
 struct HomeView: View {
@@ -65,12 +67,20 @@ struct HomeView: View {
                              prompt: "Add a personal message", text: $model.message)
             }
 
-            HStack(spacing: 8) {
-                Toggle("Keep the same link for this app", isOn: $model.keepSameLink)
-                Button { model.onSameLinkHelp?() } label: { Image(systemName: "questionmark.circle") }
-                    .buttonStyle(.borderless)
-                    .help("Learn more")
-                Spacer()
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(spacing: 8) {
+                    Toggle("Keep the same link for this app", isOn: $model.keepSameLink)
+                    Button { model.onSameLinkHelp?() } label: { Image(systemName: "questionmark.circle") }
+                        .buttonStyle(.borderless)
+                        .help("Learn more")
+                    Spacer()
+                }
+                if model.keepSameLink, let folder = model.linkFolder {
+                    Text("Dropbox folder: \(folder)")
+                        .font(IslandTypography.caption)
+                        .foregroundColor(.secondary)
+                        .textSelection(.enabled)
+                }
             }
 
             Spacer(minLength: 0)

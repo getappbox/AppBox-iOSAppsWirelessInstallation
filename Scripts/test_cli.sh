@@ -14,6 +14,7 @@ TEST_TIMEOUT=900 # 15 minutes
 # Usage: ./test_cli.sh          (run all tests)
 #        ./test_cli.sh 15       (run only test 15)
 #        ./test_cli.sh 1,2,15   (run tests 1, 2, and 15)
+#        APPBOX_CLI=/path/to/appboxcli ./test_cli.sh 18,19   (test a local build)
 RUN_TESTS=""
 if [ -n "$1" ]; then
     RUN_TESTS=",$1,"
@@ -33,8 +34,8 @@ SLACK_WEBHOOK="https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXX
 MSTEAMS_WEBHOOK="https://outlook.office.com/webhook/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/IncomingWebhook/XXXXXXXXXXXXXXXX/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
 DB_FOLDER="TestScriptBuilds"
 
-# Path to appboxcli binary (adjust if needed)
-CLI="appboxcli"
+# Path to appboxcli binary (adjust if needed, or set APPBOX_CLI)
+CLI="${APPBOX_CLI:-appboxcli}"
 
 # Log file (overwritten each run)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -205,6 +206,68 @@ check_prerequisites() {
 }
 
 # ============================================================
+# SCENARIO HELPERS (exported so run_test's `bash -c` can call them)
+# ============================================================
+
+# The install link the last upload wrote to ~/.appbox_share_value.json.
+last_share_url() {
+    local url
+    url=$(plutil -extract APPBOX_SHARE_URL raw -o - "$HOME/.appbox_share_value.json") && [ -n "$url" ] && echo "$url"
+}
+
+# Fails unless the newest build in `appboxcli list` kept `link` in `folder`.
+expect_newest_build() {
+    local cli="$1" folder="$2" link="$3"
+    local listing newest
+    listing=$("$cli" list) || return 1
+    if [[ "$(sed -n 1p <<< "$listing")" != *"SAME LINK"* ]]; then
+        echo "$cli has no SAME LINK column in 'list'; set APPBOX_CLI to a build of this branch."
+        return 1
+    fi
+    newest=$(sed -n 2p <<< "$listing")
+    if [[ "$newest" != *"  $folder  "* || "$newest" != *"$link"* ]]; then
+        echo "Expected the newest build to keep $link in $folder, got: $newest"
+        return 1
+    fi
+}
+
+# Two keep-same-link uploads into a nested folder share one link, and list shows the whole folder.
+nested_folder_keeps_link() {
+    local cli="$1" ipa="$2" folder="$3"
+    local first_link second_link
+    "$cli" --ipa "$ipa" --keepsamelink --dbfolder "$folder" || return 1
+    first_link=$(last_share_url) || return 1
+    "$cli" --ipa "$ipa" --keepsamelink --dbfolder "$folder" || return 1
+    second_link=$(last_share_url) || return 1
+    if [ "$first_link" != "$second_link" ]; then
+        echo "The nested folder didn't keep its link: $first_link, then $second_link"
+        return 1
+    fi
+    expect_newest_build "$cli" "$folder" "$second_link"
+}
+
+# Deleting the only build in a nested folder removes that folder, not its parent.
+nested_folder_delete_keeps_parent() {
+    local cli="$1" ipa="$2" parent="$3"
+    local child="$parent/App$(date +%Y%m%d%H%M%S)"
+    local parent_link child_link relinked
+    "$cli" --ipa "$ipa" --keepsamelink --dbfolder "$parent" || return 1
+    parent_link=$(last_share_url) || return 1
+    "$cli" --ipa "$ipa" --keepsamelink --dbfolder "$child" || return 1
+    child_link=$(last_share_url) || return 1
+    expect_newest_build "$cli" "$child" "$child_link" || return 1
+    printf '1\ny\n' | "$cli" delete || return 1
+    "$cli" --ipa "$ipa" --keepsamelink --dbfolder "$parent" || return 1
+    relinked=$(last_share_url) || return 1
+    if [ "$relinked" != "$parent_link" ]; then
+        echo "The parent folder lost its link ($parent_link) when its nested folder's last build was deleted."
+        return 1
+    fi
+}
+
+export -f last_share_url expect_newest_build nested_folder_keeps_link nested_folder_delete_keeps_parent
+
+# ============================================================
 # TEST CASES
 # ============================================================
 
@@ -289,6 +352,19 @@ if [ -f "$LARGE_IPA_PATH" ]; then
 else
     skip_test "Large IPA file upload (chunked session upload)" \
         "LARGE_IPA_PATH not found: $LARGE_IPA_PATH"
+fi
+
+# ---------- Test 18: Keep same link in a nested custom folder ----------
+run_test "Upload twice with --keepsamelink into a nested --dbfolder (same link, full folder listed)" \
+    "nested_folder_keeps_link \"$CLI\" \"$IPA_PATH\" \"$DB_FOLDER/Nested/App\""
+
+# ---------- Test 19: Delete the last build of a nested folder, parent keeps its link ----------
+if pgrep -xq AppBox; then
+    skip_test "Delete the only build in a nested --dbfolder (parent keeps its link)" \
+        "AppBox is running, and appboxcli delete refuses to run alongside it"
+else
+    run_test "Delete the only build in a nested --dbfolder (parent keeps its link)" \
+        "nested_folder_delete_keeps_parent \"$CLI\" \"$IPA_PATH\" \"$DB_FOLDER/NestedDelete\""
 fi
 
 # ============================================================

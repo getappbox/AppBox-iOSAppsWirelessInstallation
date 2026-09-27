@@ -27,3 +27,28 @@ public class ABUploadRecord: NSManagedObject {
     @NSManaged public var provisioningProfile: ABProvisioningProfile?
     @NSManaged public var service: AppBoxService?
 }
+
+/// Whether a build kept its app's link, and the app-level folder it was uploaded into.
+public struct BuildLinkSettings: Equatable, Sendable {
+    public let keepSameLink: Bool
+    public let folder: RemotePath?
+
+    public init(keepSameLink: Bool, folder: RemotePath?) {
+        self.keepSameLink = keepSameLink
+        self.folder = folder
+    }
+}
+
+extension ABUploadRecord {
+    /// The link settings this build was uploaded with, read from the record's own attributes only.
+    public var linkSettings: BuildLinkSettings {
+        let keepSameLink = self.keepSameLink?.boolValue ?? false
+        return BuildLinkSettings(
+            keepSameLink: keepSameLink,
+            folder: BuildRemotePaths.appFolder(
+				keepSameLink: keepSameLink,
+				appInfoPath: dbAppInfoFullPath,
+				buildDirectory: dbDirectroy,
+				folderName: dbFolderName))
+    }
+}

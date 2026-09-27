@@ -42,8 +42,13 @@ public struct BuildMetadata: Equatable, Sendable {
 
     /// Reads and parses the `Info.plist` an `IPAExtractor` produced.
     public static func read(fromInfoPlistAt url: URL) -> BuildMetadata? {
-        guard let data = try? Data(contentsOf: url),
-              let plist = try? PropertyListSerialization.propertyList(from: data, options: [], format: nil),
+        guard let data = try? Data(contentsOf: url) else { return nil }
+        return read(fromInfoPlistData: data)
+    }
+
+    /// Parses the bytes of an `Info.plist`, XML or binary.
+    public static func read(fromInfoPlistData data: Data) -> BuildMetadata? {
+        guard let plist = try? PropertyListSerialization.propertyList(from: data, options: [], format: nil),
               let dictionary = plist as? [AnyHashable: Any] else {
             return nil
         }
@@ -61,8 +66,7 @@ public struct BuildRemotePaths: Equatable, Sendable {
 
     /// Derives the layout used since v3: `<bundleDirectory>/<name>-ver<version>(<build>)-<uuid>/`, with `appinfo.json` hoisted to the bundle directory when the short link must stay stable.
     public init(metadata: BuildMetadata, uuid: String, bundleDirectory: String? = nil, keepSameLink: Bool) {
-        let requested = (bundleDirectory?.isEmpty == false) ? bundleDirectory! : "/\(metadata.identifier)"
-        let validBundleDirectory = IPAName.sanitizedPath(requested)
+        let validBundleDirectory = Self.resolvedBundleDirectory(requested: bundleDirectory, identifier: metadata.identifier)
         let validName = IPAName.sanitizedPathComponent(metadata.name)
         let folder = validName
             + "-ver\(IPAName.sanitizedPathComponent(metadata.version))"
@@ -77,6 +81,25 @@ public struct BuildRemotePaths: Equatable, Sendable {
         self.appInfo = RemotePath(path: keepSameLink
                                   ? "\(validBundleDirectory)/appinfo.json"
                                   : "\(buildDirectory)/appinfo.json")
+    }
+
+    /// The bundle-level folder an upload lands in: the requested folder, else `/<identifier>`, sanitized.
+    public static func resolvedBundleDirectory(requested: String?, identifier: String) -> String {
+        let requested = (requested?.isEmpty == false) ? requested! : "/\(identifier)"
+        return IPAName.sanitizedPath(requested)
+    }
+
+    /// The app-level folder of a stored build, read from its first recorded path; nil when that would be the storage root.
+    public static func appFolder(keepSameLink: Bool, appInfoPath: String?, buildDirectory: String?,
+                                 folderName: String?) -> RemotePath? {
+        let recordedPaths = keepSameLink ? [appInfoPath, buildDirectory] : [buildDirectory]
+        let folder: RemotePath
+        if let recorded = recordedPaths.compactMap({ $0 }).first(where: { !$0.isEmpty }) {
+            folder = RemotePath(Array(RemotePath(path: recorded).components.dropLast()))
+        } else {
+            folder = RemotePath(path: folderName ?? "")
+        }
+        return folder.components.isEmpty ? nil : folder
     }
 }
 

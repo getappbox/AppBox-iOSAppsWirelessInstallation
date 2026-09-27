@@ -42,6 +42,9 @@ public struct RemotePath: Equatable, Sendable {
     /// POSIX-style joined path, always leading-slashed (Dropbox-style).
     public var path: String { "/" + components.joined(separator: "/") }
 
+    /// The joined path without a leading slash, as people type and read it (`Team/QA`).
+    public var relativePath: String { components.joined(separator: "/") }
+
     public func appending(_ component: String) -> RemotePath { RemotePath(components + [component]) }
 }
 

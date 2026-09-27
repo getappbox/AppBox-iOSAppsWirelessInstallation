@@ -28,7 +28,9 @@ final class BuildHistoryStoreTests: XCTestCase {
 
         project.properties = [attr("name", .stringAttributeType), attr("bundleIdentifier", .stringAttributeType)]
         record.properties = [attr("version", .stringAttributeType), attr("build", .stringAttributeType),
-                             attr("datetime", .dateAttributeType), attr("shortURL", .stringAttributeType)]
+                             attr("datetime", .dateAttributeType), attr("shortURL", .stringAttributeType),
+                             attr("keepSameLink", .booleanAttributeType), attr("dbFolderName", .stringAttributeType),
+                             attr("dbDirectroy", .stringAttributeType), attr("dbAppInfoFullPath", .stringAttributeType)]
         profile.properties = [attr("buildType", .stringAttributeType), attr("teamName", .stringAttributeType)]
 
         func rel(_ name: String, _ dest: NSEntityDescription, toMany: Bool, ordered: Bool) -> NSRelationshipDescription {
@@ -75,6 +77,22 @@ final class BuildHistoryStoreTests: XCTestCase {
         return record
     }
 
+    private func seedUpload(_ stack: CoreDataStack, bundleIdentifier: String, keepSameLink: Bool?,
+                            folder: String, date: Date) throws {
+        let ctx = try stack.loadViewContext()
+        let project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: ctx) as! ABProject
+        project.name = "App"; project.bundleIdentifier = bundleIdentifier
+        let record = NSEntityDescription.insertNewObject(forEntityName: "UploadRecord", into: ctx) as! ABUploadRecord
+        let buildDirectory = "\(folder)/App-ver1.0(1)-\(UUID().uuidString)"
+        record.datetime = date
+        record.keepSameLink = keepSameLink.map { NSNumber(value: $0) }
+        record.dbDirectroy = buildDirectory
+        record.dbAppInfoFullPath = keepSameLink == true ? "\(folder)/appinfo.json" : "\(buildDirectory)/appinfo.json"
+        record.dbFolderName = folder
+        record.project = project
+        try stack.saveChanges()
+    }
+
     // MARK: Tests
 
     func testRecentBuilds_newestFirstWithMappedFields() throws {
@@ -95,6 +113,56 @@ final class BuildHistoryStoreTests: XCTestCase {
         XCTAssertEqual(builds.first?.bundleIdentifier, "com.Newer")
         XCTAssertEqual(builds.first?.shortURL, "https://s/new")
         XCTAssertEqual(builds.last?.appName, "Older")
+    }
+
+    func testRecentBuilds_carriesTheLinkSettings() throws {
+        let stack = writableStack(makeModel())
+        try seedUpload(stack, bundleIdentifier: "com.app", keepSameLink: true, folder: "/Team/QA",
+                       date: Date(timeIntervalSince1970: 1_000))
+
+        let entry = try XCTUnwrap(BuildHistoryStore(stack: stack).recentBuilds().first)
+        XCTAssertEqual(entry.link, BuildLinkSettings(keepSameLink: true, folder: RemotePath(path: "/Team/QA")))
+    }
+
+    func testLatestLink_isTheNewestUploadOfTheApp() throws {
+        let stack = writableStack(makeModel())
+        try seedUpload(stack, bundleIdentifier: "com.app", keepSameLink: false, folder: "/com.app",
+                       date: Date(timeIntervalSince1970: 1_000))
+        try seedUpload(stack, bundleIdentifier: "com.app", keepSameLink: true, folder: "/Team/QA",
+                       date: Date(timeIntervalSince1970: 2_000))
+        try seedUpload(stack, bundleIdentifier: "com.other", keepSameLink: true, folder: "/Other",
+                       date: Date(timeIntervalSince1970: 3_000))
+
+        XCTAssertEqual(try BuildHistoryStore(stack: stack).latestLink(forBundleIdentifier: "com.app"),
+                       BuildLinkSettings(keepSameLink: true, folder: RemotePath(path: "/Team/QA")))
+    }
+
+    func testLatestLink_aNewerUnkeptUploadWins() throws {
+        let stack = writableStack(makeModel())
+        try seedUpload(stack, bundleIdentifier: "com.app", keepSameLink: true, folder: "/Team/QA",
+                       date: Date(timeIntervalSince1970: 1_000))
+        try seedUpload(stack, bundleIdentifier: "com.app", keepSameLink: false, folder: "/com.app",
+                       date: Date(timeIntervalSince1970: 2_000))
+
+        let link = try BuildHistoryStore(stack: stack).latestLink(forBundleIdentifier: "com.app")
+        XCTAssertEqual(link?.keepSameLink, false)
+        XCTAssertEqual(link?.folder?.relativePath, "com.app")
+    }
+
+    func testLatestLink_legacyRecordWithoutTheFlagIsNotKept() throws {
+        let stack = writableStack(makeModel())
+        try seedUpload(stack, bundleIdentifier: "com.app", keepSameLink: nil, folder: "/com.app",
+                       date: Date(timeIntervalSince1970: 1_000))
+
+        XCTAssertEqual(try BuildHistoryStore(stack: stack).latestLink(forBundleIdentifier: "com.app")?.keepSameLink, false)
+    }
+
+    func testLatestLink_nilForAnAppNeverUploaded() throws {
+        let stack = writableStack(makeModel())
+        try seedUpload(stack, bundleIdentifier: "com.app", keepSameLink: true, folder: "/com.app",
+                       date: Date(timeIntervalSince1970: 1_000))
+
+        XCTAssertNil(try BuildHistoryStore(stack: stack).latestLink(forBundleIdentifier: "com.unknown"))
     }
 
     func testRecentBuilds_emptyStore() throws {

@@ -8,6 +8,7 @@ import AppKit
 public final class AdvancedSettingsModel: NSObject, ObservableObject {
     @Published fileprivate var folderName: String
     let fieldEnabled: Bool
+    let placeholder: String
 
     public var onSave: (() -> Void)?
     public var onCancel: (() -> Void)?
@@ -15,9 +16,10 @@ public final class AdvancedSettingsModel: NSObject, ObservableObject {
     /// Bridge so the controller can read the field on save.
     public var folderNameText: String { folderName }
 
-    public init(folderName: String, fieldEnabled: Bool) {
+    public init(folderName: String, fieldEnabled: Bool, placeholder: String) {
         self.folderName = folderName
         self.fieldEnabled = fieldEnabled
+        self.placeholder = placeholder
         super.init()
     }
 }
@@ -31,7 +33,7 @@ struct UploadAdvancedSettingView: View {
 
             VStack(alignment: .leading, spacing: 6) {
                 LabeledField(label: "Custom Dropbox folder name",
-                             prompt: "e.g. MyApp", text: $model.folderName)
+                             prompt: model.placeholder, text: $model.folderName)
                     .disabled(!model.fieldEnabled)
                 if !model.fieldEnabled {
                     Text("Turn on “Keep the same link” to set a custom folder.")
