@@ -1,7 +1,7 @@
-[![Support](https://img.shields.io/static/v1?logo=github&label=GitHub&message=Sponsor&color=brightgreen&style=flat-square)](https://github.com/sponsors/vineetchoudhary)
-[![GitHub Release](https://img.shields.io/github/release/vineetchoudhary/AppBox-iOSAppsWirelessInstallation.svg?style=flat-square)](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest)
-[![](https://img.shields.io/github/downloads/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/total.svg?style=flat-square)](https://getappbox.com/download)
-[![License](https://img.shields.io/badge/license-cc%20by--nd%204.0-brightgreen.svg?style=flat-square)](#user-content-license)
+[![Sponsor on GitHub](https://img.shields.io/badge/Sponsor%20on%20GitHub-EA4AAA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sponsors/vineetchoudhary)
+[![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/vineetchoudhary)
+[![Build status](https://img.shields.io/github/actions/workflow/status/getappbox/AppBox-iOSAppsWirelessInstallation/xcodebuild.yml?branch=master&style=for-the-badge&logo=githubactions&logoColor=white&label=build)](https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/actions/workflows/xcodebuild.yml)
+[![Downloads](https://img.shields.io/github/downloads/getappbox/AppBox-iOSAppsWirelessInstallation/total?style=for-the-badge&logo=github&logoColor=white&label=downloads)](https://getappbox.com/download)
 
 # AppBox - iOS Apps Wireless Installation
 AppBox is a tool for iOS developers to deploy Development, Ad-Hoc and In-house (Enterprise) applications directly to the devices from your Dropbox account.
@@ -82,6 +82,20 @@ Any contribution is more than welcome! You can contribute through pull requests 
 
 # Bugs
 Please post any bugs to the [issue tracker](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/issues) found on the project's GitHub page. Please include a description of what is not working right with your issue.
+
+
+# Support
+If AppBox has been useful to you, consider supporting its continued development.
+
+<a href="https://github.com/sponsors/vineetchoudhary">
+  <img src="https://img.shields.io/badge/Sponsor%20on%20GitHub-EA4AAA?style=for-the-badge&logo=github&logoColor=white" alt="Sponsor on GitHub" height="50">
+</a>
+&nbsp;
+<a href="https://buymeacoffee.com/vineetchoudhary">
+  <img src="https://img.shields.io/badge/Buy%20me%20a%20coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me a Coffee" height="50">
+</a>
+
+Thank you for supporting open source! 🙏
 
 
 # License
