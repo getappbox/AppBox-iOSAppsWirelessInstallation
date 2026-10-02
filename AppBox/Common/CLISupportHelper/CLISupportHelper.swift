@@ -81,12 +81,13 @@ public final class CLISupportHelper: NSObject {
         return false
     }
 
+    /// Offers to relink the CLI after an app update; call it only once launch has finished, because AppKit aborts a modal started during the launch's open event.
     @discardableResult
     public class func updatePromptAfterVersionUpdate() -> Bool {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
-        let cliVersion = UserData.cliVersion()
-        if appVersion == cliVersion || cliVersion.isEmpty { return false }
-        guard FileManager.default.fileExists(atPath: cliPath) else { return false }
+        guard needsUpdatePrompt(appVersion: appVersion, cliVersion: UserData.cliVersion(), linkInstalled: isLinkInstalled) else {
+            return false
+        }
 
         let alert = NSAlert()
         alert.messageText = "Update CLI Tool"
@@ -94,7 +95,8 @@ public final class CLISupportHelper: NSObject {
         alert.alertStyle = .informational
         alert.addButton(withTitle: "Update")
         alert.addButton(withTitle: "Uninstall")
-        if alert.runModal() == .alertFirstButtonReturn {
+        switch alert.runModal() {
+        case .alertFirstButtonReturn:
             switch installSymlink() {
             case .succeeded:
                 UserData.setCLIVersion(appVersion)
@@ -106,8 +108,21 @@ public final class CLISupportHelper: NSObject {
                 showFailure(installing: true, reason: reason)
                 return false
             }
+        case .alertSecondButtonReturn:
+            return uninstall()
+        default:
+            return false
         }
-        return uninstall()
+    }
+
+    class func needsUpdatePrompt(appVersion: String, cliVersion: String, linkInstalled: Bool) -> Bool {
+        linkInstalled && !cliVersion.isEmpty && cliVersion != appVersion
+    }
+
+    /// True for a dangling link too, which is what an install into an app bundle that has since moved leaves behind.
+    private static var isLinkInstalled: Bool {
+        let fm = FileManager.default
+        return fm.fileExists(atPath: cliPath) || (try? fm.destinationOfSymbolicLink(atPath: cliPath)) != nil
     }
 
     // MARK: - Symlink management

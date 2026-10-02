@@ -103,11 +103,6 @@ public final class HomeViewController: NSViewController, UploadAdvancedSettingVi
         NotificationCenter.default.post(name: Notification.Name("AppBoxReadyToBuildNotification"), object: self)
     }
 
-    public override func viewDidAppear() {
-        super.viewDidAppear()
-        CLISupportHelper.updatePromptAfterVersionUpdate()
-    }
-
     // MARK: - Upload manager
 
     private func setupUploadManager() {

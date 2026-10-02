@@ -67,6 +67,9 @@ public final class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificat
             }
         }
 
+        if !Self.isHostingTests {
+            DispatchQueue.main.async { CLISupportHelper.updatePromptAfterVersionUpdate() }
+        }
     }
 
     public func applicationWillTerminate(_ notification: Notification) {
@@ -100,6 +103,10 @@ public final class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificat
     }
 
     // MARK: - Helpers
+
+    private static var isHostingTests: Bool {
+        ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+    }
 
     @objc private func handleDropboxLoggedOut(_ notification: Notification) {
         guard DropboxSession.isAuthorized else { return }

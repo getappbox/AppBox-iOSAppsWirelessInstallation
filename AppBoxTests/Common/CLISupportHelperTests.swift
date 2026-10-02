@@ -1,8 +1,7 @@
 import XCTest
 @testable import AppBox
 
-/// The escaping that stands between a bundle path and a root shell. The symlink itself targets a fixed
-/// `/usr/local/bin` path, so only the quoting is unit-testable here.
+/// The escaping that stands between a bundle path and a root shell, and when an app update offers to relink the CLI.
 final class CLISupportHelperTests: XCTestCase {
 
     // MARK: - Shell quoting
@@ -61,5 +60,23 @@ final class CLISupportHelperTests: XCTestCase {
 
         let escaped = CLISupportHelper.appleScriptEscaped(quoted)
         XCTAssertEqual(escaped, "'/Users/o'\\\\''brien/a\\\"b'")
+    }
+
+    // MARK: - Update prompt
+
+    func testPromptsWhenTheAppMovedPastTheInstalledCLIVersion() {
+        XCTAssertTrue(CLISupportHelper.needsUpdatePrompt(appVersion: "4.1.0", cliVersion: "4.0.0", linkInstalled: true))
+    }
+
+    func testSkipsWhenTheCLIMatchesTheApp() {
+        XCTAssertFalse(CLISupportHelper.needsUpdatePrompt(appVersion: "4.1.0", cliVersion: "4.1.0", linkInstalled: true))
+    }
+
+    func testSkipsWhenNoInstalledVersionWasRecorded() {
+        XCTAssertFalse(CLISupportHelper.needsUpdatePrompt(appVersion: "4.1.0", cliVersion: "", linkInstalled: true))
+    }
+
+    func testSkipsWhenTheLinkIsGone() {
+        XCTAssertFalse(CLISupportHelper.needsUpdatePrompt(appVersion: "4.1.0", cliVersion: "4.0.0", linkInstalled: false))
     }
 }
