@@ -110,6 +110,8 @@ cd AppBoxCore && xcrun swift test
 
 Outside `AppBoxCore`, write `AppBoxCore.ProgressReporter`: the macOS 27 SDK adds `Foundation.ProgressReporter`, so the bare name is ambiguous in any file that imports both, and the build fails.
 
+Never start a modal from Home's `viewWillAppear` / `viewDidAppear`. SwiftUI orders the Home window front inside AppKit's launch open-event, before `applicationDidFinishLaunching`, and AppKit aborts any `runModal()` started there: it returns `.abort` instantly and nothing is shown. That is how the CLI update prompt silently never appeared in 4.0–4.1. Launch-time prompts belong in `AppDelegate`, dispatched to the main queue after launch and skipped when `isHostingTests` is true, so the AppBoxTests host never blocks on a modal.
+
 Coverage is enabled in `AppBoxTests/AppBoxTests.xctestplan` (scoped to the `AppBox` target). CI prints `xccov` report; gating is by diff coverage on changed Swift (ratchets up by phase).
 
 ### Release builds (Developer ID)
